@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+  --color-google-blue: #4285F4;
+  --color-google-blue-dark: #174EA6;
+  --color-google-blue-soft: #E8F0FE;
+  
+  --color-google-green: #34A853;
+  --color-google-green-dark: #0D652D;
+  --color-google-green-soft: #E6F4EA;
+  
+  --color-google-yellow: #FBBC04;
+  --color-google-yellow-dark: #E37400;
+  --color-google-yellow-soft: #FEF7E0;
+  
+  --color-google-red: #EA4335;
+  --color-google-red-dark: #A50E0E;
+  --color-google-red-soft: #FCE8E6;
+  
+  --color-ink: #202124;
+  --color-ink-2: #3C4043;
+  --color-ink-3: #5F6368;
+  --color-ink-4: #80868B;
+  
+  --color-line: #E8EAED;
+  --color-line-soft: #F1F3F4;
+  --color-bg: #FFFFFF;
+  
+  --shadow-google: 0 1px 2px 0 rgba(60,64,67,0.1), 0 1px 3px 1px rgba(60,64,67,0.05);
+  --shadow-google-hover: 0 1px 3px 0 rgba(60,64,67,0.15), 0 4px 8px 3px rgba(60,64,67,0.1);
+}
+
+@layer base {
+  body {
+    @apply bg-bg text-ink min-h-screen antialiased;
+  }
+}
+
+@layer components {
+  .google-strip {
+    height: 4px;
+    width: 100%;
+    background: linear-gradient(to right, var(--color-google-blue) 0%, var(--color-google-blue) 25%, var(--color-google-red) 25%, var(--color-google-red) 50%, var(--color-google-yellow) 50%, var(--color-google-yellow) 75%, var(--color-google-green) 75%, var(--color-google-green) 100%);
+  }
+}

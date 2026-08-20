@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Feedback {
+  id           Int       @id @default(autoincrement())
+  nama_lengkap String?   @db.VarChar(255)
+  email        String?   @db.VarChar(255)
+  rating       Int?
+  alasan       String?
+  pesan_kesan  String?
+  created_at   DateTime? @db.Timestamptz(6)
+  source       String?
+  materi       String?   @db.VarChar(255)
+
+  @@map("feedbacks")
+}
+
+model LinkedinAccount {
+  id           Int       @id @default(autoincrement())
+  nama_lengkap String    @db.VarChar(255)
+  url_linkedin String    @db.VarChar(500)
+  created_at   DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@map("gsa-aiforge_akun-linkedin")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model gsa_aiforge_feedback {
+  id           Int       @id @default(autoincrement())
+  nama_lengkap String    @db.VarChar(255)
+  email        String    @db.VarChar(255)
+  rating       Int
+  alasan       String
+  pesan_kesan  String
+  created_at   DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@map("gsa-aiforge_feedback")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model gsa_aiforge_questions {
+  id         Int       @id @default(autoincrement())
+  nama       String    @db.VarChar(255)
+  pertanyaan String
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@map("gsa-aiforge_questions")
+}
+
+model Form {
+  id           String   @id @default(cuid())
+  name         String   @db.VarChar(255)
+  slug         String   @unique @db.VarChar(255)
+  description  String?
+  config       Json
+  is_active    Boolean  @default(true)
+  created_at   DateTime @default(now())
+
+  @@map("forms")
+}
+
+model FormResponse {
+  id           String   @id @default(cuid())
+  form_id      String
+  answers      Json
+  submitted_at DateTime @default(now())
+
+  @@map("form_responses")
+}

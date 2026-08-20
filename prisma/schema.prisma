@@ -1,0 +1,111 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model feedbacks {
+  id           Int       @id @default(autoincrement())
+  nama_lengkap String?   @db.VarChar(255)
+  email        String?   @db.VarChar(255)
+  rating       Int?
+  alasan       String?
+  pesan_kesan  String?
+  created_at   DateTime? @db.Timestamptz(6)
+  source       String?
+  materi       String?   @db.VarChar(255)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model form_fields {
+  id          Int      @id @default(autoincrement())
+  form_id     Int
+  type        String   @default("text")
+  label       String
+  placeholder String?
+  required    Boolean? @default(true)
+  options     String?
+  sort_order  Int?     @default(0)
+  
+  form        forms    @relation(fields: [form_id], references: [id], onDelete: Cascade)
+}
+
+model form_responses {
+  id           Int      @id @default(autoincrement())
+  form_id      Int
+  data         Json
+  created_at   DateTime @default(now())
+  
+  form         forms    @relation(fields: [form_id], references: [id], onDelete: Cascade)
+}
+
+model forms {
+  id          Int      @id @default(autoincrement())
+  title       String
+  slug        String   @unique
+  description String?
+  color       String?  @default("#4285F4")
+  created_at  DateTime @default(now())
+  
+  fields      form_fields[]
+  responses   form_responses[]
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model gsa_aiforge_akun_linkedin {
+  id           Int       @id @default(autoincrement())
+  nama_lengkap String    @db.VarChar(255)
+  url_linkedin String    @db.VarChar(500)
+  created_at   DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@map("gsa-aiforge_akun-linkedin")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model gsa_aiforge_feedback {
+  id           Int       @id @default(autoincrement())
+  nama_lengkap String    @db.VarChar(255)
+  email        String    @db.VarChar(255)
+  rating       Int
+  alasan       String
+  pesan_kesan  String
+  created_at   DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@map("gsa-aiforge_feedback")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model gsa_aiforge_questions {
+  id         Int       @id @default(autoincrement())
+  nama       String    @db.VarChar(255)
+  pertanyaan String
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@map("gsa-aiforge_questions")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model mindful_ai_feedbacks {
+  id         Int       @id @default(autoincrement())
+  nama       String    @db.VarChar(255)
+  email      String    @db.VarChar(255)
+  rating     Int
+  alasan     String
+  pesan      String
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@map("mindful-ai-feedbacks")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model mindful_ai_questions {
+  id         Int       @id @default(autoincrement())
+  nama       String    @db.VarChar(255)
+  pertanyaan String
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@map("mindful-ai-questions")
+}

@@ -1,0 +1,39 @@
+{
+  "name": "presentation-personal-branding---portfolio-digital",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/muhammadhaerul25/presentation-personal-branding---portfolio-digital.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/muhammadhaerul25/presentation-personal-branding---portfolio-digital/issues"
+  },
+  "homepage": "https://github.com/muhammadhaerul25/presentation-personal-branding---portfolio-digital#readme",
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.9.1",
+    "@prisma/client": "^7.9.1",
+    "compression": "^1.8.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "helmet": "^8.3.0",
+    "morgan": "^1.11.0",
+    "pdf-lib": "^1.17.1",
+    "pg": "^8.22.0",
+    "puppeteer": "^25.3.0"
+  },
+  "devDependencies": {
+    "prisma": "^7.9.1"
+  }
+}
