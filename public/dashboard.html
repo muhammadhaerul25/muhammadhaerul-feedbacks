@@ -2575,7 +2575,7 @@ function renderTalksGrid() {
                 (slides.length
                     ? '<div class="talk-slides">' + slides.map(function(s){
                         var href = safeUrl(s.url || s.label);
-                        var labelText = s.label || (s.type === 'pdf' ? 'PDF' : 'Link');
+                        var labelText = s.label || (s.type === 'pdf' ? 'File' : 'Link');
                         return '<a class="slide-badge" href="'+esc(href)+'" target="_blank" rel="noopener">' +
                             (s.type==='pdf' ? '📄' : '🔗') + ' ' + esc(labelText) +
                           '</a>';
@@ -2638,7 +2638,7 @@ function renderSlideRows() {
             '<div class="slide-row-top" style="justify-content: space-between;">' +
                 '<div class="slide-type-toggle">' +
                     '<button type="button" class="slide-type-btn'+(s.type==='link'?' active':'')+'" onclick="setSlideType('+i+',\'link\')">Link</button>' +
-                    '<button type="button" class="slide-type-btn'+(s.type==='pdf'?' active':'')+'" onclick="setSlideType('+i+',\'pdf\')">PDF</button>' +
+                    '<button type="button" class="slide-type-btn'+(s.type==='pdf'?' active':'')+'" onclick="setSlideType('+i+',\'pdf\')">File</button>' +
                 '</div>' +
                 '<button type="button" class="btn-remove-slide" onclick="removeSlide('+i+')">✕</button>' +
             '</div>' +
@@ -2646,8 +2646,8 @@ function renderSlideRows() {
                 '<input class="field-input" type="text" placeholder="Title / Label (e.g. Pitch Deck)" value="'+esc(s.label||'')+'" oninput="talkSlides['+i+'].label=this.value" style="font-size:0.82rem;padding:8px 12px">' +
             '</div>' +
             '<div class="input-row">' +
-                '<input class="field-input" type="url" placeholder="'+(s.type==='pdf'?'PDF URL (auto-filled after upload)':'URL (https://...)')+'" value="'+esc(s.url||'')+'" oninput="talkSlides['+i+'].url=this.value" style="font-size:0.82rem;padding:8px 12px">' +
-                (s.type==='pdf' ? '<button type="button" class="btn-upload" id="slide-upbtn-'+i+'" onclick="triggerSlideUpload('+i+')">📤 Upload</button><input type="file" id="slide-file-'+i+'" accept=".pdf,application/pdf" style="display:none" onchange="handleSlideFile('+i+',this)">' : '') +
+                '<input class="field-input" type="url" placeholder="'+(s.type==='pdf'?'File URL (auto-filled after upload)':'URL (https://...)')+'" value="'+esc(s.url||'')+'" oninput="talkSlides['+i+'].url=this.value" style="font-size:0.82rem;padding:8px 12px">' +
+                (s.type==='pdf' ? '<button type="button" class="btn-upload" id="slide-upbtn-'+i+'" onclick="triggerSlideUpload('+i+')">📤 Upload</button><input type="file" id="slide-file-'+i+'" accept="*/*" style="display:none" onchange="handleSlideFile('+i+',this)">' : '') +
             '</div>' +
         '</div>';
     }).join('');
