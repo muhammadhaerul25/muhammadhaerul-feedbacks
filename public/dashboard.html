@@ -2209,8 +2209,7 @@ async function loadOverview() {
         var forms = resForms.data || [];
 
         // Hero Stats
-        // TODO: Replace with real visitor data if available
-        animateCount(document.getElementById('hs-visitors'), 12450, '', false);
+        animateCount(document.getElementById('hs-visitors'), 0, '', false);
 
         var attendees = talks.reduce(function(s,t) { return s + (t.jumlah_peserta||0); }, 0);
         animateCount(document.getElementById('hs-attendees'), attendees, '', false);
