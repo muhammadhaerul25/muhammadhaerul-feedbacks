@@ -1392,6 +1392,17 @@
 
                 <div id="fb-content" style="display:none">
 
+                    <div style="display:flex; gap:16px; margin-bottom:16px;">
+                        <div style="flex:1; background:#fff; border:1px solid var(--line-soft); border-radius:var(--r-md); padding:16px; box-shadow:0 2px 8px rgba(0,0,0,0.02)">
+                            <div style="font-size:0.85rem; color:var(--ink-4); font-weight:600; text-transform:uppercase; letter-spacing:0.5px">Total Responses</div>
+                            <div style="font-size:2rem; font-weight:800; color:var(--ink-1); margin-top:8px" id="stat-total-responses">-</div>
+                        </div>
+                        <div style="flex:1; background:#fff; border:1px solid var(--line-soft); border-radius:var(--r-md); padding:16px; box-shadow:0 2px 8px rgba(0,0,0,0.02)">
+                            <div style="font-size:0.85rem; color:var(--ink-4); font-weight:600; text-transform:uppercase; letter-spacing:0.5px">Average Rate</div>
+                            <div style="font-size:2rem; font-weight:800; color:var(--ink-1); margin-top:8px" id="stat-avg-rate">-</div>
+                        </div>
+                    </div>
+
                     <div class="toolbar">
                         <div class="search-wrap">
                             <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -2008,6 +2019,18 @@ function applyFilters() {
     });
     var fbCountEl = document.getElementById('fb-count');
     if (fbCountEl) fbCountEl.textContent = fl.length;
+
+    var statTotalEl = document.getElementById('stat-total-responses');
+    var statAvgEl = document.getElementById('stat-avg-rate');
+    if (statTotalEl) statTotalEl.textContent = fl.length;
+    if (statAvgEl) {
+        if (fl.length > 0) {
+            var sum = fl.reduce(function(acc, d) { return acc + (+d.rating || 0); }, 0);
+            statAvgEl.textContent = (sum / fl.length).toFixed(1);
+        } else {
+            statAvgEl.textContent = '-';
+        }
+    }
     var cardsEl=document.getElementById('cards'), emptyEl=document.getElementById('fb-empty');
     if (!fl.length) { cardsEl.innerHTML=''; emptyEl.style.display='flex'; }
     else { emptyEl.style.display='none'; cardsEl.innerHTML=fl.map(buildCard).join(''); }
