@@ -413,14 +413,14 @@
         position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
         color: var(--ink-4); width: 16px; height: 16px; pointer-events: none;
     }
-    #q, #talks-q, #projects-q {
+    .search-wrap input, #q, #talks-q, #projects-q, #forms-q {
         width: 100%; padding: 10px 16px 10px 38px;
         border: 1.5px solid var(--line); border-radius: var(--r-pill);
         font-family: inherit; font-size: 0.875rem; font-weight: 500;
         background: var(--surface); outline: none; transition: var(--t); color: var(--ink);
     }
-    #q:focus, #talks-q:focus, #projects-q:focus { border-color: var(--g-blue); box-shadow: 0 0 0 3px var(--g-blue-soft); }
-    #q::placeholder, #talks-q::placeholder, #projects-q::placeholder { color: var(--ink-4); }
+    .search-wrap input:focus, #q:focus, #talks-q:focus, #projects-q:focus, #forms-q:focus { border-color: var(--g-blue); box-shadow: 0 0 0 3px var(--g-blue-soft); }
+    .search-wrap input::placeholder, #q::placeholder, #talks-q::placeholder, #projects-q::placeholder, #forms-q::placeholder { color: var(--ink-4); }
 
     .chip {
         padding: 7px 15px; border-radius: var(--r-pill);
