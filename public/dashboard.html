@@ -1914,13 +1914,14 @@ function switchView(view, el) {
     document.querySelectorAll('.nav-item').forEach(function(n){ n.classList.remove('active'); });
     if (el) el.classList.add('active');
     document.querySelectorAll('.view').forEach(function(v){ v.classList.remove('active'); });
-    document.getElementById('view-'+view).classList.add('active');
+    var viewEl = document.getElementById('view-'+view);
+    if (viewEl) viewEl.classList.add('active');
     var m = viewMeta[view] || {title:view,crumb:'Portfolio'};
     document.getElementById('topbar-title').textContent = m.title;
     document.getElementById('topbar-crumb').textContent = m.crumb;
     document.getElementById('btn-refresh').style.display = (view==='feedbacks') ? 'flex' : 'none';
     if (view==='feedbacks' && !dataLoaded) loadFeedback();
-    if (view==='forms') closeFormEditor();
+    if (view==='forms') loadForms();
     if (view==='dashboard') loadOverview();
     if (view==='talks' && !talksLoaded) loadTalks();
     if (view==='projects' && !projectsLoaded) loadProjects();
@@ -3253,6 +3254,12 @@ function execConfirm() {
     if (confirmCallback) confirmCallback();
     hideConfirm();
 }
+
+// Init active view on page load
+(function() {
+    var savedView = localStorage.getItem('activeView') || 'dashboard';
+    switchView(savedView);
+})();
 </script>
 
     <!-- Confirm Modal -->
