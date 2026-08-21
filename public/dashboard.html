@@ -305,19 +305,30 @@
     .hero-right { position: relative; z-index: 1; display: flex; gap: 16px; }
 
     .hero-stat {
-        background: var(--bg);
-        border: 1.5px solid var(--line);
+        background: linear-gradient(145deg, rgba(255,255,255,1), rgba(255,255,255,0.6));
+        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255,255,255,0.8);
         border-radius: var(--r-md);
-        padding: 18px 22px; text-align: center; min-width: 100px;
-        transition: var(--t);
+        padding: 24px 32px; text-align: center; min-width: 140px;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.03), inset 0 2px 4px rgba(255,255,255,1);
     }
-    .hero-stat:hover { border-color: var(--g-blue); transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+    .hero-stat:hover { 
+        transform: translateY(-6px) scale(1.02); 
+        box-shadow: 0 16px 32px rgba(66,133,244,0.08), inset 0 2px 4px rgba(255,255,255,1);
+        border-color: rgba(66,133,244,0.3);
+    }
     .hero-stat-num {
         font-family: 'Google Sans', 'Inter', sans-serif;
-        font-size: 2.2rem; font-weight: 700;
-        color: var(--ink); letter-spacing: -0.05em; line-height: 1; margin-bottom: 5px;
+        font-size: 3rem; font-weight: 800;
+        background: linear-gradient(135deg, var(--ink) 0%, var(--g-blue-dark) 100%);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        letter-spacing: -0.05em; line-height: 1; margin-bottom: 8px;
     }
-    .hero-stat-label { font-size: 0.68rem; color: var(--ink-4); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+    .hero-stat-label { 
+        font-size: 0.75rem; color: var(--ink-3); font-weight: 700; 
+        text-transform: uppercase; letter-spacing: 0.08em; 
+    }
 
     /* ════════════════════════════════════════
        STAT CARDS
