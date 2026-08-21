@@ -15,7 +15,10 @@ const app = express();
 
 // Security and Performance Middlewares
 app.use(helmet({
-    contentSecurityPolicy: false // Disabled to prevent blocking inline scripts in the old static HTML
+    contentSecurityPolicy: false, // Disabled to prevent blocking inline scripts in the old static HTML
+    crossOriginEmbedderPolicy: false,
+    crossOriginResourcePolicy: false,
+    referrerPolicy: { policy: 'strict-origin-when-cross-origin' }
 }));
 app.use(cors());
 app.use(compression());
