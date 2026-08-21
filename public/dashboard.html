@@ -1338,6 +1338,10 @@
                     </div>
                     <div class="hero-right">
                         <div class="hero-stat">
+                            <div class="hero-stat-num" id="hs-visitors">—</div>
+                            <div class="hero-stat-label">Visitors</div>
+                        </div>
+                        <div class="hero-stat">
                             <div class="hero-stat-num" id="hs-attendees">—</div>
                             <div class="hero-stat-label">Attendees</div>
                         </div>
@@ -1891,6 +1895,9 @@ async function loadOverview() {
         var forms = resForms.data || [];
 
         // Hero Stats
+        // TODO: Replace with real visitor data if available
+        animateCount(document.getElementById('hs-visitors'), 12450, '', false);
+
         var attendees = talks.reduce(function(s,t) { return s + (t.jumlah_peserta||0); }, 0);
         animateCount(document.getElementById('hs-attendees'), attendees, '', false);
         
