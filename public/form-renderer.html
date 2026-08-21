@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loading Form…</title>
     <meta name="description" content="Fill out this form.">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -19,20 +21,21 @@
         --ink-3: #5F6368;
         --ink-4: #9AA0A6;
         --border: #DADCE0;
+        --border-soft: #F1F3F4;
         --bg: #F0F4FF;
         --surface: #FFFFFF;
         --g-green: #34A853;
         --g-red: #EA4335;
         --g-yellow: #FBBC04;
-        --r-md: 14px;
-        --r-sm: 10px;
+        --r-md: 10px;
+        --r-sm: 8px;
         --r-pill: 100px;
-        --t: 0.22s cubic-bezier(0.4,0,0.2,1);
-        --t-spring: 0.4s cubic-bezier(0.34,1.56,0.64,1);
+        --t: 0.2s cubic-bezier(0.4,0,0.2,1);
+        --t-spring: 0.3s cubic-bezier(0.34,1.56,0.64,1);
     }
 
     body {
-        font-family: 'Inter', system-ui, sans-serif;
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
         background: var(--bg);
         color: var(--ink);
         min-height: 100vh;
@@ -40,10 +43,10 @@
         display: flex;
         align-items: flex-start;
         justify-content: center;
-        padding: 32px 16px 48px;
+        padding: 40px 16px 60px;
         background-image:
-            radial-gradient(ellipse 600px 400px at 0% 0%, rgba(66,133,244,0.08) 0%, transparent 60%),
-            radial-gradient(ellipse 400px 300px at 100% 100%, rgba(52,168,83,0.06) 0%, transparent 60%);
+            radial-gradient(ellipse 600px 400px at 0% 0%, rgba(66,133,244,0.06) 0%, transparent 60%),
+            radial-gradient(ellipse 400px 300px at 100% 100%, rgba(52,168,83,0.05) 0%, transparent 60%);
     }
 
     /* ── LOADING ── */
@@ -52,13 +55,13 @@
         justify-content: center; gap: 16px; min-height: 60vh; width: 100%;
     }
     .loader {
-        width: 40px; height: 40px; border-radius: 50%;
-        border: 3px solid var(--border);
+        width: 42px; height: 42px; border-radius: 50%;
+        border: 3.5px solid var(--border);
         border-top-color: var(--primary);
         animation: spin 0.8s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
-    .loading-text { font-size: 0.9rem; color: var(--ink-3); font-weight: 600; }
+    .loading-text { font-size: 0.95rem; color: var(--ink-3); font-weight: 600; }
 
     /* ── ERROR STATE ── */
     #error-state {
@@ -66,62 +69,68 @@
         justify-content: center; gap: 12px; min-height: 60vh; width: 100%; text-align: center;
     }
     .error-icon { font-size: 4rem; }
-    .error-title { font-size: 1.4rem; font-weight: 800; color: var(--ink); }
-    .error-desc { font-size: 0.9rem; color: var(--ink-3); max-width: 300px; line-height: 1.6; }
+    .error-title { font-size: 1.4rem; font-weight: 800; color: var(--ink); font-family: 'Google Sans', sans-serif; }
+    .error-desc { font-size: 0.9rem; color: var(--ink-3); max-width: 340px; line-height: 1.6; }
 
     /* ── FORM CARD ── */
     #form-card {
         display: none;
         background: var(--surface);
-        max-width: 580px;
+        max-width: 640px;
         width: 100%;
-        border-radius: 20px;
-        box-shadow: 0 4px 24px rgba(60,64,67,0.12);
+        border-radius: 16px;
+        box-shadow: 0 4px 24px rgba(60,64,67,0.08), 0 1px 3px rgba(60,64,67,0.04);
+        border: 1px solid rgba(0,0,0,0.04);
         overflow: hidden;
         position: relative;
+    }
+
+    .google-top-stripe {
+        height: 6px;
+        width: 100%;
+        background: linear-gradient(90deg, #4285F4 0% 25%, #EA4335 25% 50%, #FBBC04 50% 75%, #34A853 75% 100%);
     }
 
     .form-header {
-        padding: 32px 36px 28px;
-        position: relative;
-        overflow: hidden;
+        padding: 40px 48px 24px;
+        text-align: center;
+        background: #fff;
     }
-    .form-header::after {
-        content: '';
-        position: absolute; inset: 0;
-        background: linear-gradient(180deg, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.25) 100%);
-    }
-    .form-header-content { position: relative; z-index: 1; }
 
-    .form-badge {
-        display: inline-flex; align-items: center; gap: 5px;
-        padding: 4px 12px; border-radius: var(--r-pill);
-        background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3);
-        font-size: 0.68rem; font-weight: 800; color: #fff;
-        text-transform: uppercase; letter-spacing: 0.08em;
-        margin-bottom: 12px;
-    }
     .form-title-display {
         font-family: 'Google Sans', 'Inter', sans-serif;
-        font-size: 1.8rem; font-weight: 700;
-        color: #fff; letter-spacing: -0.03em; line-height: 1.2;
-        margin-bottom: 8px;
-    }
-    .form-desc-display {
-        font-size: 0.9rem; color: rgba(255,255,255,0.8);
-        line-height: 1.5;
+        font-size: 1.65rem;
+        font-weight: 700;
+        color: var(--ink);
+        letter-spacing: -0.025em;
+        line-height: 1.3;
+        margin-bottom: 12px;
+        white-space: pre-line;
     }
 
-    .form-body { padding: 32px 36px 36px; }
+    .form-desc-display {
+        font-size: 0.92rem;
+        color: var(--ink-3);
+        line-height: 1.6;
+        max-width: 500px;
+        margin: 0 auto;
+        white-space: pre-line;
+    }
+
+    .form-body {
+        padding: 16px 48px 40px;
+        background: #fff;
+    }
 
     /* ── PROGRESS BAR ── */
-    .progress-bar-wrap { margin-bottom: 28px; }
+    .progress-bar-wrap { margin-bottom: 24px; }
     .progress-track {
-        height: 4px; background: var(--border); border-radius: 2px; overflow: hidden;
+        height: 4px; background: var(--border-soft); border-radius: 2px; overflow: hidden;
     }
     .progress-fill {
         height: 100%; border-radius: 2px;
-        transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+        background: var(--primary);
+        transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
     }
     .progress-label {
         font-size: 0.72rem; font-weight: 700; color: var(--ink-4);
@@ -129,56 +138,92 @@
     }
 
     /* ── FIELDS ── */
-    .field-group { margin-bottom: 22px; }
+    .field-group { margin-bottom: 24px; }
     .field-label {
-        display: block; font-size: 0.82rem; font-weight: 700;
-        color: var(--ink-2); margin-bottom: 8px;
+        display: block;
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: var(--ink);
+        margin-bottom: 8px;
     }
-    .field-label .req { color: var(--g-red); margin-left: 2px; }
+    .field-label .req { color: #d93025; margin-left: 2px; font-weight: 700; }
 
     .field-input, .field-textarea, .field-select {
-        width: 100%; padding: 12px 16px;
-        font-family: inherit; font-size: 0.9rem; font-weight: 500; color: var(--ink);
-        background: #FAFAFA; border: 1.5px solid var(--border);
-        border-radius: var(--r-md); outline: none; transition: var(--t);
+        width: 100%;
+        padding: 12px 16px;
+        font-family: inherit;
+        font-size: 0.92rem;
+        font-weight: 400;
+        color: var(--ink);
+        background: #FAFAFA;
+        border: 1.5px solid var(--border);
+        border-radius: var(--r-sm);
+        outline: none;
+        transition: var(--t);
         appearance: none;
     }
     .field-input:focus, .field-textarea:focus, .field-select:focus {
-        border-color: var(--primary); background: var(--surface);
+        border-color: var(--primary);
+        background: var(--surface);
         box-shadow: 0 0 0 3px rgba(66,133,244,0.12);
     }
-    .field-input::placeholder, .field-textarea::placeholder { color: var(--ink-4); }
+    .field-input::placeholder, .field-textarea::placeholder {
+        color: var(--ink-4);
+        font-weight: 400;
+    }
     .field-textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
     .field-select-wrap { position: relative; }
     .field-select-wrap::after {
         content: '';
-        position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
-        border: 5px solid transparent; border-top: 6px solid var(--ink-4);
+        position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+        border: 5px solid transparent; border-top: 6px solid var(--ink-3);
         pointer-events: none;
     }
-    .field-select { cursor: pointer; padding-right: 36px; }
+    .field-select { cursor: pointer; padding-right: 40px; }
 
-    /* ── RATING ── */
-    .rating-grid {
-        display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 4px;
+    /* ── RATING 1 - 10 ── */
+    .rating-scale-wrap {
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        gap: 6px;
+        margin-top: 6px;
     }
-    .rating-grid + .rating-grid { margin-top: 0; }
     input[type="radio"].r-inp { display: none; }
     .r-lbl {
-        display: flex; align-items: center; justify-content: center;
-        height: 46px; border: 2px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 44px;
+        border: 1.5px solid var(--border);
         border-radius: var(--r-sm);
-        font-size: 1rem; font-weight: 800; color: var(--ink-3);
-        cursor: pointer; transition: var(--t-spring); user-select: none;
+        background: #FAFAFA;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--ink-2);
+        cursor: pointer;
+        transition: var(--t);
+        user-select: none;
     }
-    .r-lbl:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-3px) scale(1.05); }
+    .r-lbl:hover {
+        border-color: var(--primary);
+        background: rgba(66,133,244,0.06);
+        color: var(--primary);
+    }
+    input.r-inp:checked + .r-lbl {
+        background: var(--primary) !important;
+        border-color: var(--primary) !important;
+        color: #fff !important;
+        font-weight: 700;
+        box-shadow: 0 3px 10px rgba(66,133,244,0.3);
+    }
 
-    /* Radio options */
-    .radio-options { display: flex; flex-direction: column; gap: 10px; }
+    /* ── RADIO OPTIONS ── */
+    .radio-options { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
     .radio-option {
         display: flex; align-items: center; gap: 12px;
         padding: 12px 16px; border: 1.5px solid var(--border);
-        border-radius: var(--r-md); cursor: pointer; transition: var(--t);
+        border-radius: var(--r-sm); cursor: pointer; transition: var(--t);
+        background: #FAFAFA;
     }
     .radio-option:hover { border-color: var(--primary); background: rgba(66,133,244,0.04); }
     .radio-option input[type="radio"] { display: none; }
@@ -190,28 +235,28 @@
     .radio-option.selected { border-color: var(--primary); background: rgba(66,133,244,0.06); }
     .radio-option.selected .radio-dot { border-color: var(--primary); background: var(--primary); }
     .radio-option.selected .radio-dot::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #fff; }
-    .radio-option-label { font-size: 0.9rem; font-weight: 600; color: var(--ink-2); }
+    .radio-option-label { font-size: 0.9rem; font-weight: 500; color: var(--ink-2); }
 
     /* ── BUTTONS ── */
-    .nav-btns { display: flex; gap: 10px; margin-top: 28px; }
+    .nav-btns { display: flex; gap: 12px; margin-top: 32px; }
     .btn {
         flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-        padding: 13px 20px; font-family: inherit; font-size: 0.9rem; font-weight: 700;
+        padding: 14px 24px; font-family: inherit; font-size: 0.95rem; font-weight: 700;
         border: none; border-radius: var(--r-pill); cursor: pointer; transition: var(--t);
     }
-    .btn svg { width: 15px; height: 15px; }
-    .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 2px 8px rgba(66,133,244,0.3); }
-    .btn-primary:hover { background: #3367D6; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(66,133,244,0.4); }
+    .btn svg { width: 16px; height: 16px; }
+    .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 2px 8px rgba(66,133,244,0.25); }
+    .btn-primary:hover { background: #3367D6; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(66,133,244,0.35); }
     .btn-primary:disabled { background: #AEC8FF; box-shadow: none; cursor: not-allowed; transform: none; }
-    .btn-secondary { background: #F1F3F4; color: var(--ink-2); flex: none; width: auto; padding: 13px 22px; }
+    .btn-secondary { background: #F1F3F4; color: var(--ink-2); flex: none; width: auto; padding: 14px 24px; }
     .btn-secondary:hover { background: var(--border); }
 
     .spinner { width: 18px; height: 18px; border: 2.5px solid rgba(255,255,255,0.35); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; display: none; }
 
     /* ── ALERT ── */
     .alert {
-        padding: 12px 16px; border-radius: var(--r-md);
-        font-size: 0.85rem; font-weight: 600;
+        padding: 12px 16px; border-radius: var(--r-sm);
+        font-size: 0.88rem; font-weight: 600;
         margin-bottom: 20px; display: none; align-items: center; gap: 10px;
     }
     .alert.error   { display: flex; background: #FDE8E7; color: #C5221F; border: 1px solid #FACBC9; }
@@ -219,7 +264,7 @@
 
     /* ── SUCCESS STATE ── */
     #success-state {
-        display: none; text-align: center; padding: 48px 36px 40px;
+        display: none; text-align: center; padding: 56px 40px 48px;
         position: relative;
     }
     .confetti-wrap { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
@@ -232,16 +277,16 @@
         100% { transform: translateY(500px) rotate(720deg); opacity: 0; }
     }
     .success-ring {
-        width: 80px; height: 80px; border-radius: 50%;
+        width: 76px; height: 76px; border-radius: 50%;
         background: linear-gradient(135deg, var(--g-green), #1E8A3E);
         display: flex; align-items: center; justify-content: center;
         margin: 0 auto 20px;
-        box-shadow: 0 8px 28px rgba(52,168,83,0.3);
+        box-shadow: 0 8px 24px rgba(52,168,83,0.25);
         animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
         position: relative; z-index: 1;
     }
     @keyframes popIn { from{transform:scale(0.4);opacity:0} to{transform:scale(1);opacity:1} }
-    .success-ring svg { width: 38px; height: 38px; color: #fff; }
+    .success-ring svg { width: 36px; height: 36px; color: #fff; }
     .success-title {
         font-family: 'Google Sans', 'Inter', sans-serif;
         font-size: 1.6rem; font-weight: 700; color: var(--ink);
@@ -249,38 +294,37 @@
         animation: fadeUp 0.4s 0.2s both; position: relative; z-index: 1;
     }
     .success-desc {
-        font-size: 0.88rem; color: var(--ink-3); line-height: 1.6;
+        font-size: 0.92rem; color: var(--ink-3); line-height: 1.6;
         margin-bottom: 28px; animation: fadeUp 0.4s 0.3s both;
         position: relative; z-index: 1;
     }
     @keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
     #btn-again {
         animation: fadeUp 0.4s 0.4s both; flex: none;
-        width: auto; padding: 11px 26px;
+        width: auto; padding: 12px 28px;
         position: relative; z-index: 1;
     }
 
     /* ── FOOTER ── */
     .form-footer {
-        padding: 14px 36px; border-top: 1px solid var(--border);
+        padding: 16px 36px; border-top: 1px solid var(--border-soft);
         display: flex; align-items: center; justify-content: center; gap: 8px;
+        background: #FAFAFA;
     }
-    .footer-dots { display: flex; gap: 3px; }
+    .footer-dots { display: flex; gap: 4px; }
     .footer-dot { width: 6px; height: 6px; border-radius: 50%; }
-    .footer-text { font-size: 0.68rem; font-weight: 600; color: var(--ink-4); }
+    .footer-text { font-size: 0.72rem; font-weight: 600; color: var(--ink-4); }
 
-    /* ── RATING COLOR STATES ── */
-    input.r-inp[value="1"]:checked~label,input.r-inp[value="2"]:checked~label{background:var(--g-red);border-color:var(--g-red);color:#fff;transform:translateY(-3px) scale(1.1);box-shadow:0 6px 16px rgba(234,67,53,0.35)}
-    input.r-inp[value="3"]:checked~label,input.r-inp[value="4"]:checked~label{background:#FF7043;border-color:#FF7043;color:#fff;transform:translateY(-3px) scale(1.1);box-shadow:0 6px 16px rgba(255,112,67,0.35)}
-    input.r-inp[value="5"]:checked~label,input.r-inp[value="6"]:checked~label{background:var(--g-yellow);border-color:var(--g-yellow);color:#fff;transform:translateY(-3px) scale(1.1);box-shadow:0 6px 16px rgba(251,188,4,0.35)}
-    input.r-inp[value="7"]:checked~label,input.r-inp[value="8"]:checked~label{background:#00BFA5;border-color:#00BFA5;color:#fff;transform:translateY(-3px) scale(1.1);box-shadow:0 6px 16px rgba(0,191,165,0.35)}
-    input.r-inp[value="9"]:checked~label,input.r-inp[value="10"]:checked~label{background:var(--g-green);border-color:var(--g-green);color:#fff;transform:translateY(-3px) scale(1.1);box-shadow:0 6px 16px rgba(52,168,83,0.35)}
-
-    @media (max-width: 480px) {
-        body { padding: 16px; }
-        .form-header, .form-body { padding: 24px 20px; }
-        .form-footer { padding: 14px 20px; }
-        .form-title-display { font-size: 1.4rem; }
+    @media (max-width: 600px) {
+        body { padding: 16px 12px 32px; }
+        .form-header { padding: 28px 20px 16px; }
+        .form-body { padding: 16px 20px 28px; }
+        .form-footer { padding: 14px 16px; }
+        .form-title-display { font-size: 1.35rem; }
+        .rating-scale-wrap {
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+        }
         .nav-btns { flex-direction: column; }
         .btn-secondary { order: 2; }
     }
@@ -303,13 +347,13 @@
 
 <!-- FORM CARD -->
 <div id="form-card">
-    <!-- Header (color + title) -->
+    <!-- Top Google Gradient Stripe -->
+    <div class="google-top-stripe" id="google-stripe"></div>
+
+    <!-- Header (clean white title + subtitle) -->
     <div class="form-header" id="form-header">
-        <div class="form-header-content">
-            <div class="form-badge" id="form-badge">📝 Form</div>
-            <div class="form-title-display" id="form-title-display">Loading…</div>
-            <div class="form-desc-display" id="form-desc-display"></div>
-        </div>
+        <div class="form-title-display" id="form-title-display">Loading…</div>
+        <div class="form-desc-display" id="form-desc-display"></div>
     </div>
 
     <!-- SUCCESS -->
@@ -327,7 +371,7 @@
     <div id="form-body" class="form-body">
         <div id="alert-box" class="alert"></div>
 
-        <!-- Progress -->
+        <!-- Progress (if paginated) -->
         <div class="progress-bar-wrap" id="progress-wrap" style="display:none">
             <div class="progress-track">
                 <div class="progress-fill" id="progress-fill" style="width:0%"></div>
@@ -344,8 +388,8 @@
                 Back
             </button>
             <button class="btn btn-primary" id="btn-next" onclick="nextPage()">
-                <span id="btn-next-text">Continue</span>
-                <svg id="btn-next-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                <span id="btn-next-text">Submit</span>
+                <svg id="btn-next-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:none"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 <div class="spinner" id="btn-spinner"></div>
             </button>
         </div>
@@ -369,7 +413,7 @@
 ════════════════════ */
 var formData = null;     // form + fields from API
 var answers  = {};       // { fieldId: value }
-var PAGE_SIZE = 3;       // fields per page
+var PAGE_SIZE = 50;      // Render all fields on one clean continuous form
 var currentPage = 0;
 var pages = [];          // array of field arrays
 
@@ -392,19 +436,18 @@ async function loadForm() {
         formData = json.data;
         document.title = formData.title + ' — Muhammad Haerul';
 
-        // Set header
-        var hdr = document.getElementById('form-header');
-        hdr.style.background = 'linear-gradient(135deg, ' + formData.color + ' 0%, ' + darken(formData.color, 30) + ' 100%)';
-        document.getElementById('progress-fill').style.background = formData.color;
+        // Set header styling
+        if (formData.color) {
+            document.documentElement.style.setProperty('--primary', formData.color);
+        }
         document.getElementById('form-title-display').textContent = formData.title;
         document.getElementById('form-desc-display').textContent = formData.description || '';
         if (!formData.description) document.getElementById('form-desc-display').style.display = 'none';
 
-        // Build pages
+        // Build fields
         var fields = formData.fields || [];
         if (fields.length === 0) { showError('This form has no questions yet.'); return; }
 
-        // Paginate: group into pages of PAGE_SIZE
         pages = [];
         for (var i = 0; i < fields.length; i += PAGE_SIZE) {
             pages.push(fields.slice(i, i + PAGE_SIZE));
@@ -441,7 +484,7 @@ function renderPage(idx) {
         container.appendChild(buildField(field));
     });
 
-    // Update progress
+    // Update progress if multi-page
     var totalFields = formData.fields.length;
     var doneFields  = Math.min(idx * PAGE_SIZE + PAGE_SIZE, totalFields);
     document.getElementById('progress-fill').style.width = (doneFields / totalFields * 100) + '%';
@@ -457,7 +500,6 @@ function renderPage(idx) {
     nextIcon.style.display = isLast ? 'none' : '';
 
     clearAlert();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function buildField(field) {
@@ -479,7 +521,7 @@ function buildField(field) {
             var inp = document.createElement('input');
             inp.type = field.type;
             inp.className = 'field-input';
-            inp.placeholder = field.placeholder || '';
+            inp.placeholder = field.placeholder || (field.type === 'email' ? 'Contoh: budi@example.com' : (field.label.toLowerCase().includes('nama') ? 'Contoh: Budi Santoso' : ''));
             inp.value = savedVal;
             inp.dataset.fieldId = field.id;
             inp.addEventListener('input', function(){ answers[field.id] = this.value; });
@@ -491,7 +533,7 @@ function buildField(field) {
         case 'textarea':
             var ta = document.createElement('textarea');
             ta.className = 'field-textarea';
-            ta.placeholder = field.placeholder || '';
+            ta.placeholder = field.placeholder || 'Tuliskan jawaban Anda...';
             ta.value = savedVal;
             ta.dataset.fieldId = field.id;
             ta.addEventListener('input', function(){ answers[field.id] = this.value; });
@@ -508,7 +550,7 @@ function buildField(field) {
             sel.className = 'field-select';
             sel.dataset.fieldId = field.id;
             sel.id = 'f_' + field.id;
-            sel.innerHTML = '<option value="">— Select an option —</option>' +
+            sel.innerHTML = '<option value="">— Pilih opsi —</option>' +
                 opts.map(function(o){ return '<option value="'+escHtml(o)+'"'+(savedVal===o?' selected':'')+'>'+escHtml(o)+'</option>'; }).join('');
             sel.addEventListener('change', function(){ answers[field.id] = this.value; });
             sw.appendChild(sel); group.appendChild(sw);
@@ -566,39 +608,31 @@ function buildField(field) {
             break;
 
         case 'rating':
-            var rGrid = document.createElement('div');
-            rGrid.className = 'rating-grid';
-            rGrid.style.gridTemplateColumns = 'repeat(5, 1fr)';
-            var rGrid2 = document.createElement('div');
-            rGrid2.className = 'rating-grid';
-            rGrid2.style.marginTop = '8px';
-            rGrid2.style.gridTemplateColumns = 'repeat(5, 1fr)';
+            var rWrap = document.createElement('div');
+            rWrap.className = 'rating-scale-wrap';
 
-            [1,2,3,4,5].forEach(function(n) {
-                var ri = document.createElement('input');
-                ri.type='radio'; ri.className='r-inp'; ri.name='r_'+field.id; ri.id='r_'+field.id+'_'+n; ri.value=n;
-                if (savedVal == n) ri.checked = true;
-                ri.addEventListener('change', function(){ answers[field.id] = this.value; });
-                var rl = document.createElement('label');
-                rl.className = 'r-lbl'; rl.setAttribute('for','r_'+field.id+'_'+n); rl.textContent = n;
-                rGrid.appendChild(ri); rGrid.appendChild(rl);
-            });
-            [6,7,8,9,10].forEach(function(n) {
-                var ri = document.createElement('input');
-                ri.type='radio'; ri.className='r-inp'; ri.name='r_'+field.id; ri.id='r_'+field.id+'_'+n; ri.value=n;
-                if (savedVal == n) ri.checked = true;
-                ri.addEventListener('change', function(){ answers[field.id] = this.value; });
-                var rl = document.createElement('label');
-                rl.className = 'r-lbl'; rl.setAttribute('for','r_'+field.id+'_'+n); rl.textContent = n;
-                rGrid2.appendChild(ri); rGrid2.appendChild(rl);
-            });
+            for (var n = 1; n <= 10; n++) {
+                (function(num) {
+                    var ri = document.createElement('input');
+                    ri.type = 'radio';
+                    ri.className = 'r-inp';
+                    ri.name = 'r_' + field.id;
+                    ri.id = 'r_' + field.id + '_' + num;
+                    ri.value = num;
+                    if (savedVal == num) ri.checked = true;
+                    ri.addEventListener('change', function(){ answers[field.id] = this.value; });
 
-            var zoneRow = document.createElement('div');
-            zoneRow.style = 'display:flex;justify-content:space-between;font-size:0.68rem;font-weight:700;color:var(--ink-4);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em';
-            zoneRow.innerHTML = '<span>😞 Poor</span><span>😊 Excellent</span>';
-            group.appendChild(zoneRow);
-            group.appendChild(rGrid);
-            group.appendChild(rGrid2);
+                    var rl = document.createElement('label');
+                    rl.className = 'r-lbl';
+                    rl.setAttribute('for', 'r_' + field.id + '_' + num);
+                    rl.textContent = num;
+
+                    rWrap.appendChild(ri);
+                    rWrap.appendChild(rl);
+                })(n);
+            }
+
+            group.appendChild(rWrap);
             break;
 
         default:
@@ -622,12 +656,12 @@ function nextPage() {
     var pageFields = pages[currentPage];
     for (var i = 0; i < pageFields.length; i++) {
         var f = pageFields[i];
-        if (f.required && !answers[f.id]) {
-            showAlert('Please complete "' + f.label + '" before continuing.', 'error');
+        if (f.required && (!answers[f.id] || (typeof answers[f.id] === 'string' && !answers[f.id].trim()))) {
+            showAlert('Harap isi kolom "' + f.label + '" sebelum melanjutkan.', 'error');
             return;
         }
         if (f.type === 'email' && answers[f.id] && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(answers[f.id])) {
-            showAlert('Please enter a valid email address.', 'error');
+            showAlert('Harap masukkan alamat email yang valid.', 'error');
             return;
         }
     }
@@ -637,11 +671,15 @@ function nextPage() {
         submitForm();
     } else {
         renderPage(currentPage + 1);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
 
 function prevPage() {
-    if (currentPage > 0) renderPage(currentPage - 1);
+    if (currentPage > 0) {
+        renderPage(currentPage - 1);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 }
 
 /* ════════════════════
@@ -671,7 +709,7 @@ async function submitForm() {
         showSuccessState('');
     } catch(e) {
         console.error(e);
-        showAlert('Submission failed: ' + e.message, 'error');
+        showAlert('Gagal mengirimkan feedback: ' + e.message, 'error');
     } finally {
         btn.disabled = false;
         txt.style.display = 'block';
@@ -687,8 +725,9 @@ function showSuccessState(name) {
     document.getElementById('form-body').style.display = 'none';
     var ss = document.getElementById('success-state');
     ss.style.display = 'block';
-    if (name) document.getElementById('success-name').textContent = 'Thank you, ' + name + '! 🎉';
+    if (name) document.getElementById('success-name').textContent = 'Terima kasih, ' + name + '! 🎉';
     launchConfetti();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function launchConfetti() {
@@ -739,14 +778,6 @@ function clearAlert() {
 
 function escHtml(s) {
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-function darken(hex, amount) {
-    var num = parseInt(hex.replace('#',''), 16);
-    var r = Math.max(0, (num >> 16) - amount);
-    var g = Math.max(0, ((num >> 8) & 0xFF) - amount);
-    var b = Math.max(0, (num & 0xFF) - amount);
-    return '#' + ((r << 16) | (g << 8) | b).toString(16).padStart(6, '0');
 }
 </script>
 </body>
