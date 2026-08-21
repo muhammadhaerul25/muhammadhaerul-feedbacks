@@ -1707,29 +1707,6 @@
             <div style="font-size:0.82rem;font-family:monospace;color:var(--ink-3);background:var(--bg);padding:9px 13px;border-radius:var(--r-sm);border:1.5px solid var(--line)" id="nf-slug-preview">.../form/...</div>
         </div>
 
-        <div class="field-group" style="margin-top:8px" id="nf-starter-fields-group">
-            <label class="field-label">Quick Add Fields</label>
-            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:2px" id="starter-fields">
-                <label style="display:flex;align-items:center;gap:6px;font-size:0.8rem;font-weight:600;cursor:pointer;padding:6px 10px;border:1.5px solid var(--line);border-radius:var(--r-sm);transition:var(--t)" onmouseover="this.style.borderColor='var(--g-blue)'" onmouseout="this.style.borderColor='var(--line)'">
-                    <input type="checkbox" id="sf-radio" style="width:14px;height:14px;accent-color:var(--g-blue)"> Multiple Choice
-                </label>
-                <label style="display:flex;align-items:center;gap:6px;font-size:0.8rem;font-weight:600;cursor:pointer;padding:6px 10px;border:1.5px solid var(--line);border-radius:var(--r-sm);transition:var(--t)" onmouseover="this.style.borderColor='var(--g-blue)'" onmouseout="this.style.borderColor='var(--line)'">
-                    <input type="checkbox" id="sf-text" style="width:14px;height:14px;accent-color:var(--g-blue)"> Short Essay
-                </label>
-                <label style="display:flex;align-items:center;gap:6px;font-size:0.8rem;font-weight:600;cursor:pointer;padding:6px 10px;border:1.5px solid var(--line);border-radius:var(--r-sm);transition:var(--t)" onmouseover="this.style.borderColor='var(--g-blue)'" onmouseout="this.style.borderColor='var(--line)'">
-                    <input type="checkbox" id="sf-textarea" style="width:14px;height:14px;accent-color:var(--g-blue)"> Paragraph Essay
-                </label>
-                <label style="display:flex;align-items:center;gap:6px;font-size:0.8rem;font-weight:600;cursor:pointer;padding:6px 10px;border:1.5px solid var(--line);border-radius:var(--r-sm);transition:var(--t)" onmouseover="this.style.borderColor='var(--g-blue)'" onmouseout="this.style.borderColor='var(--line)'">
-                    <input type="checkbox" id="sf-select" style="width:14px;height:14px;accent-color:var(--g-blue)"> Dropdown
-                </label>
-                <label style="display:flex;align-items:center;gap:6px;font-size:0.8rem;font-weight:600;cursor:pointer;padding:6px 10px;border:1.5px solid var(--line);border-radius:var(--r-sm);transition:var(--t)" onmouseover="this.style.borderColor='var(--g-blue)'" onmouseout="this.style.borderColor='var(--line)'">
-                    <input type="checkbox" id="sf-checkbox" style="width:14px;height:14px;accent-color:var(--g-blue)"> Checkbox
-                </label>
-                <label style="display:flex;align-items:center;gap:6px;font-size:0.8rem;font-weight:600;cursor:pointer;padding:6px 10px;border:1.5px solid var(--line);border-radius:var(--r-sm);transition:var(--t)" onmouseover="this.style.borderColor='var(--g-blue)'" onmouseout="this.style.borderColor='var(--line)'">
-                    <input type="checkbox" id="sf-rating" style="width:14px;height:14px;accent-color:var(--g-blue)"> Rate
-                </label>
-            </div>
-        </div>
 
         <div id="drawer-fields-section" style="display:none; margin-top:24px; padding-top:24px; border-top:1.5px dashed var(--line);">
             <div class="fb-fields-head">
@@ -2131,6 +2108,7 @@ var selectedColor  = FB_COLORS[0];
 var selectedFType  = 'text';
 var activeFBFormId = null;   // currently open form id
 var activeFBSlug   = null;
+var pendingFields  = [];     // fields when creating a new form
 
 var FIELD_TYPES = [
     { type:'text',     icon:'📝', name:'Text'     },
@@ -2199,7 +2177,6 @@ async function openFormEditor(form) {
     }).join('');
 
     // Setup Edit Mode
-    document.getElementById('nf-starter-fields-group').style.display = 'none';
     document.getElementById('drawer-fields-section').style.display = 'block';
     document.getElementById('df-btn-cancel').style.display = 'none';
     document.getElementById('df-btn-create').style.display = 'none';
@@ -2242,6 +2219,11 @@ async function saveFormMeta() {
 }
 
 async function deleteField(fid) {
+    if (!activeFBFormId) {
+        pendingFields = pendingFields.filter(function(f){ return f.id != fid; });
+        renderDrawerFields(pendingFields);
+        return;
+    }
     showConfirm('Remove this field?', async function() {
         await fetch('/api/forms/'+activeFBFormId+'/fields/'+fid, { method:'DELETE' });
         // Refresh builder
@@ -2269,12 +2251,11 @@ function openNewFormModal() {
     document.getElementById('nf-slug-preview').textContent = window.location.origin + '/form/...';
     selectedColor = FB_COLORS[0];
     
-    // Reset checkboxes
-    document.querySelectorAll('#starter-fields input[type="checkbox"]').forEach(function(cb) { cb.checked = false; });
+    pendingFields = [];
+    renderDrawerFields(pendingFields);
 
     // UI for Create Mode
-    document.getElementById('nf-starter-fields-group').style.display = 'block';
-    document.getElementById('drawer-fields-section').style.display = 'none';
+    document.getElementById('drawer-fields-section').style.display = 'block';
     document.getElementById('df-btn-cancel').style.display = 'block';
     document.getElementById('df-btn-create').style.display = 'block';
     document.getElementById('df-btn-save').style.display = 'none';
@@ -2312,52 +2293,26 @@ async function createForm() {
     if (!title) { document.getElementById('nf-title').focus(); return; }
     var desc  = document.getElementById('nf-desc').value.trim();
 
-    var starterFields = [];
-    var sort = 0;
-    if (document.getElementById('sf-radio').checked)
-        starterFields.push({type:'radio', label:'Multiple Choice Question', placeholder:'', required:false, sort_order:sort++, options:'["Option 1", "Option 2", "Option 3"]'});
-    if (document.getElementById('sf-text').checked)
-        starterFields.push({type:'text', label:'Short Essay', placeholder:'Type your answer...', required:false, sort_order:sort++});
-    if (document.getElementById('sf-textarea').checked)
-        starterFields.push({type:'textarea', label:'Paragraph Essay', placeholder:'Type a longer answer...', required:false, sort_order:sort++});
-    if (document.getElementById('sf-select').checked)
-        starterFields.push({type:'select', label:'Dropdown Question', placeholder:'', required:false, sort_order:sort++, options:'["Option A", "Option B", "Option C"]'});
-    if (document.getElementById('sf-checkbox').checked)
-        starterFields.push({type:'checkbox', label:'Checkbox Question', placeholder:'', required:false, sort_order:sort++, options:'["Choice 1", "Choice 2", "Choice 3"]'});
-    if (document.getElementById('sf-rating').checked)
-        starterFields.push({type:'rating', label:'Rate this', placeholder:'', required:false, sort_order:sort++});
+    var defaultFields = pendingFields.map(function(f, idx) {
+        return { type: f.type, label: f.label, placeholder: f.placeholder, required: f.required, options: f.options, sort_order: idx };
+    });
 
     try {
         var res  = await fetch('/api/forms', {
             method:'POST', headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({ title, description:desc, color:selectedColor, defaultFields:starterFields })
+            body: JSON.stringify({ title, description:desc, color:selectedColor, defaultFields })
         });
         var json = await res.json();
         if (!res.ok) { showToast(json.error||'Error creating form.'); return; }
         await loadForms();
         
-        // Auto-switch to Edit Mode
-        activeFBFormId = json.data.id;
-        activeFBSlug   = json.data.slug;
-        
-        document.getElementById('nf-starter-fields-group').style.display = 'none';
-        document.getElementById('drawer-fields-section').style.display = 'block';
-        document.getElementById('df-btn-cancel').style.display = 'none';
-        document.getElementById('df-btn-create').style.display = 'none';
-        document.getElementById('df-btn-save').style.display = 'block';
-
-        var f2res  = await fetch('/api/forms/'+json.data.slug);
-        var f2json = await f2res.json();
-        if (f2json.data) {
-            renderDrawerFields(f2json.data.fields||[]);
-        }
+        closeNewFormModal();
         showToast('Form created! 🎉');
     } catch(e) { showToast('Failed to create form.'); }
 }
 
 /* ── Add Field Modal ── */
 function openAddFieldModal() {
-    if (!activeFBFormId) { showToast('Select a form first.'); return; }
     selectedFType = 'text';
     document.getElementById('af-label').value='';
     document.getElementById('af-placeholder').value='';
@@ -2397,6 +2352,14 @@ async function addField() {
         if (!raw) { showToast('Please add at least one option.'); return; }
         options = JSON.stringify(raw.split('\n').map(function(o){ return o.trim(); }).filter(Boolean));
     }
+    
+    if (!activeFBFormId) {
+        pendingFields.push({ id: 'tmp_'+Date.now(), type: selectedFType, label: label, placeholder: placeholder, required: required, options: options });
+        renderDrawerFields(pendingFields);
+        closeAddFieldModal();
+        return;
+    }
+
     try {
         await fetch('/api/forms/'+activeFBFormId+'/fields', {
             method:'POST', headers:{'Content-Type':'application/json'},
