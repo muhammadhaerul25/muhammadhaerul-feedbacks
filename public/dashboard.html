@@ -730,6 +730,17 @@
         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
 
+    /* Form Type Selection Cards */
+    .ftype-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px; }
+    .ftype-card {
+        padding: 12px; border: 1.5px solid var(--line); border-radius: var(--r-md);
+        background: var(--surface); cursor: pointer; transition: var(--t);
+        display: flex; flex-direction: column; gap: 4px; user-select: none;
+    }
+    .ftype-card:hover { border-color: var(--g-blue); }
+    .ftype-card.active { border-color: var(--g-blue); background: var(--g-blue-soft); }
+    .ftype-card#ftype-card-feedback.active { border-color: #FCE8B2; background: #FEF7E0; }
+
     /* Question View Cards */
     .q-card {
         background: var(--surface);
@@ -1914,6 +1925,25 @@
         <button class="modal-close" onclick="closeNewFormModal()">✕</button>
     </div>
     <div class="drawer-body">
+        <!-- Form Type -->
+        <div class="field-group" id="nf-type-group">
+            <label class="field-label">Form Type</label>
+            <div class="ftype-selector">
+                <div id="ftype-card-feedback" class="ftype-card active" onclick="selectFormType('feedback')">
+                    <div style="display:flex;align-items:center;gap:6px;font-size:0.85rem;font-weight:800;color:#B06000;">
+                        <span>⭐ Feedback Form</span>
+                    </div>
+                    <div style="font-size:0.72rem;color:var(--ink-3);line-height:1.35">Fixed standardized fields, syncs to table feedbacks.</div>
+                </div>
+                <div id="ftype-card-general" class="ftype-card" onclick="selectFormType('general')">
+                    <div style="display:flex;align-items:center;gap:6px;font-size:0.85rem;font-weight:800;color:var(--ink);">
+                        <span>📝 General Form</span>
+                    </div>
+                    <div style="font-size:0.72rem;color:var(--ink-3);line-height:1.35">Custom questions builder for dynamic surveys.</div>
+                </div>
+            </div>
+        </div>
+
         <div class="field-group">
             <label class="field-label">Form Title *</label>
             <input class="field-input" id="nf-title" placeholder="e.g. Session Feedback, Workshop Survey…" oninput="updateSlugPreview()" onblur="saveFormMeta()">
@@ -2486,11 +2516,14 @@ function renderFormsGrid() {
     body.innerHTML = filtered.map(function(f) {
         var url = window.location.origin + '/form/' + f.slug;
         var responseCount = Number(f.response_count) || 0;
-        var tagHtml = f.tag ? '<div style="margin-bottom:8px;"><span class="talk-topic-tag" style="font-size:0.75rem;">' + esc(f.tag) + '</span></div>' : '';
+        var typeBadge = f.type === 'feedback' 
+            ? '<span class="talk-topic-tag" style="background:#FEF7E0;color:#B06000;border:1px solid #FCE8B2;font-size:0.72rem;font-weight:800;display:inline-flex;align-items:center;gap:4px;">⭐ Feedback Form</span>'
+            : '<span class="talk-topic-tag" style="font-size:0.72rem;font-weight:700;">📝 General Form</span>';
+        var tagHtml = f.tag ? '<span class="talk-topic-tag" style="font-size:0.72rem;font-weight:700;">' + esc(f.tag) + '</span>' : '';
         return '<div class="form-card">' +
             '<div class="fc-header">' +
                 '<div>' +
-                    tagHtml +
+                    '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;">' + typeBadge + tagHtml + '</div>' +
                     '<div class="fc-title">'+esc(f.title)+'</div>' +
                     '<div class="fc-desc">'+esc(f.description||'No description provided.')+'</div>' +
                 '</div>' +
@@ -2901,11 +2934,50 @@ async function confirmDeleteResponse(rid) {
     });
 }
 
+var selectedFormType = 'feedback';
+var CONSTANT_FEEDBACK_FIELDS = [
+    { type: 'text', label: 'Nama Lengkap', placeholder: 'Masukkan nama lengkap kamu', required: true },
+    { type: 'email', label: 'Email', placeholder: 'nama@email.com', required: true },
+    { type: 'rating', label: 'Rating Sesi / Pemateri (1 - 10)', placeholder: null, required: true },
+    { type: 'textarea', label: 'Alasan Penilaian', placeholder: 'Ceritakan alasan dari rating yang kamu berikan…', required: true },
+    { type: 'textarea', label: 'Pesan & Kesan / Saran untuk Pemateri', placeholder: 'Tuliskan kritik, saran, pesan dan kesanmu…', required: true },
+    { type: 'text', label: 'Materi / Topik Sesi', placeholder: 'Topik atau judul materi…', required: false }
+];
+
+function selectFormType(type) {
+    selectedFormType = type;
+    var cFeed = document.getElementById('ftype-card-feedback');
+    var cGen = document.getElementById('ftype-card-general');
+    if (cFeed) cFeed.classList.toggle('active', type === 'feedback');
+    if (cGen) cGen.classList.toggle('active', type === 'general');
+
+    if (!activeFBFormId) {
+        if (type === 'feedback') {
+            pendingFields = JSON.parse(JSON.stringify(CONSTANT_FEEDBACK_FIELDS));
+            if (!document.getElementById('nf-title').value.trim()) {
+                document.getElementById('nf-title').value = 'Feedback Sesi';
+                updateSlugPreview();
+            }
+        } else {
+            pendingFields = [];
+        }
+        renderDrawerFields(pendingFields);
+    } else {
+        saveFormMeta();
+    }
+}
+
 /* ── Form Editor Drawer ── */
 async function openFormEditor(form) {
     activeFBFormId = form.id;
     activeFBSlug   = form.slug;
+    selectedFormType = form.type || 'general';
     
+    var cFeed = document.getElementById('ftype-card-feedback');
+    var cGen = document.getElementById('ftype-card-general');
+    if (cFeed) cFeed.classList.toggle('active', selectedFormType === 'feedback');
+    if (cGen) cGen.classList.toggle('active', selectedFormType === 'general');
+
     document.getElementById('nf-title').value = form.title;
     document.getElementById('nf-desc').value = form.description || '';
     document.getElementById('nf-tag').value = form.tag || '';
@@ -2938,11 +3010,12 @@ async function openFormEditor(form) {
 
 function buildFieldRow(f) {
     var typeInfo = FIELD_TYPES.find(function(t){ return t.type===f.type; }) || {icon:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg>',name:f.type};
+    var isLocked = selectedFormType === 'feedback';
     return '<div class="fb-field-row" data-fid="'+f.id+'">' +
         '<div class="fb-field-type-pill">'+typeInfo.icon+' '+typeInfo.name+'</div>' +
         '<div class="fb-field-label-text">'+esc(f.label)+'</div>' +
         (f.required?'<div class="fb-field-req-star">*</div>':'') +
-        '<button class="fb-field-del" title="Remove field" onclick="deleteField('+f.id+')">✕</button>' +
+        (isLocked ? '<span style="font-size:0.75rem;color:var(--ink-4);margin-left:auto;" title="Standard Constant Field">🔒</span>' : '<button class="fb-field-del" title="Remove field" onclick="deleteField('+f.id+')">✕</button>') +
     '</div>';
 }
 
@@ -2955,12 +3028,16 @@ async function saveFormMeta() {
     await fetch('/api/forms/'+activeFBFormId, {
         method:'PUT',
         headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({ title, description: desc, tag: tag || null, color: selectedColor })
+        body: JSON.stringify({ title, description: desc, tag: tag || null, type: selectedFormType, color: selectedColor })
     });
     loadForms(); // refresh list
 }
 
 async function deleteField(fid) {
+    if (selectedFormType === 'feedback') {
+        showToast('Feedback form fields are standardized and constant.');
+        return;
+    }
     if (!activeFBFormId) {
         pendingFields = pendingFields.filter(function(f){ return f.id != fid; });
         renderDrawerFields(pendingFields);
@@ -2978,23 +3055,38 @@ async function deleteField(fid) {
 
 function renderDrawerFields(fields) {
     var container = document.getElementById('fb-field-list');
-    document.getElementById('df-count').textContent = 'Fields (' + fields.length + ')';
-    container.innerHTML = fields.length 
+    var isFeedback = selectedFormType === 'feedback';
+    document.getElementById('df-count').textContent = 'Fields (' + fields.length + ')' + (isFeedback ? ' — Constant' : '');
+    
+    var fieldsListHtml = fields.length 
         ? fields.map(buildFieldRow).join('') 
         : '<div style="text-align:center;padding:48px 20px;background:#fcfcfc;border-radius:var(--r-md);border:1.5px dashed var(--line);margin-bottom:12px"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg><div style="font-size:1rem;font-weight:700;color:var(--ink-2);margin-bottom:6px">No Fields Yet</div><div style="font-size:0.85rem;color:var(--ink-4)">Start building your form by adding questions below.</div></div>';
+
+    var lockedNoticeHtml = isFeedback 
+        ? '<div style="text-align:center;font-size:0.75rem;font-weight:700;color:#B06000;background:#FEF7E0;border:1px solid #FCE8B2;padding:10px 14px;border-radius:var(--r-md);margin-top:10px;">🔒 Constant fields mapped directly to the table <code>feedbacks</code></div>'
+        : '<button class="btn-add-field" onclick="openAddFieldModal()">+ Add Field</button>';
+
+    container.innerHTML = fieldsListHtml + lockedNoticeHtml;
 }
 
 /* ── New Form Modal ── */
 function openNewFormModal() {
     activeFBFormId = null;
     activeFBSlug = null;
-    document.getElementById('nf-title').value='';
+    selectedFormType = 'feedback'; // Default to Feedback Form as requested
+    
+    var cFeed = document.getElementById('ftype-card-feedback');
+    var cGen = document.getElementById('ftype-card-general');
+    if (cFeed) cFeed.classList.add('active');
+    if (cGen) cGen.classList.remove('active');
+
+    document.getElementById('nf-title').value='Feedback Sesi';
     document.getElementById('nf-desc').value='';
     document.getElementById('nf-tag').value='';
-    document.getElementById('nf-slug-preview').textContent = window.location.origin + '/form/...';
+    updateSlugPreview();
     selectedColor = FB_COLORS[0];
     
-    pendingFields = [];
+    pendingFields = JSON.parse(JSON.stringify(CONSTANT_FEEDBACK_FIELDS));
     renderDrawerFields(pendingFields);
 
     // UI for Create Mode
@@ -3044,7 +3136,7 @@ async function createForm() {
     try {
         var res  = await fetch('/api/forms', {
             method:'POST', headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({ title, description:desc, tag: tag || null, color:selectedColor, defaultFields })
+            body: JSON.stringify({ title, description:desc, tag: tag || null, type: selectedFormType, color:selectedColor, defaultFields })
         });
         var json = await res.json();
         if (!res.ok) { showToast(json.error||'Error creating form.'); return; }

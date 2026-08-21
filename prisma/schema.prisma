@@ -48,6 +48,7 @@ model forms {
   slug        String   @unique
   description String?
   tag         String?
+  type        String?  @default("general")
   color       String?  @default("#4285F4")
   created_at  DateTime @default(now())
   

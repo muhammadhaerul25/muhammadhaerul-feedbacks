@@ -36,14 +36,29 @@ exports.getFormBySlug = async (req, res, next) => {
     }
 };
 
+const FEEDBACK_FORM_FIELDS = [
+    { type: 'text', label: 'Nama Lengkap', placeholder: 'Masukkan nama lengkap kamu', required: true },
+    { type: 'email', label: 'Email', placeholder: 'nama@email.com', required: true },
+    { type: 'rating', label: 'Rating Sesi / Pemateri (1 - 10)', placeholder: null, required: true },
+    { type: 'textarea', label: 'Alasan Penilaian', placeholder: 'Ceritakan alasan dari rating yang kamu berikan…', required: true },
+    { type: 'textarea', label: 'Pesan & Kesan / Saran untuk Pemateri', placeholder: 'Tuliskan kritik, saran, pesan dan kesanmu…', required: true },
+    { type: 'text', label: 'Materi / Topik Sesi', placeholder: 'Topik atau judul materi…', required: false }
+];
+
+exports.getFeedbackTemplateFields = (req, res) => {
+    res.json({ success: true, data: FEEDBACK_FORM_FIELDS });
+};
+
 // Create a new form
 exports.createForm = async (req, res, next) => {
-    const { title, description, tag, color, defaultFields } = req.body;
+    const { title, description, tag, type, color, defaultFields } = req.body;
     if (!title) {
         const err = new Error('Title is required.');
         err.status = 400;
         return next(err);
     }
+
+    const formType = type === 'feedback' ? 'feedback' : 'general';
 
     const slug = title.toLowerCase().trim()
         .replace(/[^\w\s-]/g, '')
@@ -51,18 +66,24 @@ exports.createForm = async (req, res, next) => {
         .replace(/^-+|-+$/g, '') || `form-${Date.now()}`;
 
     try {
-        const fieldsData = Array.isArray(defaultFields) ? defaultFields.map((f, i) => ({
+        const fieldsToUse = (formType === 'feedback' && (!defaultFields || !defaultFields.length))
+            ? FEEDBACK_FORM_FIELDS
+            : (Array.isArray(defaultFields) ? defaultFields : []);
+
+        const fieldsData = fieldsToUse.map((f, i) => ({
             type: f.type,
             label: f.label,
             placeholder: f.placeholder || null,
             required: f.required !== false,
             options: f.options || null,
             sort_order: i
-        })) : [];
+        }));
 
         const form = await prisma.forms.create({
             data: {
-                title, slug, description: description || null, tag: tag || null, color: color || '#4285F4',
+                title, slug, description: description || null, tag: tag || null,
+                type: formType,
+                color: color || '#4285F4',
                 fields: { create: fieldsData }
             },
             include: { fields: true }
@@ -75,11 +96,11 @@ exports.createForm = async (req, res, next) => {
 
 // Update form metadata
 exports.updateForm = async (req, res, next) => {
-    const { title, description, tag, color } = req.body;
+    const { title, description, tag, type, color } = req.body;
     try {
         const form = await prisma.forms.update({
             where: { id: parseInt(req.params.id) },
-            data: { title, description: description || null, tag: tag || null, color }
+            data: { title, description: description || null, tag: tag || null, type, color }
         });
         res.json({ success: true, data: form });
     } catch (err) {
