@@ -1665,10 +1665,34 @@
 
             <!-- ══ FORMS BUILDER ══ -->
             <div id="view-forms" class="view">
-                <div id="forms-grid-view">
-                    <div style="display:flex;justify-content:flex-end;margin-bottom:16px;margin-top:-16px;margin-right:-16px">
-                        <button class="btn btn-primary" onclick="openNewFormModal()">+ New Form</button>
+                <div class="talks-stats" id="forms-stats" style="margin-bottom: 24px;">
+                    <div class="stat-card blue">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+                        <div class="stat-label">Total Forms</div>
+                        <div class="stat-value" id="fstat-total">0</div>
                     </div>
+                    <div class="stat-card green">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+                        <div class="stat-label">Total Responses</div>
+                        <div class="stat-value" id="fstat-responses">0</div>
+                    </div>
+                </div>
+
+                <div class="toolbar" style="margin-bottom: 24px;">
+                    <div class="search-wrap">
+                        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input type="text" id="forms-q" placeholder="Search forms by title, tag, or description..." oninput="renderFormsGrid()">
+                    </div>
+                    <select id="forms-tag-filter" class="filter-select" onchange="renderFormsGrid()">
+                        <option value="">All Tags</option>
+                    </select>
+                    <button class="btn btn-primary" onclick="openNewFormModal()" style="flex-shrink:0;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        Add Form
+                    </button>
+                </div>
+
+                <div id="forms-grid-view">
                     <div class="form-card-grid" id="fb-grid-body">
                         <!-- Cards injected here -->
                     </div>
@@ -1808,6 +1832,11 @@
         <div class="field-group">
             <label class="field-label">Description</label>
             <textarea class="field-input" id="nf-desc" placeholder="Optional — tell respondents what this form is about." style="resize:vertical;min-height:72px;line-height:1.6" onblur="saveFormMeta()"></textarea>
+        </div>
+
+        <div class="field-group">
+            <label class="field-label">Tag</label>
+            <input class="field-input" id="nf-tag" placeholder="Optional — e.g. Workshop AI, Google Cloud Summit, Web Dev 2026…" onblur="saveFormMeta()">
         </div>
 
         <div class="field-group">
@@ -2298,35 +2327,79 @@ async function loadForms() {
         formsDataMap = {};
         allFormsList.forEach(function(f){ formsDataMap[f.id] = f; });
 
-        if (!allFormsList.length) { body.innerHTML=''; empty.style.display='flex'; return; }
-        body.innerHTML = allFormsList.map(function(f) {
-            var url = window.location.origin + '/form/' + f.slug;
-            var responseCount = Number(f.response_count) || 0;
-            return '<div class="form-card">' +
-                '<div class="fc-header">' +
-                    '<div>' +
-                        '<div class="fc-title">'+esc(f.title)+'</div>' +
-                        '<div class="fc-desc">'+esc(f.description||'No description provided.')+'</div>' +
-                    '</div>' +
-                '</div>' +
-                '<div class="fc-meta">' +
-                    '<span style="display:flex;align-items:center;gap:6px;cursor:pointer;color:var(--g-blue);font-weight:700;" onclick="openFormResponses('+f.id+')" title="Click to view responses">' +
-                        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>' +
-                        responseCount + ' response' + (responseCount!==1?'s':'') + ' →' +
-                    '</span>' +
-                '</div>' +
-                '<div class="fc-actions">' +
-                    '<button class="btn-fc view" onclick="window.open(\''+esc(url)+'\',\'_blank\')">View</button>' +
-                    '<button class="btn-fc responses" onclick="openFormResponses('+f.id+')">Responses ('+responseCount+')</button>' +
-                    '<button class="btn-fc edit" onclick="openFormEditorById('+f.id+')">Edit</button>' +
-                    '<button class="btn-fc delete" onclick="openDeleteFormModal('+f.id+',\''+esc(f.title).replace(/'/g, "\\'")+'\')">Delete</button>' +
-                '</div>' +
-            '</div>';
-        }).join('');
+        // Update Stat Counters
+        var totalForms = allFormsList.length;
+        var totalResponses = allFormsList.reduce(function(acc, f){ return acc + (Number(f.response_count) || 0); }, 0);
+        animateCount(document.getElementById('fstat-total'), totalForms, '', false);
+        animateCount(document.getElementById('fstat-responses'), totalResponses, '', false);
+
+        // Update Tag Filter
+        var tagSel = document.getElementById('forms-tag-filter');
+        if (tagSel) {
+            var currentTagVal = tagSel.value;
+            var uniqueTags = [...new Set(allFormsList.map(function(f){ return f.tag; }).filter(Boolean))];
+            tagSel.innerHTML = '<option value="">All Tags</option>' + uniqueTags.map(function(t){
+                return '<option value="'+esc(t)+'"'+(currentTagVal===t?' selected':'')+'>'+esc(t)+'</option>';
+            }).join('');
+        }
+
+        renderFormsGrid();
     } catch(e) { 
         console.error('Failed to load forms:', e);
         body.innerHTML='<div style="padding:16px;color:var(--ink-4);font-size:0.85rem">Failed to load forms.</div>'; 
     }
+}
+
+function renderFormsGrid() {
+    var body  = document.getElementById('fb-grid-body');
+    var empty = document.getElementById('fb-list-empty');
+    if (!body || !empty) return;
+
+    var q = (document.getElementById('forms-q') ? document.getElementById('forms-q').value : '').toLowerCase().trim();
+    var tagFilter = document.getElementById('forms-tag-filter') ? document.getElementById('forms-tag-filter').value : '';
+
+    var filtered = allFormsList.filter(function(f) {
+        if (tagFilter && f.tag !== tagFilter) return false;
+        if (q) {
+            var text = ((f.title||'') + ' ' + (f.description||'') + ' ' + (f.tag||'')).toLowerCase();
+            if (!text.includes(q)) return false;
+        }
+        return true;
+    });
+
+    if (!filtered.length) {
+        body.innerHTML = '';
+        empty.style.display = 'flex';
+        return;
+    }
+    empty.style.display = 'none';
+
+    body.innerHTML = filtered.map(function(f) {
+        var url = window.location.origin + '/form/' + f.slug;
+        var responseCount = Number(f.response_count) || 0;
+        var tagHtml = f.tag ? '<div style="margin-bottom:8px;"><span class="talk-topic-tag" style="font-size:0.75rem;">' + esc(f.tag) + '</span></div>' : '';
+        return '<div class="form-card">' +
+            '<div class="fc-header">' +
+                '<div>' +
+                    tagHtml +
+                    '<div class="fc-title">'+esc(f.title)+'</div>' +
+                    '<div class="fc-desc">'+esc(f.description||'No description provided.')+'</div>' +
+                '</div>' +
+            '</div>' +
+            '<div class="fc-meta">' +
+                '<span style="display:flex;align-items:center;gap:6px;cursor:pointer;color:var(--g-blue);font-weight:700;" onclick="openFormResponses('+f.id+')" title="Click to view responses">' +
+                    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>' +
+                    responseCount + ' response' + (responseCount!==1?'s':'') + ' →' +
+                '</span>' +
+            '</div>' +
+            '<div class="fc-actions">' +
+                '<button class="btn-fc view" onclick="window.open(\''+esc(url)+'\',\'_blank\')">View</button>' +
+                '<button class="btn-fc responses" onclick="openFormResponses('+f.id+')">Responses ('+responseCount+')</button>' +
+                '<button class="btn-fc edit" onclick="openFormEditorById('+f.id+')">Edit</button>' +
+                '<button class="btn-fc delete" onclick="openDeleteFormModal('+f.id+',\''+esc(f.title).replace(/'/g, "\\'")+'\')">Delete</button>' +
+            '</div>' +
+        '</div>';
+    }).join('');
 }
 
 function openFormEditorById(id) {
@@ -2507,6 +2580,7 @@ async function openFormEditor(form) {
     
     document.getElementById('nf-title').value = form.title;
     document.getElementById('nf-desc').value = form.description || '';
+    document.getElementById('nf-tag').value = form.tag || '';
     updateSlugPreview();
     
     selectedColor = form.color || FB_COLORS[0];
@@ -2548,11 +2622,12 @@ async function saveFormMeta() {
     if (!activeFBFormId) return;
     var title = document.getElementById('nf-title').value.trim();
     var desc  = document.getElementById('nf-desc').value.trim();
+    var tag   = document.getElementById('nf-tag').value.trim();
     if (!title) return;
     await fetch('/api/forms/'+activeFBFormId, {
         method:'PUT',
         headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({ title, description: desc, color: selectedColor })
+        body: JSON.stringify({ title, description: desc, tag: tag || null, color: selectedColor })
     });
     loadForms(); // refresh list
 }
@@ -2587,6 +2662,7 @@ function openNewFormModal() {
     activeFBSlug = null;
     document.getElementById('nf-title').value='';
     document.getElementById('nf-desc').value='';
+    document.getElementById('nf-tag').value='';
     document.getElementById('nf-slug-preview').textContent = window.location.origin + '/form/...';
     selectedColor = FB_COLORS[0];
     
@@ -2631,6 +2707,7 @@ async function createForm() {
     var title = document.getElementById('nf-title').value.trim();
     if (!title) { document.getElementById('nf-title').focus(); return; }
     var desc  = document.getElementById('nf-desc').value.trim();
+    var tag   = document.getElementById('nf-tag').value.trim();
 
     var defaultFields = pendingFields.map(function(f, idx) {
         return { type: f.type, label: f.label, placeholder: f.placeholder, required: f.required, options: f.options, sort_order: idx };
@@ -2639,7 +2716,7 @@ async function createForm() {
     try {
         var res  = await fetch('/api/forms', {
             method:'POST', headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({ title, description:desc, color:selectedColor, defaultFields })
+            body: JSON.stringify({ title, description:desc, tag: tag || null, color:selectedColor, defaultFields })
         });
         var json = await res.json();
         if (!res.ok) { showToast(json.error||'Error creating form.'); return; }

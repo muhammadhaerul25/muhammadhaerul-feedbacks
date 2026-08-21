@@ -38,7 +38,7 @@ exports.getFormBySlug = async (req, res, next) => {
 
 // Create a new form
 exports.createForm = async (req, res, next) => {
-    const { title, description, color, defaultFields } = req.body;
+    const { title, description, tag, color, defaultFields } = req.body;
     if (!title) {
         const err = new Error('Title is required.');
         err.status = 400;
@@ -62,7 +62,7 @@ exports.createForm = async (req, res, next) => {
 
         const form = await prisma.forms.create({
             data: {
-                title, slug, description: description || null, color: color || '#4285F4',
+                title, slug, description: description || null, tag: tag || null, color: color || '#4285F4',
                 fields: { create: fieldsData }
             },
             include: { fields: true }
@@ -75,11 +75,11 @@ exports.createForm = async (req, res, next) => {
 
 // Update form metadata
 exports.updateForm = async (req, res, next) => {
-    const { title, description, color } = req.body;
+    const { title, description, tag, color } = req.body;
     try {
         const form = await prisma.forms.update({
             where: { id: parseInt(req.params.id) },
-            data: { title, description, color }
+            data: { title, description: description || null, tag: tag || null, color }
         });
         res.json({ success: true, data: form });
     } catch (err) {
