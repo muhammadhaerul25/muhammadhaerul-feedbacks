@@ -3258,18 +3258,37 @@ async function addField() {
 
 /* ── Delete Form ── */
 function openDeleteFormModal(id, title) {
-    showConfirm('Delete "' + title + '"? All responses will also be deleted. This cannot be undone.', function() {
+    showConfirm('Delete "' + title + '"? All responses and questions will also be deleted. This cannot be undone.', function() {
         deleteForm(id);
     });
 }
 async function deleteForm(id) {
     try {
-        await fetch('/api/forms/'+id, { method:'DELETE' });
-        activeFBFormId = null; activeFBSlug = null;
-        document.getElementById('fb-builder-panel').innerHTML = '';
+        // Optimistic instant removal from UI
+        allFormsList = allFormsList.filter(function(f){ return f.id !== id; });
+        delete formsDataMap[id];
+        renderFormsGrid();
+        
+        // Instant stat counters update
+        var totalForms = allFormsList.length;
+        var totalResponses = allFormsList.reduce(function(acc, f){ return acc + (Number(f.response_count) || 0); }, 0);
+        var elTotal = document.getElementById('fstat-total');
+        var elResp = document.getElementById('fstat-responses');
+        if (elTotal) animateCount(elTotal, totalForms, '', false);
+        if (elResp) animateCount(elResp, totalResponses, '', false);
+
+        var res = await fetch('/api/forms/' + id, { method: 'DELETE' });
+        var json = await res.json();
+        if (!res.ok) throw new Error(json.error || 'Failed to delete form');
+        
+        activeFBFormId = null; 
+        activeFBSlug = null;
+        showToast('Form deleted successfully.');
         await loadForms();
-        showToast('Form deleted.');
-    } catch(e) { showToast('Failed to delete form.'); }
+    } catch(e) {
+        showToast('Failed to delete form.');
+        await loadForms();
+    }
 }
 
 /* ── Helpers ── */

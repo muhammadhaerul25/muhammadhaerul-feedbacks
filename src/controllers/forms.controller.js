@@ -136,9 +136,18 @@ exports.updateForm = async (req, res, next) => {
 // Delete a form
 exports.deleteForm = async (req, res, next) => {
     try {
-        await prisma.forms.delete({
-            where: { id: parseInt(req.params.id) }
-        });
+        const id = parseInt(req.params.id);
+        const form = await prisma.forms.findUnique({ where: { id } });
+        if (!form) {
+            return res.json({ success: true, message: 'Form already deleted' });
+        }
+
+        await prisma.$transaction([
+            prisma.form_responses.deleteMany({ where: { form_id: id } }),
+            prisma.form_fields.deleteMany({ where: { form_id: id } }),
+            prisma.forms.delete({ where: { id } })
+        ]);
+
         res.json({ success: true, message: 'Form deleted successfully' });
     } catch (err) {
         next(err);
