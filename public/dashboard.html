@@ -1369,6 +1369,26 @@
                         <div class="stat-label">Total Feedbacks</div>
                         <div class="stat-value" id="sc-feedbacks">—</div>
                     </div>
+                    <div class="stat-card blue">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg></div>
+                        <div class="stat-label">Total Certifications</div>
+                        <div class="stat-value" id="sc-certs">—</div>
+                    </div>
+                    <div class="stat-card yellow">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></div>
+                        <div class="stat-label">Total Awards</div>
+                        <div class="stat-value" id="sc-awards">—</div>
+                    </div>
+                    <div class="stat-card green">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
+                        <div class="stat-label">Total Publications</div>
+                        <div class="stat-value" id="sc-pubs">—</div>
+                    </div>
+                    <div class="stat-card blue">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg></div>
+                        <div class="stat-label">Total Article Blog</div>
+                        <div class="stat-value" id="sc-blogs">—</div>
+                    </div>
                 </div>
 
                 <div class="panel" style="margin-bottom: 24px;">
@@ -1912,6 +1932,10 @@ async function loadOverview() {
         animateCount(document.getElementById('sc-projects'), projects.length, '', false);
         animateCount(document.getElementById('sc-talks'), talks.length, '', false);
         animateCount(document.getElementById('sc-feedbacks'), feedbacks.length, '', false);
+        animateCount(document.getElementById('sc-certs'), 0, '', false);
+        animateCount(document.getElementById('sc-awards'), 0, '', false);
+        animateCount(document.getElementById('sc-pubs'), 0, '', false);
+        animateCount(document.getElementById('sc-blogs'), 0, '', false);
 
         // Recent Projects
         var recentProj = projects.slice(0, 3);
