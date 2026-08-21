@@ -1052,6 +1052,31 @@
     .project-date { font-size: 0.75rem; color: var(--ink-4); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; background: #f8f9fa; padding: 4px 10px; border-radius: var(--r-pill); display: inline-block; margin-bottom: 8px;}
     
     .project-desc { font-size: 0.9rem; color: var(--ink-3); line-height: 1.6; }
+    .project-desc.clamped {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .btn-see-more {
+        background: none;
+        border: none;
+        padding: 0;
+        margin-top: 6px;
+        font-family: inherit;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--g-blue);
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        transition: var(--t);
+    }
+    .btn-see-more:hover {
+        color: var(--g-blue-dark);
+        text-decoration: underline;
+    }
     
     .project-techs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
     .project-tech-tag {
@@ -1988,7 +2013,8 @@ function buildProjectCardOverview(p) {
     if (p.thumbnailUrl) mediaHtml = '<div class="project-thumb" style="background-image:url(\''+esc(p.thumbnailUrl)+'\')"></div>';
     else if (embedUrl) mediaHtml = '<div class="project-thumb" style="background:#000;"><iframe width="100%" height="100%" src="'+embedUrl+'" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width:100%;height:100%;border:none;border-bottom:1px solid var(--line-soft);"></iframe></div>';
     
-    return '<div class="project-card">' + mediaHtml + '<div class="project-content"><div><div class="project-head"><div class="project-title">' + esc(p.name) + '</div></div>' + (p.description ? '<div class="project-desc">' + esc(p.description) + '</div>' : '') + '</div><div class="project-tech-stack">' + techsHtml + '</div></div></div>';
+    var descHtml = renderProjectDesc(p.description, 'ov-' + p.id);
+    return '<div class="project-card">' + mediaHtml + '<div class="project-content"><div><div class="project-head"><div class="project-title">' + esc(p.name) + '</div></div>' + descHtml + '</div><div class="project-tech-stack">' + techsHtml + '</div></div></div>';
 }
 
 function buildTalkCardOverview(t) {
@@ -2844,6 +2870,30 @@ function getYouTubeEmbedUrl(url) {
     return null;
 }
 
+function renderProjectDesc(desc, uniqueId) {
+    if (!desc) return '';
+    var escaped = esc(desc);
+    if (desc.length > 120) {
+        return '<div style="margin-top:12px;">' +
+            '<div class="project-desc clamped" id="pdesc-' + uniqueId + '">' + escaped + '</div>' +
+            '<button type="button" class="btn-see-more" onclick="toggleProjectDesc(\'' + uniqueId + '\', this)">See More</button>' +
+        '</div>';
+    }
+    return '<div class="project-desc" style="margin-top:12px;">' + escaped + '</div>';
+}
+
+function toggleProjectDesc(id, btn) {
+    var el = document.getElementById('pdesc-' + id);
+    if (!el) return;
+    if (el.classList.contains('clamped')) {
+        el.classList.remove('clamped');
+        btn.textContent = 'See Less';
+    } else {
+        el.classList.add('clamped');
+        btn.textContent = 'See More';
+    }
+}
+
 function updateProjectsStats() {
     var uniqueTechs = new Set();
     allProjects.forEach(function(p) {
@@ -2988,7 +3038,7 @@ function renderProjectsGrid() {
                         '<div class="project-title">' + esc(p.name) + '</div>' +
                         visitHtml +
                     '</div>' +
-                    (p.description ? '<div class="project-desc" style="margin-top:12px;">' + esc(p.description) + '</div>' : '') +
+                    renderProjectDesc(p.description, 'grid-' + p.id) +
                 '</div>' +
                 (techsHtml ? '<div class="project-techs" style="display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;">' + techsHtml + '</div>' : '') +
                 '<div class="project-actions">' +
