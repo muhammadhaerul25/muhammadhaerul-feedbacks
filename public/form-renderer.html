@@ -455,13 +455,6 @@ async function loadForm() {
 
         if (pages.length > 1) document.getElementById('progress-wrap').style.display = 'block';
 
-        // Check if already submitted
-        var storageKey = 'form_submitted_' + SLUG;
-        if (localStorage.getItem(storageKey) === 'true') {
-            showSuccessState('');
-            return;
-        }
-
         document.getElementById('loading-state').style.display = 'none';
         document.getElementById('form-card').style.display = 'block';
         renderPage(0);
@@ -722,6 +715,8 @@ async function submitForm() {
    SUCCESS
 ════════════════════ */
 function showSuccessState(name) {
+    document.getElementById('loading-state').style.display = 'none';
+    document.getElementById('form-card').style.display = 'block';
     document.getElementById('form-body').style.display = 'none';
     var ss = document.getElementById('success-state');
     ss.style.display = 'block';
