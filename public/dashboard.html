@@ -659,10 +659,52 @@
         display: inline-flex; justify-content: center; align-items: center; gap: 6px;
     }
     .btn-fc:hover { background: var(--line-soft); }
-    .btn-fc.edit { border-color: var(--g-blue); color: var(--g-blue); }
-    .btn-fc.edit:hover { background: var(--g-blue-soft); }
+    .btn-fc.responses { border-color: rgba(66,133,244,0.3); color: var(--g-blue); background: var(--g-blue-soft); }
+    .btn-fc.responses:hover { background: var(--g-blue); color: #fff; border-color: var(--g-blue); }
+    .btn-fc.edit { border-color: var(--line); color: var(--ink-2); }
+    .btn-fc.edit:hover { background: var(--line-soft); border-color: var(--ink-4); }
     .btn-fc.delete { border-color: transparent; color: var(--ink-4); }
     .btn-fc.delete:hover { color: var(--g-red); background: var(--g-red-soft); }
+
+    /* ── Form Responses Drawer & Cards ── */
+    .resp-drawer { max-width: 680px; }
+    .resp-badge {
+        display: inline-flex; align-items: center; gap: 4px;
+        padding: 3px 10px; border-radius: var(--r-pill);
+        font-size: 0.72rem; font-weight: 700;
+        background: var(--g-blue-soft); color: var(--g-blue);
+    }
+    .resp-card {
+        background: var(--surface);
+        border: 1.5px solid var(--line);
+        border-radius: var(--r-md);
+        padding: 18px 20px;
+        display: flex; flex-direction: column; gap: 14px;
+        transition: var(--t);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    .resp-card:hover { border-color: rgba(66,133,244,0.4); box-shadow: var(--shadow-sm); }
+    .resp-head {
+        display: flex; justify-content: space-between; align-items: center;
+        padding-bottom: 12px; border-bottom: 1px solid var(--line-soft);
+    }
+    .resp-num { font-size: 0.85rem; font-weight: 800; color: var(--ink); display: flex; align-items: center; gap: 6px; }
+    .resp-time { font-size: 0.75rem; color: var(--ink-4); font-weight: 500; }
+    .resp-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .resp-field { display: flex; flex-direction: column; gap: 4px; }
+    .resp-field-q { font-size: 0.76rem; font-weight: 700; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.04em; }
+    .resp-field-a { font-size: 0.92rem; font-weight: 500; color: var(--ink); word-break: break-word; line-height: 1.5; }
+    .resp-rating-badge {
+        display: inline-flex; align-items: center; gap: 4px;
+        background: #FEF7E0; color: #B06000; border: 1px solid #FCE8B2;
+        padding: 3px 10px; border-radius: var(--r-pill); font-weight: 700; font-size: 0.85rem;
+    }
+    .resp-btn-del {
+        background: transparent; border: none; cursor: pointer; color: var(--ink-4);
+        padding: 4px 8px; border-radius: var(--r-sm); font-size: 0.75rem; font-weight: 600;
+        transition: var(--t); display: flex; align-items: center; gap: 4px;
+    }
+    .resp-btn-del:hover { background: var(--g-red-soft); color: var(--g-red); }
 
     /* RIGHT PANEL — builder */
     .fb-builder-panel {
@@ -1794,6 +1836,40 @@
     </div>
 </div>
 
+<!-- ════ FORM RESPONSES DRAWER ════ -->
+<div class="drawer-backdrop" id="resp-backdrop" onclick="closeFormResponses()"></div>
+<div class="drawer resp-drawer" id="resp-drawer">
+    <div class="drawer-head">
+        <div>
+            <div style="display:flex;align-items:center;gap:8px;">
+                <div class="drawer-title" id="resp-form-title">Form Responses</div>
+                <span class="resp-badge" id="resp-count-badge">0 responses</span>
+            </div>
+            <div class="drawer-subtitle" id="resp-form-subtitle">Viewing submitted responses</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+            <button class="btn-sm-ghost" id="resp-btn-export" onclick="exportResponsesCSV()" title="Export CSV" style="padding:6px 12px;font-size:0.75rem;display:inline-flex;align-items:center;gap:4px;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                Export CSV
+            </button>
+            <button class="modal-close" onclick="closeFormResponses()">✕</button>
+        </div>
+    </div>
+    
+    <div style="padding:12px 24px;border-bottom:1px solid var(--line-soft);background:#FAFAFA;display:flex;gap:10px;align-items:center;">
+        <input type="text" id="resp-search" class="field-input" placeholder="Search responses by name, email, or answer…" oninput="filterFormResponses()" style="padding:8px 12px;font-size:0.84rem;background:#fff;">
+    </div>
+
+    <div class="drawer-body" id="resp-drawer-body">
+        <!-- Responses injected here -->
+    </div>
+    
+    <div class="drawer-foot">
+        <button class="btn-sm-ghost" onclick="closeFormResponses()">Close</button>
+        <button class="btn btn-primary" id="resp-btn-open-form" onclick="openCurrentFormPublic()">View Public Form ↗</button>
+    </div>
+</div>
+
 <!-- ════ TALKS DRAWER ════ -->
 <div class="drawer-backdrop" id="talk-backdrop" onclick="closeTalkDrawer()"></div>
 <div class="drawer" id="talk-drawer">
@@ -2234,13 +2310,14 @@ async function loadForms() {
                     '</div>' +
                 '</div>' +
                 '<div class="fc-meta">' +
-                    '<span style="display:flex;align-items:center;gap:4px">' +
+                    '<span style="display:flex;align-items:center;gap:6px;cursor:pointer;color:var(--g-blue);font-weight:700;" onclick="openFormResponses('+f.id+')" title="Click to view responses">' +
                         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>' +
-                        responseCount + ' response' + (responseCount!==1?'s':'') +
+                        responseCount + ' response' + (responseCount!==1?'s':'') + ' →' +
                     '</span>' +
                 '</div>' +
                 '<div class="fc-actions">' +
                     '<button class="btn-fc view" onclick="window.open(\''+esc(url)+'\',\'_blank\')">View</button>' +
+                    '<button class="btn-fc responses" onclick="openFormResponses('+f.id+')">Responses ('+responseCount+')</button>' +
                     '<button class="btn-fc edit" onclick="openFormEditorById('+f.id+')">Edit</button>' +
                     '<button class="btn-fc delete" onclick="openDeleteFormModal('+f.id+',\''+esc(f.title).replace(/'/g, "\\'")+'\')">Delete</button>' +
                 '</div>' +
@@ -2255,6 +2332,172 @@ async function loadForms() {
 function openFormEditorById(id) {
     var form = formsDataMap[id];
     if (form) openFormEditor(form);
+}
+
+/* ══════════════════════════════════════════════════════
+   FORM RESPONSES VIEWER
+══════════════════════════════════════════════════════ */
+var currentRespForm = null;
+var currentRespData = [];
+var filteredRespData = [];
+
+async function openFormResponses(formId) {
+    document.getElementById('resp-backdrop').classList.add('open');
+    document.getElementById('resp-drawer').classList.add('open');
+    var body = document.getElementById('resp-drawer-body');
+    body.innerHTML = '<div class="sk" style="height:120px;border-radius:12px;margin-bottom:12px;"></div><div class="sk" style="height:120px;border-radius:12px;"></div>';
+    document.getElementById('resp-search').value = '';
+
+    try {
+        var res = await fetch('/api/forms/' + formId + '/responses');
+        var json = await res.json();
+        if (!json.success) throw new Error(json.error || 'Failed to load');
+        
+        currentRespForm = json.form;
+        currentRespData = json.data || [];
+        filteredRespData = currentRespData;
+
+        document.getElementById('resp-form-title').textContent = currentRespForm.title;
+        document.getElementById('resp-count-badge').textContent = currentRespData.length + ' response' + (currentRespData.length !== 1 ? 's' : '');
+        document.getElementById('resp-form-subtitle').textContent = '/form/' + currentRespForm.slug;
+        
+        renderResponsesList();
+    } catch(e) {
+        console.error(e);
+        body.innerHTML = '<div style="padding:32px;text-align:center;color:var(--g-red);">Failed to load responses.</div>';
+    }
+}
+
+function closeFormResponses() {
+    document.getElementById('resp-backdrop').classList.remove('open');
+    document.getElementById('resp-drawer').classList.remove('open');
+}
+
+function openCurrentFormPublic() {
+    if (currentRespForm && currentRespForm.slug) {
+        window.open(window.location.origin + '/form/' + currentRespForm.slug, '_blank');
+    }
+}
+
+function filterFormResponses() {
+    var q = (document.getElementById('resp-search').value || '').toLowerCase().trim();
+    if (!q) {
+        filteredRespData = currentRespData;
+    } else {
+        filteredRespData = currentRespData.filter(function(r) {
+            var allVals = Object.values(r.data || {}).join(' ').toLowerCase();
+            return allVals.includes(q);
+        });
+    }
+    renderResponsesList();
+}
+
+function renderResponsesList() {
+    var body = document.getElementById('resp-drawer-body');
+    if (!filteredRespData || !filteredRespData.length) {
+        body.innerHTML = '<div class="empty-state" style="padding:48px 24px;">' +
+            '<div class="empty-icon">📝</div>' +
+            '<div class="empty-title">No Responses ' + (currentRespData.length ? 'Found' : 'Yet') + '</div>' +
+            '<div class="empty-desc">' + (currentRespData.length ? 'Try a different search keyword.' : 'Share the form link to start collecting feedback.') + '</div>' +
+            (currentRespData.length === 0 ? '<button class="btn btn-primary" style="margin-top:14px;display:inline-flex;align-items:center;gap:6px;" onclick="copyFormLink()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy Form Link</button>' : '') +
+        '</div>';
+        return;
+    }
+
+    var fields = (currentRespForm && currentRespForm.fields) ? currentRespForm.fields : [];
+
+    body.innerHTML = filteredRespData.map(function(r) {
+        var respNum = currentRespData.length - currentRespData.indexOf(r);
+        var dateStr = r.created_at ? new Date(r.created_at).toLocaleString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'numeric', minute:'2-digit' }) : 'Recently';
+        
+        var fieldsHtml = fields.map(function(f) {
+            var val = (r.data && r.data[f.id] !== undefined) ? r.data[f.id] : null;
+            var formattedVal = '';
+            if (val === null || val === undefined || val === '') {
+                formattedVal = '<span style="color:var(--ink-4);font-style:italic;">No answer</span>';
+            } else if (f.type === 'rating') {
+                formattedVal = '<span class="resp-rating-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> ' + esc(val) + ' / 10</span>';
+            } else if (f.type === 'checkbox') {
+                try {
+                    var parsed = typeof val === 'string' ? JSON.parse(val) : val;
+                    if (Array.isArray(parsed)) {
+                        formattedVal = parsed.map(function(p){ return '<span class="talk-topic-tag" style="font-size:0.78rem">'+esc(p)+'</span>'; }).join(' ');
+                    } else {
+                        formattedVal = esc(String(val));
+                    }
+                } catch(e) { formattedVal = esc(String(val)); }
+            } else {
+                formattedVal = esc(String(val));
+            }
+
+            return '<div class="resp-field">' +
+                '<div class="resp-field-q">' + esc(f.label) + '</div>' +
+                '<div class="resp-field-a">' + formattedVal + '</div>' +
+            '</div>';
+        }).join('');
+
+        return '<div class="resp-card">' +
+            '<div class="resp-head">' +
+                '<div class="resp-num">' +
+                    '<span style="background:var(--g-blue);color:#fff;border-radius:50%;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;">#' + respNum + '</span>' +
+                    '<span>Submission</span>' +
+                '</div>' +
+                '<div style="display:flex;align-items:center;gap:10px">' +
+                    '<span class="resp-time">' + esc(dateStr) + '</span>' +
+                    '<button class="resp-btn-del" onclick="confirmDeleteResponse(' + r.id + ')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg> Delete</button>' +
+                '</div>' +
+            '</div>' +
+            '<div class="resp-grid">' + fieldsHtml + '</div>' +
+        '</div>';
+    }).join('');
+}
+
+function copyFormLink() {
+    if (!currentRespForm) return;
+    var url = window.location.origin + '/form/' + currentRespForm.slug;
+    navigator.clipboard.writeText(url).then(function() {
+        showToast('Link form disalin! 📋');
+    });
+}
+
+function exportResponsesCSV() {
+    if (!currentRespForm || !currentRespData.length) {
+        showToast('Tidak ada respons untuk diexport.');
+        return;
+    }
+    var headers = ['Response ID', 'Timestamp'].concat((currentRespForm.fields || []).map(function(f){ return '"' + f.label.replace(/"/g, '""') + '"'; }));
+    var rows = currentRespData.map(function(r) {
+        var row = [r.id, '"' + (r.created_at || '') + '"'];
+        (currentRespForm.fields || []).forEach(function(f) {
+            var val = (r.data && r.data[f.id] !== undefined) ? r.data[f.id] : '';
+            if (typeof val === 'object') val = JSON.stringify(val);
+            row.push('"' + String(val).replace(/"/g, '""') + '"');
+        });
+        return row.join(',');
+    });
+
+    var csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(',')].concat(rows).join('\n');
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', (currentRespForm.slug || 'form') + '_responses.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    showToast('Responses exported as CSV! 📥');
+}
+
+async function confirmDeleteResponse(rid) {
+    showConfirm('Delete this response? This cannot be undone.', async function() {
+        try {
+            await fetch('/api/forms/' + currentRespForm.id + '/responses/' + rid, { method: 'DELETE' });
+            showToast('Response deleted.');
+            await openFormResponses(currentRespForm.id);
+            await loadForms();
+        } catch(e) {
+            showToast('Failed to delete response.');
+        }
+    });
 }
 
 /* ── Form Editor Drawer ── */

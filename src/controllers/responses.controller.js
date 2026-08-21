@@ -26,11 +26,33 @@ exports.submitResponse = async (req, res, next) => {
 
 exports.getResponsesByFormId = async (req, res, next) => {
     try {
+        const formId = parseInt(req.params.id);
+        const form = await prisma.forms.findUnique({
+            where: { id: formId },
+            include: { fields: { orderBy: [{ sort_order: 'asc' }, { id: 'asc' }] } }
+        });
+        if (!form) {
+            const err = new Error('Form not found.');
+            err.status = 404;
+            return next(err);
+        }
         const responses = await prisma.form_responses.findMany({
-            where: { form_id: parseInt(req.params.id) },
+            where: { form_id: formId },
             orderBy: { created_at: 'desc' }
         });
-        res.json({ success: true, count: responses.length, data: responses });
+        res.json({ success: true, count: responses.length, form, data: responses });
+    } catch (err) {
+        next(err);
+    }
+};
+
+exports.deleteResponse = async (req, res, next) => {
+    try {
+        const rid = parseInt(req.params.rid);
+        await prisma.form_responses.delete({
+            where: { id: rid }
+        });
+        res.json({ success: true, message: 'Response deleted successfully.' });
     } catch (err) {
         next(err);
     }

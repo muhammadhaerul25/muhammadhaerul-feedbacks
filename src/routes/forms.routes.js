@@ -20,5 +20,6 @@ router.delete('/:id/fields/:fid', fieldsController.deleteField);
 // Form Responses
 router.post('/:slug/responses', responsesController.submitResponse);
 router.get('/:id/responses', responsesController.getResponsesByFormId);
+router.delete('/:id/responses/:rid', responsesController.deleteResponse);
 
 module.exports = router;
