@@ -2586,16 +2586,18 @@ function renderSlideRows() {
     if (!talkSlides.length) { cont.innerHTML='<div style="font-size:0.82rem;color:var(--ink-4);font-style:italic;padding:4px 0">No slides yet.</div>'; return; }
     cont.innerHTML = talkSlides.map(function(s, i){
         return '<div class="slide-row" id="slide-row-'+i+'">' +
-            '<div class="slide-row-top">' +
+            '<div class="slide-row-top" style="justify-content: space-between;">' +
                 '<div class="slide-type-toggle">' +
                     '<button type="button" class="slide-type-btn'+(s.type==='link'?' active':'')+'" onclick="setSlideType('+i+',\'link\')">Link</button>' +
                     '<button type="button" class="slide-type-btn'+(s.type==='pdf'?' active':'')+'" onclick="setSlideType('+i+',\'pdf\')">PDF</button>' +
                 '</div>' +
-                '<input class="slide-label-inp" type="text" placeholder="Label…" value="'+esc(s.label||'')+'" oninput="talkSlides['+i+'].label=this.value">' +
                 '<button type="button" class="btn-remove-slide" onclick="removeSlide('+i+')">✕</button>' +
             '</div>' +
+            '<div class="input-row" style="margin-top:4px">' +
+                '<input class="field-input" type="text" placeholder="Title / Label (e.g. Pitch Deck)" value="'+esc(s.label||'')+'" oninput="talkSlides['+i+'].label=this.value" style="font-size:0.82rem;padding:8px 12px">' +
+            '</div>' +
             '<div class="input-row">' +
-                '<input class="field-input" type="url" placeholder="'+(s.type==='pdf'?'PDF URL (auto-filled after upload)':'https://docs.google.com/…')+'" value="'+esc(s.url||'')+'" oninput="talkSlides['+i+'].url=this.value" style="font-size:0.82rem;padding:8px 12px">' +
+                '<input class="field-input" type="url" placeholder="'+(s.type==='pdf'?'PDF URL (auto-filled after upload)':'URL (https://...)')+'" value="'+esc(s.url||'')+'" oninput="talkSlides['+i+'].url=this.value" style="font-size:0.82rem;padding:8px 12px">' +
                 (s.type==='pdf' ? '<button type="button" class="btn-upload" id="slide-upbtn-'+i+'" onclick="triggerSlideUpload('+i+')">📤 Upload</button><input type="file" id="slide-file-'+i+'" accept=".pdf,application/pdf" style="display:none" onchange="handleSlideFile('+i+',this)">' : '') +
             '</div>' +
         '</div>';
