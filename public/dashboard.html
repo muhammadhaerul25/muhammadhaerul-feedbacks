@@ -1392,14 +1392,16 @@
 
                 <div id="fb-content" style="display:none">
 
-                    <div style="display:flex; gap:16px; margin-bottom:16px;">
-                        <div class="fcard" style="flex:1; padding:20px 24px; animation:none;">
-                            <div style="font-size:0.75rem; color:var(--ink-3); font-weight:700; text-transform:uppercase; letter-spacing:0.8px">Total Responses</div>
-                            <div style="font-size:2.5rem; font-weight:800; color:var(--ink-1); margin-top:12px; line-height:1" id="stat-total-responses">-</div>
+                    <div class="talks-stats" style="margin-bottom:24px;">
+                        <div class="stat-card red">
+                            <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+                            <div class="stat-label">Total Feedbacks</div>
+                            <div class="stat-value" id="stat-total-responses">-</div>
                         </div>
-                        <div class="fcard" style="flex:1; padding:20px 24px; animation:none;">
-                            <div style="font-size:0.75rem; color:var(--ink-3); font-weight:700; text-transform:uppercase; letter-spacing:0.8px">Average Rate</div>
-                            <div style="font-size:2.5rem; font-weight:800; color:var(--ink-1); margin-top:12px; line-height:1" id="stat-avg-rate">-</div>
+                        <div class="stat-card yellow">
+                            <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                            <div class="stat-label">Average Rate</div>
+                            <div class="stat-value" id="stat-avg-rate">-</div>
                         </div>
                     </div>
 
