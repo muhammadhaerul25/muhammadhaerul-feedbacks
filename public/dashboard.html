@@ -1301,16 +1301,12 @@
                     </div>
                     <div class="hero-right">
                         <div class="hero-stat">
-                            <div class="hero-stat-num" id="hs-projects">—</div>
-                            <div class="hero-stat-label">Projects</div>
-                        </div>
-                        <div class="hero-stat">
-                            <div class="hero-stat-num" id="hs-talks">—</div>
-                            <div class="hero-stat-label">Talks</div>
-                        </div>
-                        <div class="hero-stat">
                             <div class="hero-stat-num" id="hs-attendees">—</div>
                             <div class="hero-stat-label">Attendees</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-num" id="hs-avg-rate">—</div>
+                            <div class="hero-stat-label">Average Rate</div>
                         </div>
                     </div>
                 </div>
@@ -1881,10 +1877,15 @@ async function loadOverview() {
         var forms = resForms.data || [];
 
         // Hero Stats
-        animateCount(document.getElementById('hs-projects'), projects.length, '', false);
-        animateCount(document.getElementById('hs-talks'), talks.length, '', false);
         var attendees = talks.reduce(function(s,t) { return s + (t.jumlah_peserta||0); }, 0);
         animateCount(document.getElementById('hs-attendees'), attendees, '', false);
+        
+        var avgRate = 0;
+        if (feedbacks.length > 0) {
+            var sum = feedbacks.reduce(function(acc, d) { return acc + (+d.rating || 0); }, 0);
+            avgRate = sum / feedbacks.length;
+        }
+        animateCount(document.getElementById('hs-avg-rate'), avgRate, '', true);
 
         // Grid Stats
         animateCount(document.getElementById('sc-projects'), projects.length, '', false);
