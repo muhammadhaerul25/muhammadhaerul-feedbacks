@@ -1914,13 +1914,13 @@
     </div>
 </div>
 
-<!-- ════ NEW FORM DRAWER ════ -->
+<!-- ════ NEW / EDIT FORM DRAWER ════ -->
 <div class="drawer-backdrop" id="nf-form-backdrop" onclick="closeNewFormModal()"></div>
 <div class="drawer" id="nf-form-drawer">
     <div class="drawer-head">
         <div>
-            <div class="drawer-title">Create New Form</div>
-            <div class="drawer-subtitle">Set up a new feedback form</div>
+            <div class="drawer-title" id="nf-drawer-title">Create New Form</div>
+            <div class="drawer-subtitle" id="nf-drawer-subtitle">Set up a new feedback form</div>
         </div>
         <button class="modal-close" onclick="closeNewFormModal()">✕</button>
     </div>
@@ -1983,27 +1983,27 @@
     <div class="drawer-foot">
         <button class="btn-sm-ghost" id="df-btn-cancel" onclick="closeNewFormModal()" style="flex:1">Cancel</button>
         <button class="btn btn-primary" id="df-btn-create" onclick="createForm()" style="flex:2">Create Form</button>
-        <button class="btn btn-primary" id="df-btn-save" onclick="closeNewFormModal()" style="display:none; flex:2">Close</button>
+        <button class="btn btn-primary" id="df-btn-save" onclick="saveFormAndClose()" style="display:none; flex:2">Save Changes</button>
     </div>
 </div>
 
 <!-- ════ FORM RESPONSES DRAWER ════ -->
 <div class="drawer-backdrop" id="resp-backdrop" onclick="closeFormResponses()"></div>
 <div class="drawer resp-drawer" id="resp-drawer">
-    <div class="drawer-head">
-        <div>
-            <div style="display:flex;align-items:center;gap:8px;">
-                <div class="drawer-title" id="resp-form-title">Form Responses</div>
-                <span class="resp-badge" id="resp-count-badge">0 responses</span>
+    <div class="drawer-head resp-drawer-head" style="padding: 20px 24px 16px; border-bottom: 1.5px solid var(--line-soft); display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;">
+        <div style="flex: 1; min-width: 0;">
+            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <div class="drawer-title" id="resp-form-title" style="font-size: 1.25rem; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; line-height: 1.25;">Feedback GSA AI Forge 2026</div>
+                <span class="resp-badge" id="resp-count-badge" style="font-size: 0.75rem; font-weight: 700; background: var(--g-blue-soft); color: var(--g-blue); padding: 3px 10px; border-radius: var(--r-pill); border: 1px solid rgba(66,133,244,0.2); white-space: nowrap;">9 responses</span>
             </div>
-            <div class="drawer-subtitle" id="resp-form-subtitle">Viewing submitted responses</div>
+            <div style="font-size: 0.78rem; color: var(--ink-3); font-family: monospace; margin-top: 4px; word-break: break-all;" id="resp-form-subtitle">/form/feedback-gsa-ai-forge-2026</div>
         </div>
-        <div style="display:flex;align-items:center;gap:8px;">
-            <button class="btn-sm-ghost" id="resp-btn-export" onclick="exportResponsesCSV()" title="Export CSV" style="padding:6px 12px;font-size:0.75rem;display:inline-flex;align-items:center;gap:4px;">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        <div style="display: flex; align-items: center; gap: 8px; flex-shrink: 0;">
+            <button class="btn-sm-ghost" id="resp-btn-export" onclick="exportResponsesCSV()" title="Export CSV" style="padding: 7px 14px; font-size: 0.78rem; display: inline-flex; align-items: center; gap: 6px; border-radius: var(--r-pill);">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                 Export CSV
             </button>
-            <button class="modal-close" onclick="closeFormResponses()">✕</button>
+            <button class="modal-close" onclick="closeFormResponses()" title="Close">✕</button>
         </div>
     </div>
 
@@ -2974,6 +2974,12 @@ async function openFormEditor(form) {
     activeFBSlug   = form.slug;
     selectedFormType = form.type || 'general';
     
+    // Update Drawer Header for Edit Mode
+    var drawerTitle = document.getElementById('nf-drawer-title');
+    var drawerSub = document.getElementById('nf-drawer-subtitle');
+    if (drawerTitle) drawerTitle.textContent = 'Edit Form';
+    if (drawerSub) drawerSub.textContent = 'Update form settings and questions';
+
     var cFeed = document.getElementById('ftype-card-feedback');
     var cGen = document.getElementById('ftype-card-general');
     if (cFeed) cFeed.classList.toggle('active', selectedFormType === 'feedback');
@@ -2992,9 +2998,11 @@ async function openFormEditor(form) {
 
     // Setup Edit Mode
     document.getElementById('drawer-fields-section').style.display = 'block';
-    document.getElementById('df-btn-cancel').style.display = 'none';
+    document.getElementById('df-btn-cancel').style.display = 'block';
+    document.getElementById('df-btn-cancel').textContent = 'Cancel';
     document.getElementById('df-btn-create').style.display = 'none';
     document.getElementById('df-btn-save').style.display = 'block';
+    document.getElementById('df-btn-save').textContent = 'Save Changes';
     
     document.getElementById('fb-field-list').innerHTML = '<div class="sk" style="height:100px;width:100%;border-radius:8px"></div>';
 
@@ -3032,6 +3040,35 @@ async function saveFormMeta() {
         body: JSON.stringify({ title, description: desc, tag: tag || null, type: selectedFormType, color: selectedColor })
     });
     loadForms(); // refresh list
+}
+
+async function saveFormAndClose() {
+    if (!activeFBFormId) return;
+    var title = document.getElementById('nf-title').value.trim();
+    if (!title) { document.getElementById('nf-title').focus(); return; }
+    var desc  = document.getElementById('nf-desc').value.trim();
+    var tag   = document.getElementById('nf-tag').value.trim();
+    
+    var saveBtn = document.getElementById('df-btn-save');
+    if (saveBtn) { saveBtn.disabled = true; saveBtn.textContent = 'Saving…'; }
+    
+    try {
+        var res = await fetch('/api/forms/' + activeFBFormId, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title, description: desc, tag: tag || null, type: selectedFormType, color: selectedColor })
+        });
+        var json = await res.json();
+        if (!res.ok) throw new Error(json.error || 'Failed to update form');
+        
+        await loadForms();
+        closeNewFormModal();
+        showToast('Form updated successfully! 🎉');
+    } catch(e) {
+        showToast('Failed to save changes.');
+    } finally {
+        if (saveBtn) { saveBtn.disabled = false; saveBtn.textContent = 'Save Changes'; }
+    }
 }
 
 async function deleteField(fid) {
@@ -3076,6 +3113,12 @@ function openNewFormModal() {
     activeFBSlug = null;
     selectedFormType = 'feedback'; // Default to Feedback Form as requested
     
+    // Update Drawer Header for Create Mode
+    var drawerTitle = document.getElementById('nf-drawer-title');
+    var drawerSub = document.getElementById('nf-drawer-subtitle');
+    if (drawerTitle) drawerTitle.textContent = 'Create New Form';
+    if (drawerSub) drawerSub.textContent = 'Set up a new feedback form';
+
     var cFeed = document.getElementById('ftype-card-feedback');
     var cGen = document.getElementById('ftype-card-general');
     if (cFeed) cFeed.classList.add('active');
@@ -3093,7 +3136,9 @@ function openNewFormModal() {
     // UI for Create Mode
     document.getElementById('drawer-fields-section').style.display = 'block';
     document.getElementById('df-btn-cancel').style.display = 'block';
+    document.getElementById('df-btn-cancel').textContent = 'Cancel';
     document.getElementById('df-btn-create').style.display = 'block';
+    document.getElementById('df-btn-create').textContent = 'Create Form';
     document.getElementById('df-btn-save').style.display = 'none';
 
     // Build color swatches
