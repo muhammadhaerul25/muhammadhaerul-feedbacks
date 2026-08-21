@@ -706,6 +706,96 @@
     }
     .resp-btn-del:hover { background: var(--g-red-soft); color: var(--g-red); }
 
+    /* ── Form Responses Tab Switcher ── */
+    .resp-tabs-bar {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 8px 24px; background: #fff;
+        border-bottom: 1.5px solid var(--line-soft);
+        gap: 12px; flex-wrap: wrap;
+    }
+    .resp-segmented {
+        display: inline-flex; background: #f1f3f4; padding: 3px;
+        border-radius: var(--r-pill); gap: 2px;
+    }
+    .resp-tab-btn {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 6px 16px; border-radius: var(--r-pill);
+        border: none; background: transparent;
+        font-family: inherit; font-size: 0.8rem; font-weight: 700;
+        color: var(--ink-3); cursor: pointer; transition: var(--t);
+    }
+    .resp-tab-btn:hover { color: var(--ink); }
+    .resp-tab-btn.active {
+        background: #fff; color: var(--g-blue);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    /* Question View Cards */
+    .q-card {
+        background: var(--surface);
+        border: 1.5px solid var(--line);
+        border-radius: var(--r-md);
+        padding: 20px;
+        display: flex; flex-direction: column; gap: 14px;
+        transition: var(--t);
+    }
+    .q-card:hover { border-color: rgba(66,133,244,0.4); box-shadow: var(--shadow-sm); }
+    .q-card-head {
+        display: flex; justify-content: space-between; align-items: flex-start;
+        gap: 10px; padding-bottom: 12px; border-bottom: 1px solid var(--line-soft);
+    }
+    .q-card-title {
+        font-size: 0.95rem; font-weight: 800; color: var(--ink);
+        display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+    .q-type-badge {
+        font-size: 0.68rem; font-weight: 800; text-transform: uppercase;
+        padding: 2px 8px; border-radius: var(--r-pill);
+        background: #f1f3f4; color: var(--ink-3); letter-spacing: 0.04em;
+    }
+    .q-ans-count { font-size: 0.75rem; color: var(--ink-4); font-weight: 600; }
+    
+    .q-ans-list { display: flex; flex-direction: column; gap: 8px; }
+    .q-ans-item {
+        background: #F8F9FA; border: 1px solid var(--line-soft);
+        border-radius: var(--r-sm); padding: 10px 14px;
+        display: flex; flex-direction: column; gap: 4px;
+    }
+    .q-ans-meta {
+        font-size: 0.72rem; color: var(--ink-4); font-weight: 600;
+        display: flex; justify-content: space-between; align-items: center;
+    }
+    .q-ans-text { font-size: 0.88rem; color: var(--ink); line-height: 1.5; word-break: break-word; }
+
+    /* Bar Distribution */
+    .q-bar-row { display: flex; align-items: center; gap: 10px; font-size: 0.82rem; margin-bottom: 6px; }
+    .q-bar-label { width: 130px; font-weight: 600; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .q-bar-track { flex: 1; height: 10px; background: #e8eaed; border-radius: var(--r-pill); overflow: hidden; position: relative; }
+    .q-bar-fill { height: 100%; background: var(--g-blue); border-radius: var(--r-pill); transition: width 0.4s ease; }
+    .q-bar-count { min-width: 55px; text-align: right; font-weight: 700; color: var(--ink-3); font-size: 0.78rem; }
+
+    /* Individual Stepper */
+    .indiv-nav {
+        display: flex; align-items: center; justify-content: space-between;
+        background: #F8F9FA; border: 1.5px solid var(--line-soft);
+        border-radius: var(--r-md); padding: 8px 14px; margin-bottom: 12px; gap: 8px; flex-wrap: wrap;
+    }
+    .indiv-btn {
+        display: inline-flex; align-items: center; gap: 4px;
+        padding: 5px 12px; border-radius: var(--r-pill);
+        border: 1px solid var(--line); background: #fff;
+        font-family: inherit; font-size: 0.78rem; font-weight: 700;
+        cursor: pointer; transition: var(--t); color: var(--ink-2);
+    }
+    .indiv-btn:hover:not(:disabled) { border-color: var(--g-blue); color: var(--g-blue); }
+    .indiv-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .indiv-select {
+        padding: 5px 24px 5px 10px; border-radius: var(--r-pill);
+        border: 1px solid var(--line); background: #fff;
+        font-family: inherit; font-size: 0.82rem; font-weight: 700;
+        color: var(--ink); cursor: pointer; outline: none;
+    }
+
     /* RIGHT PANEL — builder */
     .fb-builder-panel {
         background: var(--surface);
@@ -1884,8 +1974,27 @@
             <button class="modal-close" onclick="closeFormResponses()">✕</button>
         </div>
     </div>
+
+    <!-- TABS BAR: By Question vs Individual -->
+    <div class="resp-tabs-bar">
+        <div class="resp-segmented">
+            <button class="resp-tab-btn active" id="rtab-questions" onclick="switchRespTab('questions')">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                By Question
+            </button>
+            <button class="resp-tab-btn" id="rtab-individual" onclick="switchRespTab('individual')">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                Individual
+            </button>
+        </div>
+        <div id="resp-q-picker" style="display:flex;align-items:center;gap:6px;">
+            <select id="resp-q-select" class="filter-select" onchange="filterSpecificQuestion(this.value)" style="font-size:0.75rem;padding:5px 26px 5px 10px;">
+                <option value="all">All Questions</option>
+            </select>
+        </div>
+    </div>
     
-    <div style="padding:12px 24px;border-bottom:1px solid var(--line-soft);background:#FAFAFA;display:flex;gap:10px;align-items:center;">
+    <div style="padding:10px 24px;border-bottom:1px solid var(--line-soft);background:#FAFAFA;display:flex;gap:10px;align-items:center;">
         <input type="text" id="resp-search" class="field-input" placeholder="Search responses by name, email, or answer…" oninput="filterFormResponses()" style="padding:8px 12px;font-size:0.84rem;background:#fff;">
     </div>
 
@@ -2408,11 +2517,15 @@ function openFormEditorById(id) {
 }
 
 /* ══════════════════════════════════════════════════════
-   FORM RESPONSES VIEWER
+   FORM RESPONSES VIEWER (By Question & Individual)
 ══════════════════════════════════════════════════════ */
 var currentRespForm = null;
 var currentRespData = [];
 var filteredRespData = [];
+var currentRespTab = 'questions'; // 'questions' or 'individual'
+var currentIndivIndex = 0;
+var currentIndivMode = 'all'; // 'all' or 'single'
+var selectedQuestionId = 'all';
 
 async function openFormResponses(formId) {
     document.getElementById('resp-backdrop').classList.add('open');
@@ -2420,6 +2533,7 @@ async function openFormResponses(formId) {
     var body = document.getElementById('resp-drawer-body');
     body.innerHTML = '<div class="sk" style="height:120px;border-radius:12px;margin-bottom:12px;"></div><div class="sk" style="height:120px;border-radius:12px;"></div>';
     document.getElementById('resp-search').value = '';
+    currentIndivIndex = 0;
 
     try {
         var res = await fetch('/api/forms/' + formId + '/responses');
@@ -2434,11 +2548,40 @@ async function openFormResponses(formId) {
         document.getElementById('resp-count-badge').textContent = currentRespData.length + ' response' + (currentRespData.length !== 1 ? 's' : '');
         document.getElementById('resp-form-subtitle').textContent = '/form/' + currentRespForm.slug;
         
-        renderResponsesList();
+        // Populate Question Selector Dropdown
+        var qSelect = document.getElementById('resp-q-select');
+        if (qSelect) {
+            qSelect.innerHTML = '<option value="all">All Questions (' + (currentRespForm.fields || []).length + ')</option>' +
+                (currentRespForm.fields || []).map(function(f, idx){
+                    return '<option value="' + f.id + '">Q' + (idx+1) + '. ' + esc(f.label) + '</option>';
+                }).join('');
+            selectedQuestionId = 'all';
+            qSelect.value = 'all';
+        }
+
+        switchRespTab(currentRespTab);
     } catch(e) {
         console.error(e);
         body.innerHTML = '<div style="padding:32px;text-align:center;color:var(--g-red);">Failed to load responses.</div>';
     }
+}
+
+function switchRespTab(tab) {
+    currentRespTab = tab;
+    var btnQ = document.getElementById('rtab-questions');
+    var btnI = document.getElementById('rtab-individual');
+    var qPicker = document.getElementById('resp-q-picker');
+    
+    if (btnQ) btnQ.classList.toggle('active', tab === 'questions');
+    if (btnI) btnI.classList.toggle('active', tab === 'individual');
+    if (qPicker) qPicker.style.display = (tab === 'questions') ? 'flex' : 'none';
+
+    renderResponsesList();
+}
+
+function filterSpecificQuestion(qid) {
+    selectedQuestionId = qid;
+    renderResponsesList();
 }
 
 function closeFormResponses() {
@@ -2462,11 +2605,14 @@ function filterFormResponses() {
             return allVals.includes(q);
         });
     }
+    if (currentIndivIndex >= filteredRespData.length) currentIndivIndex = 0;
     renderResponsesList();
 }
 
 function renderResponsesList() {
     var body = document.getElementById('resp-drawer-body');
+    if (!body) return;
+
     if (!filteredRespData || !filteredRespData.length) {
         body.innerHTML = '<div class="empty-state" style="padding:48px 24px;">' +
             '<div class="empty-icon">📝</div>' +
@@ -2477,9 +2623,177 @@ function renderResponsesList() {
         return;
     }
 
-    var fields = (currentRespForm && currentRespForm.fields) ? currentRespForm.fields : [];
+    if (currentRespTab === 'questions') {
+        renderQuestionsView(body);
+    } else {
+        renderIndividualView(body);
+    }
+}
 
-    body.innerHTML = filteredRespData.map(function(r) {
+/* ── 1. BY QUESTION VIEW ── */
+function renderQuestionsView(body) {
+    var fields = (currentRespForm && currentRespForm.fields) ? currentRespForm.fields : [];
+    if (selectedQuestionId !== 'all') {
+        fields = fields.filter(function(f){ return String(f.id) === String(selectedQuestionId); });
+    }
+
+    if (!fields.length) {
+        body.innerHTML = '<div style="padding:24px;text-align:center;color:var(--ink-4)">No questions found.</div>';
+        return;
+    }
+
+    body.innerHTML = fields.map(function(f, idx) {
+        var realIdx = (currentRespForm.fields || []).indexOf(f) + 1;
+        
+        // Collect all non-empty answers for this question
+        var answers = [];
+        filteredRespData.forEach(function(r) {
+            var val = (r.data && r.data[f.id] !== undefined) ? r.data[f.id] : null;
+            if (val !== null && val !== undefined && val !== '') {
+                answers.push({ val: val, response: r });
+            }
+        });
+
+        var contentHtml = '';
+
+        if (f.type === 'rating') {
+            // Calculate Rating Stats & Bar Distribution
+            var sum = 0, counts = {};
+            for (var i = 1; i <= 10; i++) counts[i] = 0;
+            answers.forEach(function(a){
+                var n = Number(a.val) || 0;
+                sum += n;
+                if (counts[n] !== undefined) counts[n]++;
+            });
+            var avg = answers.length ? (sum / answers.length).toFixed(1) : '0';
+
+            var barsHtml = '';
+            for (var score = 10; score >= 1; score--) {
+                var c = counts[score] || 0;
+                var pct = answers.length ? Math.round((c / answers.length) * 100) : 0;
+                if (c > 0 || score === 10 || score === 1 || answers.length < 5) {
+                    barsHtml += '<div class="q-bar-row">' +
+                        '<div class="q-bar-label">' + score + ' ★</div>' +
+                        '<div class="q-bar-track"><div class="q-bar-fill" style="width:' + pct + '%;background:#FBBC04"></div></div>' +
+                        '<div class="q-bar-count">' + c + ' (' + pct + '%)</div>' +
+                    '</div>';
+                }
+            }
+
+            contentHtml = '<div style="display:flex;align-items:center;gap:12px;background:#FEF7E0;padding:12px 16px;border-radius:var(--r-md);border:1px solid #FCE8B2;margin-bottom:12px;">' +
+                '<div style="font-size:1.8rem;font-weight:800;color:#B06000;">⭐ ' + avg + '</div>' +
+                '<div><div style="font-size:0.85rem;font-weight:700;color:#B06000;">Average Rating</div><div style="font-size:0.75rem;color:#B06000;opacity:0.8">' + answers.length + ' of ' + filteredRespData.length + ' respondents rated</div></div>' +
+            '</div>' +
+            '<div style="margin-bottom:14px;">' + barsHtml + '</div>';
+
+        } else if (f.type === 'radio' || f.type === 'select' || f.type === 'checkbox') {
+            // Option Breakdown
+            var optionCounts = {};
+            if (f.options && typeof f.options === 'string') {
+                f.options.split('\n').map(function(s){ return s.trim(); }).filter(Boolean).forEach(function(opt){
+                    optionCounts[opt] = 0;
+                });
+            }
+            answers.forEach(function(a){
+                try {
+                    var parsed = typeof a.val === 'string' && a.val.startsWith('[') ? JSON.parse(a.val) : [a.val];
+                    if (Array.isArray(parsed)) {
+                        parsed.forEach(function(p){ optionCounts[p] = (optionCounts[p] || 0) + 1; });
+                    } else {
+                        optionCounts[a.val] = (optionCounts[a.val] || 0) + 1;
+                    }
+                } catch(e) {
+                    optionCounts[a.val] = (optionCounts[a.val] || 0) + 1;
+                }
+            });
+
+            var totalChoices = 0;
+            Object.values(optionCounts).forEach(function(c){ totalChoices += c; });
+
+            contentHtml = '<div style="margin-bottom:14px;">' +
+                Object.keys(optionCounts).map(function(optKey){
+                    var c = optionCounts[optKey] || 0;
+                    var pct = totalChoices ? Math.round((c / totalChoices) * 100) : 0;
+                    return '<div class="q-bar-row">' +
+                        '<div class="q-bar-label" title="' + esc(optKey) + '">' + esc(optKey) + '</div>' +
+                        '<div class="q-bar-track"><div class="q-bar-fill" style="width:' + pct + '%"></div></div>' +
+                        '<div class="q-bar-count">' + c + ' (' + pct + '%)</div>' +
+                    '</div>';
+                }).join('') +
+            '</div>';
+
+        }
+
+        // List of all written answers
+        var answersListHtml = answers.length ? (
+            '<div class="q-ans-list">' +
+                answers.map(function(a) {
+                    var respNum = currentRespData.length - currentRespData.indexOf(a.response);
+                    var dateStr = a.response.created_at ? new Date(a.response.created_at).toLocaleDateString('en-US', { month:'short', day:'numeric', hour:'numeric', minute:'2-digit' }) : '';
+                    var valDisplay = '';
+                    if (f.type === 'rating') {
+                        valDisplay = '<span class="resp-rating-badge">⭐ ' + esc(a.val) + ' / 10</span>';
+                    } else if (f.type === 'checkbox') {
+                        try {
+                            var parsed = typeof a.val === 'string' && a.val.startsWith('[') ? JSON.parse(a.val) : [a.val];
+                            valDisplay = Array.isArray(parsed) ? parsed.map(function(p){ return '<span class="talk-topic-tag" style="font-size:0.75rem">'+esc(p)+'</span>'; }).join(' ') : esc(String(a.val));
+                        } catch(e) { valDisplay = esc(String(a.val)); }
+                    } else {
+                        valDisplay = esc(String(a.val));
+                    }
+
+                    return '<div class="q-ans-item">' +
+                        '<div class="q-ans-meta">' +
+                            '<span><strong style="color:var(--g-blue)">#Submission ' + respNum + '</strong></span>' +
+                            '<span>' + esc(dateStr) + '</span>' +
+                        '</div>' +
+                        '<div class="q-ans-text">' + valDisplay + '</div>' +
+                    '</div>';
+                }).join('') +
+            '</div>'
+        ) : '<div style="font-size:0.84rem;color:var(--ink-4);font-style:italic;padding:8px 0;">No answers submitted for this question yet.</div>';
+
+        return '<div class="q-card">' +
+            '<div class="q-card-head">' +
+                '<div>' +
+                    '<div class="q-card-title">' +
+                        '<span>Q' + realIdx + '. ' + esc(f.label) + '</span>' +
+                        '<span class="q-type-badge">' + esc(f.type) + '</span>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="q-ans-count">' + answers.length + ' answer' + (answers.length !== 1 ? 's' : '') + '</div>' +
+            '</div>' +
+            contentHtml +
+            answersListHtml +
+        '</div>';
+    }).join('');
+}
+
+/* ── 2. INDIVIDUAL VIEW ── */
+function renderIndividualView(body) {
+    var fields = (currentRespForm && currentRespForm.fields) ? currentRespForm.fields : [];
+    var totalCount = filteredRespData.length;
+
+    // Stepper navigation bar
+    var navHtml = '<div class="indiv-nav">' +
+        '<div style="display:flex;align-items:center;gap:6px;">' +
+            '<button class="indiv-btn" onclick="changeIndivIndex(-1)" ' + (currentIndivIndex <= 0 || currentIndivMode==='all' ? 'disabled' : '') + '>‹ Prev</button>' +
+            '<button class="indiv-btn" onclick="changeIndivIndex(1)" ' + (currentIndivIndex >= totalCount - 1 || currentIndivMode==='all' ? 'disabled' : '') + '>Next ›</button>' +
+            '<span style="font-size:0.8rem;font-weight:700;color:var(--ink-3);margin-left:4px;">' +
+                (currentIndivMode === 'single' ? ('Response ' + (currentIndivIndex + 1) + ' of ' + totalCount) : ('All ' + totalCount + ' Responses')) +
+            '</span>' +
+        '</div>' +
+        '<div style="display:flex;align-items:center;gap:8px;">' +
+            '<button class="indiv-btn" onclick="toggleIndivViewMode()">' +
+                (currentIndivMode === 'single' ? '📄 View All Stacked' : '🔍 Stepper Mode') +
+            '</button>' +
+        '</div>' +
+    '</div>';
+
+    var responsesToRender = (currentIndivMode === 'single') ? [filteredRespData[currentIndivIndex]] : filteredRespData;
+
+    var cardsHtml = responsesToRender.map(function(r) {
+        if (!r) return '';
         var respNum = currentRespData.length - currentRespData.indexOf(r);
         var dateStr = r.created_at ? new Date(r.created_at).toLocaleString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'numeric', minute:'2-digit' }) : 'Recently';
         
@@ -2509,7 +2823,7 @@ function renderResponsesList() {
             '</div>';
         }).join('');
 
-        return '<div class="resp-card">' +
+        return '<div class="resp-card" style="margin-bottom:12px;">' +
             '<div class="resp-head">' +
                 '<div class="resp-num">' +
                     '<span style="background:var(--g-blue);color:#fff;border-radius:50%;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;">#' + respNum + '</span>' +
@@ -2523,6 +2837,20 @@ function renderResponsesList() {
             '<div class="resp-grid">' + fieldsHtml + '</div>' +
         '</div>';
     }).join('');
+
+    body.innerHTML = navHtml + cardsHtml;
+}
+
+function changeIndivIndex(delta) {
+    currentIndivIndex += delta;
+    if (currentIndivIndex < 0) currentIndivIndex = 0;
+    if (currentIndivIndex >= filteredRespData.length) currentIndivIndex = filteredRespData.length - 1;
+    renderResponsesList();
+}
+
+function toggleIndivViewMode() {
+    currentIndivMode = (currentIndivMode === 'single') ? 'all' : 'single';
+    renderResponsesList();
 }
 
 function copyFormLink() {
