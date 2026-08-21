@@ -3058,7 +3058,7 @@ function renderTechMap() {
     } else {
         categories.forEach(function(cat, i) {
             var tagsHtml = currentTechMap[cat].map(function(t, j) {
-                return '<div class="tag-pill">#'+esc(t)+' <span class="tag-remove" onclick="removeTechMapTag(\''+esc(cat)+'\', '+j+')">✕</span></div>';
+                return '<div class="tag-pill">'+esc(t)+' <span class="tag-remove" onclick="removeTechMapTag(\''+esc(cat)+'\', '+j+')">✕</span></div>';
             }).join('');
             
             html += '<div style="border:1px solid var(--line-soft); border-radius:6px; padding:12px; background:#fcfcfc;">' +
