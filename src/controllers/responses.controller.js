@@ -81,6 +81,51 @@ exports.getResponsesByFormId = async (req, res, next) => {
             err.status = 404;
             return next(err);
         }
+
+        if (form.type === 'feedback') {
+            // Map fields by role
+            const fNama = form.fields.find(f => (f.label || '').toLowerCase().includes('nama')) || form.fields[0];
+            const fEmail = form.fields.find(f => f.type === 'email' || (f.label || '').toLowerCase().includes('email')) || form.fields[1];
+            const fRating = form.fields.find(f => f.type === 'rating' || (f.label || '').toLowerCase().includes('rating')) || form.fields[2];
+            const fAlasan = form.fields.find(f => (f.label || '').toLowerCase().includes('alasan')) || form.fields[3];
+            const fPesan = form.fields.find(f => (f.label || '').toLowerCase().includes('pesan') || (f.label || '').toLowerCase().includes('kesan') || (f.label || '').toLowerCase().includes('saran')) || form.fields[4];
+
+            const tag = (form.tag || '').toLowerCase().trim();
+            const slug = (form.slug || '').toLowerCase().trim();
+            const title = (form.title || '').toLowerCase().trim();
+
+            const allFeedbacks = await prisma.feedbacks.findMany({
+                orderBy: { created_at: 'desc' }
+            });
+
+            const matchedFeedbacks = allFeedbacks.filter(fb => {
+                if (!fb.source) return false;
+                const src = fb.source.toLowerCase().trim();
+                return (tag && src === tag) || 
+                       (slug && src === `/form/${slug}`) || 
+                       (title && src === title) || 
+                       (tag && (src.includes(tag) || tag.includes(src)));
+            });
+
+            const mappedResponses = matchedFeedbacks.map(fb => {
+                const dataObj = {};
+                if (fNama) dataObj[fNama.id] = fb.nama_lengkap || '';
+                if (fEmail) dataObj[fEmail.id] = fb.email || '';
+                if (fRating) dataObj[fRating.id] = fb.rating || null;
+                if (fAlasan) dataObj[fAlasan.id] = fb.alasan || '';
+                if (fPesan) dataObj[fPesan.id] = fb.pesan_kesan || '';
+
+                return {
+                    id: fb.id,
+                    form_id: form.id,
+                    data: dataObj,
+                    created_at: fb.created_at || new Date()
+                };
+            });
+
+            return res.json({ success: true, count: mappedResponses.length, form, data: mappedResponses });
+        }
+
         const responses = await prisma.form_responses.findMany({
             where: { form_id: formId },
             orderBy: { created_at: 'desc' }
@@ -93,10 +138,15 @@ exports.getResponsesByFormId = async (req, res, next) => {
 
 exports.deleteResponse = async (req, res, next) => {
     try {
+        const formId = parseInt(req.params.id);
         const rid = parseInt(req.params.rid);
-        await prisma.form_responses.delete({
-            where: { id: rid }
-        });
+
+        const form = await prisma.forms.findUnique({ where: { id: formId } });
+        if (form && form.type === 'feedback') {
+            await prisma.feedbacks.delete({ where: { id: rid } }).catch(() => {});
+        }
+        await prisma.form_responses.delete({ where: { id: rid } }).catch(() => {});
+
         res.json({ success: true, message: 'Response deleted successfully.' });
     } catch (err) {
         next(err);

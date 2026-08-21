@@ -3,15 +3,41 @@ const prisma = require('../config/db');
 // List all forms with response count
 exports.getAllForms = async (req, res, next) => {
     try {
-        const result = await prisma.$queryRaw`
-            SELECT f.*,
-                   COUNT(r.id)::int AS response_count,
-                   MAX(r.created_at) AS last_response_at
-            FROM forms f
-            LEFT JOIN form_responses r ON r.form_id = f.id
-            GROUP BY f.id
-            ORDER BY f.created_at DESC
-        `;
+        const forms = await prisma.forms.findMany({
+            orderBy: { created_at: 'desc' },
+            include: {
+                _count: { select: { responses: true } }
+            }
+        });
+
+        // Query all feedbacks to match with feedback forms
+        const allFeedbacks = await prisma.feedbacks.findMany({
+            select: { id: true, source: true, created_at: true }
+        });
+
+        const result = forms.map(f => {
+            let count = f._count ? f._count.responses : 0;
+            if (f.type === 'feedback') {
+                const tag = (f.tag || '').toLowerCase().trim();
+                const slug = (f.slug || '').toLowerCase().trim();
+                const title = (f.title || '').toLowerCase().trim();
+                
+                const matchingFeedbacks = allFeedbacks.filter(fb => {
+                    if (!fb.source) return false;
+                    const src = fb.source.toLowerCase().trim();
+                    return (tag && src === tag) || 
+                           (slug && src === `/form/${slug}`) || 
+                           (title && src === title) || 
+                           (tag && (src.includes(tag) || tag.includes(src)));
+                });
+                count = Math.max(count, matchingFeedbacks.length);
+            }
+            return {
+                ...f,
+                response_count: count
+            };
+        });
+
         res.json({ success: true, data: result });
     } catch (err) {
         next(err);
@@ -41,8 +67,7 @@ const FEEDBACK_FORM_FIELDS = [
     { type: 'email', label: 'Email', placeholder: 'nama@email.com', required: true },
     { type: 'rating', label: 'Rating Sesi / Pemateri (1 - 10)', placeholder: null, required: true },
     { type: 'textarea', label: 'Alasan Penilaian', placeholder: 'Ceritakan alasan dari rating yang kamu berikan…', required: true },
-    { type: 'textarea', label: 'Pesan & Kesan / Saran untuk Pemateri', placeholder: 'Tuliskan kritik, saran, pesan dan kesanmu…', required: true },
-    { type: 'text', label: 'Materi / Topik Sesi', placeholder: 'Topik atau judul materi…', required: false }
+    { type: 'textarea', label: 'Pesan & Kesan / Saran untuk Pemateri', placeholder: 'Tuliskan kritik, saran, pesan dan kesanmu…', required: true }
 ];
 
 exports.getFeedbackTemplateFields = (req, res) => {

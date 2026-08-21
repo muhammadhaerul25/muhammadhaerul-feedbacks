@@ -1930,16 +1930,18 @@
             <label class="field-label">Form Type</label>
             <div class="ftype-selector">
                 <div id="ftype-card-feedback" class="ftype-card active" onclick="selectFormType('feedback')">
-                    <div style="display:flex;align-items:center;gap:6px;font-size:0.85rem;font-weight:800;color:#B06000;">
-                        <span>⭐ Feedback Form</span>
+                    <div style="display:flex;align-items:center;gap:7px;font-size:0.86rem;font-weight:800;color:#B06000;">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="flex-shrink:0"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <span>Feedback Form</span>
                     </div>
-                    <div style="font-size:0.72rem;color:var(--ink-3);line-height:1.35">Fixed standardized fields, syncs to table feedbacks.</div>
+                    <div style="font-size:0.73rem;color:var(--ink-3);line-height:1.35;margin-top:2px;">Standardized fields, syncs to table feedbacks.</div>
                 </div>
                 <div id="ftype-card-general" class="ftype-card" onclick="selectFormType('general')">
-                    <div style="display:flex;align-items:center;gap:6px;font-size:0.85rem;font-weight:800;color:var(--ink);">
-                        <span>📝 General Form</span>
+                    <div style="display:flex;align-items:center;gap:7px;font-size:0.86rem;font-weight:800;color:var(--ink);">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                        <span>General Form</span>
                     </div>
-                    <div style="font-size:0.72rem;color:var(--ink-3);line-height:1.35">Custom questions builder for dynamic surveys.</div>
+                    <div style="font-size:0.73rem;color:var(--ink-3);line-height:1.35;margin-top:2px;">Custom questions builder for dynamic surveys.</div>
                 </div>
             </div>
         </div>
@@ -2517,8 +2519,8 @@ function renderFormsGrid() {
         var url = window.location.origin + '/form/' + f.slug;
         var responseCount = Number(f.response_count) || 0;
         var typeBadge = f.type === 'feedback' 
-            ? '<span class="talk-topic-tag" style="background:#FEF7E0;color:#B06000;border:1px solid #FCE8B2;font-size:0.72rem;font-weight:800;display:inline-flex;align-items:center;gap:4px;">⭐ Feedback Form</span>'
-            : '<span class="talk-topic-tag" style="font-size:0.72rem;font-weight:700;">📝 General Form</span>';
+            ? '<span class="talk-topic-tag" style="background:#FEF7E0;color:#B06000;border:1px solid #FCE8B2;font-size:0.72rem;font-weight:800;display:inline-flex;align-items:center;gap:5px;"><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> Feedback Form</span>'
+            : '<span class="talk-topic-tag" style="font-size:0.72rem;font-weight:700;display:inline-flex;align-items:center;gap:5px;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg> General Form</span>';
         var tagHtml = f.tag ? '<span class="talk-topic-tag" style="font-size:0.72rem;font-weight:700;">' + esc(f.tag) + '</span>' : '';
         return '<div class="form-card">' +
             '<div class="fc-header">' +
@@ -2940,8 +2942,7 @@ var CONSTANT_FEEDBACK_FIELDS = [
     { type: 'email', label: 'Email', placeholder: 'nama@email.com', required: true },
     { type: 'rating', label: 'Rating Sesi / Pemateri (1 - 10)', placeholder: null, required: true },
     { type: 'textarea', label: 'Alasan Penilaian', placeholder: 'Ceritakan alasan dari rating yang kamu berikan…', required: true },
-    { type: 'textarea', label: 'Pesan & Kesan / Saran untuk Pemateri', placeholder: 'Tuliskan kritik, saran, pesan dan kesanmu…', required: true },
-    { type: 'text', label: 'Materi / Topik Sesi', placeholder: 'Topik atau judul materi…', required: false }
+    { type: 'textarea', label: 'Pesan & Kesan / Saran untuk Pemateri', placeholder: 'Tuliskan kritik, saran, pesan dan kesanmu…', required: true }
 ];
 
 function selectFormType(type) {
