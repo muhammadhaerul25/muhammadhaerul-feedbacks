@@ -764,10 +764,12 @@
     }
     .fb-field-row:hover { border-color: var(--g-blue); background: var(--g-blue-soft); }
     .fb-field-type-pill {
-        font-size: 0.6rem; font-weight: 800; text-transform: uppercase;
-        letter-spacing: 0.05em; padding: 2px 8px; border-radius: var(--r-pill);
-        background: var(--line-soft); color: var(--ink-4); white-space: nowrap; flex-shrink: 0;
+        display: inline-flex; align-items: center; gap: 6px;
+        font-size: 0.65rem; font-weight: 800; text-transform: uppercase;
+        letter-spacing: 0.05em; padding: 4px 10px; border-radius: var(--r-pill);
+        background: var(--line-soft); color: var(--ink-3); white-space: nowrap; flex-shrink: 0;
     }
+    .fb-field-type-pill svg { width: 13px; height: 13px; flex-shrink: 0; }
     .fb-field-label-text { flex: 1; font-size: 0.875rem; font-weight: 600; color: var(--ink); }
     .fb-field-req-star { font-size: 0.75rem; color: var(--g-red); font-weight: 900; }
     .fb-field-del {
@@ -878,17 +880,36 @@
 
     /* field type grid in modal */
     .field-type-grid {
-        display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 8px;
+        display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 8px;
     }
     .ftype-btn {
-        border: 1.5px solid var(--line); border-radius: var(--r-sm);
-        padding: 12px 6px; text-align: center;
+        border: 1.5px solid var(--line); border-radius: var(--r-md);
+        padding: 14px 6px; text-align: center;
         cursor: pointer; transition: var(--t); background: var(--surface);
+        display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+        color: var(--ink-3);
     }
-    .ftype-btn:hover { border-color: var(--g-blue); background: var(--g-blue-soft); }
-    .ftype-btn.sel { border-color: var(--g-blue); background: var(--g-blue-soft); }
-    .ftype-icon { font-size: 1.4rem; }
-    .ftype-name { font-size: 0.68rem; font-weight: 700; color: var(--ink-3); margin-top: 4px; }
+    .ftype-btn:hover {
+        border-color: var(--g-blue); background: var(--g-blue-soft);
+        color: var(--g-blue); transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(66,133,244,0.12);
+    }
+    .ftype-btn.sel {
+        border-color: var(--g-blue); background: var(--g-blue-soft);
+        color: var(--g-blue); box-shadow: 0 0 0 2px var(--g-blue);
+    }
+    .ftype-icon {
+        display: flex; align-items: center; justify-content: center;
+        width: 28px; height: 28px; color: inherit;
+    }
+    .ftype-icon svg { width: 22px; height: 22px; }
+    .ftype-name {
+        font-size: 0.76rem; font-weight: 700; color: var(--ink-2);
+        transition: color var(--t);
+    }
+    .ftype-btn.sel .ftype-name, .ftype-btn:hover .ftype-name {
+        color: var(--g-blue);
+    }
 
     .modal-footer {
         padding: 0 24px 24px;
@@ -2169,13 +2190,13 @@ var activeFBSlug   = null;
 var pendingFields  = [];     // fields when creating a new form
 
 var FIELD_TYPES = [
-    { type:'text',     icon:'📝', name:'Text'     },
-    { type:'email',    icon:'✉️',  name:'Email'    },
-    { type:'number',   icon:'🔢', name:'Number'   },
-    { type:'textarea', icon:'📄', name:'Paragraph'},
-    { type:'rating',   icon:'⭐', name:'Rating'   },
-    { type:'select',   icon:'📋', name:'Dropdown' },
-    { type:'radio',    icon:'🔘', name:'Choice'   }
+    { type:'text',     icon:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>', name:'Text' },
+    { type:'email',    icon:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>', name:'Email' },
+    { type:'number',   icon:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="9" x2="20" y2="9"></line><line x1="4" y1="15" x2="20" y2="15"></line><line x1="10" y1="3" x2="8" y2="21"></line><line x1="16" y1="3" x2="14" y2="21"></line></svg>', name:'Number' },
+    { type:'textarea', icon:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="21" y1="6" x2="3" y2="6"></line><line x1="15" y1="12" x2="3" y2="12"></line><line x1="17" y1="18" x2="3" y2="18"></line></svg>', name:'Paragraph' },
+    { type:'rating',   icon:'<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#FBBC04;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>', name:'Rating' },
+    { type:'select',   icon:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>', name:'Dropdown' },
+    { type:'radio',    icon:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4" fill="currentColor"></circle></svg>', name:'Choice' }
 ];
 
 function slugify(t) {
@@ -2254,7 +2275,7 @@ async function openFormEditor(form) {
 }
 
 function buildFieldRow(f) {
-    var typeInfo = FIELD_TYPES.find(function(t){ return t.type===f.type; }) || {icon:'📝',name:f.type};
+    var typeInfo = FIELD_TYPES.find(function(t){ return t.type===f.type; }) || {icon:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg>',name:f.type};
     return '<div class="fb-field-row" data-fid="'+f.id+'">' +
         '<div class="fb-field-type-pill">'+typeInfo.icon+' '+typeInfo.name+'</div>' +
         '<div class="fb-field-label-text">'+esc(f.label)+'</div>' +
