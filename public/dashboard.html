@@ -1417,9 +1417,6 @@
                         <select class="filter-select" id="sourceFilter" onchange="applyFilters()">
                             <option value="all">All Sources</option>
                         </select>
-                        <select class="filter-select" id="materiFilter" onchange="applyFilters()">
-                            <option value="all">All Topics</option>
-                        </select>
                         <select class="filter-select" id="sorter" onchange="applyFilters()">
                             <option value="newest">Newest First</option>
                             <option value="hi">Highest Rating</option>
@@ -1968,14 +1965,10 @@ async function loadFeedback() {
         var res=await fetch('/api/get_feedback'), j=await res.json();
         allData=j.data||[]; dataLoaded=true;
         if (!allData.length) { setFbState('empty'); return; }
-        var srcSel=document.getElementById('sourceFilter'), matSel=document.getElementById('materiFilter');
+        var srcSel=document.getElementById('sourceFilter');
         if (srcSel.options.length===1) {
             [...new Set(allData.map(function(d){ return d.source; }).filter(Boolean))]
                 .forEach(function(s){ srcSel.options.add(new Option(s,s)); });
-        }
-        if (matSel.options.length===1) {
-            [...new Set(allData.map(function(d){ return d.materi; }).filter(Boolean))]
-                .forEach(function(m){ matSel.options.add(new Option(m,m)); });
         }
         
         // Restore saved filter
@@ -2000,14 +1993,12 @@ function applyFilters() {
     var q=(document.getElementById('q').value||'').toLowerCase();
     var s=document.getElementById('sorter').value;
     var srcF=document.getElementById('sourceFilter').value;
-    var matF=document.getElementById('materiFilter').value;
     var fl=allData.filter(function(d) {
         var r=+d.rating;
         if (activeFilter==='9-10' && !(r>=9)) return false;
         if (activeFilter==='7-8'  && !(r>=7&&r<=8)) return false;
         if (activeFilter==='0-6'  && !(r>=0&&r<=6)) return false;
         if (srcF!=='all' && (d.source||'General')!==srcF) return false;
-        if (matF!=='all' && (d.materi||'')!==matF) return false;
         if (q && !((d.nama_lengkap||'')+' '+(d.email||'')+' '+(d.alasan||'')+' '+(d.pesan_kesan||'')).toLowerCase().includes(q)) return false;
         return true;
     });
