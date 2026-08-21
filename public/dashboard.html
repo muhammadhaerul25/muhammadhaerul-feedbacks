@@ -2032,8 +2032,8 @@ function buildProjectCardOverview(p) {
     var techsHtml = allTagsHtml.join('');
     var mediaHtml = '';
     var embedUrl = getYouTubeEmbedUrl(p.videoDemo);
-    if (p.thumbnailUrl) mediaHtml = '<div class="project-thumb" style="background-image:url(\''+esc(p.thumbnailUrl)+'\')"></div>';
-    else if (embedUrl) mediaHtml = '<div class="project-thumb" style="background:#000;"><iframe width="100%" height="100%" src="'+embedUrl+'" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width:100%;height:100%;border:none;border-bottom:1px solid var(--line-soft);"></iframe></div>';
+    if (embedUrl) mediaHtml = '<div class="project-thumb" style="background:#000;"><iframe width="100%" height="100%" src="'+embedUrl+'" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width:100%;height:100%;border:none;border-bottom:1px solid var(--line-soft);"></iframe></div>';
+    else if (p.thumbnailUrl) mediaHtml = '<div class="project-thumb" style="background-image:url(\''+esc(p.thumbnailUrl)+'\')"></div>';
     
     var descHtml = renderProjectDesc(p.description, 'ov-' + p.id);
     return '<div class="project-card">' + mediaHtml + '<div class="project-content"><div><div class="project-head"><div class="project-title">' + esc(p.name) + '</div></div>' + descHtml + '</div><div class="project-tech-stack">' + techsHtml + '</div></div></div>';
@@ -3045,10 +3045,10 @@ function renderProjectsGrid() {
         }
         
         var mediaHtml = '';
-        if (p.thumbnailUrl) {
-            mediaHtml = '<div class="project-thumb" style="background-image:url(\''+esc(p.thumbnailUrl)+'\')"></div>';
-        } else if (embedUrl) {
+        if (embedUrl) {
             mediaHtml = '<div class="project-thumb" style="background:#000;"><iframe width="100%" height="100%" src="'+embedUrl+'" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width:100%;height:100%;border:none;border-bottom:1px solid var(--line-soft);"></iframe></div>';
+        } else if (p.thumbnailUrl) {
+            mediaHtml = '<div class="project-thumb" style="background-image:url(\''+esc(p.thumbnailUrl)+'\')"></div>';
         }
 
         return '<div class="project-card">' +
