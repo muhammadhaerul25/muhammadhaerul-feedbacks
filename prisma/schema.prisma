@@ -109,3 +109,34 @@ model mindful_ai_questions {
 
   @@map("mindful-ai-questions")
 }
+
+model Talk {
+  id             String    @id @default(cuid())
+  event          String
+  organizer      String?
+  place          String?
+  date           DateTime?
+  jumlah_peserta Int?
+  poster_url     String?
+  slides         Json?
+  topics         String[]  @default([])
+  created_at     DateTime  @default(now())
+  updated_at     DateTime  @updatedAt
+
+  @@map("talks")
+}
+
+model Project {
+  id          String    @id @default(cuid())
+  name        String
+  description String?
+  dateRange   String?
+  techStack   String[]  @default([])
+  videoDemo   String?
+  linkProject String?
+  thumbnailUrl String?
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+
+  @@map("projects")
+}

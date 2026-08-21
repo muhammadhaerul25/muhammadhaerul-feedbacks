@@ -534,6 +534,37 @@ function buildField(field) {
             group.appendChild(rDiv);
             break;
 
+        case 'checkbox':
+            var cOpts = [];
+            try { cOpts = JSON.parse(field.options || '[]'); } catch(e) { cOpts = []; }
+            var cDiv = document.createElement('div'); cDiv.className = 'radio-options';
+            var currentSelections = [];
+            try { if (savedVal) currentSelections = JSON.parse(savedVal); } catch(e) {}
+            if (!Array.isArray(currentSelections)) currentSelections = [];
+
+            cOpts.forEach(function(opt) {
+                var isSel = currentSelections.includes(opt);
+                var row = document.createElement('div');
+                row.className = 'radio-option' + (isSel ? ' selected' : '');
+                row.innerHTML = '<div class="radio-dot" style="border-radius:4px">' + (isSel?'<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>':'') + '</div><span class="radio-option-label">'+escHtml(opt)+'</span>';
+                row.addEventListener('click', function() {
+                    var idx = currentSelections.indexOf(opt);
+                    if (idx > -1) {
+                        currentSelections.splice(idx, 1);
+                        this.classList.remove('selected');
+                        this.querySelector('.radio-dot').innerHTML = '';
+                    } else {
+                        currentSelections.push(opt);
+                        this.classList.add('selected');
+                        this.querySelector('.radio-dot').innerHTML = '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+                    }
+                    answers[field.id] = JSON.stringify(currentSelections);
+                });
+                cDiv.appendChild(row);
+            });
+            group.appendChild(cDiv);
+            break;
+
         case 'rating':
             var rGrid = document.createElement('div');
             rGrid.className = 'rating-grid';

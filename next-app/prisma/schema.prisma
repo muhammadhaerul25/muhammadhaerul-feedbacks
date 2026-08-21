@@ -72,3 +72,18 @@ model FormResponse {
 
   @@map("form_responses")
 }
+
+model Talk {
+  id             String    @id @default(cuid())
+  event          String
+  organizer      String?
+  place          String?
+  date           DateTime?
+  jumlah_peserta Int?
+  poster_url     String?
+  slides         Json?
+  created_at     DateTime  @default(now())
+  updated_at     DateTime  @updatedAt
+
+  @@map("talks")
+}

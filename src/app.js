@@ -8,6 +8,8 @@ const errorHandler = require('./middlewares/errorHandler');
 
 const formsRoutes = require('./routes/forms.routes');
 const feedbacksRoutes = require('./routes/feedbacks.routes');
+const talksRoutes = require('./routes/talks.routes');
+const projectsRoutes = require('./routes/projects.routes');
 
 const app = express();
 
@@ -30,6 +32,8 @@ app.get('/full-materi.pdf', (req, res) => res.sendFile(path.join(publicDir, 'ful
 
 // API Routes
 app.use('/api/forms', formsRoutes);
+app.use('/api/talks', talksRoutes);
+app.use('/api/projects', projectsRoutes);
 app.use('/api', feedbacksRoutes); // Legacy routes didn't have a common prefix other than /api
 
 // Global Error Handler

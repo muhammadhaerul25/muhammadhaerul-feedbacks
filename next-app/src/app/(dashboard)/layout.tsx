@@ -1,7 +1,7 @@
 "use client"
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, MessageSquare, FolderKanban, Presentation, Settings2 } from 'lucide-react';
+import { LayoutDashboard, MessageSquare, FolderKanban, Presentation, Settings2, Mic2 } from 'lucide-react';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -13,6 +13,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   
   const managementItems = [
     { name: 'Projects', href: '/projects', icon: FolderKanban },
+    { name: 'Talks', href: '/talks', icon: Mic2 },
     { name: 'Presentations', href: '/presentations', icon: Presentation },
     { name: 'Forms', href: '/forms', icon: Settings2 },
   ];
