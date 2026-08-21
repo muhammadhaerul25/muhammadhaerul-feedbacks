@@ -2205,19 +2205,27 @@ function slugify(t) {
         .replace(/[^\w\s-]/g,'').replace(/[\s_-]+/g,'-').replace(/^-+|-+$/g,'') || 'form-'+Date.now();
 }
 
+var allFormsList = [];
+var formsDataMap = {};
+
 /* ── Load forms list ── */
 async function loadForms() {
     var body  = document.getElementById('fb-grid-body');
     var empty = document.getElementById('fb-list-empty');
+    if (!body || !empty) return;
     body.innerHTML = '<div class="sk" style="height:150px"></div><div class="sk" style="height:150px"></div>';
     empty.style.display = 'none';
     try {
         var res  = await fetch('/api/forms');
         var json = await res.json();
-        var forms = json.data || [];
-        if (!forms.length) { body.innerHTML=''; empty.style.display='flex'; return; }
-        body.innerHTML = forms.map(function(f) {
+        allFormsList = json.data || [];
+        formsDataMap = {};
+        allFormsList.forEach(function(f){ formsDataMap[f.id] = f; });
+
+        if (!allFormsList.length) { body.innerHTML=''; empty.style.display='flex'; return; }
+        body.innerHTML = allFormsList.map(function(f) {
             var url = window.location.origin + '/form/' + f.slug;
+            var responseCount = Number(f.response_count) || 0;
             return '<div class="form-card">' +
                 '<div class="fc-header">' +
                     '<div>' +
@@ -2228,17 +2236,25 @@ async function loadForms() {
                 '<div class="fc-meta">' +
                     '<span style="display:flex;align-items:center;gap:4px">' +
                         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>' +
-                        f.response_count + ' response' + (f.response_count!==1?'s':'') +
+                        responseCount + ' response' + (responseCount!==1?'s':'') +
                     '</span>' +
                 '</div>' +
                 '<div class="fc-actions">' +
                     '<button class="btn-fc view" onclick="window.open(\''+esc(url)+'\',\'_blank\')">View</button>' +
-                    '<button class="btn-fc edit" onclick="openFormEditor('+JSON.stringify(f).replace(/"/g, '&quot;')+')">Edit</button>' +
-                    '<button class="btn-fc delete" onclick="openDeleteFormModal('+f.id+',\''+esc(f.title)+'\')">Delete</button>' +
+                    '<button class="btn-fc edit" onclick="openFormEditorById('+f.id+')">Edit</button>' +
+                    '<button class="btn-fc delete" onclick="openDeleteFormModal('+f.id+',\''+esc(f.title).replace(/'/g, "\\'")+'\')">Delete</button>' +
                 '</div>' +
             '</div>';
         }).join('');
-    } catch(e) { body.innerHTML='<div style="padding:16px;color:var(--ink-4);font-size:0.85rem">Failed to load forms.</div>'; }
+    } catch(e) { 
+        console.error('Failed to load forms:', e);
+        body.innerHTML='<div style="padding:16px;color:var(--ink-4);font-size:0.85rem">Failed to load forms.</div>'; 
+    }
+}
+
+function openFormEditorById(id) {
+    var form = formsDataMap[id];
+    if (form) openFormEditor(form);
 }
 
 /* ── Form Editor Drawer ── */
