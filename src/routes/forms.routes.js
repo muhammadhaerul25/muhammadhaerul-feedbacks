@@ -17,8 +17,10 @@ router.post('/:id/fields', fieldsController.addFieldToForm);
 router.put('/:id/fields/:fid', fieldsController.updateField);
 router.delete('/:id/fields/:fid', fieldsController.deleteField);
 
+const { submissionLimiter } = require('../middlewares/security');
+
 // Form Responses
-router.post('/:slug/responses', responsesController.submitResponse);
+router.post('/:slug/responses', submissionLimiter, responsesController.submitResponse);
 router.get('/:id/responses', responsesController.getResponsesByFormId);
 router.delete('/:id/responses/:rid', responsesController.deleteResponse);
 

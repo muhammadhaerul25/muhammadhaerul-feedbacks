@@ -13,21 +13,38 @@ const projectsRoutes = require('./routes/projects.routes');
 
 const app = express();
 
+const { apiLimiter, sanitizeInput } = require('./middlewares/security');
+
 // Security and Performance Middlewares
 app.use(helmet({
-    contentSecurityPolicy: false, // Disabled to prevent blocking inline scripts in the old static HTML
+    contentSecurityPolicy: false, // Disabled to prevent blocking inline scripts in static HTML
     crossOriginEmbedderPolicy: false,
     crossOriginResourcePolicy: false,
+    xContentTypeOptions: true, // Prevents MIME-sniffing
+    xFrameOptions: { action: 'sameorigin' }, // Prevents clickjacking
+    xXssProtection: true, // Legacy XSS filter protection
+    hidePoweredBy: true, // Hides X-Powered-By header
     referrerPolicy: { policy: 'strict-origin-when-cross-origin' }
 }));
 app.use(cors());
 app.use(compression());
 app.use(morgan('dev')); // Logging
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+app.use(sanitizeInput); // Global input sanitization
+app.use('/api', apiLimiter); // API Rate limiting
 
-// Static Pages (served from public directory)
+// Static Pages (served with caching for images/assets)
 const publicDir = path.join(__dirname, '../public');
-app.use(express.static(publicDir));
+app.use(express.static(publicDir, {
+    maxAge: '2h',
+    etag: true,
+    setHeaders: (res, filePath) => {
+        if (filePath.endsWith('.webp') || filePath.endsWith('.png') || filePath.endsWith('.jpg') || filePath.endsWith('.svg') || filePath.endsWith('.woff2')) {
+            res.setHeader('Cache-Control', 'public, max-age=86400, stale-while-revalidate=604800');
+        }
+    }
+}));
 
 app.get('/', (req, res) => res.redirect('/dashboard'));
 app.get('/dashboard', (req, res) => res.sendFile(path.join(publicDir, 'dashboard.html')));

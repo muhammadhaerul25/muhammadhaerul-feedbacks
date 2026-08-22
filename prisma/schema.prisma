@@ -17,6 +17,10 @@ model feedbacks {
   created_at   DateTime? @db.Timestamptz(6)
   source       String?
   materi       String?   @db.VarChar(255)
+
+  @@index([created_at(sort: Desc)])
+  @@index([source])
+  @@index([rating])
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
@@ -31,6 +35,8 @@ model form_fields {
   sort_order  Int?     @default(0)
   
   form        forms    @relation(fields: [form_id], references: [id], onDelete: Cascade)
+
+  @@index([form_id, sort_order])
 }
 
 model form_responses {
@@ -40,6 +46,9 @@ model form_responses {
   created_at   DateTime @default(now())
   
   form         forms    @relation(fields: [form_id], references: [id], onDelete: Cascade)
+
+  @@index([form_id])
+  @@index([created_at(sort: Desc)])
 }
 
 model forms {
@@ -54,6 +63,9 @@ model forms {
   
   fields      form_fields[]
   responses   form_responses[]
+
+  @@index([created_at(sort: Desc)])
+  @@index([tag])
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
@@ -122,9 +134,12 @@ model Talk {
   poster_url     String?
   slides         Json?
   topics         String[]  @default([])
+  gallery        String[]  @default([])
   created_at     DateTime  @default(now())
   updated_at     DateTime  @updatedAt
 
+  @@index([date(sort: Desc)])
+  @@index([created_at(sort: Desc)])
   @@map("talks")
 }
 
@@ -140,5 +155,6 @@ model Project {
   created_at  DateTime  @default(now())
   updated_at  DateTime  @updatedAt
 
+  @@index([created_at(sort: Desc)])
   @@map("projects")
 }

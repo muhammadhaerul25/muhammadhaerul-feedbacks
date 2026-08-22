@@ -1,4 +1,5 @@
 const prisma = require('../config/db');
+const cache = require('../utils/cache');
 
 exports.submitFeedback = async (req, res, next) => {
     const { namaLengkap, email, rating, alasan, pesanKesan, materi } = req.body;
@@ -18,6 +19,8 @@ exports.submitFeedback = async (req, res, next) => {
                 materi: materi || null 
             }
         });
+        cache.del('feedback');
+        cache.del('forms');
         res.status(201).json({ success: true, data: result });
     } catch (err) {
         next(err);
@@ -26,11 +29,16 @@ exports.submitFeedback = async (req, res, next) => {
 
 exports.getFeedbacks = async (req, res, next) => {
     try {
+        const cached = cache.get('feedbacks:all');
+        if (cached) return res.json(cached);
+
         const result = await prisma.feedbacks.findMany({
             select: { id: true, nama_lengkap: true, email: true, rating: true, alasan: true, pesan_kesan: true, created_at: true, source: true, materi: true },
             orderBy: { created_at: 'desc' }
         });
-        res.json({ success: true, count: result.length, data: result });
+        const responseData = { success: true, count: result.length, data: result };
+        cache.set('feedbacks:all', responseData, 60);
+        res.json(responseData);
     } catch (err) {
         next(err);
     }

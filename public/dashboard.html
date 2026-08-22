@@ -6,7 +6,7 @@
     <title>Muhammad Haerul's Portfolio</title>
     <meta name="description" content="Dashboard Portfolio — Feedback analytics and portfolio management hub.">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/favicon.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900;1,14..32,400&display=swap" rel="stylesheet">
@@ -542,7 +542,13 @@
         text-align: center; padding: 72px 32px;
         display: flex; flex-direction: column; align-items: center; gap: 14px;
     }
-    .empty-icon  { font-size: 3.5rem; }
+    .empty-icon  {
+        width: 64px; height: 64px; border-radius: var(--r-xl);
+        background: var(--g-blue-soft); color: var(--g-blue);
+        display: flex; align-items: center; justify-content: center;
+        margin-bottom: 4px; box-shadow: 0 4px 12px rgba(66, 133, 244, 0.08);
+    }
+    .empty-icon svg { width: 30px; height: 30px; stroke: currentColor; }
     .empty-title { font-size: 1.25rem; font-weight: 800; color: var(--ink); }
     .empty-desc  { font-size: 0.875rem; color: var(--ink-3); max-width: 300px; line-height: 1.6; }
 
@@ -1147,12 +1153,27 @@
     .talk-org-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--line); flex-shrink: 0; }
     
     .talk-topic-tag {
-        display: inline-flex; align-items: center;
-        padding: 4px 10px; border-radius: var(--r-pill);
+        display: inline-flex; align-items: center; gap: 5px;
+        padding: 3px 9px; border-radius: var(--r-pill);
+        font-size: 0.71rem; font-weight: 700;
+        border: 1px solid rgba(0,0,0,0.08);
+        background: #f1f3f4; color: var(--ink-2);
+        letter-spacing: 0.015em;
+        line-height: 1.25;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+    .talk-topic-tag:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    }
+    .talk-attendees-tag {
+        display: inline-flex; align-items: center; gap: 5px;
+        padding: 3px 10px; border-radius: var(--r-pill);
         font-size: 0.7rem; font-weight: 700;
-        border: 1px solid rgba(66,133,244,0.15);
-        background: transparent; color: var(--g-blue);
-        letter-spacing: 0.02em;
+        background: rgba(52, 168, 83, 0.1); color: #137333;
+        border: 1px solid rgba(52, 168, 83, 0.25);
+        letter-spacing: 0.01em;
     }
 
     .talk-meta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 2px; }
@@ -1183,6 +1204,8 @@
         display: inline-flex; align-items: center; justify-content: center; gap: 6px;
         white-space: nowrap; width: 100%;
     }
+    .btn-talk.view { background: #f1f3f4; color: var(--ink-2); }
+    .btn-talk.view:hover { background: var(--g-blue-soft); color: var(--g-blue); transform: translateY(-1px); }
     .btn-talk.edit { background: var(--g-blue-soft); color: var(--g-blue-dark); }
     .btn-talk.edit:hover { background: var(--g-blue); color: #fff; box-shadow: var(--glow-blue); transform: translateY(-1px); }
     .btn-talk.del { background: #f1f3f4; color: var(--ink-3); }
@@ -1605,7 +1628,7 @@
                     </div>
                     <div class="talks-list" id="overview-projects" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); display: grid; gap: 24px;"></div>
                     <div class="empty-state" id="overview-projects-empty" style="padding:36px;display:none">
-                        <div class="empty-icon">📁</div>
+                        <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></div>
                         <div class="empty-title">No Projects Yet</div>
                         <div class="empty-desc">Your latest projects will appear here.</div>
                     </div>
@@ -1618,7 +1641,7 @@
                     </div>
                     <div class="talks-list" id="overview-talks" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); display: grid; gap: 24px;"></div>
                     <div class="empty-state" id="overview-talks-empty" style="padding:36px;display:none">
-                        <div class="empty-icon">🎤</div>
+                        <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-1.7 0-3 1.2-3 2.6v6.8c0 1.4 1.3 2.6 3 2.6s3-1.2 3-2.6V4.6C15 3.2 13.7 2 12 2z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg></div>
                         <div class="empty-title">No Talks Yet</div>
                         <div class="empty-desc">Your latest speaking engagements will appear here.</div>
                     </div>
@@ -1631,7 +1654,7 @@
                     </div>
                     <div class="cards-grid" id="overview-cards" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr))"></div>
                     <div class="empty-state" id="overview-empty" style="padding:36px;display:none">
-                        <div class="empty-icon">💬</div>
+                        <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
                         <div class="empty-title">No Feedback Yet</div>
                         <div class="empty-desc">Feedback submitted through your forms will appear here.</div>
                     </div>
@@ -1687,14 +1710,14 @@
                     </div>
                     <div class="cards-grid" id="cards"></div>
                     <div class="empty-state" id="fb-empty" style="display:none">
-                        <div class="empty-icon">🔍</div>
+                        <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
                         <div class="empty-title">No Results</div>
                         <div class="empty-desc">Try adjusting your filters or search query.</div>
                     </div>
                 </div>
 
                 <div class="empty-state" id="fb-no-data" style="display:none">
-                    <div class="empty-icon">💬</div>
+                    <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
                     <div class="empty-title">No Feedback Yet</div>
                     <div class="empty-desc">Feedback submitted through your forms will appear here.</div>
                 </div>
@@ -1774,7 +1797,7 @@
 
                 <div class="talks-list" id="talks-grid"></div>
                 <div class="empty-state" id="talks-empty" style="display:none">
-                    <div class="empty-icon">🎤</div>
+                    <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-1.7 0-3 1.2-3 2.6v6.8c0 1.4 1.3 2.6 3 2.6s3-1.2 3-2.6V4.6C15 3.2 13.7 2 12 2z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg></div>
                     <div class="empty-title">No Talks Yet</div>
                     <div class="empty-desc">Click "Add Talk" to add your first speaking engagement.</div>
                     <button class="btn btn-primary" style="margin-top:14px" onclick="openTalkDrawer(null)">+ Add Talk</button>
@@ -1815,7 +1838,7 @@
                         <!-- Cards injected here -->
                     </div>
                     <div id="fb-list-empty" class="empty-state" style="display:none">
-                        <div class="empty-icon">📋</div>
+                        <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></div>
                         <div class="empty-title">No Forms Yet</div>
                         <div class="empty-desc">Create your first form to collect responses.</div>
                     </div>
@@ -1886,13 +1909,72 @@
 
         <!-- Date Range -->
         <div class="field-group">
-            <label class="field-label">Date Range</label>
-            <div style="display:flex; gap:12px; align-items:center;">
-                <input class="field-input" id="dp-dateStart" type="month" style="flex:1;">
-                <span style="color:var(--ink-4); font-weight:600;">-</span>
-                <input class="field-input" id="dp-dateEnd" type="month" style="flex:1;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                <label class="field-label" style="margin:0;">Date Range</label>
+                <span id="dp-date-preview" style="font-size:0.75rem; font-weight:700; color:var(--g-blue); background:var(--g-blue-soft); padding:2px 8px; border-radius:var(--r-pill); display:none;"></span>
             </div>
-            <div style="font-size:0.75rem; color:var(--ink-4); margin-top:6px;">Leave end date empty if currently ongoing.</div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                <!-- Start Date -->
+                <div style="background:#f8f9fa; border:1.5px solid var(--line); border-radius:var(--r-md); padding:10px 12px;">
+                    <div style="font-size:0.72rem; font-weight:800; color:var(--ink-3); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:6px; display:flex; align-items:center; gap:6px;">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--g-blue)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> Start Date
+                    </div>
+                    <div style="display:flex; gap:6px;">
+                        <select id="dp-start-month" class="field-input" style="flex:1.2; padding:8px 8px; font-size:0.85rem;" onchange="updateProjectDateState()">
+                            <option value="">Month</option>
+                            <option value="01">Jan</option>
+                            <option value="02">Feb</option>
+                            <option value="03">Mar</option>
+                            <option value="04">Apr</option>
+                            <option value="05">May</option>
+                            <option value="06">Jun</option>
+                            <option value="07">Jul</option>
+                            <option value="08">Aug</option>
+                            <option value="09">Sep</option>
+                            <option value="10">Oct</option>
+                            <option value="11">Nov</option>
+                            <option value="12">Dec</option>
+                        </select>
+                        <select id="dp-start-year" class="field-input" style="flex:1; padding:8px 8px; font-size:0.85rem;" onchange="updateProjectDateState()">
+                            <option value="">Year</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- End Date -->
+                <div id="dp-end-container" style="background:#f8f9fa; border:1.5px solid var(--line); border-radius:var(--r-md); padding:10px 12px; transition:opacity 0.2s;">
+                    <div style="font-size:0.72rem; font-weight:800; color:var(--ink-3); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:6px; display:flex; align-items:center; gap:6px;">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--g-green)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> End Date
+                    </div>
+                    <div style="display:flex; gap:6px;">
+                        <select id="dp-end-month" class="field-input" style="flex:1.2; padding:8px 8px; font-size:0.85rem;" onchange="updateProjectDateState()">
+                            <option value="">Month</option>
+                            <option value="01">Jan</option>
+                            <option value="02">Feb</option>
+                            <option value="03">Mar</option>
+                            <option value="04">Apr</option>
+                            <option value="05">May</option>
+                            <option value="06">Jun</option>
+                            <option value="07">Jul</option>
+                            <option value="08">Aug</option>
+                            <option value="09">Sep</option>
+                            <option value="10">Oct</option>
+                            <option value="11">Nov</option>
+                            <option value="12">Dec</option>
+                        </select>
+                        <select id="dp-end-year" class="field-input" style="flex:1; padding:8px 8px; font-size:0.85rem;" onchange="updateProjectDateState()">
+                            <option value="">Year</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+                <label style="display:inline-flex; align-items:center; gap:6px; cursor:pointer; font-size:0.78rem; color:var(--ink-2); font-weight:600; user-select:none;">
+                    <input type="checkbox" id="dp-is-present" onchange="toggleProjectPresent(this.checked)" style="width:15px; height:15px; accent-color:var(--g-blue); cursor:pointer;">
+                    Currently ongoing (Present)
+                </label>
+                <button type="button" class="btn-sm-ghost" onclick="clearProjectDates()" style="font-size:0.72rem; padding:2px 8px; border:none; color:var(--ink-4); cursor:pointer; background:none;">✕ Clear</button>
+            </div>
         </div>
 
         <!-- Thumbnail -->
@@ -1902,7 +1984,7 @@
             <div class="input-row">
                 <input class="field-input" id="dp-thumbnail" type="url" placeholder="https://… (Image URL)" oninput="updateThumbnailPreview()">
                 <input type="file" id="dp-thumbnail-file" accept="image/*" style="display:none" onchange="uploadThumbnail()">
-                <button type="button" class="btn-upload" id="dp-upload-btn" onclick="document.getElementById('dp-thumbnail-file').click()">📤 Upload</button>
+                <button type="button" class="btn-upload" id="dp-upload-btn" onclick="document.getElementById('dp-thumbnail-file').click()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload</button>
             </div>
         </div>
 
@@ -2117,8 +2199,31 @@
             <div class="input-row">
                 <input class="field-input" id="dk-poster" type="url" placeholder="https://… (Image URL)" oninput="updatePosterPreview()">
                 <input type="file" id="dk-poster-file" accept="image/*" style="display:none" onchange="uploadPoster()">
-                <button type="button" class="btn-upload" id="dk-upload-btn" onclick="document.getElementById('dk-poster-file').click()">📤 Upload</button>
+                <button type="button" class="btn-upload" id="dk-upload-btn" onclick="document.getElementById('dk-poster-file').click()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload</button>
             </div>
+        </div>
+
+        <!-- Gallery (Event Photos) -->
+        <div class="field-group">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                <label class="field-label" style="margin:0; display:flex; align-items:center; gap:6px;">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--g-blue)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                    Gallery (Event Photos)
+                </label>
+                <span id="dk-gallery-count" style="font-size:0.72rem; font-weight:700; color:var(--ink-4); background:#f1f3f4; padding:2px 8px; border-radius:var(--r-pill);">0 photos</span>
+            </div>
+            
+            <div id="dk-gallery-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(72px, 1fr)); gap:8px; margin-bottom:10px;"></div>
+            
+            <div class="input-row">
+                <input class="field-input" id="dk-gallery-url" type="url" placeholder="https://… (Photo URL)" onkeydown="if(event.key==='Enter'){event.preventDefault();addGalleryUrl();}">
+                <button type="button" class="btn-sm-ghost" onclick="addGalleryUrl()" style="padding:0 12px; font-size:0.8rem; font-weight:700; border:1.5px solid var(--line); border-radius:var(--r-md); background:var(--surface);">+ Add URL</button>
+                <input type="file" id="dk-gallery-files" accept="image/*" multiple style="display:none" onchange="uploadTalkGalleryFiles(this.files)">
+                <button type="button" class="btn-upload" id="dk-gallery-upbtn" onclick="document.getElementById('dk-gallery-files').click()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload Photos
+                </button>
+            </div>
+            <div style="font-size:0.75rem; color:var(--ink-4); margin-top:6px;">Upload multiple photos or paste image URLs to showcase event documentation.</div>
         </div>
 
         <!-- Slides -->
@@ -2164,6 +2269,57 @@ function showToast(msg) {
     setTimeout(function(){ t.classList.remove('show'); }, 2800);
 }
 
+/* ── Topic Color Palette (No green to avoid collision with attendees badge) ── */
+var TOPIC_PALETTES = [
+    { bg: '#E8F0FE', text: '#1967D2', border: 'rgba(66,133,244,0.25)', dot: '#4285F4' }, // Google Blue
+    { bg: '#F3E8FD', text: '#7627BB', border: 'rgba(147,52,230,0.25)', dot: '#9334E6' }, // Purple
+    { bg: '#FEF7E0', text: '#B06000', border: 'rgba(251,188,4,0.35)', dot: '#FBBC04' }, // Amber / Gold
+    { bg: '#FCE8E6', text: '#C5221F', border: 'rgba(234,67,53,0.25)', dot: '#EA4335' }, // Crimson / Coral
+    { bg: '#E1F5FE', text: '#0277BD', border: 'rgba(3,169,244,0.25)', dot: '#0288D1' }, // Sky Blue
+    { bg: '#EDE7F6', text: '#512DA8', border: 'rgba(103,58,183,0.25)', dot: '#673AB7' }, // Deep Indigo
+    { bg: '#FFF0E6', text: '#C2410C', border: 'rgba(249,115,22,0.25)', dot: '#F97316' }, // Warm Tangerine
+    { bg: '#FCE4EC', text: '#AD1457', border: 'rgba(233,30,99,0.25)', dot: '#E91E63' }, // Rose Pink
+    { bg: '#ECEFF1', text: '#37474F', border: 'rgba(96,125,139,0.25)', dot: '#546E7A' }, // Slate
+    { bg: '#EFEBE9', text: '#4E342E', border: 'rgba(121,85,72,0.25)', dot: '#795548' }  // Cocoa
+];
+
+function getTopicTheme(topicName) {
+    if (!topicName) return TOPIC_PALETTES[0];
+    var str = String(topicName).toLowerCase().trim();
+    var hash = 0;
+    for (var i = 0; i < str.length; i++) {
+        hash = (hash << 5) - hash + str.charCodeAt(i);
+        hash |= 0;
+    }
+    var idx = Math.abs(hash) % TOPIC_PALETTES.length;
+    return TOPIC_PALETTES[idx];
+}
+
+function buildTopicBadge(topicName) {
+    var theme = getTopicTheme(topicName);
+    return '<span class="talk-topic-tag" style="background:'+theme.bg+'; color:'+theme.text+'; border-color:'+theme.border+';">' +
+        '<span style="width:5px; height:5px; border-radius:50%; background:'+theme.dot+'; flex-shrink:0; display:inline-block;"></span>' +
+        esc(topicName) +
+    '</span>';
+}
+
+var overviewLoaded = false;
+var formsLoaded = false;
+var talksLoaded = false;
+var projectsLoaded = false;
+var dataLoaded = false;
+
+function debounce(func, wait) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(function() {
+            func.apply(context, args);
+        }, wait || 150);
+    };
+}
+
 var viewMeta = {
     dashboard:     {title:'Overview',      crumb:'Portfolio'},
     feedbacks:     {title:'Feedback',      crumb:'Portfolio'},
@@ -2183,25 +2339,44 @@ function switchView(view, el) {
     document.getElementById('topbar-title').textContent = m.title;
     document.getElementById('topbar-crumb').textContent = m.crumb;
     document.getElementById('btn-refresh').style.display = (view==='feedbacks') ? 'flex' : 'none';
-    if (view==='feedbacks' && !dataLoaded) loadFeedback();
-    if (view==='forms') loadForms();
-    if (view==='dashboard') loadOverview();
-    if (view==='talks' && !talksLoaded) loadTalks();
-    if (view==='projects' && !projectsLoaded) loadProjects();
+
+    // Instant render from memory cache if available, else fetch
+    if (view === 'feedbacks') {
+        if (!dataLoaded) loadFeedback();
+        else applyFilters();
+    } else if (view === 'forms') {
+        if (!formsLoaded) loadForms();
+        else renderFormsGrid();
+    } else if (view === 'dashboard') {
+        if (!overviewLoaded) loadOverview();
+    } else if (view === 'talks') {
+        if (!talksLoaded) loadTalks();
+        else renderTalksGrid();
+    } else if (view === 'projects') {
+        if (!projectsLoaded) loadProjects();
+        else renderProjectsGrid();
+    }
     localStorage.setItem('activeView', view);
 }
 
 function refreshData() {
     var id = (document.querySelector('.view.active')||{id:''}).id.replace('view-','');
     if (id==='feedbacks') { dataLoaded=false; loadFeedback(); }
+    else if (id==='talks') { talksLoaded=false; loadTalks(); }
+    else if (id==='projects') { projectsLoaded=false; loadProjects(); }
+    else if (id==='forms') { formsLoaded=false; loadForms(true); }
+    else if (id==='dashboard') { overviewLoaded=false; loadOverview(); }
+    
     var icon = document.getElementById('refresh-icon');
-    icon.style.transition='transform 0.6s ease'; icon.style.transform='rotate(360deg)';
-    setTimeout(function(){ icon.style.transition='none'; icon.style.transform='rotate(0deg)'; },700);
+    if (icon) {
+        icon.style.transition='transform 0.6s ease'; icon.style.transform='rotate(360deg)';
+        setTimeout(function(){ icon.style.transition='none'; icon.style.transform='rotate(0deg)'; },700);
+    }
 }
 
 function animateCount(el, target, suffix, isFloat) {
     if (!el) return;
-    var start=0, dur=800, t0=null;
+    var start=0, dur=600, t0=null;
     function step(ts) {
         if (!t0) t0=ts;
         var p = Math.min((ts-t0)/dur,1), e=1-Math.pow(1-p,3), val=e*target;
@@ -2221,9 +2396,22 @@ async function loadOverview() {
         ]);
         
         var feedbacks = resFeedbacks.data || [];
-        var projects = resProjects.data || [];
-        var talks = resTalks.data || [];
+        var projects = (typeof sortProjectsByDate === 'function') ? sortProjectsByDate(resProjects.data || []) : (resProjects.data || []);
+        var talks = (resTalks.data || []).sort(function(a,b){ return (b.date ? new Date(b.date).getTime() : 0) - (a.date ? new Date(a.date).getTime() : 0); });
         var forms = resForms.data || [];
+
+        // Populate in-memory caches so switching views is instant (0ms delay)
+        allData = feedbacks;
+        dataLoaded = true;
+        allProjects = projects;
+        projectsLoaded = true;
+        allTalks = talks;
+        talksLoaded = true;
+        allFormsList = forms;
+        formsLoaded = true;
+        formsDataMap = {};
+        forms.forEach(function(f){ formsDataMap[f.id] = f; });
+        overviewLoaded = true;
 
         // Hero Stats
         animateCount(document.getElementById('hs-visitors'), 0, '', false);
@@ -2252,26 +2440,27 @@ async function loadOverview() {
         var recentProj = projects.slice(0, 3);
         var projCont = document.getElementById('overview-projects');
         var projEmpty = document.getElementById('overview-projects-empty');
-        if (!recentProj.length) { projCont.style.display='none'; projEmpty.style.display='flex'; }
-        else { projEmpty.style.display='none'; projCont.style.display='grid'; projCont.innerHTML=recentProj.map(buildProjectCardOverview).join(''); }
+        if (!recentProj.length) { if(projCont) projCont.style.display='none'; if(projEmpty) projEmpty.style.display='flex'; }
+        else { if(projEmpty) projEmpty.style.display='none'; if(projCont) { projCont.style.display='grid'; projCont.innerHTML=recentProj.map(buildProjectCardOverview).join(''); } }
 
         // Recent Talks
         var recentTalks = talks.slice(0, 3);
         var talksCont = document.getElementById('overview-talks');
         var talksEmpty = document.getElementById('overview-talks-empty');
-        if (!recentTalks.length) { talksCont.style.display='none'; talksEmpty.style.display='flex'; }
-        else { talksEmpty.style.display='none'; talksCont.style.display='grid'; talksCont.innerHTML=recentTalks.map(buildTalkCardOverview).join(''); }
+        if (!recentTalks.length) { if(talksCont) talksCont.style.display='none'; if(talksEmpty) talksEmpty.style.display='flex'; }
+        else { if(talksEmpty) talksEmpty.style.display='none'; if(talksCont) { talksCont.style.display='grid'; talksCont.innerHTML=recentTalks.map(buildTalkCardOverview).join(''); } }
 
         // Recent Feedbacks
         var recentFb = feedbacks.slice(0, 3);
         var fbCont = document.getElementById('overview-cards');
         var fbEmpty = document.getElementById('overview-empty');
-        if (!recentFb.length) { fbCont.style.display='none'; fbEmpty.style.display='flex'; }
-        else { fbEmpty.style.display='none'; fbCont.style.display='grid'; fbCont.innerHTML=recentFb.map(buildCard).join(''); }
+        if (!recentFb.length) { if(fbCont) fbCont.style.display='none'; if(fbEmpty) fbEmpty.style.display='flex'; }
+        else { if(fbEmpty) fbEmpty.style.display='none'; if(fbCont) { fbCont.style.display='grid'; fbCont.innerHTML=recentFb.map(buildCard).join(''); } }
 
-        if (feedbacks.length>0) { var b=document.getElementById('nav-badge'); b.textContent=feedbacks.length; b.style.display='block'; }
-
-    } catch(e) { console.error('Overview error', e); }
+        if (feedbacks.length>0) { var b=document.getElementById('nav-badge'); if(b){ b.textContent=feedbacks.length; b.style.display='block'; } }
+    } catch(e) {
+        console.error('Error in loadOverview:', e);
+    }
 }
 
 function buildProjectCardOverview(p) {
@@ -2297,15 +2486,40 @@ function buildProjectCardOverview(p) {
     var embedUrl = getYouTubeEmbedUrl(p.videoDemo);
     if (embedUrl) mediaHtml = '<div class="project-thumb" style="background:#000;"><iframe width="100%" height="100%" src="'+embedUrl+'" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width:100%;height:100%;border:none;border-bottom:1px solid var(--line-soft);"></iframe></div>';
     else if (p.thumbnailUrl) mediaHtml = '<div class="project-thumb" style="background-image:url(\''+esc(p.thumbnailUrl)+'\')"></div>';
+    else mediaHtml = '<div class="project-thumb empty-frame" style="background: linear-gradient(135deg, #f8f9fa 0%, #edf2f7 100%); display: flex; align-items: center; justify-content: center; color: var(--ink-4); border-bottom: 1px solid var(--line-soft);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.35;"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg></div>';
     
     var descHtml = renderProjectDesc(p.description, 'ov-' + p.id);
-    return '<div class="project-card">' + mediaHtml + '<div class="project-content"><div><div class="project-head"><div class="project-title">' + esc(p.name) + '</div></div>' + descHtml + '</div><div class="project-tech-stack">' + techsHtml + '</div></div></div>';
+    var pJson = JSON.stringify(p).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    return '<div class="project-card">' + mediaHtml + '<div class="project-content"><div><div class="project-head"><div class="project-title">' + esc(p.name) + '</div></div>' + descHtml + '</div><div class="project-tech-stack">' + techsHtml + '</div><div style="margin-top:auto; padding-top:12px; display:flex; justify-content:flex-end;"><button class="btn-talk view" onclick="openProjectViewModal('+pJson+')">View</button></div></div></div>';
 }
 
 function buildTalkCardOverview(t) {
     var dateStr = t.date ? new Date(t.date).toLocaleDateString('en-US',{day:'numeric',month:'short',year:'numeric'}) : null;
-    var topicsHtml = (t.topics && t.topics.length) ? '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">' + t.topics.map(function(tp){ return '<span class="talk-topic-tag">'+esc(tp)+'</span>'; }).join('') + '</div>' : '';
-    return '<div class="talk-card"><div class="talk-poster">' + (t.poster_url ? '<img src="'+esc(t.poster_url)+'" loading="lazy">' : '🎤') + '<div class="talk-poster-overlay"></div>' + (dateStr ? '<div class="talk-date-badge">'+esc(dateStr)+'</div>' : '') + '</div><div class="talk-body"><div class="talk-event">'+esc(t.event)+'</div>' + topicsHtml + '</div></div>';
+    var attendeesHtml = (t.jumlah_peserta != null)
+        ? '<div style="margin-top:4px;"><span class="talk-attendees-tag" title="Total Attendees"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> '+t.jumlah_peserta.toLocaleString('en-US')+' attendees</span></div>'
+        : '';
+    var topicsHtml = (t.topics && t.topics.length)
+        ? '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;">' +
+            t.topics.map(buildTopicBadge).join('') +
+          '</div>'
+        : '';
+    var tJson = JSON.stringify(t).replace(/"/g,'&quot;');
+    return '<div class="talk-card" onclick="openTalkViewModal('+tJson+')" style="cursor:pointer;" title="Click to view details">' +
+        '<div class="talk-poster">' +
+            (t.poster_url ? '<img src="'+esc(t.poster_url)+'" loading="lazy">' : '🎤') +
+            '<div class="talk-poster-overlay"></div>' +
+        '</div>' +
+        '<div class="talk-body">' +
+            '<div class="talk-event">'+esc(t.event)+'</div>' +
+            attendeesHtml +
+            topicsHtml +
+            (t.organizer ? '<div class="talk-org"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><path d="M9 22v-4h6v4"></path><path d="M8 6h.01"></path><path d="M16 6h.01"></path><path d="M12 6h.01"></path><path d="M12 10h.01"></path><path d="M12 14h.01"></path><path d="M16 10h.01"></path><path d="M16 14h.01"></path><path d="M8 10h.01"></path><path d="M8 14h.01"></path></svg>'+esc(t.organizer)+'</div>' : '') +
+            '<div class="talk-meta">' +
+                (t.place ? '<span class="talk-meta-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>'+esc(t.place)+'</span>' : '') +
+                (dateStr ? '<span class="talk-meta-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>'+esc(dateStr)+'</span>' : '') +
+            '</div>' +
+        '</div>' +
+    '</div>';
 }
 
 function setFbState(s) {
@@ -2391,7 +2605,7 @@ function buildCard(d, i) {
                 <div class="fcard-name">${esc(d.nama_lengkap||'Anonymous')}</div>
                 <div class="fcard-email">${esc(d.email||'—')}</div>
             </div>
-            <div class="rating-badge ${rc}">★ ${+d.rating}</div>
+            <div class="rating-badge ${rc}"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block;vertical-align:-1px;margin-right:2px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>${+d.rating}</div>
         </div>
         <div class="fcard-block-label">Response</div>
         <div class="fcard-block-text">${esc(d.alasan||'—')}</div>
@@ -2412,7 +2626,7 @@ async function loadMateri() {
         var res=await fetch('/api/materi'), json=await res.json();
         var list=document.getElementById('materiList');
         if (!json.data||!json.data.length) {
-            list.innerHTML='<div class="empty-state" style="padding:28px"><div class="empty-icon">📋</div><div class="empty-title">No Topics Yet</div><div class="empty-desc">Add your first topic above.</div></div>';
+            list.innerHTML='<div class="empty-state" style="padding:28px"><div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></div><div class="empty-title">No Topics Yet</div><div class="empty-desc">Add your first topic above.</div></div>';
             return;
         }
         list.innerHTML='<div class="materi-list">'+json.data.map(function(item){
@@ -2667,7 +2881,7 @@ function renderResponsesList() {
 
     if (!filteredRespData || !filteredRespData.length) {
         body.innerHTML = '<div class="empty-state" style="padding:48px 24px;">' +
-            '<div class="empty-icon">📝</div>' +
+            '<div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>' +
             '<div class="empty-title">No Responses ' + (currentRespData.length ? 'Found' : 'Yet') + '</div>' +
             '<div class="empty-desc">' + (currentRespData.length ? 'Try a different search keyword.' : 'Share the form link to start collecting feedback.') + '</div>' +
             (currentRespData.length === 0 ? '<button class="btn btn-primary" style="margin-top:14px;display:inline-flex;align-items:center;gap:6px;" onclick="copyFormLink()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy Form Link</button>' : '') +
@@ -2725,7 +2939,7 @@ function renderQuestionsView(body) {
                 var pct = answers.length ? Math.round((c / answers.length) * 100) : 0;
                 if (c > 0 || score === 10 || score === 1 || answers.length < 5) {
                     barsHtml += '<div class="q-bar-row">' +
-                        '<div class="q-bar-label">' + score + ' ★</div>' +
+                        '<div class="q-bar-label">' + score + ' <svg width="11" height="11" viewBox="0 0 24 24" fill="#FBBC04" style="vertical-align:-1px;display:inline-block;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>' +
                         '<div class="q-bar-track"><div class="q-bar-fill" style="width:' + pct + '%;background:#FBBC04"></div></div>' +
                         '<div class="q-bar-count">' + c + ' (' + pct + '%)</div>' +
                     '</div>';
@@ -2733,7 +2947,7 @@ function renderQuestionsView(body) {
             }
 
             contentHtml = '<div style="display:flex;align-items:center;gap:12px;background:#FEF7E0;padding:12px 16px;border-radius:var(--r-md);border:1px solid #FCE8B2;margin-bottom:12px;">' +
-                '<div style="font-size:1.8rem;font-weight:800;color:#B06000;">⭐ ' + avg + '</div>' +
+                '<div style="font-size:1.8rem;font-weight:800;color:#B06000;display:flex;align-items:center;gap:4px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="#FBBC04" style="flex-shrink:0;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> ' + avg + '</div>' +
                 '<div><div style="font-size:0.85rem;font-weight:700;color:#B06000;">Average Rating</div><div style="font-size:0.75rem;color:#B06000;opacity:0.8">' + answers.length + ' of ' + filteredRespData.length + ' respondents rated</div></div>' +
             '</div>' +
             '<div style="margin-bottom:14px;">' + barsHtml + '</div>';
@@ -3041,7 +3255,7 @@ function buildFieldRow(f) {
         '<div class="fb-field-type-pill">'+typeInfo.icon+' '+typeInfo.name+'</div>' +
         '<div class="fb-field-label-text">'+esc(f.label)+'</div>' +
         (f.required?'<div class="fb-field-req-star">*</div>':'') +
-        (isLocked ? '<span style="font-size:0.75rem;color:var(--ink-4);margin-left:auto;" title="Standard Constant Field">🔒</span>' : '<button class="fb-field-del" title="Remove field" onclick="deleteField('+f.id+')">✕</button>') +
+        (isLocked ? '<span style="font-size:0.75rem;color:var(--ink-4);margin-left:auto;display:inline-flex;align-items:center;" title="Standard Constant Field"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></span>' : '<button class="fb-field-del" title="Remove field" onclick="deleteField('+f.id+')">✕</button>') +
     '</div>';
 }
 
@@ -3080,7 +3294,7 @@ async function saveFormAndClose() {
         
         await loadForms();
         closeNewFormModal();
-        showToast('Form updated successfully! 🎉');
+        showToast('Form updated successfully!');
     } catch(e) {
         showToast('Failed to save changes.');
     } finally {
@@ -3118,7 +3332,7 @@ function renderDrawerFields(fields) {
         : '<div style="text-align:center;padding:48px 20px;background:#fcfcfc;border-radius:var(--r-md);border:1.5px dashed var(--line);margin-bottom:12px"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg><div style="font-size:1rem;font-weight:700;color:var(--ink-2);margin-bottom:6px">No Fields Yet</div><div style="font-size:0.85rem;color:var(--ink-4)">Start building your form by adding questions below.</div></div>';
 
     var lockedNoticeHtml = isFeedback 
-        ? '<div style="text-align:center;font-size:0.75rem;font-weight:700;color:#B06000;background:#FEF7E0;border:1px solid #FCE8B2;padding:10px 14px;border-radius:var(--r-md);margin-top:10px;">🔒 Constant fields mapped directly to the table <code>feedbacks</code></div>'
+        ? '<div style="text-align:center;font-size:0.75rem;font-weight:700;color:#B06000;background:#FEF7E0;border:1px solid #FCE8B2;padding:10px 14px;border-radius:var(--r-md);margin-top:10px;display:flex;align-items:center;justify-content:center;gap:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span>Constant fields mapped directly to the table <code>feedbacks</code></span></div>'
         : '<button class="btn-add-field" onclick="openAddFieldModal()">+ Add Field</button>';
 
     container.innerHTML = fieldsListHtml + lockedNoticeHtml;
@@ -3338,8 +3552,14 @@ var currentTopics = [];
 
 function renderTopics() {
     var cont = document.getElementById('dk-topics-list');
+    if (!cont) return;
     cont.innerHTML = currentTopics.map(function(t, i) {
-        return '<div class="tag-pill">' + esc(t) + '<span class="tag-remove" onclick="removeTopic(' + i + ')">&times;</span></div>';
+        var theme = getTopicTheme(t);
+        return '<div class="tag-pill" style="background:'+theme.bg+'; color:'+theme.text+'; border: 1.5px solid '+theme.border+'; font-weight:700; gap:6px; padding:4px 10px; border-radius:var(--r-pill);">' +
+            '<span style="width:6px; height:6px; border-radius:50%; background:'+theme.dot+';"></span>' +
+            esc(t) + 
+            '<span class="tag-remove" style="color:'+theme.text+'; opacity:0.75; transition:opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.75" onclick="removeTopic(' + i + ')">&times;</span>' +
+        '</div>';
     }).join('');
 }
 
@@ -3364,7 +3584,7 @@ async function loadTalks() {
     try {
         var res = await fetch('/api/talks');
         var json = await res.json();
-        allTalks = json.data || [];
+        allTalks = (json.data || []).sort(function(a,b){ return (b.date ? new Date(b.date).getTime() : 0) - (a.date ? new Date(a.date).getTime() : 0); });
         talksLoaded = true;
         renderTalksGrid();
         updateTalksStats();
@@ -3420,18 +3640,31 @@ function renderTalksGrid() {
         var dateStr = t.date ? new Date(t.date).toLocaleDateString('en-US',{day:'numeric',month:'short',year:'numeric'}) : null;
         var delay = Math.min(i*50, 400);
         var tJson = JSON.stringify(t).replace(/"/g,'&quot;');
-        var topicsHtml = (t.topics && t.topics.length) ? '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">' + t.topics.map(function(tp){ return '<span class="talk-topic-tag">'+esc(tp)+'</span>'; }).join('') + '</div>' : '';
+
+        var attendeesHtml = (t.jumlah_peserta != null)
+            ? '<div style="margin-top:4px;"><span class="talk-attendees-tag" title="Total Attendees">' +
+                '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>' +
+                t.jumlah_peserta.toLocaleString('en-US') + ' attendees' +
+              '</span></div>'
+            : '';
+
+        var topicsHtml = (t.topics && t.topics.length)
+            ? '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;">' +
+                t.topics.map(buildTopicBadge).join('') +
+              '</div>'
+            : '';
+
         return '<div class="talk-card" style="animation-delay:'+delay+'ms">' +
-            '<div class="talk-poster">' +
+            '<div class="talk-poster" onclick="openTalkViewModal('+tJson+')" style="cursor:pointer;" title="Click to view talk details">' +
                 (t.poster_url
                     ? '<img src="'+esc(t.poster_url)+'" alt="'+esc(t.event)+'" loading="lazy">'
-                    : '🎤'
+                    : '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#E8F0FE 0%,#d2e3fc 100%);color:var(--g-blue);"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-1.7 0-3 1.2-3 2.6v6.8c0 1.4 1.3 2.6 3 2.6s3-1.2 3-2.6V4.6C15 3.2 13.7 2 12 2z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg></div>'
                 ) +
                 '<div class="talk-poster-overlay"></div>' +
-                (dateStr ? '<div class="talk-date-badge">'+esc(dateStr)+'</div>' : '') +
             '</div>' +
             '<div class="talk-body">' +
-                '<div class="talk-event">'+esc(t.event)+'</div>' +
+                '<div class="talk-event" onclick="openTalkViewModal('+tJson+')" style="cursor:pointer;" title="Click to view talk details">'+esc(t.event)+'</div>' +
+                attendeesHtml +
                 topicsHtml +
                 (t.organizer
                     ? '<div class="talk-org">'+
@@ -3446,10 +3679,10 @@ function renderTalksGrid() {
                             esc(t.place) +
                           '</span>'
                         : '') +
-                    (t.jumlah_peserta != null
+                    (dateStr
                         ? '<span class="talk-meta-row">' +
-                            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>' +
-                            t.jumlah_peserta.toLocaleString('en-US') + ' attendees' +
+                            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>' +
+                            esc(dateStr) +
                           '</span>'
                         : '') +
                 '</div>' +
@@ -3458,12 +3691,13 @@ function renderTalksGrid() {
                         var href = safeUrl(s.url || s.label);
                         var labelText = s.label || (s.type === 'pdf' ? 'File' : 'Link');
                         return '<a class="slide-badge" href="'+esc(href)+'" target="_blank" rel="noopener">' +
-                            (s.type==='pdf' ? '📄' : '🔗') + ' ' + esc(labelText) +
+                            (s.type==='pdf' ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:3px;color:var(--g-red);"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>' : '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:3px;color:var(--g-blue);"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>') + ' ' + esc(labelText) +
                           '</a>';
                       }).join('') + '</div>'
                     : '') +
             '</div>' +
             '<div class="talk-side">' +
+                '<button class="btn-talk view" onclick="openTalkViewModal('+tJson+')">View</button>' +
                 '<button class="btn-talk edit" onclick="openTalkDrawer('+tJson+')">Edit</button>' +
                 '<button class="btn-talk del" onclick="confirmDeleteTalk(\''+t.id+'\',\''+esc(t.event)+'\')" >Delete</button>' +
             '</div>' +
@@ -3471,11 +3705,20 @@ function renderTalksGrid() {
     }).join('');
 }
 
+var talkSlides = [];
+var talkGallery = [];
+var talkDrawerMode = 'create'; // 'create' | 'edit'
+var talkEditId = null;
+
 /* ── Drawer ── */
 function openTalkDrawer(talk) {
+    if (typeof talk === 'string') {
+        try { talk = JSON.parse(talk); } catch(e){}
+    }
     talkEditId = talk ? talk.id : null;
     talkDrawerMode = talk ? 'edit' : 'create';
     talkSlides = talk && talk.slides ? JSON.parse(JSON.stringify(talk.slides)) : [];
+    talkGallery = (talk && talk.gallery && Array.isArray(talk.gallery)) ? JSON.parse(JSON.stringify(talk.gallery)) : [];
 
     document.getElementById('dk-title').textContent = talk ? 'Edit Talk' : 'Add Talk';
     document.getElementById('dk-sub').textContent   = talk ? 'Update talk details' : 'Add a new speaking engagement';
@@ -3492,6 +3735,7 @@ function openTalkDrawer(talk) {
     document.getElementById('dk-err').style.display='none';
     document.getElementById('dk-err').textContent='';
     renderSlideRows();
+    renderTalkGallery();
 
     document.getElementById('talk-backdrop').classList.add('open');
     document.getElementById('talk-drawer').classList.add('open');
@@ -3508,6 +3752,71 @@ function updatePosterPreview() {
     var prev = document.getElementById('dk-poster-prev');
     if (url) { prev.src=url; prev.style.display='block'; }
     else { prev.style.display='none'; }
+}
+
+/* ── Gallery Functions ── */
+function renderTalkGallery() {
+    var cont = document.getElementById('dk-gallery-grid');
+    var countEl = document.getElementById('dk-gallery-count');
+    if (!cont) return;
+    if (countEl) countEl.textContent = talkGallery.length + (talkGallery.length === 1 ? ' photo' : ' photos');
+    
+    if (!talkGallery.length) {
+        cont.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:14px 10px;background:#fafbff;border:1.5px dashed var(--line-soft);border-radius:var(--r-md);color:var(--ink-4);font-size:0.78rem;font-style:italic;">No event photos added yet. Upload files or paste links below.</div>';
+        return;
+    }
+    
+    cont.innerHTML = talkGallery.map(function(url, idx){
+        return '<div style="position:relative;width:100%;aspect-ratio:1/1;border-radius:var(--r-sm);overflow:hidden;background:#f1f3f4;border:1.5px solid var(--line);box-shadow:0 1px 3px rgba(0,0,0,0.05);">' +
+            '<img src="'+esc(url)+'" alt="Photo '+(idx+1)+'" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.src=\'data:image/svg+xml;utf8,<svg xmlns=\\\'http://www.w3.org/2000/svg\\\' width=\\\'100%\\\' height=\\\'100%\\\' viewBox=\\\'0 0 24 24\\\' fill=\\\'none\\\' stroke=\\\'%239aa0a6\\\' stroke-width=\\\'2\\\'><rect width=\\\'18\\\' height=\\\'18\\\' x=\\\'3\\\' y=\\\'3\\\' rx=\\\'2\\\'/><circle cx=\\\'8.5\\\' cy=\\\'8.5\\\' r=\\\'1.5\\\'/><path d=\\\'m21 15-5-5L5 21\\\'/></svg>\'">' +
+            '<button type="button" onclick="removeGalleryPhoto('+idx+')" title="Remove photo" style="position:absolute;top:3px;right:3px;width:18px;height:18px;border-radius:50%;background:rgba(0,0,0,0.65);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;line-height:1;transition:background 0.2s;" onmouseover="this.style.background=\'var(--g-red)\'" onmouseout="this.style.background=\'rgba(0,0,0,0.65)\'">✕</button>' +
+        '</div>';
+    }).join('');
+}
+
+function addGalleryUrl() {
+    var input = document.getElementById('dk-gallery-url');
+    if (!input) return;
+    var url = input.value.trim();
+    if (!url) return;
+    talkGallery.push(url);
+    input.value = '';
+    renderTalkGallery();
+}
+
+function removeGalleryPhoto(idx) {
+    talkGallery.splice(idx, 1);
+    renderTalkGallery();
+}
+
+async function uploadTalkGalleryFiles(files) {
+    if (!files || !files.length) return;
+    var btn = document.getElementById('dk-gallery-upbtn');
+    if (btn) { btn.disabled = true; btn.innerHTML = '<span>⏳ Uploading…</span>'; }
+    var fd = new FormData();
+    for (var i = 0; i < files.length; i++) {
+        fd.append('files', files[i]);
+    }
+    try {
+        var res = await fetch('/api/talks/upload-multiple', { method: 'POST', body: fd });
+        var json = await res.json();
+        if (json.urls && json.urls.length) {
+            talkGallery = talkGallery.concat(json.urls);
+            renderTalkGallery();
+            showToast(json.urls.length + ' photo' + (json.urls.length > 1 ? 's' : '') + ' uploaded successfully!');
+        } else {
+            showToast(json.error || 'Upload failed.');
+        }
+    } catch(e) {
+        showToast('Upload error.');
+    } finally {
+        if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload Photos';
+        }
+        var fileInp = document.getElementById('dk-gallery-files');
+        if (fileInp) fileInp.value = '';
+    }
 }
 
 /* ── Slides ── */
@@ -3528,7 +3837,7 @@ function renderSlideRows() {
             '</div>' +
             '<div class="input-row">' +
                 '<input class="field-input" type="url" placeholder="'+(s.type==='pdf'?'File URL (auto-filled after upload)':'URL (https://...)')+'" value="'+esc(s.url||'')+'" oninput="talkSlides['+i+'].url=this.value" style="font-size:0.82rem;padding:8px 12px">' +
-                (s.type==='pdf' ? '<button type="button" class="btn-upload" id="slide-upbtn-'+i+'" onclick="triggerSlideUpload('+i+')">📤 Upload</button><input type="file" id="slide-file-'+i+'" accept="*/*" style="display:none" onchange="handleSlideFile('+i+',this)">' : '') +
+                (s.type==='pdf' ? '<button type="button" class="btn-upload" id="slide-upbtn-'+i+'" onclick="triggerSlideUpload('+i+')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload</button><input type="file" id="slide-file-'+i+'" accept="*/*" style="display:none" onchange="handleSlideFile('+i+',this)">' : '') +
             '</div>' +
         '</div>';
     }).join('');
@@ -3602,7 +3911,8 @@ async function saveTalk() {
         jumlah_peserta: document.getElementById('dk-peserta').value || null,
         poster_url:     document.getElementById('dk-poster').value.trim() || null,
         slides:         talkSlides,
-        topics:         currentTopics
+        topics:         currentTopics,
+        gallery:        talkGallery
     };
 
     var url    = talkDrawerMode==='edit' ? '/api/talks/'+talkEditId : '/api/talks';
@@ -3651,6 +3961,126 @@ async function confirmDeleteTalk(id, name) {
         } catch(e) { showToast('Gagal menghapus.'); }
     });
 }
+
+/* ── Talk View Modal ── */
+var currentViewingTalk = null;
+
+function openTalkViewModal(t) {
+    if (typeof t === 'string') {
+        try { t = JSON.parse(t); } catch(e){}
+    }
+    if (!t) return;
+    currentViewingTalk = t;
+    
+    var dateStr = t.date ? new Date(t.date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : null;
+    var shortDate = t.date ? new Date(t.date).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' }) : null;
+    var slides = t.slides || [];
+    
+    var topicsHtml = (t.topics && t.topics.length)
+        ? '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;">' +
+            t.topics.map(buildTopicBadge).join('') +
+          '</div>'
+        : '';
+        
+    var attendeesHtml = (t.jumlah_peserta != null)
+        ? '<span class="talk-attendees-tag" style="font-size:0.75rem;padding:3px 10px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> '+t.jumlah_peserta.toLocaleString('en-US')+' attendees</span>'
+        : '';
+
+    var slidesHtml = '';
+    if (slides.length) {
+        slidesHtml = '<div style="margin-top:6px;">' +
+            '<div style="font-size:0.72rem;font-weight:800;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px;">Presentation Materials & Slides ('+slides.length+')</div>' +
+            '<div style="display:flex;flex-direction:column;gap:6px;">' +
+            slides.map(function(s){
+                var href = safeUrl(s.url || s.label);
+                var isPdf = s.type === 'pdf';
+                var label = s.label || (isPdf ? 'Presentation File' : 'Slide Link');
+                return '<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:#f8f9fa;border:1px solid var(--line);border-radius:var(--r-md);gap:8px;">' +
+                    '<div style="display:flex;align-items:center;gap:8px;min-width:0;">' +
+                        '<span style="font-size:1.05rem;flex-shrink:0;color:'+(isPdf?'var(--g-red)':'var(--g-blue)')+';">'+(isPdf?'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>':'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>')+'</span>' +
+                        '<div style="min-width:0;">' +
+                            '<div style="font-weight:700;font-size:0.82rem;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+esc(label)+'</div>' +
+                        '</div>' +
+                    '</div>' +
+                    '<a href="'+esc(href)+'" target="_blank" rel="noopener" class="btn-talk edit" style="width:auto;padding:5px 12px;font-size:0.75rem;flex-shrink:0;text-decoration:none;border-radius:var(--r-pill);">' +
+                        (isPdf ? 'Download / View ↗' : 'Open Link ↗') +
+                    '</a>' +
+                '</div>';
+            }).join('') +
+            '</div>' +
+        '</div>';
+    }
+
+    var gallery = (t.gallery && Array.isArray(t.gallery)) ? t.gallery : [];
+    var galleryHtml = '';
+    if (gallery.length) {
+        galleryHtml = '<div style="margin-top:16px;border-top:1.5px solid var(--line);padding-top:14px;">' +
+            '<div style="font-size:0.75rem;font-weight:800;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px;display:flex;align-items:center;gap:6px;">' +
+                '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--g-blue)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>' +
+                'Event Gallery (' + gallery.length + ' Photos)' +
+            '</div>' +
+            '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;">' +
+            gallery.map(function(imgUrl, gIdx){
+                return '<div style="position:relative;border-radius:var(--r-md);overflow:hidden;aspect-ratio:4/3;background:#f1f3f4;border:1.5px solid var(--line);cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.04);transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform=\'scale(1.03)\';this.style.boxShadow=\'0 6px 14px rgba(0,0,0,0.12)\'" onmouseout="this.style.transform=\'scale(1)\';this.style.boxShadow=\'0 2px 6px rgba(0,0,0,0.04)\'" onclick="openLightbox(currentViewingTalk, '+gIdx+')">' +
+                    '<img src="'+esc(imgUrl)+'" alt="Event Photo '+(gIdx+1)+'" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">' +
+                    '<div style="position:absolute;inset:0;background:rgba(0,0,0,0.25);opacity:0;transition:opacity 0.2s;display:flex;align-items:center;justify-content:center;color:#fff;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0">' +
+                        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>' +
+                    '</div>' +
+                '</div>';
+            }).join('') +
+            '</div>' +
+        '</div>';
+    }
+
+    var posterHtml = t.poster_url 
+        ? '<div style="position:relative;border-radius:var(--r-md);overflow:hidden;aspect-ratio:4/5;width:100%;box-shadow:0 4px 14px rgba(0,0,0,0.08);border:1px solid var(--line);background:#f1f3f4;">' +
+            '<img src="'+esc(t.poster_url)+'" alt="'+esc(t.event)+'" style="width:100%;height:100%;object-fit:cover;display:block;">' +
+            '<a href="'+esc(t.poster_url)+'" target="_blank" rel="noopener" style="position:absolute;inset:0;background:rgba(0,0,0,0.4);opacity:0;transition:opacity 0.2s;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.75rem;font-weight:700;text-decoration:none;gap:6px;backdrop-filter:blur(2px);" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0">' +
+                '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span>View Full</span>' +
+            '</a>' +
+          '</div>'
+        : '<div style="border-radius:var(--r-md);aspect-ratio:4/5;width:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg, #E8F0FE 0%, #d2e3fc 100%);border:1px solid var(--line);color:var(--g-blue);">' +
+            '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-1.7 0-3 1.2-3 2.6v6.8c0 1.4 1.3 2.6 3 2.6s3-1.2 3-2.6V4.6C15 3.2 13.7 2 12 2z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg>' +
+          '</div>';
+
+    var bodyHtml = '<div style="display:flex;flex-direction:column;">' +
+        '<div style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap;">' +
+            '<div style="flex:0 0 190px;width:190px;max-width:100%;">' + posterHtml + '</div>' +
+            '<div style="flex:1;min-width:240px;display:flex;flex-direction:column;gap:10px;">' +
+                '<div>' +
+                    '<div style="font-size:1.25rem;font-weight:800;color:var(--ink);line-height:1.3;letter-spacing:-0.02em;">'+esc(t.event)+'</div>' +
+                    (attendeesHtml ? '<div style="margin-top:6px;">' + attendeesHtml + '</div>' : '') +
+                    topicsHtml +
+                '</div>' +
+                '<div style="background:#f8f9fa;border:1px solid var(--line);border-radius:var(--r-md);padding:10px 12px;display:flex;flex-direction:column;gap:7px;">' +
+                    (t.organizer ? '<div style="display:flex;align-items:center;gap:7px;font-size:0.82rem;color:var(--ink-2);font-weight:600;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--g-blue);flex-shrink:0;"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><path d="M9 22v-4h6v4"></path><path d="M8 6h.01"></path><path d="M16 6h.01"></path><path d="M12 6h.01"></path><path d="M12 10h.01"></path><path d="M12 14h.01"></path><path d="M16 10h.01"></path><path d="M16 14h.01"></path><path d="M8 10h.01"></path><path d="M8 14h.01"></path></svg><span>'+esc(t.organizer)+'</span></div>' : '') +
+                    (t.place ? '<div style="display:flex;align-items:center;gap:7px;font-size:0.82rem;color:var(--ink-2);font-weight:600;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--g-red);flex-shrink:0;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>'+esc(t.place)+'</span></div>' : '') +
+                    (dateStr ? '<div style="display:flex;align-items:center;gap:7px;font-size:0.82rem;color:var(--ink-2);font-weight:600;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--g-yellow);flex-shrink:0;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg><span>'+esc(shortDate || dateStr)+'</span></div>' : '') +
+                '</div>' +
+                slidesHtml +
+            '</div>' +
+        '</div>' +
+        galleryHtml +
+    '</div>';
+
+    document.getElementById('talk-view-body').innerHTML = bodyHtml;
+    
+    var primarySlide = slides.find(function(s){ return s.url; });
+    var primaryUrl = primarySlide ? safeUrl(primarySlide.url) : null;
+    
+    document.getElementById('talk-view-footer').innerHTML = 
+        '<button class="btn-sm-ghost" onclick="closeTalkViewModal()">Close</button>' +
+        '<div style="display:flex;gap:8px;">' +
+            '<button class="btn btn-ghost" style="padding:8px 16px;font-size:0.82rem;display:inline-flex;align-items:center;gap:6px;" onclick="closeTalkViewModal(); openTalkDrawer(currentViewingTalk)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> Edit Talk</button>' +
+            (primaryUrl ? '<a href="'+esc(primaryUrl)+'" target="_blank" rel="noopener" class="btn btn-primary" style="padding:8px 16px;font-size:0.82rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">Open Slide ↗</a>' : '') +
+        '</div>';
+
+    document.getElementById('talk-view-overlay').classList.add('show');
+}
+
+function closeTalkViewModal() {
+    document.getElementById('talk-view-overlay').classList.remove('show');
+}
 /* ════ PROJECTS JS ════ */
 var allProjects = [];
 var projectsLoaded = false;
@@ -3658,11 +4088,44 @@ var projectDrawerMode = 'create';
 var projectEditId = null;
 var currentTechStacks = [];
 
+function getProjectDateSortValue(p) {
+    if (!p) return '';
+    var dr = (p.dateRange || '').trim();
+    if (dr) {
+        if (dr.includes('_')) {
+            var parts = dr.split('_');
+            var start = parts[0] ? parts[0].trim() : '';
+            var end = parts[1] ? parts[1].trim() : '';
+            var sortEnd = end ? end : (start ? '9999-12' : '0000-00');
+            var sortStart = start || '0000-00';
+            return sortEnd + '_' + sortStart;
+        }
+        return dr;
+    }
+    if (p.created_at) {
+        return new Date(p.created_at).toISOString();
+    }
+    return '0000-00';
+}
+
+function sortProjectsByDate(projects) {
+    return (projects || []).sort(function(a, b) {
+        var keyA = getProjectDateSortValue(a);
+        var keyB = getProjectDateSortValue(b);
+        if (keyA !== keyB) {
+            return keyB.localeCompare(keyA);
+        }
+        var createdA = a.created_at ? new Date(a.created_at).getTime() : 0;
+        var createdB = b.created_at ? new Date(b.created_at).getTime() : 0;
+        return createdB - createdA;
+    });
+}
+
 async function loadProjects() {
     try {
         var res = await fetch('/api/projects');
         var json = await res.json();
-        allProjects = json.data || [];
+        allProjects = sortProjectsByDate(json.data || []);
         projectsLoaded = true;
         updateProjectsStats();
         renderProjectsGrid();
@@ -3782,9 +4245,9 @@ function renderProjectsGrid() {
     var q = (document.getElementById('projects-q').value || '').toLowerCase();
     var techFilter = (document.getElementById('projects-tech-filter')||{value:''}).value.toLowerCase();
     
-    var filtered = allProjects;
+    var filtered = sortProjectsByDate(allProjects.slice());
     if (q || techFilter) {
-        filtered = allProjects.filter(function(p) {
+        filtered = filtered.filter(function(p) {
             var matchQ = true;
             if (q) {
                 matchQ = (p.name||'').toLowerCase().includes(q) || 
@@ -3887,6 +4350,8 @@ function renderProjectsGrid() {
             mediaHtml = '<div class="project-thumb" style="background:#000;"><iframe width="100%" height="100%" src="'+embedUrl+'" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width:100%;height:100%;border:none;border-bottom:1px solid var(--line-soft);"></iframe></div>';
         } else if (p.thumbnailUrl) {
             mediaHtml = '<div class="project-thumb" style="background-image:url(\''+esc(p.thumbnailUrl)+'\')"></div>';
+        } else {
+            mediaHtml = '<div class="project-thumb empty-frame" style="background: linear-gradient(135deg, #f8f9fa 0%, #edf2f7 100%); display: flex; align-items: center; justify-content: center; color: var(--ink-4); border-bottom: 1px solid var(--line-soft);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.35;"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg></div>';
         }
 
         return '<div class="project-card">' +
@@ -3904,6 +4369,7 @@ function renderProjectsGrid() {
                 '<div class="project-actions">' +
                     '<div class="project-links">' + linksHtml + '</div>' +
                     '<div class="project-manage">' +
+                        '<button class="btn-talk view" onclick="openProjectViewModal('+pJson+')">View</button>' +
                         '<button class="btn-talk edit" onclick="openProjectDrawer('+pJson+')">Edit</button>' +
                         '<button class="btn-talk del" onclick="confirmDeleteProject(\''+p.id+'\',\''+esc(p.name)+'\')" >Delete</button>' +
                     '</div>' +
@@ -3911,6 +4377,209 @@ function renderProjectsGrid() {
             '</div>' +
         '</div>';
     }).join('');
+}
+
+function openProjectViewModal(p) {
+    if (typeof p === 'string') {
+        try { p = JSON.parse(p); } catch(e){}
+    }
+    if (!p) return;
+
+    var formattedDate = p.dateRange || '';
+    if (p.dateRange && p.dateRange.includes('_')) {
+        var parts = p.dateRange.split('_');
+        var formatMonth = function(val) {
+            if (!val) return 'Present';
+            var d = new Date(val + '-01');
+            if (isNaN(d)) return val;
+            return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+        };
+        formattedDate = formatMonth(parts[0]) + ' - ' + formatMonth(parts[1]);
+    } else if (p.dateRange && p.dateRange.includes('-')) {
+        var d = new Date(p.dateRange + '-01');
+        if (!isNaN(d)) formattedDate = d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+    }
+
+    var embedUrl = getYouTubeEmbedUrl(p.videoDemo);
+    var pJson = JSON.stringify(p).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+
+    // Media HTML
+    var mediaHtml = '';
+    if (embedUrl) {
+        mediaHtml = '<div style="position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--r-lg);overflow:hidden;background:#000;box-shadow:0 6px 20px rgba(0,0,0,0.12);border:1px solid var(--line);margin-bottom:16px;">' +
+            '<iframe width="100%" height="100%" src="'+embedUrl+'" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width:100%;height:100%;border:none;"></iframe>' +
+        '</div>';
+    } else if (p.thumbnailUrl) {
+        mediaHtml = '<div style="position:relative;width:100%;max-height:280px;aspect-ratio:16/9;border-radius:var(--r-lg);overflow:hidden;background:#f8f9fa;border:1px solid var(--line);box-shadow:0 4px 14px rgba(0,0,0,0.06);margin-bottom:16px;display:flex;align-items:center;justify-content:center;">' +
+            '<img src="'+esc(p.thumbnailUrl)+'" alt="'+esc(p.name)+'" style="max-width:100%;max-height:100%;object-fit:contain;display:block;">' +
+            '<a href="'+esc(p.thumbnailUrl)+'" target="_blank" rel="noopener" style="position:absolute;inset:0;background:rgba(0,0,0,0.35);opacity:0;transition:opacity 0.2s;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.78rem;font-weight:700;text-decoration:none;gap:6px;backdrop-filter:blur(2px);" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0">' +
+                '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span>View Full Image</span>' +
+            '</a>' +
+        '</div>';
+    }
+
+    // Tech stack map
+    var techMap = {};
+    (p.techStack || []).forEach(function(t) {
+        var parts = t.split(':');
+        var cat = parts.length > 1 ? parts[0].trim() : 'General';
+        var tag = parts.length > 1 ? parts.slice(1).join(':').trim() : t.trim();
+        if (!techMap[cat]) techMap[cat] = [];
+        techMap[cat].push(tag);
+    });
+
+    var techStackHtml = '';
+    var catKeys = Object.keys(techMap);
+    if (catKeys.length > 0) {
+        techStackHtml = '<div style="background:#f8f9fa;border:1px solid var(--line);border-radius:var(--r-md);padding:12px 14px;margin-top:14px;display:flex;flex-direction:column;gap:10px;">' +
+            '<div style="font-size:0.72rem;font-weight:800;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.05em;">Technologies & Architecture</div>' +
+            catKeys.map(function(cat) {
+                var tags = techMap[cat].map(function(tag) {
+                    var iconSlug = getTechIcon(tag);
+                    var imgSrc = iconSlug.startsWith('http') ? iconSlug : 'https://cdn.simpleicons.org/' + iconSlug;
+                    return '<span style="display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line);padding:4px 10px;border-radius:var(--r-pill);font-size:0.78rem;font-weight:600;color:var(--ink-2);">' +
+                        '<img src="'+esc(imgSrc)+'" alt="'+esc(tag)+'" style="width:14px;height:14px;object-fit:contain;" onerror="this.style.display=\'none\';">' +
+                        '<span>'+esc(tag)+'</span>' +
+                    '</span>';
+                }).join('');
+                return '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;">' +
+                    '<span style="font-size:0.75rem;font-weight:700;color:var(--ink-3);min-width:70px;">'+esc(cat)+':</span>' +
+                    '<div style="display:flex;flex-wrap:wrap;gap:6px;">' + tags + '</div>' +
+                '</div>';
+            }).join('') +
+        '</div>';
+    }
+
+    // Links Section
+    var linksHtml = '';
+    if (p.linkProject || p.videoDemo) {
+        var linksList = [];
+        if (p.linkProject) {
+            linksList.push('<a href="'+esc(safeUrl(p.linkProject))+'" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#fff;border:1px solid var(--line);border-radius:var(--r-md);font-size:0.8rem;font-weight:700;color:var(--g-blue);text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.02);">' +
+                '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span>Live Demo / Website ↗</span>' +
+            '</a>');
+        }
+        if (p.videoDemo && !embedUrl) {
+            linksList.push('<a href="'+esc(safeUrl(p.videoDemo))+'" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#fff;border:1px solid var(--line);border-radius:var(--r-md);font-size:0.8rem;font-weight:700;color:var(--g-red);text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.02);">' +
+                '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg><span>Video Demo ↗</span>' +
+            '</a>');
+        }
+        if (linksList.length > 0) {
+            linksHtml = '<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;">' + linksList.join('') + '</div>';
+        }
+    }
+
+    var bodyHtml = '<div style="display:flex;flex-direction:column;">' +
+        mediaHtml +
+        '<div>' +
+            (formattedDate ? '<div style="margin-bottom:6px;"><span style="font-size:0.75rem;font-weight:700;color:var(--ink-3);background:#f1f3f4;padding:3px 10px;border-radius:var(--r-pill);display:inline-flex;align-items:center;gap:4px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>' + esc(formattedDate) + '</span></div>' : '') +
+            '<div style="font-size:1.35rem;font-weight:800;color:var(--ink);line-height:1.3;letter-spacing:-0.02em;">'+esc(p.name)+'</div>' +
+        '</div>' +
+        (p.description ? '<div style="color:var(--ink-2);font-size:0.88rem;line-height:1.65;white-space:pre-line;margin-top:12px;">'+esc(p.description)+'</div>' : '<div style="color:var(--ink-4);font-size:0.85rem;font-style:italic;margin-top:8px;">No description provided.</div>') +
+        techStackHtml +
+        linksHtml +
+    '</div>';
+
+    document.getElementById('project-view-body').innerHTML = bodyHtml;
+
+    var visitUrl = p.linkProject ? safeUrl(p.linkProject) : null;
+    document.getElementById('project-view-footer').innerHTML = 
+        '<button class="btn-sm-ghost" onclick="closeProjectViewModal()">Close</button>' +
+        '<div style="display:flex;gap:8px;">' +
+            '<button class="btn btn-ghost" style="padding:8px 16px;font-size:0.82rem;display:inline-flex;align-items:center;gap:6px;" onclick="closeProjectViewModal(); openProjectDrawer('+pJson+')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> Edit Project</button>' +
+            (visitUrl ? '<a href="'+esc(visitUrl)+'" target="_blank" rel="noopener" class="btn btn-primary" style="padding:8px 16px;font-size:0.82rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">Visit Project ↗</a>' : '') +
+        '</div>';
+
+    document.getElementById('project-view-overlay').classList.add('show');
+}
+
+function closeProjectViewModal() {
+    document.getElementById('project-view-overlay').classList.remove('show');
+}
+
+function initProjectYearSelects() {
+    var currentYear = new Date().getFullYear();
+    var startYearSelect = document.getElementById('dp-start-year');
+    var endYearSelect = document.getElementById('dp-end-year');
+    if (startYearSelect && startYearSelect.options.length <= 1) {
+        var optionsHtml = '<option value="">Year</option>';
+        for (var y = currentYear + 2; y >= 2015; y--) {
+            optionsHtml += '<option value="'+y+'">'+y+'</option>';
+        }
+        startYearSelect.innerHTML = optionsHtml;
+        endYearSelect.innerHTML = optionsHtml;
+    }
+}
+
+var PROJECT_MONTH_NAMES = {
+    '01':'Jan','02':'Feb','03':'Mar','04':'Apr','05':'May','06':'Jun',
+    '07':'Jul','08':'Aug','09':'Sep','10':'Oct','11':'Nov','12':'Dec'
+};
+
+function updateProjectDateState() {
+    var startY = document.getElementById('dp-start-year').value;
+    var startM = document.getElementById('dp-start-month').value;
+    var endY = document.getElementById('dp-end-year').value;
+    var endM = document.getElementById('dp-end-month').value;
+    var isPresent = document.getElementById('dp-is-present').checked;
+
+    var previewEl = document.getElementById('dp-date-preview');
+    if (!previewEl) return;
+
+    var startStr = '';
+    if (startY && startM) startStr = PROJECT_MONTH_NAMES[startM] + ' ' + startY;
+    else if (startY) startStr = startY;
+
+    var endStr = '';
+    if (isPresent) {
+        endStr = 'Present';
+    } else if (endY && endM) {
+        endStr = PROJECT_MONTH_NAMES[endM] + ' ' + endY;
+    } else if (endY) {
+        endStr = endY;
+    }
+
+    if (startStr && endStr) {
+        previewEl.textContent = startStr + ' - ' + endStr;
+        previewEl.style.display = 'inline-block';
+    } else if (startStr) {
+        previewEl.textContent = startStr;
+        previewEl.style.display = 'inline-block';
+    } else if (endStr) {
+        previewEl.textContent = endStr;
+        previewEl.style.display = 'inline-block';
+    } else {
+        previewEl.style.display = 'none';
+    }
+}
+
+function toggleProjectPresent(isPresent) {
+    var endContainer = document.getElementById('dp-end-container');
+    var endMonth = document.getElementById('dp-end-month');
+    var endYear = document.getElementById('dp-end-year');
+    if (isPresent) {
+        endMonth.value = '';
+        endYear.value = '';
+        endMonth.disabled = true;
+        endYear.disabled = true;
+        endContainer.style.opacity = '0.5';
+        endContainer.style.pointerEvents = 'none';
+    } else {
+        endMonth.disabled = false;
+        endYear.disabled = false;
+        endContainer.style.opacity = '1';
+        endContainer.style.pointerEvents = 'auto';
+    }
+    updateProjectDateState();
+}
+
+function clearProjectDates() {
+    document.getElementById('dp-start-year').value = '';
+    document.getElementById('dp-start-month').value = '';
+    document.getElementById('dp-end-year').value = '';
+    document.getElementById('dp-end-month').value = '';
+    document.getElementById('dp-is-present').checked = false;
+    toggleProjectPresent(false);
 }
 
 function openProjectDrawer(project) {
@@ -3921,15 +4590,55 @@ function openProjectDrawer(project) {
     document.getElementById('dp-name').value = project ? (project.name||'') : '';
     document.getElementById('dp-description').value = project ? (project.description||'') : '';
     
+    initProjectYearSelects();
     var dr = project ? (project.dateRange||'') : '';
     if (dr.includes('_')) {
         var parts = dr.split('_');
-        document.getElementById('dp-dateStart').value = parts[0] || '';
-        document.getElementById('dp-dateEnd').value = parts[1] || '';
+        var startPart = parts[0] || '';
+        var endPart = parts[1] || '';
+        if (startPart && startPart.includes('-')) {
+            var s = startPart.split('-');
+            document.getElementById('dp-start-year').value = s[0] || '';
+            document.getElementById('dp-start-month').value = s[1] || '';
+        } else {
+            document.getElementById('dp-start-year').value = startPart || '';
+            document.getElementById('dp-start-month').value = '';
+        }
+        if (endPart && endPart.includes('-')) {
+            var e = endPart.split('-');
+            document.getElementById('dp-end-year').value = e[0] || '';
+            document.getElementById('dp-end-month').value = e[1] || '';
+            document.getElementById('dp-is-present').checked = false;
+            toggleProjectPresent(false);
+        } else if (endPart) {
+            document.getElementById('dp-end-year').value = endPart || '';
+            document.getElementById('dp-end-month').value = '';
+            document.getElementById('dp-is-present').checked = false;
+            toggleProjectPresent(false);
+        } else {
+            document.getElementById('dp-end-year').value = '';
+            document.getElementById('dp-end-month').value = '';
+            var isOngoing = !!startPart;
+            document.getElementById('dp-is-present').checked = isOngoing;
+            toggleProjectPresent(isOngoing);
+        }
+    } else if (dr && dr.includes('-')) {
+        var s = dr.split('-');
+        document.getElementById('dp-start-year').value = s[0] || '';
+        document.getElementById('dp-start-month').value = s[1] || '';
+        document.getElementById('dp-end-year').value = '';
+        document.getElementById('dp-end-month').value = '';
+        document.getElementById('dp-is-present').checked = false;
+        toggleProjectPresent(false);
     } else {
-        document.getElementById('dp-dateStart').value = '';
-        document.getElementById('dp-dateEnd').value = '';
+        document.getElementById('dp-start-year').value = dr || '';
+        document.getElementById('dp-start-month').value = '';
+        document.getElementById('dp-end-year').value = '';
+        document.getElementById('dp-end-month').value = '';
+        document.getElementById('dp-is-present').checked = false;
+        toggleProjectPresent(false);
     }
+    updateProjectDateState();
 
     document.getElementById('dp-videoDemo').value = project ? (project.videoDemo||'') : '';
     document.getElementById('dp-linkProject').value = project ? (project.linkProject||'') : '';
@@ -4028,10 +4737,17 @@ async function saveProject() {
     var name = document.getElementById('dp-name').value.trim();
     if (!name) { showToast('Project Name is required.'); return; }
     
-    var start = document.getElementById('dp-dateStart').value;
-    var end = document.getElementById('dp-dateEnd').value;
+    var startY = document.getElementById('dp-start-year').value;
+    var startM = document.getElementById('dp-start-month').value;
+    var endY = document.getElementById('dp-end-year').value;
+    var endM = document.getElementById('dp-end-month').value;
+    var isPresent = document.getElementById('dp-is-present').checked;
+
+    var start = (startY && startM) ? (startY + '-' + startM) : (startY || '');
+    var end = isPresent ? '' : ((endY && endM) ? (endY + '-' + endM) : (endY || ''));
+
     var finalDateRange = null;
-    if (start || end) {
+    if (start || end || isPresent) {
         finalDateRange = start + '_' + end;
     }
     
@@ -4100,11 +4816,76 @@ function execConfirm() {
 })();
 </script>
 
+    <!-- View Talk Modal -->
+    <div class="modal-overlay" id="talk-view-overlay" onclick="if(event.target===this)closeTalkViewModal()">
+        <div class="modal" style="max-width: 660px; padding: 0; display: flex; flex-direction: column; max-height: 88vh; overflow: hidden;">
+            <div class="modal-head" style="padding: 16px 20px; border-bottom: 1px solid var(--line-soft); flex-shrink: 0;">
+                <div class="modal-title" style="display:flex; align-items:center; gap:8px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--g-blue)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-1.7 0-3 1.2-3 2.6v6.8c0 1.4 1.3 2.6 3 2.6s3-1.2 3-2.6V4.6C15 3.2 13.7 2 12 2z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg>
+                    Talk Details
+                </div>
+                <button class="modal-close" onclick="closeTalkViewModal()">✕</button>
+            </div>
+            <div class="modal-body" id="talk-view-body" style="padding: 20px; overflow-y: auto; flex: 1;">
+            </div>
+            <div class="modal-footer" id="talk-view-footer" style="padding: 14px 20px; background: var(--bg); border-top: 1px solid var(--line-soft); display: flex; justify-content: space-between; gap: 10px; flex-shrink: 0;">
+            </div>
+        </div>
+    </div>
+
+    <!-- View Project Modal -->
+    <div class="modal-overlay" id="project-view-overlay" onclick="if(event.target===this)closeProjectViewModal()">
+        <div class="modal" style="max-width: 660px; padding: 0; display: flex; flex-direction: column; max-height: 88vh; overflow: hidden;">
+            <div class="modal-head" style="padding: 16px 20px; border-bottom: 1px solid var(--line-soft); flex-shrink: 0;">
+                <div class="modal-title" style="display:flex; align-items:center; gap:8px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--g-blue)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                    Project Details
+                </div>
+                <button class="modal-close" onclick="closeProjectViewModal()">✕</button>
+            </div>
+            <div class="modal-body" id="project-view-body" style="padding: 20px; overflow-y: auto; flex: 1;">
+            </div>
+            <div class="modal-footer" id="project-view-footer" style="padding: 14px 20px; background: var(--bg); border-top: 1px solid var(--line-soft); display: flex; justify-content: space-between; gap: 10px; flex-shrink: 0;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery Lightbox Modal -->
+    <div class="modal-overlay" id="gallery-lightbox-overlay" style="z-index:10000; background:rgba(15,23,42,0.92); backdrop-filter:blur(10px); padding:20px;" onclick="if(event.target===this)closeLightbox()">
+        <div style="position:relative; max-width:960px; width:100%; display:flex; flex-direction:column; align-items:center; gap:16px;">
+            <!-- Top bar -->
+            <div style="width:100%; display:flex; justify-content:space-between; align-items:center; color:#fff;">
+                <div id="lightbox-counter" style="font-size:0.85rem; font-weight:700; opacity:0.85; letter-spacing:0.02em;">Photo 1 of 1</div>
+                <div style="display:flex; gap:10px; align-items:center;">
+                    <a id="lightbox-download" href="#" target="_blank" rel="noopener" class="btn btn-ghost" style="color:#fff; border-color:rgba(255,255,255,0.25); padding:6px 14px; font-size:0.78rem; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Open Original
+                    </a>
+                    <button onclick="closeLightbox()" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.15); color:#fff; border:none; font-size:1.1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">✕</button>
+                </div>
+            </div>
+            
+            <!-- Image viewport with Prev/Next -->
+            <div style="position:relative; width:100%; max-height:75vh; display:flex; align-items:center; justify-content:center;">
+                <button id="lightbox-prev" onclick="stepLightbox(-1)" style="position:absolute; left:-12px; top:50%; transform:translateY(-50%); width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,0.2); color:#fff; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s; z-index:2;" onmouseover="this.style.background='rgba(255,255,255,0.4)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                
+                <img id="lightbox-img" src="" alt="Gallery Image" style="max-width:100%; max-height:75vh; object-fit:contain; border-radius:var(--r-lg); box-shadow:0 12px 36px rgba(0,0,0,0.5); transition:opacity 0.2s;">
+                
+                <button id="lightbox-next" onclick="stepLightbox(1)" style="position:absolute; right:-12px; top:50%; transform:translateY(-50%); width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,0.2); color:#fff; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s; z-index:2;" onmouseover="this.style.background='rgba(255,255,255,0.4)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Confirm Modal -->
     <div class="modal-overlay" id="confirm-overlay" style="z-index:9999;">
         <div class="modal" style="max-width:380px; padding: 24px; text-align: center;">
-            <div style="font-size: 3rem; margin-bottom: 16px;">⚠️</div>
-            <div class="modal-title" style="margin-bottom: 12px;">Are you sure?</div>
+            <div style="width:60px; height:60px; border-radius:50%; background:var(--g-red-soft); color:var(--g-red); display:flex; align-items:center; justify-content:center; margin:0 auto 16px auto;">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            </div>
+            <div class="modal-title" style="margin-bottom: 8px;">Are you sure?</div>
             <div id="confirm-msg" style="color:var(--ink-3); font-size:0.9rem; line-height:1.5; margin-bottom: 24px;"></div>
             <div style="display:flex; gap:12px; justify-content:center;">
                 <button class="btn btn-ghost" onclick="hideConfirm()">Cancel</button>
@@ -4112,6 +4893,63 @@ function execConfirm() {
             </div>
         </div>
     </div>
+
+<script>
+/* ── Lightbox Logic ── */
+var activeLightboxGallery = [];
+var activeLightboxIndex = 0;
+
+function openLightbox(talkOrPhotos, startIndex) {
+    if (Array.isArray(talkOrPhotos)) {
+        activeLightboxGallery = talkOrPhotos;
+    } else if (talkOrPhotos && talkOrPhotos.gallery) {
+        activeLightboxGallery = talkOrPhotos.gallery;
+    } else {
+        activeLightboxGallery = [];
+    }
+    if (!activeLightboxGallery.length) return;
+    activeLightboxIndex = startIndex || 0;
+    renderLightboxCurrent();
+    document.getElementById('gallery-lightbox-overlay').classList.add('show');
+    window.addEventListener('keydown', handleLightboxKey);
+}
+
+function renderLightboxCurrent() {
+    if (activeLightboxIndex < 0) activeLightboxIndex = 0;
+    if (activeLightboxIndex >= activeLightboxGallery.length) activeLightboxIndex = activeLightboxGallery.length - 1;
+    
+    var currentUrl = activeLightboxGallery[activeLightboxIndex];
+    var imgEl = document.getElementById('lightbox-img');
+    imgEl.style.opacity = '0.3';
+    imgEl.src = currentUrl;
+    imgEl.onload = function(){ imgEl.style.opacity = '1'; };
+    
+    document.getElementById('lightbox-counter').textContent = 'Photo ' + (activeLightboxIndex + 1) + ' of ' + activeLightboxGallery.length;
+    document.getElementById('lightbox-download').href = currentUrl;
+    
+    var prevBtn = document.getElementById('lightbox-prev');
+    var nextBtn = document.getElementById('lightbox-next');
+    if (prevBtn) prevBtn.style.display = activeLightboxGallery.length > 1 ? 'flex' : 'none';
+    if (nextBtn) nextBtn.style.display = activeLightboxGallery.length > 1 ? 'flex' : 'none';
+}
+
+function stepLightbox(delta) {
+    activeLightboxIndex = (activeLightboxIndex + delta + activeLightboxGallery.length) % activeLightboxGallery.length;
+    renderLightboxCurrent();
+}
+
+function closeLightbox() {
+    var el = document.getElementById('gallery-lightbox-overlay');
+    if (el) el.classList.remove('show');
+    window.removeEventListener('keydown', handleLightboxKey);
+}
+
+function handleLightboxKey(e) {
+    if (e.key === 'Escape') closeLightbox();
+    else if (e.key === 'ArrowLeft') stepLightbox(-1);
+    else if (e.key === 'ArrowRight') stepLightbox(1);
+}
+</script>
 
 </body>
 </html>

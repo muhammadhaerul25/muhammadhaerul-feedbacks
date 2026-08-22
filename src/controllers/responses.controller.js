@@ -1,4 +1,5 @@
 const prisma = require('../config/db');
+const cache = require('../utils/cache');
 
 exports.submitResponse = async (req, res, next) => {
     const { data } = req.body;
@@ -63,6 +64,8 @@ exports.submitResponse = async (req, res, next) => {
             });
         }
 
+        cache.del('form');
+        cache.del('feedback');
         res.status(201).json({ success: true, data: response });
     } catch (err) {
         next(err);

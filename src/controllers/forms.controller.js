@@ -1,19 +1,24 @@
 const prisma = require('../config/db');
+const cache = require('../utils/cache');
 
 // List all forms with response count
 exports.getAllForms = async (req, res, next) => {
     try {
-        const forms = await prisma.forms.findMany({
-            orderBy: { created_at: 'desc' },
-            include: {
-                _count: { select: { responses: true } }
-            }
-        });
+        const cached = cache.get('forms:all');
+        if (cached) return res.json(cached);
 
-        // Query all feedbacks to match with feedback forms
-        const allFeedbacks = await prisma.feedbacks.findMany({
-            select: { id: true, source: true, created_at: true }
-        });
+        // Run queries in parallel to cut latency in half
+        const [forms, allFeedbacks] = await Promise.all([
+            prisma.forms.findMany({
+                orderBy: { created_at: 'desc' },
+                include: {
+                    _count: { select: { responses: true } }
+                }
+            }),
+            prisma.feedbacks.findMany({
+                select: { id: true, source: true, created_at: true }
+            })
+        ]);
 
         const result = forms.map(f => {
             let count = f._count ? f._count.responses : 0;
@@ -38,7 +43,9 @@ exports.getAllForms = async (req, res, next) => {
             };
         });
 
-        res.json({ success: true, data: result });
+        const responseData = { success: true, data: result };
+        cache.set('forms:all', responseData, 60);
+        res.json(responseData);
     } catch (err) {
         next(err);
     }
@@ -47,6 +54,10 @@ exports.getAllForms = async (req, res, next) => {
 // Get single form + fields by slug
 exports.getFormBySlug = async (req, res, next) => {
     try {
+        const cacheKey = 'form:slug:' + req.params.slug;
+        const cached = cache.get(cacheKey);
+        if (cached) return res.json(cached);
+
         const form = await prisma.forms.findUnique({
             where: { slug: req.params.slug },
             include: { fields: { orderBy: [{ sort_order: 'asc' }, { id: 'asc' }] } }
@@ -56,7 +67,9 @@ exports.getFormBySlug = async (req, res, next) => {
             error.status = 404;
             return next(error);
         }
-        res.json({ success: true, data: form });
+        const responseData = { success: true, data: form };
+        cache.set(cacheKey, responseData, 120);
+        res.json(responseData);
     } catch (err) {
         next(err);
     }
@@ -113,6 +126,7 @@ exports.createForm = async (req, res, next) => {
             },
             include: { fields: true }
         });
+        cache.del('form');
         res.status(201).json({ success: true, data: form });
     } catch (err) {
         next(err);
@@ -127,6 +141,7 @@ exports.updateForm = async (req, res, next) => {
             where: { id: parseInt(req.params.id) },
             data: { title, description: description || null, tag: tag || null, type, color }
         });
+        cache.del('form');
         res.json({ success: true, data: form });
     } catch (err) {
         next(err);
@@ -148,6 +163,7 @@ exports.deleteForm = async (req, res, next) => {
             prisma.forms.delete({ where: { id } })
         ]);
 
+        cache.del('form');
         res.json({ success: true, message: 'Form deleted successfully' });
     } catch (err) {
         next(err);

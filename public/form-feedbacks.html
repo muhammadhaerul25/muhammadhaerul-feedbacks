@@ -436,7 +436,7 @@
                 <polyline points="20 6 9 17 4 12"/>
             </svg>
         </div>
-        <div class="success-title" id="success-name">Thank you! 🎉</div>
+        <div class="success-title" id="success-name">Thank you!</div>
         <div class="success-desc">Your feedback has been submitted successfully. It means a lot and helps improve future sessions.</div>
         <button id="btn-again" class="btn btn-secondary" onclick="resetForm()">Submit another response</button>
     </div>
@@ -765,7 +765,7 @@ function showSuccess(name) {
     document.getElementById('form-wrap').style.display = 'none';
     var ss = document.getElementById('success-state');
     ss.style.display = 'block';
-    document.getElementById('success-name').textContent = 'Thank you, ' + name.split(' ')[0] + '! 🎉';
+    document.getElementById('success-name').textContent = 'Thank you, ' + name.split(' ')[0] + '!';
     launchConfetti();
 }
 
@@ -821,7 +821,7 @@ function resetForm() {
 if (localStorage.getItem('feedbackSubmitted') === 'true') {
     document.getElementById('form-wrap').style.display = 'none';
     document.getElementById('success-state').style.display = 'block';
-    document.getElementById('success-name').textContent = 'Thank you! 🎉';
+    document.getElementById('success-name').textContent = 'Thank you!';
 }
 
 /* ════════════════════════════════════

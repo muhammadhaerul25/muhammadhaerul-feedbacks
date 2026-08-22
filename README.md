@@ -29,34 +29,42 @@ An interactive, full-stack personal portfolio and feedback management dashboard 
 
 ```
 ├── prisma/
-│   └── schema.prisma        # Prisma data models (forms, feedbacks, talks, projects)
+│   └── schema.prisma        # Prisma data models with performance indexes
 ├── public/
-│   ├── assets/              # Static branding and icon assets
-│   ├── uploads/             # Media uploads (posters, slides, materials)
-│   ├── dashboard.html       # Single-Page Admin Dashboard UI
+│   ├── assets/              # Static branding and optimized WebP assets
+│   ├── uploads/             # Media uploads (posters, event galleries, materials)
+│   ├── dashboard.html       # Single-Page Admin Dashboard UI with instant cache
 │   ├── form-renderer.html   # Public dynamic form submission interface
-│   └── favicon.png          # App favicon
+│   ├── form-feedbacks.html  # Dedicated public feedback submission interface
+│   └── favicon.webp         # Lightweight WebP favicon
+├── scripts/
+│   ├── convert-to-webp.js   # Automated batch WebP converter & DB synchronizer
+│   ├── check_db.js          # Database connection validator
+│   └── clean_tables.js      # Database maintenance script
 ├── src/
 │   ├── config/
-│   │   └── db.js            # Prisma Client instance with @prisma/adapter-pg pooling
+│   │   └── db.js            # Prisma Client with connection pool tuning & keepAlive
 │   ├── controllers/
-│   │   ├── feedbacks.controller.js # Feedback submission & retrieval
-│   │   ├── forms.controller.js     # Form CRUD & standardized feedback fields
+│   │   ├── feedbacks.controller.js # Feedback submission & retrieval with cache
+│   │   ├── forms.controller.js     # Form CRUD & parallel queries
 │   │   ├── fields.controller.js    # Dynamic form fields management
 │   │   ├── responses.controller.js # Response submission, queries & exports
-│   │   ├── talks.controller.js     # Talks CRUD & slide extraction
-│   │   └── projects.controller.js  # Projects CRUD operations
+│   │   ├── talks.controller.js     # Talks CRUD, event gallery & slide management
+│   │   └── projects.controller.js  # Projects CRUD & date-desc sorting
 │   ├── middlewares/
-│   │   └── errorHandler.js  # Centralized API error handling
+│   │   ├── security.js      # Multi-tier rate limiters & input sanitization
+│   │   └── errorHandler.js  # Information-disclosure protected error handler
 │   ├── routes/
 │   │   ├── feedbacks.routes.js
 │   │   ├── forms.routes.js
-│   │   ├── talks.routes.js
+│   │   ├── talks.routes.js  # Supports single & multi-file uploads with auto-WebP
 │   │   └── projects.routes.js
-│   ├── app.js               # Express application configuration & security middlewares
+│   ├── utils/
+│   │   └── cache.js         # Zero-latency in-memory cache with TTL & pattern busting
+│   ├── app.js               # Express application with compression & security headers
 │   └── server.js            # HTTP Server bootstrap
-├── package.json             # Dependencies & scripts
-└── vercel.json              # Vercel serverless deployment configuration
+├── package.json             # Dependencies & maintenance scripts
+└── vercel.json              # Vercel deployment configuration
 ```
 
 ---

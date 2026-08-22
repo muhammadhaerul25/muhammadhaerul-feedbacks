@@ -1,12 +1,18 @@
 const prisma = require('../config/db');
+const cache = require('../utils/cache');
 const path = require('path');
 const fs = require('fs');
 
 // GET /api/talks
 exports.getTalks = async (req, res, next) => {
     try {
+        const cached = cache.get('talks:all');
+        if (cached) return res.json(cached);
+
         const talks = await prisma.talk.findMany({ orderBy: { date: 'desc' } });
-        res.json({ success: true, count: talks.length, data: talks });
+        const responseData = { success: true, count: talks.length, data: talks };
+        cache.set('talks:all', responseData, 60);
+        res.json(responseData);
     } catch (err) {
         next(err);
     }
@@ -14,7 +20,7 @@ exports.getTalks = async (req, res, next) => {
 
 // POST /api/talks
 exports.createTalk = async (req, res, next) => {
-    const { event, organizer, place, date, jumlah_peserta, poster_url, slides, topics } = req.body;
+    const { event, organizer, place, date, jumlah_peserta, poster_url, slides, topics, gallery } = req.body;
     if (!event) {
         const err = new Error('Event name is required.');
         err.status = 400;
@@ -31,8 +37,10 @@ exports.createTalk = async (req, res, next) => {
                 poster_url: poster_url || null,
                 slides: slides || [],
                 topics: topics || [],
+                gallery: Array.isArray(gallery) ? gallery : [],
             }
         });
+        cache.del('talks');
         res.status(201).json({ success: true, data: talk });
     } catch (err) {
         next(err);
@@ -42,7 +50,7 @@ exports.createTalk = async (req, res, next) => {
 // PUT /api/talks/:id
 exports.updateTalk = async (req, res, next) => {
     const { id } = req.params;
-    const { event, organizer, place, date, jumlah_peserta, poster_url, slides, topics } = req.body;
+    const { event, organizer, place, date, jumlah_peserta, poster_url, slides, topics, gallery } = req.body;
     if (!event) {
         const err = new Error('Event name is required.');
         err.status = 400;
@@ -60,8 +68,10 @@ exports.updateTalk = async (req, res, next) => {
                 poster_url: poster_url || null,
                 slides: slides || [],
                 topics: topics || [],
+                gallery: Array.isArray(gallery) ? gallery : [],
             }
         });
+        cache.del('talks');
         res.json({ success: true, data: talk });
     } catch (err) {
         if (err.code === 'P2025') {
@@ -75,6 +85,7 @@ exports.updateTalk = async (req, res, next) => {
 exports.deleteTalk = async (req, res, next) => {
     try {
         await prisma.talk.delete({ where: { id: req.params.id } });
+        cache.del('talks');
         res.json({ success: true });
     } catch (err) {
         if (err.code === 'P2025') {

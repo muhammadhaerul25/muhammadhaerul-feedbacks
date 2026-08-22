@@ -1,4 +1,5 @@
 const prisma = require('../config/db');
+const cache = require('../utils/cache');
 
 exports.getFieldsByFormId = async (req, res, next) => {
     try {
@@ -26,6 +27,7 @@ exports.addFieldToForm = async (req, res, next) => {
                 type, label, placeholder: placeholder || null, required: required !== false, options: options || null, sort_order: sort_order || 0
             }
         });
+        cache.del('form');
         res.status(201).json({ success: true, data: field });
     } catch (err) {
         next(err);
@@ -48,6 +50,7 @@ exports.updateField = async (req, res, next) => {
             where: { id: parseInt(req.params.fid) },
             data: { label, placeholder: placeholder || null, required: required !== false, options: options || null, sort_order: sort_order || 0 }
         });
+        cache.del('form');
         res.json({ success: true, data: updatedField });
     } catch (err) {
         next(err);
@@ -68,6 +71,7 @@ exports.deleteField = async (req, res, next) => {
         await prisma.form_fields.delete({
             where: { id: parseInt(req.params.fid) }
         });
+        cache.del('form');
         res.json({ success: true, message: 'Field deleted successfully' });
     } catch (err) {
         next(err);
