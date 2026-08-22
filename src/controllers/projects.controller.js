@@ -1,5 +1,6 @@
 const prisma = require('../config/db');
 const cache = require('../utils/cache');
+const asyncHandler = require('../utils/asyncHandler');
 
 function getProjectDateSortValue(p) {
     if (!p) return '';
@@ -35,78 +36,91 @@ function sortProjectsByDateDesc(projects) {
 }
 
 // Get all projects
-const getAllProjects = async (req, res) => {
-    try {
-        const cached = cache.get('projects:all');
-        if (cached) return res.json(cached);
-
-        const projects = await prisma.project.findMany();
-        const sorted = sortProjectsByDateDesc(projects);
-        const responseData = { success: true, data: sorted };
-        cache.set('projects:all', responseData, 60);
-        res.json(responseData);
-    } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
+const getAllProjects = asyncHandler(async (req, res) => {
+    const cached = cache.get('projects:all');
+    if (cached) {
+        res.set('X-Cache', 'HIT');
+        res.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=120');
+        return res.json(cached);
     }
-};
+
+    const projects = await prisma.project.findMany();
+    const sorted = sortProjectsByDateDesc(projects);
+    const responseData = { success: true, count: sorted.length, data: sorted };
+    cache.set('projects:all', responseData, 60);
+
+    res.set('X-Cache', 'MISS');
+    res.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=120');
+    res.json(responseData);
+});
 
 // Create a project
-const createProject = async (req, res) => {
-    try {
-        const { name, description, dateRange, techStack, videoDemo, linkProject, thumbnailUrl } = req.body;
-        const newProject = await prisma.project.create({
-            data: {
-                name,
-                description,
-                dateRange,
-                techStack: techStack || [],
-                videoDemo,
-                linkProject,
-                thumbnailUrl
-            }
-        });
-        cache.del('projects');
-        res.status(201).json({ success: true, data: newProject });
-    } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
+const createProject = asyncHandler(async (req, res) => {
+    const { name, description, dateRange, techStack, videoDemo, linkProject, thumbnailUrl } = req.body;
+    if (!name || !String(name).trim()) {
+        const err = new Error('Project name is required.');
+        err.status = 400;
+        throw err;
     }
-};
+
+    const newProject = await prisma.project.create({
+        data: {
+            name: String(name).trim(),
+            description: description ? String(description).trim() : null,
+            dateRange: dateRange ? String(dateRange).trim() : null,
+            techStack: Array.isArray(techStack) ? techStack : [],
+            videoDemo: videoDemo ? String(videoDemo).trim() : null,
+            linkProject: linkProject ? String(linkProject).trim() : null,
+            thumbnailUrl: thumbnailUrl ? String(thumbnailUrl).trim() : null
+        }
+    });
+
+    cache.del('projects');
+    res.status(201).json({ success: true, data: newProject });
+});
 
 // Update a project
-const updateProject = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const { name, description, dateRange, techStack, videoDemo, linkProject, thumbnailUrl } = req.body;
-        const updated = await prisma.project.update({
-            where: { id },
-            data: {
-                name,
-                description,
-                dateRange,
-                techStack: techStack || [],
-                videoDemo,
-                linkProject,
-                thumbnailUrl
-            }
-        });
-        cache.del('projects');
-        res.json({ success: true, data: updated });
-    } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
+const updateProject = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const { name, description, dateRange, techStack, videoDemo, linkProject, thumbnailUrl } = req.body;
+
+    const existing = await prisma.project.findUnique({ where: { id } });
+    if (!existing) {
+        const err = new Error('Project not found.');
+        err.status = 404;
+        throw err;
     }
-};
+
+    const updateData = {};
+    if (name !== undefined) updateData.name = String(name).trim();
+    if (description !== undefined) updateData.description = description ? String(description).trim() : null;
+    if (dateRange !== undefined) updateData.dateRange = dateRange ? String(dateRange).trim() : null;
+    if (techStack !== undefined) updateData.techStack = Array.isArray(techStack) ? techStack : [];
+    if (videoDemo !== undefined) updateData.videoDemo = videoDemo ? String(videoDemo).trim() : null;
+    if (linkProject !== undefined) updateData.linkProject = linkProject ? String(linkProject).trim() : null;
+    if (thumbnailUrl !== undefined) updateData.thumbnailUrl = thumbnailUrl ? String(thumbnailUrl).trim() : null;
+
+    const updated = await prisma.project.update({
+        where: { id },
+        data: updateData
+    });
+
+    cache.del('projects');
+    res.json({ success: true, data: updated });
+});
 
 // Delete a project
-const deleteProject = async (req, res) => {
-    try {
-        const { id } = req.params;
-        await prisma.project.delete({ where: { id } });
-        cache.del('projects');
-        res.json({ success: true, message: 'Project deleted' });
-    } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
+const deleteProject = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const existing = await prisma.project.findUnique({ where: { id } });
+    if (!existing) {
+        return res.json({ success: true, message: 'Project already deleted' });
     }
-};
+
+    await prisma.project.delete({ where: { id } });
+    cache.del('projects');
+    res.json({ success: true, message: 'Project deleted' });
+});
 
 module.exports = {
     getAllProjects,
