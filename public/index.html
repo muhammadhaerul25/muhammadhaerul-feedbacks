@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muhammad Haerul — AI Engineer &amp; Software Engineer</title>
+  <meta name="description"
+    content="Muhammad Haerul — AI Engineer, Software Engineer, and AI Trainer building production AI systems in computer vision, LLMs, and applied machine learning.">
+  <link rel="icon" type="image/webp" href="/favicon.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- Scroll progress -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- ============ NAVIGATION ============ -->
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#top" class="nav-logo" aria-label="Muhammad Haerul — Home">
+        <span class="nav-logo-mark">MH</span>
+        <span class="nav-logo-dot"></span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#about" data-nav>About</a>
+        <a href="#skills" data-nav>Skills</a>
+        <a href="#education" data-nav>Education</a>
+        <a href="#experience" data-nav>Experience</a>
+        <a href="#projects" data-nav>Projects</a>
+        <a href="#publications" data-nav>Publications</a>
+        <a href="#talks" data-nav>Talks</a>
+        <a href="#awards" data-nav>Awards</a>
+        <a href="#certifications" data-nav>Certifications</a>
+        <a href="#contact" data-nav>Contact</a>
+        <a href="/dashboard" style="color:var(--blue); font-weight:600;">Dashboard</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle theme">
+          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.6">
+            <circle cx="12" cy="12" r="4.2" />
+            <path
+              d="M12 2.5v2.4M12 19.1v2.4M4.4 4.4l1.7 1.7M17.9 17.9l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.4 19.6l1.7-1.7M17.9 6.1l1.7-1.7" />
+          </svg>
+          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.6">
+            <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z" />
+          </svg>
+        </button>
+        <a href="#contact" class="btn btn-small btn-primary">Let's talk</a>
+        <button class="nav-burger" id="navBurger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <div class="hero-bg" aria-hidden="true">
+        <canvas id="heroCanvas"></canvas>
+        <div class="hero-grid"></div>
+      </div>
+
+      <div class="hero-inner container">
+        <p class="eyebrow reveal">AI Engineer &amp; Trainer</p>
+
+        <h1 class="hero-title reveal">
+          <span class="hero-title-line">I <span class="hero-accent hero-accent-blue">build</span> &amp; <span class="hero-accent hero-accent-green">teach</span> <span class="hero-accent hero-accent-yellow">AI</span> solutions</span>
+          <span class="hero-title-line">for real-world use cases</span>
+        </h1>
+
+        <div class="hero-cta reveal">
+          <a href="#projects" class="btn btn-primary">
+            View my work
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </a>
+          <a href="#contact" class="btn btn-ghost">Get in touch</a>
+        </div>
+
+        <div class="hero-social reveal">
+          <a href="https://github.com/muhammadhaerul25" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.18 1.18.92-.26 1.91-.38 2.89-.39.98 0 1.97.13 2.89.39 2.21-1.49 3.18-1.18 3.18-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.82 1.19 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.15v3.19c0 .3.2.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/muhammadhaerul" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.11 20.45H3.56V9h3.55v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z" />
+            </svg>
+          </a>
+          <a href="mailto:haerulmuhammad01@gmail.com" aria-label="Email">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <rect x="2" y="4.5" width="20" height="15" rx="2.5" />
+              <path d="m3 6 9 7 9-7" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-scroll-cue" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="scroll-cue-line"></div>
+      </div>
+    </section>
+
+    <!-- ============ LOGO / TRUST STRIP ============ -->
+    <section class="trust-strip">
+      <div class="container">
+        <p class="trust-label">Trusted by teams and institutions across Indonesia</p>
+        <div class="trust-logos">
+          <span>Paper.id</span>
+          <span>XL Axiata</span>
+          <span>RevoU</span>
+          <span>Masa Geosciences</span>
+          <span>BSSN RI</span>
+          <span>Kemdikbudristek</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section about" id="about">
+      <div class="container about-grid">
+        <div class="about-col-label reveal">
+          <span class="section-eyebrow">01 — About</span>
+          <div class="about-portrait">
+            <div class="portrait-frame">
+              <img class="portrait-photo" src="assets/profile.png" alt="Muhammad Haerul" width="300" height="330">
+            </div>
+            <ul class="about-facts">
+              <li><span>Based in</span><strong>Jakarta, Indonesia</strong></li>
+              <li><span>Education</span><strong>B.Sc. Computer Science, Cumlaude</strong></li>
+              <li><span>Experience</span><strong>3+ years, AI &amp; Software</strong></li>
+              <li><span>Focus</span><strong>AI Systems, CV, LLMs</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="about-col-content">
+          <h2 class="section-title reveal">From Makassar to production AI systems used by real teams.</h2>
+
+          <div class="about-story reveal">
+            <p>I studied Computer Science at Hasanuddin University in Makassar, graduating cum laude with a 3.97/4.00
+              GPA — and along the way, discovered that I cared less about winning hackathons (though I've done a few)
+              and more about what happens after: does the thing actually keep working when nobody's watching it anymore.
+            </p>
+            <p>That question has shaped every role since. At Paper.id, I helped ship an OCR system for KYC/KYB documents
+              that runs at 99% accuracy in four seconds — not because the model was clever, but because the pipeline
+              around it was boring and dependable. At XL Axiata, I built computer vision systems for road damage and
+              safety-equipment detection that had to work on a Raspberry Pi in the field, not just a GPU in a notebook.
+              Today, as AI Trainer at RevoU and Co-Founder of AksaraHub Nusantara, I split my time between teaching
+              organizations how to use AI responsibly and building AI tools that help preserve Indonesia's local scripts
+              and languages.</p>
+          </div>
+
+          <div class="about-values reveal">
+            <div class="value-card">
+              <span class="value-mark" style="--accent:var(--blue)"></span>
+              <h3>Ship, then refine</h3>
+              <p>A model in production teaching you real lessons beats a model in a notebook proving a hypothesis.</p>
+            </div>
+            <div class="value-card">
+              <span class="value-mark" style="--accent:var(--red)"></span>
+              <h3>Systems over demos</h3>
+              <p>Accuracy numbers mean little without latency, cost, and failure modes accounted for.</p>
+            </div>
+            <div class="value-card">
+              <span class="value-mark" style="--accent:var(--yellow)"></span>
+              <h3>Teach as you build</h3>
+              <p>Explaining a system to a non-technical stakeholder is the fastest way to find its weak points.</p>
+            </div>
+            <div class="value-card">
+              <span class="value-mark" style="--accent:var(--green)"></span>
+              <h3>Technology in service of culture</h3>
+              <p>Some of my favorite work uses AI to preserve, not replace — local scripts, languages, heritage.</p>
+            </div>
+          </div>
+
+          <div class="about-expertise reveal">
+            <span class="about-expertise-label">Areas of expertise</span>
+            <div class="chip-row">
+              <span class="chip">Computer Vision</span>
+              <span class="chip">Large Language Models</span>
+              <span class="chip">Retrieval-Augmented Generation</span>
+              <span class="chip">OCR &amp; Document Intelligence</span>
+              <span class="chip">AI Agents</span>
+              <span class="chip">MLOps &amp; Deployment</span>
+              <span class="chip">Full-Stack Product Development</span>
+              <span class="chip">AI Training &amp; Enablement</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section class="section skills" id="skills">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-eyebrow">02 — Skills</span>
+          <h2 class="section-title">Depth where it matters, range where it helps.</h2>
+          <p class="section-desc">Fluency is shown through delivered systems, not certificates alone — but here's the
+            map.</p>
+        </div>
+
+        <div class="skills-grid" id="skillsGrid">
+
+          <div class="skill-card reveal">
+            <div class="skill-card-head">
+              <span class="skill-icon" style="--accent:var(--blue)">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <circle cx="12" cy="12" r="3" />
+                  <path
+                    d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" />
+                </svg>
+              </span>
+              <h3>Artificial Intelligence &amp; ML</h3>
+            </div>
+            <ul class="skill-list">
+              <li><span>Machine Learning</span><span class="dots" data-level="5"></span></li>
+              <li><span>Deep Learning</span><span class="dots" data-level="4"></span></li>
+              <li><span>Model Evaluation &amp; Optimization</span><span class="dots" data-level="4"></span></li>
+            </ul>
+          </div>
+
+          <div class="skill-card reveal">
+            <div class="skill-card-head">
+              <span class="skill-icon" style="--accent:var(--red)">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <rect x="3" y="4" width="18" height="14" rx="2" />
+                  <circle cx="9" cy="10" r="1.6" />
+                  <path d="m4 17 5-4 4 3 3-2.5 4 3.5" />
+                </svg>
+              </span>
+              <h3>Computer Vision</h3>
+            </div>
+            <ul class="skill-list">
+              <li><span>Object Detection (YOLO family)</span><span class="dots" data-level="5"></span></li>
+              <li><span>Image Segmentation</span><span class="dots" data-level="4"></span></li>
+              <li><span>OCR &amp; Document Intelligence</span><span class="dots" data-level="5"></span></li>
+            </ul>
+          </div>
+
+          <div class="skill-card reveal">
+            <div class="skill-card-head">
+              <span class="skill-icon" style="--accent:var(--yellow)">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path d="M4 12h4l2-7 4 14 2-7h4" />
+                </svg>
+              </span>
+              <h3>LLMs &amp; Generative AI</h3>
+            </div>
+            <ul class="skill-list">
+              <li><span>Retrieval-Augmented Generation</span><span class="dots" data-level="5"></span></li>
+              <li><span>AI Agents &amp; Chatbots</span><span class="dots" data-level="5"></span></li>
+              <li><span>Prompt Engineering</span><span class="dots" data-level="5"></span></li>
+            </ul>
+          </div>
+
+          <div class="skill-card reveal">
+            <div class="skill-card-head">
+              <span class="skill-icon" style="--accent:var(--green)">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path d="M4 6h16M4 12h16M4 18h10" />
+                </svg>
+              </span>
+              <h3>Backend Development</h3>
+            </div>
+            <ul class="skill-list">
+              <li><span>FastAPI</span><span class="dots" data-level="5"></span></li>
+              <li><span>Flask</span><span class="dots" data-level="4"></span></li>
+              <li><span>API &amp; Systems Design</span><span class="dots" data-level="4"></span></li>
+            </ul>
+          </div>
+
+          <div class="skill-card reveal">
+            <div class="skill-card-head">
+              <span class="skill-icon" style="--accent:var(--blue)">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <rect x="3" y="3" width="7" height="7" rx="1.5" />
+                  <rect x="14" y="3" width="7" height="7" rx="1.5" />
+                  <rect x="3" y="14" width="7" height="7" rx="1.5" />
+                  <rect x="14" y="14" width="7" height="7" rx="1.5" />
+                </svg>
+              </span>
+              <h3>Frontend Development</h3>
+            </div>
+            <ul class="skill-list">
+              <li><span>JavaScript / DOM</span><span class="dots" data-level="4"></span></li>
+              <li><span>Streamlit Interfaces</span><span class="dots" data-level="4"></span></li>
+              <li><span>HTML &amp; CSS</span><span class="dots" data-level="4"></span></li>
+            </ul>
+          </div>
+
+          <div class="skill-card reveal">
+            <div class="skill-card-head">
+              <span class="skill-icon" style="--accent:var(--red)">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path d="M12 3 3 7l9 4 9-4-9-4Z" />
+                  <path d="M3 12l9 4 9-4M3 17l9 4 9-4" />
+                </svg>
+              </span>
+              <h3>Cloud &amp; DevOps</h3>
+            </div>
+            <ul class="skill-list">
+              <li><span>Google Cloud Platform</span><span class="dots" data-level="3"></span></li>
+              <li><span>Docker</span><span class="dots" data-level="3"></span></li>
+              <li><span>Deployment Pipelines</span><span class="dots" data-level="4"></span></li>
+            </ul>
+          </div>
+
+          <div class="skill-card reveal">
+            <div class="skill-card-head">
+              <span class="skill-icon" style="--accent:var(--yellow)">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <ellipse cx="12" cy="6" rx="8" ry="3" />
+                  <path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3" />
+                </svg>
+              </span>
+              <h3>Databases</h3>
+            </div>
+            <ul class="skill-list">
+              <li><span>MongoDB</span><span class="dots" data-level="5"></span></li>
+              <li><span>Vector DBs (Pinecone)</span><span class="dots" data-level="4"></span></li>
+              <li><span>Neo4j / MySQL</span><span class="dots" data-level="3"></span></li>
+            </ul>
+          </div>
+
+          <div class="skill-card reveal">
+            <div class="skill-card-head">
+              <span class="skill-icon" style="--accent:var(--green)">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path d="M4 19V5M4 19h16M8 15l3-4 3 3 4-6" />
+                </svg>
+              </span>
+              <h3>Data Science</h3>
+            </div>
+            <ul class="skill-list">
+              <li><span>Feature Engineering</span><span class="dots" data-level="5"></span></li>
+              <li><span>Data Visualization</span><span class="dots" data-level="4"></span></li>
+              <li><span>Statistical Analysis</span><span class="dots" data-level="4"></span></li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="stack-categories" id="stackCategories">
+          <span class="about-expertise-label">Tools I reach for</span>
+          <div class="stack-tabs" role="tablist">
+            <button class="stack-tab active" data-cat="languages">Languages</button>
+            <button class="stack-tab" data-cat="ai">AI / ML</button>
+            <button class="stack-tab" data-cat="backend">Backend</button>
+            <button class="stack-tab" data-cat="data">Data &amp; Cloud</button>
+            <button class="stack-tab" data-cat="tools">Tools</button>
+          </div>
+
+          <div class="stack-panel active" data-cat="languages">
+            <span class="stack-badge">Python</span><span class="stack-badge">JavaScript</span><span
+              class="stack-badge">SQL</span>
+          </div>
+          <div class="stack-panel" data-cat="ai">
+            <span class="stack-badge">TensorFlow</span><span class="stack-badge">PyTorch</span><span
+              class="stack-badge">Scikit-learn</span><span class="stack-badge">OpenAI</span><span
+              class="stack-badge">Gemini</span><span class="stack-badge">Hugging Face</span><span
+              class="stack-badge">LangChain</span><span class="stack-badge">YOLO</span>
+          </div>
+          <div class="stack-panel" data-cat="backend">
+            <span class="stack-badge">FastAPI</span><span class="stack-badge">Flask</span><span
+              class="stack-badge">Streamlit</span>
+          </div>
+          <div class="stack-panel" data-cat="data">
+            <span class="stack-badge">MongoDB</span><span class="stack-badge">MySQL</span><span
+              class="stack-badge">Neo4j</span><span class="stack-badge">Pinecone</span><span class="stack-badge">Google
+              Cloud Platform</span><span class="stack-badge">Docker</span>
+          </div>
+          <div class="stack-panel" data-cat="tools">
+            <span class="stack-badge">Flowise</span><span class="stack-badge">N8N</span><span class="stack-badge">Git
+              &amp; GitHub</span><span class="stack-badge">OpenCV</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ EDUCATION ============ -->
+    <section class="section education" id="education">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-eyebrow">03 — Education</span>
+          <h2 class="section-title">Academic foundation.</h2>
+        </div>
+
+        <div class="edu-card reveal">
+          <div class="edu-card-main">
+            <h3>Bachelor of Computer Science</h3>
+            <p class="edu-school">Hasanuddin University, Makassar</p>
+            <p class="edu-date">September 2020 — July 2024</p>
+            <p class="edu-desc">Coursework spanning machine learning, algorithms, distributed systems, and software
+              engineering — the foundation for everything built since. Honors and recognitions from this period are
+              detailed under Awards.</p>
+          </div>
+          <div class="edu-card-stats">
+            <div><span>3.97</span><small>CGPA / 4.00</small></div>
+            <div><span>Cumlaude</span><small>Honors</small></div>
+            <div><span>3×</span><small>Most Outstanding Student</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE ============ -->
+    <section class="section experience" id="experience">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-eyebrow">04 — Experience</span>
+          <h2 class="section-title">A career built inside real AI teams.</h2>
+          <p class="section-desc">Six roles, one throughline: taking AI from research notebooks into things people
+            actually rely on.</p>
+        </div>
+
+        <div class="timeline" id="timeline">
+
+          <div class="timeline-item reveal">
+            <div class="timeline-marker" style="--accent:var(--blue)"></div>
+            <div class="timeline-content">
+              <div class="timeline-top">
+                <h3>Co-Founder, AI &amp; Product</h3>
+                <span class="timeline-date">Jan 2026 — Present</span>
+              </div>
+              <p class="timeline-company">AksaraHub Nusantara <span class="timeline-loc">· Makassar, Hybrid</span></p>
+              <p class="timeline-desc">Leading AI development and data analytics for AksaraHub.id — script recognition
+                (OCR), local-language translation, AI-powered educational tools, and digital preservation of Indonesian
+                regional scripts.</p>
+              <div class="timeline-stack">
+                <span>Computer Vision</span><span>OCR</span><span>NLP</span><span>Product Strategy</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-marker" style="--accent:var(--red)"></div>
+            <div class="timeline-content">
+              <div class="timeline-top">
+                <h3>AI Trainer</h3>
+                <span class="timeline-date">Jul 2025 — Present</span>
+              </div>
+              <p class="timeline-company">RevoU <span class="timeline-loc">· Contract, Hybrid</span></p>
+              <p class="timeline-desc">Lead enterprise AI training and adoption programs for government institutions,
+                universities, and corporates. Delivered sessions to 300+ professionals at BSSN on AI in cybersecurity,
+                trained 100+ IT staff at Universitas Sulawesi Barat, and ran Generative AI programs for AXA Mandiri and
+                Indosat.</p>
+              <div class="timeline-stack">
+                <span>Prompt Engineering</span><span>Generative AI</span><span>Facilitation</span><span>Curriculum
+                  Design</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-marker" style="--accent:var(--green)"></div>
+            <div class="timeline-content">
+              <div class="timeline-top">
+                <h3>AI Engineer</h3>
+                <span class="timeline-date">May 2024 — Jun 2025</span>
+              </div>
+              <p class="timeline-company">Paper.id <span class="timeline-loc">· AI Product &amp; Enablement,
+                  Jakarta</span></p>
+              <p class="timeline-desc">Led development of an LLM-powered OCR system for KYC/KYB processing (99%
+                accuracy, 4s per document), a multi-agent HR chatbot (99% response accuracy across 1,000+ queries), and
+                a hybrid keyword + vector + LLM search engine. Built the ImageProcessingOCR enhancement pipeline that
+                lifted OCR accuracy by 10% while cutting file size 40% and processing time 50%.</p>
+              <div class="timeline-stack">
+                <span>LLMs</span><span>FastAPI</span><span>YOLOv8</span><span>OpenCV</span><span>MongoDB</span><span>InsightFace</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-marker" style="--accent:var(--yellow)"></div>
+            <div class="timeline-content">
+              <div class="timeline-top">
+                <h3>Computer Vision Engineer</h3>
+                <span class="timeline-date">Jul 2024 — Sep 2024</span>
+              </div>
+              <p class="timeline-company">Masa Geosciences <span class="timeline-loc">· Remote, Jakarta</span></p>
+              <p class="timeline-desc">Fine-tuned YOLOv8 / YOLO-World models to detect and segment minerals across
+                1,000+ field images, built a color-matching pipeline against known mineral references, and trained
+                regression models to estimate mineral content using engineered geological features.</p>
+              <div class="timeline-stack">
+                <span>YOLOv8</span><span>OpenCV</span><span>Feature Engineering</span><span>Regression</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-marker" style="--accent:var(--blue)"></div>
+            <div class="timeline-content">
+              <div class="timeline-top">
+                <h3>AI Engineer</h3>
+                <span class="timeline-date">Aug 2023 — Dec 2023</span>
+              </div>
+              <p class="timeline-company">XL Axiata <span class="timeline-loc">· 5G AI-IoT Use Case Dev, Jakarta</span>
+              </p>
+              <p class="timeline-desc">Built four production computer-vision systems for the X-Camp incubation program:
+                a road-damage detector across 45,000+ images (78% accuracy), a PPE detector for industrial safety
+                running on Raspberry Pi (84% accuracy), a headcount monitoring dashboard, and a TensorFlow-based fuse
+                anomaly detector.</p>
+              <div class="timeline-stack">
+                <span>YOLOv8</span><span>TensorFlow</span><span>Edge Deployment</span><span>Dashboards</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-marker" style="--accent:var(--red)"></div>
+            <div class="timeline-content">
+              <div class="timeline-top">
+                <h3>AI Engineer</h3>
+                <span class="timeline-date">Feb 2023 — Jun 2023</span>
+              </div>
+              <p class="timeline-company">Ministry of Education, Culture, Research &amp; Technology <span
+                  class="timeline-loc">· Jakarta</span></p>
+              <p class="timeline-desc">Researched applications of ChatGPT in education, proposed three product concepts,
+                then built Personalized English Learning — a web app using OpenAI's API to adapt language lessons to
+                individual learners.</p>
+              <div class="timeline-stack">
+                <span>OpenAI API</span><span>NLP</span><span>EdTech</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEATURED PROJECTS ============ -->
+    <section class="section projects" id="projects">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-eyebrow">05 — Featured &amp; Case-Study Projects</span>
+          <h2 class="section-title">Selected work, built end-to-end.</h2>
+          <p class="section-desc">A mix of commercial systems and independent products — each shipped, not just
+            prototyped.</p>
+        </div>
+
+        <div class="project-list" id="projectList">
+
+          <article class="project-row reveal">
+            <div class="project-media">
+              <div class="project-media-inner ph-blue">
+                <svg viewBox="0 0 200 140" width="70%">
+                  <rect x="20" y="20" width="160" height="100" rx="8" fill="none" stroke="currentColor"
+                    stroke-width="2" />
+                  <path d="M40 90 L75 55 L100 80 L130 45 L160 75" fill="none" stroke="currentColor"
+                    stroke-width="2.5" />
+                  <circle cx="75" cy="55" r="4" fill="currentColor" />
+                  <circle cx="130" cy="45" r="4" fill="currentColor" />
+                </svg>
+              </div>
+            </div>
+            <div class="project-info">
+              <span class="project-tag">Computer Vision · Cultural AI</span>
+              <h3>Aksara Lontara Recognition</h3>
+              <p class="project-overview">A digital canvas where users hand-draw the traditional Aksara Lontara script
+                of South Sulawesi and get instant, real-time ML transliteration into the Latin alphabet — bridging
+                centuries-old heritage with modern AI.</p>
+              <div class="project-detail-grid">
+                <div><span>Challenge</span>
+                  <p>Lontara characters are stroke-based and highly sensitive to hand-drawn variation, with very little
+                    labeled training data available.</p>
+                </div>
+                <div><span>Solution</span>
+                  <p>Built a custom character-recognition pipeline with data augmentation to generalize from a small
+                    handwritten dataset, wrapped in an interactive canvas UI.</p>
+                </div>
+                <div><span>Outcome</span>
+                  <p>Live product powering script learning at AksaraHub.id, used by students and researchers of
+                    Indonesian regional scripts.</p>
+                </div>
+              </div>
+              <div class="project-stack">
+                <span>Computer Vision</span><span>Python</span><span>Model Training</span><span>Web App</span>
+              </div>
+              <div class="project-links">
+                <a href="https://aksarahub.id/" target="_blank" rel="noopener" class="link-arrow">Live product <svg
+                    width="14" height="14" viewBox="0 0 16 16" fill="none">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg></a>
+                <a href="https://github.com/muhammadhaerul25" target="_blank" rel="noopener" class="link-arrow">GitHub
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-row project-row-reverse reveal">
+            <div class="project-media">
+              <div class="project-media-inner ph-red">
+                <svg viewBox="0 0 200 140" width="70%">
+                  <rect x="30" y="30" width="140" height="80" rx="6" fill="none" stroke="currentColor"
+                    stroke-width="2" />
+                  <path d="M30 55h140M60 30v80M110 30v80" stroke="currentColor" stroke-width="1.4" opacity=".5" />
+                  <circle cx="45" cy="42" r="3" fill="currentColor" />
+                </svg>
+              </div>
+            </div>
+            <div class="project-info">
+              <span class="project-tag">Computer Vision · OCR</span>
+              <h3>Galaxy ALPR — License Plate Recognition</h3>
+              <p class="project-overview">An automatic license-plate recognition system that detects vehicles, reads
+                plates, and generates structured metadata for traffic monitoring and analytics.</p>
+              <div class="project-detail-grid">
+                <div><span>Challenge</span>
+                  <p>Plates needed to be read reliably across lighting conditions, angles, and partial occlusion in real
+                    traffic footage.</p>
+                </div>
+                <div><span>Solution</span>
+                  <p>Combined a fine-tuned detection model with OCR post-processing and confidence-based filtering to
+                    reduce false reads.</p>
+                </div>
+                <div><span>Outcome</span>
+                  <p>Shipped as a reusable module with a performance-analytics layer for downstream decision-making.</p>
+                </div>
+              </div>
+              <div class="project-stack">
+                <span>Object Detection</span><span>OCR</span><span>Python</span><span>Analytics</span>
+              </div>
+              <div class="project-links">
+                <a href="https://youtu.be/CngIuDBNCLA" target="_blank" rel="noopener" class="link-arrow">Watch demo <svg
+                    width="14" height="14" viewBox="0 0 16 16" fill="none">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg></a>
+                <a href="https://github.com/muhammadhaerul25" target="_blank" rel="noopener" class="link-arrow">GitHub
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-row reveal">
+            <div class="project-media">
+              <div class="project-media-inner ph-yellow">
+                <svg viewBox="0 0 200 140" width="70%">
+                  <circle cx="100" cy="70" r="45" fill="none" stroke="currentColor" stroke-width="2" />
+                  <path d="M100 40v30l20 15" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+                </svg>
+              </div>
+            </div>
+            <div class="project-info">
+              <span class="project-tag">LLMs · Full-Stack</span>
+              <h3>AI Update Hub</h3>
+              <p class="project-overview">A full-stack platform that aggregates AI-related news from multiple sources
+                and uses LLM-based summarization to help teams monitor industry trends in one place.</p>
+              <div class="project-detail-grid">
+                <div><span>Challenge</span>
+                  <p>Relevant AI news is scattered across dozens of sources with wildly inconsistent formats and
+                    signal-to-noise ratio.</p>
+                </div>
+                <div><span>Solution</span>
+                  <p>Built ingestion pipelines feeding an LLM summarization layer, with topic clustering to surface what
+                    actually matters.</p>
+                </div>
+                <div><span>Outcome</span>
+                  <p>A daily-usable aggregation tool that turns hours of reading into a five-minute scan.</p>
+                </div>
+              </div>
+              <div class="project-stack">
+                <span>LLM Summarization</span><span>Full-Stack</span><span>Automation</span>
+              </div>
+              <div class="project-links">
+                <a href="#" class="link-arrow">Watch demo <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg></a>
+                <a href="https://github.com/muhammadhaerul25" target="_blank" rel="noopener" class="link-arrow">GitHub
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-row project-row-reverse reveal">
+            <div class="project-media">
+              <div class="project-media-inner ph-green">
+                <svg viewBox="0 0 200 140" width="70%">
+                  <rect x="50" y="20" width="100" height="100" rx="14" fill="none" stroke="currentColor"
+                    stroke-width="2" />
+                  <path d="M75 55h50M75 75h50M75 95h30" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </div>
+            </div>
+            <div class="project-info">
+              <span class="project-tag">Computer Vision · Health-Tech</span>
+              <h3>Eatitude.id</h3>
+              <p class="project-overview">A personal healthy-eating companion combining AI-generated nutrition plans, a
+                computer-vision nutrition scanner, and direct access to certified nutritionists.</p>
+              <div class="project-detail-grid">
+                <div><span>Challenge</span>
+                  <p>Turning general nutrition advice into something personal enough that people actually follow it.</p>
+                </div>
+                <div><span>Solution</span>
+                  <p>Personalization engine driven by health profile and goals, paired with a CV-based food scanner for
+                    effortless logging.</p>
+                </div>
+                <div><span>Outcome</span>
+                  <p>Five integrated features shipped as a cohesive product, from planning to progress tracking.</p>
+                </div>
+              </div>
+              <div class="project-stack">
+                <span>Computer Vision</span><span>Personalization</span><span>Product Design</span>
+              </div>
+              <div class="project-links">
+                <a href="https://youtu.be/wOsPg19O8KM" target="_blank" rel="noopener" class="link-arrow">Watch demo <svg
+                    width="14" height="14" viewBox="0 0 16 16" fill="none">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg></a>
+                <a href="https://github.com/muhammadhaerul25" target="_blank" rel="noopener" class="link-arrow">GitHub
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg></a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="flagship-case reveal">
+          <div class="flagship-case-head">
+            <span class="section-eyebrow">Flagship Case Study</span>
+            <h3 class="flagship-case-title">Paper OCR LLM: KYC/KYB document intelligence at scale</h3>
+            <p class="section-desc">How a document-classification bottleneck at a B2B fintech serving 600,000+ SMEs
+              became a 4-second, 99%-accurate pipeline.</p>
+          </div>
+
+          <div class="case-grid">
+            <div class="case-block reveal">
+              <span class="case-num">01</span>
+              <h3>Problem</h3>
+              <p>Paper.id's onboarding required manual review of ID cards, Tax ID numbers, and business registration
+                documents for every new business customer. Manual KYC/KYB review was slow, inconsistent across
+                reviewers, and became the biggest bottleneck to onboarding speed as the platform scaled.</p>
+            </div>
+            <div class="case-block reveal">
+              <span class="case-num">02</span>
+              <h3>Research</h3>
+              <p>Evaluated traditional OCR engines against LLM-assisted extraction. Traditional OCR handled clean scans
+                well but broke down on skewed, low-light, or handwritten fields common in real submissions — while pure
+                LLM extraction was accurate but too slow and costly to run on every field independently.</p>
+            </div>
+            <div class="case-block reveal">
+              <span class="case-num">03</span>
+              <h3>Architecture</h3>
+              <p>Designed a hybrid pipeline: a lightweight classifier routes each document to the right handler, an
+                image-enhancement stage (brightness, contrast, sharpness, skew correction via OpenCV) prepares it for
+                extraction, and an LLM-backed extraction layer parses structured fields — all served through FastAPI.
+              </p>
+            </div>
+            <div class="case-block reveal">
+              <span class="case-num">04</span>
+              <h3>Workflow</h3>
+              <p>Document upload → type classification → image enhancement → field extraction (LLM + OCR) → confidence
+                scoring → structured output. Low-confidence extractions are flagged for lightweight human review rather
+                than blocking the pipeline.</p>
+            </div>
+            <div class="case-block reveal">
+              <span class="case-num">05</span>
+              <h3>Implementation</h3>
+              <p>Built and iterated the pipeline in Python with FastAPI for serving, OpenCV for preprocessing, and LLM
+                APIs for extraction. The enhancement stage alone lifted downstream OCR accuracy by 10%, cut file size
+                40%, and increased processing speed 50% before extraction even ran.</p>
+            </div>
+            <div class="case-block reveal">
+              <span class="case-num">06</span>
+              <h3>Results</h3>
+              <p>The system reached 99% OCR accuracy with processing time down to roughly 4 seconds per document —
+                turning a manual review bottleneck into a near-instant onboarding step, at meaningful scale.</p>
+            </div>
+          </div>
+
+          <div class="case-diagram reveal">
+            <span class="case-diagram-label">Pipeline overview</span>
+            <div class="diagram" id="pipelineDiagram">
+              <div class="diagram-node"><span class="node-dot" style="--accent:var(--blue)"></span>Upload</div>
+              <div class="diagram-arrow">→</div>
+              <div class="diagram-node"><span class="node-dot" style="--accent:var(--red)"></span>Classify</div>
+              <div class="diagram-arrow">→</div>
+              <div class="diagram-node"><span class="node-dot" style="--accent:var(--yellow)"></span>Enhance</div>
+              <div class="diagram-arrow">→</div>
+              <div class="diagram-node"><span class="node-dot" style="--accent:var(--green)"></span>Extract (LLM + OCR)
+              </div>
+              <div class="diagram-arrow">→</div>
+              <div class="diagram-node"><span class="node-dot" style="--accent:var(--blue)"></span>Structured Output
+              </div>
+            </div>
+          </div>
+
+          <div class="case-stats reveal">
+            <div class="stat-card"><span class="stat-num" data-count="99">0</span><span class="stat-unit">%</span><span
+                class="stat-label">OCR accuracy</span></div>
+            <div class="stat-card"><span class="stat-num" data-count="4">0</span><span class="stat-unit">s</span><span
+                class="stat-label">avg. processing time</span></div>
+            <div class="stat-card"><span class="stat-num" data-count="10">0</span><span class="stat-unit">%</span><span
+                class="stat-label">accuracy lift from preprocessing</span></div>
+            <div class="stat-card"><span class="stat-num" data-count="50">0</span><span class="stat-unit">%</span><span
+                class="stat-label">faster processing</span></div>
+          </div>
+
+          <div class="case-lessons reveal">
+            <span class="case-diagram-label">Lessons learned</span>
+            <p>The unglamorous preprocessing step mattered more than the model choice — most of the accuracy gain came
+              before extraction ever ran. And routing by confidence, rather than trying to force one model to be
+              perfect, let the system fail gracefully instead of silently.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ PUBLICATIONS ============ -->
+    <section class="section publications" id="publications">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-eyebrow">06 — Publications</span>
+          <h2 class="section-title">Open-source work, written up and shared.</h2>
+          <p class="section-desc">Code and write-ups released publicly so other engineers can learn from — or build on —
+            the same systems.</p>
+        </div>
+
+        <div class="talks-grid">
+          <div class="talk-card reveal">
+            <span class="talk-icon" style="--accent:var(--red)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M9 18V6l10 6-10 6Z" />
+              </svg>
+            </span>
+            <p class="talk-date">2024 — 2025</p>
+            <h3>GraphRAG Chatbot</h3>
+            <p class="talk-org">Open-source retrieval-augmented chatbot using graph-based context retrieval</p>
+          </div>
+          <div class="talk-card reveal">
+            <span class="talk-icon" style="--accent:var(--yellow)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M9 18V6l10 6-10 6Z" />
+              </svg>
+            </span>
+            <p class="talk-date">2024 — 2025</p>
+            <h3>ALPR Core</h3>
+            <p class="talk-org">Reusable automatic license-plate recognition module, extracted from the Galaxy ALPR
+              project</p>
+          </div>
+          <div class="talk-card reveal">
+            <span class="talk-icon" style="--accent:var(--green)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M9 18V6l10 6-10 6Z" />
+              </svg>
+            </span>
+            <p class="talk-date">2024 — 2025</p>
+            <h3>Object Detection Utilities</h3>
+            <p class="talk-org">Shared helper library for training and evaluating YOLO-family detection models</p>
+          </div>
+        </div>
+
+        <div class="talks-links reveal">
+          <a href="https://github.com/muhammadhaerul25" target="_blank" rel="noopener" class="link-arrow">Browse all
+            repositories <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TALKS ============ -->
+    <section class="section talks-section" id="talks">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-eyebrow">07 — Talks</span>
+          <h2 class="section-title">Speaking on AI, in the rooms where it matters.</h2>
+          <p class="section-desc">Workshops and talks for developer communities, government institutions, and enterprise
+            teams across Indonesia.</p>
+        </div>
+
+        <div class="talks-grid">
+          <div class="talk-card reveal">
+            <span class="talk-icon" style="--accent:var(--blue)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M4 11v2a2 2 0 0 0 2 2h1l4 4v-6M4 11h3l7-6v14" />
+              </svg>
+            </span>
+            <p class="talk-date">May 2026</p>
+            <h3>Speaker — Google Build with AI</h3>
+            <p class="talk-org">GDGoC Makassar</p>
+          </div>
+          <div class="talk-card reveal">
+            <span class="talk-icon" style="--accent:var(--red)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M4 11v2a2 2 0 0 0 2 2h1l4 4v-6M4 11h3l7-6v14" />
+              </svg>
+            </span>
+            <p class="talk-date">Dec 2025</p>
+            <h3>Speaker — Web Development &amp; Security Workshop</h3>
+            <p class="talk-org">Universitas Sulawesi Barat</p>
+          </div>
+          <div class="talk-card reveal">
+            <span class="talk-icon" style="--accent:var(--yellow)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M4 11v2a2 2 0 0 0 2 2h1l4 4v-6M4 11h3l7-6v14" />
+              </svg>
+            </span>
+            <p class="talk-date">Jul 2025</p>
+            <h3>Speaker — AI Trends for Cybersecurity</h3>
+            <p class="talk-org">Badan Siber dan Sandi Negara (BSSN RI) · 300+ attendees</p>
+          </div>
+          <div class="talk-card reveal">
+            <span class="talk-icon" style="--accent:var(--green)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M4 11v2a2 2 0 0 0 2 2h1l4 4v-6M4 11h3l7-6v14" />
+              </svg>
+            </span>
+            <p class="talk-date">Mar 2025</p>
+            <h3>Speaker — AI Demo Day</h3>
+            <p class="talk-org">Paper.id</p>
+          </div>
+          <div class="talk-card reveal">
+            <span class="talk-icon" style="--accent:var(--blue)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M4 11v2a2 2 0 0 0 2 2h1l4 4v-6M4 11h3l7-6v14" />
+              </svg>
+            </span>
+            <p class="talk-date">Oct 2023</p>
+            <h3>Speaker — AIoT Visitation</h3>
+            <p class="talk-org">XL Axiata</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ AWARDS ============ -->
+    <section class="section awards" id="awards">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-eyebrow">08 — Awards</span>
+          <h2 class="section-title">Recognition along the way.</h2>
+        </div>
+
+        <div class="cert-grid">
+          <div class="cert-card reveal">
+            <span class="cert-badge" style="--accent:var(--blue)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+                <path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0V4Z" />
+                <path d="M7 5H4a3 3 0 0 0 3 5M17 5h3a3 3 0 0 1-3 5" />
+              </svg>
+            </span>
+            <h4>Most Outstanding Student — Computer Science</h4>
+            <p>Hasanuddin University · 2021, 2022 &amp; 2023 (3 consecutive years)</p>
+          </div>
+          <div class="cert-card reveal">
+            <span class="cert-badge" style="--accent:var(--green)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+                <path d="M12 2 3 7l9 5 9-5-9-5Z" />
+                <path d="M3 7v10l9 5 9-5V7M12 12v10" />
+              </svg>
+            </span>
+            <h4>Bank Indonesia Scholarship (GenBI)</h4>
+            <p>Awarded for academic excellence · Hasanuddin University</p>
+          </div>
+          <div class="cert-card reveal">
+            <span class="cert-badge" style="--accent:var(--yellow)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+                <circle cx="12" cy="9" r="6" />
+                <path d="m8.5 14.5-2 6.5 5.5-3 5.5 3-2-6.5" />
+              </svg>
+            </span>
+            <h4>Graduated Cumlaude</h4>
+            <p>CGPA 3.97 / 4.00 · Bachelor of Computer Science, 2024</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CERTIFICATIONS ============ -->
+    <section class="section certifications" id="certifications">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-eyebrow">09 — Certifications</span>
+          <h2 class="section-title">Continuous, deliberate learning.</h2>
+        </div>
+
+        <div class="cert-grid">
+          <div class="cert-card reveal"><span class="cert-badge" style="--accent:var(--blue)">DL</span>
+            <h4>Machine Learning Specialization</h4>
+            <p>DeepLearning.AI &amp; Stanford · Mar 2023</p>
+          </div>
+          <div class="cert-card reveal"><span class="cert-badge" style="--accent:var(--red)">ML</span>
+            <h4>Machine Learning in Production</h4>
+            <p>DeepLearning.AI · May 2024</p>
+          </div>
+          <div class="cert-card reveal"><span class="cert-badge" style="--accent:var(--yellow)">GA</span>
+            <h4>Generative AI for Software Development</h4>
+            <p>DeepLearning.AI · Oct 2024</p>
+          </div>
+          <div class="cert-card reveal"><span class="cert-badge" style="--accent:var(--green)">LC</span>
+            <h4>Generative AI with LangChain &amp; HuggingFace</h4>
+            <p>Udemy · Oct 2024</p>
+          </div>
+          <div class="cert-card reveal"><span class="cert-badge" style="--accent:var(--blue)">PE</span>
+            <h4>Prompt Engineering for Software Developers</h4>
+            <p>Dicoding Indonesia · May 2026</p>
+          </div>
+          <div class="cert-card reveal"><span class="cert-badge" style="--accent:var(--red)">DL</span>
+            <h4>Deep Learning — DTS Nasional</h4>
+            <p>Digital Talent Scholarship · Mar 2026</p>
+          </div>
+          <div class="cert-card reveal"><span class="cert-badge" style="--accent:var(--yellow)">DS</span>
+            <h4>Data Science — DTS Nasional</h4>
+            <p>Digital Talent Scholarship · Feb 2026</p>
+          </div>
+          <div class="cert-card reveal"><span class="cert-badge" style="--accent:var(--green)">SQL</span>
+            <h4>SQL (Intermediate)</h4>
+            <p>HackerRank</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section contact" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-left reveal">
+          <span class="section-eyebrow">10 — Contact</span>
+          <h2 class="contact-title">Let's build something that ships.</h2>
+          <p class="contact-sub">Open to AI Engineering roles, technical consulting, speaking invitations, and
+            collaborations on products that put AI to real, careful use.</p>
+
+          <div class="contact-links">
+            <a href="mailto:haerulmuhammad01@gmail.com" class="contact-link">
+              <span>Email</span>
+              <strong>haerulmuhammad01@gmail.com</strong>
+            </a>
+            <a href="https://www.linkedin.com/in/muhammadhaerul" target="_blank" rel="noopener" class="contact-link">
+              <span>LinkedIn</span>
+              <strong>linkedin.com/in/muhammadhaerul</strong>
+            </a>
+            <a href="https://github.com/muhammadhaerul25" target="_blank" rel="noopener" class="contact-link">
+              <span>GitHub</span>
+              <strong>github.com/muhammadhaerul25</strong>
+            </a>
+            <a href="#" class="contact-link" id="resumeDownload">
+              <span>Resume</span>
+              <strong>Download PDF</strong>
+            </a>
+          </div>
+        </div>
+
+        <form class="contact-form reveal" id="contactForm">
+          <div class="form-row">
+            <label for="cf-name">Name</label>
+            <input type="text" id="cf-name" name="name" required placeholder="Your name">
+          </div>
+          <div class="form-row">
+            <label for="cf-email">Email</label>
+            <input type="email" id="cf-email" name="email" required placeholder="you@company.com">
+          </div>
+          <div class="form-row">
+            <label for="cf-message">Message</label>
+            <textarea id="cf-message" name="message" rows="4" required
+              placeholder="Tell me about the project or opportunity..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full" id="cfSubmit">
+            <span class="btn-label">Send message</span>
+          </button>
+          <p class="form-note" id="formNote" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <span class="nav-logo-mark">MH</span>
+        <p>Muhammad Haerul — AI Engineer, Software Engineer, AI Trainer. Building AI systems that ship, from Jakarta,
+          Indonesia.</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h5>Site</h5>
+          <a href="#about">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#awards">Awards</a>
+          <a href="#contact">Contact</a>
+          <a href="/dashboard">Dashboard</a>
+        </div>
+        <div>
+          <h5>Elsewhere</h5>
+          <a href="https://github.com/muhammadhaerul25" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/muhammadhaerul" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="mailto:haerulmuhammad01@gmail.com">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© 2026 Muhammad Haerul. Built with HTML, CSS &amp; JavaScript.</p>
+      <button class="back-to-top" id="backToTop" aria-label="Back to top">↑ Top</button>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

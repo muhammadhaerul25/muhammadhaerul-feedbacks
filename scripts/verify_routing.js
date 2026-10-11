@@ -124,6 +124,16 @@ async function runComprehensiveTests() {
         const deleteMateri = await testRequest(server, `/api/materi/${createdMateriId}`, { method: 'DELETE' });
         assert(deleteMateri.statusCode === 200 && deleteMateri.body.success, 'DELETE /api/materi/:id deletes topic');
 
+        // 6. Homepage & Dashboard Routing
+        console.log('\n6. Testing Homepage (/) and Dashboard (/dashboard) Routing');
+        const homePage = await testRequest(server, '/');
+        assert(homePage.statusCode === 200, 'GET / returns 200 OK');
+        assert(typeof homePage.body === 'string' && homePage.body.includes('Muhammad Haerul'), 'GET / serves Muhammad Haerul portfolio index');
+
+        const dashPage = await testRequest(server, '/dashboard');
+        assert(dashPage.statusCode === 200, 'GET /dashboard returns 200 OK');
+        assert(typeof dashPage.body === 'string' && dashPage.body.includes('Muhammad Haerul\'s Portfolio'), 'GET /dashboard serves dashboard.html');
+
         console.log(`\n========================================`);
         console.log(`Total lifecycle tests: ${passed + failed} | Passed: ${passed} | Failed: ${failed}`);
         console.log(`========================================\n`);

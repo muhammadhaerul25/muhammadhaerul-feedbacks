@@ -58,7 +58,7 @@ app.use(express.static(publicDir, {
 }));
 
 // 4. Clean Page Routes
-app.get('/', (req, res) => res.redirect('/dashboard'));
+app.get('/', (req, res) => res.sendFile(path.join(publicDir, 'index.html')));
 app.get('/dashboard', (req, res) => res.sendFile(path.join(publicDir, 'dashboard.html')));
 app.get('/feedback', (req, res) => res.sendFile(path.join(publicDir, 'form-feedbacks.html')));
 app.get('/form-feedbacks', (req, res) => res.sendFile(path.join(publicDir, 'form-feedbacks.html')));
