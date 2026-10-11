@@ -172,3 +172,18 @@ model materi_options {
   @@index([created_at(sort: Desc)])
   @@map("materi_options")
 }
+
+model AllowedAdmin {
+  id         String   @id @default(cuid())
+  email      String   @unique
+  name       String?
+  avatar     String?
+  is_primary Boolean  @default(false)
+  added_by   String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@index([email])
+  @@map("allowed_admins")
+}
+

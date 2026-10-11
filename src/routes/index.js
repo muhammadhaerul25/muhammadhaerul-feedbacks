@@ -6,6 +6,7 @@ const formsRoutes = require('./forms.routes');
 const talksRoutes = require('./talks.routes');
 const projectsRoutes = require('./projects.routes');
 const feedbacksRoutes = require('./feedbacks.routes');
+const authRoutes = require('./auth.routes');
 
 // Health Check & Uptime Endpoint
 router.get('/health', async (req, res) => {
@@ -99,6 +100,7 @@ router.get('/', (req, res) => {
 });
 
 // Mount Sub-routers
+router.use('/auth', authRoutes);
 router.use('/forms', formsRoutes);
 router.use('/talks', talksRoutes);
 router.use('/projects', projectsRoutes);
