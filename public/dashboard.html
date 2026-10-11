@@ -469,15 +469,52 @@
     .chip.active { border-color: var(--g-blue); background: var(--g-blue-soft); color: var(--g-blue-dark); }
 
     select.filter-select {
-        padding: 7px 30px 7px 13px; border-radius: var(--r-pill);
+        padding: 7px 30px 7px 14px; border-radius: var(--r-pill);
         border: 1.5px solid var(--line); background: var(--surface);
         font-family: inherit; font-size: 0.82rem; font-weight: 700;
         color: var(--ink-2); cursor: pointer; outline: none; transition: var(--t);
-        appearance: none;
+        appearance: none; height: 38px; line-height: 20px; box-sizing: border-box;
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%2380868B' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-        background-repeat: no-repeat; background-position: right 10px center;
+        background-repeat: no-repeat; background-position: right 11px center;
     }
     select.filter-select:focus { border-color: var(--g-blue); }
+
+    .btn-filter-hidden {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        height: 38px;
+        padding: 0 15px;
+        border-radius: var(--r-pill);
+        border: 1.5px solid var(--line);
+        background: var(--surface);
+        font-family: inherit;
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: var(--ink-2);
+        cursor: pointer;
+        outline: none;
+        transition: var(--t);
+        white-space: nowrap;
+        user-select: none;
+        box-sizing: border-box;
+    }
+    .btn-filter-hidden:hover {
+        border-color: var(--g-blue);
+        color: var(--g-blue);
+        background: #f8fafd;
+        box-shadow: var(--shadow-sm);
+    }
+    .btn-filter-hidden.active {
+        border-color: var(--g-blue);
+        background: var(--g-blue-soft);
+        color: var(--g-blue-dark);
+        box-shadow: 0 0 0 1px var(--g-blue);
+    }
+    .btn-filter-hidden svg {
+        flex-shrink: 0;
+        stroke: currentColor;
+    }
 
     /* ════════════════════════════════════════
        FEEDBACK CARDS
@@ -1831,10 +1868,10 @@
                             <option value="hi">Highest Rating</option>
                             <option value="lo">Lowest Rating</option>
                         </select>
-                        <button type="button" class="filter-select" id="btn-toggle-hidden" onclick="toggleShowHidden()" style="display:inline-flex; align-items:center; gap:6px; cursor:pointer; height:42px; font-weight:600;" title="Toggle hidden messages">
+                        <button type="button" class="btn-filter-hidden" id="btn-toggle-hidden" onclick="toggleShowHidden()" title="Toggle hidden feedback">
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="icon-toggle-hidden"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                             <span id="lbl-toggle-hidden">Show Hidden</span>
-                            <span class="badge-count" id="hidden-count" style="display:none; background:var(--g-red); color:#fff; font-size:0.68rem; padding:1px 6px; border-radius:10px; font-weight:700;">0</span>
+                            <span class="badge-count" id="hidden-count" style="display:none; background:var(--g-red); color:#fff; font-size:0.68rem; padding:1px 7px; border-radius:var(--r-pill); font-weight:700; margin-left:2px;">0</span>
                         </button>
                     </div>
                     <div class="cards-grid" id="cards"></div>
@@ -2764,12 +2801,20 @@ function toggleShowHidden() {
     showHiddenFeedbacks = !showHiddenFeedbacks;
     var btn = document.getElementById('btn-toggle-hidden');
     var lbl = document.getElementById('lbl-toggle-hidden');
+    var ico = document.getElementById('icon-toggle-hidden');
     if (btn) {
         if (showHiddenFeedbacks) btn.classList.add('active');
         else btn.classList.remove('active');
     }
     if (lbl) {
-        lbl.textContent = showHiddenFeedbacks ? 'Hiding Hidden' : 'Show Hidden';
+        lbl.textContent = showHiddenFeedbacks ? 'Showing Hidden' : 'Show Hidden';
+    }
+    if (ico) {
+        if (showHiddenFeedbacks) {
+            ico.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
+        } else {
+            ico.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+        }
     }
     applyFilters();
 }
@@ -5206,14 +5251,14 @@ function openFeedbackDetailModal(id) {
 
         <!-- Hidden Alert Banner if currently hidden -->
         ${isHidden ? `
-            <div style="display:flex; align-items:center; gap:10px; background:#FDE8E8; color:#9B1C1C; padding:10px 14px; border-radius:var(--r-md); border:1px solid #F8B4B4; font-size:0.82rem; font-weight:600; margin-bottom:18px;">
+            <div style="display:flex; align-items:center; gap:10px; background:#FDE8E8; color:#9B1C1C; padding:10px 14px; border-radius:var(--r-md); border:1px solid #F8B4B4; font-size:0.82rem; font-weight:600; margin-bottom:14px;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
                 Status: Hidden from public view. Only administrators can see this feedback.
             </div>
         ` : ''}
 
         <!-- Meta chips (Date, Source, Materi) -->
-        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:18px;">
+        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:14px;">
             <div style="display:inline-flex; align-items:center; gap:5px; font-size:0.78rem; color:var(--ink-3); background:var(--bg); padding:4px 10px; border-radius:var(--r-pill); border:1px solid var(--line-soft);">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                 ${dateFormatted}
@@ -5229,25 +5274,21 @@ function openFeedbackDetailModal(id) {
         </div>
 
         <!-- Block 1: Response / Alasan Penilaian -->
-        <div style="margin-bottom:18px;">
+        <div style="margin-bottom:14px;">
             <div style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-4); margin-bottom:6px; display:flex; align-items:center; gap:6px;">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                 Response / Alasan Penilaian
             </div>
-            <div style="background:var(--bg); border:1px solid var(--line-soft); border-left:3px solid var(--g-blue); border-radius:var(--r-md); padding:14px 16px; font-size:0.92rem; color:var(--ink-2); line-height:1.6; white-space:pre-wrap; word-break:break-word;">
-                ${esc(d.alasan || '—')}
-            </div>
+            <div style="background:var(--bg); border:1px solid var(--line-soft); border-left:3px solid var(--g-blue); border-radius:var(--r-md); padding:12px 14px; font-size:0.9rem; color:var(--ink-2); line-height:1.55; white-space:pre-line; word-break:break-word; text-align:left;">${esc((d.alasan || '—').trim())}</div>
         </div>
 
         <!-- Block 2: Message / Pesan & Kesan / Saran -->
-        <div style="margin-bottom:10px;">
+        <div style="margin-bottom:4px;">
             <div style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-4); margin-bottom:6px; display:flex; align-items:center; gap:6px;">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                 Message / Pesan & Kesan / Saran
             </div>
-            <div style="background:var(--bg); border:1px solid var(--line-soft); border-left:3px solid var(--g-green); border-radius:var(--r-md); padding:14px 16px; font-size:0.92rem; color:var(--ink-2); line-height:1.6; white-space:pre-wrap; word-break:break-word;">
-                ${esc(d.pesan_kesan || '—')}
-            </div>
+            <div style="background:var(--bg); border:1px solid var(--line-soft); border-left:3px solid var(--g-green); border-radius:var(--r-md); padding:12px 14px; font-size:0.9rem; color:var(--ink-2); line-height:1.55; white-space:pre-line; word-break:break-word; text-align:left;">${esc((d.pesan_kesan || '—').trim())}</div>
         </div>
     `;
 
@@ -5441,7 +5482,7 @@ function closeFeedbackDetailModal() {
                 </div>
                 <button class="modal-close" onclick="closeFeedbackDetailModal()">✕</button>
             </div>
-            <div class="modal-body" id="feedback-detail-body" style="padding: 22px; overflow-y: auto; flex: 1;">
+            <div class="modal-body" id="feedback-detail-body" style="padding: 18px 22px; overflow-y: auto; flex: 1;">
             </div>
             <div class="modal-footer" id="feedback-detail-footer" style="padding: 14px 20px; background: var(--bg); border-top: 1px solid var(--line-soft); display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-shrink: 0; flex-wrap: wrap;">
             </div>
