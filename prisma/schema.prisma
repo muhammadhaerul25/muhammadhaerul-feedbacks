@@ -21,6 +21,8 @@ model feedbacks {
   @@index([created_at(sort: Desc)])
   @@index([source])
   @@index([rating])
+  @@index([source, created_at(sort: Desc)])
+  @@index([rating, created_at(sort: Desc)])
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
@@ -49,6 +51,7 @@ model form_responses {
 
   @@index([form_id])
   @@index([created_at(sort: Desc)])
+  @@index([form_id, created_at(sort: Desc)])
 }
 
 model forms {
@@ -75,6 +78,7 @@ model gsa_aiforge_akun_linkedin {
   url_linkedin String    @db.VarChar(500)
   created_at   DateTime? @default(now()) @db.Timestamptz(6)
 
+  @@index([created_at(sort: Asc)])
   @@map("gsa-aiforge_akun-linkedin")
 }
 
@@ -155,6 +159,16 @@ model Project {
   created_at  DateTime  @default(now())
   updated_at  DateTime  @updatedAt
 
+  @@index([dateRange])
   @@index([created_at(sort: Desc)])
   @@map("projects")
+}
+
+model materi_options {
+  id         Int       @id @default(autoincrement())
+  name       String    @db.VarChar(255)
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([created_at(sort: Desc)])
+  @@map("materi_options")
 }

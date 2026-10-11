@@ -47,6 +47,47 @@ exports.getFeedbacks = asyncHandler(async (req, res) => {
     res.json(responseData);
 });
 
+exports.updateFeedback = asyncHandler(async (req, res) => {
+    const id = parseInt(req.params.id, 10);
+    if (!id || isNaN(id)) {
+        const err = new Error('Invalid feedback ID.');
+        err.status = 400;
+        throw err;
+    }
+
+    const { namaLengkap, email, rating, alasan, pesanKesan, materi, source } = req.body;
+
+    const existing = await prisma.feedbacks.findUnique({ where: { id: id } });
+    if (!existing) {
+        const err = new Error('Feedback not found.');
+        err.status = 404;
+        throw err;
+    }
+
+    const updateData = {};
+    if (namaLengkap !== undefined) updateData.nama_lengkap = String(namaLengkap).trim();
+    if (email !== undefined) updateData.email = String(email).trim();
+    if (rating !== undefined) {
+        const r = parseInt(rating, 10);
+        if (!isNaN(r)) updateData.rating = r;
+    }
+    if (alasan !== undefined) updateData.alasan = String(alasan).trim();
+    if (pesanKesan !== undefined) updateData.pesan_kesan = String(pesanKesan).trim();
+    if (materi !== undefined) updateData.materi = materi ? String(materi).trim() : null;
+    if (source !== undefined) updateData.source = source ? String(source).trim() : null;
+
+    const result = await prisma.feedbacks.update({
+        where: { id: id },
+        data: updateData
+    });
+
+    cache.del('feedbacks:all');
+    cache.del('feedback');
+    cache.del('forms');
+
+    res.json({ success: true, message: 'Feedback updated successfully.', data: result });
+});
+
 exports.deleteFeedback = asyncHandler(async (req, res) => {
     const id = parseInt(req.params.id, 10);
     if (!id || isNaN(id)) {

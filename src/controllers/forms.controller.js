@@ -179,12 +179,28 @@ exports.deleteForm = asyncHandler(async (req, res) => {
         return res.json({ success: true, message: 'Form already deleted' });
     }
 
-    await prisma.$transaction([
+    const deleteOps = [
         prisma.form_responses.deleteMany({ where: { form_id: id } }),
         prisma.form_fields.deleteMany({ where: { form_id: id } }),
         prisma.forms.delete({ where: { id } })
-    ]);
+    ];
+
+    if (form.slug) {
+        deleteOps.unshift(prisma.feedbacks.deleteMany({
+            where: {
+                OR: [
+                    { source: `/form/${form.slug}` },
+                    { source: form.tag ? form.tag : undefined }
+                ]
+            }
+        }));
+    }
+
+    await prisma.$transaction(deleteOps);
 
     cache.del('form');
+    cache.del('forms:all');
+    cache.del('feedback');
+    cache.del('feedbacks:all');
     res.json({ success: true, message: 'Form deleted successfully' });
 });

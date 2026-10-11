@@ -567,48 +567,37 @@
 
     .fcard-top-right {
         display: flex;
-        flex-direction: column;
-        align-items: flex-end;
+        align-items: center;
         gap: 8px;
         flex-shrink: 0;
     }
-    .fcard-actions {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
-    .fcard-btn-action {
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
+    .fcard-btn-detail {
         display: inline-flex;
         align-items: center;
-        justify-content: center;
-        border: 1px solid var(--line);
+        gap: 5px;
+        padding: 5px 12px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--ink-2);
         background: var(--surface);
-        color: var(--ink-3);
+        border: 1px solid var(--line);
+        border-radius: var(--r-pill);
         cursor: pointer;
-        transition: var(--t-spring);
-        padding: 0;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 1px 2px rgba(0,0,0,0.03);
     }
-    .fcard-btn-action:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-sm);
-    }
-    .fcard-btn-action.hide:hover {
-        color: var(--g-blue);
-        border-color: var(--g-blue);
+    .fcard-btn-detail:hover {
         background: var(--g-blue-soft);
+        color: var(--g-blue);
+        border-color: rgba(66, 133, 244, 0.35);
+        transform: translateY(-1px);
+        box-shadow: 0 3px 8px rgba(66, 133, 244, 0.12);
     }
-    .fcard-btn-action.hide.active {
-        color: #D93025;
-        border-color: var(--g-red);
-        background: var(--g-red-soft);
+    .fcard-btn-detail svg {
+        transition: transform 0.2s ease;
     }
-    .fcard-btn-action.del:hover {
-        color: var(--g-red);
-        border-color: var(--g-red);
-        background: var(--g-red-soft);
+    .fcard-btn-detail:hover svg {
+        transform: scale(1.1);
     }
     .fcard.is-hidden {
         opacity: 0.72;
@@ -1712,8 +1701,8 @@
                     </div>
                     <div class="hero-right">
                         <div class="hero-stat">
-                            <div class="hero-stat-num" id="hs-visitors">—</div>
-                            <div class="hero-stat-label">Visitors</div>
+                            <div class="hero-stat-num" id="hs-feedbacks">—</div>
+                            <div class="hero-stat-label">Feedbacks</div>
                         </div>
                         <div class="hero-stat">
                             <div class="hero-stat-num" id="hs-attendees">—</div>
@@ -2599,10 +2588,9 @@ async function loadOverview() {
         forms.forEach(function(f){ formsDataMap[f.id] = f; });
         overviewLoaded = true;
 
-        // Hero Stats
+        // Hero Stats (100% genuine data)
         var attendees = talks.reduce(function(s,t) { return s + (t.jumlah_peserta||0); }, 0);
-        var totalEngagements = Math.max(1280, (attendees * 2) + (feedbacks.length * 15));
-        animateCount(document.getElementById('hs-visitors'), totalEngagements, '+', false);
+        animateCount(document.getElementById('hs-feedbacks'), feedbacks.length, '', false);
         animateCount(document.getElementById('hs-attendees'), attendees, '', false);
         
         var avgRate = 0;
@@ -2924,16 +2912,10 @@ function buildCard(d, i) {
             </div>
             <div class="fcard-top-right">
                 <div class="rating-badge ${rc}"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block;vertical-align:-1px;margin-right:2px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>${+d.rating}</div>
-                <div class="fcard-actions">
-                    <button type="button" class="fcard-btn-action hide ${isHidden ? 'active' : ''}" onclick="toggleHideFeedback(${d.id})" title="${isHidden ? 'Unhide this feedback' : 'Hide this feedback'}">
-                        ${isHidden 
-                            ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>' 
-                            : '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>'}
-                    </button>
-                    <button type="button" class="fcard-btn-action del" onclick="confirmDeleteFeedback(${d.id}, '${nameEsc}')" title="Delete this feedback permanently">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-                    </button>
-                </div>
+                <button type="button" class="fcard-btn-detail" onclick="openFeedbackDetailModal(${d.id})" title="Lihat detail, edit, hide, atau hapus feedback">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                    Detail
+                </button>
             </div>
         </div>
         <div class="fcard-block-label">Response</div>
@@ -5181,12 +5163,304 @@ function execConfirm() {
     hideConfirm();
 }
 
+/* ════════════════════════════════════════
+   FEEDBACK DETAIL MODAL & EDIT/HIDE/DELETE
+════════════════════════════════════════ */
+var activeFeedbackDetailId = null;
+
+function openFeedbackDetailModal(id) {
+    activeFeedbackDetailId = id;
+    var d = (allData || []).find(function(item) { return Number(item.id) === Number(id); });
+    if (!d) return;
+
+    var overlay = document.getElementById('feedback-detail-overlay');
+    var body = document.getElementById('feedback-detail-body');
+    var footer = document.getElementById('feedback-detail-footer');
+    var titleEl = document.getElementById('feedback-detail-title');
+    if (!overlay || !body || !footer) return;
+
+    if (titleEl) titleEl.textContent = 'Feedback Details';
+
+    var isHidden = isFeedbackHidden(d.id);
+    var c = colorFor(d.nama_lengkap);
+    var rc = ratingClass(+d.rating);
+    var nameEsc = esc(d.nama_lengkap || 'Anonymous');
+    var emailEsc = esc(d.email || '—');
+    var dateFormatted = fmtDate(d.created_at);
+    
+    var ratingNum = +d.rating;
+    var ratingDesc = ratingNum >= 9 ? 'Outstanding' : (ratingNum >= 7 ? 'Good / Positive' : 'Needs Improvement');
+
+    var html = `
+        <!-- Profile Header -->
+        <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:20px; padding-bottom:18px; border-bottom:1px solid var(--line-soft);">
+            <div style="display:flex; align-items:center; gap:14px; min-width:0;">
+                <div style="width:48px; height:48px; border-radius:50%; background:${c[0]}; color:#fff; display:flex; align-items:center; justify-content:center; font-size:1.1rem; font-weight:800; flex-shrink:0; box-shadow:var(--shadow-sm);">
+                    ${esc(initials(d.nama_lengkap))}
+                </div>
+                <div style="min-width:0;">
+                    <div style="font-size:1.15rem; font-weight:800; color:var(--ink); letter-spacing:-0.01em; line-height:1.25; margin-bottom:4px; word-break:break-word;">
+                        ${nameEsc}
+                    </div>
+                    <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                        <a href="mailto:${emailEsc}" style="font-size:0.85rem; color:var(--g-blue); text-decoration:none; font-weight:500;" title="Send email">
+                            ${emailEsc}
+                        </a>
+                        ${d.email ? `<button type="button" onclick="navigator.clipboard.writeText('${emailEsc}'); showToast('Email disalin ke clipboard!');" style="background:none; border:none; color:var(--ink-4); cursor:pointer; padding:2px 4px; border-radius:4px; display:inline-flex; align-items:center;" title="Copy email"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>` : ''}
+                    </div>
+                </div>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px; flex-shrink:0;">
+                <div class="rating-badge ${rc}" style="font-size:0.95rem; padding:6px 14px; border-radius:var(--r-pill);">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block; vertical-align:-1px; margin-right:4px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>${ratingNum} / 10
+                </div>
+                <span style="font-size:0.72rem; font-weight:700; color:var(--ink-4); text-transform:uppercase; letter-spacing:0.04em;">${ratingDesc}</span>
+            </div>
+        </div>
+
+        <!-- Hidden Alert Banner if currently hidden -->
+        ${isHidden ? `
+            <div style="display:flex; align-items:center; gap:10px; background:#FDE8E8; color:#9B1C1C; padding:10px 14px; border-radius:var(--r-md); border:1px solid #F8B4B4; font-size:0.82rem; font-weight:600; margin-bottom:18px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                Status: Hidden from public view. Only administrators can see this feedback.
+            </div>
+        ` : ''}
+
+        <!-- Meta chips (Date, Source, Materi) -->
+        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:18px;">
+            <div style="display:inline-flex; align-items:center; gap:5px; font-size:0.78rem; color:var(--ink-3); background:var(--bg); padding:4px 10px; border-radius:var(--r-pill); border:1px solid var(--line-soft);">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                ${dateFormatted}
+            </div>
+            <div style="display:inline-flex; align-items:center; gap:5px; font-size:0.78rem; font-weight:600; color:var(--g-blue-dark); background:var(--g-blue-soft); padding:4px 10px; border-radius:var(--r-pill);">
+                ${esc(d.source || 'General')}
+            </div>
+            ${d.materi ? `
+                <div style="display:inline-flex; align-items:center; gap:5px; font-size:0.78rem; font-weight:600; color:var(--g-green-dark); background:var(--g-green-soft); padding:4px 10px; border-radius:var(--r-pill);">
+                    ${esc(d.materi)}
+                </div>
+            ` : ''}
+        </div>
+
+        <!-- Block 1: Response / Alasan Penilaian -->
+        <div style="margin-bottom:18px;">
+            <div style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-4); margin-bottom:6px; display:flex; align-items:center; gap:6px;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                Response / Alasan Penilaian
+            </div>
+            <div style="background:var(--bg); border:1px solid var(--line-soft); border-left:3px solid var(--g-blue); border-radius:var(--r-md); padding:14px 16px; font-size:0.92rem; color:var(--ink-2); line-height:1.6; white-space:pre-wrap; word-break:break-word;">
+                ${esc(d.alasan || '—')}
+            </div>
+        </div>
+
+        <!-- Block 2: Message / Pesan & Kesan / Saran -->
+        <div style="margin-bottom:10px;">
+            <div style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-4); margin-bottom:6px; display:flex; align-items:center; gap:6px;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                Message / Pesan & Kesan / Saran
+            </div>
+            <div style="background:var(--bg); border:1px solid var(--line-soft); border-left:3px solid var(--g-green); border-radius:var(--r-md); padding:14px 16px; font-size:0.92rem; color:var(--ink-2); line-height:1.6; white-space:pre-wrap; word-break:break-word;">
+                ${esc(d.pesan_kesan || '—')}
+            </div>
+        </div>
+    `;
+
+    body.innerHTML = html;
+
+    // Footer Action Buttons: Edit, Hide, Delete, Close
+    footer.innerHTML = `
+        <div style="display:flex; align-items:center; gap:8px;">
+            <button type="button" class="btn btn-ghost" onclick="toggleHideFeedbackFromModal(${d.id})" style="gap:6px; font-size:0.82rem; padding:8px 14px; font-weight:600; color:${isHidden ? 'var(--g-blue)' : 'var(--ink-2)'};">
+                ${isHidden 
+                    ? '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Unhide' 
+                    : '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg> Hide'}
+            </button>
+            <button type="button" class="btn btn-ghost" onclick="deleteFeedbackFromModal(${d.id})" style="gap:6px; font-size:0.82rem; padding:8px 14px; font-weight:600; color:var(--g-red); border-color:rgba(234,67,53,0.3); background:var(--g-red-soft);">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                Delete
+            </button>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+            <button type="button" class="btn btn-primary" onclick="editFeedbackInModal(${d.id})" style="gap:6px; font-size:0.82rem; padding:8px 16px; font-weight:600;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                Edit
+            </button>
+            <button type="button" class="btn-sm-ghost" onclick="closeFeedbackDetailModal()">Close</button>
+        </div>
+    `;
+
+    overlay.classList.add('show');
+}
+
+function editFeedbackInModal(id) {
+    var d = (allData || []).find(function(item) { return Number(item.id) === Number(id); });
+    if (!d) return;
+
+    var body = document.getElementById('feedback-detail-body');
+    var footer = document.getElementById('feedback-detail-footer');
+    var titleEl = document.getElementById('feedback-detail-title');
+    if (!body || !footer) return;
+
+    if (titleEl) titleEl.textContent = 'Edit Feedback';
+
+    var ratingVal = +d.rating || 10;
+
+    var html = `
+        <form id="form-edit-feedback" onsubmit="event.preventDefault(); saveFeedbackFromModal(${d.id});">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;">
+                <div>
+                    <label style="display:block; font-size:0.78rem; font-weight:700; color:var(--ink-2); margin-bottom:5px;">Nama Lengkap</label>
+                    <input type="text" id="ef-nama" required class="form-input" value="${esc(d.nama_lengkap || '')}" style="width:100%; padding:9px 12px; border:1px solid var(--line); border-radius:var(--r-md); font-size:0.9rem; background:var(--surface); color:var(--ink);">
+                </div>
+                <div>
+                    <label style="display:block; font-size:0.78rem; font-weight:700; color:var(--ink-2); margin-bottom:5px;">Email</label>
+                    <input type="email" id="ef-email" required class="form-input" value="${esc(d.email || '')}" style="width:100%; padding:9px 12px; border:1px solid var(--line); border-radius:var(--r-md); font-size:0.9rem; background:var(--surface); color:var(--ink);">
+                </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;">
+                <div>
+                    <label style="display:block; font-size:0.78rem; font-weight:700; color:var(--ink-2); margin-bottom:5px;">Rating (1 - 10)</label>
+                    <select id="ef-rating" class="form-input" style="width:100%; padding:9px 12px; border:1px solid var(--line); border-radius:var(--r-md); font-size:0.9rem; background:var(--surface); color:var(--ink);">
+                        ${[10,9,8,7,6,5,4,3,2,1].map(function(num) {
+                            return '<option value="' + num + '" ' + (ratingVal === num ? 'selected' : '') + '>★ ' + num + (num>=9 ? ' - Outstanding' : (num>=7 ? ' - Good' : '')) + '</option>';
+                        }).join('')}
+                    </select>
+                </div>
+                <div>
+                    <label style="display:block; font-size:0.78rem; font-weight:700; color:var(--ink-2); margin-bottom:5px;">Topik / Materi</label>
+                    <input type="text" id="ef-materi" class="form-input" value="${esc(d.materi || '')}" placeholder="Optional topic" style="width:100%; padding:9px 12px; border:1px solid var(--line); border-radius:var(--r-md); font-size:0.9rem; background:var(--surface); color:var(--ink);">
+                </div>
+            </div>
+
+            <div style="margin-bottom:14px;">
+                <label style="display:block; font-size:0.78rem; font-weight:700; color:var(--ink-2); margin-bottom:5px;">Response / Alasan Penilaian</label>
+                <textarea id="ef-alasan" rows="3" required class="form-input" style="width:100%; padding:9px 12px; border:1px solid var(--line); border-radius:var(--r-md); font-size:0.9rem; background:var(--surface); color:var(--ink); resize:vertical;">${esc(d.alasan || '')}</textarea>
+            </div>
+
+            <div style="margin-bottom:6px;">
+                <label style="display:block; font-size:0.78rem; font-weight:700; color:var(--ink-2); margin-bottom:5px;">Message / Pesan & Kesan / Saran</label>
+                <textarea id="ef-pesan" rows="3" required class="form-input" style="width:100%; padding:9px 12px; border:1px solid var(--line); border-radius:var(--r-md); font-size:0.9rem; background:var(--surface); color:var(--ink); resize:vertical;">${esc(d.pesan_kesan || '')}</textarea>
+            </div>
+        </form>
+    `;
+
+    body.innerHTML = html;
+
+    footer.innerHTML = `
+        <button type="button" class="btn btn-ghost" onclick="openFeedbackDetailModal(${d.id})">Cancel</button>
+        <button type="button" id="btn-save-ef" class="btn btn-primary" onclick="saveFeedbackFromModal(${d.id})" style="gap:6px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+            Save Changes
+        </button>
+    `;
+}
+
+async function saveFeedbackFromModal(id) {
+    var nama = (document.getElementById('ef-nama').value || '').trim();
+    var email = (document.getElementById('ef-email').value || '').trim();
+    var rating = parseInt(document.getElementById('ef-rating').value, 10);
+    var materi = (document.getElementById('ef-materi').value || '').trim();
+    var alasan = (document.getElementById('ef-alasan').value || '').trim();
+    var pesan = (document.getElementById('ef-pesan').value || '').trim();
+
+    if (!nama || !email || !alasan || !pesan) {
+        showToast('Mohon lengkapi semua field yang wajib diisi.');
+        return;
+    }
+
+    var saveBtn = document.getElementById('btn-save-ef');
+    if (saveBtn) {
+        saveBtn.disabled = true;
+        saveBtn.innerHTML = 'Saving...';
+    }
+
+    try {
+        var res = await fetch('/api/feedbacks/' + id, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                namaLengkap: nama,
+                email: email,
+                rating: rating,
+                materi: materi,
+                alasan: alasan,
+                pesanKesan: pesan
+            })
+        });
+        var json = await res.json();
+        if (json.success) {
+            var idx = (allData || []).findIndex(function(x) { return Number(x.id) === Number(id); });
+            if (idx !== -1) {
+                allData[idx].nama_lengkap = nama;
+                allData[idx].email = email;
+                allData[idx].rating = rating;
+                allData[idx].materi = materi;
+                allData[idx].alasan = alasan;
+                allData[idx].pesan_kesan = pesan;
+            }
+            applyFilters();
+            updateOverviewStatsAfterDelete();
+            showToast('Feedback berhasil diperbarui.');
+            openFeedbackDetailModal(id);
+        } else {
+            showToast(json.error || 'Gagal menyimpan perubahan feedback.');
+            if (saveBtn) {
+                saveBtn.disabled = false;
+                saveBtn.textContent = 'Save Changes';
+            }
+        }
+    } catch(e) {
+        console.error('Error saving feedback:', e);
+        showToast('Gagal menyimpan perubahan feedback.');
+        if (saveBtn) {
+            saveBtn.disabled = false;
+            saveBtn.textContent = 'Save Changes';
+        }
+    }
+}
+
+function toggleHideFeedbackFromModal(id) {
+    toggleHideFeedback(id);
+    openFeedbackDetailModal(id);
+}
+
+function deleteFeedbackFromModal(id) {
+    var d = (allData || []).find(function(item) { return Number(item.id) === Number(id); });
+    var name = d ? d.nama_lengkap : 'Anonymous';
+    closeFeedbackDetailModal();
+    confirmDeleteFeedback(id, name);
+}
+
+function closeFeedbackDetailModal() {
+    var overlay = document.getElementById('feedback-detail-overlay');
+    if (overlay) overlay.classList.remove('show');
+    activeFeedbackDetailId = null;
+}
+
 // Init active view on page load
 (function() {
     var savedView = localStorage.getItem('activeView') || 'dashboard';
     switchView(savedView);
 })();
 </script>
+
+    <!-- Feedback Detail Modal -->
+    <div class="modal-overlay" id="feedback-detail-overlay" onclick="if(event.target===this)closeFeedbackDetailModal()">
+        <div class="modal" style="max-width: 620px; width: 100%; padding: 0; display: flex; flex-direction: column; max-height: 90vh; overflow: hidden; border-radius: 16px;">
+            <div class="modal-head" style="padding: 16px 20px; border-bottom: 1px solid var(--line-soft); flex-shrink: 0; display: flex; align-items: center; justify-content: space-between;">
+                <div class="modal-title" style="display:flex; align-items:center; gap:8px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--g-blue)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                    <span id="feedback-detail-title">Feedback Details</span>
+                </div>
+                <button class="modal-close" onclick="closeFeedbackDetailModal()">✕</button>
+            </div>
+            <div class="modal-body" id="feedback-detail-body" style="padding: 22px; overflow-y: auto; flex: 1;">
+            </div>
+            <div class="modal-footer" id="feedback-detail-footer" style="padding: 14px 20px; background: var(--bg); border-top: 1px solid var(--line-soft); display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-shrink: 0; flex-wrap: wrap;">
+            </div>
+        </div>
+    </div>
 
     <!-- View Talk Modal -->
     <div class="modal-overlay" id="talk-view-overlay" onclick="if(event.target===this)closeTalkViewModal()">

@@ -131,6 +131,15 @@ async function runComprehensiveTests() {
     } catch (err) {
         console.error('Lifecycle test error:', err);
     } finally {
+        // Ensure strictly zero dummy/test records are ever left behind
+        await prisma.feedbacks.deleteMany({
+            where: {
+                OR: [
+                    { email: { contains: '@example.com' } },
+                    { source: { contains: 'automated-test' } }
+                ]
+            }
+        }).catch(() => {});
         server.close();
         await prisma.$disconnect();
         process.exit(failed > 0 ? 1 : 0);
