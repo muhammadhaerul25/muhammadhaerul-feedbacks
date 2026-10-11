@@ -83,52 +83,75 @@
     ════════════════════════════════════════ */
     .steps {
         display: flex;
-        align-items: center;
-        gap: 0;
-        margin-bottom: 32px;
+        align-items: flex-start;
+        justify-content: space-between;
+        position: relative;
+        margin-bottom: 34px;
+        padding: 0 4px;
+    }
+
+    .steps-track {
+        position: absolute;
+        top: 15px;
+        left: 36px;
+        right: 36px;
+        height: 3px;
+        background: #E8EAED;
+        border-radius: var(--r-pill);
+        z-index: 0;
+        overflow: hidden;
+    }
+    .steps-track-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--g-blue), #1A73E8);
+        width: 0%;
+        transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: var(--r-pill);
     }
 
     .step {
         display: flex;
+        flex-direction: column;
         align-items: center;
-        gap: 8px;
+        gap: 7px;
         flex: 1;
         position: relative;
+        z-index: 1;
     }
-    .step:not(:last-child)::after {
-        content: '';
-        position: absolute;
-        left: calc(28px + 8px);
-        right: 0;
-        top: 14px;
-        height: 2px;
-        background: var(--border);
-        z-index: 0;
-        transition: background 0.4s;
-    }
-    .step.done:not(:last-child)::after { background: var(--g-blue); }
 
     .step-dot {
-        width: 28px; height: 28px;
+        width: 32px; height: 32px;
         border-radius: 50%;
         display: flex; align-items: center; justify-content: center;
-        font-size: 0.72rem; font-weight: 800;
-        background: var(--border); color: var(--ink-4);
-        border: 2px solid var(--border);
-        transition: var(--t); position: relative; z-index: 1;
+        font-size: 0.78rem; font-weight: 800;
+        background: var(--surface); color: var(--ink-4);
+        border: 2px solid #DADCE0;
+        box-shadow: 0 0 0 4px var(--surface);
+        transition: var(--t-spring);
+        position: relative; z-index: 1;
         flex-shrink: 0;
     }
-    .step.active .step-dot  { background: var(--g-blue); border-color: var(--g-blue); color: #fff; box-shadow: 0 0 0 4px rgba(66,133,244,0.2); }
-    .step.done   .step-dot  { background: var(--g-blue); border-color: var(--g-blue); color: #fff; }
-    .step-dot svg { width: 12px; height: 12px; }
+    .step.active .step-dot  {
+        background: var(--g-blue); border-color: var(--g-blue);
+        color: #fff;
+        box-shadow: 0 0 0 5px rgba(66,133,244,0.2), 0 2px 8px rgba(66,133,244,0.3);
+        transform: scale(1.05);
+    }
+    .step.done   .step-dot  {
+        background: var(--g-blue); border-color: var(--g-blue);
+        color: #fff;
+        box-shadow: 0 0 0 4px var(--surface);
+    }
+    .step-dot svg { width: 14px; height: 14px; }
 
     .step-label {
-        font-size: 0.72rem; font-weight: 700;
+        font-size: 0.73rem; font-weight: 700;
         color: var(--ink-4); white-space: nowrap;
         transition: var(--t);
+        letter-spacing: 0.01em;
     }
-    .step.active .step-label { color: var(--g-blue); }
-    .step.done   .step-label { color: var(--ink-3); }
+    .step.active .step-label { color: var(--g-blue); font-weight: 800; }
+    .step.done   .step-label { color: var(--ink-2); font-weight: 700; }
 
     /* ════════════════════════════════════════
        STEP PANELS
@@ -447,6 +470,9 @@
 
             <!-- PROGRESS -->
             <div class="steps" id="steps-bar">
+                <div class="steps-track">
+                    <div class="steps-track-fill" id="steps-progress" style="width: 0%;"></div>
+                </div>
                 <div class="step active" id="step-ind-1">
                     <div class="step-dot">1</div>
                     <span class="step-label">Your Info</span>
@@ -681,12 +707,17 @@ function goStep(to, goBack) {
     if (goBack) nextPanel.classList.add('back');
     nextPanel.classList.add('active');
 
-    // Update step indicators
+    // Update step indicators and progress bar
     for (var i = 1; i <= 3; i++) {
         var ind = document.getElementById('step-ind-' + i);
         ind.classList.remove('active', 'done');
         if (i < to) ind.classList.add('done');
         if (i === to) ind.classList.add('active');
+    }
+
+    var progressEl = document.getElementById('steps-progress');
+    if (progressEl) {
+        progressEl.style.width = (to === 1 ? '0%' : to === 2 ? '50%' : '100%');
     }
 
     currentStep = to;
@@ -800,6 +831,8 @@ function resetForm() {
         ind.classList.remove('active', 'done');
         if (i === 1) ind.classList.add('active');
     }
+    var progressEl = document.getElementById('steps-progress');
+    if (progressEl) progressEl.style.width = '0%';
     document.getElementById('fullName').value = '';
     document.getElementById('emailAddr').value = '';
     document.getElementById('topicSel').selectedIndex = 0;
@@ -825,22 +858,50 @@ if (localStorage.getItem('feedbackSubmitted') === 'true') {
 }
 
 /* ════════════════════════════════════
-   LOAD TOPICS
+   LOAD TOPICS WITH SMART FALLBACK
 ════════════════════════════════════ */
+function esc(str) {
+    return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
 document.addEventListener('DOMContentLoaded', async function() {
+    var sel = document.getElementById('topicSel');
+    if (!sel) return;
     try {
-        var res  = await fetch('/api/materi');
-        var json = await res.json();
-        var sel  = document.getElementById('topicSel');
-        if (json.success && json.data.length > 0) {
-            sel.innerHTML = '<option value="" disabled selected>— Select a topic —</option>' +
-                json.data.map(function(m){ return '<option value="' + m.name + '">' + m.name + '</option>'; }).join('');
-        } else {
-            sel.innerHTML = '<option value="" disabled selected>No topics available</option>';
+        var [resMateri, resTalks] = await Promise.all([
+            fetch('/api/materi').then(r => r.json()).catch(() => ({ data: [] })),
+            fetch('/api/talks').then(r => r.json()).catch(() => ({ data: [] }))
+        ]);
+        
+        var topicList = [];
+        if (resMateri && resMateri.data && resMateri.data.length > 0) {
+            topicList = topicList.concat(resMateri.data.map(m => m.name));
         }
+        if (resTalks && resTalks.data && resTalks.data.length > 0) {
+            resTalks.data.forEach(function(t) {
+                if (t.event && !topicList.includes(t.event)) topicList.push(t.event);
+            });
+        }
+        
+        // Smart fallback if database table is empty
+        if (topicList.length === 0) {
+            topicList = [
+                'GSA AI Forge: AI for Personal Branding & Portfolio Digital',
+                'Mindful AI: AI Personalization for Students',
+                'Build with AI: AI-Driven Development',
+                'Workshop Pelatihan AI untuk Pengembangan Web',
+                'General Portfolio & Speaking Feedback'
+            ];
+        }
+
+        sel.innerHTML = '<option value="" disabled selected>— Select a session / topic —</option>' +
+            topicList.map(function(t){ return '<option value="' + esc(t) + '">' + esc(t) + '</option>'; }).join('');
     } catch (e) {
-        var sel = document.getElementById('topicSel');
-        if (sel) sel.innerHTML = '<option value="" disabled selected>Failed to load topics</option>';
+        console.error('Error loading topics:', e);
+        sel.innerHTML = '<option value="" disabled selected>— Select a session / topic —</option>' +
+            '<option value="GSA AI Forge 2026">GSA AI Forge 2026</option>' +
+            '<option value="Mindful AI 2026">Mindful AI 2026</option>' +
+            '<option value="General Feedback">General Feedback</option>';
     }
 });
 </script>

@@ -47,6 +47,34 @@ exports.getFeedbacks = asyncHandler(async (req, res) => {
     res.json(responseData);
 });
 
+exports.deleteFeedback = asyncHandler(async (req, res) => {
+    const id = parseInt(req.params.id, 10);
+    if (!id || isNaN(id)) {
+        const err = new Error('Invalid feedback ID.');
+        err.status = 400;
+        throw err;
+    }
+
+    try {
+        const result = await prisma.feedbacks.delete({
+            where: { id: id }
+        });
+
+        cache.del('feedbacks:all');
+        cache.del('feedback');
+        cache.del('forms');
+
+        res.json({ success: true, message: 'Feedback deleted successfully.', data: result });
+    } catch (e) {
+        if (e.code === 'P2025') {
+            const err = new Error('Feedback not found.');
+            err.status = 404;
+            throw err;
+        }
+        throw e;
+    }
+});
+
 exports.getMateriOptions = asyncHandler(async (req, res) => {
     const cached = cache.get('materi:all');
     if (cached) {

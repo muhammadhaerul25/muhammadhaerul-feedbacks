@@ -8,12 +8,15 @@ const { validateIntParam } = require('../middlewares/validateParams');
 // Legacy endpoints
 router.post('/submit_feedback', submissionLimiter, feedbacksController.submitFeedback);
 router.get('/get_feedback', feedbacksController.getFeedbacks);
+router.delete('/delete_feedback/:id', validateIntParam('id'), feedbacksController.deleteFeedback);
 
 // RESTful aliases
 router.post('/feedbacks', submissionLimiter, feedbacksController.submitFeedback);
 router.get('/feedbacks', feedbacksController.getFeedbacks);
+router.delete('/feedbacks/:id', validateIntParam('id'), feedbacksController.deleteFeedback);
 router.post('/feedback', submissionLimiter, feedbacksController.submitFeedback);
 router.get('/feedback', feedbacksController.getFeedbacks);
+router.delete('/feedback/:id', validateIntParam('id'), feedbacksController.deleteFeedback);
 
 // --- Materi Options ---
 router.get('/materi', feedbacksController.getMateriOptions);
