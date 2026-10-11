@@ -49,12 +49,17 @@ async function runComprehensiveTests() {
 
     try {
         // 1. Healthcheck & System Metrics
-        console.log('1. Testing /api/health');
+        console.log('1. Testing /api/health and /api/keep-alive');
         const health = await testRequest(server, '/api/health');
         assert(health.statusCode === 200, 'Status code is 200');
         assert(health.body.success === true, 'Healthcheck success is true');
         assert(health.body.database && health.body.database.status === 'healthy', 'Database status is healthy');
         assert(health.headers['x-response-time'] !== undefined, 'X-Response-Time header is present');
+
+        const keepAlive = await testRequest(server, '/api/keep-alive');
+        assert(keepAlive.statusCode === 200, 'Keep-Alive status code is 200');
+        assert(keepAlive.body.success === true, 'Keep-Alive success is true');
+        assert(typeof keepAlive.body.latencyMs === 'number', 'Keep-Alive latency is tracked');
 
         // 2. Forms Lifecycle
         console.log('\n2. Testing Form Creation, Slug Fetch, and Response Submission');

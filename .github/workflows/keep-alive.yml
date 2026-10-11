@@ -1,0 +1,39 @@
+name: Supabase Database Keep-Alive
+
+on:
+  schedule:
+    # Run every 2 days at 04:00 UTC (prevents Supabase free tier 7-14 days inactivity pause)
+    - cron: '0 4 */2 * *'
+  workflow_dispatch:
+    # Allows manual trigger at any time from GitHub Actions tab
+
+jobs:
+  ping-database:
+    name: Ping Database & Reset Inactivity Timer
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Keep-Alive Endpoint
+        run: |
+          echo "Sending keep-alive query to Supabase PostgreSQL database..."
+          RESPONSE=$(curl -s -w "\n%{http_code}" -X GET "https://www.muhammadhaerul.tech/api/keep-alive" || \
+                    curl -s -w "\n%{http_code}" -X GET "https://muhammadhaerul-portfolio-mlyc7w8tg-muhammadhaeruls-projects.vercel.app/api/keep-alive")
+          
+          HTTP_BODY=$(echo "$RESPONSE" | sed '$d')
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          
+          echo "HTTP Status Code: $HTTP_CODE"
+          echo "Response Body: $HTTP_BODY"
+          
+          if [ "$HTTP_CODE" -eq 200 ]; then
+            echo "✅ Database keep-alive ping succeeded! Supabase project is active and will not be paused."
+            echo "### 🚀 Supabase Keep-Alive Ping Successful" >> $GITHUB_STEP_SUMMARY
+            echo "- **Status Code**: $HTTP_CODE" >> $GITHUB_STEP_SUMMARY
+            echo "- **Response**: \`$HTTP_BODY\`" >> $GITHUB_STEP_SUMMARY
+            echo "- **Timestamp**: $(date -u)" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Keep-alive ping failed with HTTP $HTTP_CODE"
+            echo "### ⚠️ Supabase Keep-Alive Ping Failed" >> $GITHUB_STEP_SUMMARY
+            echo "- **Status Code**: $HTTP_CODE" >> $GITHUB_STEP_SUMMARY
+            echo "- **Response**: \`$HTTP_BODY\`" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi

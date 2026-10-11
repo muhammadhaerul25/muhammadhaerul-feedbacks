@@ -42,6 +42,29 @@ router.get('/health', async (req, res) => {
     });
 });
 
+// Keep-Alive Ping Endpoint (Automated Cron / Supabase Inactivity Prevention)
+router.get('/keep-alive', async (req, res) => {
+    const startTime = Date.now();
+    try {
+        await prisma.$queryRaw`SELECT 1`;
+        const latencyMs = Date.now() - startTime;
+        res.status(200).json({
+            success: true,
+            message: 'Database keep-alive ping successful. Supabase inactivity timer reset.',
+            latencyMs,
+            timestamp: new Date().toISOString()
+        });
+    } catch (err) {
+        console.error('[Keep-Alive DB Error]:', err.message);
+        res.status(500).json({
+            success: false,
+            error: 'Failed to ping database',
+            details: err.message,
+            timestamp: new Date().toISOString()
+        });
+    }
+});
+
 // Root API Directory & Meta Information
 router.get('/', (req, res) => {
     res.json({
