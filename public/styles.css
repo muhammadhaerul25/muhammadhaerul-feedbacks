@@ -184,6 +184,7 @@ img {
   font-weight: 700;
   font-size: 19px;
   letter-spacing: -.02em;
+  white-space: nowrap;
 }
 
 .nav-logo-mark {
@@ -1836,6 +1837,10 @@ img {
 }
 
 @media (max-width: 768px) {
+  .nav-logo {
+    font-size: 16.5px;
+  }
+
   .container {
     padding: 0 22px;
   }
