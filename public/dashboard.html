@@ -127,19 +127,6 @@
     }
     .brand-role { font-size: 0.7rem; color: var(--ink-3); font-weight: 500; margin-top: 1px; }
 
-    .live-pill {
-        display: inline-flex; align-items: center; gap: 4px;
-        padding: 2px 7px;
-        background: #E6F4EA; border: 1px solid #B8DBBF;
-        border-radius: var(--r-pill);
-        font-size: 0.62rem; font-weight: 800; color: #137333;
-        letter-spacing: 0.04em; white-space: nowrap;
-    }
-    .live-pill::before {
-        content: '●'; font-size: 0.4rem; color: #34A853;
-        animation: blink 2s infinite;
-    }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
     .sidebar-nav {
         flex: 1; padding: 10px 12px;
@@ -1676,7 +1663,6 @@
                 </div>
             </div>
             <div style="display:flex;align-items:center;gap:12px">
-                <div class="live-pill">Live</div>
                 <button class="btn btn-ghost" onclick="refreshData()" id="btn-refresh" style="display:none">
                     <svg id="refresh-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
                     Refresh
