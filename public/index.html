@@ -37,6 +37,7 @@
         <a href="#projects" data-nav>Projects</a>
         <a href="#publications" data-nav>Publications</a>
         <a href="#talks" data-nav>Talks</a>
+        <a href="#testimonials" data-nav>Feedback</a>
         <a href="#awards" data-nav>Awards</a>
         <a href="#certifications" data-nav>Certifications</a>
         <a href="#contact" data-nav>Contact</a>
@@ -112,6 +113,27 @@
             </svg>
           </a>
         </div>
+
+        <!-- Live Portfolio Stat Counter Strip -->
+        <div class="hero-stats-strip reveal">
+          <div class="hero-stat-item">
+            <span class="hero-stat-val" id="stat-count-projects">13+</span>
+            <span class="hero-stat-label">Shipped Projects</span>
+          </div>
+          <div class="hero-stat-item">
+            <span class="hero-stat-val" id="stat-count-attendees">650+</span>
+            <span class="hero-stat-label">Workshop Attendees</span>
+          </div>
+          <div class="hero-stat-item">
+            <span class="hero-stat-val" id="stat-count-rating">9.4★</span>
+            <span class="hero-stat-label">Attendee Satisfaction</span>
+          </div>
+          <div class="hero-stat-item">
+            <span class="hero-stat-val">3+ Yrs</span>
+            <span class="hero-stat-label">Production AI Experience</span>
+          </div>
+        </div>
+      </div>
       </div>
 
       <div class="hero-scroll-cue" aria-hidden="true">
@@ -560,195 +582,17 @@
             prototyped.</p>
         </div>
 
-        <div class="project-list" id="projectList">
+        <!-- Interactive Category Filter Bar -->
+        <div class="project-filter-bar reveal">
+          <button class="p-filter-pill active" data-filter="all">All Projects (13)</button>
+          <button class="p-filter-pill" data-filter="cv">Computer Vision &amp; OCR</button>
+          <button class="p-filter-pill" data-filter="llm">LLMs &amp; Agents</button>
+          <button class="p-filter-pill" data-filter="web">Full-Stack &amp; Web</button>
+        </div>
 
-          <article class="project-row reveal">
-            <div class="project-media">
-              <div class="project-media-inner ph-blue">
-                <svg viewBox="0 0 200 140" width="70%">
-                  <rect x="20" y="20" width="160" height="100" rx="8" fill="none" stroke="currentColor"
-                    stroke-width="2" />
-                  <path d="M40 90 L75 55 L100 80 L130 45 L160 75" fill="none" stroke="currentColor"
-                    stroke-width="2.5" />
-                  <circle cx="75" cy="55" r="4" fill="currentColor" />
-                  <circle cx="130" cy="45" r="4" fill="currentColor" />
-                </svg>
-              </div>
-            </div>
-            <div class="project-info">
-              <span class="project-tag">Computer Vision · Cultural AI</span>
-              <h3>Aksara Lontara Recognition</h3>
-              <p class="project-overview">A digital canvas where users hand-draw the traditional Aksara Lontara script
-                of South Sulawesi and get instant, real-time ML transliteration into the Latin alphabet — bridging
-                centuries-old heritage with modern AI.</p>
-              <div class="project-detail-grid">
-                <div><span>Challenge</span>
-                  <p>Lontara characters are stroke-based and highly sensitive to hand-drawn variation, with very little
-                    labeled training data available.</p>
-                </div>
-                <div><span>Solution</span>
-                  <p>Built a custom character-recognition pipeline with data augmentation to generalize from a small
-                    handwritten dataset, wrapped in an interactive canvas UI.</p>
-                </div>
-                <div><span>Outcome</span>
-                  <p>Live product powering script learning at AksaraHub.id, used by students and researchers of
-                    Indonesian regional scripts.</p>
-                </div>
-              </div>
-              <div class="project-stack">
-                <span>Computer Vision</span><span>Python</span><span>Model Training</span><span>Web App</span>
-              </div>
-              <div class="project-links">
-                <a href="https://aksarahub.id/" target="_blank" rel="noopener" class="link-arrow">Live product <svg
-                    width="14" height="14" viewBox="0 0 16 16" fill="none">
-                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-                      stroke-linejoin="round" />
-                  </svg></a>
-                <a href="https://github.com/muhammadhaerul25" target="_blank" rel="noopener" class="link-arrow">GitHub
-                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-                      stroke-linejoin="round" />
-                  </svg></a>
-              </div>
-            </div>
-          </article>
-
-          <article class="project-row project-row-reverse reveal">
-            <div class="project-media">
-              <div class="project-media-inner ph-red">
-                <svg viewBox="0 0 200 140" width="70%">
-                  <rect x="30" y="30" width="140" height="80" rx="6" fill="none" stroke="currentColor"
-                    stroke-width="2" />
-                  <path d="M30 55h140M60 30v80M110 30v80" stroke="currentColor" stroke-width="1.4" opacity=".5" />
-                  <circle cx="45" cy="42" r="3" fill="currentColor" />
-                </svg>
-              </div>
-            </div>
-            <div class="project-info">
-              <span class="project-tag">Computer Vision · OCR</span>
-              <h3>Galaxy ALPR — License Plate Recognition</h3>
-              <p class="project-overview">An automatic license-plate recognition system that detects vehicles, reads
-                plates, and generates structured metadata for traffic monitoring and analytics.</p>
-              <div class="project-detail-grid">
-                <div><span>Challenge</span>
-                  <p>Plates needed to be read reliably across lighting conditions, angles, and partial occlusion in real
-                    traffic footage.</p>
-                </div>
-                <div><span>Solution</span>
-                  <p>Combined a fine-tuned detection model with OCR post-processing and confidence-based filtering to
-                    reduce false reads.</p>
-                </div>
-                <div><span>Outcome</span>
-                  <p>Shipped as a reusable module with a performance-analytics layer for downstream decision-making.</p>
-                </div>
-              </div>
-              <div class="project-stack">
-                <span>Object Detection</span><span>OCR</span><span>Python</span><span>Analytics</span>
-              </div>
-              <div class="project-links">
-                <a href="https://youtu.be/CngIuDBNCLA" target="_blank" rel="noopener" class="link-arrow">Watch demo <svg
-                    width="14" height="14" viewBox="0 0 16 16" fill="none">
-                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-                      stroke-linejoin="round" />
-                  </svg></a>
-                <a href="https://github.com/muhammadhaerul25" target="_blank" rel="noopener" class="link-arrow">GitHub
-                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-                      stroke-linejoin="round" />
-                  </svg></a>
-              </div>
-            </div>
-          </article>
-
-          <article class="project-row reveal">
-            <div class="project-media">
-              <div class="project-media-inner ph-yellow">
-                <svg viewBox="0 0 200 140" width="70%">
-                  <circle cx="100" cy="70" r="45" fill="none" stroke="currentColor" stroke-width="2" />
-                  <path d="M100 40v30l20 15" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
-                </svg>
-              </div>
-            </div>
-            <div class="project-info">
-              <span class="project-tag">LLMs · Full-Stack</span>
-              <h3>AI Update Hub</h3>
-              <p class="project-overview">A full-stack platform that aggregates AI-related news from multiple sources
-                and uses LLM-based summarization to help teams monitor industry trends in one place.</p>
-              <div class="project-detail-grid">
-                <div><span>Challenge</span>
-                  <p>Relevant AI news is scattered across dozens of sources with wildly inconsistent formats and
-                    signal-to-noise ratio.</p>
-                </div>
-                <div><span>Solution</span>
-                  <p>Built ingestion pipelines feeding an LLM summarization layer, with topic clustering to surface what
-                    actually matters.</p>
-                </div>
-                <div><span>Outcome</span>
-                  <p>A daily-usable aggregation tool that turns hours of reading into a five-minute scan.</p>
-                </div>
-              </div>
-              <div class="project-stack">
-                <span>LLM Summarization</span><span>Full-Stack</span><span>Automation</span>
-              </div>
-              <div class="project-links">
-                <a href="#" class="link-arrow">Watch demo <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-                      stroke-linejoin="round" />
-                  </svg></a>
-                <a href="https://github.com/muhammadhaerul25" target="_blank" rel="noopener" class="link-arrow">GitHub
-                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-                      stroke-linejoin="round" />
-                  </svg></a>
-              </div>
-            </div>
-          </article>
-
-          <article class="project-row project-row-reverse reveal">
-            <div class="project-media">
-              <div class="project-media-inner ph-green">
-                <svg viewBox="0 0 200 140" width="70%">
-                  <rect x="50" y="20" width="100" height="100" rx="14" fill="none" stroke="currentColor"
-                    stroke-width="2" />
-                  <path d="M75 55h50M75 75h50M75 95h30" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                </svg>
-              </div>
-            </div>
-            <div class="project-info">
-              <span class="project-tag">Computer Vision · Health-Tech</span>
-              <h3>Eatitude.id</h3>
-              <p class="project-overview">A personal healthy-eating companion combining AI-generated nutrition plans, a
-                computer-vision nutrition scanner, and direct access to certified nutritionists.</p>
-              <div class="project-detail-grid">
-                <div><span>Challenge</span>
-                  <p>Turning general nutrition advice into something personal enough that people actually follow it.</p>
-                </div>
-                <div><span>Solution</span>
-                  <p>Personalization engine driven by health profile and goals, paired with a CV-based food scanner for
-                    effortless logging.</p>
-                </div>
-                <div><span>Outcome</span>
-                  <p>Five integrated features shipped as a cohesive product, from planning to progress tracking.</p>
-                </div>
-              </div>
-              <div class="project-stack">
-                <span>Computer Vision</span><span>Personalization</span><span>Product Design</span>
-              </div>
-              <div class="project-links">
-                <a href="https://youtu.be/wOsPg19O8KM" target="_blank" rel="noopener" class="link-arrow">Watch demo <svg
-                    width="14" height="14" viewBox="0 0 16 16" fill="none">
-                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-                      stroke-linejoin="round" />
-                  </svg></a>
-                <a href="https://github.com/muhammadhaerul25" target="_blank" rel="noopener" class="link-arrow">GitHub
-                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-                      stroke-linejoin="round" />
-                  </svg></a>
-              </div>
-            </div>
-          </article>
-
+        <!-- Dynamic Projects Grid (Synced from Database API) -->
+        <div class="projects-dynamic-grid" id="projects-dynamic-grid">
+          <!-- Hydrated dynamically from /api/projects -->
         </div>
 
         <div class="flagship-case reveal">
@@ -907,57 +751,43 @@
             teams across Indonesia.</p>
         </div>
 
-        <div class="talks-grid">
-          <div class="talk-card reveal">
-            <span class="talk-icon" style="--accent:var(--blue)">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                <path d="M4 11v2a2 2 0 0 0 2 2h1l4 4v-6M4 11h3l7-6v14" />
-              </svg>
-            </span>
-            <p class="talk-date">May 2026</p>
-            <h3>Speaker — Google Build with AI</h3>
-            <p class="talk-org">GDGoC Makassar</p>
+        <div class="talks-dynamic-grid" id="talks-dynamic-grid">
+          <!-- Hydrated dynamically from /api/talks with verified posters and attendee metrics -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TESTIMONIALS / COMMUNITY FEEDBACK ============ -->
+    <section class="section testimonials-section" id="testimonials">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-eyebrow">08 — Community Feedback</span>
+          <h2 class="section-title">Verified attendee reviews &amp; feedback.</h2>
+          <p class="section-desc">Authentic ratings and feedback submitted by participants across AI workshops and training sessions.</p>
+        </div>
+
+        <!-- Score Banner -->
+        <div class="testimonials-score-banner reveal">
+          <div class="t-score-left">
+            <div class="t-score-big">9.4</div>
+            <div class="t-stars-col">
+              <div class="t-stars">
+                ★★★★★
+              </div>
+              <span class="t-score-lbl">Average Rating across 9 verified workshop reviews</span>
+            </div>
           </div>
-          <div class="talk-card reveal">
-            <span class="talk-icon" style="--accent:var(--red)">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                <path d="M4 11v2a2 2 0 0 0 2 2h1l4 4v-6M4 11h3l7-6v14" />
-              </svg>
-            </span>
-            <p class="talk-date">Dec 2025</p>
-            <h3>Speaker — Web Development &amp; Security Workshop</h3>
-            <p class="talk-org">Universitas Sulawesi Barat</p>
+          <div class="t-score-right">
+            <a href="/dashboard" class="btn btn-small btn-primary">
+              View All in Live Dashboard
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
           </div>
-          <div class="talk-card reveal">
-            <span class="talk-icon" style="--accent:var(--yellow)">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                <path d="M4 11v2a2 2 0 0 0 2 2h1l4 4v-6M4 11h3l7-6v14" />
-              </svg>
-            </span>
-            <p class="talk-date">Jul 2025</p>
-            <h3>Speaker — AI Trends for Cybersecurity</h3>
-            <p class="talk-org">Badan Siber dan Sandi Negara (BSSN RI) · 300+ attendees</p>
-          </div>
-          <div class="talk-card reveal">
-            <span class="talk-icon" style="--accent:var(--green)">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                <path d="M4 11v2a2 2 0 0 0 2 2h1l4 4v-6M4 11h3l7-6v14" />
-              </svg>
-            </span>
-            <p class="talk-date">Mar 2025</p>
-            <h3>Speaker — AI Demo Day</h3>
-            <p class="talk-org">Paper.id</p>
-          </div>
-          <div class="talk-card reveal">
-            <span class="talk-icon" style="--accent:var(--blue)">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                <path d="M4 11v2a2 2 0 0 0 2 2h1l4 4v-6M4 11h3l7-6v14" />
-              </svg>
-            </span>
-            <p class="talk-date">Oct 2023</p>
-            <h3>Speaker — AIoT Visitation</h3>
-            <p class="talk-org">XL Axiata</p>
-          </div>
+        </div>
+
+        <!-- Testimonials Dynamic Grid -->
+        <div class="testimonials-grid" id="testimonials-dynamic-grid">
+          <!-- Hydrated dynamically from /api/get_feedback -->
         </div>
       </div>
     </section>
@@ -966,7 +796,7 @@
     <section class="section awards" id="awards">
       <div class="container">
         <div class="section-head reveal">
-          <span class="section-eyebrow">08 — Awards</span>
+          <span class="section-eyebrow">09 — Awards</span>
           <h2 class="section-title">Recognition along the way.</h2>
         </div>
 
@@ -1009,7 +839,7 @@
     <section class="section certifications" id="certifications">
       <div class="container">
         <div class="section-head reveal">
-          <span class="section-eyebrow">09 — Certifications</span>
+          <span class="section-eyebrow">10 — Certifications</span>
           <h2 class="section-title">Continuous, deliberate learning.</h2>
         </div>
 
@@ -1054,7 +884,7 @@
     <section class="section contact" id="contact">
       <div class="container contact-grid">
         <div class="contact-left reveal">
-          <span class="section-eyebrow">10 — Contact</span>
+          <span class="section-eyebrow">11 — Contact</span>
           <h2 class="contact-title">Let's build something that ships.</h2>
           <p class="contact-sub">Open to AI Engineering roles, technical consulting, speaking invitations, and
             collaborations on products that put AI to real, careful use.</p>
@@ -1117,6 +947,8 @@
           <a href="#about">About</a>
           <a href="#experience">Experience</a>
           <a href="#projects">Projects</a>
+          <a href="#talks">Talks</a>
+          <a href="#testimonials">Feedback</a>
           <a href="#awards">Awards</a>
           <a href="#contact">Contact</a>
           <a href="/dashboard">Dashboard</a>
@@ -1134,6 +966,45 @@
       <button class="back-to-top" id="backToTop" aria-label="Back to top">↑ Top</button>
     </div>
   </footer>
+
+  <!-- ============ PROJECT DETAIL MODAL ============ -->
+  <div class="mh-modal-overlay" id="projectModalOverlay" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
+    <div class="mh-modal">
+      <div class="mh-modal-head">
+        <div>
+          <h3 class="mh-modal-title" id="pmTitle">Project Details</h3>
+          <p class="mh-modal-sub" id="pmDate"></p>
+        </div>
+        <button type="button" class="mh-modal-close" onclick="closeProjectModal()" aria-label="Close dialog">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="mh-modal-body" id="pmBody"></div>
+      <div class="mh-modal-foot" id="pmFoot"></div>
+    </div>
+  </div>
+
+  <!-- ============ TALK DETAIL MODAL ============ -->
+  <div class="mh-modal-overlay" id="talkModalOverlay" role="dialog" aria-modal="true" aria-labelledby="tmTitle">
+    <div class="mh-modal">
+      <div class="mh-modal-head">
+        <div>
+          <h3 class="mh-modal-title" id="tmTitle">Speaking Session Details</h3>
+          <p class="mh-modal-sub" id="tmOrg"></p>
+        </div>
+        <button type="button" class="mh-modal-close" onclick="closeTalkModal()" aria-label="Close dialog">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="mh-modal-body" id="tmBody"></div>
+      <div class="mh-modal-foot" id="tmFoot"></div>
+    </div>
+  </div>
+
+  <!-- ============ FULLSCREEN POSTER LIGHTBOX ============ -->
+  <div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox()" role="dialog" aria-modal="true">
+    <img class="lightbox-img" id="lightboxImg" src="" alt="Session Poster" onclick="event.stopPropagation()">
+  </div>
 
   <script src="script.js"></script>
 </body>

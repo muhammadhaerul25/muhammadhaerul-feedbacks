@@ -1,0 +1,428 @@
+{
+  "projects": [
+    {
+      "id": "cmt3189k00000xwb9l6c5vu3c",
+      "name": "Aksara Lontara Recognition",
+      "description": "Aksara Lontara Character Recognition is an intelligent web application engineered to bridge ancient cultural heritage with modern artificial intelligence. The platform provides an interactive, digital canvas where users can hand-draw traditional Aksara Lontara characters—the historic script of South Sulawesi, Indonesia—and receive instant, real-time machine learning transliterations into the Latin alphabet.",
+      "dateRange": "2026-05_2026-06",
+      "techStack": [
+        "Full-Stack:TypeScript",
+        "AI Object Detection Model:YOLO"
+      ],
+      "videoDemo": "https://youtu.be/GEwjEfHMg-4?si=zldA9UQShInGjkN7",
+      "linkProject": null,
+      "thumbnailUrl": null,
+      "created_at": "2026-08-21T14:16:01.632Z",
+      "updated_at": "2026-08-21T14:16:01.632Z"
+    },
+    {
+      "id": "cmt2n979d0001u0b945lk181y",
+      "name": "DengarTulis App (AI-Powered Transcription)",
+      "description": "DengarTulis — a full-stack web app that transforms audio & video into accurate transcripts and AI-generated summaries, all in one seamless workflow.",
+      "dateRange": "2026-02_2026-02",
+      "techStack": [
+        "Front-End:React",
+        "Back-End:FastAPI",
+        "AI Speech Recognition:Whisper AI"
+      ],
+      "videoDemo": "https://youtu.be/UE-GZdGShkI?si=vxnrnLUJSgo_iQvp",
+      "linkProject": null,
+      "thumbnailUrl": null,
+      "created_at": "2026-08-21T07:44:50.689Z",
+      "updated_at": "2026-08-21T07:47:23.287Z"
+    },
+    {
+      "id": "cmt2mz9dy0000u0b9mgu4xfw2",
+      "name": "AI Update Hub",
+      "description": "AI-Update-Hub, a full-stack web application that aggregates and analyzes AI-related news from multiple sources — all in one place.",
+      "dateRange": "2026-01_2026-01",
+      "techStack": [
+        "Full-Stack:TypeScript"
+      ],
+      "videoDemo": "https://youtu.be/AelUqjbJaG4?si=-z4MTdjbcgYOtxrp",
+      "linkProject": "https://ai-update-hub.onrender.com/",
+      "thumbnailUrl": null,
+      "created_at": "2026-08-21T07:37:06.888Z",
+      "updated_at": "2026-08-21T07:38:30.500Z"
+    },
+    {
+      "id": "cmt2lvntg0000s0b9jnau9cio",
+      "name": "AI Split Bills",
+      "description": "AI Split Bill is an AI-powered web application that extracts receipt data automatically and helps users split items, taxes, and service fees proportionally, fast and transparently.",
+      "dateRange": "2026-01_2026-01",
+      "techStack": [
+        "Front-End:React.js",
+        "Back-End:FastAPI",
+        "Database:Postgres",
+        "AI OCR:Gemini"
+      ],
+      "videoDemo": "https://youtube.com/shorts/qXtIyUeEuuw?si=spgASljRBdjhy76e",
+      "linkProject": "https://ai-split-bills.vercel.app/",
+      "thumbnailUrl": "/uploads/talks/screenshot_2026_08_21_151241_1787297861676.webp",
+      "created_at": "2026-08-21T07:06:19.348Z",
+      "updated_at": "2026-08-22T04:20:37.841Z"
+    },
+    {
+      "id": "cmt3sqg920000qcb9qnqxei8n",
+      "name": "Eatitude.id",
+      "description": "Eatitude.id – a personal healthy eating companion platform. ✨ Powered by AI, guided by Nutritionists. ✨\n\nEatitude.id was born from a simple yet urgent challenge: despite growing health awareness, many people still struggle to maintain consistent and balanced nutrition in their daily lives. With AI and expert guidance, our mission is to turn healthy eating into something personal, practical, and sustainable.\n\nEatitude.id is designed to make healthy eating personal, practical, and sustainable, through 5 key features:\n✅ Personalized Nutrition Planner – AI-generated daily nutrition plans based on health profile, goals, and food preferences.\n✅ Smart Meal Reminders – Keeps you on track with meal schedules and balanced menu suggestions.\n✅ Nutri Scanner – Instantly scan food or nutrition labels to know calories and nutrients with AI-powered Computer Vision.\n✅ Progress Tracking – Visualizes your daily nutrition intake, hydration, and progress toward health goals.\n✅ Direct Nutritionist Consultation – Access expert guidance, tips, and live consultation with certified nutritionists.",
+      "dateRange": "2025-08_2025-09",
+      "techStack": [
+        "Front-End:React",
+        "Back-End:FastAPI",
+        "Database:Postgres"
+      ],
+      "videoDemo": "https://youtu.be/wOsPg19O8KM?si=tGcqsa1C83voi3bp",
+      "linkProject": "https://eatitude-id-web.vercel.app/",
+      "thumbnailUrl": null,
+      "created_at": "2026-08-22T03:05:59.751Z",
+      "updated_at": "2026-08-22T03:05:59.751Z"
+    },
+    {
+      "id": "cmt3srpm00001qcb9b9708zk9",
+      "name": "Galaxy Aksara",
+      "description": "Galaxy Aksara is a digital platform to learn Indonesian local scripts (aksara) in a fun and interactive way. Explore features like interactive learning, script writing tools, aksara translation, and curated content on local literature and culture — all in one place.",
+      "dateRange": "2025-07_2025-08",
+      "techStack": [
+        "Full-Stack:TypeScript"
+      ],
+      "videoDemo": "https://youtu.be/da2vGdWkkw4?si=yrOVouaUeOy8z5t0",
+      "linkProject": "https://www.galaxyaksara.id/",
+      "thumbnailUrl": null,
+      "created_at": "2026-08-22T03:06:58.537Z",
+      "updated_at": "2026-08-22T03:15:34.378Z"
+    },
+    {
+      "id": "cmt3styad0002qcb9an0hd0p1",
+      "name": "Galaxy ALPR (Automatic License Plate Recognition)",
+      "description": "Galaxy ALPR — an automatic license plate recognition system that detects vehicles, reads plates, and provides useful metadata for further analysis and decision-making.",
+      "dateRange": "2025-05_2025-06",
+      "techStack": [
+        "Full-Stack:TypeScript",
+        "AI Object Detection Model:YOLO",
+        "AI OCR:Gemini"
+      ],
+      "videoDemo": "https://youtu.be/CngIuDBNCLA?si=kgkbiV3NENJxBlGv",
+      "linkProject": null,
+      "thumbnailUrl": null,
+      "created_at": "2026-08-22T03:08:43.093Z",
+      "updated_at": "2026-08-22T03:08:55.720Z"
+    },
+    {
+      "id": "cmt3t5khh0001o8b9tjl1zucf",
+      "name": "AI Chatbot - VectorRAG",
+      "description": "This project features a personalized AI chatbot built using Retrieval-Augmented Generation (RAG) on FlowiseAI, integrating OpenAI, Pinecone, and SQLite. By combining data retrieval from a custom knowledge base with AI-powered text generation, the chatbot delivers context-aware, accurate, and personalized responses. The system retrieves relevant information from Pinecone based on the meaning of user queries, while OpenAI's GPT model generates human-like responses, enhancing conversational quality. Additionally, SQLite stores user data and past interactions, ensuring a more personalized experience.\n\nThis solution improves chatbot performance by leveraging real-time data retrieval, providing a scalable and highly relevant response system that adapts to each user’s unique needs.",
+      "dateRange": "2025-04_2025-04",
+      "techStack": [
+        "AI Chatbot:FlowiseAI"
+      ],
+      "videoDemo": "https://youtu.be/6bJdURMwQbk?si=mAyMzqeEWhj-7zHa",
+      "linkProject": null,
+      "thumbnailUrl": null,
+      "created_at": "2026-08-22T03:17:45.077Z",
+      "updated_at": "2026-08-22T03:17:45.077Z"
+    },
+    {
+      "id": "cmt3t278a0000o8b9cio2oo3c",
+      "name": "Custom Object Detection",
+      "description": "The Custom Object Detection App is a powerful tool built with YOLOWorld technology, designed for precise and customizable object detection in both images and videos through a prompt-based approach. The app allows users to define custom object classes using simple prompts, upload media files, and adjust key detection parameters such as confidence and IoU thresholds, ensuring accurate and tailored detection results.",
+      "dateRange": "2025-03_2025-03",
+      "techStack": [
+        "Web-Development:Streamlit",
+        "AI Models:Gemini",
+        "AI Models:YOLO"
+      ],
+      "videoDemo": "https://youtu.be/mip0cLW0VlQ",
+      "linkProject": null,
+      "thumbnailUrl": null,
+      "created_at": "2026-08-22T03:15:07.931Z",
+      "updated_at": "2026-08-22T03:16:00.159Z"
+    },
+    {
+      "id": "cmt3syyv30004qcb9ezky8i23",
+      "name": "Product Recognition",
+      "description": "Product Recognition App, a smart solution that identifies and extracts detailed product information from images. This tool simplifies workflows by providing insights such as product name, brand, size, and packaging—perfect for businesses aiming to enhance efficiency and accuracy in product analysis and inventory management.\n\nBuilt with cutting-edge Artificial Intelligence, this app integrates advanced Object Detection, Image Classification, and Optical Character Recognition (OCR) for precise and reliable product recognition.",
+      "dateRange": "2025-01_2025-01",
+      "techStack": [
+        "Web Development:Streamlit",
+        "AI Model:YOLO",
+        "AI Model:Gemini"
+      ],
+      "videoDemo": "https://youtu.be/UYhXSkHO5LE?si=RNOd-U50VW5KWjjt",
+      "linkProject": null,
+      "thumbnailUrl": null,
+      "created_at": "2026-08-22T03:12:37.120Z",
+      "updated_at": "2026-08-22T03:12:37.120Z"
+    },
+    {
+      "id": "cmt3t8sl00002o8b9ge5uv7pb",
+      "name": "Hybrid Search Engine",
+      "description": "Movie Search Engine App, a Streamlit-based application that allows users to search for movies using three different search methodologies: Keyword Search, Vector Search, and Hybrid Search. The project leverages MongoDB, Hugging Face embeddings, and Streamlit for an interactive user interface.",
+      "dateRange": "2024-12_2024-12",
+      "techStack": [
+        "Web-Development:Streamlit",
+        "AI Models:Gemini Embedding",
+        "AI Models:HuggingFace",
+        "Database:MongoDB"
+      ],
+      "videoDemo": "https://youtu.be/a7VTbulhuC0?si=Ez4Hrc7TbI7znA8C",
+      "linkProject": null,
+      "thumbnailUrl": null,
+      "created_at": "2026-08-22T03:20:15.540Z",
+      "updated_at": "2026-08-22T03:20:15.540Z"
+    },
+    {
+      "id": "cmt3tffwa0003o8b98ro48ba2",
+      "name": "PPE Inspector",
+      "description": "PPE Inspector is An artificial intelligence-based program for detecting Personal Protective Equipment (PPE) usage.\n- Developed using the YOLOv8 algorithm and trained it on a dataset comprising 10,000 images.\n- Achieved an impressive accuracy performance of 88% in detecting Personal Protective Equipment (PPE) usage, contributing to enhanced workplace safety. \n- Deployed and hosted on Streamlit Cloud, facilitating seamless accessibility and utilization for end-users.",
+      "dateRange": "2024-01_2024-06",
+      "techStack": [],
+      "videoDemo": null,
+      "linkProject": "https://ppe-inspector.streamlit.app/",
+      "thumbnailUrl": null,
+      "created_at": "2026-08-22T03:25:25.696Z",
+      "updated_at": "2026-08-22T03:25:45.853Z"
+    },
+    {
+      "id": "cmt3sw9e10003qcb9ka7zcgdw",
+      "name": "Personalized English Learning",
+      "description": "Personalized English Learning is a web-based English language learning application that utilizes AI models to interact with users. The application is designed to be interactive, adaptive, and personalizing the English learning process according to the user's abilities.",
+      "dateRange": "2023-02_2023-06",
+      "techStack": [
+        "Full-Stack:JavaScript"
+      ],
+      "videoDemo": "https://youtu.be/oCQTAU5ns5A?si=b7yqgdBMD0KnKB_J",
+      "linkProject": null,
+      "thumbnailUrl": null,
+      "created_at": "2026-08-22T03:10:30.793Z",
+      "updated_at": "2026-08-22T03:10:30.793Z"
+    }
+  ],
+  "talks": [
+    {
+      "id": "cmt2iw01n00003wb9elo5edkn",
+      "event": "Mindful AI: AI Personalization for Students",
+      "organizer": "Yayasan Khouw Kalbe",
+      "place": "Zoom Meeting",
+      "date": "2026-08-22T00:00:00.000Z",
+      "jumlah_peserta": 50,
+      "poster_url": "/uploads/talks/saveclip_app_775154220_18087205625558486_2093555353223423387_n_1787290933586.webp",
+      "slides": [
+        {
+          "url": "https://drive.google.com/file/d/1iY3R1cBMLewmLaxXx-Z-QZkIn9n027nZ/view?usp=sharing",
+          "type": "link",
+          "label": "https://mindful-ai-2026.vercel.app/"
+        }
+      ],
+      "topics": [
+        "AI Introduction",
+        "Prompt Engineering",
+        "Context Engineering",
+        "Gemini Gems",
+        "Gemini Notebook"
+      ],
+      "gallery": [],
+      "created_at": "2026-08-21T05:42:36.347Z",
+      "updated_at": "2026-08-22T04:21:12.450Z"
+    },
+    {
+      "id": "cmt2k5bn000019sb9mvzbynus",
+      "event": "GSA AI Forge: AI for Personal Branding & Portfolio Digital",
+      "organizer": "Google Student Ambassador",
+      "place": "Makassar Goverment Center",
+      "date": "2026-07-28T00:00:00.000Z",
+      "jumlah_peserta": 150,
+      "poster_url": "/uploads/talks/saveclip_app_752916423_18047968217611708_109289192688503691_n_1787293047380.webp",
+      "slides": [
+        {
+          "url": "",
+          "type": "link",
+          "label": "https://gsa-ai-forge-2026.vercel.app/"
+        }
+      ],
+      "topics": [
+        "Gemini",
+        "Personal Branding",
+        "Portfolio Digital"
+      ],
+      "gallery": [],
+      "created_at": "2026-08-21T06:17:50.892Z",
+      "updated_at": "2026-08-22T04:21:12.563Z"
+    },
+    {
+      "id": "cmt2jzuji00009sb912wwjh01",
+      "event": "Build with AI: AI-Driven Development",
+      "organizer": "Google Developer Group on Campus Makassar",
+      "place": "Universitas Ciputra Makassar",
+      "date": "2026-05-16T00:00:00.000Z",
+      "jumlah_peserta": 100,
+      "poster_url": "/uploads/talks/saveclip_app_671241768_18351262810240133_2482393838735247827_n_1787292713669.webp",
+      "slides": [
+        {
+          "url": "",
+          "type": "link",
+          "label": "https://ai-driven-development-master.vercel.app/"
+        }
+      ],
+      "topics": [
+        "AI Introduction",
+        "Prompt Engineering",
+        "Context Engineering",
+        "Vibe Coding",
+        "Gemini",
+        "Google Antigravity"
+      ],
+      "gallery": [],
+      "created_at": "2026-08-21T06:13:35.454Z",
+      "updated_at": "2026-08-22T04:21:12.621Z"
+    },
+    {
+      "id": "cmt2kgv0z00039sb9w2y7ol67",
+      "event": "Workshop Pelatihan AI untuk Pengembangan dan Keamanan Web",
+      "organizer": "Universitas Sulawesi Barat",
+      "place": "Hotel Villa Bogor, Majene",
+      "date": "2025-12-15T00:00:00.000Z",
+      "jumlah_peserta": 50,
+      "poster_url": "/uploads/talks/whatsapp_image_2026_08_21_at_15_55_16_1787298986322.webp",
+      "slides": [
+        {
+          "url": "",
+          "type": "link",
+          "label": "https://drive.google.com/file/d/1vLklTZpZSXtqPcMHHiwYCypnknGPlLK2/view?usp=sharing"
+        }
+      ],
+      "topics": [
+        "Web Development",
+        "Web Security"
+      ],
+      "gallery": [],
+      "created_at": "2026-08-21T06:26:49.235Z",
+      "updated_at": "2026-08-22T04:21:12.676Z"
+    },
+    {
+      "id": "cmt2kbpn800029sb99b3zz1ax",
+      "event": "Webinar Bulan Kesadaran dan Keamanan Informasi",
+      "organizer": "Badan Siber dan Sandi Negara",
+      "place": "Zoom Meeting",
+      "date": "2025-07-15T00:00:00.000Z",
+      "jumlah_peserta": 300,
+      "poster_url": "/uploads/talks/whatsapp_image_2026_08_21_at_14_20_26_1787293332557.webp",
+      "slides": [
+        {
+          "url": "",
+          "type": "link",
+          "label": "https://drive.google.com/file/d/1NZHAtxrqkfMWa3ANV6ecTUfmJrpzeqcv/view?usp=sharing"
+        }
+      ],
+      "topics": [
+        "AI Introduction",
+        "Generative AI",
+        "AI for Cybersecurity"
+      ],
+      "gallery": [],
+      "created_at": "2026-08-21T06:22:48.981Z",
+      "updated_at": "2026-08-22T04:21:12.509Z"
+    }
+  ],
+  "feedbacks": [
+    {
+      "id": 10,
+      "nama_lengkap": "Farrel nathaniel",
+      "email": "farrelnataniel2030@gmail.com",
+      "rating": 9,
+      "alasan": "saya suka di bagian planing yang membantu saya memantapkan rencana sebagai mahasiswa baru",
+      "pesan_kesan": "penjelasan yang sangat mudah di pahami dan tidak technical",
+      "created_at": "2026-07-28T07:03:48.133Z",
+      "source": "GSA AI Forge 2026",
+      "materi": null
+    },
+    {
+      "id": 9,
+      "nama_lengkap": "Rifka Andina Ruslan",
+      "email": "rfkandina@gmail.com",
+      "rating": 10,
+      "alasan": "Menambahkan insight yang sangat berkesann",
+      "pesan_kesan": "Sangat mudah dumengerti",
+      "created_at": "2026-07-28T07:03:02.684Z",
+      "source": "GSA AI Forge 2026",
+      "materi": null
+    },
+    {
+      "id": 8,
+      "nama_lengkap": "Dimas Khairiansyah Sutarno",
+      "email": "dimaskhairian7@gmail.com",
+      "rating": 10,
+      "alasan": "sangat bermanfaat untuk mahasiswa yang sedang kebingungan dengan cara mencari kerja di era sekarang",
+      "pesan_kesan": "sangat up to date dan penjelasan yang jelas",
+      "created_at": "2026-07-28T06:45:46.382Z",
+      "source": "GSA AI Forge 2026",
+      "materi": null
+    },
+    {
+      "id": 7,
+      "nama_lengkap": "Mohammad Alief RM",
+      "email": "muhammadalifrahman1555@gmail.com",
+      "rating": 10,
+      "alasan": "Materi tersebut sangat penting untuk dipelajari karena dapat membantu seseorang untuk mendapatkan informasi tentang AI",
+      "pesan_kesan": "Materi disampaikan dengan sangat jelas, interaktif, dan mudah dipahami.\n\nSemoga pemateri sehat selalu dan bisa membagikan ilmunya kembali di lain kesempatan.",
+      "created_at": "2026-07-28T06:44:59.696Z",
+      "source": "GSA AI Forge 2026",
+      "materi": null
+    },
+    {
+      "id": 6,
+      "nama_lengkap": "Arundaffa Nahara",
+      "email": "arundaffa.nahara@gmail.com",
+      "rating": 9,
+      "alasan": "Sangat daging dan runtut",
+      "pesan_kesan": "Sangat keren",
+      "created_at": "2026-07-28T06:44:34.510Z",
+      "source": "GSA AI Forge 2026",
+      "materi": null
+    },
+    {
+      "id": 5,
+      "nama_lengkap": "Izzatun Nailah M. Jasri",
+      "email": "izzatunnailahh.mj@gmail.com",
+      "rating": 9,
+      "alasan": "sangat menarik dan memberi insight yang sangat bermanfaat",
+      "pesan_kesan": "sangat luar biasa kerenn",
+      "created_at": "2026-07-28T06:43:36.739Z",
+      "source": "GSA AI Forge 2026",
+      "materi": null
+    },
+    {
+      "id": 4,
+      "nama_lengkap": "ILMADDIN, S.Pd.",
+      "email": "ilmaddinhusain@gmail.com",
+      "rating": 9,
+      "alasan": "Acara yang bermanfaat",
+      "pesan_kesan": "Saran untuk memberikan praktik langsung",
+      "created_at": "2026-07-28T06:43:26.284Z",
+      "source": "GSA AI Forge 2026",
+      "materi": null
+    },
+    {
+      "id": 3,
+      "nama_lengkap": "Nur Hasanah",
+      "email": "nurh9255@gmail.com",
+      "rating": 10,
+      "alasan": "Informatif sekali",
+      "pesan_kesan": "Penyampaiannya keren dan spesifik",
+      "created_at": "2026-07-28T06:42:59.925Z",
+      "source": "GSA AI Forge 2026",
+      "materi": null
+    },
+    {
+      "id": 2,
+      "nama_lengkap": "Farhan Aulia ss",
+      "email": "farhanmeroket@gmail.com",
+      "rating": 9,
+      "alasan": "Materinya bagus",
+      "pesan_kesan": "Bagus",
+      "created_at": "2026-07-28T06:42:29.427Z",
+      "source": "GSA AI Forge 2026",
+      "materi": null
+    }
+  ]
+}
