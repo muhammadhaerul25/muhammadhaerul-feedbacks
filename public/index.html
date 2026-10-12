@@ -118,23 +118,22 @@
         <!-- Live Portfolio Stat Counter Strip -->
         <div class="hero-stats-strip reveal">
           <div class="hero-stat-item">
-            <span class="hero-stat-val" id="stat-count-projects">13+</span>
+            <span class="hero-stat-val" id="stat-count-projects" data-target="13" data-suffix="+">13+</span>
             <span class="hero-stat-label">Shipped Projects</span>
           </div>
           <div class="hero-stat-item">
-            <span class="hero-stat-val" id="stat-count-attendees">650+</span>
+            <span class="hero-stat-val" id="stat-count-attendees" data-target="650" data-suffix="+">650+</span>
             <span class="hero-stat-label">Workshop Attendees</span>
           </div>
           <div class="hero-stat-item">
-            <span class="hero-stat-val" id="stat-count-rating">9.4★</span>
+            <span class="hero-stat-val" id="stat-count-rating" data-target="9.4" data-decimals="1" data-suffix="★">9.4★</span>
             <span class="hero-stat-label">Attendee Satisfaction</span>
           </div>
           <div class="hero-stat-item">
-            <span class="hero-stat-val">3+ Yrs</span>
+            <span class="hero-stat-val" id="stat-count-years" data-target="3" data-suffix="+ Yrs">3+ Yrs</span>
             <span class="hero-stat-label">Production AI Experience</span>
           </div>
         </div>
-      </div>
       </div>
 
       <div class="hero-scroll-cue" aria-hidden="true">
@@ -883,9 +882,17 @@
             collaborations on products that put AI to real, careful use.</p>
 
           <div class="contact-links">
-            <a href="mailto:haerulmuhammad01@gmail.com" class="contact-link">
-              <span>Email</span>
-              <strong>haerulmuhammad01@gmail.com</strong>
+            <a href="mailto:haerulmuhammad01@gmail.com" class="contact-link" id="emailContactLink" title="Email haerulmuhammad01@gmail.com">
+              <div style="display:flex; justify-content:space-between; align-items:center; width:100%; gap:8px;">
+                <div>
+                  <span>Email</span>
+                  <strong>haerulmuhammad01@gmail.com</strong>
+                </div>
+                <button type="button" class="btn-copy-chip" aria-label="Copy email address" onclick="event.preventDefault(); event.stopPropagation(); window.copyEmailToClipboard();" title="Copy to clipboard">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  <span>Copy</span>
+                </button>
+              </div>
             </a>
             <a href="https://www.linkedin.com/in/muhammadhaerul" target="_blank" rel="noopener" class="contact-link">
               <span>LinkedIn</span>
@@ -999,9 +1006,21 @@
   </div>
 
   <!-- ============ FULLSCREEN POSTER LIGHTBOX ============ -->
-  <div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox()" role="dialog" aria-modal="true">
+  <div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox()" role="dialog" aria-modal="true" aria-label="Media Lightbox">
+    <button type="button" class="lightbox-nav-btn prev" onclick="event.stopPropagation(); window.prevLightboxImage();" aria-label="Previous image">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
     <img class="lightbox-img" id="lightboxImg" src="" alt="Session Poster" onclick="event.stopPropagation()">
+    <button type="button" class="lightbox-nav-btn next" onclick="event.stopPropagation(); window.nextLightboxImage();" aria-label="Next image">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+    <button type="button" class="lightbox-close-btn" onclick="closeLightbox()" aria-label="Close lightbox">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
   </div>
+
+  <!-- Global Toast Notification -->
+  <div id="portfolioToast" class="portfolio-toast" role="status" aria-live="polite"></div>
 
   <script src="script.js"></script>
 </body>

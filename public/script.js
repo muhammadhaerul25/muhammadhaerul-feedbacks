@@ -97,6 +97,47 @@
   }
   initScrollReveal();
 
+  /* ============ STAT COUNTERS ANIMATION ============ */
+  function initStatCounters() {
+    const counterEls = document.querySelectorAll('.hero-stat-val[data-target]');
+    if (!counterEls.length) return;
+
+    let animated = false;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !animated) {
+          animated = true;
+          counterEls.forEach(el => {
+            const target = parseFloat(el.getAttribute('data-target'));
+            const suffix = el.getAttribute('data-suffix') || '';
+            const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+            const duration = 1600;
+            const startTime = performance.now();
+
+            function updateCount(currentTime) {
+              const elapsed = currentTime - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              const easeProgress = 1 - Math.pow(1 - progress, 3);
+              const currentVal = (target * easeProgress).toFixed(decimals);
+              el.textContent = currentVal + suffix;
+
+              if (progress < 1) {
+                requestAnimationFrame(updateCount);
+              } else {
+                el.textContent = (decimals ? target.toFixed(decimals) : target) + suffix;
+              }
+            }
+            requestAnimationFrame(updateCount);
+          });
+        }
+      });
+    }, { threshold: 0.15 });
+
+    const strip = document.querySelector('.hero-stats-strip');
+    if (strip) observer.observe(strip);
+  }
+  initStatCounters();
+
   /* ============ SKILL DOT INDICATORS ============ */
   document.querySelectorAll('.dots[data-level]').forEach(dot => {
     const level = parseInt(dot.getAttribute('data-level'), 10) || 0;
@@ -118,13 +159,28 @@
     });
   });
 
-  /* ============ HERO CANVAS: floating node network ============ */
+  /* ============ HERO CANVAS: floating node network with interactive aura ============ */
   const canvas = document.getElementById('heroCanvas');
+  const heroSection = document.getElementById('hero');
   if (canvas && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const ctx = canvas.getContext('2d');
     let w, h, nodes;
     const COLORS = ['#4285F4', '#EA4335', '#FBBC04', '#34A853'];
     const NODE_COUNT = window.innerWidth < 768 ? 20 : 38;
+    const mouse = { x: -1000, y: -1000, active: false };
+
+    if (heroSection) {
+      heroSection.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+        mouse.x = (e.clientX - rect.left) * dpr;
+        mouse.y = (e.clientY - rect.top) * dpr;
+        mouse.active = true;
+      });
+      heroSection.addEventListener('mouseleave', () => {
+        mouse.active = false;
+      });
+    }
 
     function resize() {
       w = canvas.width = canvas.offsetWidth * (window.devicePixelRatio || 1);
@@ -149,10 +205,34 @@
       const lineColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(32,33,36,0.06)';
       const dpr = window.devicePixelRatio || 1;
 
+      // Ambient interactive glow around cursor
+      if (mouse.active) {
+        const radGlow = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 220 * dpr);
+        const glowColor = isDark ? 'rgba(66, 133, 244, 0.09)' : 'rgba(66, 133, 244, 0.06)';
+        radGlow.addColorStop(0, glowColor);
+        radGlow.addColorStop(1, 'transparent');
+        ctx.fillStyle = radGlow;
+        ctx.fillRect(0, 0, w, h);
+      }
+
       nodes.forEach(n => {
         n.x += n.vx; n.y += n.vy;
         if (n.x < 0 || n.x > w) n.vx *= -1;
         if (n.y < 0 || n.y > h) n.vy *= -1;
+
+        // Connect nodes to mouse cursor
+        if (mouse.active) {
+          const dx = n.x - mouse.x, dy = n.y - mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120 * dpr) {
+            ctx.beginPath();
+            ctx.strokeStyle = isDark ? 'rgba(66, 133, 244, 0.24)' : 'rgba(66, 133, 244, 0.18)';
+            ctx.lineWidth = 1;
+            ctx.moveTo(n.x, n.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.stroke();
+          }
+        }
       });
 
       for (let i = 0; i < nodes.length; i++) {
@@ -635,15 +715,88 @@
     document.body.style.overflow = '';
   };
 
+  /* ============ TOAST NOTIFICATION ============ */
+  let toastTimeout = null;
+  window.showToast = function(msg) {
+    const toast = document.getElementById('portfolioToast');
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.add('show');
+    if (toastTimeout) clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 2800);
+  };
+
+  /* ============ COPY EMAIL TO CLIPBOARD ============ */
+  window.copyEmailToClipboard = function() {
+    const email = 'haerulmuhammad01@gmail.com';
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(email).then(() => {
+        window.showToast('Email address copied to clipboard!');
+      }).catch(() => {
+        window.showToast(email);
+      });
+    } else {
+      window.showToast(email);
+    }
+  };
+
+  /* ============ FULLSCREEN LIGHTBOX CAROUSEL ============ */
+  let lightboxImages = [];
+  let currentLightboxIdx = 0;
+
+  function updateLightboxList() {
+    lightboxImages = [];
+    if (Array.isArray(liveTalks)) {
+      liveTalks.forEach(t => {
+        if (t.poster_url) {
+          lightboxImages.push({ src: t.poster_url, alt: t.event || 'Talk Session' });
+        } else if (Array.isArray(t.media) && t.media.length) {
+          lightboxImages.push({ src: t.media[0], alt: t.event || 'Talk Session' });
+        }
+      });
+    }
+  }
+
   window.openLightbox = function(src, alt) {
     const overlay = document.getElementById('lightboxOverlay');
     const img = document.getElementById('lightboxImg');
     if (!overlay || !img) return;
 
+    updateLightboxList();
+    currentLightboxIdx = lightboxImages.findIndex(item => item.src === src);
+    if (currentLightboxIdx === -1) {
+      lightboxImages.push({ src, alt: alt || 'Image' });
+      currentLightboxIdx = lightboxImages.length - 1;
+    }
+
     img.src = src;
     img.alt = alt || 'Image';
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
+  };
+
+  window.prevLightboxImage = function() {
+    if (!lightboxImages.length) return;
+    currentLightboxIdx = (currentLightboxIdx - 1 + lightboxImages.length) % lightboxImages.length;
+    const item = lightboxImages[currentLightboxIdx];
+    const img = document.getElementById('lightboxImg');
+    if (img && item) {
+      img.src = item.src;
+      img.alt = item.alt;
+    }
+  };
+
+  window.nextLightboxImage = function() {
+    if (!lightboxImages.length) return;
+    currentLightboxIdx = (currentLightboxIdx + 1) % lightboxImages.length;
+    const item = lightboxImages[currentLightboxIdx];
+    const img = document.getElementById('lightboxImg');
+    if (img && item) {
+      img.src = item.src;
+      img.alt = item.alt;
+    }
   };
 
   window.closeLightbox = function() {
@@ -652,12 +805,19 @@
     document.body.style.overflow = '';
   };
 
-  // Keyboard shortcut for modals
+  // Keyboard shortcut for modals & lightbox
   window.addEventListener('keydown', (e) => {
+    const overlay = document.getElementById('lightboxOverlay');
+    const isLightboxActive = overlay && overlay.classList.contains('active');
+
     if (e.key === 'Escape') {
       window.closeProjectModal();
       window.closeTalkModal();
       window.closeLightbox();
+    } else if (isLightboxActive && e.key === 'ArrowLeft') {
+      window.prevLightboxImage();
+    } else if (isLightboxActive && e.key === 'ArrowRight') {
+      window.nextLightboxImage();
     }
   });
 
