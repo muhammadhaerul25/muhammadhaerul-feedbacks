@@ -13,6 +13,7 @@ const educationsRoutes = require('./educations.routes');
 const certificationsRoutes = require('./certifications.routes');
 const awardsRoutes = require('./awards.routes');
 const contactRoutes = require('./contact.routes');
+const galleryRoutes = require('./gallery.routes');
 
 // Health Check & Uptime Endpoint (Optimized with Database Pool & Cache Metrics)
 router.get('/health', async (req, res) => {
@@ -152,6 +153,7 @@ router.use('/educations', educationsRoutes);
 router.use('/certifications', certificationsRoutes);
 router.use('/awards', awardsRoutes);
 router.use('/contact', contactRoutes);
+router.use('/gallery', galleryRoutes);
 router.use('/', feedbacksRoutes);
 
 module.exports = router;

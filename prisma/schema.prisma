@@ -279,4 +279,23 @@ model ContactMessage {
   @@map("contact_messages")
 }
 
+model GalleryItem {
+  id          String    @id @default(cuid())
+  title       String
+  description String?
+  image_url   String
+  category    String?   @default("General")
+  date        String?
+  location    String?
+  tags        String[]  @default([])
+  sort_order  Int       @default(0)
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+
+  @@index([sort_order(sort: Asc), created_at(sort: Desc)])
+  @@index([category])
+  @@map("gallery_items")
+}
+
+
 

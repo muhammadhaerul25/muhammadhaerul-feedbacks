@@ -70,6 +70,8 @@ app.get('/feedback', (req, res) => res.sendFile(path.join(publicDir, 'form-feedb
 app.get('/form-feedbacks', (req, res) => res.sendFile(path.join(publicDir, 'form-feedbacks.html')));
 app.get('/blog', (req, res) => res.redirect('/#blog'));
 app.get('/blogs', (req, res) => res.redirect('/#blog'));
+app.get('/gallery', (req, res) => res.redirect('/#gallery'));
+app.get('/galeri', (req, res) => res.redirect('/#gallery'));
 app.get('/form/:slug', (req, res) => res.sendFile(path.join(publicDir, 'form-renderer.html')));
 app.get('/full-materi.pdf', (req, res) => res.sendFile(path.join(publicDir, 'full-materi.pdf')));
 

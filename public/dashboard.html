@@ -2103,7 +2103,11 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
                     Blogs <span class="badge-soon">Soon</span>
                 </li>
-                <li class="nav-item" id="nav-feedbacks" onclick="switchView('feedbacks',this)">
+                                <li class="nav-item" id="nav-gallery" onclick="switchView('gallery',this)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    Gallery
+                </li>
+<li class="nav-item" id="nav-feedbacks" onclick="switchView('feedbacks',this)">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                     Feedback
                     <span class="nav-badge" id="nav-badge" style="display:none">0</span>
@@ -2253,6 +2257,11 @@
                         <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg></div>
                         <div class="stat-label">Total Article Blog</div>
                         <div class="stat-value" id="sc-blogs">0</div>
+                    </div>
+                    <div class="stat-card purple" onclick="switchView('gallery', document.getElementById('nav-gallery'))" style="cursor:pointer;" title="View Gallery">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                        <div class="stat-label">Visual Gallery</div>
+                        <div class="stat-value" id="sc-gallery">—</div>
                     </div>
                 </div>
 
@@ -2611,6 +2620,47 @@
                     <div class="empty-icon"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--g-yellow);"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></div>
                     <div class="empty-title">No Awards Added</div>
                     <div class="empty-desc">Click "Add Award" to record your honors and recognitions.</div>
+                </div>
+            </div>
+
+            <!-- ══ VISUAL GALLERY CMS ══ -->
+            <div id="view-gallery" class="view">
+                <div class="talks-stats" id="gallery-stats" style="margin-bottom: 24px;">
+                    <div class="stat-card blue">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                        <div class="stat-label">Total Gallery Photos</div>
+                        <div class="stat-value" id="gal-stat-total">0</div>
+                    </div>
+                    <div class="stat-card green">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div>
+                        <div class="stat-label">Active Categories</div>
+                        <div class="stat-value" id="gal-stat-cats">0</div>
+                    </div>
+                </div>
+
+                <div class="toolbar" style="margin-bottom: 24px;">
+                    <div class="search-wrap">
+                        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input type="text" id="gal-q" placeholder="Search gallery by title, category, or location..." oninput="renderGalleryGrid()">
+                    </div>
+                    <select class="field-select" id="gal-cat-filter" onchange="renderGalleryGrid()" style="width: auto; min-width: 170px; margin-bottom: 0;">
+                        <option value="All">All Categories</option>
+                        <option value="Speaking &amp; Workshops">Speaking &amp; Workshops</option>
+                        <option value="Campus &amp; Honors">Campus &amp; Honors</option>
+                        <option value="Projects &amp; AI">Projects &amp; AI</option>
+                        <option value="Leadership &amp; Community">Leadership &amp; Community</option>
+                    </select>
+                    <button class="btn btn-primary" onclick="openGalleryDrawer(null)" style="flex-shrink:0;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        Add Photo
+                    </button>
+                </div>
+
+                <div class="talks-list" id="gal-grid-dash" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); display: grid; gap: 24px;"></div>
+                <div class="empty-state" id="gal-empty" style="display:none">
+                    <div class="empty-icon"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--g-blue);"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                    <div class="empty-title">No Photos Found</div>
+                    <div class="empty-desc">Click "Add Photo" to record and showcase milestone moments.</div>
                 </div>
             </div>
 
@@ -3258,6 +3308,78 @@
     </div>
 </div>
 
+<!-- ════ GALLERY DRAWER ════ -->
+<div class="drawer-backdrop" id="gallery-backdrop" onclick="closeGalleryDrawer()"></div>
+<div class="drawer" id="gallery-drawer">
+    <div class="drawer-head">
+        <div>
+            <div class="drawer-title" id="gallery-drawer-title">Add Photo to Gallery</div>
+            <div class="drawer-subtitle">Sync speaking and milestone photos to live portfolio</div>
+        </div>
+        <button class="modal-close" onclick="closeGalleryDrawer()">✕</button>
+    </div>
+    <div class="drawer-body">
+        <input type="hidden" id="gal-id">
+        <div class="field-group">
+            <label class="field-label">Photo Title *</label>
+            <input class="field-input" id="gal-title" placeholder="e.g. Build with AI Keynote at GDG Campus">
+        </div>
+        <div class="fields-2col">
+            <div class="field-group">
+                <label class="field-label">Category</label>
+                <select class="field-select" id="gal-category">
+                    <option value="Speaking &amp; Workshops">Speaking &amp; Workshops</option>
+                    <option value="Campus &amp; Honors">Campus &amp; Honors</option>
+                    <option value="Projects &amp; AI">Projects &amp; AI</option>
+                    <option value="Leadership &amp; Community">Leadership &amp; Community</option>
+                    <option value="General">General</option>
+                </select>
+            </div>
+            <div class="field-group">
+                <label class="field-label">Sort Order</label>
+                <input class="field-input" id="gal-sort" type="number" value="0">
+            </div>
+        </div>
+        <div class="field-group">
+            <label class="field-label">Image File Upload (WebP, PNG, JPEG)</label>
+            <input class="field-input" id="gal-file-input" type="file" accept="image/*" onchange="previewGalleryUpload(event)" style="padding: 8px;">
+        </div>
+        <div class="field-group">
+            <label class="field-label">Or Image URL Path</label>
+            <input class="field-input" id="gal-image-url" placeholder="e.g. /uploads/talks/my_photo.webp or https://..." oninput="updateGalleryPreviewFromUrl()">
+        </div>
+        <!-- Live Image Preview Box -->
+        <div class="field-group" id="gal-preview-wrap" style="display:none;">
+            <label class="field-label">Selected Preview</label>
+            <div style="border-radius: var(--r-md); overflow: hidden; border: 1.5px solid var(--line); max-height: 180px; width: 100%; background: var(--surface-2); display: flex; align-items: center; justify-content: center;">
+                <img id="gal-preview-img" src="" alt="Preview" style="max-height: 180px; width: auto; max-width: 100%; object-fit: contain;">
+            </div>
+        </div>
+        <div class="fields-2col">
+            <div class="field-group">
+                <label class="field-label">Date / Month</label>
+                <input class="field-input" id="gal-date" placeholder="e.g. May 2026">
+            </div>
+            <div class="field-group">
+                <label class="field-label">Location / Venue</label>
+                <input class="field-input" id="gal-location" placeholder="e.g. Universitas Ciputra Makassar">
+            </div>
+        </div>
+        <div class="field-group">
+            <label class="field-label">Tags / Badges (comma-separated)</label>
+            <input class="field-input" id="gal-tags" placeholder="e.g. Keynote, GDG, AI, Workshop">
+        </div>
+        <div class="field-group">
+            <label class="field-label">Caption / Description</label>
+            <textarea class="field-input" id="gal-desc" rows="3" style="resize:vertical;" placeholder="Context, attendee size, or milestone significance..."></textarea>
+        </div>
+    </div>
+    <div class="drawer-foot">
+        <button class="btn-sm-ghost" onclick="closeGalleryDrawer()">Cancel</button>
+        <button class="btn btn-primary" id="gal-save-btn" onclick="saveGalleryItem()">Save Photo</button>
+    </div>
+</div>
+
 <!-- ════ AWARD DRAWER ════ -->
 <div class="drawer-backdrop" id="award-backdrop" onclick="closeAwardDrawer()"></div>
 <div class="drawer" id="award-drawer">
@@ -3428,6 +3550,7 @@ var viewMeta = {
     education:     {title:'Education',        crumb:'Portfolio CMS'},
     certifications:{title:'Certifications',   crumb:'Portfolio CMS'},
     awards:        {title:'Honors & Awards',  crumb:'Portfolio CMS'},
+    gallery:       {title:'Visual Gallery',   crumb:'Management'},
     inbox:         {title:'Contact Messages', crumb:'Inquiries'}
 };
 
@@ -3514,6 +3637,12 @@ function switchView(view, el) {
             updateAwardsStats();
             renderAwardsGrid();
         }
+    } else if (view === 'gallery') {
+        if (!galleryLoaded) loadGallery();
+        else {
+            updateGalleryStats();
+            renderGalleryGrid();
+        }
     } else if (view === 'inbox') {
         loadInbox();
     }
@@ -3531,6 +3660,7 @@ function refreshData() {
     else if (id==='education') { educationsLoaded=false; loadEducations(); }
     else if (id==='certifications') { certificationsLoaded=false; loadCertifications(); }
     else if (id==='awards') { awardsLoaded=false; loadAwards(); }
+    else if (id==='gallery') { galleryLoaded=false; loadGallery(); }
     else if (id==='inbox') { loadInbox(); }
     
     var icon = document.getElementById('refresh-icon');
@@ -3609,6 +3739,9 @@ async function loadOverview() {
         }).catch(function(){});
         fetch('/api/certifications').then(r=>r.json()).then(function(d){
             if (d && d.success) animateCount(document.getElementById('sc-certs'), (d.data||[]).length, '', false);
+        }).catch(function(){});
+        fetch('/api/gallery').then(r=>r.json()).then(function(d){
+            if (d && d.success) animateCount(document.getElementById('sc-gallery'), (d.data||[]).length, '', false);
         }).catch(function(){});
         fetch('/api/awards').then(r=>r.json()).then(function(d){
             if (d && d.success) animateCount(document.getElementById('sc-awards'), (d.data||[]).length, '', false);
@@ -8312,6 +8445,264 @@ async function deleteMessage(id) {
         showToast('Failed to delete message');
     }
 }
+
+/* ══════════════════════════════════════════════════════════
+   PORTFOLIO CMS TWO-WAY SYNC: VISUAL GALLERY
+   ══════════════════════════════════════════════════════════ */
+var galleryData = [];
+var _galleryMap = {};
+var galleryLoaded = false;
+
+async function loadGallery() {
+    try {
+        var res = await fetch('/api/gallery');
+        var data = await res.json();
+        if (data.success) {
+            galleryData = data.data || [];
+            _galleryMap = {};
+            galleryData.forEach(function(item) {
+                _galleryMap[item.id] = item;
+            });
+            galleryLoaded = true;
+            updateGalleryStats();
+            renderGalleryGrid();
+        }
+    } catch (err) {
+        console.error('Failed to load gallery:', err);
+        showToast('Error loading gallery items');
+    }
+}
+
+function updateGalleryStats() {
+    var total = galleryData.length;
+    var cats = Array.from(new Set(galleryData.map(function(i){ return i.category; }).filter(Boolean))).length;
+    
+    var totalEl = document.getElementById('gal-stat-total');
+    var catEl = document.getElementById('gal-stat-cats');
+    if (totalEl) totalEl.textContent = total;
+    if (catEl) catEl.textContent = cats;
+
+    var scEl = document.getElementById('sc-gallery');
+    if (scEl) scEl.textContent = total;
+}
+
+function renderGalleryGrid() {
+    var container = document.getElementById('gal-grid-dash');
+    var empty = document.getElementById('gal-empty');
+    if (!container) return;
+
+    var q = (document.getElementById('gal-q') ? document.getElementById('gal-q').value : '').toLowerCase().trim();
+    var filterCat = document.getElementById('gal-cat-filter') ? document.getElementById('gal-cat-filter').value : 'All';
+
+    var filtered = galleryData.filter(function(item) {
+        var matchQ = !q || (item.title && item.title.toLowerCase().includes(q)) ||
+                     (item.category && item.category.toLowerCase().includes(q)) ||
+                     (item.location && item.location.toLowerCase().includes(q));
+        var matchCat = filterCat === 'All' || item.category === filterCat;
+        return matchQ && matchCat;
+    });
+
+    if (filtered.length === 0) {
+        container.innerHTML = '';
+        if (empty) empty.style.display = 'block';
+        return;
+    }
+
+    if (empty) empty.style.display = 'none';
+
+    container.innerHTML = filtered.map(function(item) {
+        var tagsHtml = (item.tags || []).slice(0, 3).map(function(t) {
+            return '<span class="badge" style="font-size:0.7rem; padding:2px 8px; background:var(--surface-2); border:1px solid var(--line);">' + escapeHtml(t) + '</span>';
+        }).join(' ');
+
+        var dateStr = item.date ? escapeHtml(item.date) : '';
+        var locStr = item.location ? '📍 ' + escapeHtml(item.location) : '';
+
+        return '<div class="card" style="display:flex; flex-direction:column; overflow:hidden; border:1.5px solid var(--line); border-radius:var(--r-card); background:var(--surface);">' +
+            '<div style="position:relative; width:100%; aspect-ratio:16/10; overflow:hidden; background:var(--surface-2);">' +
+                '<img src="' + escapeHtml(item.image_url) + '" alt="' + escapeHtml(item.title) + '" style="width:100%; height:100%; object-fit:cover;">' +
+                '<span class="badge" style="position:absolute; top:10px; left:10px; background:rgba(15,23,42,0.85); color:#fff; font-size:0.72rem; font-weight:700; padding:4px 10px; border-radius:var(--r-pill);">' + escapeHtml(item.category || 'General') + '</span>' +
+            '</div>' +
+            '<div style="padding:18px; display:flex; flex-direction:column; flex:1;">' +
+                '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; font-size:0.78rem; color:var(--text-tertiary);">' +
+                    '<span>' + locStr + '</span>' +
+                    '<span>' + dateStr + '</span>' +
+                '</div>' +
+                '<h4 style="font-size:1rem; font-weight:700; margin-bottom:8px; line-height:1.4; color:var(--text);">' + escapeHtml(item.title) + '</h4>' +
+                (item.description ? '<p style="font-size:0.84rem; color:var(--text-secondary); line-height:1.5; margin-bottom:12px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">' + escapeHtml(item.description) + '</p>' : '') +
+                (tagsHtml ? '<div style="display:flex; flex-wrap:wrap; gap:5px; margin-bottom:14px;">' + tagsHtml + '</div>' : '') +
+                '<div style="margin-top:auto; padding-top:12px; border-top:1px solid var(--line); display:flex; justify-content:flex-end; gap:8px;">' +
+                    '<button class="btn-sm-ghost" onclick="window.open(\'' + escapeHtml(item.image_url) + '\', \'_blank\')" style="font-size:0.78rem; font-weight:700; padding:6px 12px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface);" title="View Full Image">Preview</button>' +
+                    '<button class="btn-sm-ghost" onclick="openGalleryDrawerById(\'' + item.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface);">Edit</button>' +
+                    '<button class="btn-sm-ghost" onclick="deleteGalleryItem(\'' + item.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid rgba(234,67,53,0.3); background:rgba(234,67,53,0.08); color:var(--g-red);">Delete</button>' +
+                '</div>' +
+            '</div>' +
+        '</div>';
+    }).join('');
+}
+
+function openGalleryDrawerById(id) {
+    openGalleryDrawer(_galleryMap[id] || null);
+}
+
+function openGalleryDrawer(item) {
+    document.getElementById('gal-id').value = item ? item.id : '';
+    document.getElementById('gallery-drawer-title').textContent = item ? 'Edit Gallery Photo' : 'Add Photo to Gallery';
+    document.getElementById('gal-title').value = item ? (item.title || '') : '';
+    document.getElementById('gal-category').value = item ? (item.category || 'Speaking & Workshops') : 'Speaking & Workshops';
+    document.getElementById('gal-image-url').value = item ? (item.image_url || '') : '';
+    document.getElementById('gal-date').value = item ? (item.date || '') : '';
+    document.getElementById('gal-location').value = item ? (item.location || '') : '';
+    document.getElementById('gal-tags').value = item && item.tags ? item.tags.join(', ') : '';
+    document.getElementById('gal-desc').value = item ? (item.description || '') : '';
+    document.getElementById('gal-sort').value = item ? (item.sort_order || 0) : 0;
+
+    var fileInput = document.getElementById('gal-file-input');
+    if (fileInput) fileInput.value = '';
+
+    var previewWrap = document.getElementById('gal-preview-wrap');
+    var previewImg = document.getElementById('gal-preview-img');
+    if (item && item.image_url) {
+        if (previewImg) previewImg.src = item.image_url;
+        if (previewWrap) previewWrap.style.display = 'block';
+    } else {
+        if (previewWrap) previewWrap.style.display = 'none';
+    }
+
+    document.getElementById('gallery-backdrop').classList.add('open');
+    document.getElementById('gallery-drawer').classList.add('open');
+}
+
+function closeGalleryDrawer() {
+    document.getElementById('gallery-backdrop').classList.remove('open');
+    document.getElementById('gallery-drawer').classList.remove('open');
+}
+
+function previewGalleryUpload(event) {
+    var file = event.target.files && event.target.files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var previewImg = document.getElementById('gal-preview-img');
+            var previewWrap = document.getElementById('gal-preview-wrap');
+            if (previewImg) previewImg.src = e.target.result;
+            if (previewWrap) previewWrap.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+function updateGalleryPreviewFromUrl() {
+    var url = document.getElementById('gal-image-url').value.trim();
+    var previewImg = document.getElementById('gal-preview-img');
+    var previewWrap = document.getElementById('gal-preview-wrap');
+    if (url) {
+        if (previewImg) previewImg.src = url;
+        if (previewWrap) previewWrap.style.display = 'block';
+    } else {
+        if (previewWrap) previewWrap.style.display = 'none';
+    }
+}
+
+async function saveGalleryItem() {
+    var id = document.getElementById('gal-id').value;
+    var title = document.getElementById('gal-title').value.trim();
+    var category = document.getElementById('gal-category').value;
+    var imageUrl = document.getElementById('gal-image-url').value.trim();
+    var fileInput = document.getElementById('gal-file-input');
+    var hasFile = fileInput && fileInput.files && fileInput.files.length > 0;
+    var date = document.getElementById('gal-date').value.trim();
+    var location = document.getElementById('gal-location').value.trim();
+    var tags = document.getElementById('gal-tags').value.split(',').map(function(s){ return s.trim(); }).filter(Boolean);
+    var description = document.getElementById('gal-desc').value.trim();
+    var sort_order = parseInt(document.getElementById('gal-sort').value, 10) || 0;
+
+    if (!title) {
+        showToast('Photo title is required');
+        return;
+    }
+
+    if (!id && !hasFile && !imageUrl) {
+        showToast('Please upload an image file or provide an image URL');
+        return;
+    }
+
+    var saveBtn = document.getElementById('gal-save-btn');
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving…';
+
+    try {
+        var url = id ? '/api/gallery/' + id : '/api/gallery';
+        var method = id ? 'PUT' : 'POST';
+
+        var res;
+        if (hasFile) {
+            var formData = new FormData();
+            formData.append('title', title);
+            formData.append('category', category);
+            formData.append('image', fileInput.files[0]);
+            formData.append('date', date);
+            formData.append('location', location);
+            formData.append('tags', tags.join(','));
+            formData.append('description', description);
+            formData.append('sort_order', sort_order);
+            if (imageUrl) formData.append('image_url', imageUrl);
+
+            res = await fetch(url, {
+                method: method,
+                body: formData
+            });
+        } else {
+            var payload = {
+                title: title,
+                category: category,
+                image_url: imageUrl,
+                date: date,
+                location: location,
+                tags: tags,
+                description: description,
+                sort_order: sort_order
+            };
+
+            res = await fetch(url, {
+                method: method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+        }
+
+        var data = await res.json();
+        if (data.success) {
+            showToast(id ? 'Photo updated successfully!' : 'Photo added to gallery!');
+            closeGalleryDrawer();
+            await loadGallery();
+        } else {
+            showToast(data.error || 'Failed to save photo');
+        }
+    } catch(err) {
+        showToast('Network error while saving photo');
+    } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Save Photo';
+    }
+}
+
+async function deleteGalleryItem(id) {
+    if (!confirm('Are you sure you want to delete this photo from the gallery?')) return;
+    try {
+        var res = await fetch('/api/gallery/' + id, { method: 'DELETE' });
+        var data = await res.json();
+        if (data.success) {
+            showToast('Photo deleted from gallery');
+            await loadGallery();
+        } else {
+            showToast(data.error || 'Delete failed');
+        }
+    } catch(err) {
+        showToast('Error deleting photo');
+    }
+}
+
 </script>
 
 </body>

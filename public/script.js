@@ -1315,10 +1315,10 @@
       });
     }
 
-    // Also dynamically include any certificate images rendered on page
-    document.querySelectorAll('.award-cert-img, .cert-preview-img').forEach(img => {
+    // Also dynamically include any certificate or gallery images rendered on page
+    document.querySelectorAll('.award-cert-img, .cert-preview-img, .gallery-card-thumb').forEach(img => {
       if (img.src && !lightboxImages.some(item => item.src === img.src)) {
-        lightboxImages.push({ src: img.src, alt: img.alt || 'Certificate' });
+        lightboxImages.push({ src: img.src, alt: img.alt || 'Visual Gallery' });
       }
     });
   }
@@ -1386,19 +1386,91 @@
     }
   });
 
+  /* ============ GALLERY DYNAMIC HYDRATION & FILTERS ============ */
+  let liveGallery = [];
+  let currentGalleryFilter = 'All';
+
+  function renderGallery(filter = 'All') {
+    const container = document.getElementById('galleryGrid');
+    if (!container) return;
+
+    currentGalleryFilter = filter;
+    const items = (!filter || filter === 'All')
+      ? liveGallery
+      : liveGallery.filter(item => (item.category || '').toLowerCase() === filter.toLowerCase());
+
+    if (!items || items.length === 0) {
+      container.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 48px 24px; background: var(--surface); border: 1.5px dashed var(--line); border-radius: var(--r-card);">
+          <div style="font-size: 2.2rem; margin-bottom: 12px;">📷</div>
+          <h4 style="font-size: 1.1rem; color: var(--ink); margin-bottom: 6px;">No moments found in this category</h4>
+          <p style="font-size: 0.88rem; color: var(--ink-3);">Select "All Moments" to explore other speaking engagements, campus milestones, and research photos.</p>
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = items.map(item => {
+      const tagsHtml = (item.tags || []).slice(0, 3).map(tag => `<span class="gallery-card-tag">${escapeHtml(tag)}</span>`).join('');
+      const dateText = item.date ? escapeHtml(item.date) : '';
+      const locText = item.location ? `📍 ${escapeHtml(item.location)}` : '';
+      const catText = item.category ? escapeHtml(item.category) : 'Highlight';
+      const titleText = escapeHtml(item.title);
+      const descText = item.description ? escapeHtml(item.description) : '';
+      const imgUrl = escapeHtml(item.image_url);
+
+      return `
+        <article class="gallery-card" onclick="window.openLightbox('${imgUrl}', '${titleText}')">
+          <div class="gallery-card-thumb-wrap">
+            <span class="gallery-category-badge">${catText}</span>
+            <img class="gallery-card-thumb" src="${imgUrl}" alt="${titleText}" loading="lazy">
+            <div class="gallery-zoom-overlay">
+              <div class="gallery-zoom-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+              </div>
+            </div>
+          </div>
+          <div class="gallery-card-content">
+            <div class="gallery-card-meta">
+              <span>${locText}</span>
+              <span>${dateText}</span>
+            </div>
+            <h3 class="gallery-card-title">${titleText}</h3>
+            ${descText ? `<p class="gallery-card-desc">${descText}</p>` : ''}
+            ${tagsHtml ? `<div class="gallery-card-tags">${tagsHtml}</div>` : ''}
+          </div>
+        </article>
+      `;
+    }).join('');
+  }
+
+  function setupGalleryFilters() {
+    const tabs = document.querySelectorAll('.gallery-tab');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const cat = tab.getAttribute('data-category') || 'All';
+        renderGallery(cat);
+      });
+    });
+  }
+
   // Main Live Data Fetcher & Hydrator
   async function initLivePortfolioSync() {
     setupProjectFilters();
+    setupGalleryFilters();
 
     try {
-      const [projRes, talksRes, feedRes, expRes, eduRes, certRes, awardRes] = await Promise.allSettled([
+      const [projRes, talksRes, feedRes, expRes, eduRes, certRes, awardRes, galRes] = await Promise.allSettled([
         fetch('/api/projects').then(r => r.json()),
         fetch('/api/talks').then(r => r.json()),
         fetch('/api/get_feedback').then(r => r.json()),
         fetch('/api/experiences').then(r => r.json()),
         fetch('/api/educations').then(r => r.json()),
         fetch('/api/certifications').then(r => r.json()),
-        fetch('/api/awards').then(r => r.json())
+        fetch('/api/awards').then(r => r.json()),
+        fetch('/api/gallery').then(r => r.json())
       ]);
 
       if (projRes.status === 'fulfilled' && projRes.value && projRes.value.data) {
@@ -1435,6 +1507,11 @@
       if (awardRes.status === 'fulfilled' && awardRes.value && awardRes.value.data && awardRes.value.data.length) {
         liveAwards = awardRes.value.data;
         renderAwards(liveAwards);
+      }
+
+      if (galRes.status === 'fulfilled' && galRes.value && galRes.value.data && galRes.value.data.length) {
+        liveGallery = galRes.value.data;
+        renderGallery('All');
       }
 
       updateHeroStats();
