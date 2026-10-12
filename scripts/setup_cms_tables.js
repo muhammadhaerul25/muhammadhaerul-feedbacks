@@ -128,14 +128,14 @@ async function setupAndSeed() {
       },
       {
         role: 'AI Engineer',
-        company: 'Bangkit Academy led by Google, Tokopedia, GoTo, Traveloka',
-        location: 'Hybrid · Jakarta',
+        company: 'Paper.id',
+        location: 'AI Product & Enablement, Jakarta',
         start_date: 'May 2024',
         end_date: 'Jun 2025',
         is_current: false,
-        accent_color: 'var(--yellow)',
-        description: 'Developed and reviewed machine learning and deep learning curriculum and hands-on projects, assisted students in fine-tuning models, building APIs, and deploying models to cloud infrastructure.',
-        stack: ['TensorFlow', 'Python', 'Cloud Deployment', 'MLOps'],
+        accent_color: 'var(--green)',
+        description: 'Led development of an LLM-powered OCR system for KYC/KYB processing (99% accuracy, 4s per document), a multi-agent HR chatbot (99% response accuracy across 1,000+ queries), and a hybrid keyword + vector + LLM search engine. Built the ImageProcessingOCR enhancement pipeline that lifted OCR accuracy by 10% while cutting file size 40% and processing time 50%.',
+        stack: ['LLMs', 'FastAPI', 'YOLOv8', 'OpenCV', 'MongoDB', 'InsightFace'],
         sort_order: 3
       },
       {
