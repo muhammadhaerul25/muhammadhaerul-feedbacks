@@ -15,7 +15,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=3.2">
+  <link rel="stylesheet" href="styles.css?v=3.3">
 </head>
 
 <body>
@@ -27,17 +27,18 @@
   <header class="nav" id="nav">
     <div class="nav-inner">
       <nav class="nav-links" id="navLinks">
-        <a href="#about" data-nav>About</a>
-        <a href="#skills" data-nav>Skills</a>
+        <a href="#about" data-nav>Profile</a>
         <a href="#education" data-nav>Education</a>
-        <a href="#experience" data-nav>Experience</a>
+        <a href="#experience" data-nav>Experiences</a>
+        <a href="#skills" data-nav>Skills</a>
         <a href="#projects" data-nav>Projects</a>
         <a href="#publications" data-nav>Publications</a>
         <a href="#talks" data-nav>Talks</a>
-        <a href="#testimonials" data-nav>Feedback</a>
         <a href="#awards" data-nav>Awards</a>
         <a href="#certifications" data-nav>Certifications</a>
-        <a href="#contact" data-nav>Contact</a>
+        <a href="#blog" data-nav>Blog</a>
+        <a href="#testimonials" data-nav>Feedbacks</a>
+        <a href="#contact" data-nav>Contacts</a>
       </nav>
 
       <div class="nav-actions">
@@ -152,8 +153,7 @@
       </a>
     </section>
 
-    <!-- ============ LOGO / TRUST STRIP ============ -->
-    <section class="trust-strip" id="trust">
+<section class="trust-strip" id="trust">
       <div class="container">
         <p class="trust-label">Trusted by teams and institutions across Indonesia</p>
         <div class="trust-logos">
@@ -167,11 +167,10 @@
       </div>
     </section>
 
-    <!-- ============ ABOUT ============ -->
-    <section class="section about" id="about">
+<section class="section about" id="about">
       <div class="container about-grid">
         <div class="about-col-label reveal">
-          <span class="section-eyebrow">01 — About</span>
+          <span class="section-eyebrow">01 — Profile</span>
           <div class="about-portrait">
             <div class="portrait-frame">
               <picture>
@@ -217,11 +216,256 @@
       </div>
     </section>
 
-    <!-- ============ SKILLS ============ -->
-    <section class="section skills" id="skills">
+<section class="section education" id="education">
       <div class="container">
         <div class="section-head reveal">
-          <span class="section-eyebrow">02 — Skills</span>
+          <span class="section-eyebrow">02 — Education</span>
+          <h2 class="section-title">Academic foundation.</h2>
+        </div>
+
+        <div class="edu-cards-wrap" id="edu-cards-wrap">
+        <div class="edu-card reveal">
+          <div class="edu-card-main">
+            <div class="edu-header">
+              <div class="edu-logo-wrap">
+                <img src="/assets/images/unhas-logo.png" 
+                     onerror="this.src='https://www.unhas.ac.id/wp-content/uploads/2026/10/logo-unhas-resmi-berwarna-png-transparan-768x918.png'" 
+                     alt="Hasanuddin University Logo" 
+                     class="edu-logo" 
+                     width="58" 
+                     height="70" 
+                     loading="lazy">
+              </div>
+              <div class="edu-header-info">
+                <h3>Bachelor of Computer Science</h3>
+                <p class="edu-school">Hasanuddin University</p>
+                <p class="edu-date">September 2020 — July 2024</p>
+              </div>
+            </div>
+
+            <div class="edu-details-body">
+              <div class="edu-section-block">
+                <span class="edu-block-label">Specialization</span>
+                <span class="edu-spec-val">Artificial Intelligence and Data Science</span>
+              </div>
+
+              <div class="edu-section-block">
+                <span class="edu-block-label">Thesis</span>
+                <div class="edu-thesis-box">
+                  Development and Comparison of PPE Detection Models in Industrial Workers Based on Computer Vision
+                </div>
+              </div>
+
+              <div class="edu-section-block">
+                <span class="edu-block-label">Relevant Courseworks</span>
+                <div class="edu-coursework-tags">
+                  <span class="edu-cw-tag">Data Mining</span>
+                  <span class="edu-cw-tag">Data Analytics</span>
+                  <span class="edu-cw-tag">Data Visualization</span>
+                  <span class="edu-cw-tag">Machine Learning</span>
+                  <span class="edu-cw-tag">Deep Learning</span>
+                  <span class="edu-cw-tag">Computer Vision</span>
+                  <span class="edu-cw-tag">Natural Language Processing</span>
+                </div>
+              </div>
+
+              <div class="edu-section-block">
+                <span class="edu-block-label">Activities and Societies</span>
+                <ul class="edu-societies-list">
+                  <li>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                    <span>GenBI Chapter Hasanuddin University 2022</span>
+                  </li>
+                  <li>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                    <span>Unit of Scientific Knowledge and Scientific Reasoning Generation XIII 2021</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="edu-card-stats">
+            <div>
+              <span>3.97</span>
+              <small>Grade: 3.97 / 4.00 (CGPA)</small>
+            </div>
+            <div>
+              <span>Cumlaude</span>
+              <small>Honors</small>
+            </div>
+            <div>
+              <span>3×</span>
+              <small>Most Outstanding Student</small>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+<section class="section experience" id="experience">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-eyebrow">03 — Experiences</span>
+          <h2 class="section-title">A career built inside real AI teams.</h2>
+          <p class="section-desc">Six roles, one throughline: taking AI from research notebooks into things people
+            actually rely on.</p>
+        </div>
+
+        <div class="timeline" id="timeline">
+
+          <div class="timeline-item reveal">
+            <div class="timeline-marker" style="--accent:var(--blue)"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <!-- AksaraHub Logo Slot: Insert <img> or <svg> inside (e.g. <img src="assets/images/aksarahub.png" alt="AksaraHub Nusantara">) -->
+                <div class="timeline-company-logo" aria-label="AksaraHub Nusantara Logo"></div>
+                <div class="timeline-header-main">
+                  <div class="timeline-top">
+                    <h3>Co-Founder (AI &amp; Product Lead)</h3>
+                    <span class="timeline-date">Jan 2026 — Present</span>
+                  </div>
+                  <p class="timeline-company">AksaraHub Nusantara <span class="timeline-loc">· Hybrid</span></p>
+                </div>
+              </div>
+              <p class="timeline-desc">Leading AI and Product development and data analytics for AksaraHub.id — script recognition (OCR), local-language translation, AI-powered educational tools, and digital preservation of Indonesian regional scripts.</p>
+              <div class="timeline-stack">
+                <span>Computer Vision</span><span>OCR</span><span>NLP</span><span>Product Strategy</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-marker" style="--accent:var(--red)"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <!-- RevoU Logo Slot: Insert <img> or <svg> inside (e.g. <img src="assets/images/revou.png" alt="RevoU">) -->
+                <div class="timeline-company-logo" aria-label="RevoU Logo"></div>
+                <div class="timeline-header-main">
+                  <div class="timeline-top">
+                    <h3>AI Trainer</h3>
+                    <span class="timeline-date">Jul 2025 — Present</span>
+                  </div>
+                  <p class="timeline-company">RevoU <span class="timeline-loc">· Contract, Hybrid</span></p>
+                </div>
+              </div>
+              <p class="timeline-desc">Lead enterprise AI training and adoption programs for government institutions,
+                universities, and corporates. Delivered sessions to 300+ professionals at BSSN on AI in cybersecurity,
+                trained 100+ IT staff at Universitas Sulawesi Barat, and ran Generative AI programs for AXA Mandiri and
+                Indosat.</p>
+              <div class="timeline-stack">
+                <span>Prompt Engineering</span><span>Generative AI</span><span>Facilitation</span><span>Curriculum
+                  Design</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-marker" style="--accent:var(--green)"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <!-- Paper.id Logo Slot: Insert <img> or <svg> inside (e.g. <img src="assets/images/paperid.png" alt="Paper.id">) -->
+                <div class="timeline-company-logo" aria-label="Paper.id Logo"></div>
+                <div class="timeline-header-main">
+                  <div class="timeline-top">
+                    <h3>AI Engineer</h3>
+                    <span class="timeline-date">May 2024 — Jun 2025</span>
+                  </div>
+                  <p class="timeline-company">Paper.id <span class="timeline-loc">· AI Product &amp; Enablement,
+                      Jakarta</span></p>
+                </div>
+              </div>
+              <p class="timeline-desc">Led development of an LLM-powered OCR system for KYC/KYB processing (99%
+                accuracy, 4s per document), a multi-agent HR chatbot (99% response accuracy across 1,000+ queries), and
+                a hybrid keyword + vector + LLM search engine. Built the ImageProcessingOCR enhancement pipeline that
+                lifted OCR accuracy by 10% while cutting file size 40% and processing time 50%.</p>
+              <div class="timeline-stack">
+                <span>LLMs</span><span>FastAPI</span><span>YOLOv8</span><span>OpenCV</span><span>MongoDB</span><span>InsightFace</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-marker" style="--accent:var(--yellow)"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <!-- Masa Geosciences Logo Slot: Insert <img> or <svg> inside (e.g. <img src="assets/images/masageosciences.png" alt="Masa Geosciences">) -->
+                <div class="timeline-company-logo" aria-label="Masa Geosciences Logo"></div>
+                <div class="timeline-header-main">
+                  <div class="timeline-top">
+                    <h3>Computer Vision Engineer</h3>
+                    <span class="timeline-date">Jul 2024 — Sep 2024</span>
+                  </div>
+                  <p class="timeline-company">Masa Geosciences <span class="timeline-loc">· Remote, Jakarta</span></p>
+                </div>
+              </div>
+              <p class="timeline-desc">Fine-tuned YOLOv8 / YOLO-World models to detect and segment minerals across
+                1,000+ field images, built a color-matching pipeline against known mineral references, and trained
+                regression models to estimate mineral content using engineered geological features.</p>
+              <div class="timeline-stack">
+                <span>YOLOv8</span><span>OpenCV</span><span>Feature Engineering</span><span>Regression</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-marker" style="--accent:var(--blue)"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <!-- XL Axiata Logo Slot: Insert <img> or <svg> inside (e.g. <img src="assets/images/xlaxiata.png" alt="XL Axiata">) -->
+                <div class="timeline-company-logo" aria-label="XL Axiata Logo"></div>
+                <div class="timeline-header-main">
+                  <div class="timeline-top">
+                    <h3>AI Engineer</h3>
+                    <span class="timeline-date">Aug 2023 — Dec 2023</span>
+                  </div>
+                  <p class="timeline-company">XL Axiata <span class="timeline-loc">· 5G AI-IoT Use Case Dev, Jakarta</span>
+                  </p>
+                </div>
+              </div>
+              <p class="timeline-desc">Built four production computer-vision systems for the X-Camp incubation program:
+                a road-damage detector across 45,000+ images (78% accuracy), a PPE detector for industrial safety
+                running on Raspberry Pi (84% accuracy), a headcount monitoring dashboard, and a TensorFlow-based fuse
+                anomaly detector.</p>
+              <div class="timeline-stack">
+                <span>YOLOv8</span><span>TensorFlow</span><span>Edge Deployment</span><span>Dashboards</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-marker" style="--accent:var(--red)"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <!-- Kemdikbudristek Logo Slot: Insert <img> or <svg> inside (e.g. <img src="assets/images/kemdikbud.png" alt="Kemdikbudristek">) -->
+                <div class="timeline-company-logo" aria-label="Kemdikbudristek Logo"></div>
+                <div class="timeline-header-main">
+                  <div class="timeline-top">
+                    <h3>AI Engineer</h3>
+                    <span class="timeline-date">Feb 2023 — Jun 2023</span>
+                  </div>
+                  <p class="timeline-company">Ministry of Education, Culture, Research &amp; Technology <span
+                      class="timeline-loc">· Jakarta</span></p>
+                </div>
+              </div>
+              <p class="timeline-desc">Researched applications of ChatGPT in education, proposed three product concepts,
+                then built Personalized English Learning — a web app using OpenAI's API to adapt language lessons to
+                individual learners.</p>
+              <div class="timeline-stack">
+                <span>OpenAI API</span><span>NLP</span><span>EdTech</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+<section class="section skills" id="skills">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-eyebrow">04 — Skills</span>
           <h2 class="section-title">Depth where it matters, range where it helps.</h2>
           <p class="section-desc">Fluency is shown through delivered systems, not certificates alone — but here's the
             map.</p>
@@ -1209,256 +1453,7 @@
       </div>
     </section>
 
-    <!-- ============ EDUCATION ============ -->
-    <section class="section education" id="education">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="section-eyebrow">03 — Education</span>
-          <h2 class="section-title">Academic foundation.</h2>
-        </div>
-
-        <div class="edu-cards-wrap" id="edu-cards-wrap">
-        <div class="edu-card reveal">
-          <div class="edu-card-main">
-            <div class="edu-header">
-              <div class="edu-logo-wrap">
-                <img src="/assets/images/unhas-logo.png" 
-                     onerror="this.src='https://www.unhas.ac.id/wp-content/uploads/2026/10/logo-unhas-resmi-berwarna-png-transparan-768x918.png'" 
-                     alt="Hasanuddin University Logo" 
-                     class="edu-logo" 
-                     width="58" 
-                     height="70" 
-                     loading="lazy">
-              </div>
-              <div class="edu-header-info">
-                <h3>Bachelor of Computer Science</h3>
-                <p class="edu-school">Hasanuddin University</p>
-                <p class="edu-date">September 2020 — July 2024</p>
-              </div>
-            </div>
-
-            <div class="edu-details-body">
-              <div class="edu-section-block">
-                <span class="edu-block-label">Specialization</span>
-                <span class="edu-spec-val">Artificial Intelligence and Data Science</span>
-              </div>
-
-              <div class="edu-section-block">
-                <span class="edu-block-label">Thesis</span>
-                <div class="edu-thesis-box">
-                  Development and Comparison of PPE Detection Models in Industrial Workers Based on Computer Vision
-                </div>
-              </div>
-
-              <div class="edu-section-block">
-                <span class="edu-block-label">Relevant Courseworks</span>
-                <div class="edu-coursework-tags">
-                  <span class="edu-cw-tag">Data Mining</span>
-                  <span class="edu-cw-tag">Data Analytics</span>
-                  <span class="edu-cw-tag">Data Visualization</span>
-                  <span class="edu-cw-tag">Machine Learning</span>
-                  <span class="edu-cw-tag">Deep Learning</span>
-                  <span class="edu-cw-tag">Computer Vision</span>
-                  <span class="edu-cw-tag">Natural Language Processing</span>
-                </div>
-              </div>
-
-              <div class="edu-section-block">
-                <span class="edu-block-label">Activities and Societies</span>
-                <ul class="edu-societies-list">
-                  <li>
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-                    <span>GenBI Chapter Hasanuddin University 2022</span>
-                  </li>
-                  <li>
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-                    <span>Unit of Scientific Knowledge and Scientific Reasoning Generation XIII 2021</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div class="edu-card-stats">
-            <div>
-              <span>3.97</span>
-              <small>Grade: 3.97 / 4.00 (CGPA)</small>
-            </div>
-            <div>
-              <span>Cumlaude</span>
-              <small>Honors</small>
-            </div>
-            <div>
-              <span>3×</span>
-              <small>Most Outstanding Student</small>
-            </div>
-          </div>
-        </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ EXPERIENCE ============ -->
-    <section class="section experience" id="experience">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="section-eyebrow">04 — Experience</span>
-          <h2 class="section-title">A career built inside real AI teams.</h2>
-          <p class="section-desc">Six roles, one throughline: taking AI from research notebooks into things people
-            actually rely on.</p>
-        </div>
-
-        <div class="timeline" id="timeline">
-
-          <div class="timeline-item reveal">
-            <div class="timeline-marker" style="--accent:var(--blue)"></div>
-            <div class="timeline-content">
-              <div class="timeline-header">
-                <!-- AksaraHub Logo Slot: Insert <img> or <svg> inside (e.g. <img src="assets/images/aksarahub.png" alt="AksaraHub Nusantara">) -->
-                <div class="timeline-company-logo" aria-label="AksaraHub Nusantara Logo"></div>
-                <div class="timeline-header-main">
-                  <div class="timeline-top">
-                    <h3>Co-Founder (AI &amp; Product Lead)</h3>
-                    <span class="timeline-date">Jan 2026 — Present</span>
-                  </div>
-                  <p class="timeline-company">AksaraHub Nusantara <span class="timeline-loc">· Hybrid</span></p>
-                </div>
-              </div>
-              <p class="timeline-desc">Leading AI and Product development and data analytics for AksaraHub.id — script recognition (OCR), local-language translation, AI-powered educational tools, and digital preservation of Indonesian regional scripts.</p>
-              <div class="timeline-stack">
-                <span>Computer Vision</span><span>OCR</span><span>NLP</span><span>Product Strategy</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="timeline-item reveal">
-            <div class="timeline-marker" style="--accent:var(--red)"></div>
-            <div class="timeline-content">
-              <div class="timeline-header">
-                <!-- RevoU Logo Slot: Insert <img> or <svg> inside (e.g. <img src="assets/images/revou.png" alt="RevoU">) -->
-                <div class="timeline-company-logo" aria-label="RevoU Logo"></div>
-                <div class="timeline-header-main">
-                  <div class="timeline-top">
-                    <h3>AI Trainer</h3>
-                    <span class="timeline-date">Jul 2025 — Present</span>
-                  </div>
-                  <p class="timeline-company">RevoU <span class="timeline-loc">· Contract, Hybrid</span></p>
-                </div>
-              </div>
-              <p class="timeline-desc">Lead enterprise AI training and adoption programs for government institutions,
-                universities, and corporates. Delivered sessions to 300+ professionals at BSSN on AI in cybersecurity,
-                trained 100+ IT staff at Universitas Sulawesi Barat, and ran Generative AI programs for AXA Mandiri and
-                Indosat.</p>
-              <div class="timeline-stack">
-                <span>Prompt Engineering</span><span>Generative AI</span><span>Facilitation</span><span>Curriculum
-                  Design</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="timeline-item reveal">
-            <div class="timeline-marker" style="--accent:var(--green)"></div>
-            <div class="timeline-content">
-              <div class="timeline-header">
-                <!-- Paper.id Logo Slot: Insert <img> or <svg> inside (e.g. <img src="assets/images/paperid.png" alt="Paper.id">) -->
-                <div class="timeline-company-logo" aria-label="Paper.id Logo"></div>
-                <div class="timeline-header-main">
-                  <div class="timeline-top">
-                    <h3>AI Engineer</h3>
-                    <span class="timeline-date">May 2024 — Jun 2025</span>
-                  </div>
-                  <p class="timeline-company">Paper.id <span class="timeline-loc">· AI Product &amp; Enablement,
-                      Jakarta</span></p>
-                </div>
-              </div>
-              <p class="timeline-desc">Led development of an LLM-powered OCR system for KYC/KYB processing (99%
-                accuracy, 4s per document), a multi-agent HR chatbot (99% response accuracy across 1,000+ queries), and
-                a hybrid keyword + vector + LLM search engine. Built the ImageProcessingOCR enhancement pipeline that
-                lifted OCR accuracy by 10% while cutting file size 40% and processing time 50%.</p>
-              <div class="timeline-stack">
-                <span>LLMs</span><span>FastAPI</span><span>YOLOv8</span><span>OpenCV</span><span>MongoDB</span><span>InsightFace</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="timeline-item reveal">
-            <div class="timeline-marker" style="--accent:var(--yellow)"></div>
-            <div class="timeline-content">
-              <div class="timeline-header">
-                <!-- Masa Geosciences Logo Slot: Insert <img> or <svg> inside (e.g. <img src="assets/images/masageosciences.png" alt="Masa Geosciences">) -->
-                <div class="timeline-company-logo" aria-label="Masa Geosciences Logo"></div>
-                <div class="timeline-header-main">
-                  <div class="timeline-top">
-                    <h3>Computer Vision Engineer</h3>
-                    <span class="timeline-date">Jul 2024 — Sep 2024</span>
-                  </div>
-                  <p class="timeline-company">Masa Geosciences <span class="timeline-loc">· Remote, Jakarta</span></p>
-                </div>
-              </div>
-              <p class="timeline-desc">Fine-tuned YOLOv8 / YOLO-World models to detect and segment minerals across
-                1,000+ field images, built a color-matching pipeline against known mineral references, and trained
-                regression models to estimate mineral content using engineered geological features.</p>
-              <div class="timeline-stack">
-                <span>YOLOv8</span><span>OpenCV</span><span>Feature Engineering</span><span>Regression</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="timeline-item reveal">
-            <div class="timeline-marker" style="--accent:var(--blue)"></div>
-            <div class="timeline-content">
-              <div class="timeline-header">
-                <!-- XL Axiata Logo Slot: Insert <img> or <svg> inside (e.g. <img src="assets/images/xlaxiata.png" alt="XL Axiata">) -->
-                <div class="timeline-company-logo" aria-label="XL Axiata Logo"></div>
-                <div class="timeline-header-main">
-                  <div class="timeline-top">
-                    <h3>AI Engineer</h3>
-                    <span class="timeline-date">Aug 2023 — Dec 2023</span>
-                  </div>
-                  <p class="timeline-company">XL Axiata <span class="timeline-loc">· 5G AI-IoT Use Case Dev, Jakarta</span>
-                  </p>
-                </div>
-              </div>
-              <p class="timeline-desc">Built four production computer-vision systems for the X-Camp incubation program:
-                a road-damage detector across 45,000+ images (78% accuracy), a PPE detector for industrial safety
-                running on Raspberry Pi (84% accuracy), a headcount monitoring dashboard, and a TensorFlow-based fuse
-                anomaly detector.</p>
-              <div class="timeline-stack">
-                <span>YOLOv8</span><span>TensorFlow</span><span>Edge Deployment</span><span>Dashboards</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="timeline-item reveal">
-            <div class="timeline-marker" style="--accent:var(--red)"></div>
-            <div class="timeline-content">
-              <div class="timeline-header">
-                <!-- Kemdikbudristek Logo Slot: Insert <img> or <svg> inside (e.g. <img src="assets/images/kemdikbud.png" alt="Kemdikbudristek">) -->
-                <div class="timeline-company-logo" aria-label="Kemdikbudristek Logo"></div>
-                <div class="timeline-header-main">
-                  <div class="timeline-top">
-                    <h3>AI Engineer</h3>
-                    <span class="timeline-date">Feb 2023 — Jun 2023</span>
-                  </div>
-                  <p class="timeline-company">Ministry of Education, Culture, Research &amp; Technology <span
-                      class="timeline-loc">· Jakarta</span></p>
-                </div>
-              </div>
-              <p class="timeline-desc">Researched applications of ChatGPT in education, proposed three product concepts,
-                then built Personalized English Learning — a web app using OpenAI's API to adapt language lessons to
-                individual learners.</p>
-              <div class="timeline-stack">
-                <span>OpenAI API</span><span>NLP</span><span>EdTech</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ FEATURED PROJECTS ============ -->
-    <section class="section projects" id="projects">
+<section class="section projects" id="projects">
       <div class="container">
         <div class="section-head reveal">
           <span class="section-eyebrow">05 — Featured &amp; Case-Study Projects</span>
@@ -1507,8 +1502,7 @@
       </div>
     </section>
 
-    <!-- ============ PUBLICATIONS ============ -->
-    <section class="section publications" id="publications">
+<section class="section publications" id="publications">
       <div class="container">
         <div class="section-head reveal">
           <span class="section-eyebrow">06 — Publications</span>
@@ -1561,8 +1555,7 @@
       </div>
     </section>
 
-    <!-- ============ TALKS ============ -->
-    <section class="section talks-section" id="talks">
+<section class="section talks-section" id="talks">
       <div class="container">
         <div class="section-head reveal">
           <span class="section-eyebrow">07 — Talks</span>
@@ -1577,46 +1570,10 @@
       </div>
     </section>
 
-    <!-- ============ TESTIMONIALS / COMMUNITY FEEDBACK ============ -->
-    <section class="section testimonials-section" id="testimonials">
+<section class="section awards" id="awards">
       <div class="container">
         <div class="section-head reveal">
-          <span class="section-eyebrow">08 — Community Feedback</span>
-          <h2 class="section-title">Verified attendee reviews &amp; feedback.</h2>
-          <p class="section-desc">Authentic ratings and feedback submitted by participants across AI workshops and training sessions.</p>
-        </div>
-
-        <!-- Score Banner -->
-        <div class="testimonials-score-banner reveal">
-          <div class="t-score-left">
-            <div class="t-score-big">9.4</div>
-            <div class="t-stars-col">
-              <div class="t-stars">
-                ★★★★★
-              </div>
-              <span class="t-score-lbl">Average Rating across 9 verified workshop reviews</span>
-            </div>
-          </div>
-          <div class="t-score-right">
-            <a href="/form-feedbacks.html" class="btn btn-small btn-primary">
-              Leave Feedback
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Testimonials Dynamic Grid -->
-        <div class="testimonials-grid" id="testimonials-dynamic-grid">
-          <!-- Hydrated dynamically from /api/get_feedback -->
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ AWARDS ============ -->
-    <section class="section awards" id="awards">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="section-eyebrow">09 — Awards</span>
+          <span class="section-eyebrow">08 — Honors &amp; Awards</span>
           <h2 class="section-title">Recognition along the way.</h2>
         </div>
 
@@ -1786,11 +1743,10 @@
       </div>
     </section>
 
-    <!-- ============ CERTIFICATIONS ============ -->
-    <section class="section certifications" id="certifications">
+<section class="section certifications" id="certifications">
       <div class="container">
         <div class="section-head reveal">
-          <span class="section-eyebrow">10 — Certifications</span>
+          <span class="section-eyebrow">09 — Licences &amp; Certifications</span>
           <h2 class="section-title">Continuous, deliberate learning.</h2>
         </div>
 
@@ -2062,11 +2018,171 @@
       </div>
     </section>
 
-    <!-- ============ CONTACT ============ -->
-    <section class="section contact" id="contact">
+    <!-- ============ BLOG ============ -->
+    <section class="section blog-section" id="blog">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-eyebrow">10 — Blog &amp; Insights</span>
+          <h2 class="section-title">Technical Writings &amp; Case Studies</h2>
+          <p class="section-sub">
+            Articles, system design breakdowns, and practical explorations in Artificial Intelligence, Computer Vision, and Modern Full-Stack Architectures.
+          </p>
+        </div>
+
+        <div class="blog-grid reveal">
+          <!-- Article 1: PPE Detection Thesis / CV -->
+          <article class="blog-card">
+            <div class="blog-card-media">
+              <span class="blog-tag-badge">Computer Vision</span>
+              <div class="blog-art-pattern cv-pattern">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </div>
+            </div>
+            <div class="blog-card-content">
+              <div class="blog-meta">
+                <span class="blog-date">Oct 2026</span>
+                <span class="blog-dot">·</span>
+                <span class="blog-read">7 min read</span>
+              </div>
+              <h3 class="blog-title">
+                Development and Comparison of PPE Detection Models in Industrial Environments
+              </h3>
+              <p class="blog-excerpt">
+                A comparative analysis of YOLOv8, Faster R-CNN, and SSD architectures for real-time safety gear compliance on edge computing devices, achieving 98.4% mAP.
+              </p>
+              <div class="blog-chips">
+                <span class="blog-chip">Python</span>
+                <span class="blog-chip">PyTorch</span>
+                <span class="blog-chip">YOLOv8</span>
+                <span class="blog-chip">Edge AI</span>
+              </div>
+              <a href="https://github.com/muhammadhaerul25" target="_blank" rel="noopener" class="blog-link">
+                Read Research Note
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Article 2: Database & Backend Architecture -->
+          <article class="blog-card">
+            <div class="blog-card-media">
+              <span class="blog-tag-badge">Backend &amp; DB</span>
+              <div class="blog-art-pattern db-pattern">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                  <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+                </svg>
+              </div>
+            </div>
+            <div class="blog-card-content">
+              <div class="blog-meta">
+                <span class="blog-date">Sep 2026</span>
+                <span class="blog-dot">·</span>
+                <span class="blog-read">5 min read</span>
+              </div>
+              <h3 class="blog-title">
+                Designing Resilient Database Pooling and In-Memory Caching with Prisma ORM 7
+              </h3>
+              <p class="blog-excerpt">
+                Best practices for PostgreSQL connection management, idle client error recovery, statement timeouts, and multi-tier caching in cloud-native applications.
+              </p>
+              <div class="blog-chips">
+                <span class="blog-chip">PostgreSQL</span>
+                <span class="blog-chip">Prisma</span>
+                <span class="blog-chip">Node.js</span>
+                <span class="blog-chip">Security</span>
+              </div>
+              <a href="https://github.com/muhammadhaerul25" target="_blank" rel="noopener" class="blog-link">
+                Read Architecture Guide
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Article 3: Agentic AI & LLMs -->
+          <article class="blog-card">
+            <div class="blog-card-media">
+              <span class="blog-tag-badge">Agentic AI</span>
+              <div class="blog-art-pattern ai-pattern">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <rect x="3" y="11" width="18" height="10" rx="2"/>
+                  <circle cx="12" cy="5" r="2"/>
+                  <path d="M12 7v4"/>
+                  <line x1="8" y1="16" x2="8" y2="16"/>
+                  <line x1="16" y1="16" x2="16" y2="16"/>
+                </svg>
+              </div>
+            </div>
+            <div class="blog-card-content">
+              <div class="blog-meta">
+                <span class="blog-date">Aug 2026</span>
+                <span class="blog-dot">·</span>
+                <span class="blog-read">6 min read</span>
+              </div>
+              <h3 class="blog-title">
+                Autonomous Agent Workflows: Bridging LLM Reasoning with Deterministic Tool Execution
+              </h3>
+              <p class="blog-excerpt">
+                How state machines, schema validations, and reactive polling transform probabilistic language models into robust, autonomous production systems.
+              </p>
+              <div class="blog-chips">
+                <span class="blog-chip">LLMs</span>
+                <span class="blog-chip">Agentic AI</span>
+                <span class="blog-chip">LangChain</span>
+                <span class="blog-chip">TypeScript</span>
+              </div>
+              <a href="https://github.com/muhammadhaerul25" target="_blank" rel="noopener" class="blog-link">
+                Read Case Study
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+<section class="section testimonials-section" id="testimonials">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-eyebrow">11 — Community Feedback</span>
+          <h2 class="section-title">Verified attendee reviews &amp; feedback.</h2>
+          <p class="section-desc">Authentic ratings and feedback submitted by participants across AI workshops and training sessions.</p>
+        </div>
+
+        <!-- Score Banner -->
+        <div class="testimonials-score-banner reveal">
+          <div class="t-score-left">
+            <div class="t-score-big">9.4</div>
+            <div class="t-stars-col">
+              <div class="t-stars">
+                ★★★★★
+              </div>
+              <span class="t-score-lbl">Average Rating across 9 verified workshop reviews</span>
+            </div>
+          </div>
+          <div class="t-score-right">
+            <a href="/form-feedbacks.html" class="btn btn-small btn-primary">
+              Leave Feedback
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Testimonials Dynamic Grid -->
+        <div class="testimonials-grid" id="testimonials-dynamic-grid">
+          <!-- Hydrated dynamically from /api/get_feedback -->
+        </div>
+      </div>
+    </section>
+
+<section class="section contact" id="contact">
       <div class="container contact-grid">
         <div class="contact-left reveal">
-          <span class="section-eyebrow">11 — Contact</span>
+          <span class="section-eyebrow">12 — Contacts</span>
           <h2 class="contact-title">Let's build something that ships.</h2>
           <p class="contact-sub">Open to AI Engineering roles, technical consulting, speaking invitations, and
             collaborations on products that put AI to real, careful use.</p>
@@ -2137,13 +2253,18 @@
       <div class="footer-links">
         <div>
           <h5>Site</h5>
-          <a href="#about">About</a>
-          <a href="#experience">Experience</a>
+          <a href="#about">Profile</a>
+          <a href="#education">Education</a>
+          <a href="#experience">Experiences</a>
+          <a href="#skills">Skills</a>
           <a href="#projects">Projects</a>
+          <a href="#publications">Publications</a>
           <a href="#talks">Talks</a>
-          <a href="#testimonials">Feedback</a>
           <a href="#awards">Awards</a>
-          <a href="#contact">Contact</a>
+          <a href="#certifications">Certifications</a>
+          <a href="#blog">Blog</a>
+          <a href="#testimonials">Feedbacks</a>
+          <a href="#contact">Contacts</a>
         </div>
         <div>
           <h5>Elsewhere</h5>
@@ -2211,7 +2332,7 @@
   <!-- Global Toast Notification -->
   <div id="portfolioToast" class="portfolio-toast" role="status" aria-live="polite"></div>
 
-  <script src="script.js?v=4.2"></script>
+  <script src="script.js?v=4.3"></script>
 </body>
 
 </html>
