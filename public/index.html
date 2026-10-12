@@ -15,7 +15,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=3.4">
+  <link rel="stylesheet" href="styles.css?v=3.5">
 </head>
 
 <body>
@@ -119,11 +119,26 @@
           </a>
         </div>
 
-        <!-- Live Portfolio Stat Counter Strip -->
+        <!-- Live Portfolio Stat Counter Strip (Dynamic from Database) -->
         <div class="hero-stats-strip reveal">
+          <div class="hero-stat-item">
+            <span class="hero-stat-val" id="stat-count-years" data-target="4" data-suffix="+ Yrs">4+ Yrs</span>
+            <span class="hero-stat-label">AI Experience</span>
+          </div>
+          <span class="hero-stat-sep" aria-hidden="true"></span>
           <div class="hero-stat-item">
             <span class="hero-stat-val" id="stat-count-projects" data-target="13" data-suffix="+">13+</span>
             <span class="hero-stat-label">Shipped Projects</span>
+          </div>
+          <span class="hero-stat-sep" aria-hidden="true"></span>
+          <div class="hero-stat-item">
+            <span class="hero-stat-val" id="stat-count-publications" data-target="3" data-suffix="+">3+</span>
+            <span class="hero-stat-label">Publications</span>
+          </div>
+          <span class="hero-stat-sep" aria-hidden="true"></span>
+          <div class="hero-stat-item">
+            <span class="hero-stat-val" id="stat-count-talks" data-target="5" data-suffix="+">5+</span>
+            <span class="hero-stat-label">Talks Delivered</span>
           </div>
           <span class="hero-stat-sep" aria-hidden="true"></span>
           <div class="hero-stat-item">
@@ -132,13 +147,18 @@
           </div>
           <span class="hero-stat-sep" aria-hidden="true"></span>
           <div class="hero-stat-item">
-            <span class="hero-stat-val" id="stat-count-rating" data-target="9.4" data-decimals="1" data-suffix="★">9.4★</span>
-            <span class="hero-stat-label">Satisfaction</span>
+            <span class="hero-stat-val" id="stat-count-awards" data-target="3" data-suffix="+">3+</span>
+            <span class="hero-stat-label">Honors &amp; Awards</span>
           </div>
           <span class="hero-stat-sep" aria-hidden="true"></span>
           <div class="hero-stat-item">
-            <span class="hero-stat-val" id="stat-count-years" data-target="4" data-suffix="+ Yrs">4+ Yrs</span>
-            <span class="hero-stat-label">AI Experience</span>
+            <span class="hero-stat-val" id="stat-count-certs" data-target="8" data-suffix="+">8+</span>
+            <span class="hero-stat-label">Certifications</span>
+          </div>
+          <span class="hero-stat-sep" aria-hidden="true"></span>
+          <div class="hero-stat-item">
+            <span class="hero-stat-val" id="stat-count-rating" data-target="9.4" data-decimals="1" data-suffix="★">9.4★</span>
+            <span class="hero-stat-label">Satisfaction</span>
           </div>
         </div>
       </div>
@@ -2425,7 +2445,7 @@
   <!-- Global Toast Notification -->
   <div id="portfolioToast" class="portfolio-toast" role="status" aria-live="polite"></div>
 
-  <script src="script.js?v=4.4"></script>
+  <script src="script.js?v=4.5"></script>
 </body>
 
 </html>

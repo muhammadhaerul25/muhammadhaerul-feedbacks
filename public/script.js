@@ -143,6 +143,27 @@
   applyDynamicExperienceYears();
 
   /* ============ STAT COUNTERS ANIMATION ============ */
+  function animateStatElement(el, target, suffix = '', decimals = 0) {
+    if (!el || isNaN(target)) return;
+    const duration = 1400;
+    const startTime = performance.now();
+
+    function updateCount(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easeProgress = 1 - Math.pow(1 - progress, 3);
+      const currentVal = (target * easeProgress).toFixed(decimals);
+      el.textContent = currentVal + suffix;
+
+      if (progress < 1) {
+        requestAnimationFrame(updateCount);
+      } else {
+        el.textContent = (decimals ? target.toFixed(decimals) : target) + suffix;
+      }
+    }
+    requestAnimationFrame(updateCount);
+  }
+
   function initStatCounters() {
     const counterEls = document.querySelectorAll('.hero-stat-val[data-target]');
     if (!counterEls.length) return;
@@ -156,23 +177,7 @@
             const target = parseFloat(el.getAttribute('data-target'));
             const suffix = el.getAttribute('data-suffix') || '';
             const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
-            const duration = 1600;
-            const startTime = performance.now();
-
-            function updateCount(currentTime) {
-              const elapsed = currentTime - startTime;
-              const progress = Math.min(elapsed / duration, 1);
-              const easeProgress = 1 - Math.pow(1 - progress, 3);
-              const currentVal = (target * easeProgress).toFixed(decimals);
-              el.textContent = currentVal + suffix;
-
-              if (progress < 1) {
-                requestAnimationFrame(updateCount);
-              } else {
-                el.textContent = (decimals ? target.toFixed(decimals) : target) + suffix;
-              }
-            }
-            requestAnimationFrame(updateCount);
+            animateStatElement(el, target, suffix, decimals);
           });
         }
       });
@@ -1059,22 +1064,74 @@
     }).join('');
   }
 
-  // Update Hero Stats Banner
-  function updateHeroStats() {
-    const pCountEl = document.getElementById('stat-count-projects');
-    const aCountEl = document.getElementById('stat-count-attendees');
-    const rCountEl = document.getElementById('stat-count-rating');
+  // Update Hero Stats Banner with live database data
+  function updateHeroStats(triggerAnimation = false) {
+    const years = getDynamicYearsOfExperience();
+    const yCountEl = document.getElementById('stat-count-years');
+    if (yCountEl) {
+      yCountEl.setAttribute('data-target', String(years));
+      if (triggerAnimation) animateStatElement(yCountEl, years, '+ Yrs', 0);
+      else yCountEl.textContent = `${years}+ Yrs`;
+    }
 
-    if (pCountEl && liveProjects.length) {
-      pCountEl.textContent = `${liveProjects.length}+`;
+    const pCountEl = document.getElementById('stat-count-projects');
+    if (pCountEl && liveProjects && liveProjects.length) {
+      const pCount = liveProjects.length;
+      pCountEl.setAttribute('data-target', String(pCount));
+      if (triggerAnimation) animateStatElement(pCountEl, pCount, '+', 0);
+      else pCountEl.textContent = `${pCount}+`;
     }
-    if (aCountEl && liveTalks.length) {
-      const totalAttendees = liveTalks.reduce((acc, t) => acc + (t.jumlah_peserta || 0), 0);
-      aCountEl.textContent = `${totalAttendees || 750}+`;
+
+    const pubCountEl = document.getElementById('stat-count-publications');
+    const pubCards = document.querySelectorAll('#publications .talk-card');
+    const pubCount = (pubCards && pubCards.length) ? pubCards.length : 3;
+    if (pubCountEl) {
+      pubCountEl.setAttribute('data-target', String(pubCount));
+      if (triggerAnimation) animateStatElement(pubCountEl, pubCount, '+', 0);
+      else pubCountEl.textContent = `${pubCount}+`;
     }
-    if (rCountEl && liveFeedbacks.length) {
-      const avg = (liveFeedbacks.reduce((acc, f) => acc + (Number(f.rating) || 0), 0) / liveFeedbacks.length).toFixed(1);
-      rCountEl.textContent = `${avg}★`;
+
+    const tCountEl = document.getElementById('stat-count-talks');
+    if (tCountEl && liveTalks && liveTalks.length) {
+      const tCount = liveTalks.length;
+      tCountEl.setAttribute('data-target', String(tCount));
+      if (triggerAnimation) animateStatElement(tCountEl, tCount, '+', 0);
+      else tCountEl.textContent = `${tCount}+`;
+    }
+
+    const aCountEl = document.getElementById('stat-count-attendees');
+    if (aCountEl && liveTalks && liveTalks.length) {
+      const totalAttendees = liveTalks.reduce((acc, t) => acc + (t.jumlah_peserta || 0), 0) || 650;
+      aCountEl.setAttribute('data-target', String(totalAttendees));
+      if (triggerAnimation) animateStatElement(aCountEl, totalAttendees, '+', 0);
+      else aCountEl.textContent = `${totalAttendees}+`;
+    }
+
+    const awCountEl = document.getElementById('stat-count-awards');
+    if (awCountEl && liveAwards && liveAwards.length) {
+      const awCount = liveAwards.length;
+      awCountEl.setAttribute('data-target', String(awCount));
+      if (triggerAnimation) animateStatElement(awCountEl, awCount, '+', 0);
+      else awCountEl.textContent = `${awCount}+`;
+    }
+
+    const cCountEl = document.getElementById('stat-count-certs');
+    if (cCountEl && liveCertifications && liveCertifications.length) {
+      const cCount = liveCertifications.length;
+      cCountEl.setAttribute('data-target', String(cCount));
+      if (triggerAnimation) animateStatElement(cCountEl, cCount, '+', 0);
+      else cCountEl.textContent = `${cCount}+`;
+    }
+
+    const rCountEl = document.getElementById('stat-count-rating');
+    if (rCountEl && liveFeedbacks && liveFeedbacks.length) {
+      const validRatings = liveFeedbacks.map(f => Number(f.rating)).filter(r => !isNaN(r) && r > 0);
+      if (validRatings.length) {
+        const avg = parseFloat((validRatings.reduce((acc, r) => acc + r, 0) / validRatings.length).toFixed(1));
+        rCountEl.setAttribute('data-target', String(avg));
+        if (triggerAnimation) animateStatElement(rCountEl, avg, '★', 1);
+        else rCountEl.textContent = `${avg}★`;
+      }
     }
   }
 
@@ -1514,7 +1571,7 @@
         renderGallery('All');
       }
 
-      updateHeroStats();
+      updateHeroStats(true);
     } catch (err) {
       console.warn('[Portfolio Sync] Offline or API error:', err);
     }
