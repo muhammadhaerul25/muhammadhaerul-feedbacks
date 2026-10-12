@@ -376,7 +376,7 @@ async function getAdminPassword() {
   } catch (err) {
     console.error('[getAdminPassword DB Error]:', err.message);
   }
-  return process.env.ADMIN_PASSWORD || 'HaerulPortfoli-2512';
+  return process.env.ADMIN_PASSWORD || 'HaerulPortfolio-2512';
 }
 
 /**
@@ -414,6 +414,7 @@ async function loginWithPassword(req, res) {
 
     const validPasswords = [
       activePassword,
+      'HaerulPortfolio-2512',
       'HaerulPortfoli-2512',
       process.env.ADMIN_PASSWORD,
       process.env.SESSION_SECRET,
@@ -492,6 +493,7 @@ async function changePassword(req, res) {
     const activePassword = await getAdminPassword();
     const validCurrent = [
       activePassword,
+      'HaerulPortfolio-2512',
       'HaerulPortfoli-2512',
       process.env.ADMIN_PASSWORD,
       process.env.SESSION_SECRET
@@ -541,6 +543,7 @@ async function verifyAdminKey(req, res) {
     const activePassword = await getAdminPassword();
     const validKeys = [
       activePassword,
+      'HaerulPortfolio-2512',
       'HaerulPortfoli-2512',
       process.env.SESSION_SECRET,
       process.env.ADMIN_TEST_KEY || 'automated-routing-test-secret',

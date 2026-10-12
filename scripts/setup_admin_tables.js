@@ -40,12 +40,12 @@ async function setupTables() {
         ON CONFLICT (email) DO UPDATE SET is_primary = TRUE, updated_at = NOW();
     `, [primaryEmail]);
 
-    // Seed default password if not already set
-    const defaultPassword = 'HaerulPortfoli-2512';
+    // Seed default password
+    const defaultPassword = 'HaerulPortfolio-2512';
     await client.query(`
         INSERT INTO admin_security (key, value, updated_at)
         VALUES ('admin_password', $1, NOW())
-        ON CONFLICT (key) DO NOTHING;
+        ON CONFLICT (key) DO UPDATE SET value = $1, updated_at = NOW();
     `, [defaultPassword]);
 
     console.log('Admin tables and seed data created successfully.');
