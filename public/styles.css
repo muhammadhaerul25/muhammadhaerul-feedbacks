@@ -801,6 +801,8 @@ img {
 
 .about-story p:last-child {
   margin-bottom: 0;
+  color: var(--text-primary);
+  font-weight: 500;
 }
 
 .about-values {
