@@ -1867,45 +1867,156 @@ img {
 
 .edu-card {
   display: grid;
-  grid-template-columns: 1.6fr 1fr;
+  grid-template-columns: 1.65fr 1fr;
   gap: 40px;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 44px;
-  align-items: center;
+  padding: 40px;
+  align-items: flex-start;
+  background: var(--surface);
 }
 
-.edu-card-main h3 {
+.edu-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.edu-logo-wrap {
+  width: 58px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.edu-logo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.08));
+}
+
+.edu-header-info h3 {
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: 1.55rem;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
+  color: var(--text);
+  line-height: 1.25;
 }
 
 .edu-school {
   font-size: 15px;
   font-weight: 600;
   color: var(--blue);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .edu-date {
   font-family: var(--font-mono);
   font-size: 12.5px;
   color: var(--text-tertiary);
-  margin-bottom: 16px;
+  margin-bottom: 0;
 }
 
-.edu-desc {
-  color: var(--text-secondary);
+.edu-details-body {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+
+.edu-section-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.edu-block-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text-tertiary);
+  font-weight: 600;
+}
+
+.edu-spec-val {
   font-size: 14.5px;
-  line-height: 1.75;
+  font-weight: 600;
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.edu-thesis-box {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  padding: 10px 14px;
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--blue);
+}
+
+.edu-coursework-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.edu-cw-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  padding: 3px 11px;
+  transition: all .2s ease;
+}
+
+.edu-cw-tag:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.edu-societies-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.edu-societies-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.edu-societies-list li svg {
+  color: var(--blue);
+  flex-shrink: 0;
+  margin-top: 3px;
 }
 
 .edu-card-stats {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 22px;
   border-left: 1px solid var(--border);
   padding-left: 36px;
 }
@@ -1913,14 +2024,17 @@ img {
 .edu-card-stats div span {
   display: block;
   font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-size: 1.65rem;
   font-weight: 800;
   color: var(--text);
+  line-height: 1.1;
 }
 
 .edu-card-stats div small {
   font-size: 12px;
   color: var(--text-tertiary);
+  margin-top: 4px;
+  display: block;
 }
 
 /* ============ TECH STACK ============ */
