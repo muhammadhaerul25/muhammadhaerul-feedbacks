@@ -3,9 +3,10 @@ const router = express.Router();
 const contactController = require('../controllers/contact.controller');
 const { requireAdminAuth } = require('../middlewares/auth');
 const { validateStringParam } = require('../middlewares/validateParams');
+const { contactLimiter } = require('../middlewares/security');
 
-// Public route to submit inquiry from portfolio
-router.post('/', contactController.submitContactMessage);
+// Public route to submit inquiry from portfolio (rate limited to prevent spam flooding)
+router.post('/', contactLimiter, contactController.submitContactMessage);
 
 // Protected routes for dashboard inbox management
 router.get('/', requireAdminAuth, contactController.getContactMessages);

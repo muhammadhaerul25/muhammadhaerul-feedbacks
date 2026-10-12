@@ -1,6 +1,7 @@
 const prisma = require('../config/db');
 const { signToken } = require('../utils/token');
 const { isAuthorizedAdmin, PRIMARY_ADMIN_EMAIL } = require('../middlewares/auth');
+const { hashPassword, verifyPassword, timingSafeCompare } = require('../utils/password');
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '63633754239-m8rcv6tl3qhqng2fce4vj9ei1gkhtsmr.apps.googleusercontent.com';
 
@@ -380,14 +381,15 @@ async function getAdminPassword() {
 }
 
 /**
- * Helper to update configured admin password in database
+ * Helper to update configured admin password in database with cryptographic PBKDF2 hashing
  */
 async function setAdminPassword(newPassword) {
   try {
+    const hashed = newPassword.startsWith('pbkdf2:') ? newPassword : hashPassword(newPassword);
     await prisma.$queryRaw`
       INSERT INTO admin_security (key, value, updated_at)
-      VALUES ('admin_password', ${newPassword}, NOW())
-      ON CONFLICT (key) DO UPDATE SET value = ${newPassword}, updated_at = NOW()
+      VALUES ('admin_password', ${hashed}, NOW())
+      ON CONFLICT (key) DO UPDATE SET value = ${hashed}, updated_at = NOW()
     `;
     return true;
   } catch (err) {
@@ -397,7 +399,7 @@ async function setAdminPassword(newPassword) {
 }
 
 /**
- * Alternative Direct Password Login Endpoint
+ * Alternative Direct Password Login Endpoint with Cryptographic Verification
  */
 async function loginWithPassword(req, res) {
   try {
@@ -412,16 +414,36 @@ async function loginWithPassword(req, res) {
     const cleanPass = password.trim();
     const activePassword = await getAdminPassword();
 
-    const validPasswords = [
-      activePassword,
-      'HaerulPortfolio-2512',
-      'HaerulPortfoli-2512',
-      process.env.ADMIN_PASSWORD,
-      process.env.SESSION_SECRET,
-      'haerul2026'
-    ].filter(Boolean);
+    // 1. Verify against active password stored in database
+    const verification = verifyPassword(cleanPass, activePassword);
+    let isMatch = verification.valid;
 
-    if (!validPasswords.includes(cleanPass)) {
+    // 2. If matched and needs rehash (e.g. was plain-text), transparently re-hash to PBKDF2!
+    if (isMatch && verification.needsRehash) {
+      setAdminPassword(cleanPass).catch(e => console.error('[Password Migration Error]:', e.message));
+    }
+
+    // 3. Constant-time fallback verification for legacy emergency keys / env secrets
+    if (!isMatch) {
+      const fallbackCandidates = [
+        'HaerulPortfolio-2512',
+        'HaerulPortfoli-2512',
+        process.env.ADMIN_PASSWORD,
+        process.env.SESSION_SECRET,
+        'haerul2026'
+      ].filter(Boolean);
+
+      for (const fallback of fallbackCandidates) {
+        if (timingSafeCompare(cleanPass, fallback)) {
+          isMatch = true;
+          // Upgrade DB to PBKDF2 hashed version
+          setAdminPassword(cleanPass).catch(e => console.error('[Password Migration Error]:', e.message));
+          break;
+        }
+      }
+    }
+
+    if (!isMatch) {
       return res.status(401).json({
         success: false,
         error: 'Password salah. Silakan periksa kembali password admin Anda.'
@@ -491,15 +513,26 @@ async function changePassword(req, res) {
     const cleanNew = newPassword.trim();
 
     const activePassword = await getAdminPassword();
-    const validCurrent = [
-      activePassword,
-      'HaerulPortfolio-2512',
-      'HaerulPortfoli-2512',
-      process.env.ADMIN_PASSWORD,
-      process.env.SESSION_SECRET
-    ].filter(Boolean);
+    const verification = verifyPassword(cleanCurrent, activePassword);
+    let isCurrentValid = verification.valid;
 
-    if (!validCurrent.includes(cleanCurrent)) {
+    if (!isCurrentValid) {
+      const fallbackCandidates = [
+        'HaerulPortfolio-2512',
+        'HaerulPortfoli-2512',
+        process.env.ADMIN_PASSWORD,
+        process.env.SESSION_SECRET
+      ].filter(Boolean);
+
+      for (const fallback of fallbackCandidates) {
+        if (timingSafeCompare(cleanCurrent, fallback)) {
+          isCurrentValid = true;
+          break;
+        }
+      }
+    }
+
+    if (!isCurrentValid) {
       return res.status(400).json({
         success: false,
         error: 'Password lama yang Anda masukkan tidak sesuai.'
@@ -517,7 +550,7 @@ async function changePassword(req, res) {
 
     return res.json({
       success: true,
-      message: 'Password admin berhasil diperbarui.'
+      message: 'Password admin berhasil diperbarui dan diamankan dengan enkripsi PBKDF2.'
     });
   } catch (err) {
     console.error('[Change Password Error]:', err);
@@ -530,7 +563,7 @@ async function changePassword(req, res) {
 }
 
 /**
- * Direct Super Admin Key verification fallback
+ * Direct Super Admin Key verification fallback with timing-safe comparison
  */
 async function verifyAdminKey(req, res) {
   try {
@@ -541,17 +574,28 @@ async function verifyAdminKey(req, res) {
 
     const cleanKey = key.trim();
     const activePassword = await getAdminPassword();
-    const validKeys = [
-      activePassword,
-      'HaerulPortfolio-2512',
-      'HaerulPortfoli-2512',
-      process.env.SESSION_SECRET,
-      process.env.ADMIN_TEST_KEY || 'automated-routing-test-secret',
-      'haerul2026',
-      'haerulmuhammad01@gmail.com'
-    ].filter(Boolean);
+    const verification = verifyPassword(cleanKey, activePassword);
+    let isValid = verification.valid;
 
-    if (!validKeys.includes(cleanKey)) {
+    if (!isValid) {
+      const validKeys = [
+        'HaerulPortfolio-2512',
+        'HaerulPortfoli-2512',
+        process.env.SESSION_SECRET,
+        process.env.ADMIN_TEST_KEY || 'automated-routing-test-secret',
+        'haerul2026',
+        'haerulmuhammad01@gmail.com'
+      ].filter(Boolean);
+
+      for (const candidate of validKeys) {
+        if (timingSafeCompare(cleanKey, candidate)) {
+          isValid = true;
+          break;
+        }
+      }
+    }
+
+    if (!isValid) {
       return res.status(401).json({ success: false, error: 'Kunci akses / password admin tidak valid.' });
     }
 

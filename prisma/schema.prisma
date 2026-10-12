@@ -69,6 +69,7 @@ model forms {
 
   @@index([created_at(sort: Desc)])
   @@index([tag])
+  @@index([type])
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
@@ -272,7 +273,9 @@ model ContactMessage {
   created_at DateTime  @default(now())
   updated_at DateTime  @updatedAt
 
+  @@index([status])
   @@index([created_at(sort: Desc)])
+  @@index([status, created_at(sort: Desc)])
   @@map("contact_messages")
 }
 

@@ -1,18 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const talksController = require('../controllers/talks.controller');
+const { requireAdminAuth } = require('../middlewares/auth');
 const { uploadLimiter } = require('../middlewares/security');
 const { uploadTalkMedia } = require('../middlewares/upload');
 const { validateStringParam } = require('../middlewares/validateParams');
 
-// --- Talks CRUD ---
+// --- Talks Public View ---
 router.get('/', talksController.getTalks);
-router.post('/', talksController.createTalk);
-router.put('/:id', validateStringParam('id'), talksController.updateTalk);
-router.delete('/:id', validateStringParam('id'), talksController.deleteTalk);
 
-// --- Media Uploads ---
-router.post('/upload', uploadLimiter, uploadTalkMedia.single('file'), talksController.uploadSingleFile);
-router.post('/upload-multiple', uploadLimiter, uploadTalkMedia.array('files', 20), talksController.uploadMultipleFiles);
+// --- Talks Protected Management (Admin Protected) ---
+router.post('/', requireAdminAuth, talksController.createTalk);
+router.put('/:id', requireAdminAuth, validateStringParam('id'), talksController.updateTalk);
+router.delete('/:id', requireAdminAuth, validateStringParam('id'), talksController.deleteTalk);
+
+// --- Media Uploads (Admin Protected + Rate Limited) ---
+router.post('/upload', requireAdminAuth, uploadLimiter, uploadTalkMedia.single('file'), talksController.uploadSingleFile);
+router.post('/upload-multiple', requireAdminAuth, uploadLimiter, uploadTalkMedia.array('files', 20), talksController.uploadMultipleFiles);
 
 module.exports = router;

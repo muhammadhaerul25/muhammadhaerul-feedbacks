@@ -8,11 +8,12 @@ const compression = require('compression');
 const apiRoutes = require('./routes');
 const errorHandler = require('./middlewares/errorHandler');
 const notFoundHandler = require('./middlewares/notFound');
-const { apiLimiter, sanitizeInput } = require('./middlewares/security');
+const { apiLimiter, sanitizeInput, corsOptions } = require('./middlewares/security');
 
 const app = express();
+const isProd = process.env.NODE_ENV === 'production';
 
-// 1. Response Time Header Middleware (Track latency)
+// 1. Response Time Header Middleware (Latency telemetry)
 app.use((req, res, next) => {
     const start = process.hrtime();
     const originalSend = res.send;
@@ -27,25 +28,28 @@ app.use((req, res, next) => {
     next();
 });
 
-// 2. Security and Performance Middlewares
+// 2. Security Headers via Helmet
 app.use(helmet({
-    contentSecurityPolicy: false, // Disabled to allow inline scripts/styles in dashboard and forms
+    contentSecurityPolicy: false, // Allows inline scripts & GIS Google One-Tap auth
     crossOriginEmbedderPolicy: false,
-    crossOriginResourcePolicy: false,
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
     xContentTypeOptions: true, // Prevents MIME-sniffing
     xFrameOptions: { action: 'sameorigin' }, // Prevents clickjacking
-    xXssProtection: true, // Legacy XSS filter
-    hidePoweredBy: true, // Hides X-Powered-By header
-    referrerPolicy: { policy: 'strict-origin-when-cross-origin' }
+    xXssProtection: true, // XSS filter protection
+    hidePoweredBy: true, // Suppresses X-Powered-By
+    referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
+    hsts: isProd ? { maxAge: 31536000, includeSubDomains: true, preload: true } : false
 }));
-app.use(cors());
-app.use(compression());
-app.use(morgan('dev')); // Logging
+
+// 3. Dynamic CORS & Performance Middlewares
+app.use(cors(corsOptions));
+app.use(compression({ threshold: 1024 })); // Only compress responses > 1KB
+app.use(morgan(isProd ? 'combined' : 'dev'));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
-app.use(sanitizeInput); // Global input sanitization
+app.use(sanitizeInput); // Global input sanitization & null-byte stripping
 
-// 3. Static Assets & Pages (with optimized caching headers)
+// 4. Static Assets & Pages (with differentiated cache-control headers)
 const publicDir = path.join(__dirname, '../public');
 app.use(express.static(publicDir, {
     maxAge: 0,
@@ -59,7 +63,7 @@ app.use(express.static(publicDir, {
     }
 }));
 
-// 4. Clean Page Routes
+// 5. Clean Page Routes
 app.get('/', (req, res) => res.sendFile(path.join(publicDir, 'index.html')));
 app.get('/dashboard', (req, res) => res.sendFile(path.join(publicDir, 'dashboard.html')));
 app.get('/feedback', (req, res) => res.sendFile(path.join(publicDir, 'form-feedbacks.html')));
@@ -67,13 +71,13 @@ app.get('/form-feedbacks', (req, res) => res.sendFile(path.join(publicDir, 'form
 app.get('/form/:slug', (req, res) => res.sendFile(path.join(publicDir, 'form-renderer.html')));
 app.get('/full-materi.pdf', (req, res) => res.sendFile(path.join(publicDir, 'full-materi.pdf')));
 
-// 5. Centralized API Gateway with Rate Limiting
+// 6. Centralized API Gateway with Global Rate Limiting
 app.use('/api', apiLimiter, apiRoutes);
 
-// 6. 404 Handler for Unmatched API Endpoints & Routes
+// 7. 404 Handler for Unmatched API Endpoints & Routes
 app.use(notFoundHandler);
 
-// 7. Global Error Handler
+// 8. Global Error Handler
 app.use(errorHandler);
 
 module.exports = app;

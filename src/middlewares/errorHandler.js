@@ -1,5 +1,5 @@
 const errorHandler = (err, req, res, next) => {
-    // Check for JSON parse error
+    // 1. JSON parse error
     if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
         return res.status(400).json({
             success: false,
@@ -7,7 +7,7 @@ const errorHandler = (err, req, res, next) => {
         });
     }
 
-    // Check for Multer upload errors
+    // 2. Multer upload errors
     if (err.name === 'MulterError') {
         let msg = err.message;
         if (err.code === 'LIMIT_FILE_SIZE') msg = 'File size exceeds the allowed limit (max 50MB).';
@@ -18,7 +18,15 @@ const errorHandler = (err, req, res, next) => {
         });
     }
 
-    // Check for Prisma-specific errors
+    // 3. JWT Authentication Errors
+    if (err.name === 'JsonWebTokenError' || err.name === 'TokenExpiredError') {
+        return res.status(401).json({
+            success: false,
+            error: 'Session expired or authentication token is invalid. Please sign in again.'
+        });
+    }
+
+    // 4. Prisma ORM Database Errors
     if (err.code === 'P2002') {
         return res.status(409).json({
             success: false,
@@ -40,6 +48,21 @@ const errorHandler = (err, req, res, next) => {
         });
     }
 
+    if (err.code === 'P2000') {
+        return res.status(400).json({
+            success: false,
+            error: 'One or more input values exceed the maximum allowable database length.'
+        });
+    }
+
+    if (err.code === 'P2024') {
+        return res.status(503).json({
+            success: false,
+            error: 'Database connection pool timed out. Please retry shortly.'
+        });
+    }
+
+    // 5. Validation error
     if (err.name === 'ValidationError') {
         return res.status(400).json({
             success: false,
@@ -47,6 +70,7 @@ const errorHandler = (err, req, res, next) => {
         });
     }
 
+    // 6. Generic or unhandled errors
     const status = err.status || 500;
     const isProd = process.env.NODE_ENV === 'production';
     
