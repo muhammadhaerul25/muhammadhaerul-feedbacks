@@ -287,6 +287,9 @@
   let liveTalks = [];
   let liveFeedbacks = [];
   let currentProjectFilter = 'all';
+  let currentProjectPage = 1;
+  const PROJECTS_PER_PAGE = 6;
+  let showAllProjects = false;
 
   const COLOR_PALETTES = [
     ['#4f46e5', '#7c3aed'],
@@ -405,12 +408,16 @@
     return true;
   }
 
-  // Render Projects Grid
-  function renderProjects(filter = 'all') {
+  // Render Projects Grid with Dynamic Pagination
+  function renderProjects(filter = currentProjectFilter, page = currentProjectPage) {
     const grid = document.getElementById('projects-dynamic-grid');
+    const paginationWrap = document.getElementById('projects-pagination-wrap');
+    const paginationInfo = document.getElementById('projects-pagination-info');
+    const paginationControls = document.getElementById('projects-pagination-controls');
     if (!grid) return;
 
     currentProjectFilter = filter;
+    currentProjectPage = page;
     const filtered = liveProjects.filter(p => matchesProjectCategory(p, filter));
 
     if (!filtered.length) {
@@ -419,10 +426,23 @@
           <p style="color: var(--text-secondary); font-size: 15px;">No projects found in this category.</p>
         </div>
       `;
+      if (paginationWrap) paginationWrap.style.display = 'none';
       return;
     }
 
-    grid.innerHTML = filtered.map(p => {
+    const totalProjects = filtered.length;
+    const totalPages = Math.ceil(totalProjects / PROJECTS_PER_PAGE);
+
+    // Keep page in valid bounds
+    if (currentProjectPage > totalPages) currentProjectPage = totalPages;
+    if (currentProjectPage < 1) currentProjectPage = 1;
+
+    // Slice projects for pagination unless "showAll" is toggled
+    const startIndex = showAllProjects ? 0 : (currentProjectPage - 1) * PROJECTS_PER_PAGE;
+    const endIndex = showAllProjects ? totalProjects : Math.min(startIndex + PROJECTS_PER_PAGE, totalProjects);
+    const visibleProjects = filtered.slice(startIndex, endIndex);
+
+    grid.innerHTML = visibleProjects.map(p => {
       const dateText = formatDateRange(p.dateRange);
       const isPresent = (p.dateRange || '').toLowerCase().includes('present');
       const badgeText = isPresent ? 'Ongoing' : 'Production';
@@ -509,7 +529,77 @@
         </article>
       `;
     }).join('');
+
+    // Update Pagination UI
+    if (paginationWrap && paginationInfo && paginationControls) {
+      if (totalProjects <= PROJECTS_PER_PAGE) {
+        paginationWrap.style.display = 'flex';
+        paginationInfo.innerHTML = `Showing all <strong>${totalProjects}</strong> ${totalProjects === 1 ? 'project' : 'projects'}`;
+        paginationControls.innerHTML = '';
+      } else {
+        paginationWrap.style.display = 'flex';
+        paginationInfo.innerHTML = showAllProjects 
+          ? `Showing all <strong>${totalProjects}</strong> projects`
+          : `Showing <strong>${startIndex + 1}–${endIndex}</strong> of <strong>${totalProjects}</strong> projects`;
+
+        let controlsHtml = '';
+
+        if (!showAllProjects) {
+          const prevDisabled = currentProjectPage === 1 ? 'disabled' : '';
+          controlsHtml += `
+            <button type="button" class="p-page-btn" onclick="window.changeProjectPage(${currentProjectPage - 1})" ${prevDisabled} aria-label="Previous Page">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          `;
+
+          for (let i = 1; i <= totalPages; i++) {
+            const activeClass = i === currentProjectPage ? 'active' : '';
+            controlsHtml += `
+              <button type="button" class="p-page-btn ${activeClass}" onclick="window.changeProjectPage(${i})">
+                ${i}
+              </button>
+            `;
+          }
+
+          const nextDisabled = currentProjectPage === totalPages ? 'disabled' : '';
+          controlsHtml += `
+            <button type="button" class="p-page-btn" onclick="window.changeProjectPage(${currentProjectPage + 1})" ${nextDisabled} aria-label="Next Page">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          `;
+        }
+
+        const toggleBtnLabel = showAllProjects 
+          ? `Paginated (6 / page)` 
+          : `Browse All (${totalProjects})`;
+        controlsHtml += `
+          <button type="button" class="p-page-toggle-btn" onclick="window.toggleShowAllProjects()">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            ${toggleBtnLabel}
+          </button>
+        `;
+
+        paginationControls.innerHTML = controlsHtml;
+      }
+    }
   }
+
+  // Global Page Handler
+  window.changeProjectPage = function(page) {
+    showAllProjects = false;
+    currentProjectPage = page;
+    renderProjects(currentProjectFilter, page);
+    const pSection = document.getElementById('projects');
+    if (pSection) {
+      pSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  // Global Toggle All Projects
+  window.toggleShowAllProjects = function() {
+    showAllProjects = !showAllProjects;
+    renderProjects(currentProjectFilter, currentProjectPage);
+  };
 
   // Render Talks Grid
   function renderTalks() {
@@ -731,7 +821,9 @@
         pill.classList.add('active');
         pill.setAttribute('aria-selected', 'true');
         const filter = pill.getAttribute('data-filter') || 'all';
-        renderProjects(filter);
+        currentProjectPage = 1;
+        showAllProjects = false;
+        renderProjects(filter, 1);
       });
     });
   }
