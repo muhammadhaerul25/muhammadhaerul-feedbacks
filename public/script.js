@@ -308,15 +308,29 @@
   }
 
   function formatName(str) {
-    if (!str) return 'Attendee';
-    return str.split(' ')
-      .map(w => {
-        if (w.includes('.') || w.toUpperCase() === 'RM' || w.toUpperCase() === 'SS') {
-          return w;
-        }
-        return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
-      })
-      .join(' ');
+    if (!str || typeof str !== 'string') return 'Verified Attendee';
+    const trimmed = str.trim();
+    if (!trimmed) return 'Verified Attendee';
+
+    if (trimmed.includes('@')) {
+      const u = trimmed.split('@')[0];
+      const p = u.slice(0, Math.min(3, Math.max(1, u.length - 1)));
+      return (p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()) + '****';
+    }
+
+    const words = trimmed.split(/\s+/).filter(Boolean);
+    if (!words.length) return 'Verified Attendee';
+
+    return words.map(w => {
+      const clean = w.replace(/[^\p{L}\p{N}]/gu, '');
+      if (!clean) return '';
+      const cap = clean.charAt(0).toUpperCase() + clean.slice(1).toLowerCase();
+
+      if (cap.length <= 2) return cap.charAt(0) + '****';
+      if (cap.length <= 4) return cap.slice(0, 2) + '****';
+      if (cap.toLowerCase() === 'haerul') return 'Ha****';
+      return cap.slice(0, 3) + '****';
+    }).filter(Boolean).join(' ');
   }
 
   function getInitials(name) {
