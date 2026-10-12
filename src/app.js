@@ -51,10 +51,12 @@ app.use(express.static(publicDir, {
     maxAge: 0,
     etag: true,
     setHeaders: (res, filePath) => {
-        if (filePath.endsWith('.html') || filePath.endsWith('.css') || filePath.endsWith('.js')) {
+        if (filePath.endsWith('.html')) {
             res.setHeader('Cache-Control', 'no-cache, must-revalidate');
-        } else if (filePath.endsWith('.webp') || filePath.endsWith('.png') || filePath.endsWith('.jpg') || filePath.endsWith('.svg') || filePath.endsWith('.woff2')) {
-            res.setHeader('Cache-Control', 'public, max-age=86400, stale-while-revalidate=604800');
+        } else if (filePath.endsWith('.css') || filePath.endsWith('.js')) {
+            res.setHeader('Cache-Control', 'public, max-age=3600, stale-while-revalidate=86400');
+        } else if (filePath.endsWith('.webp') || filePath.endsWith('.png') || filePath.endsWith('.jpg') || filePath.endsWith('.jpeg') || filePath.endsWith('.svg') || filePath.endsWith('.ico') || filePath.endsWith('.woff2') || filePath.endsWith('.pdf')) {
+            res.setHeader('Cache-Control', 'public, max-age=604800, stale-while-revalidate=2592000');
         }
     }
 }));

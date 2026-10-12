@@ -32,8 +32,31 @@
   function onScrollNav() {
     if (nav) nav.classList.toggle('scrolled', window.scrollY > 24);
   }
-  window.addEventListener('scroll', onScrollNav, { passive: true });
+
+  /* ============ SCROLL PROGRESS ============ */
+  const scrollProgress = document.getElementById('scrollProgress');
+  function updateProgress() {
+    if (!scrollProgress) return;
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    scrollProgress.style.width = pct + '%';
+  }
+
+  let scrollTicking = false;
+  function handleWindowScroll() {
+    if (!scrollTicking) {
+      window.requestAnimationFrame(() => {
+        onScrollNav();
+        updateProgress();
+        scrollTicking = false;
+      });
+      scrollTicking = true;
+    }
+  }
+  window.addEventListener('scroll', handleWindowScroll, { passive: true });
   onScrollNav();
+  updateProgress();
 
   if (navBurger && navLinks) {
     navBurger.addEventListener('click', () => {
@@ -47,18 +70,6 @@
       });
     });
   }
-
-  /* ============ SCROLL PROGRESS ============ */
-  const scrollProgress = document.getElementById('scrollProgress');
-  function updateProgress() {
-    if (!scrollProgress) return;
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    scrollProgress.style.width = pct + '%';
-  }
-  window.addEventListener('scroll', updateProgress, { passive: true });
-  updateProgress();
 
   /* ============ ACTIVE SECTION HIGHLIGHTING ============ */
   const sections = Array.from(document.querySelectorAll('main section[id]'));

@@ -40,4 +40,14 @@ router.get('/accounts', feedbacksController.getLinkedInAccounts);
 router.post('/linkedin-accounts', submissionLimiter, feedbacksController.submitLinkedInAccount);
 router.get('/linkedin-accounts', feedbacksController.getLinkedInAccounts);
 
+// --- Questions ---
+// Legacy endpoints
+router.get('/get_questions', feedbacksController.getQuestions);
+router.post('/submit_question', submissionLimiter, feedbacksController.submitQuestion);
+
+// RESTful aliases
+router.get('/questions', feedbacksController.getQuestions);
+router.post('/questions', submissionLimiter, feedbacksController.submitQuestion);
+
 module.exports = router;
+

@@ -210,3 +210,44 @@ exports.getLinkedInAccounts = asyncHandler(async (req, res) => {
     res.set('Cache-Control', 'public, max-age=30, stale-while-revalidate=60');
     res.json(responseData);
 });
+
+exports.getQuestions = asyncHandler(async (req, res) => {
+    const cached = cache.get('questions:all');
+    if (cached) {
+        res.set('X-Cache', 'HIT');
+        res.set('Cache-Control', 'public, max-age=15, stale-while-revalidate=30');
+        return res.json(cached);
+    }
+
+    const result = await prisma.gsa_aiforge_questions.findMany({
+        select: { id: true, nama: true, pertanyaan: true, created_at: true },
+        orderBy: { created_at: 'asc' }
+    });
+
+    const responseData = { success: true, count: result.length, data: result };
+    cache.set('questions:all', responseData, 30);
+
+    res.set('X-Cache', 'MISS');
+    res.set('Cache-Control', 'public, max-age=15, stale-while-revalidate=30');
+    res.json(responseData);
+});
+
+exports.submitQuestion = asyncHandler(async (req, res) => {
+    const { nama, pertanyaan } = req.body;
+    if (!nama || !pertanyaan) {
+        const err = new Error('Nama dan pertanyaan harus diisi.');
+        err.status = 400;
+        throw err;
+    }
+
+    const result = await prisma.gsa_aiforge_questions.create({
+        data: {
+            nama: String(nama).trim(),
+            pertanyaan: String(pertanyaan).trim()
+        }
+    });
+
+    cache.del('questions');
+    res.status(201).json({ success: true, data: result });
+});
+
