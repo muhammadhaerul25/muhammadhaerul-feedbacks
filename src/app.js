@@ -48,10 +48,12 @@ app.use(sanitizeInput); // Global input sanitization
 // 3. Static Assets & Pages (with optimized caching headers)
 const publicDir = path.join(__dirname, '../public');
 app.use(express.static(publicDir, {
-    maxAge: '2h',
+    maxAge: 0,
     etag: true,
     setHeaders: (res, filePath) => {
-        if (filePath.endsWith('.webp') || filePath.endsWith('.png') || filePath.endsWith('.jpg') || filePath.endsWith('.svg') || filePath.endsWith('.woff2')) {
+        if (filePath.endsWith('.html') || filePath.endsWith('.css') || filePath.endsWith('.js')) {
+            res.setHeader('Cache-Control', 'no-cache, must-revalidate');
+        } else if (filePath.endsWith('.webp') || filePath.endsWith('.png') || filePath.endsWith('.jpg') || filePath.endsWith('.svg') || filePath.endsWith('.woff2')) {
             res.setHeader('Cache-Control', 'public, max-age=86400, stale-while-revalidate=604800');
         }
     }

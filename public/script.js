@@ -138,12 +138,7 @@
   }
   initStatCounters();
 
-  /* ============ SKILL DOT INDICATORS ============ */
-  document.querySelectorAll('.dots[data-level]').forEach(dot => {
-    const level = parseInt(dot.getAttribute('data-level'), 10) || 0;
-    const pct = Math.max(0, Math.min(5, level)) / 5 * 100;
-    dot.style.setProperty('--pct', pct + '%');
-  });
+
 
   /* ============ TECH STACK TABS ============ */
   const stackTabs = document.querySelectorAll('.stack-tab');
@@ -283,18 +278,31 @@
   let currentProjectFilter = 'all';
 
   const COLOR_PALETTES = [
-    ['#4285F4', '#174EA6'],
-    ['#34A853', '#0D652D'],
-    ['#FBBC04', '#E37400'],
-    ['#EA4335', '#A50E0E'],
-    ['#9334E6', '#5B0EA6'],
-    ['#00BCD4', '#006064']
+    ['#4f46e5', '#7c3aed'],
+    ['#0284c7', '#2563eb'],
+    ['#059669', '#0d9488'],
+    ['#d97706', '#ea580c'],
+    ['#db2777', '#9333ea'],
+    ['#2563eb', '#4f46e5']
   ];
 
   function getAvatarColor(name) {
     let hash = 0;
     for (let i = 0; i < (name || ' ').length; i++) hash = hash * 31 + (name || ' ').charCodeAt(i);
-    return COLOR_PALETTES[Math.abs(hash) % COLOR_PALETTES.length][0];
+    const pair = COLOR_PALETTES[Math.abs(hash) % COLOR_PALETTES.length];
+    return `linear-gradient(135deg, ${pair[0]}, ${pair[1]})`;
+  }
+
+  function formatName(str) {
+    if (!str) return 'Attendee';
+    return str.split(' ')
+      .map(w => {
+        if (w.includes('.') || w.toUpperCase() === 'RM' || w.toUpperCase() === 'SS') {
+          return w;
+        }
+        return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
+      })
+      .join(' ');
   }
 
   function getInitials(name) {
@@ -333,6 +341,33 @@
       return d;
     }
   }
+
+  // Extract YouTube Video ID
+  function getYouTubeId(url) {
+    if (!url) return null;
+    const regExp = /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))([\w-]{11})/;
+    const match = url.match(regExp);
+    return match ? match[1] : null;
+  }
+
+  // Play Video Directly Inside Project Card
+  window.playCardVideo = function(id, ytId) {
+    const container = document.getElementById(`p-media-${id}`);
+    if (!container) return;
+    container.innerHTML = `
+      <iframe class="p-video-iframe" 
+        src="https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0&modestbranding=1" 
+        title="Demo Video" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    `;
+    const card = document.querySelector(`.p-card[data-pid="${id}"]`);
+    if (card) {
+      card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  };
 
   // Project Categorization Helper
   function matchesProjectCategory(p, filter) {
@@ -380,6 +415,37 @@
       const dateText = formatDateRange(p.dateRange);
       const isPresent = (p.dateRange || '').toLowerCase().includes('present');
       const badgeText = isPresent ? 'Ongoing' : 'Production';
+      const ytId = getYouTubeId(p.videoDemo);
+
+      // Video Media Header Banner
+      let mediaHeader = '';
+      if (ytId) {
+        mediaHeader = `
+          <div class="p-card-media" id="p-media-${p.id}">
+            <div class="p-video-wrapper" onclick="window.playCardVideo('${p.id}', '${ytId}')" role="button" tabindex="0" aria-label="Play ${escapeHtml(p.name)} video demo">
+              <img class="p-video-thumb" src="https://img.youtube.com/vi/${ytId}/hqdefault.jpg" alt="${escapeHtml(p.name)} Demo Thumbnail" loading="lazy" />
+              <div class="p-video-overlay">
+                <div class="p-play-btn" title="Play Video Demo">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+                </div>
+                <span class="p-video-badge">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#FF0000"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                  Watch Demo
+                </span>
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        mediaHeader = `
+          <div class="p-card-media p-media-placeholder">
+            <span class="p-media-placeholder-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+              Live Interactive App
+            </span>
+          </div>
+        `;
+      }
       
       // Tech tags
       const techTags = (p.techStack || []).map(t => {
@@ -388,12 +454,17 @@
       }).slice(0, 4).join('');
 
       // Buttons
-      const demoBtn = p.videoDemo ? `
+      const demoBtn = ytId ? `
+        <button type="button" class="p-btn-action" onclick="window.playCardVideo('${p.id}', '${ytId}')" title="Play demo video inside card">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Demo
+        </button>
+      ` : (p.videoDemo ? `
         <a href="${escapeHtml(p.videoDemo)}" target="_blank" rel="noopener" class="p-btn-action" title="Watch demo on YouTube">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           Demo
         </a>
-      ` : '';
+      ` : '');
 
       const liveBtn = p.linkProject ? `
         <a href="${escapeHtml(p.linkProject)}" target="_blank" rel="noopener" class="p-btn-action" title="Open live project">
@@ -404,7 +475,8 @@
 
       return `
         <article class="p-card reveal in-view" data-pid="${p.id}">
-          <div>
+          ${mediaHeader}
+          <div class="p-card-body">
             <div class="p-card-head">
               <span class="p-card-date">${escapeHtml(dateText)}</span>
               <span class="p-card-badge">${badgeText}</span>
@@ -457,6 +529,7 @@
       return `
         <article class="talk-dynamic-card reveal in-view" data-tid="${t.id}">
           <div class="talk-poster-wrap" onclick="window.openLightbox('${escapeHtml(posterImg)}', '${escapeHtml(t.event)}')">
+            <div class="talk-poster-backdrop" style="background-image: url('${escapeHtml(posterImg)}');"></div>
             <img class="talk-poster-img" src="${escapeHtml(posterImg)}" alt="${escapeHtml(t.event)}" onerror="this.src='/favicon.webp'">
             <div class="talk-poster-overlay">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -504,38 +577,93 @@
       return;
     }
 
+    // Dynamically update score banner
+    const avgScore = (liveFeedbacks.reduce((acc, f) => acc + (Number(f.rating) || 0), 0) / liveFeedbacks.length).toFixed(1);
+    const scoreBig = document.querySelector('.t-score-big');
+    if (scoreBig) scoreBig.textContent = avgScore;
+    const scoreLbl = document.querySelector('.t-score-lbl');
+    if (scoreLbl) scoreLbl.textContent = `Average Rating across ${liveFeedbacks.length} verified workshop reviews`;
+
     grid.innerHTML = liveFeedbacks.map(f => {
       const avatarBg = getAvatarColor(f.nama_lengkap);
       const initials = getInitials(f.nama_lengkap);
-      const dateText = f.created_at ? new Date(f.created_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : '';
+      const cleanName = formatName(f.nama_lengkap);
+      const dateText = f.created_at ? new Date(f.created_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'Jul 2026';
       const rating = Number(f.rating) || 10;
+      const isPerfect = rating === 10;
+
+      const pesan = f.pesan_kesan ? f.pesan_kesan.trim() : '';
+      const alasan = f.alasan ? f.alasan.trim() : '';
+
+      // Determine mainQuote and takeaway smartly
+      let mainQuote = '';
+      let takeaway = '';
+
+      if (pesan && alasan) {
+        if (pesan.length < 15 && alasan.length > pesan.length) {
+          mainQuote = alasan;
+          takeaway = pesan;
+        } else {
+          mainQuote = pesan;
+          takeaway = alasan;
+        }
+      } else {
+        mainQuote = pesan || alasan || 'Sesi materi sangat bermanfaat!';
+      }
 
       return `
         <article class="t-card reveal in-view">
+          <svg class="t-watermark-quote" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+          </svg>
+          
           <div>
             <div class="t-card-head">
               <div class="t-user-info">
                 <div class="t-avatar" style="background:${avatarBg};">${escapeHtml(initials)}</div>
                 <div class="t-user-names">
-                  <div class="t-name">${escapeHtml(f.nama_lengkap || 'Attendee')}</div>
-                  <div class="t-source">${escapeHtml(f.source || 'GSA AI Forge')}</div>
+                  <div class="t-name">${escapeHtml(cleanName)}</div>
+                  <div class="t-source">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                    <span>${escapeHtml(f.source || 'GSA AI Forge 2026')}</span>
+                  </div>
                 </div>
               </div>
-              <span class="t-rate-badge">★ ${rating}/10</span>
+              <div class="t-rate-pill ${isPerfect ? 'perfect' : ''}">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+                <span>${rating}/10</span>
+              </div>
             </div>
 
-            ${f.alasan ? `
-              <div class="t-quote-box">"${escapeHtml(f.alasan.trim())}"</div>
-            ` : ''}
-
-            ${f.pesan_kesan ? `
-              <p class="t-msg-box">"${escapeHtml(f.pesan_kesan.trim())}"</p>
-            ` : ''}
+            <div class="t-review-body">
+              <p class="t-primary-quote">“${escapeHtml(mainQuote)}”</p>
+              
+              ${takeaway ? `
+                <div class="t-takeaway-card">
+                  <div class="t-takeaway-header">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                    <span>Highlight Materi</span>
+                  </div>
+                  <p class="t-takeaway-text">“${escapeHtml(takeaway)}”</p>
+                </div>
+              ` : ''}
+            </div>
           </div>
 
           <div class="t-card-foot">
-            <span>Verified Attendee Review</span>
-            <span>${escapeHtml(dateText)}</span>
+            <span class="t-verified-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              Verified Attendee
+            </span>
+            <span class="t-foot-date">${escapeHtml(dateText)}</span>
           </div>
         </article>
       `;
@@ -561,13 +689,36 @@
     }
   }
 
+  // Update Project Filter Pill Counts Dynamically
+  function updateProjectFilterCounts() {
+    if (!liveProjects || !liveProjects.length) return;
+    const countAll = liveProjects.length;
+    const countCv = liveProjects.filter(p => matchesProjectCategory(p, 'cv')).length;
+    const countLlm = liveProjects.filter(p => matchesProjectCategory(p, 'llm')).length;
+    const countWeb = liveProjects.filter(p => matchesProjectCategory(p, 'web')).length;
+
+    const elAll = document.querySelector('.p-filter-pill[data-filter="all"] .p-filter-count');
+    const elCv = document.querySelector('.p-filter-pill[data-filter="cv"] .p-filter-count');
+    const elLlm = document.querySelector('.p-filter-pill[data-filter="llm"] .p-filter-count');
+    const elWeb = document.querySelector('.p-filter-pill[data-filter="web"] .p-filter-count');
+
+    if (elAll) elAll.textContent = countAll;
+    if (elCv) elCv.textContent = countCv;
+    if (elLlm) elLlm.textContent = countLlm;
+    if (elWeb) elWeb.textContent = countWeb;
+  }
+
   // Setup Project Filter Listeners
   function setupProjectFilters() {
     const pills = document.querySelectorAll('.p-filter-pill');
     pills.forEach(pill => {
       pill.addEventListener('click', () => {
-        pills.forEach(p => p.classList.remove('active'));
+        pills.forEach(p => {
+          p.classList.remove('active');
+          p.setAttribute('aria-selected', 'false');
+        });
         pill.classList.add('active');
+        pill.setAttribute('aria-selected', 'true');
         const filter = pill.getAttribute('data-filter') || 'all';
         renderProjects(filter);
       });
@@ -602,7 +753,20 @@
       return `<span class="p-tag" style="margin:2px;">${escapeHtml(t)}</span>`;
     }).join('');
 
+    const ytId = getYouTubeId(p.videoDemo);
+    const videoEmbedHtml = ytId ? `
+      <div style="position:relative; aspect-ratio:16/9; width:100%; border-radius:var(--radius-md); overflow:hidden; margin-bottom:22px; background:#000; border:1px solid var(--border); box-shadow:var(--shadow-sm);">
+        <iframe style="width:100%; height:100%; border:0;" 
+          src="https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0&modestbranding=1" 
+          title="${escapeHtml(p.name)} Video Demo" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    ` : '';
+
     bodyEl.innerHTML = `
+      ${videoEmbedHtml}
       <div style="margin-bottom:20px;">
         <h4 style="font-size:12.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--text-tertiary); font-family:var(--font-mono); margin-bottom:8px;">Overview</h4>
         <p style="font-size:14.5px; color:var(--text-secondary); line-height:1.75; white-space:pre-line;">${escapeHtml(p.description || '')}</p>
@@ -620,7 +784,7 @@
       ${p.videoDemo ? `
         <a href="${escapeHtml(p.videoDemo)}" target="_blank" rel="noopener" class="p-btn-action primary">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          Watch Video Demo
+          Watch on YouTube
         </a>
       ` : ''}
       ${p.linkProject ? `
@@ -638,7 +802,9 @@
 
   window.closeProjectModal = function() {
     const overlay = document.getElementById('projectModalOverlay');
+    const bodyEl = document.getElementById('pmBody');
     if (overlay) overlay.classList.remove('active');
+    if (bodyEl) bodyEl.innerHTML = '';
     document.body.style.overflow = '';
   };
 
@@ -757,9 +923,17 @@
         }
       });
     }
+
+    // Also dynamically include any certificate images rendered on page
+    document.querySelectorAll('.award-cert-img, .cert-preview-img').forEach(img => {
+      if (img.src && !lightboxImages.some(item => item.src === img.src)) {
+        lightboxImages.push({ src: img.src, alt: img.alt || 'Certificate' });
+      }
+    });
   }
 
   window.openLightbox = function(src, alt) {
+    if (!src) return;
     const overlay = document.getElementById('lightboxOverlay');
     const img = document.getElementById('lightboxImg');
     if (!overlay || !img) return;
@@ -835,6 +1009,7 @@
       if (projRes.status === 'fulfilled' && projRes.value && projRes.value.data) {
         liveProjects = projRes.value.data;
         renderProjects(currentProjectFilter);
+        updateProjectFilterCounts();
       }
 
       if (talksRes.status === 'fulfilled' && talksRes.value && talksRes.value.data) {

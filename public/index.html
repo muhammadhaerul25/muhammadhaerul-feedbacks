@@ -4,16 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Muhammad Haerul — AI Engineer &amp; Software Engineer</title>
+  <title>Muhammad Haerul — AI Full-Stack Engineer</title>
   <meta name="description"
-    content="Muhammad Haerul — AI Engineer, Software Engineer, and AI Trainer building production AI systems in computer vision, LLMs, and applied machine learning.">
-  <link rel="icon" type="image/webp" href="/favicon.webp">
+    content="Muhammad Haerul — AI Full-Stack Engineer and AI Trainer building production AI systems in computer vision, LLMs, and applied machine learning.">
+  <link rel="icon" type="image/webp" href="/favicon.webp?v=2">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=2.9">
 </head>
 
 <body>
@@ -121,29 +121,37 @@
             <span class="hero-stat-val" id="stat-count-projects" data-target="13" data-suffix="+">13+</span>
             <span class="hero-stat-label">Shipped Projects</span>
           </div>
+          <span class="hero-stat-sep" aria-hidden="true"></span>
           <div class="hero-stat-item">
             <span class="hero-stat-val" id="stat-count-attendees" data-target="650" data-suffix="+">650+</span>
             <span class="hero-stat-label">Workshop Attendees</span>
           </div>
+          <span class="hero-stat-sep" aria-hidden="true"></span>
           <div class="hero-stat-item">
             <span class="hero-stat-val" id="stat-count-rating" data-target="9.4" data-decimals="1" data-suffix="★">9.4★</span>
-            <span class="hero-stat-label">Attendee Satisfaction</span>
+            <span class="hero-stat-label">Satisfaction</span>
           </div>
+          <span class="hero-stat-sep" aria-hidden="true"></span>
           <div class="hero-stat-item">
             <span class="hero-stat-val" id="stat-count-years" data-target="3" data-suffix="+ Yrs">3+ Yrs</span>
-            <span class="hero-stat-label">Production AI Experience</span>
+            <span class="hero-stat-label">AI Experience</span>
           </div>
         </div>
       </div>
 
-      <div class="hero-scroll-cue" aria-hidden="true">
-        <span>Scroll</span>
-        <div class="scroll-cue-line"></div>
-      </div>
+      <a href="#trust" class="hero-scroll-cue" id="heroScrollCue" aria-label="Scroll to explore Muhammad Haerul's portfolio">
+        <span class="scroll-cue-mouse" aria-hidden="true">
+          <span class="scroll-cue-wheel"></span>
+        </span>
+        <span class="scroll-cue-text">Scroll to explore</span>
+        <svg class="scroll-cue-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 10l5 5 5-5"/>
+        </svg>
+      </a>
     </section>
 
     <!-- ============ LOGO / TRUST STRIP ============ -->
-    <section class="trust-strip">
+    <section class="trust-strip" id="trust">
       <div class="container">
         <p class="trust-label">Trusted by teams and institutions across Indonesia</p>
         <div class="trust-logos">
@@ -167,10 +175,20 @@
               <img class="portrait-photo" src="assets/profile.png" alt="Muhammad Haerul" width="300" height="330">
             </div>
             <ul class="about-facts">
-              <li><span>Role</span><strong>AI &amp; Software Engineer</strong></li>
+              <li><span>Role</span><strong>AI Full-Stack Engineer</strong></li>
               <li><span>Education</span><strong>B.Sc. Computer Science, Cum Laude</strong></li>
-              <li><span>Experience</span><strong>3+ years, AI &amp; Software</strong></li>
-              <li><span>Focus</span><strong>AI Systems, CV, LLMs</strong></li>
+              <li><span>Experience</span><strong>3+ years, AI &amp; Data Science</strong></li>
+              <li>
+                <span>Focus</span>
+                <div class="about-focus-tags">
+                  <span class="focus-tag">Artificial Intelligence Application</span>
+                  <span class="focus-tag">Data Analytics</span>
+                  <span class="focus-tag">Computer Vision</span>
+                  <span class="focus-tag">Natural Language Processing</span>
+                  <span class="focus-tag">Generative AI</span>
+                  <span class="focus-tag">AI Agents</span>
+                </div>
+              </li>
             </ul>
           </div>
         </div>
@@ -206,20 +224,6 @@
               <p>Some of my favorite work uses AI to preserve, not replace — local scripts, languages, heritage.</p>
             </div>
           </div>
-
-          <div class="about-expertise reveal">
-            <span class="about-expertise-label">Areas of expertise</span>
-            <div class="chip-row">
-              <span class="chip">Computer Vision</span>
-              <span class="chip">Large Language Models</span>
-              <span class="chip">Retrieval-Augmented Generation</span>
-              <span class="chip">OCR &amp; Document Intelligence</span>
-              <span class="chip">AI Agents</span>
-              <span class="chip">MLOps &amp; Deployment</span>
-              <span class="chip">Full-Stack Product Development</span>
-              <span class="chip">AI Training &amp; Enablement</span>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -236,177 +240,908 @@
 
         <div class="skills-grid" id="skillsGrid">
 
-          <div class="skill-card reveal">
+          <!-- 1. Programming -->
+          <div class="skill-card reveal" style="--accent:var(--blue)">
             <div class="skill-card-head">
-              <span class="skill-icon" style="--accent:var(--blue)">
+              <span class="skill-icon">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                  <circle cx="12" cy="12" r="3" />
-                  <path
-                    d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" />
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
                 </svg>
               </span>
-              <h3>Artificial Intelligence &amp; ML</h3>
+              <h3>Programming</h3>
             </div>
             <ul class="skill-list">
-              <li><span>Machine Learning</span><span class="dots" data-level="5"></span></li>
-              <li><span>Deep Learning</span><span class="dots" data-level="4"></span></li>
-              <li><span>Model Evaluation &amp; Optimization</span><span class="dots" data-level="4"></span></li>
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">Python</span>
+                </div>
+                <span class="skill-tags">AsyncIO · OOP · Performance · Type Hinting</span>
+              </li>
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">JavaScript &amp; TypeScript</span>
+                </div>
+                <span class="skill-tags">Modern ES6+ · Static Typing · Node Ecosystem</span>
+              </li>
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">SQL &amp; Bash Scripting</span>
+                </div>
+                <span class="skill-tags">Complex Queries · CLI Automation · Shell</span>
+              </li>
             </ul>
           </div>
 
-          <div class="skill-card reveal">
+          <!-- 2. Data Analytics and Engineering -->
+          <div class="skill-card reveal" style="--accent:var(--green)">
             <div class="skill-card-head">
-              <span class="skill-icon" style="--accent:var(--red)">
+              <span class="skill-icon">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                  <rect x="3" y="4" width="18" height="14" rx="2" />
-                  <circle cx="9" cy="10" r="1.6" />
-                  <path d="m4 17 5-4 4 3 3-2.5 4 3.5" />
+                  <path d="M18 20V10M12 20V4M6 20v-6"></path>
+                </svg>
+              </span>
+              <h3>Data Analytics and Engineering</h3>
+            </div>
+            <ul class="skill-list">
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">Feature Engineering &amp; ETL</span>
+                </div>
+                <span class="skill-tags">Pandas · NumPy · Automated Data Pipelines</span>
+              </li>
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">Data Warehousing &amp; Big Data</span>
+                </div>
+                <span class="skill-tags">Google BigQuery · PySpark · Partitioning</span>
+              </li>
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">Statistical Analysis &amp; Insights</span>
+                </div>
+                <span class="skill-tags">EDA · Hypothesis Testing · A/B Evaluation</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- 3. Computer Vision -->
+          <div class="skill-card reveal" style="--accent:var(--red)">
+            <div class="skill-card-head">
+              <span class="skill-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
                 </svg>
               </span>
               <h3>Computer Vision</h3>
             </div>
             <ul class="skill-list">
-              <li><span>Object Detection (YOLO family)</span><span class="dots" data-level="5"></span></li>
-              <li><span>Image Segmentation</span><span class="dots" data-level="4"></span></li>
-              <li><span>OCR &amp; Document Intelligence</span><span class="dots" data-level="5"></span></li>
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">Object Detection &amp; Tracking</span>
+                </div>
+                <span class="skill-tags">YOLOv8 / YOLO11 · OpenCV · Real-Time Inference</span>
+              </li>
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">OCR &amp; Document AI</span>
+                </div>
+                <span class="skill-tags">LayoutLM · Tesseract · KYC/KYB Pipelines</span>
+              </li>
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">Image Segmentation &amp; Edge AI</span>
+                </div>
+                <span class="skill-tags">SAM · Mask R-CNN · ONNX &amp; Raspberry Pi</span>
+              </li>
             </ul>
           </div>
 
-          <div class="skill-card reveal">
+          <!-- 4. Natural Language Processing -->
+          <div class="skill-card reveal" style="--accent:var(--yellow)">
             <div class="skill-card-head">
-              <span class="skill-icon" style="--accent:var(--yellow)">
+              <span class="skill-icon">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                  <path d="M4 12h4l2-7 4 14 2-7h4" />
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                  <path d="M8 10h.01M12 10h.01M16 10h.01"></path>
                 </svg>
               </span>
-              <h3>LLMs &amp; Generative AI</h3>
+              <h3>Natural Language Processing</h3>
             </div>
             <ul class="skill-list">
-              <li><span>Retrieval-Augmented Generation</span><span class="dots" data-level="5"></span></li>
-              <li><span>AI Agents &amp; Chatbots</span><span class="dots" data-level="5"></span></li>
-              <li><span>Prompt Engineering</span><span class="dots" data-level="5"></span></li>
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">Transformer Architectures</span>
+                </div>
+                <span class="skill-tags">Hugging Face · BERT · RoBERTa · Fine-Tuning</span>
+              </li>
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">Semantic Search &amp; Embeddings</span>
+                </div>
+                <span class="skill-tags">Sentence-Transformers · Vector Similarity</span>
+              </li>
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">Text Preprocessing &amp; Local NLP</span>
+                </div>
+                <span class="skill-tags">spaCy · NLTK · Tokenization · Indonesian NLP</span>
+              </li>
             </ul>
           </div>
 
-          <div class="skill-card reveal">
+          <!-- 5. Generative AI -->
+          <div class="skill-card reveal" style="--accent:var(--blue)">
             <div class="skill-card-head">
-              <span class="skill-icon" style="--accent:var(--green)">
+              <span class="skill-icon">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                  <path d="M4 6h16M4 12h16M4 18h10" />
+                  <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z"></path>
                 </svg>
               </span>
-              <h3>Backend Development</h3>
+              <h3>Generative AI</h3>
             </div>
             <ul class="skill-list">
-              <li><span>FastAPI</span><span class="dots" data-level="5"></span></li>
-              <li><span>Flask</span><span class="dots" data-level="4"></span></li>
-              <li><span>API &amp; Systems Design</span><span class="dots" data-level="4"></span></li>
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">LLM Integration &amp; Orchestration</span>
+                </div>
+                <span class="skill-tags">Google Gemini · OpenAI GPT-4o · Claude 3.5</span>
+              </li>
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">Prompt Engineering &amp; Evaluation</span>
+                </div>
+                <span class="skill-tags">Few-Shot · Chain-of-Thought · Guardrails</span>
+              </li>
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">Multimodal &amp; Local LLMs</span>
+                </div>
+                <span class="skill-tags">Ollama · vLLM · Vision Models · GGUF</span>
+              </li>
             </ul>
           </div>
 
-          <div class="skill-card reveal">
+          <!-- 6. AI Agents -->
+          <div class="skill-card reveal" style="--accent:var(--green)">
             <div class="skill-card-head">
-              <span class="skill-icon" style="--accent:var(--blue)">
+              <span class="skill-icon">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                  <rect x="3" y="3" width="7" height="7" rx="1.5" />
-                  <rect x="14" y="3" width="7" height="7" rx="1.5" />
-                  <rect x="3" y="14" width="7" height="7" rx="1.5" />
-                  <rect x="14" y="14" width="7" height="7" rx="1.5" />
+                  <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                  <circle cx="12" cy="5" r="2"></circle>
+                  <path d="M12 7v4M8 16h.01M16 16h.01"></path>
                 </svg>
               </span>
-              <h3>Frontend Development</h3>
+              <h3>AI Agents</h3>
             </div>
             <ul class="skill-list">
-              <li><span>JavaScript / DOM</span><span class="dots" data-level="4"></span></li>
-              <li><span>Streamlit Interfaces</span><span class="dots" data-level="4"></span></li>
-              <li><span>HTML &amp; CSS</span><span class="dots" data-level="4"></span></li>
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">Autonomous Workflows</span>
+                </div>
+                <span class="skill-tags">LangChain · LangGraph · CrewAI Multi-Agents</span>
+              </li>
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">Tool &amp; Function Calling</span>
+                </div>
+                <span class="skill-tags">Dynamic API Calling · Structured JSON Outputs</span>
+              </li>
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">Workflow Automation</span>
+                </div>
+                <span class="skill-tags">Flowise · n8n Pipelines · Event Triggers</span>
+              </li>
             </ul>
           </div>
 
-          <div class="skill-card reveal">
+          <!-- 7. Software Development -->
+          <div class="skill-card reveal" style="--accent:var(--red)">
             <div class="skill-card-head">
-              <span class="skill-icon" style="--accent:var(--red)">
+              <span class="skill-icon">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                  <path d="M12 3 3 7l9 4 9-4-9-4Z" />
-                  <path d="M3 12l9 4 9-4M3 17l9 4 9-4" />
+                  <rect x="2" y="3" width="20" height="14" rx="2"></rect>
+                  <line x1="8" y1="21" x2="16" y2="21"></line>
+                  <line x1="12" y1="17" x2="12" y2="21"></line>
                 </svg>
               </span>
-              <h3>Cloud &amp; DevOps</h3>
+              <h3>Software Development</h3>
             </div>
             <ul class="skill-list">
-              <li><span>Google Cloud Platform</span><span class="dots" data-level="3"></span></li>
-              <li><span>Docker</span><span class="dots" data-level="3"></span></li>
-              <li><span>Deployment Pipelines</span><span class="dots" data-level="4"></span></li>
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">High-Performance APIs</span>
+                </div>
+                <span class="skill-tags">FastAPI · Pydantic · Node.js / Express</span>
+              </li>
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">Interactive AI Frontends</span>
+                </div>
+                <span class="skill-tags">Streamlit · React · Modern Vanilla JS</span>
+              </li>
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">Architecture &amp; Systems</span>
+                </div>
+                <span class="skill-tags">MVC · WebSockets · Resilient Error Handlers</span>
+              </li>
             </ul>
           </div>
 
-          <div class="skill-card reveal">
+          <!-- 8. Database Management -->
+          <div class="skill-card reveal" style="--accent:var(--yellow)">
             <div class="skill-card-head">
-              <span class="skill-icon" style="--accent:var(--yellow)">
+              <span class="skill-icon">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                  <ellipse cx="12" cy="6" rx="8" ry="3" />
-                  <path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3" />
+                  <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                  <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
                 </svg>
               </span>
-              <h3>Databases</h3>
+              <h3>Database Management</h3>
             </div>
             <ul class="skill-list">
-              <li><span>MongoDB</span><span class="dots" data-level="5"></span></li>
-              <li><span>Vector DBs (Pinecone)</span><span class="dots" data-level="4"></span></li>
-              <li><span>Neo4j / MySQL</span><span class="dots" data-level="3"></span></li>
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">Relational Databases</span>
+                </div>
+                <span class="skill-tags">PostgreSQL · MySQL · Prisma ORM</span>
+              </li>
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">Vector Databases for RAG</span>
+                </div>
+                <span class="skill-tags">Pinecone · ChromaDB · Qdrant · Dense Indices</span>
+              </li>
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">NoSQL &amp; Graph Databases</span>
+                </div>
+                <span class="skill-tags">MongoDB &amp; Atlas · Neo4j Knowledge Graphs · Redis</span>
+              </li>
             </ul>
           </div>
 
-          <div class="skill-card reveal">
+          <!-- 9. Development and Operations -->
+          <div class="skill-card reveal" style="--accent:var(--blue)">
             <div class="skill-card-head">
-              <span class="skill-icon" style="--accent:var(--green)">
+              <span class="skill-icon">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                  <path d="M4 19V5M4 19h16M8 15l3-4 3 3 4-6" />
+                  <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
+                  <polyline points="12 13 14 15 17 11"></polyline>
                 </svg>
               </span>
-              <h3>Data Science</h3>
+              <h3>Development and Operations</h3>
             </div>
             <ul class="skill-list">
-              <li><span>Feature Engineering</span><span class="dots" data-level="5"></span></li>
-              <li><span>Data Visualization</span><span class="dots" data-level="4"></span></li>
-              <li><span>Statistical Analysis</span><span class="dots" data-level="4"></span></li>
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">Containerization &amp; Edge</span>
+                </div>
+                <span class="skill-tags">Docker · Multi-Stage Builds · Raspberry Pi</span>
+              </li>
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">Cloud Infrastructure</span>
+                </div>
+                <span class="skill-tags">Google Cloud Platform · Cloud Run · Vertex AI</span>
+              </li>
+              <li class="skill-item">
+                <div class="skill-item-head">
+                  <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span class="skill-name">CI/CD &amp; Version Control</span>
+                </div>
+                <span class="skill-tags">GitHub Actions · Automated Testing · Git</span>
+              </li>
             </ul>
           </div>
 
         </div>
 
         <div class="stack-categories" id="stackCategories">
-          <span class="about-expertise-label">Tools I reach for</span>
-          <div class="stack-tabs" role="tablist">
-            <button class="stack-tab active" data-cat="languages">Languages</button>
-            <button class="stack-tab" data-cat="ai">AI / ML</button>
-            <button class="stack-tab" data-cat="backend">Backend</button>
-            <button class="stack-tab" data-cat="data">Data &amp; Cloud</button>
-            <button class="stack-tab" data-cat="tools">Tools</button>
+          <div class="stack-header-row reveal">
+            <span class="about-expertise-label">Tools I reach for</span>
+            <p class="stack-subtext">Continuous real-world toolchain across AI, Vision, Backend, and Cloud infrastructure.</p>
           </div>
 
-          <div class="stack-panel active" data-cat="languages">
-            <span class="stack-badge">Python</span><span class="stack-badge">JavaScript</span><span
-              class="stack-badge">SQL</span>
+          <!-- Seamless Infinite Moving Tech Stack Stream (Marquee) -->
+          <div class="tech-marquee-container reveal" aria-label="Animated Tech Stack Stream">
+            <!-- Row 1: Leftward Flow -->
+            <div class="tech-marquee-track tech-marquee-left">
+              <div class="marquee-group">
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M11.927 2C6.738 2 7.062 4.254 7.062 4.254l.006 2.34h4.945v.7H5.087S2 7.034 2 12.222c0 5.19 2.695 5.02 2.695 5.02h1.61v-2.285s-.087-2.695 2.64-2.695h4.53s2.553.04 2.553-2.553V4.553S16.42 2 11.927 2zm-2.42 1.48a.9.9 0 110 1.8.9.9 0 010-1.8z" fill="#387EB8"/><path d="M12.073 22c5.189 0 4.865-2.254 4.865-2.254l-.006-2.34h-4.945v-.7h6.926S22 16.966 22 11.778c0-5.19-2.695-5.02-2.695-5.02h-1.61v2.285s.087 2.695-2.64 2.695h-4.53s-2.553-.04-2.553 2.553v5.151S7.58 22 12.073 22zm2.42-1.48a.9.9 0 110-1.8.9.9 0 010-1.8z" fill="#FFE052"/></svg>
+                  </span>
+                  <span>Python</span>
+                  <span class="marquee-badge-sub">Core</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M13.5 2.5l-1 1 2.3 2.3A7.5 7.5 0 1019.5 12h-1.5a6 6 0 11-1.75-4.24l-2.75 2.74-1.5-1.5 3.25-3.25L13.5 2.5z" fill="#EE4C2C"/><circle cx="17.5" cy="4.5" r="1.5" fill="#EE4C2C"/></svg>
+                  </span>
+                  <span>PyTorch</span>
+                  <span class="marquee-badge-sub">Deep Learning</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="7" r="4.5" stroke="#ED1C24" stroke-width="2.2"/><circle cx="7" cy="16" r="4.5" stroke="#22B14C" stroke-width="2.2"/><circle cx="17" cy="16" r="4.5" stroke="#00A2E8" stroke-width="2.2"/></svg>
+                  </span>
+                  <span>OpenCV</span>
+                  <span class="marquee-badge-sub">Vision</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10.5" fill="#059669"/><path d="M12.5 4L7 13.5h4.5l-1 6.5 6.5-10H12.5V4z" fill="#FFF"/></svg>
+                  </span>
+                  <span>FastAPI</span>
+                  <span class="marquee-badge-sub">Backend</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#1C3C3C"/><path d="M7 12a3 3 0 116 0 3 3 0 01-6 0zm8-2h2a3 3 0 010 6h-2M9 14H7a3 3 0 010-6h2" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/></svg>
+                  </span>
+                  <span>LangChain</span>
+                  <span class="marquee-badge-sub">AI Agents</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" fill="#4285F4"/><circle cx="12" cy="12" r="3" fill="#EA4335"/><circle cx="17" cy="14" r="2.5" fill="#FBBC04"/><circle cx="7" cy="14" r="2.5" fill="#34A853"/></svg>
+                  </span>
+                  <span>Google Cloud</span>
+                  <span class="marquee-badge-sub">GCP</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#2496ED"><path d="M13 8.5h2v2h-2zm-3 0h2v2h-2zm-3 0h2v2H7zm6-3h2v2h-2zm-3 0h2v2h-2zm-3 0h2v2H7zm9 6h2v2h-2zm-12 0h2v2H4zm17.5 1.5c-.4-.3-1.6-.4-2.5.2-.2-1.3-1.2-2.2-2.3-2.2H2.5c-.3 0-.5.2-.5.5v4c0 3.9 3.1 7 7 7h5c4.4 0 8-3.6 8-8 0-.5-.1-1-.5-1.5z"/></svg>
+                  </span>
+                  <span>Docker</span>
+                  <span class="marquee-badge-sub">DevOps</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 2 6.5 7.5 6.5 13.5C6.5 17.5 9 20.8 12 22C15 20.8 17.5 17.5 17.5 13.5C17.5 7.5 12 2 12 2Z" fill="#47A248"/><path d="M12 2V22C12.3 21.8 12.6 21.6 12.8 21.4C15.4 19.8 17.5 16.9 17.5 13.5C17.5 7.5 12 2 12 2Z" fill="#3FA037"/></svg>
+                  </span>
+                  <span>MongoDB</span>
+                  <span class="marquee-badge-sub">NoSQL</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FFD21E"/><path d="M8 9.5c0 .8-.7 1.5-1.5 1.5S5 10.3 5 9.5 5.7 8 6.5 8 8 8.7 8 9.5zm11 0c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5.7-1.5 1.5-1.5 1.5.7 1.5 1.5zM8.5 14.5c.8 2 2.5 3 4.5 3s3.7-1 4.5-3" stroke="#202124" stroke-width="1.8" stroke-linecap="round"/></svg>
+                  </span>
+                  <span>Hugging Face</span>
+                  <span class="marquee-badge-sub">Models</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#FF4B4B"><path d="M12 4L3 18h18L12 4zm0 4.5l5.5 8.5h-11L12 8.5z"/></svg>
+                  </span>
+                  <span>Streamlit</span>
+                  <span class="marquee-badge-sub">Interfaces</span>
+                </div>
+              </div>
+
+              <!-- Duplicate for seamless infinite loop -->
+              <div class="marquee-group" aria-hidden="true">
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M11.927 2C6.738 2 7.062 4.254 7.062 4.254l.006 2.34h4.945v.7H5.087S2 7.034 2 12.222c0 5.19 2.695 5.02 2.695 5.02h1.61v-2.285s-.087-2.695 2.64-2.695h4.53s2.553.04 2.553-2.553V4.553S16.42 2 11.927 2zm-2.42 1.48a.9.9 0 110 1.8.9.9 0 010-1.8z" fill="#387EB8"/><path d="M12.073 22c5.189 0 4.865-2.254 4.865-2.254l-.006-2.34h-4.945v-.7h6.926S22 16.966 22 11.778c0-5.19-2.695-5.02-2.695-5.02h-1.61v2.285s.087 2.695-2.64 2.695h-4.53s-2.553-.04-2.553 2.553v5.151S7.58 22 12.073 22zm2.42-1.48a.9.9 0 110-1.8.9.9 0 010-1.8z" fill="#FFE052"/></svg>
+                  </span>
+                  <span>Python</span>
+                  <span class="marquee-badge-sub">Core</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M13.5 2.5l-1 1 2.3 2.3A7.5 7.5 0 1019.5 12h-1.5a6 6 0 11-1.75-4.24l-2.75 2.74-1.5-1.5 3.25-3.25L13.5 2.5z" fill="#EE4C2C"/><circle cx="17.5" cy="4.5" r="1.5" fill="#EE4C2C"/></svg>
+                  </span>
+                  <span>PyTorch</span>
+                  <span class="marquee-badge-sub">Deep Learning</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="7" r="4.5" stroke="#ED1C24" stroke-width="2.2"/><circle cx="7" cy="16" r="4.5" stroke="#22B14C" stroke-width="2.2"/><circle cx="17" cy="16" r="4.5" stroke="#00A2E8" stroke-width="2.2"/></svg>
+                  </span>
+                  <span>OpenCV</span>
+                  <span class="marquee-badge-sub">Vision</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10.5" fill="#059669"/><path d="M12.5 4L7 13.5h4.5l-1 6.5 6.5-10H12.5V4z" fill="#FFF"/></svg>
+                  </span>
+                  <span>FastAPI</span>
+                  <span class="marquee-badge-sub">Backend</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#1C3C3C"/><path d="M7 12a3 3 0 116 0 3 3 0 01-6 0zm8-2h2a3 3 0 010 6h-2M9 14H7a3 3 0 010-6h2" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/></svg>
+                  </span>
+                  <span>LangChain</span>
+                  <span class="marquee-badge-sub">AI Agents</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" fill="#4285F4"/><circle cx="12" cy="12" r="3" fill="#EA4335"/><circle cx="17" cy="14" r="2.5" fill="#FBBC04"/><circle cx="7" cy="14" r="2.5" fill="#34A853"/></svg>
+                  </span>
+                  <span>Google Cloud</span>
+                  <span class="marquee-badge-sub">GCP</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#2496ED"><path d="M13 8.5h2v2h-2zm-3 0h2v2h-2zm-3 0h2v2H7zm6-3h2v2h-2zm-3 0h2v2h-2zm-3 0h2v2H7zm9 6h2v2h-2zm-12 0h2v2H4zm17.5 1.5c-.4-.3-1.6-.4-2.5.2-.2-1.3-1.2-2.2-2.3-2.2H2.5c-.3 0-.5.2-.5.5v4c0 3.9 3.1 7 7 7h5c4.4 0 8-3.6 8-8 0-.5-.1-1-.5-1.5z"/></svg>
+                  </span>
+                  <span>Docker</span>
+                  <span class="marquee-badge-sub">DevOps</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 2 6.5 7.5 6.5 13.5C6.5 17.5 9 20.8 12 22C15 20.8 17.5 17.5 17.5 13.5C17.5 7.5 12 2 12 2Z" fill="#47A248"/><path d="M12 2V22C12.3 21.8 12.6 21.6 12.8 21.4C15.4 19.8 17.5 16.9 17.5 13.5C17.5 7.5 12 2 12 2Z" fill="#3FA037"/></svg>
+                  </span>
+                  <span>MongoDB</span>
+                  <span class="marquee-badge-sub">NoSQL</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FFD21E"/><path d="M8 9.5c0 .8-.7 1.5-1.5 1.5S5 10.3 5 9.5 5.7 8 6.5 8 8 8.7 8 9.5zm11 0c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5.7-1.5 1.5-1.5 1.5.7 1.5 1.5zM8.5 14.5c.8 2 2.5 3 4.5 3s3.7-1 4.5-3" stroke="#202124" stroke-width="1.8" stroke-linecap="round"/></svg>
+                  </span>
+                  <span>Hugging Face</span>
+                  <span class="marquee-badge-sub">Models</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#FF4B4B"><path d="M12 4L3 18h18L12 4zm0 4.5l5.5 8.5h-11L12 8.5z"/></svg>
+                  </span>
+                  <span>Streamlit</span>
+                  <span class="marquee-badge-sub">Interfaces</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Row 2: Rightward Flow -->
+            <div class="tech-marquee-track tech-marquee-right">
+              <div class="marquee-group">
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#F7DF1E"/><path d="M6 18.5l1.8-1.1c.4.7.8 1.3 1.6 1.3.8 0 1.3-.3 1.3-1.1v-5.2h2.2v5.3c0 2-1.2 2.9-3.2 2.9-1.8 0-2.9-.9-3.7-2.1zm8.3-.1l1.8-1c.5.8 1.1 1.4 2.1 1.4.9 0 1.5-.4 1.5-1 0-.7-.5-1-1.6-1.5l-.6-.3c-1.7-.7-2.8-1.6-2.8-3.5 0-1.7 1.3-3.1 3.4-3.1 1.5 0 2.6.5 3.3 1.8l-1.7 1.1c-.4-.7-.8-1-1.6-1-.8 0-1.3.4-1.3.9 0 .6.4.9 1.4 1.3l.6.3c2 1 3.1 1.8 3.1 3.7 0 2.1-1.6 3.3-3.7 3.3-2.1 0-3.3-1.1-3.9-2.4z" fill="#000"/></svg>
+                  </span>
+                  <span>JavaScript</span>
+                  <span class="marquee-badge-sub">ES6+</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 7.5 7.5 12 2 12C7.5 12 12 16.5 12 22C12 16.5 16.5 12 22 12C16.5 12 12 7.5 12 2Z" fill="url(#gemini-grad-mq)"/><defs><linearGradient id="gemini-grad-mq" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse"><stop stop-color="#4285F4"/><stop offset="0.5" stop-color="#9B72CB"/><stop offset="1" stop-color="#D96570"/></linearGradient></defs></svg>
+                  </span>
+                  <span>Google Gemini</span>
+                  <span class="marquee-badge-sub">GenAI</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22.28 9.37a5.99 5.99 0 00-.51-4.88 6.09 6.09 0 00-6.47-2.88A6.05 6.05 0 0011 3.23a6.04 6.04 0 00-4.32 1.93 6.03 6.03 0 00-1.8 4.7 6.02 6.02 0 00-3.66 2.66 6.07 6.07 0 00.5 6.82 6 6 0 00.52 4.88 6.09 6.09 0 006.47 2.88 6.05 6.05 0 004.31-1.62 6.04 6.04 0 004.32-1.93 6.03 6.03 0 001.8-4.7 6.02 6.02 0 003.66-2.66 6.07 6.07 0 00-.5-6.82zM12 14.5a2.5 2.5 0 112.5-2.5 2.5 2.5 0 01-2.5 2.5z"/></svg>
+                  </span>
+                  <span>OpenAI</span>
+                  <span class="marquee-badge-sub">LLM APIs</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3C7 3 5 6 5 10c0 4.5 2 7 4 8.5V21h3v-2.2c1.2.2 2.5.2 3.8 0V21h3v-2.5c2-1.5 4-4 4-8.5 0-4-2-7-7-7h-3.8z" fill="#336791"/><circle cx="9" cy="9" r="1.5" fill="#FFF"/><circle cx="15" cy="9" r="1.5" fill="#FFF"/></svg>
+                  </span>
+                  <span>PostgreSQL</span>
+                  <span class="marquee-badge-sub">RDBMS</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#10B981"><path d="M12 2l3.5 6h-7L12 2zm-4 7l4 7-4 3-3.5-6 3.5-4zm8 0l3.5 4-3.5 6-4-3 4-7z"/></svg>
+                  </span>
+                  <span>Pinecone</span>
+                  <span class="marquee-badge-sub">Vector DB</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#EA4B71"/><circle cx="7" cy="12" r="2.5" fill="#FFF"/><circle cx="17" cy="12" r="2.5" fill="#FFF"/><circle cx="12" cy="7" r="2" fill="#FFF"/><circle cx="12" cy="17" r="2" fill="#FFF"/><path d="M7 12h10M12 7v10" stroke="#FFF" stroke-width="1.5"/></svg>
+                  </span>
+                  <span>n8n</span>
+                  <span class="marquee-badge-sub">Workflows</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#4F46E5"/><path d="M6 8h5v8H6zm7 0h5v4h-5zm0 6h5v2h-5z" fill="#FFF"/><path d="M11 10h2M11 14h2" stroke="#FFF" stroke-width="1.5"/></svg>
+                  </span>
+                  <span>Flowise</span>
+                  <span class="marquee-badge-sub">RAG UI</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2l8.5 5v10L12 22l-8.5-5V7L12 2z" fill="#339933"/><path d="M12 6.5L7 9.5v5l5 3 5-3v-5l-5-3z" fill="#FFF"/></svg>
+                  </span>
+                  <span>Node.js</span>
+                  <span class="marquee-badge-sub">Runtime</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#008CC1"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="7" r="3"/><circle cx="18" cy="17" r="3"/><path d="M8.5 11l7-3M8.5 13l7 3" stroke="#008CC1" stroke-width="1.8"/></svg>
+                  </span>
+                  <span>Neo4j</span>
+                  <span class="marquee-badge-sub">Knowledge Graph</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"/></svg>
+                  </span>
+                  <span>Git &amp; GitHub</span>
+                  <span class="marquee-badge-sub">CI/CD</span>
+                </div>
+              </div>
+
+              <!-- Duplicate for seamless infinite loop -->
+              <div class="marquee-group" aria-hidden="true">
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#F7DF1E"/><path d="M6 18.5l1.8-1.1c.4.7.8 1.3 1.6 1.3.8 0 1.3-.3 1.3-1.1v-5.2h2.2v5.3c0 2-1.2 2.9-3.2 2.9-1.8 0-2.9-.9-3.7-2.1zm8.3-.1l1.8-1c.5.8 1.1 1.4 2.1 1.4.9 0 1.5-.4 1.5-1 0-.7-.5-1-1.6-1.5l-.6-.3c-1.7-.7-2.8-1.6-2.8-3.5 0-1.7 1.3-3.1 3.4-3.1 1.5 0 2.6.5 3.3 1.8l-1.7 1.1c-.4-.7-.8-1-1.6-1-.8 0-1.3.4-1.3.9 0 .6.4.9 1.4 1.3l.6.3c2 1 3.1 1.8 3.1 3.7 0 2.1-1.6 3.3-3.7 3.3-2.1 0-3.3-1.1-3.9-2.4z" fill="#000"/></svg>
+                  </span>
+                  <span>JavaScript</span>
+                  <span class="marquee-badge-sub">ES6+</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 7.5 7.5 12 2 12C7.5 12 12 16.5 12 22C12 16.5 16.5 12 22 12C16.5 12 12 7.5 12 2Z" fill="url(#gemini-grad-mq2)"/><defs><linearGradient id="gemini-grad-mq2" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse"><stop stop-color="#4285F4"/><stop offset="0.5" stop-color="#9B72CB"/><stop offset="1" stop-color="#D96570"/></linearGradient></defs></svg>
+                  </span>
+                  <span>Google Gemini</span>
+                  <span class="marquee-badge-sub">GenAI</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22.28 9.37a5.99 5.99 0 00-.51-4.88 6.09 6.09 0 00-6.47-2.88A6.05 6.05 0 0011 3.23a6.04 6.04 0 00-4.32 1.93 6.03 6.03 0 00-1.8 4.7 6.02 6.02 0 00-3.66 2.66 6.07 6.07 0 00.5 6.82 6 6 0 00.52 4.88 6.09 6.09 0 006.47 2.88 6.05 6.05 0 004.31-1.62 6.04 6.04 0 004.32-1.93 6.03 6.03 0 001.8-4.7 6.02 6.02 0 003.66-2.66 6.07 6.07 0 00-.5-6.82zM12 14.5a2.5 2.5 0 112.5-2.5 2.5 2.5 0 01-2.5 2.5z"/></svg>
+                  </span>
+                  <span>OpenAI</span>
+                  <span class="marquee-badge-sub">LLM APIs</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3C7 3 5 6 5 10c0 4.5 2 7 4 8.5V21h3v-2.2c1.2.2 2.5.2 3.8 0V21h3v-2.5c2-1.5 4-4 4-8.5 0-4-2-7-7-7h-3.8z" fill="#336791"/><circle cx="9" cy="9" r="1.5" fill="#FFF"/><circle cx="15" cy="9" r="1.5" fill="#FFF"/></svg>
+                  </span>
+                  <span>PostgreSQL</span>
+                  <span class="marquee-badge-sub">RDBMS</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#10B981"><path d="M12 2l3.5 6h-7L12 2zm-4 7l4 7-4 3-3.5-6 3.5-4zm8 0l3.5 4-3.5 6-4-3 4-7z"/></svg>
+                  </span>
+                  <span>Pinecone</span>
+                  <span class="marquee-badge-sub">Vector DB</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#EA4B71"/><circle cx="7" cy="12" r="2.5" fill="#FFF"/><circle cx="17" cy="12" r="2.5" fill="#FFF"/><circle cx="12" cy="7" r="2" fill="#FFF"/><circle cx="12" cy="17" r="2" fill="#FFF"/><path d="M7 12h10M12 7v10" stroke="#FFF" stroke-width="1.5"/></svg>
+                  </span>
+                  <span>n8n</span>
+                  <span class="marquee-badge-sub">Workflows</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#4F46E5"/><path d="M6 8h5v8H6zm7 0h5v4h-5zm0 6h5v2h-5z" fill="#FFF"/><path d="M11 10h2M11 14h2" stroke="#FFF" stroke-width="1.5"/></svg>
+                  </span>
+                  <span>Flowise</span>
+                  <span class="marquee-badge-sub">RAG UI</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2l8.5 5v10L12 22l-8.5-5V7L12 2z" fill="#339933"/><path d="M12 6.5L7 9.5v5l5 3 5-3v-5l-5-3z" fill="#FFF"/></svg>
+                  </span>
+                  <span>Node.js</span>
+                  <span class="marquee-badge-sub">Runtime</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#008CC1"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="7" r="3"/><circle cx="18" cy="17" r="3"/><path d="M8.5 11l7-3M8.5 13l7 3" stroke="#008CC1" stroke-width="1.8"/></svg>
+                  </span>
+                  <span>Neo4j</span>
+                  <span class="marquee-badge-sub">Knowledge Graph</span>
+                </div>
+                <div class="marquee-badge">
+                  <span class="marquee-badge-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"/></svg>
+                  </span>
+                  <span>Git &amp; GitHub</span>
+                  <span class="marquee-badge-sub">CI/CD</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="stack-panel" data-cat="ai">
-            <span class="stack-badge">TensorFlow</span><span class="stack-badge">PyTorch</span><span
-              class="stack-badge">Scikit-learn</span><span class="stack-badge">OpenAI</span><span
-              class="stack-badge">Gemini</span><span class="stack-badge">Hugging Face</span><span
-              class="stack-badge">LangChain</span><span class="stack-badge">YOLO</span>
-          </div>
-          <div class="stack-panel" data-cat="backend">
-            <span class="stack-badge">FastAPI</span><span class="stack-badge">Flask</span><span
-              class="stack-badge">Streamlit</span>
-          </div>
-          <div class="stack-panel" data-cat="data">
-            <span class="stack-badge">MongoDB</span><span class="stack-badge">MySQL</span><span
-              class="stack-badge">Neo4j</span><span class="stack-badge">Pinecone</span><span class="stack-badge">Google
-              Cloud Platform</span><span class="stack-badge">Docker</span>
-          </div>
-          <div class="stack-panel" data-cat="tools">
-            <span class="stack-badge">Flowise</span><span class="stack-badge">N8N</span><span class="stack-badge">Git
-              &amp; GitHub</span><span class="stack-badge">OpenCV</span>
+
+          <!-- Filterable Tech Category Section with SVG Logos -->
+          <div class="stack-filter-section reveal">
+            <span class="stack-filter-label">Explore by Specialization</span>
+            <div class="stack-tabs" role="tablist">
+              <button class="stack-tab active" data-cat="programming">Programming</button>
+              <button class="stack-tab" data-cat="data-analytics">Data Analytics and Engineering</button>
+              <button class="stack-tab" data-cat="computer-vision">Computer Vision</button>
+              <button class="stack-tab" data-cat="nlp">Natural Language Processing</button>
+              <button class="stack-tab" data-cat="generative-ai">Generative AI</button>
+              <button class="stack-tab" data-cat="ai-agents">AI Agents</button>
+              <button class="stack-tab" data-cat="software-dev">Software Development</button>
+              <button class="stack-tab" data-cat="database">Database Management</button>
+              <button class="stack-tab" data-cat="devops">Development and Operations</button>
+            </div>
+
+            <!-- 1. Programming -->
+            <div class="stack-panel active" data-cat="programming">
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M11.927 2C6.738 2 7.062 4.254 7.062 4.254l.006 2.34h4.945v.7H5.087S2 7.034 2 12.222c0 5.19 2.695 5.02 2.695 5.02h1.61v-2.285s-.087-2.695 2.64-2.695h4.53s2.553.04 2.553-2.553V4.553S16.42 2 11.927 2zm-2.42 1.48a.9.9 0 110 1.8.9.9 0 010-1.8z" fill="#387EB8"/><path d="M12.073 22c5.189 0 4.865-2.254 4.865-2.254l-.006-2.34h-4.945v-.7h6.926S22 16.966 22 11.778c0-5.19-2.695-5.02-2.695-5.02h-1.61v2.285s.087 2.695-2.64 2.695h-4.53s-2.553-.04-2.553 2.553v5.151S7.58 22 12.073 22zm2.42-1.48a.9.9 0 110-1.8.9.9 0 010-1.8z" fill="#FFE052"/></svg></span>
+                <span>Python</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#F7DF1E"/><path d="M6 18.5l1.8-1.1c.4.7.8 1.3 1.6 1.3.8 0 1.3-.3 1.3-1.1v-5.2h2.2v5.3c0 2-1.2 2.9-3.2 2.9-1.8 0-2.9-.9-3.7-2.1zm8.3-.1l1.8-1c.5.8 1.1 1.4 2.1 1.4.9 0 1.5-.4 1.5-1 0-.7-.5-1-1.6-1.5l-.6-.3c-1.7-.7-2.8-1.6-2.8-3.5 0-1.7 1.3-3.1 3.4-3.1 1.5 0 2.6.5 3.3 1.8l-1.7 1.1c-.4-.7-.8-1-1.6-1-.8 0-1.3.4-1.3.9 0 .6.4.9 1.4 1.3l.6.3c2 1 3.1 1.8 3.1 3.7 0 2.1-1.6 3.3-3.7 3.3-2.1 0-3.3-1.1-3.9-2.4z" fill="#000"/></svg></span>
+                <span>JavaScript</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#3178C6"/><path d="M12.5 12h-3v7.5H7.5V12h-3V10h8v2zm2.7 7.5v-1.7c.6.4 1.3.6 2 .6 1 0 1.6-.4 1.6-1.1 0-.7-.5-1-1.6-1.4l-.8-.3c-1.8-.7-2.7-1.7-2.7-3.3 0-2 1.5-3.3 3.7-3.3 1 0 1.9.3 2.7.8l-.6 1.7c-.6-.4-1.3-.6-2.1-.6-.9 0-1.5.4-1.5 1.1 0 .6.4.9 1.4 1.3l.7.3c2 .7 3 1.7 3 3.4 0 2.2-1.6 3.4-3.9 3.4-1.1 0-2.1-.3-2.9-.9z" fill="#FFF"/></svg></span>
+                <span>TypeScript</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4285F4" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></svg></span>
+                <span>SQL</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#00599C"/><path d="M7 14.5l5 3 5-3v-5l-5-3-5 3v5z" stroke="#FFF" stroke-width="1.8"/><path d="M14 10.5h2.5M15.25 9.25v2.5M17.5 10.5H20M18.75 9.25v2.5" stroke="#659AD2" stroke-width="1.5"/></svg></span>
+                <span>C++</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#293138"/><path d="M7 8l4 4-4 4M13 16h4" stroke="#4EAA25" stroke-width="2" stroke-linecap="round"/></svg></span>
+                <span>Bash / Shell</span>
+              </div>
+            </div>
+
+            <!-- 2. Data Analytics and Engineering -->
+            <div class="stack-panel" data-cat="data-analytics">
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#150458"/><path d="M7 7h3v10H7zm7 0h3v10h-3z" fill="#FFF"/><path d="M7 11h10v2H7z" fill="#E70488"/></svg></span>
+                <span>Pandas</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#013243"/><path d="M6 7l6-3 6 3v10l-6 3-6-3V7z" stroke="#4DABCF" stroke-width="1.8"/><path d="M12 4v16M6 7l12 10M18 7L6 17" stroke="#4DABCF" stroke-width="1.2"/></svg></span>
+                <span>NumPy</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-4h2v4zm-2-8h-2V7h2v2z" fill="#F89939"/><circle cx="7" cy="14" r="2.5" fill="#3498DB"/><circle cx="17" cy="11" r="2.5" fill="#E67E22"/></svg></span>
+                <span>Scikit-Learn</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#4285F4"/><path d="M7 12l3-3 4 4 3-3" stroke="#FFF" stroke-width="2" stroke-linecap="round"/><ellipse cx="12" cy="7" rx="5" ry="2" stroke="#FFF" stroke-width="1.5"/></svg></span>
+                <span>Google BigQuery</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#E25A1C"/><path d="M12 4l2 4 5 1-4 3 1 5-4-3-4 3 1-5-4-3 5-1z" fill="#FFF"/></svg></span>
+                <span>PySpark</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#11557C"/><path d="M5 17l4-6 4 3 6-8" stroke="#FFF" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="11" r="2" fill="#E24A33"/><circle cx="13" cy="14" r="2" fill="#FBC15E"/></svg></span>
+                <span>Matplotlib / Seaborn</span>
+              </div>
+            </div>
+
+            <!-- 3. Computer Vision -->
+            <div class="stack-panel" data-cat="computer-vision">
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="7" r="4.5" stroke="#ED1C24" stroke-width="2.2"/><circle cx="7" cy="16" r="4.5" stroke="#22B14C" stroke-width="2.2"/><circle cx="17" cy="16" r="4.5" stroke="#00A2E8" stroke-width="2.2"/></svg></span>
+                <span>OpenCV</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#2563EB"/><path d="M5 6h3l2 4 2-4h3l-3.5 6.5V18h-3v-5.5L5 6zm10 0h4v12h-4V6z" fill="#FFF"/></svg></span>
+                <span>YOLOv8 / YOLO11</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M13.5 2.5l-1 1 2.3 2.3A7.5 7.5 0 1019.5 12h-1.5a6 6 0 11-1.75-4.24l-2.75 2.74-1.5-1.5 3.25-3.25L13.5 2.5z" fill="#EE4C2C"/><circle cx="17.5" cy="4.5" r="1.5" fill="#EE4C2C"/></svg></span>
+                <span>PyTorch</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#00838F"/><path d="M6 12l6-6 6 6-6 6-6-6z" stroke="#FFF" stroke-width="2"/><circle cx="12" cy="12" r="2" fill="#FFF"/></svg></span>
+                <span>MediaPipe</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#6706CE"/><path d="M7 9a3 3 0 016 0c0 2-3 3-3 5m0 3h.01" stroke="#FFF" stroke-width="2" stroke-linecap="round"/></svg></span>
+                <span>Roboflow</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#4285F4"/><path d="M5 7h14M12 7v11M8 18h8" stroke="#FFF" stroke-width="2" stroke-linecap="round"/></svg></span>
+                <span>Tesseract OCR</span>
+              </div>
+            </div>
+
+            <!-- 4. Natural Language Processing -->
+            <div class="stack-panel" data-cat="nlp">
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FFD21E"/><path d="M8 9.5c0 .8-.7 1.5-1.5 1.5S5 10.3 5 9.5 5.7 8 6.5 8 8 8.7 8 9.5zm11 0c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5.7-1.5 1.5-1.5 1.5.7 1.5 1.5zM8.5 14.5c.8 2 2.5 3 4.5 3s3.7-1 4.5-3" stroke="#202124" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+                <span>Hugging Face</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#FFB703"/><path d="M7 6h6a3 3 0 010 6H7V6zm0 6h7a3 3 0 010 6H7v-6z" fill="#023047"/></svg></span>
+                <span>BERT &amp; Transformers</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#09A3D5"/><circle cx="12" cy="12" r="5" stroke="#FFF" stroke-width="2"/><path d="M12 4v3M12 17v3M4 12h3M17 12h3" stroke="#FFF" stroke-width="1.8"/></svg></span>
+                <span>spaCy</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#3D5A80"/><path d="M6 18V6l6 8 6-8v12" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <span>NLTK</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#457B9D"/><circle cx="8" cy="12" r="2.5" fill="#A8DADC"/><circle cx="16" cy="12" r="2.5" fill="#A8DADC"/><path d="M10.5 12h3" stroke="#FFF" stroke-width="2"/></svg></span>
+                <span>Sentence-Transformers</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#E63946"/><path d="M7 9h10M7 12h7M7 15h4" stroke="#FFF" stroke-width="2" stroke-linecap="round"/></svg></span>
+                <span>Tokenizers &amp; RegEx</span>
+              </div>
+            </div>
+
+            <!-- 5. Generative AI -->
+            <div class="stack-panel" data-cat="generative-ai">
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 7.5 7.5 12 2 12C7.5 12 12 16.5 12 22C12 16.5 16.5 12 22 12C16.5 12 12 7.5 12 2Z" fill="url(#gemini-grad-p)"/><defs><linearGradient id="gemini-grad-p" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse"><stop stop-color="#4285F4"/><stop offset="0.5" stop-color="#9B72CB"/><stop offset="1" stop-color="#D96570"/></linearGradient></defs></svg></span>
+                <span>Google Gemini</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22.28 9.37a5.99 5.99 0 00-.51-4.88 6.09 6.09 0 00-6.47-2.88A6.05 6.05 0 0011 3.23a6.04 6.04 0 00-4.32 1.93 6.03 6.03 0 00-1.8 4.7 6.02 6.02 0 00-3.66 2.66 6.07 6.07 0 00.5 6.82 6 6 0 00.52 4.88 6.09 6.09 0 006.47 2.88 6.05 6.05 0 004.31-1.62 6.04 6.04 0 004.32-1.93 6.03 6.03 0 001.8-4.7 6.02 6.02 0 003.66-2.66 6.07 6.07 0 00-.5-6.82zM12 14.5a2.5 2.5 0 112.5-2.5 2.5 2.5 0 01-2.5 2.5z"/></svg></span>
+                <span>OpenAI GPT-4o</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#D97706"/><circle cx="12" cy="12" r="5" fill="#FFF"/><circle cx="12" cy="12" r="2.5" fill="#D97706"/></svg></span>
+                <span>Anthropic Claude</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#1E293B"/><circle cx="12" cy="12" r="6" stroke="#FFF" stroke-width="2"/><circle cx="10" cy="11" r="1.5" fill="#FFF"/><circle cx="14" cy="11" r="1.5" fill="#FFF"/></svg></span>
+                <span>Ollama</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z" fill="#FBBC04"/></svg></span>
+                <span>Prompt Engineering</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#4F46E5"/><path d="M13 3L6 14h6l-1 7 7-11h-6l1-7z" fill="#FFF"/></svg></span>
+                <span>vLLM</span>
+              </div>
+            </div>
+
+            <!-- 6. AI Agents -->
+            <div class="stack-panel" data-cat="ai-agents">
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#1C3C3C"/><path d="M7 12a3 3 0 116 0 3 3 0 01-6 0zm8-2h2a3 3 0 010 6h-2M9 14H7a3 3 0 010-6h2" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/></svg></span>
+                <span>LangChain</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#065F46"/><circle cx="8" cy="8" r="2.5" fill="#34D399"/><circle cx="16" cy="16" r="2.5" fill="#34D399"/><circle cx="16" cy="8" r="2" fill="#FFF"/><path d="M8 8l8 8M8 8h8" stroke="#34D399" stroke-width="1.6"/></svg></span>
+                <span>LangGraph</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#BE123C"/><circle cx="12" cy="9" r="3" fill="#FFF"/><path d="M6 18c0-3 3-4 6-4s6 1 6 4" stroke="#FFF" stroke-width="2"/></svg></span>
+                <span>CrewAI</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#4F46E5"/><path d="M6 8h5v8H6zm7 0h5v4h-5zm0 6h5v2h-5z" fill="#FFF"/><path d="M11 10h2M11 14h2" stroke="#FFF" stroke-width="1.5"/></svg></span>
+                <span>Flowise</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#EA4B71"/><circle cx="7" cy="12" r="2.5" fill="#FFF"/><circle cx="17" cy="12" r="2.5" fill="#FFF"/><circle cx="12" cy="7" r="2" fill="#FFF"/><circle cx="12" cy="17" r="2" fill="#FFF"/><path d="M7 12h10M12 7v10" stroke="#FFF" stroke-width="1.5"/></svg></span>
+                <span>n8n</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#047857"/><circle cx="12" cy="12" r="4" stroke="#A7F3D0" stroke-width="2"/><path d="M12 4v4M12 16v4M4 12h4M16 12h4" stroke="#A7F3D0" stroke-width="1.8"/></svg></span>
+                <span>Agentic RAG</span>
+              </div>
+            </div>
+
+            <!-- 7. Software Development -->
+            <div class="stack-panel" data-cat="software-dev">
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10.5" fill="#059669"/><path d="M12.5 4L7 13.5h4.5l-1 6.5 6.5-10H12.5V4z" fill="#FFF"/></svg></span>
+                <span>FastAPI</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2l8.5 5v10L12 22l-8.5-5V7L12 2z" fill="#339933"/><path d="M12 6.5L7 9.5v5l5 3 5-3v-5l-5-3z" fill="#FFF"/></svg></span>
+                <span>Node.js</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 3h6M10 3v5L5 19a2 2 0 002 2h10a2 2 0 002-2l-5-11V3M8 14h8"/></svg></span>
+                <span>Flask</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="#FF4B4B"><path d="M12 4L3 18h18L12 4zm0 4.5l5.5 8.5h-11L12 8.5z"/></svg></span>
+                <span>Streamlit</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#20232A"/><circle cx="12" cy="12" r="2.5" fill="#61DAFB"/><ellipse cx="12" cy="12" rx="7" ry="2.8" stroke="#61DAFB" stroke-width="1.2" transform="rotate(30 12 12)"/><ellipse cx="12" cy="12" rx="7" ry="2.8" stroke="#61DAFB" stroke-width="1.2" transform="rotate(90 12 12)"/><ellipse cx="12" cy="12" rx="7" ry="2.8" stroke="#61DAFB" stroke-width="1.2" transform="rotate(150 12 12)"/></svg></span>
+                <span>React</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#1E293B"/><path d="M7 9h10M7 15h10M12 5v14" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"/></svg></span>
+                <span>REST &amp; WebSockets</span>
+              </div>
+            </div>
+
+            <!-- 8. Database Management -->
+            <div class="stack-panel" data-cat="database">
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3C7 3 5 6 5 10c0 4.5 2 7 4 8.5V21h3v-2.2c1.2.2 2.5.2 3.8 0V21h3v-2.5c2-1.5 4-4 4-8.5 0-4-2-7-7-7h-3.8z" fill="#336791"/><circle cx="9" cy="9" r="1.5" fill="#FFF"/><circle cx="15" cy="9" r="1.5" fill="#FFF"/></svg></span>
+                <span>PostgreSQL</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 2 6.5 7.5 6.5 13.5C6.5 17.5 9 20.8 12 22C15 20.8 17.5 17.5 17.5 13.5C17.5 7.5 12 2 12 2Z" fill="#47A248"/><path d="M12 2V22C12.3 21.8 12.6 21.6 12.8 21.4C15.4 19.8 17.5 16.9 17.5 13.5C17.5 7.5 12 2 12 2Z" fill="#3FA037"/></svg></span>
+                <span>MongoDB</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="#10B981"><path d="M12 2l3.5 6h-7L12 2zm-4 7l4 7-4 3-3.5-6 3.5-4zm8 0l3.5 4-3.5 6-4-3 4-7z"/></svg></span>
+                <span>Pinecone</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="#008CC1"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="7" r="3"/><circle cx="18" cy="17" r="3"/><path d="M8.5 11l7-3M8.5 13l7 3" stroke="#008CC1" stroke-width="1.8"/></svg></span>
+                <span>Neo4j</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#DC2626"/><path d="M7 14l5 3 5-3v-4l-5-3-5 3v4z" fill="#FFF"/></svg></span>
+                <span>Redis</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#7C3AED"/><circle cx="12" cy="12" r="5" stroke="#DDD6FE" stroke-width="2"/><circle cx="12" cy="12" r="2" fill="#FFF"/></svg></span>
+                <span>ChromaDB / Qdrant</span>
+              </div>
+            </div>
+
+            <!-- 9. Development and Operations -->
+            <div class="stack-panel" data-cat="devops">
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="#2496ED"><path d="M13 8.5h2v2h-2zm-3 0h2v2h-2zm-3 0h2v2H7zm6-3h2v2h-2zm-3 0h2v2h-2zm-3 0h2v2H7zm9 6h2v2h-2zm-12 0h2v2H4zm17.5 1.5c-.4-.3-1.6-.4-2.5.2-.2-1.3-1.2-2.2-2.3-2.2H2.5c-.3 0-.5.2-.5.5v4c0 3.9 3.1 7 7 7h5c4.4 0 8-3.6 8-8 0-.5-.1-1-.5-1.5z"/></svg></span>
+                <span>Docker</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" fill="#4285F4"/><circle cx="12" cy="12" r="3" fill="#EA4335"/><circle cx="17" cy="14" r="2.5" fill="#FBBC04"/><circle cx="7" cy="14" r="2.5" fill="#34A853"/></svg></span>
+                <span>Google Cloud Platform</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"/></svg></span>
+                <span>Git &amp; GitHub</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#2088FF"/><circle cx="8" cy="8" r="2" fill="#FFF"/><circle cx="16" cy="12" r="2" fill="#FFF"/><circle cx="8" cy="16" r="2" fill="#FFF"/><path d="M8 8v8M8 12h8" stroke="#FFF" stroke-width="1.8"/></svg></span>
+                <span>GitHub Actions (CI/CD)</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#E95420"/><circle cx="12" cy="12" r="7" stroke="#FFF" stroke-width="2"/><circle cx="12" cy="6" r="1.5" fill="#FFF"/><circle cx="6.5" cy="15" r="1.5" fill="#FFF"/><circle cx="17.5" cy="15" r="1.5" fill="#FFF"/></svg></span>
+                <span>Linux / Ubuntu</span>
+              </div>
+              <div class="stack-badge">
+                <span class="stack-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#000"/><path d="M12 6l6 11H6l6-11z" fill="#FFF"/></svg></span>
+                <span>Vercel / Railway</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -454,14 +1189,24 @@
           <div class="timeline-item reveal">
             <div class="timeline-marker" style="--accent:var(--blue)"></div>
             <div class="timeline-content">
-              <div class="timeline-top">
-                <h3>Co-Founder, AI &amp; Product</h3>
-                <span class="timeline-date">Jan 2026 — Present</span>
+              <div class="timeline-header">
+                <div class="timeline-company-logo" aria-label="AksaraHub Nusantara Logo">
+                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                    <rect width="48" height="48" rx="12" fill="#4F46E5"/>
+                    <path d="M14 32L24 12L34 32" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M18 25h12" stroke="#38BDF8" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="24" cy="18" r="3" fill="#FBBF24"/>
+                  </svg>
+                </div>
+                <div class="timeline-header-main">
+                  <div class="timeline-top">
+                    <h3>Co-Founder (AI &amp; Product Lead)</h3>
+                    <span class="timeline-date">Jan 2026 — Present</span>
+                  </div>
+                  <p class="timeline-company">AksaraHub Nusantara <span class="timeline-loc">· Hybrid</span></p>
+                </div>
               </div>
-              <p class="timeline-company">AksaraHub Nusantara <span class="timeline-loc">· Hybrid</span></p>
-              <p class="timeline-desc">Leading AI development and data analytics for AksaraHub.id — script recognition
-                (OCR), local-language translation, AI-powered educational tools, and digital preservation of Indonesian
-                regional scripts.</p>
+              <p class="timeline-desc">Leading AI and Product development and data analytics for AksaraHub.id — script recognition (OCR), local-language translation, AI-powered educational tools, and digital preservation of Indonesian regional scripts.</p>
               <div class="timeline-stack">
                 <span>Computer Vision</span><span>OCR</span><span>NLP</span><span>Product Strategy</span>
               </div>
@@ -471,11 +1216,21 @@
           <div class="timeline-item reveal">
             <div class="timeline-marker" style="--accent:var(--red)"></div>
             <div class="timeline-content">
-              <div class="timeline-top">
-                <h3>AI Trainer</h3>
-                <span class="timeline-date">Jul 2025 — Present</span>
+              <div class="timeline-header">
+                <div class="timeline-company-logo" aria-label="RevoU Logo">
+                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                    <rect width="48" height="48" rx="12" fill="#FFDE00"/>
+                    <path d="M15 12h9c4.418 0 8 3.582 8 8 0 3.2-1.9 5.96-4.63 7.24L33 36h-6l-4.5-7.5H19V36h-4V12zm4 4v8.5h5c2.209 0 4-1.791 4-4.25S26.209 16 24 16h-5z" fill="#111827"/>
+                  </svg>
+                </div>
+                <div class="timeline-header-main">
+                  <div class="timeline-top">
+                    <h3>AI Trainer</h3>
+                    <span class="timeline-date">Jul 2025 — Present</span>
+                  </div>
+                  <p class="timeline-company">RevoU <span class="timeline-loc">· Contract, Hybrid</span></p>
+                </div>
               </div>
-              <p class="timeline-company">RevoU <span class="timeline-loc">· Contract, Hybrid</span></p>
               <p class="timeline-desc">Lead enterprise AI training and adoption programs for government institutions,
                 universities, and corporates. Delivered sessions to 300+ professionals at BSSN on AI in cybersecurity,
                 trained 100+ IT staff at Universitas Sulawesi Barat, and ran Generative AI programs for AXA Mandiri and
@@ -490,12 +1245,24 @@
           <div class="timeline-item reveal">
             <div class="timeline-marker" style="--accent:var(--green)"></div>
             <div class="timeline-content">
-              <div class="timeline-top">
-                <h3>AI Engineer</h3>
-                <span class="timeline-date">May 2024 — Jun 2025</span>
+              <div class="timeline-header">
+                <div class="timeline-company-logo" aria-label="Paper.id Logo">
+                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                    <rect width="48" height="48" rx="12" fill="#F0F7FF"/>
+                    <path d="M12 18l24-6-10.5 22.5-3.5-9.5L12 18z" fill="#0083FF"/>
+                    <path d="M22 25l14-13-14 13z" fill="#0066CC"/>
+                    <path d="M22 25v6.5l3.8-4.2" stroke="#004D99" stroke-width="1.8" fill="#004D99" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="timeline-header-main">
+                  <div class="timeline-top">
+                    <h3>AI Engineer</h3>
+                    <span class="timeline-date">May 2024 — Jun 2025</span>
+                  </div>
+                  <p class="timeline-company">Paper.id <span class="timeline-loc">· AI Product &amp; Enablement,
+                      Jakarta</span></p>
+                </div>
               </div>
-              <p class="timeline-company">Paper.id <span class="timeline-loc">· AI Product &amp; Enablement,
-                  Jakarta</span></p>
               <p class="timeline-desc">Led development of an LLM-powered OCR system for KYC/KYB processing (99%
                 accuracy, 4s per document), a multi-agent HR chatbot (99% response accuracy across 1,000+ queries), and
                 a hybrid keyword + vector + LLM search engine. Built the ImageProcessingOCR enhancement pipeline that
@@ -509,11 +1276,23 @@
           <div class="timeline-item reveal">
             <div class="timeline-marker" style="--accent:var(--yellow)"></div>
             <div class="timeline-content">
-              <div class="timeline-top">
-                <h3>Computer Vision Engineer</h3>
-                <span class="timeline-date">Jul 2024 — Sep 2024</span>
+              <div class="timeline-header">
+                <div class="timeline-company-logo" aria-label="Masa Geosciences Logo">
+                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                    <rect width="48" height="48" rx="12" fill="#ECFDF5"/>
+                    <path d="M24 10l13 7.5v15L24 40 11 32.5v-15L24 10z" fill="#10B981" fill-opacity="0.12" stroke="#059669" stroke-width="2.5"/>
+                    <path d="M24 10v30M11 17.5l26 15M37 17.5l-26 15" stroke="#047857" stroke-width="2"/>
+                    <circle cx="24" cy="25" r="4" fill="#F59E0B"/>
+                  </svg>
+                </div>
+                <div class="timeline-header-main">
+                  <div class="timeline-top">
+                    <h3>Computer Vision Engineer</h3>
+                    <span class="timeline-date">Jul 2024 — Sep 2024</span>
+                  </div>
+                  <p class="timeline-company">Masa Geosciences <span class="timeline-loc">· Remote, Jakarta</span></p>
+                </div>
               </div>
-              <p class="timeline-company">Masa Geosciences <span class="timeline-loc">· Remote, Jakarta</span></p>
               <p class="timeline-desc">Fine-tuned YOLOv8 / YOLO-World models to detect and segment minerals across
                 1,000+ field images, built a color-matching pipeline against known mineral references, and trained
                 regression models to estimate mineral content using engineered geological features.</p>
@@ -526,12 +1305,25 @@
           <div class="timeline-item reveal">
             <div class="timeline-marker" style="--accent:var(--blue)"></div>
             <div class="timeline-content">
-              <div class="timeline-top">
-                <h3>AI Engineer</h3>
-                <span class="timeline-date">Aug 2023 — Dec 2023</span>
+              <div class="timeline-header">
+                <div class="timeline-company-logo" aria-label="XL Axiata Logo">
+                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                    <rect width="48" height="48" rx="12" fill="#002D62"/>
+                    <path d="M24 24L13.5 16C12.2 19.3 12.8 22.7 14.8 25.3L24 24Z" fill="#76BC21"/>
+                    <path d="M24 24L34.5 16C35.8 19.3 35.2 22.7 33.2 25.3L24 24Z" fill="#FFD100"/>
+                    <path d="M24 24L24 36C20.7 36 18 34 16.7 31.3L24 24Z" fill="#00A3E0"/>
+                    <path d="M24 12C26 12 28.7 13.3 30 15.3L24 24L18 15.3C19.3 13.3 22 12 24 12Z" fill="#0072CE"/>
+                  </svg>
+                </div>
+                <div class="timeline-header-main">
+                  <div class="timeline-top">
+                    <h3>AI Engineer</h3>
+                    <span class="timeline-date">Aug 2023 — Dec 2023</span>
+                  </div>
+                  <p class="timeline-company">XL Axiata <span class="timeline-loc">· 5G AI-IoT Use Case Dev, Jakarta</span>
+                  </p>
+                </div>
               </div>
-              <p class="timeline-company">XL Axiata <span class="timeline-loc">· 5G AI-IoT Use Case Dev, Jakarta</span>
-              </p>
               <p class="timeline-desc">Built four production computer-vision systems for the X-Camp incubation program:
                 a road-damage detector across 45,000+ images (78% accuracy), a PPE detector for industrial safety
                 running on Raspberry Pi (84% accuracy), a headcount monitoring dashboard, and a TensorFlow-based fuse
@@ -545,12 +1337,24 @@
           <div class="timeline-item reveal">
             <div class="timeline-marker" style="--accent:var(--red)"></div>
             <div class="timeline-content">
-              <div class="timeline-top">
-                <h3>AI Engineer</h3>
-                <span class="timeline-date">Feb 2023 — Jun 2023</span>
+              <div class="timeline-header">
+                <div class="timeline-company-logo" aria-label="Kemdikbudristek Logo">
+                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                    <rect width="48" height="48" rx="12" fill="#0D3B66"/>
+                    <path d="M24 12l2.5 4h4l-3 3 1.5 4.5-5-2.5-5 2.5 1.5-4.5-3-3h4l2.5-4z" fill="#F59E0B"/>
+                    <path d="M15 27c2.5-1.5 5.5-.8 9 2 3.5-2.8 6.5-3.5 9-2v5c-2.5-1.5-5.5-.8-9 2-3.5-2.8-6.5-3.5-9-2v-5z" fill="#FFFFFF"/>
+                    <path d="M24 29v7" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div class="timeline-header-main">
+                  <div class="timeline-top">
+                    <h3>AI Engineer</h3>
+                    <span class="timeline-date">Feb 2023 — Jun 2023</span>
+                  </div>
+                  <p class="timeline-company">Ministry of Education, Culture, Research &amp; Technology <span
+                      class="timeline-loc">· Jakarta</span></p>
+                </div>
               </div>
-              <p class="timeline-company">Ministry of Education, Culture, Research &amp; Technology <span
-                  class="timeline-loc">· Jakarta</span></p>
               <p class="timeline-desc">Researched applications of ChatGPT in education, proposed three product concepts,
                 then built Personalized English Learning — a web app using OpenAI's API to adapt language lessons to
                 individual learners.</p>
@@ -576,104 +1380,33 @@
 
         <!-- Interactive Category Filter Bar -->
         <div class="project-filter-bar reveal">
-          <button class="p-filter-pill active" data-filter="all">All Projects (13)</button>
-          <button class="p-filter-pill" data-filter="cv">Computer Vision &amp; OCR</button>
-          <button class="p-filter-pill" data-filter="llm">LLMs &amp; Agents</button>
-          <button class="p-filter-pill" data-filter="web">Full-Stack &amp; Web</button>
+          <div class="project-filter-group" role="tablist" aria-label="Filter projects by specialization">
+            <button class="p-filter-pill active" data-filter="all" role="tab" aria-selected="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+              <span>All Projects</span>
+              <span class="p-filter-count">13</span>
+            </button>
+            <button class="p-filter-pill" data-filter="cv" role="tab" aria-selected="false">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              <span>Computer Vision &amp; OCR</span>
+              <span class="p-filter-count">7</span>
+            </button>
+            <button class="p-filter-pill" data-filter="llm" role="tab" aria-selected="false">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path></svg>
+              <span>LLMs &amp; Agents</span>
+              <span class="p-filter-count">3</span>
+            </button>
+            <button class="p-filter-pill" data-filter="web" role="tab" aria-selected="false">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+              <span>Full-Stack &amp; Web</span>
+              <span class="p-filter-count">9</span>
+            </button>
+          </div>
         </div>
 
         <!-- Dynamic Projects Grid (Synced from Database API) -->
         <div class="projects-dynamic-grid" id="projects-dynamic-grid">
           <!-- Hydrated dynamically from /api/projects -->
-        </div>
-
-        <div class="flagship-case reveal">
-          <div class="flagship-case-head">
-            <span class="section-eyebrow">Flagship Case Study</span>
-            <h3 class="flagship-case-title">Paper OCR LLM: KYC/KYB document intelligence at scale</h3>
-            <p class="section-desc">How a document-classification bottleneck at a B2B fintech serving 600,000+ SMEs
-              became a 4-second, 99%-accurate pipeline.</p>
-          </div>
-
-          <div class="case-grid">
-            <div class="case-block reveal">
-              <span class="case-num">01</span>
-              <h3>Problem</h3>
-              <p>Paper.id's onboarding required manual review of ID cards, Tax ID numbers, and business registration
-                documents for every new business customer. Manual KYC/KYB review was slow, inconsistent across
-                reviewers, and became the biggest bottleneck to onboarding speed as the platform scaled.</p>
-            </div>
-            <div class="case-block reveal">
-              <span class="case-num">02</span>
-              <h3>Research</h3>
-              <p>Evaluated traditional OCR engines against LLM-assisted extraction. Traditional OCR handled clean scans
-                well but broke down on skewed, low-light, or handwritten fields common in real submissions — while pure
-                LLM extraction was accurate but too slow and costly to run on every field independently.</p>
-            </div>
-            <div class="case-block reveal">
-              <span class="case-num">03</span>
-              <h3>Architecture</h3>
-              <p>Designed a hybrid pipeline: a lightweight classifier routes each document to the right handler, an
-                image-enhancement stage (brightness, contrast, sharpness, skew correction via OpenCV) prepares it for
-                extraction, and an LLM-backed extraction layer parses structured fields — all served through FastAPI.
-              </p>
-            </div>
-            <div class="case-block reveal">
-              <span class="case-num">04</span>
-              <h3>Workflow</h3>
-              <p>Document upload → type classification → image enhancement → field extraction (LLM + OCR) → confidence
-                scoring → structured output. Low-confidence extractions are flagged for lightweight human review rather
-                than blocking the pipeline.</p>
-            </div>
-            <div class="case-block reveal">
-              <span class="case-num">05</span>
-              <h3>Implementation</h3>
-              <p>Built and iterated the pipeline in Python with FastAPI for serving, OpenCV for preprocessing, and LLM
-                APIs for extraction. The enhancement stage alone lifted downstream OCR accuracy by 10%, cut file size
-                40%, and increased processing speed 50% before extraction even ran.</p>
-            </div>
-            <div class="case-block reveal">
-              <span class="case-num">06</span>
-              <h3>Results</h3>
-              <p>The system reached 99% OCR accuracy with processing time down to roughly 4 seconds per document —
-                turning a manual review bottleneck into a near-instant onboarding step, at meaningful scale.</p>
-            </div>
-          </div>
-
-          <div class="case-diagram reveal">
-            <span class="case-diagram-label">Pipeline overview</span>
-            <div class="diagram" id="pipelineDiagram">
-              <div class="diagram-node"><span class="node-dot" style="--accent:var(--blue)"></span>Upload</div>
-              <div class="diagram-arrow">→</div>
-              <div class="diagram-node"><span class="node-dot" style="--accent:var(--red)"></span>Classify</div>
-              <div class="diagram-arrow">→</div>
-              <div class="diagram-node"><span class="node-dot" style="--accent:var(--yellow)"></span>Enhance</div>
-              <div class="diagram-arrow">→</div>
-              <div class="diagram-node"><span class="node-dot" style="--accent:var(--green)"></span>Extract (LLM + OCR)
-              </div>
-              <div class="diagram-arrow">→</div>
-              <div class="diagram-node"><span class="node-dot" style="--accent:var(--blue)"></span>Structured Output
-              </div>
-            </div>
-          </div>
-
-          <div class="case-stats reveal">
-            <div class="stat-card"><span class="stat-num" data-count="99">0</span><span class="stat-unit">%</span><span
-                class="stat-label">OCR accuracy</span></div>
-            <div class="stat-card"><span class="stat-num" data-count="4">0</span><span class="stat-unit">s</span><span
-                class="stat-label">avg. processing time</span></div>
-            <div class="stat-card"><span class="stat-num" data-count="10">0</span><span class="stat-unit">%</span><span
-                class="stat-label">accuracy lift from preprocessing</span></div>
-            <div class="stat-card"><span class="stat-num" data-count="50">0</span><span class="stat-unit">%</span><span
-                class="stat-label">faster processing</span></div>
-          </div>
-
-          <div class="case-lessons reveal">
-            <span class="case-diagram-label">Lessons learned</span>
-            <p>The unglamorous preprocessing step mattered more than the model choice — most of the accuracy gain came
-              before extraction ever ran. And routing by confidence, rather than trying to force one model to be
-              perfect, let the system fail gracefully instead of silently.</p>
-          </div>
         </div>
 
       </div>
@@ -792,37 +1525,168 @@
           <h2 class="section-title">Recognition along the way.</h2>
         </div>
 
-        <div class="cert-grid">
-          <div class="cert-card reveal">
-            <span class="cert-badge" style="--accent:var(--blue)">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
-                <path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0V4Z" />
-                <path d="M7 5H4a3 3 0 0 0 3 5M17 5h3a3 3 0 0 1-3 5" />
-              </svg>
-            </span>
-            <h4>Most Outstanding Student — Computer Science</h4>
-            <p>Hasanuddin University · 2021, 2022 &amp; 2023 (3 consecutive years)</p>
-          </div>
-          <div class="cert-card reveal">
-            <span class="cert-badge" style="--accent:var(--green)">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
-                <path d="M12 2 3 7l9 5 9-5-9-5Z" />
-                <path d="M3 7v10l9 5 9-5V7M12 12v10" />
-              </svg>
-            </span>
-            <h4>Bank Indonesia Scholarship (GenBI)</h4>
-            <p>Awarded for academic excellence · Hasanuddin University</p>
-          </div>
-          <div class="cert-card reveal">
-            <span class="cert-badge" style="--accent:var(--yellow)">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
-                <circle cx="12" cy="9" r="6" />
-                <path d="m8.5 14.5-2 6.5 5.5-3 5.5 3-2-6.5" />
-              </svg>
-            </span>
-            <h4>Graduated Cumlaude</h4>
-            <p>CGPA 3.97 / 4.00 · Bachelor of Computer Science, 2024</p>
-          </div>
+        <div class="awards-grid">
+          <!-- Award 1 -->
+          <article class="award-card accent-blue reveal">
+            <div class="award-insignia-banner">
+              <span class="award-badge-pill blue">
+                🏆 Outstanding Student
+              </span>
+              <div class="award-insignia-watermark" aria-hidden="true">
+                <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+              </div>
+              <div class="award-insignia-emblem">
+                <div class="award-emblem-icon-wrap">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="6"/>
+                    <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="award-card-body">
+              <div>
+                <div class="award-meta-row">
+                  <span class="award-issuer">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    Hasanuddin University
+                  </span>
+                  <span class="award-metric-tag blue">3 Consecutive Years</span>
+                </div>
+                <h3 class="award-title">Most Outstanding Student — Computer Science</h3>
+                <p class="award-desc">Recognized as the top student across the Computer Science Department for three consecutive years (2021, 2022 &amp; 2023) based on academic excellence, leadership, and scientific innovation.</p>
+                <div class="award-chips-row">
+                  <span class="award-chip">Rank #1 Department</span>
+                  <span class="award-chip">Univ. Selection</span>
+                  <span class="award-chip">Academic Excellence</span>
+                </div>
+              </div>
+
+              <div class="award-doc-slot">
+                <div class="award-doc-slot-info">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                  <span>Official Certificate Record</span>
+                </div>
+                <span class="award-doc-slot-pill">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><polyline points="20 6 9 17 4 12"/></svg>
+                  Verified
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Award 2 -->
+          <article class="award-card accent-green reveal">
+            <div class="award-insignia-banner">
+              <span class="award-badge-pill green">
+                🏛️ Central Bank Award
+              </span>
+              <div class="award-insignia-watermark" aria-hidden="true">
+                <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/>
+                </svg>
+              </div>
+              <div class="award-insignia-emblem">
+                <div class="award-emblem-icon-wrap">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="21" x2="21" y2="21"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                    <polyline points="5 6 12 3 19 6"/>
+                    <line x1="4" y1="10" x2="4" y2="21"/>
+                    <line x1="20" y1="10" x2="20" y2="21"/>
+                    <line x1="8" y1="14" x2="8" y2="17"/>
+                    <line x1="12" y1="14" x2="12" y2="17"/>
+                    <line x1="16" y1="14" x2="16" y2="17"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="award-card-body">
+              <div>
+                <div class="award-meta-row">
+                  <span class="award-issuer">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    Bank Indonesia
+                  </span>
+                  <span class="award-metric-tag green">Academic Excellence</span>
+                </div>
+                <h3 class="award-title">Bank Indonesia Scholarship (GenBI)</h3>
+                <p class="award-desc">Prestigious competitive scholarship awarded by the Central Bank of Indonesia to high-achieving university scholars with outstanding leadership potential and community service dedication.</p>
+                <div class="award-chips-row">
+                  <span class="award-chip">Central Bank Award</span>
+                  <span class="award-chip">GenBI Scholar</span>
+                  <span class="award-chip">Merit Selection</span>
+                </div>
+              </div>
+
+              <div class="award-doc-slot">
+                <div class="award-doc-slot-info">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                  <span>Official Certificate Record</span>
+                </div>
+                <span class="award-doc-slot-pill">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><polyline points="20 6 9 17 4 12"/></svg>
+                  Verified
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Award 3 -->
+          <article class="award-card accent-gold reveal">
+            <div class="award-insignia-banner">
+              <span class="award-badge-pill gold">
+                🎓 Highest Distinction
+              </span>
+              <div class="award-insignia-watermark" aria-hidden="true">
+                <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5zM6 12v5c3 3 9 3 12 0v-5"/>
+                </svg>
+              </div>
+              <div class="award-insignia-emblem">
+                <div class="award-emblem-icon-wrap">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                    <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="award-card-body">
+              <div>
+                <div class="award-meta-row">
+                  <span class="award-issuer">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    Hasanuddin University
+                  </span>
+                  <span class="award-metric-tag gold">CGPA 3.97 / 4.00</span>
+                </div>
+                <h3 class="award-title">Graduated Cumlaude (Highest Honors)</h3>
+                <p class="award-desc">Conferred Bachelor of Computer Science with Highest Distinction (Cum Laude), achieving a near-perfect Cumulative GPA of 3.97 out of 4.00 across comprehensive computer science coursework.</p>
+                <div class="award-chips-row">
+                  <span class="award-chip">CGPA 3.97 / 4.00</span>
+                  <span class="award-chip">Summa Honors</span>
+                  <span class="award-chip">B.Comp.Sc (S.Kom)</span>
+                </div>
+              </div>
+
+              <div class="award-doc-slot">
+                <div class="award-doc-slot-info">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                  <span>Official Certificate Record</span>
+                </div>
+                <span class="award-doc-slot-pill">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><polyline points="20 6 9 17 4 12"/></svg>
+                  Verified
+                </span>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -836,37 +1700,268 @@
         </div>
 
         <div class="cert-grid">
-          <div class="cert-card reveal"><span class="cert-badge" style="--accent:var(--blue)">DL</span>
-            <h4>Machine Learning Specialization</h4>
-            <p>DeepLearning.AI &amp; Stanford · Mar 2023</p>
+          <!-- Cert 1 -->
+          <div class="cert-card reveal">
+            <div class="cert-card-top">
+              <div class="cert-issuer-badge">
+                <span class="cert-issuer-icon" style="--accent:var(--blue)">DL</span>
+                <div class="cert-issuer-meta">
+                  <span class="cert-issuer-name">DeepLearning.AI &amp; Stanford</span>
+                  <span class="cert-date">March 2023</span>
+                </div>
+              </div>
+              <span class="cert-category-pill">Specialization · 3 Courses</span>
+            </div>
+            <div class="cert-card-mid">
+              <h4 class="cert-title">Machine Learning Specialization</h4>
+              <div class="cert-tags-row">
+                <span class="cert-tag">Supervised Learning</span>
+                <span class="cert-tag">Neural Networks</span>
+                <span class="cert-tag">Decision Trees &amp; XGBoost</span>
+                <span class="cert-tag">Recommender Systems</span>
+              </div>
+            </div>
+            <div class="cert-card-bottom">
+              <span class="cert-status-tag">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Credential Verified
+              </span>
+              <span class="cert-doc-hint">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Certificate on Record
+              </span>
+            </div>
           </div>
-          <div class="cert-card reveal"><span class="cert-badge" style="--accent:var(--red)">ML</span>
-            <h4>Machine Learning in Production</h4>
-            <p>DeepLearning.AI · May 2024</p>
+
+          <!-- Cert 2 -->
+          <div class="cert-card reveal">
+            <div class="cert-card-top">
+              <div class="cert-issuer-badge">
+                <span class="cert-issuer-icon" style="--accent:var(--red)">ML</span>
+                <div class="cert-issuer-meta">
+                  <span class="cert-issuer-name">DeepLearning.AI</span>
+                  <span class="cert-date">May 2024</span>
+                </div>
+              </div>
+              <span class="cert-category-pill">Professional MLOps</span>
+            </div>
+            <div class="cert-card-mid">
+              <h4 class="cert-title">Machine Learning in Production</h4>
+              <div class="cert-tags-row">
+                <span class="cert-tag">MLOps Pipelines</span>
+                <span class="cert-tag">Data Lifecycle</span>
+                <span class="cert-tag">Model Serving &amp; Monitoring</span>
+                <span class="cert-tag">Concept Drift</span>
+              </div>
+            </div>
+            <div class="cert-card-bottom">
+              <span class="cert-status-tag">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Credential Verified
+              </span>
+              <span class="cert-doc-hint">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Certificate on Record
+              </span>
+            </div>
           </div>
-          <div class="cert-card reveal"><span class="cert-badge" style="--accent:var(--yellow)">GA</span>
-            <h4>Generative AI for Software Development</h4>
-            <p>DeepLearning.AI · Oct 2024</p>
+
+          <!-- Cert 3 -->
+          <div class="cert-card reveal">
+            <div class="cert-card-top">
+              <div class="cert-issuer-badge">
+                <span class="cert-issuer-icon" style="--accent:var(--yellow)">GA</span>
+                <div class="cert-issuer-meta">
+                  <span class="cert-issuer-name">DeepLearning.AI</span>
+                  <span class="cert-date">October 2024</span>
+                </div>
+              </div>
+              <span class="cert-category-pill">Applied Generative AI</span>
+            </div>
+            <div class="cert-card-mid">
+              <h4 class="cert-title">Generative AI for Software Development</h4>
+              <div class="cert-tags-row">
+                <span class="cert-tag">LLM Architectures</span>
+                <span class="cert-tag">Prompt Engineering</span>
+                <span class="cert-tag">AI Code Generation</span>
+                <span class="cert-tag">Agentic Workflows</span>
+              </div>
+            </div>
+            <div class="cert-card-bottom">
+              <span class="cert-status-tag">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Credential Verified
+              </span>
+              <span class="cert-doc-hint">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Certificate on Record
+              </span>
+            </div>
           </div>
-          <div class="cert-card reveal"><span class="cert-badge" style="--accent:var(--green)">LC</span>
-            <h4>Generative AI with LangChain &amp; HuggingFace</h4>
-            <p>Udemy · Oct 2024</p>
+
+          <!-- Cert 4 -->
+          <div class="cert-card reveal">
+            <div class="cert-card-top">
+              <div class="cert-issuer-badge">
+                <span class="cert-issuer-icon" style="--accent:var(--green)">LC</span>
+                <div class="cert-issuer-meta">
+                  <span class="cert-issuer-name">Udemy</span>
+                  <span class="cert-date">October 2024</span>
+                </div>
+              </div>
+              <span class="cert-category-pill">Hands-on Implementation</span>
+            </div>
+            <div class="cert-card-mid">
+              <h4 class="cert-title">Generative AI with LangChain &amp; HuggingFace</h4>
+              <div class="cert-tags-row">
+                <span class="cert-tag">LangChain Framework</span>
+                <span class="cert-tag">HuggingFace Transformers</span>
+                <span class="cert-tag">RAG Pipelines</span>
+                <span class="cert-tag">Vector Stores</span>
+              </div>
+            </div>
+            <div class="cert-card-bottom">
+              <span class="cert-status-tag">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Credential Verified
+              </span>
+              <span class="cert-doc-hint">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Certificate on Record
+              </span>
+            </div>
           </div>
-          <div class="cert-card reveal"><span class="cert-badge" style="--accent:var(--blue)">PE</span>
-            <h4>Prompt Engineering for Software Developers</h4>
-            <p>Dicoding Indonesia · May 2026</p>
+
+          <!-- Cert 5 -->
+          <div class="cert-card reveal">
+            <div class="cert-card-top">
+              <div class="cert-issuer-badge">
+                <span class="cert-issuer-icon" style="--accent:var(--blue)">PE</span>
+                <div class="cert-issuer-meta">
+                  <span class="cert-issuer-name">Dicoding Indonesia</span>
+                  <span class="cert-date">May 2026</span>
+                </div>
+              </div>
+              <span class="cert-category-pill">Software Engineering</span>
+            </div>
+            <div class="cert-card-mid">
+              <h4 class="cert-title">Prompt Engineering for Software Developers</h4>
+              <div class="cert-tags-row">
+                <span class="cert-tag">Few-Shot Prompting</span>
+                <span class="cert-tag">Chain-of-Thought</span>
+                <span class="cert-tag">Context Window Optimization</span>
+                <span class="cert-tag">Guardrails</span>
+              </div>
+            </div>
+            <div class="cert-card-bottom">
+              <span class="cert-status-tag">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Credential Verified
+              </span>
+              <span class="cert-doc-hint">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Certificate on Record
+              </span>
+            </div>
           </div>
-          <div class="cert-card reveal"><span class="cert-badge" style="--accent:var(--red)">DL</span>
-            <h4>Deep Learning — DTS Nasional</h4>
-            <p>Digital Talent Scholarship · Mar 2026</p>
+
+          <!-- Cert 6 -->
+          <div class="cert-card reveal">
+            <div class="cert-card-top">
+              <div class="cert-issuer-badge">
+                <span class="cert-issuer-icon" style="--accent:var(--red)">DL</span>
+                <div class="cert-issuer-meta">
+                  <span class="cert-issuer-name">Digital Talent Scholarship (Kominfo)</span>
+                  <span class="cert-date">March 2026</span>
+                </div>
+              </div>
+              <span class="cert-category-pill">National Program</span>
+            </div>
+            <div class="cert-card-mid">
+              <h4 class="cert-title">Deep Learning — DTS Nasional</h4>
+              <div class="cert-tags-row">
+                <span class="cert-tag">Convolutional Networks</span>
+                <span class="cert-tag">Computer Vision</span>
+                <span class="cert-tag">Transfer Learning</span>
+                <span class="cert-tag">Model Optimization</span>
+              </div>
+            </div>
+            <div class="cert-card-bottom">
+              <span class="cert-status-tag">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Credential Verified
+              </span>
+              <span class="cert-doc-hint">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Certificate on Record
+              </span>
+            </div>
           </div>
-          <div class="cert-card reveal"><span class="cert-badge" style="--accent:var(--yellow)">DS</span>
-            <h4>Data Science — DTS Nasional</h4>
-            <p>Digital Talent Scholarship · Feb 2026</p>
+
+          <!-- Cert 7 -->
+          <div class="cert-card reveal">
+            <div class="cert-card-top">
+              <div class="cert-issuer-badge">
+                <span class="cert-issuer-icon" style="--accent:var(--yellow)">DS</span>
+                <div class="cert-issuer-meta">
+                  <span class="cert-issuer-name">Digital Talent Scholarship (Kominfo)</span>
+                  <span class="cert-date">February 2026</span>
+                </div>
+              </div>
+              <span class="cert-category-pill">National Program</span>
+            </div>
+            <div class="cert-card-mid">
+              <h4 class="cert-title">Data Science — DTS Nasional</h4>
+              <div class="cert-tags-row">
+                <span class="cert-tag">Exploratory Data Analysis</span>
+                <span class="cert-tag">Statistical Modeling</span>
+                <span class="cert-tag">Feature Engineering</span>
+                <span class="cert-tag">Pandas &amp; Scikit-Learn</span>
+              </div>
+            </div>
+            <div class="cert-card-bottom">
+              <span class="cert-status-tag">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Credential Verified
+              </span>
+              <span class="cert-doc-hint">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Certificate on Record
+              </span>
+            </div>
           </div>
-          <div class="cert-card reveal"><span class="cert-badge" style="--accent:var(--green)">SQL</span>
-            <h4>SQL (Intermediate)</h4>
-            <p>HackerRank</p>
+
+          <!-- Cert 8 -->
+          <div class="cert-card reveal">
+            <div class="cert-card-top">
+              <div class="cert-issuer-badge">
+                <span class="cert-issuer-icon" style="--accent:var(--green)">SQL</span>
+                <div class="cert-issuer-meta">
+                  <span class="cert-issuer-name">HackerRank</span>
+                  <span class="cert-date">Verified Skill</span>
+                </div>
+              </div>
+              <span class="cert-category-pill">Skill Assessment</span>
+            </div>
+            <div class="cert-card-mid">
+              <h4 class="cert-title">SQL (Intermediate)</h4>
+              <div class="cert-tags-row">
+                <span class="cert-tag">Advanced Joins</span>
+                <span class="cert-tag">Window Functions</span>
+                <span class="cert-tag">Nested Subqueries</span>
+                <span class="cert-tag">Performance Tuning</span>
+              </div>
+            </div>
+            <div class="cert-card-bottom">
+              <span class="cert-status-tag">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Credential Verified
+              </span>
+              <span class="cert-doc-hint">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Certificate on Record
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -942,7 +2037,7 @@
     <div class="container footer-grid">
       <div class="footer-brand">
         <span class="nav-logo-mark" style="font-size:1.2rem; font-weight:800; font-family:var(--font-display);">Muhammad Haerul</span>
-        <p>Muhammad Haerul — AI Engineer, Software Engineer, AI Trainer. Building intelligent systems and dependable software architectures that ship.</p>
+        <p>Muhammad Haerul — AI Full-Stack Engineer &amp; AI Trainer. Building intelligent systems and dependable software architectures that ship.</p>
       </div>
       <div class="footer-links">
         <div>
@@ -1022,7 +2117,7 @@
   <!-- Global Toast Notification -->
   <div id="portfolioToast" class="portfolio-toast" role="status" aria-live="polite"></div>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=2.8"></script>
 </body>
 
 </html>

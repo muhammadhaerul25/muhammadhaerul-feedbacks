@@ -2,13 +2,15 @@ const prisma = require('../config/db');
 const { signToken } = require('../utils/token');
 const { isAuthorizedAdmin, PRIMARY_ADMIN_EMAIL } = require('../middlewares/auth');
 
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '63633754239-m8rcv6tl3qhqng2fce4vj9ei1gkhtsmr.apps.googleusercontent.com';
+
 /**
  * Public endpoint to get client-side auth configuration
  */
 async function getConfig(req, res) {
   res.json({
     success: true,
-    googleClientId: process.env.GOOGLE_CLIENT_ID || null,
+    googleClientId: GOOGLE_CLIENT_ID,
     primaryEmail: PRIMARY_ADMIN_EMAIL
   });
 }
@@ -55,8 +57,8 @@ async function googleLogin(req, res) {
       }
 
       // Check client_id if configured
-      if (process.env.GOOGLE_CLIENT_ID && googleData.aud !== process.env.GOOGLE_CLIENT_ID) {
-        console.warn('[Google Auth] aud mismatch:', googleData.aud, 'expected:', process.env.GOOGLE_CLIENT_ID);
+      if (GOOGLE_CLIENT_ID && googleData.aud !== GOOGLE_CLIENT_ID) {
+        console.warn('[Google Auth] aud mismatch:', googleData.aud, 'expected:', GOOGLE_CLIENT_ID);
         return res.status(401).json({
           success: false,
           error: 'ID token Google tidak cocok dengan Google Client ID yang terdaftar.'
