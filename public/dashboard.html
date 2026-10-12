@@ -1623,12 +1623,12 @@
     }
     .auth-gate-card {
         background: #FFFFFF;
-        border: 1.5px solid var(--line);
-        border-radius: var(--r-lg);
-        width: 100%; max-width: 480px;
-        box-shadow: 0 16px 48px rgba(60,64,67,0.14), 0 4px 12px rgba(60,64,67,0.08);
+        border: 1px solid rgba(218, 220, 224, 0.9);
+        border-radius: 20px;
+        width: 100%; max-width: 440px;
+        box-shadow: 0 24px 60px -12px rgba(60,64,67,0.18), 0 8px 24px -4px rgba(60,64,67,0.08);
         position: relative; overflow: hidden;
-        padding: 36px 32px 28px;
+        padding: 34px 28px 24px;
         animation: authCardIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
     @keyframes authCardIn {
@@ -1639,52 +1639,78 @@
         position: absolute; top: 0; left: 0; right: 0; height: 4px;
         background: linear-gradient(90deg, #4285F4 0%, #34A853 33%, #FBBC04 66%, #EA4335 100%);
     }
-    .auth-gate-badge {
-        display: inline-flex; align-items: center; gap: 6px;
-        font-size: 0.72rem; font-weight: 800; text-transform: uppercase;
-        letter-spacing: 0.08em; color: var(--g-blue);
-        background: var(--g-blue-soft);
-        padding: 4px 12px; border-radius: var(--r-pill);
-        border: 1px solid rgba(66,133,244,0.2);
-        margin-bottom: 20px;
-    }
     .auth-brand {
         display: flex; align-items: center; gap: 14px;
-        margin-bottom: 20px;
+        margin-bottom: 22px;
+    }
+    .auth-brand-avatar-wrap {
+        position: relative; flex-shrink: 0;
     }
     .auth-brand-avatar {
-        width: 48px; height: 48px; border-radius: 50%;
-        object-fit: cover; box-shadow: 0 0 0 3px rgba(66,133,244,0.25);
-        flex-shrink: 0;
+        width: 52px; height: 52px; border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px rgba(66, 133, 244, 0.22);
+        display: block;
+    }
+    .auth-avatar-badge {
+        position: absolute; bottom: -2px; right: -2px;
+        width: 18px; height: 18px; border-radius: 50%;
+        background: #1A73E8; color: #FFFFFF;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 0 0 2px #FFFFFF;
     }
     .auth-title {
-        font-family: 'Google Sans', 'Inter', sans-serif;
-        font-size: 1.35rem; font-weight: 700; color: var(--ink);
-        letter-spacing: -0.02em; line-height: 1.2;
+        font-family: 'Google Sans', 'Inter', -apple-system, sans-serif;
+        font-size: 1.32rem; font-weight: 700; color: #202124;
+        letter-spacing: -0.02em; line-height: 1.25;
     }
     .auth-subtitle {
-        font-size: 0.84rem; color: var(--ink-3);
-        line-height: 1.5; margin-top: 4px;
+        font-size: 0.82rem; color: #5F6368;
+        line-height: 1.45; margin-top: 3px; font-weight: 500;
     }
-    .auth-primary-notice {
-        display: flex; align-items: center; gap: 12px;
+    .auth-security-notice {
+        display: flex; align-items: flex-start; gap: 12px;
         background: #F8FAFD; border: 1.5px solid #D2E3FC;
-        border-radius: var(--r-md); padding: 12px 14px;
-        margin-bottom: 20px;
+        border-radius: 14px; padding: 14px 16px;
+        margin-bottom: 22px;
+        transition: border-color 0.2s ease;
+    }
+    .auth-security-notice:hover {
+        border-color: #AECBFA;
     }
     .auth-notice-icon {
-        width: 32px; height: 32px; border-radius: 50%;
-        background: #E8F0FE; color: var(--g-blue);
+        width: 34px; height: 34px; border-radius: 10px;
+        background: #E8F0FE; color: #1A73E8;
         display: flex; align-items: center; justify-content: center;
-        flex-shrink: 0;
+        flex-shrink: 0; margin-top: 1px;
+    }
+    .auth-notice-content {
+        flex: 1; min-width: 0;
+    }
+    .auth-notice-header {
+        display: flex; align-items: center; justify-content: space-between;
+        gap: 8px; margin-bottom: 4px;
     }
     .auth-notice-title {
-        font-size: 0.68rem; font-weight: 800; text-transform: uppercase;
-        letter-spacing: 0.06em; color: var(--g-blue-dark);
+        font-family: 'Google Sans', 'Inter', sans-serif;
+        font-size: 0.90rem; font-weight: 700; color: #1A73E8;
+        letter-spacing: -0.01em;
     }
-    .auth-notice-email {
-        font-size: 0.88rem; font-weight: 700; color: var(--ink);
-        word-break: break-all;
+    .auth-notice-chip {
+        display: inline-flex; align-items: center; gap: 5px;
+        font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
+        letter-spacing: 0.06em; color: #137333;
+        background: #E6F4EA; border: 1px solid rgba(52, 168, 83, 0.3);
+        padding: 2px 8px; border-radius: 999px;
+    }
+    .chip-dot {
+        width: 6px; height: 6px; border-radius: 50%;
+        background: #34A853;
+        box-shadow: 0 0 0 2px rgba(52, 168, 83, 0.2);
+    }
+    .auth-notice-desc {
+        font-size: 0.80rem; color: #5F6368;
+        line-height: 1.45; margin: 0;
     }
     .auth-error-banner {
         background: #FCE8E6; border: 1.5px solid #F5C2C7;
@@ -1818,26 +1844,33 @@
 <div id="admin-auth-gate" class="admin-auth-gate" style="display:flex;">
     <div class="auth-gate-card">
         <div class="auth-gate-stripe"></div>
-        <div class="auth-gate-badge">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-            <span>Admin Protected Area</span>
-        </div>
         
         <div class="auth-brand">
-            <img class="auth-brand-avatar" src="/assets/images/muhammad%20haerul_formal%20photo_zoom_in.webp?v=5" alt="Muhammad Haerul">
+            <div class="auth-brand-avatar-wrap">
+                <img class="auth-brand-avatar" src="/assets/images/muhammad%20haerul_formal%20photo_zoom_in.webp?v=5" alt="Muhammad Haerul">
+                <div class="auth-avatar-badge" title="Verified Portfolio Owner">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                </div>
+            </div>
             <div>
                 <h1 class="auth-title">Muhammad Haerul</h1>
-                <p class="auth-subtitle">Authentication required. Only authorized Google accounts can access this workspace.</p>
+                <p class="auth-subtitle">Portfolio Management Workspace</p>
             </div>
         </div>
 
-        <div class="auth-primary-notice">
+        <div class="auth-security-notice">
             <div class="auth-notice-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
             </div>
             <div class="auth-notice-content">
-                <div class="auth-notice-title">Primary Super Admin</div>
-                <div class="auth-notice-email">haerulmuhammad01@gmail.com</div>
+                <div class="auth-notice-header">
+                    <span class="auth-notice-title">Admin Protected Area</span>
+                    <span class="auth-notice-chip"><span class="chip-dot"></span> Restricted</span>
+                </div>
+                <p class="auth-notice-desc">Restricted access. Please sign in with an authorized Google account to access this console.</p>
             </div>
         </div>
 
@@ -1858,10 +1891,23 @@
                     <span>Sign in with Google</span>
                 </button>
             </div>
+
+            <div class="auth-fallback-box" style="margin-top: 14px; text-align: center; width: 100%;">
+                <button type="button" class="btn-auth-key-toggle" onclick="toggleAdminKeyInput()" style="background:none; border:none; color:#1a73e8; font-size:0.78rem; font-weight:600; cursor:pointer; text-decoration:underline;">
+                    Popup Google stuck / terblokir? Masuk via Kunci Akses Admin
+                </button>
+                <div id="admin-key-form" style="display:none; margin-top:12px; padding:12px 14px; background:#F8FAFD; border:1px solid #D2E3FC; border-radius:10px; text-align:left;">
+                    <p style="font-size:0.75rem; color:#5F6368; margin-bottom:8px; line-height:1.4;">Akses darurat administrator untuk <strong>haerulmuhammad01@gmail.com</strong></p>
+                    <div style="display:flex; gap:8px;">
+                        <input type="password" id="input-admin-key" placeholder="Ketik PIN / Master Key Admin" style="flex:1; padding:8px 12px; border:1px solid #DADCE0; border-radius:6px; font-size:0.82rem; outline:none;" onkeydown="if(event.key==='Enter')submitAdminKey()">
+                        <button type="button" onclick="submitAdminKey()" style="padding:8px 14px; background:#1a73e8; color:#fff; border:none; border-radius:6px; font-size:0.82rem; font-weight:600; cursor:pointer;">Masuk</button>
+                    </div>
+                </div>
+            </div>
             
             <div id="auth-loading-state" class="auth-loading-spinner" style="display:none;">
                 <div class="spinner-sm"></div>
-                <span>Memverifikasi autentikasi Google...</span>
+                <span>Memverifikasi autentikasi...</span>
             </div>
         </div>
 
@@ -5867,7 +5913,8 @@ function initGoogleSignIn(clientId) {
                         client_id: cId,
                         callback: handleGoogleCredentialResponse,
                         auto_select: false,
-                        cancel_on_tap_outside: true
+                        cancel_on_tap_outside: true,
+                        itp_support: true
                     });
 
                     var container = document.getElementById('google-signin-btn');
@@ -5888,12 +5935,20 @@ function initGoogleSignIn(clientId) {
                     }
                 }
 
-                // 2. Initialize OAuth 2.0 Token Client (Popup flow fallback)
+                // 2. Initialize OAuth 2.0 Token Client (Popup flow fallback with safe error handling)
                 if (window.google.accounts.oauth2) {
                     tokenClient = google.accounts.oauth2.initTokenClient({
                         client_id: cId,
                         scope: 'email profile openid',
-                        callback: handleGoogleOAuthResponse
+                        callback: handleGoogleOAuthResponse,
+                        error_callback: function(err) {
+                            console.warn('[GIS OAuth Token Error]:', err);
+                            if (err && err.type === 'popup_closed') {
+                                showAuthGate('Jendela login Google ditutup. Silakan coba lagi.');
+                            } else {
+                                showAuthGate('Popup autentikasi Google diblokir browser atau mengalami kendala jaringan. Silakan gunakan opsi Kunci Admin.');
+                            }
+                        }
                     });
                 }
                 gisInitialized = true;
@@ -5923,12 +5978,69 @@ function triggerGoogleOAuth() {
     var errEl = document.getElementById('auth-error-banner');
     if (errEl) errEl.style.display = 'none';
 
-    if (tokenClient) {
-        tokenClient.requestAccessToken({ prompt: 'select_account' });
-    } else if (window.google && window.google.accounts && window.google.accounts.id) {
-        google.accounts.id.prompt();
+    // Prioritize ID Token One-Tap prompt to avoid gsi/transform blank popup bug
+    if (window.google && window.google.accounts && window.google.accounts.id) {
+        google.accounts.id.prompt(function(notification) {
+            if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+                if (tokenClient) {
+                    try {
+                        tokenClient.requestAccessToken({ prompt: '' });
+                    } catch(e) {
+                        console.warn('[tokenClient prompt err]:', e);
+                    }
+                }
+            }
+        });
+    } else if (tokenClient) {
+        try {
+            tokenClient.requestAccessToken({ prompt: '' });
+        } catch(e) {
+            showAuthGate('Gagal membuka popup Google: ' + e.message);
+        }
     } else {
         showAuthGate('Google Identity Services belum selesai dimuat. Silakan muat ulang halaman.');
+    }
+}
+
+function toggleAdminKeyInput() {
+    var el = document.getElementById('admin-key-form');
+    if (el) el.style.display = (el.style.display === 'none' || !el.style.display) ? 'block' : 'none';
+    var inp = document.getElementById('input-admin-key');
+    if (inp && el.style.display === 'block') inp.focus();
+}
+
+async function submitAdminKey() {
+    var inp = document.getElementById('input-admin-key');
+    var key = inp ? inp.value.trim() : '';
+    if (!key) {
+        showAuthGate('Silakan masukkan Kunci Akses / PIN Admin.');
+        return;
+    }
+
+    var loadingEl = document.getElementById('auth-loading-state');
+    var btnWrap = document.getElementById('google-signin-btn-wrapper');
+    var errEl = document.getElementById('auth-error-banner');
+
+    if (loadingEl) loadingEl.style.display = 'flex';
+    if (btnWrap) btnWrap.style.display = 'none';
+    if (errEl) errEl.style.display = 'none';
+
+    try {
+        var res = await fetch('/api/auth/verify-key', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ key: key })
+        });
+        var data = await res.json();
+
+        if (res.ok && data.success) {
+            if (data.token) localStorage.setItem('mh_admin_token', data.token);
+            handleAuthSuccess(data.user, true);
+        } else {
+            showAuthGate(data.error || 'Kunci akses admin tidak valid.');
+        }
+    } catch(err) {
+        showAuthGate('Terjadi kesalahan saat memverifikasi kunci akses: ' + err.message);
     }
 }
 

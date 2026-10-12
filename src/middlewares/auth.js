@@ -52,20 +52,8 @@ async function isAuthorizedAdmin(email) {
   if (!email || typeof email !== 'string') return false;
   const cleanEmail = email.toLowerCase().trim();
 
-  // Primary super-admin is always authorized
-  if (cleanEmail === PRIMARY_ADMIN_EMAIL) {
-    return true;
-  }
-
-  try {
-    const adminRecord = await prisma.allowedAdmin.findUnique({
-      where: { email: cleanEmail }
-    });
-    return !!adminRecord;
-  } catch (err) {
-    console.error('[Auth Middleware] Database error checking admin:', err.message);
-    return false;
-  }
+  // STRICT ACCESS: ONLY PRIMARY_ADMIN_EMAIL (haerulmuhammad01@gmail.com) is authorized
+  return cleanEmail === PRIMARY_ADMIN_EMAIL;
 }
 
 /**

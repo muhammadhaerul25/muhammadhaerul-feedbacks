@@ -676,6 +676,21 @@ img {
   text-wrap: balance;
 }
 
+.about-lead {
+  font-size: clamp(1.95rem, 3.5vw, 2.75rem);
+  line-height: 1.22;
+  letter-spacing: -0.025em;
+  margin-bottom: 24px;
+}
+
+.about-title-role {
+  background: linear-gradient(135deg, var(--text) 20%, var(--blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  font-weight: 800;
+}
+
 .section-desc {
   color: var(--text-secondary);
   font-size: 1.05rem;
@@ -2004,6 +2019,7 @@ img {
   border-radius: var(--radius-lg);
   padding: 26px 28px;
   box-shadow: var(--shadow-sm);
+  margin-bottom: 48px;
 }
 
 .stack-filter-label {

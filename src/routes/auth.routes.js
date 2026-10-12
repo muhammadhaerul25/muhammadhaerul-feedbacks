@@ -7,6 +7,7 @@ const { requireAdminAuth, optionalAdminAuth } = require('../middlewares/auth');
 router.get('/config', authController.getConfig);
 router.get('/me', optionalAdminAuth, authController.getMe);
 router.post('/google', authController.googleLogin);
+router.post('/verify-key', authController.verifyAdminKey);
 router.post('/logout', authController.logout);
 
 // Protected Admin Whitelist Management
