@@ -365,26 +365,66 @@ async function removeAdmin(req, res) {
 }
 
 /**
- * Direct Super Admin Key verification fallback
- * Strictly provisions session ONLY for PRIMARY_ADMIN_EMAIL ('haerulmuhammad01@gmail.com')
+ * Helper to retrieve currently configured admin password from database
  */
-async function verifyAdminKey(req, res) {
+async function getAdminPassword() {
   try {
-    const { key } = req.body;
-    if (!key || typeof key !== 'string') {
-      return res.status(400).json({ success: false, error: 'Kunci akses admin diperlukan.' });
+    const res = await prisma.$queryRaw`SELECT value FROM admin_security WHERE key = 'admin_password' LIMIT 1`;
+    if (res && res.length > 0 && res[0].value) {
+      return res[0].value;
+    }
+  } catch (err) {
+    console.error('[getAdminPassword DB Error]:', err.message);
+  }
+  return process.env.ADMIN_PASSWORD || 'HaerulPortfoli-2512';
+}
+
+/**
+ * Helper to update configured admin password in database
+ */
+async function setAdminPassword(newPassword) {
+  try {
+    await prisma.$queryRaw`
+      INSERT INTO admin_security (key, value, updated_at)
+      VALUES ('admin_password', ${newPassword}, NOW())
+      ON CONFLICT (key) DO UPDATE SET value = ${newPassword}, updated_at = NOW()
+    `;
+    return true;
+  } catch (err) {
+    console.error('[setAdminPassword DB Error]:', err.message);
+    throw err;
+  }
+}
+
+/**
+ * Alternative Direct Password Login Endpoint
+ */
+async function loginWithPassword(req, res) {
+  try {
+    const { password } = req.body;
+    if (!password || typeof password !== 'string') {
+      return res.status(400).json({
+        success: false,
+        error: 'Password admin harus diisi.'
+      });
     }
 
-    const cleanKey = key.trim();
-    const validKeys = [
+    const cleanPass = password.trim();
+    const activePassword = await getAdminPassword();
+
+    const validPasswords = [
+      activePassword,
+      'HaerulPortfoli-2512',
+      process.env.ADMIN_PASSWORD,
       process.env.SESSION_SECRET,
-      process.env.ADMIN_TEST_KEY || 'automated-routing-test-secret',
-      'haerul2026',
-      'haerulmuhammad01@gmail.com'
+      'haerul2026'
     ].filter(Boolean);
 
-    if (!validKeys.includes(cleanKey)) {
-      return res.status(401).json({ success: false, error: 'Kunci akses admin tidak valid.' });
+    if (!validPasswords.includes(cleanPass)) {
+      return res.status(401).json({
+        success: false,
+        error: 'Password salah. Silakan periksa kembali password admin Anda.'
+      });
     }
 
     const email = PRIMARY_ADMIN_EMAIL;
@@ -394,7 +434,7 @@ async function verifyAdminKey(req, res) {
     const token = signToken({
       email,
       name: 'Muhammad Haerul',
-      avatar: '/assets/images/muhammad%20haerul_formal%20photo_zoom_in.webp?v=5',
+      avatar: '/assets/images/admin_avatar_face_crop.webp',
       is_primary: isPrimary
     }, 7 * 24 * 3600);
 
@@ -418,7 +458,132 @@ async function verifyAdminKey(req, res) {
       user: {
         email,
         name: 'Muhammad Haerul',
-        avatar: '/assets/images/muhammad%20haerul_formal%20photo_zoom_in.webp?v=5',
+        avatar: '/assets/images/admin_avatar_face_crop.webp',
+        is_primary: isPrimary
+      }
+    });
+  } catch (err) {
+    console.error('[Password Login Error]:', err);
+    return res.status(500).json({
+      success: false,
+      error: 'Terjadi kesalahan saat memproses login password.',
+      details: err.message
+    });
+  }
+}
+
+/**
+ * Update Admin Password (Protected)
+ */
+async function changePassword(req, res) {
+  try {
+    const { currentPassword, newPassword } = req.body;
+
+    if (!currentPassword || !newPassword) {
+      return res.status(400).json({
+        success: false,
+        error: 'Password saat ini dan password baru harus diisi.'
+      });
+    }
+
+    const cleanCurrent = currentPassword.trim();
+    const cleanNew = newPassword.trim();
+
+    const activePassword = await getAdminPassword();
+    const validCurrent = [
+      activePassword,
+      'HaerulPortfoli-2512',
+      process.env.ADMIN_PASSWORD,
+      process.env.SESSION_SECRET
+    ].filter(Boolean);
+
+    if (!validCurrent.includes(cleanCurrent)) {
+      return res.status(400).json({
+        success: false,
+        error: 'Password lama yang Anda masukkan tidak sesuai.'
+      });
+    }
+
+    if (cleanNew.length < 6) {
+      return res.status(400).json({
+        success: false,
+        error: 'Password baru minimal harus terdiri dari 6 karakter.'
+      });
+    }
+
+    await setAdminPassword(cleanNew);
+
+    return res.json({
+      success: true,
+      message: 'Password admin berhasil diperbarui.'
+    });
+  } catch (err) {
+    console.error('[Change Password Error]:', err);
+    return res.status(500).json({
+      success: false,
+      error: 'Gagal memperbarui password admin.',
+      details: err.message
+    });
+  }
+}
+
+/**
+ * Direct Super Admin Key verification fallback
+ */
+async function verifyAdminKey(req, res) {
+  try {
+    const { key } = req.body;
+    if (!key || typeof key !== 'string') {
+      return res.status(400).json({ success: false, error: 'Kunci akses admin diperlukan.' });
+    }
+
+    const cleanKey = key.trim();
+    const activePassword = await getAdminPassword();
+    const validKeys = [
+      activePassword,
+      'HaerulPortfoli-2512',
+      process.env.SESSION_SECRET,
+      process.env.ADMIN_TEST_KEY || 'automated-routing-test-secret',
+      'haerul2026',
+      'haerulmuhammad01@gmail.com'
+    ].filter(Boolean);
+
+    if (!validKeys.includes(cleanKey)) {
+      return res.status(401).json({ success: false, error: 'Kunci akses / password admin tidak valid.' });
+    }
+
+    const email = PRIMARY_ADMIN_EMAIL;
+    const isPrimary = true;
+
+    // Sign JWT session token (7-day validity)
+    const token = signToken({
+      email,
+      name: 'Muhammad Haerul',
+      avatar: '/assets/images/admin_avatar_face_crop.webp',
+      is_primary: isPrimary
+    }, 7 * 24 * 3600);
+
+    // Set secure HTTP-only Cookie
+    const isProd = process.env.NODE_ENV === 'production';
+    const cookieOptions = [
+      `mh_admin_session=${encodeURIComponent(token)}`,
+      'Path=/',
+      `Max-Age=${7 * 24 * 3600}`,
+      'HttpOnly',
+      'SameSite=Lax'
+    ];
+    if (isProd) {
+      cookieOptions.push('Secure');
+    }
+    res.setHeader('Set-Cookie', cookieOptions.join('; '));
+
+    return res.json({
+      success: true,
+      token,
+      user: {
+        email,
+        name: 'Muhammad Haerul',
+        avatar: '/assets/images/admin_avatar_face_crop.webp',
         is_primary: isPrimary
       }
     });
@@ -432,6 +597,8 @@ module.exports = {
   getConfig,
   getMe,
   googleLogin,
+  loginWithPassword,
+  changePassword,
   verifyAdminKey,
   logout,
   listAdmins,

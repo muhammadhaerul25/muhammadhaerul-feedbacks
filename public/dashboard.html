@@ -1647,21 +1647,21 @@
         position: relative; flex-shrink: 0;
     }
     .auth-brand-avatar {
-        width: 52px; height: 52px; border-radius: 50%;
-        object-fit: cover;
-        box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px rgba(66, 133, 244, 0.22);
-        display: block;
+        width: 58px; height: 58px; border-radius: 50%;
+        object-fit: cover; object-position: center 15%;
+        box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 5.5px rgba(66, 133, 244, 0.28), 0 8px 18px rgba(0,0,0,0.1);
+        display: block; background: #E8F0FE;
     }
     .auth-avatar-badge {
-        position: absolute; bottom: -2px; right: -2px;
-        width: 18px; height: 18px; border-radius: 50%;
+        position: absolute; bottom: 0px; right: 0px;
+        width: 20px; height: 20px; border-radius: 50%;
         background: #1A73E8; color: #FFFFFF;
         display: flex; align-items: center; justify-content: center;
-        box-shadow: 0 0 0 2px #FFFFFF;
+        box-shadow: 0 0 0 2.5px #FFFFFF;
     }
     .auth-title {
         font-family: 'Google Sans', 'Inter', -apple-system, sans-serif;
-        font-size: 1.32rem; font-weight: 700; color: #202124;
+        font-size: 1.35rem; font-weight: 800; color: #202124;
         letter-spacing: -0.02em; line-height: 1.25;
     }
     .auth-subtitle {
@@ -1671,8 +1671,8 @@
     .auth-security-notice {
         display: flex; align-items: flex-start; gap: 12px;
         background: #F8FAFD; border: 1.5px solid #D2E3FC;
-        border-radius: 14px; padding: 14px 16px;
-        margin-bottom: 22px;
+        border-radius: 14px; padding: 13px 16px;
+        margin-bottom: 18px;
         transition: border-color 0.2s ease;
     }
     .auth-security-notice:hover {
@@ -1709,18 +1709,101 @@
         box-shadow: 0 0 0 2px rgba(52, 168, 83, 0.2);
     }
     .auth-notice-desc {
-        font-size: 0.80rem; color: #5F6368;
+        font-size: 0.78rem; color: #5F6368;
         line-height: 1.45; margin: 0;
     }
     .auth-error-banner {
         background: #FCE8E6; border: 1.5px solid #F5C2C7;
         color: #C5221F; padding: 12px 14px; border-radius: var(--r-md);
         font-size: 0.82rem; font-weight: 600; line-height: 1.45;
+        margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+    }
+    
+    /* Dual Mode Switcher Tabs */
+    .auth-tabs {
+        display: flex; gap: 4px; background: #F1F3F4;
+        padding: 4px; border-radius: 12px; width: 100%;
         margin-bottom: 18px;
     }
+    .auth-tab-btn {
+        flex: 1; padding: 9px 12px; border-radius: 9px;
+        border: none; background: transparent; color: #5F6368;
+        font-family: 'Google Sans', 'Inter', -apple-system, sans-serif;
+        font-size: 0.82rem; font-weight: 700; cursor: pointer;
+        display: flex; align-items: center; justify-content: center; gap: 7px;
+        transition: all 0.2s cubic-bezier(0.2, 0.8, 0.4, 1);
+    }
+    .auth-tab-btn:hover { color: #202124; }
+    .auth-tab-btn.active {
+        background: #FFFFFF; color: #1A73E8;
+        box-shadow: 0 1px 3px rgba(60,64,67,0.12), 0 1px 2px rgba(60,64,67,0.08);
+    }
+    
+    .auth-panel {
+        width: 100%; animation: authPanelFade 0.2s ease;
+    }
+    @keyframes authPanelFade {
+        from { opacity: 0; transform: translateY(4px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+    
+    .auth-input-group {
+        display: flex; flex-direction: column; gap: 6px; width: 100%; text-align: left;
+    }
+    .auth-input-label {
+        font-size: 0.74rem; font-weight: 700; color: #3C4043;
+        text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .auth-password-wrapper {
+        position: relative; display: flex; align-items: center; width: 100%;
+    }
+    .auth-text-input {
+        width: 100%; padding: 12px 44px 12px 14px;
+        border: 1.5px solid #DADCE0; border-radius: 10px;
+        font-size: 0.90rem; font-family: inherit; color: #202124;
+        background: #FAFAFA; outline: none; transition: all 0.2s ease;
+    }
+    .auth-text-input:focus {
+        border-color: #1A73E8; background: #FFFFFF;
+        box-shadow: 0 0 0 3px rgba(26,115,232,0.16);
+    }
+    .btn-toggle-eye {
+        position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+        background: transparent; border: none; padding: 6px;
+        color: #5F6368; cursor: pointer; display: flex; align-items: center; justify-content: center;
+        border-radius: 6px; transition: color 0.2s;
+    }
+    .btn-toggle-eye:hover { color: #202124; }
+    .btn-primary-auth {
+        width: 100%; padding: 12px 20px;
+        background: #1A73E8; color: #FFFFFF; border: none;
+        border-radius: 10px; font-family: 'Google Sans', 'Inter', sans-serif;
+        font-size: 0.90rem; font-weight: 700; cursor: pointer;
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        transition: all 0.2s cubic-bezier(0.2, 0.8, 0.4, 1);
+        box-shadow: 0 2px 6px rgba(26,115,232,0.25);
+    }
+    .btn-primary-auth:hover {
+        background: #1765CC; box-shadow: 0 4px 12px rgba(26,115,232,0.35);
+        transform: translateY(-1px);
+    }
+    .btn-primary-auth:active { transform: translateY(0); }
+    .auth-hint {
+        font-size: 0.72rem; color: #5F6368; line-height: 1.35;
+    }
+    .auth-hint code {
+        background: #E8F0FE; padding: 2px 6px; border-radius: 4px;
+        font-size: 0.73rem; color: #1A73E8; font-weight: 700;
+        font-family: monospace;
+    }
+    .auth-google-note {
+        font-size: 0.75rem; color: #5F6368; text-align: center;
+        margin-top: 12px; line-height: 1.45;
+    }
+
     .auth-action-box {
         display: flex; flex-direction: column; align-items: center;
-        margin-bottom: 22px; width: 100%;
+        margin-bottom: 18px; width: 100%;
     }
     .google-signin-wrapper {
         min-height: 48px; display: flex; justify-content: center;
@@ -1750,10 +1833,16 @@
         width: 20px; height: 20px; flex-shrink: 0;
     }
     .auth-loading-spinner {
-        display: flex; align-items: center; gap: 10px;
-        font-size: 0.85rem; font-weight: 600; color: var(--ink-3);
-        padding: 12px;
+        display: flex; align-items: center; justify-content: center; gap: 10px;
+        font-size: 0.84rem; font-weight: 600; color: var(--ink-3);
+        padding: 14px; background: #F8FAFD; border-radius: 10px; width: 100%;
     }
+    .btn-cancel-auth {
+        background: transparent; border: 1px solid #DADCE0; border-radius: 6px;
+        font-size: 0.72rem; font-weight: 700; padding: 3px 8px; margin-left: 6px;
+        color: #5F6368; cursor: pointer;
+    }
+    .btn-cancel-auth:hover { border-color: #202124; color: #202124; }
     .spinner-sm {
         width: 18px; height: 18px; border: 2.5px solid #E8EAED;
         border-top-color: var(--g-blue); border-radius: 50%;
@@ -1762,8 +1851,25 @@
     @keyframes spin { 0%{transform:rotate(0deg);} 100%{transform:rotate(360deg);} }
     .auth-gate-footer {
         text-align: center; font-size: 0.72rem; color: var(--ink-4);
-        margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line-soft);
+        margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line-soft);
         font-weight: 500;
+    }
+
+    /* Security Modal Tabs */
+    .security-modal-tabs {
+        display: flex; border-bottom: 1.5px solid var(--line-soft);
+        padding: 0 24px; background: var(--surface); gap: 8px;
+    }
+    .security-tab-btn {
+        padding: 13px 18px; border: none; background: transparent;
+        font-size: 0.85rem; font-weight: 700; color: var(--ink-3);
+        border-bottom: 2.5px solid transparent; cursor: pointer;
+        display: inline-flex; align-items: center; gap: 8px;
+        transition: var(--t); font-family: inherit;
+    }
+    .security-tab-btn:hover { color: var(--ink); }
+    .security-tab-btn.active {
+        color: var(--g-blue); border-bottom-color: var(--g-blue);
     }
 
     /* Topbar Profile Badge & Signout */
@@ -1847,7 +1953,7 @@
         
         <div class="auth-brand">
             <div class="auth-brand-avatar-wrap">
-                <img class="auth-brand-avatar" src="/assets/images/muhammad%20haerul_formal%20photo_zoom_in.webp?v=5" alt="Muhammad Haerul">
+                <img class="auth-brand-avatar" src="/assets/images/admin_avatar_face_crop.webp" alt="Muhammad Haerul">
                 <div class="auth-avatar-badge" title="Verified Portfolio Owner">
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
                 </div>
@@ -1870,49 +1976,75 @@
                     <span class="auth-notice-title">Admin Protected Area</span>
                     <span class="auth-notice-chip"><span class="chip-dot"></span> Restricted</span>
                 </div>
-                <p class="auth-notice-desc">Restricted access. Please sign in with an authorized Google account to access this console.</p>
+                <p class="auth-notice-desc">Restricted access console. Masuk menggunakan Password Admin atau Akun Google terdaftar.</p>
             </div>
+        </div>
+
+        <!-- Auth Mode Selector Tabs -->
+        <div class="auth-tabs">
+            <button type="button" class="auth-tab-btn active" id="tab-btn-password" onclick="switchAuthTab('password')">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                <span>Password Admin</span>
+            </button>
+            <button type="button" class="auth-tab-btn" id="tab-btn-google" onclick="switchAuthTab('google')">
+                <svg class="google-tab-icon" viewBox="0 0 24 24" width="15" height="15"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+                <span>Akun Google</span>
+            </button>
         </div>
 
         <div id="auth-error-banner" class="auth-error-banner" style="display:none;"></div>
 
         <div class="auth-action-box">
-            <div id="google-signin-btn-wrapper" class="google-signin-wrapper">
-                <!-- Native Google Identity Services Button Container -->
-                <div id="google-signin-btn"></div>
-                <!-- Custom Official Google Sign-In Button (Dual Flow / Fallback) -->
-                <button type="button" id="btn-google-custom" class="btn-google-signin" onclick="triggerGoogleOAuth()">
-                    <svg class="google-icon-svg" viewBox="0 0 24 24">
-                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-                    </svg>
-                    <span>Sign in with Google</span>
-                </button>
+            <!-- PANEL 1: PASSWORD LOGIN -->
+            <div id="auth-panel-password" class="auth-panel" style="display:block;">
+                <form id="form-auth-password" onsubmit="handlePasswordLogin(event)" style="display:flex; flex-direction:column; gap:14px; width:100%;">
+                    <div class="auth-input-group">
+                        <label for="input-admin-password" class="auth-input-label">Password Admin</label>
+                        <div class="auth-password-wrapper">
+                            <input type="password" id="input-admin-password" class="auth-text-input" placeholder="Ketik Password Admin..." required autocomplete="current-password">
+                            <button type="button" class="btn-toggle-eye" onclick="togglePasswordVisibility('input-admin-password', this)" title="Lihat / Sembunyikan Password">
+                                <svg class="eye-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                <svg class="eye-closed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                            </button>
+                        </div>
+                        <span class="auth-hint">Default password: <code>HaerulPortfoli-2512</code></span>
+                    </div>
+                    <button type="submit" id="btn-submit-password" class="btn-primary-auth">
+                        <span>Masuk ke Dashboard</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </button>
+                </form>
             </div>
 
-            <div class="auth-fallback-box" style="margin-top: 14px; text-align: center; width: 100%;">
-                <button type="button" class="btn-auth-key-toggle" onclick="toggleAdminKeyInput()" style="background:none; border:none; color:#1a73e8; font-size:0.78rem; font-weight:600; cursor:pointer; text-decoration:underline;">
-                    Popup Google stuck / terblokir? Masuk via Kunci Akses Admin
-                </button>
-                <div id="admin-key-form" style="display:none; margin-top:12px; padding:12px 14px; background:#F8FAFD; border:1px solid #D2E3FC; border-radius:10px; text-align:left;">
-                    <p style="font-size:0.75rem; color:#5F6368; margin-bottom:8px; line-height:1.4;">Akses darurat administrator untuk <strong>haerulmuhammad01@gmail.com</strong></p>
-                    <div style="display:flex; gap:8px;">
-                        <input type="password" id="input-admin-key" placeholder="Ketik PIN / Master Key Admin" style="flex:1; padding:8px 12px; border:1px solid #DADCE0; border-radius:6px; font-size:0.82rem; outline:none;" onkeydown="if(event.key==='Enter')submitAdminKey()">
-                        <button type="button" onclick="submitAdminKey()" style="padding:8px 14px; background:#1a73e8; color:#fff; border:none; border-radius:6px; font-size:0.82rem; font-weight:600; cursor:pointer;">Masuk</button>
-                    </div>
+            <!-- PANEL 2: GOOGLE SIGN IN -->
+            <div id="auth-panel-google" class="auth-panel" style="display:none;">
+                <div id="google-signin-btn-wrapper" class="google-signin-wrapper">
+                    <!-- Native Google Identity Services Button Container -->
+                    <div id="google-signin-btn"></div>
+                    <!-- Custom Official Google Sign-In Button (Dual Flow / Fallback) -->
+                    <button type="button" id="btn-google-custom" class="btn-google-signin" onclick="triggerGoogleOAuth()">
+                        <svg class="google-icon-svg" viewBox="0 0 24 24">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                        </svg>
+                        <span>Sign in with Google</span>
+                    </button>
                 </div>
+                <p class="auth-google-note">Pastikan akun Google Anda telah terdaftar sebagai administrator yang diizinkan (contoh: <strong>haerulmuhammad01@gmail.com</strong>).</p>
             </div>
-            
+
+            <!-- LOADING SPINNER WITH CANCEL -->
             <div id="auth-loading-state" class="auth-loading-spinner" style="display:none;">
                 <div class="spinner-sm"></div>
-                <span>Memverifikasi autentikasi...</span>
+                <span id="auth-loading-text">Memverifikasi autentikasi...</span>
+                <button type="button" onclick="cancelAuthLoading()" class="btn-cancel-auth">Batal</button>
             </div>
         </div>
 
         <div class="auth-gate-footer">
-            <span>Secured with HMAC-SHA256 Token &amp; Google Identity Services · Muhammad Haerul</span>
+            <span>Secured with JWT Session Token &amp; Google Identity Services · Muhammad Haerul</span>
         </div>
     </div>
 </div>
@@ -1923,7 +2055,7 @@
     <aside class="sidebar">
         <div class="sidebar-header">
             <div class="brand">
-                <img class="brand-avatar" src="/assets/images/muhammad%20haerul_formal%20photo_zoom_in.webp?v=5" alt="Muhammad Haerul">
+                <img class="brand-avatar" src="/assets/images/admin_avatar_face_crop.webp" alt="Muhammad Haerul">
                 <div class="brand-info">
                     <div class="brand-name">Muhammad Haerul</div>
                     <div class="brand-role">Portfolio Dashboard</div>
@@ -1959,7 +2091,7 @@
                 </li>
                 <li class="nav-item" id="nav-admins" onclick="openAdminModal()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><circle cx="12" cy="11" r="3"/></svg>
-                    Admin Access
+                    Akses &amp; Keamanan
                 </li>
                 <li class="nav-item nav-item-disabled">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
@@ -2018,9 +2150,9 @@
                     <svg id="refresh-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
                     Refresh
                 </button>
-                <button class="btn btn-ghost" id="btn-manage-admins" onclick="openAdminModal()" title="Manage Whitelisted Google Admins" style="padding:7px 14px; font-size:0.8rem;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
-                    <span>Admins</span>
+                <button class="btn btn-ghost" id="btn-manage-admins" onclick="openAdminModal()" title="Kelola Akses Admin & Password" style="padding:7px 14px; font-size:0.8rem; gap:6px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><circle cx="12" cy="11" r="3"/></svg>
+                    <span>Akses &amp; Keamanan</span>
                 </button>
                 <div class="admin-user-pill" id="admin-user-pill" title="Signed in as Administrator">
                     <img id="admin-user-avatar" class="admin-user-avatar" src="/favicon.webp" alt="Admin">
@@ -5866,6 +5998,9 @@ function showAuthGate(errorMessage) {
         errEl.style.display = 'none';
     }
 
+    // Ensure password tab is active by default
+    switchAuthTab(activeAuthTab || 'password');
+
     // Initialize Google Identity Services
     var clientId = (authConfig && authConfig.googleClientId) || DEFAULT_GOOGLE_CLIENT_ID;
     initGoogleSignIn(clientId);
@@ -5974,9 +6109,131 @@ function initGoogleSignIn(clientId) {
     }
 }
 
+var activeAuthTab = 'password';
+var googleAuthTimeout = null;
+
+function switchAuthTab(tab) {
+    activeAuthTab = tab;
+    var isPass = tab === 'password';
+    var btnPass = document.getElementById('tab-btn-password');
+    var btnGoogle = document.getElementById('tab-btn-google');
+    var panelPass = document.getElementById('auth-panel-password');
+    var panelGoogle = document.getElementById('auth-panel-google');
+    var errEl = document.getElementById('auth-error-banner');
+
+    if (errEl) errEl.style.display = 'none';
+
+    if (btnPass) btnPass.classList.toggle('active', isPass);
+    if (btnGoogle) btnGoogle.classList.toggle('active', !isPass);
+
+    if (panelPass) panelPass.style.display = isPass ? 'block' : 'none';
+    if (panelGoogle) panelGoogle.style.display = isPass ? 'none' : 'block';
+
+    if (isPass) {
+        var inp = document.getElementById('input-admin-password');
+        if (inp) setTimeout(function() { inp.focus(); }, 60);
+    }
+}
+
+function togglePasswordVisibility(inputId, btn) {
+    var input = document.getElementById(inputId);
+    if (!input) return;
+    var isPassword = input.type === 'password';
+    input.type = isPassword ? 'text' : 'password';
+
+    if (btn) {
+        var eyeOpen = btn.querySelector('.eye-open');
+        var eyeClosed = btn.querySelector('.eye-closed');
+        if (eyeOpen) eyeOpen.style.display = isPassword ? 'none' : 'block';
+        if (eyeClosed) eyeClosed.style.display = isPassword ? 'block' : 'none';
+    }
+}
+
+function cancelAuthLoading() {
+    if (googleAuthTimeout) {
+        clearTimeout(googleAuthTimeout);
+        googleAuthTimeout = null;
+    }
+    var loadingEl = document.getElementById('auth-loading-state');
+    if (loadingEl) loadingEl.style.display = 'none';
+
+    var panelPass = document.getElementById('auth-panel-password');
+    var panelGoogle = document.getElementById('auth-panel-google');
+    if (activeAuthTab === 'password') {
+        if (panelPass) panelPass.style.display = 'block';
+        if (panelGoogle) panelGoogle.style.display = 'none';
+    } else {
+        if (panelPass) panelPass.style.display = 'none';
+        if (panelGoogle) panelGoogle.style.display = 'block';
+    }
+}
+
+async function handlePasswordLogin(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    var inp = document.getElementById('input-admin-password');
+    var password = inp ? inp.value.trim() : '';
+    if (!password) {
+        showAuthGate('Silakan masukkan password admin.');
+        return;
+    }
+
+    var loadingEl = document.getElementById('auth-loading-state');
+    var loadingText = document.getElementById('auth-loading-text');
+    var panelPass = document.getElementById('auth-panel-password');
+    var errEl = document.getElementById('auth-error-banner');
+
+    if (errEl) errEl.style.display = 'none';
+    if (panelPass) panelPass.style.display = 'none';
+    if (loadingEl) {
+        if (loadingText) loadingText.textContent = 'Memverifikasi Password Admin...';
+        loadingEl.style.display = 'flex';
+    }
+
+    try {
+        var res = await fetch('/api/auth/login-password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password: password })
+        });
+        var data = await res.json();
+
+        if (res.ok && data.success) {
+            if (data.token) localStorage.setItem('mh_admin_token', data.token);
+            if (loadingEl) loadingEl.style.display = 'none';
+            handleAuthSuccess(data.user, true);
+        } else {
+            cancelAuthLoading();
+            showAuthGate(data.error || 'Password admin salah. Silakan coba lagi.');
+            if (inp) {
+                inp.focus();
+                inp.select();
+            }
+        }
+    } catch(err) {
+        cancelAuthLoading();
+        showAuthGate('Gagal memverifikasi password: ' + err.message);
+    }
+}
+
 function triggerGoogleOAuth() {
     var errEl = document.getElementById('auth-error-banner');
     if (errEl) errEl.style.display = 'none';
+
+    var loadingEl = document.getElementById('auth-loading-state');
+    var loadingText = document.getElementById('auth-loading-text');
+    var panelGoogle = document.getElementById('auth-panel-google');
+
+    if (panelGoogle) panelGoogle.style.display = 'none';
+    if (loadingEl) {
+        if (loadingText) loadingText.textContent = 'Menghubungkan ke Akun Google...';
+        loadingEl.style.display = 'flex';
+    }
+
+    if (googleAuthTimeout) clearTimeout(googleAuthTimeout);
+    googleAuthTimeout = setTimeout(function() {
+        cancelAuthLoading();
+        showAuthGate('Jendela Google Sign-In tidak merespons atau pop-up diblokir browser. Silakan coba lagi atau gunakan tab "Password Admin" untuk login langsung.');
+    }, 9000);
 
     // Prioritize ID Token One-Tap prompt to avoid gsi/transform blank popup bug
     if (window.google && window.google.accounts && window.google.accounts.id) {
@@ -5986,8 +6243,12 @@ function triggerGoogleOAuth() {
                     try {
                         tokenClient.requestAccessToken({ prompt: '' });
                     } catch(e) {
-                        console.warn('[tokenClient prompt err]:', e);
+                        cancelAuthLoading();
+                        showAuthGate('Gagal membuka popup Google: ' + e.message);
                     }
+                } else {
+                    cancelAuthLoading();
+                    showAuthGate('Google Sign-In tidak dapat dibuka di lingkungan ini. Silakan gunakan Password Admin.');
                 }
             }
         });
@@ -5995,65 +6256,34 @@ function triggerGoogleOAuth() {
         try {
             tokenClient.requestAccessToken({ prompt: '' });
         } catch(e) {
+            cancelAuthLoading();
             showAuthGate('Gagal membuka popup Google: ' + e.message);
         }
     } else {
-        showAuthGate('Google Identity Services belum selesai dimuat. Silakan muat ulang halaman.');
-    }
-}
-
-function toggleAdminKeyInput() {
-    var el = document.getElementById('admin-key-form');
-    if (el) el.style.display = (el.style.display === 'none' || !el.style.display) ? 'block' : 'none';
-    var inp = document.getElementById('input-admin-key');
-    if (inp && el.style.display === 'block') inp.focus();
-}
-
-async function submitAdminKey() {
-    var inp = document.getElementById('input-admin-key');
-    var key = inp ? inp.value.trim() : '';
-    if (!key) {
-        showAuthGate('Silakan masukkan Kunci Akses / PIN Admin.');
-        return;
-    }
-
-    var loadingEl = document.getElementById('auth-loading-state');
-    var btnWrap = document.getElementById('google-signin-btn-wrapper');
-    var errEl = document.getElementById('auth-error-banner');
-
-    if (loadingEl) loadingEl.style.display = 'flex';
-    if (btnWrap) btnWrap.style.display = 'none';
-    if (errEl) errEl.style.display = 'none';
-
-    try {
-        var res = await fetch('/api/auth/verify-key', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ key: key })
-        });
-        var data = await res.json();
-
-        if (res.ok && data.success) {
-            if (data.token) localStorage.setItem('mh_admin_token', data.token);
-            handleAuthSuccess(data.user, true);
-        } else {
-            showAuthGate(data.error || 'Kunci akses admin tidak valid.');
-        }
-    } catch(err) {
-        showAuthGate('Terjadi kesalahan saat memverifikasi kunci akses: ' + err.message);
+        cancelAuthLoading();
+        showAuthGate('Google Identity Services belum selesai dimuat atau diblokir adblocker. Silakan gunakan tab Password Admin.');
     }
 }
 
 async function handleGoogleOAuthResponse(tokenResponse) {
+    if (googleAuthTimeout) {
+        clearTimeout(googleAuthTimeout);
+        googleAuthTimeout = null;
+    }
     if (tokenResponse && tokenResponse.access_token) {
         await verifyWithBackend({ accessToken: tokenResponse.access_token });
     } else if (tokenResponse && tokenResponse.error) {
         console.warn('[OAuth Error]:', tokenResponse);
+        cancelAuthLoading();
         showAuthGate('Login Google dibatalkan atau gagal: ' + tokenResponse.error);
     }
 }
 
 async function handleGoogleCredentialResponse(response) {
+    if (googleAuthTimeout) {
+        clearTimeout(googleAuthTimeout);
+        googleAuthTimeout = null;
+    }
     if (response && response.credential) {
         await verifyWithBackend({ credential: response.credential });
     }
@@ -6061,11 +6291,17 @@ async function handleGoogleCredentialResponse(response) {
 
 async function verifyWithBackend(payload) {
     var loadingEl = document.getElementById('auth-loading-state');
-    var btnWrap = document.getElementById('google-signin-btn-wrapper');
+    var loadingText = document.getElementById('auth-loading-text');
+    var panelPass = document.getElementById('auth-panel-password');
+    var panelGoogle = document.getElementById('auth-panel-google');
     var errEl = document.getElementById('auth-error-banner');
 
-    if (loadingEl) loadingEl.style.display = 'flex';
-    if (btnWrap) btnWrap.style.display = 'none';
+    if (panelPass) panelPass.style.display = 'none';
+    if (panelGoogle) panelGoogle.style.display = 'none';
+    if (loadingEl) {
+        if (loadingText) loadingText.textContent = 'Memverifikasi hak akses admin...';
+        loadingEl.style.display = 'flex';
+    }
     if (errEl) errEl.style.display = 'none';
 
     try {
@@ -6078,11 +6314,14 @@ async function verifyWithBackend(payload) {
 
         if (res.ok && data.success) {
             if (data.token) localStorage.setItem('mh_admin_token', data.token);
+            if (loadingEl) loadingEl.style.display = 'none';
             handleAuthSuccess(data.user, true);
         } else {
+            cancelAuthLoading();
             showAuthGate(data.error || 'Akses ditolak: Akun Google Anda tidak terdaftar sebagai administrator.');
         }
     } catch (err) {
+        cancelAuthLoading();
         showAuthGate('Terjadi kesalahan saat memproses autentikasi: ' + err.message);
     }
 }
@@ -6097,18 +6336,116 @@ async function logoutAdmin() {
     showToast('Anda telah keluar dari sesi admin.');
 }
 
-/* ── Manage Admins Modal Logic ── */
+/* ── Manage Admins & Security Modal Logic ── */
 function openAdminModal() {
     var overlay = document.getElementById('manage-admins-overlay');
     if (overlay) overlay.classList.add('show');
-    var feedback = document.getElementById('admin-add-feedback');
-    if (feedback) feedback.style.display = 'none';
-    loadAdminList();
+    switchSecurityTab('admins');
 }
 
 function closeAdminModal() {
     var overlay = document.getElementById('manage-admins-overlay');
     if (overlay) overlay.classList.remove('show');
+}
+
+function switchSecurityTab(tab) {
+    var isAdmins = tab === 'admins';
+    var tabAdmins = document.getElementById('sec-tab-btn-admins');
+    var tabPass = document.getElementById('sec-tab-btn-password');
+    var panelAdmins = document.getElementById('sec-panel-admins');
+    var panelPass = document.getElementById('sec-panel-password');
+
+    if (tabAdmins) tabAdmins.classList.toggle('active', isAdmins);
+    if (tabPass) tabPass.classList.toggle('active', !isAdmins);
+
+    if (panelAdmins) panelAdmins.style.display = isAdmins ? 'flex' : 'none';
+    if (panelPass) panelPass.style.display = isAdmins ? 'none' : 'flex';
+
+    var passFeedback = document.getElementById('password-change-feedback');
+    if (passFeedback) passFeedback.style.display = 'none';
+
+    var adminFeedback = document.getElementById('admin-add-feedback');
+    if (adminFeedback) adminFeedback.style.display = 'none';
+
+    if (isAdmins) {
+        loadAdminList();
+    } else {
+        var inpCurr = document.getElementById('input-curr-pass');
+        if (inpCurr) inpCurr.focus();
+    }
+}
+
+async function handleChangePassword(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    var currPass = document.getElementById('input-curr-pass');
+    var newPass = document.getElementById('input-new-pass');
+    var confPass = document.getElementById('input-conf-pass');
+    var btn = document.getElementById('btn-submit-change-pass');
+
+    var currentPassword = currPass ? currPass.value.trim() : '';
+    var newPassword = newPass ? newPass.value.trim() : '';
+    var confirmPassword = confPass ? confPass.value.trim() : '';
+
+    if (!currentPassword) {
+        showPassFeedback('Harap masukkan password saat ini.', false);
+        return;
+    }
+    if (!newPassword || newPassword.length < 6) {
+        showPassFeedback('Password baru minimal harus 6 karakter.', false);
+        return;
+    }
+    if (newPassword !== confirmPassword) {
+        showPassFeedback('Password baru dan konfirmasi tidak sama.', false);
+        return;
+    }
+
+    if (btn) btn.disabled = true;
+
+    try {
+        var token = localStorage.getItem('mh_admin_token') || '';
+        var res = await fetch('/api/auth/change-password', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token ? ('Bearer ' + token) : ''
+            },
+            body: JSON.stringify({
+                currentPassword: currentPassword,
+                newPassword: newPassword
+            })
+        });
+        var data = await res.json();
+
+        if (res.ok && data.success) {
+            showPassFeedback(data.message || 'Password admin berhasil diubah!', true);
+            if (currPass) currPass.value = '';
+            if (newPass) newPass.value = '';
+            if (confPass) confPass.value = '';
+            showToast('Password admin berhasil diperbarui');
+        } else {
+            showPassFeedback(data.error || 'Gagal mengubah password.', false);
+        }
+    } catch(err) {
+        showPassFeedback('Terjadi kesalahan: ' + err.message, false);
+    } finally {
+        if (btn) btn.disabled = false;
+    }
+}
+
+function showPassFeedback(msg, isSuccess) {
+    var feedback = document.getElementById('password-change-feedback');
+    if (!feedback) return;
+    feedback.style.display = 'block';
+    if (isSuccess) {
+        feedback.style.background = '#E6F4EA';
+        feedback.style.color = '#137333';
+        feedback.style.border = '1px solid #A8DAB5';
+    } else {
+        feedback.style.background = '#FCE8E6';
+        feedback.style.color = '#C5221F';
+        feedback.style.border = '1px solid #F5C6CB';
+    }
+    feedback.textContent = msg;
 }
 
 async function loadAdminList() {
@@ -6368,68 +6705,143 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     </div>
 
-    <!-- Manage Admins Modal -->
+    <!-- Manage Admins & Security Modal -->
     <div class="modal-overlay" id="manage-admins-overlay" onclick="if(event.target===this)closeAdminModal()">
         <div class="modal" style="max-width: 680px; width: 100%; max-height: 90vh; display: flex; flex-direction: column; padding: 0; border-radius: var(--r-lg); overflow: hidden;">
             <div class="modal-head" style="padding: 20px 24px; border-bottom: 1.5px solid var(--line-soft); display: flex; align-items: center; justify-content: space-between; background: var(--surface);">
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <div style="width:36px; height:36px; border-radius:var(--r-sm); background:var(--g-blue-soft); color:var(--g-blue); display:flex; align-items:center; justify-content:center;">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <div style="width:38px; height:38px; border-radius:var(--r-sm); background:var(--g-blue-soft); color:var(--g-blue); display:flex; align-items:center; justify-content:center;">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><circle cx="12" cy="11" r="3"/></svg>
                     </div>
                     <div>
-                        <div class="modal-title" style="font-size:1.15rem; font-weight:800; color:var(--ink);">Manage Authorized Admins</div>
-                        <div style="font-size:0.75rem; color:var(--ink-4); font-weight:500;">Authorize or revoke Google accounts allowed to access this dashboard</div>
+                        <div class="modal-title" style="font-size:1.15rem; font-weight:800; color:var(--ink);">Security &amp; Access Console</div>
+                        <div style="font-size:0.75rem; color:var(--ink-4); font-weight:500;">Kelola akun Gmail yang diizinkan &amp; ubah password akses administrator</div>
                     </div>
                 </div>
                 <button class="modal-close" onclick="closeAdminModal()">✕</button>
             </div>
 
-            <div class="modal-body" style="padding: 24px; overflow-y: auto; flex: 1; display:flex; flex-direction:column; gap:20px;">
-                <!-- Add New Admin Form -->
-                <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:var(--r-md); padding:18px;">
-                    <div style="font-size:0.82rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3); margin-bottom:12px; display:flex; align-items:center; gap:6px;">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-                        Authorize New Google Account
-                    </div>
-                    <form id="form-add-admin" onsubmit="handleAddAdmin(event)" style="display:flex; flex-direction:column; gap:12px;">
-                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                            <div>
-                                <label class="field-label" style="font-size:0.72rem; margin-bottom:4px; display:block;">Google Email *</label>
-                                <input type="email" id="new-admin-email" class="field-input" placeholder="colleague@gmail.com" required style="font-size:0.85rem;">
-                            </div>
-                            <div>
-                                <label class="field-label" style="font-size:0.72rem; margin-bottom:4px; display:block;">Display Name (Optional)</label>
-                                <input type="text" id="new-admin-name" class="field-input" placeholder="e.g. John Doe" style="font-size:0.85rem;">
-                            </div>
+            <!-- Modal Sub-Navigation Tabs -->
+            <div class="security-modal-tabs">
+                <button type="button" class="security-tab-btn active" id="sec-tab-btn-admins" onclick="switchSecurityTab('admins')">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+                    <span>Akun Gmail Terotorisasi</span>
+                </button>
+                <button type="button" class="security-tab-btn" id="sec-tab-btn-password" onclick="switchSecurityTab('password')">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    <span>Ubah Password Admin</span>
+                </button>
+            </div>
+
+            <div class="modal-body" style="padding: 24px; overflow-y: auto; flex: 1;">
+                
+                <!-- PANEL 1: GMAIL WHITELIST -->
+                <div id="sec-panel-admins" style="display:flex; flex-direction:column; gap:20px;">
+                    <!-- Add New Admin Form -->
+                    <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:var(--r-md); padding:18px;">
+                        <div style="font-size:0.82rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3); margin-bottom:12px; display:flex; align-items:center; gap:6px;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                            Otorisasi Akun Google Baru
                         </div>
-                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-                            <span style="font-size:0.73rem; color:var(--ink-4);">Only authorized emails can sign in via Google OAuth.</span>
-                            <button type="submit" class="btn btn-primary" id="btn-submit-add-admin" style="padding:8px 18px; font-size:0.82rem;">
-                                + Authorize Account
+                        <form id="form-add-admin" onsubmit="handleAddAdmin(event)" style="display:flex; flex-direction:column; gap:12px;">
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                                <div>
+                                    <label class="field-label" style="font-size:0.72rem; margin-bottom:4px; display:block;">Email Google (Gmail) *</label>
+                                    <input type="email" id="new-admin-email" class="field-input" placeholder="contoh@gmail.com" required style="font-size:0.85rem;">
+                                </div>
+                                <div>
+                                    <label class="field-label" style="font-size:0.72rem; margin-bottom:4px; display:block;">Nama Pengguna (Opsional)</label>
+                                    <input type="text" id="new-admin-name" class="field-input" placeholder="contoh: Nama Rekan" style="font-size:0.85rem;">
+                                </div>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                                <span style="font-size:0.73rem; color:var(--ink-4);">Hanya email yang ada di daftar ini yang dapat login via Google OAuth.</span>
+                                <button type="submit" class="btn btn-primary" id="btn-submit-add-admin" style="padding:8px 18px; font-size:0.82rem;">
+                                    + Tambah Otorisasi
+                                </button>
+                            </div>
+                        </form>
+                        <div id="admin-add-feedback" style="display:none; margin-top:12px; font-size:0.82rem; font-weight:600; padding:10px 14px; border-radius:var(--r-sm);"></div>
+                    </div>
+
+                    <!-- Whitelist Table / List -->
+                    <div>
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                            <div style="font-size:0.82rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3);">
+                                Daftar Akun Google Terotorisasi (<span id="admins-count">0</span>)
+                            </div>
+                            <button type="button" class="btn btn-ghost" onclick="loadAdminList()" style="padding:4px 10px; font-size:0.75rem; height:28px;">
+                                ↻ Refresh List
                             </button>
                         </div>
-                    </form>
-                    <div id="admin-add-feedback" style="display:none; margin-top:12px; font-size:0.82rem; font-weight:600; padding:10px 14px; border-radius:var(--r-sm);"></div>
+                        <div id="admins-list-container" style="display:flex; flex-direction:column; gap:10px;">
+                            <!-- Rendered dynamically -->
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Whitelist Table / List -->
-                <div>
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                        <div style="font-size:0.82rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3);">
-                            Authorized Google Accounts (<span id="admins-count">0</span>)
+                <!-- PANEL 2: UPDATE PASSWORD -->
+                <div id="sec-panel-password" style="display:none; flex-direction:column; gap:18px;">
+                    <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:var(--r-md); padding:20px;">
+                        <div style="font-size:0.85rem; font-weight:800; color:var(--ink); margin-bottom:4px; display:flex; align-items:center; gap:8px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                            Perbarui Password Akses Administrator
                         </div>
-                        <button type="button" class="btn btn-ghost" onclick="loadAdminList()" style="padding:4px 10px; font-size:0.75rem; height:28px;">
-                            ↻ Refresh List
-                        </button>
-                    </div>
-                    <div id="admins-list-container" style="display:flex; flex-direction:column; gap:10px;">
-                        <!-- Rendered dynamically -->
+                        <p style="font-size:0.76rem; color:var(--ink-4); margin-bottom:18px; line-height:1.45;">
+                            Password ini digunakan untuk akses langsung ke Dashboard tanpa memerlukan akun Google. Simpan password dengan aman.
+                        </p>
+                        
+                        <form id="form-change-password" onsubmit="handleChangePassword(event)" style="display:flex; flex-direction:column; gap:14px;">
+                            <div>
+                                <label class="field-label" style="font-size:0.74rem; font-weight:700; margin-bottom:5px; display:block;">Password Saat Ini *</label>
+                                <div class="auth-password-wrapper" style="max-width:440px;">
+                                    <input type="password" id="input-curr-pass" class="auth-text-input" placeholder="Masukkan password saat ini..." required style="background:var(--surface);">
+                                    <button type="button" class="btn-toggle-eye" onclick="togglePasswordVisibility('input-curr-pass', this)" title="Lihat Password">
+                                        <svg class="eye-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                        <svg class="eye-closed" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:600px;">
+                                <div>
+                                    <label class="field-label" style="font-size:0.74rem; font-weight:700; margin-bottom:5px; display:block;">Password Baru *</label>
+                                    <div class="auth-password-wrapper">
+                                        <input type="password" id="input-new-pass" class="auth-text-input" placeholder="Minimal 6 karakter..." required minlength="6" style="background:var(--surface);">
+                                        <button type="button" class="btn-toggle-eye" onclick="togglePasswordVisibility('input-new-pass', this)" title="Lihat Password">
+                                            <svg class="eye-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                            <svg class="eye-closed" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="field-label" style="font-size:0.74rem; font-weight:700; margin-bottom:5px; display:block;">Konfirmasi Password Baru *</label>
+                                    <div class="auth-password-wrapper">
+                                        <input type="password" id="input-conf-pass" class="auth-text-input" placeholder="Ulangi password baru..." required minlength="6" style="background:var(--surface);">
+                                        <button type="button" class="btn-toggle-eye" onclick="togglePasswordVisibility('input-conf-pass', this)" title="Lihat Password">
+                                            <svg class="eye-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                            <svg class="eye-closed" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; flex-wrap:wrap; gap:8px;">
+                                <span style="font-size:0.74rem; color:var(--ink-4);">Perubahan akan segera berlaku untuk sesi berikutnya.</span>
+                                <button type="submit" id="btn-submit-change-pass" class="btn btn-primary" style="padding:10px 22px; font-size:0.85rem; font-weight:700;">
+                                    Simpan Password Baru
+                                </button>
+                            </div>
+                        </form>
+
+                        <div id="password-change-feedback" style="display:none; margin-top:14px; font-size:0.84rem; font-weight:600; padding:12px 16px; border-radius:var(--r-sm);"></div>
                     </div>
                 </div>
+
             </div>
 
             <div class="modal-foot" style="padding: 14px 24px; border-top: 1.5px solid var(--line-soft); display: flex; justify-content: flex-end; background: var(--surface);">
-                <button class="btn btn-ghost" onclick="closeAdminModal()">Close</button>
+                <button class="btn btn-ghost" onclick="closeAdminModal()">Tutup</button>
             </div>
         </div>
     </div>
