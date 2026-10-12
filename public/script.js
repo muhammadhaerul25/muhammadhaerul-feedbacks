@@ -108,6 +108,40 @@
   }
   initScrollReveal();
 
+  /* ============ DYNAMIC YEARS OF EXPERIENCE (AUTO-INCREASING) ============ */
+  function getDynamicYearsOfExperience() {
+    // First ever job began in 2023 (Feb 2023 at Kemdikbudristek, then Aug 2023 at XL Axiata).
+    // Career progression calculates auto-increasing years (2023 -> 1, 2024 -> 2, 2025 -> 3, 2026 -> 4, etc.)
+    const startYear = 2023;
+    const currentYear = new Date().getFullYear();
+    const expYears = Math.max(4, currentYear - startYear + 1);
+    return expYears;
+  }
+
+  function applyDynamicExperienceYears() {
+    const years = getDynamicYearsOfExperience();
+
+    // 1. Hero stat counter card
+    const heroStatYears = document.getElementById('stat-count-years');
+    if (heroStatYears) {
+      heroStatYears.setAttribute('data-target', String(years));
+      heroStatYears.textContent = `${years}+ Yrs`;
+    }
+
+    // 2. About section facts sidebar
+    const aboutExpVal = document.getElementById('about-exp-val');
+    if (aboutExpVal) {
+      aboutExpVal.textContent = `${years}+ years in AI & Data Science`;
+    }
+
+    // 3. About section lead heading
+    const aboutExpHeading = document.getElementById('about-exp-heading');
+    if (aboutExpHeading) {
+      aboutExpHeading.textContent = `${years} Years`;
+    }
+  }
+  applyDynamicExperienceYears();
+
   /* ============ STAT COUNTERS ANIMATION ============ */
   function initStatCounters() {
     const counterEls = document.querySelectorAll('.hero-stat-val[data-target]');
