@@ -2092,21 +2092,25 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><circle cx="12" cy="11" r="3"/></svg>
                     Akses &amp; Keamanan
                 </li>
-                <li class="nav-item nav-item-disabled">
+                <li class="nav-item" id="nav-experiences" onclick="switchView('experiences',this)">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-                    Work Experiences <span class="badge-soon">Soon</span>
+                    Work Experiences
                 </li>
-                <li class="nav-item nav-item-disabled">
+                <li class="nav-item" id="nav-education" onclick="switchView('education',this)">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-                    Education <span class="badge-soon">Soon</span>
+                    Education
                 </li>
-                <li class="nav-item nav-item-disabled">
+                <li class="nav-item" id="nav-certifications" onclick="switchView('certifications',this)">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
-                    Licences & Certifications <span class="badge-soon">Soon</span>
+                    Licences &amp; Certifications
                 </li>
-                <li class="nav-item nav-item-disabled">
+                <li class="nav-item" id="nav-awards" onclick="switchView('awards',this)">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                    Honors & Awards <span class="badge-soon">Soon</span>
+                    Honors &amp; Awards
+                </li>
+                <li class="nav-item" id="nav-inbox" onclick="switchView('inbox',this)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    Inquiries <span id="inbox-badge-count" style="display:none; margin-left:auto; background:var(--g-red); color:#fff; font-size:0.7rem; font-weight:800; padding:2px 7px; border-radius:10px;">0</span>
                 </li>
                 <li class="nav-item nav-item-disabled">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
@@ -2220,15 +2224,25 @@
                         <div class="stat-value" id="sc-feedbacks">—</div>
                     </div>
 
-                    <div class="stat-card blue">
-                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"></path></svg></div>
-                        <div class="stat-label">Total Certifications</div>
-                        <div class="stat-value" id="sc-certs">0</div>
+                    <div class="stat-card blue" onclick="switchView('experiences', document.getElementById('nav-experiences'))" style="cursor:pointer;" title="View Work Experiences">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></div>
+                        <div class="stat-label">Work Experiences</div>
+                        <div class="stat-value" id="sc-experiences">—</div>
                     </div>
-                    <div class="stat-card yellow">
+                    <div class="stat-card blue" onclick="switchView('certifications', document.getElementById('nav-certifications'))" style="cursor:pointer;" title="View Certifications">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"></path></svg></div>
+                        <div class="stat-label">Certifications</div>
+                        <div class="stat-value" id="sc-certs">—</div>
+                    </div>
+                    <div class="stat-card yellow" onclick="switchView('awards', document.getElementById('nav-awards'))" style="cursor:pointer;" title="View Awards">
                         <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></div>
-                        <div class="stat-label">Total Awards</div>
-                        <div class="stat-value" id="sc-awards">0</div>
+                        <div class="stat-label">Honors &amp; Awards</div>
+                        <div class="stat-value" id="sc-awards">—</div>
+                    </div>
+                    <div class="stat-card red" onclick="switchView('inbox', document.getElementById('nav-inbox'))" style="cursor:pointer;" title="View Inquiries">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div>
+                        <div class="stat-label">Inquiries Received</div>
+                        <div class="stat-value" id="sc-inbox">—</div>
                     </div>
                     <div class="stat-card green">
                         <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
@@ -2468,6 +2482,174 @@
                         <div class="empty-title">No Forms Yet</div>
                         <div class="empty-desc">Create your first form to collect responses.</div>
                     </div>
+                </div>
+            </div>
+
+            <!-- ══ WORK EXPERIENCES CMS ══ -->
+            <div id="view-experiences" class="view">
+                <div class="talks-stats" id="exp-stats" style="margin-bottom: 24px;">
+                    <div class="stat-card blue">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></div>
+                        <div class="stat-label">Total Roles</div>
+                        <div class="stat-value" id="exp-stat-total">0</div>
+                    </div>
+                    <div class="stat-card green">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+                        <div class="stat-label">Active / Present Roles</div>
+                        <div class="stat-value" id="exp-stat-active">0</div>
+                    </div>
+                </div>
+
+                <div class="toolbar" style="margin-bottom: 24px;">
+                    <div class="search-wrap">
+                        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input type="text" id="exp-q" placeholder="Search experiences by role, company, stack, or location..." oninput="renderExperiencesGrid()">
+                    </div>
+                    <button class="btn btn-primary" onclick="openExperienceDrawer(null)" style="flex-shrink:0;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        Add Experience
+                    </button>
+                </div>
+
+                <div class="talks-list" id="exp-grid"></div>
+                <div class="empty-state" id="exp-empty" style="display:none">
+                    <div class="empty-icon"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--g-blue);"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></div>
+                    <div class="empty-title">No Experiences Added Yet</div>
+                    <div class="empty-desc">Click "Add Experience" to add your work history.</div>
+                </div>
+            </div>
+
+            <!-- ══ EDUCATION CMS ══ -->
+            <div id="view-education" class="view">
+                <div class="talks-stats" id="edu-stats" style="margin-bottom: 24px;">
+                    <div class="stat-card blue">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div>
+                        <div class="stat-label">Degrees / Institutions</div>
+                        <div class="stat-value" id="edu-stat-total">0</div>
+                    </div>
+                    <div class="stat-card green">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></div>
+                        <div class="stat-label">Top CGPA</div>
+                        <div class="stat-value" id="edu-stat-grade">3.97</div>
+                    </div>
+                </div>
+
+                <div class="toolbar" style="margin-bottom: 24px;">
+                    <div class="search-wrap">
+                        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input type="text" id="edu-q" placeholder="Search education by degree, institution, or specialization..." oninput="renderEducationsGrid()">
+                    </div>
+                    <button class="btn btn-primary" onclick="openEducationDrawer(null)" style="flex-shrink:0;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        Add Education
+                    </button>
+                </div>
+
+                <div class="talks-list" id="edu-grid"></div>
+                <div class="empty-state" id="edu-empty" style="display:none">
+                    <div class="empty-icon"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--g-blue);"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div>
+                    <div class="empty-title">No Education Added</div>
+                    <div class="empty-desc">Click "Add Education" to add your academic degrees.</div>
+                </div>
+            </div>
+
+            <!-- ══ CERTIFICATIONS CMS ══ -->
+            <div id="view-certifications" class="view">
+                <div class="talks-stats" id="cert-stats" style="margin-bottom: 24px;">
+                    <div class="stat-card blue">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg></div>
+                        <div class="stat-label">Total Certifications</div>
+                        <div class="stat-value" id="cert-stat-total">0</div>
+                    </div>
+                </div>
+
+                <div class="toolbar" style="margin-bottom: 24px;">
+                    <div class="search-wrap">
+                        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input type="text" id="cert-q" placeholder="Search certifications by title, issuer, or skills..." oninput="renderCertificationsGrid()">
+                    </div>
+                    <select id="cert-cat-filter" class="filter-select" onchange="renderCertificationsGrid()">
+                        <option value="">All Categories</option>
+                    </select>
+                    <button class="btn btn-primary" onclick="openCertificationDrawer(null)" style="flex-shrink:0;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        Add Certification
+                    </button>
+                </div>
+
+                <div class="talks-list" id="cert-grid-dash"></div>
+                <div class="empty-state" id="cert-empty" style="display:none">
+                    <div class="empty-icon"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--g-blue);"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg></div>
+                    <div class="empty-title">No Certifications Yet</div>
+                    <div class="empty-desc">Click "Add Certification" to add your licensed credentials.</div>
+                </div>
+            </div>
+
+            <!-- ══ AWARDS CMS ══ -->
+            <div id="view-awards" class="view">
+                <div class="talks-stats" id="award-stats" style="margin-bottom: 24px;">
+                    <div class="stat-card yellow">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></div>
+                        <div class="stat-label">Total Honors &amp; Awards</div>
+                        <div class="stat-value" id="award-stat-total">0</div>
+                    </div>
+                </div>
+
+                <div class="toolbar" style="margin-bottom: 24px;">
+                    <div class="search-wrap">
+                        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input type="text" id="award-q" placeholder="Search awards by title, issuer, or recognition..." oninput="renderAwardsGrid()">
+                    </div>
+                    <button class="btn btn-primary" onclick="openAwardDrawer(null)" style="flex-shrink:0;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        Add Award
+                    </button>
+                </div>
+
+                <div class="talks-list" id="award-grid-dash"></div>
+                <div class="empty-state" id="award-empty" style="display:none">
+                    <div class="empty-icon"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--g-yellow);"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></div>
+                    <div class="empty-title">No Awards Added</div>
+                    <div class="empty-desc">Click "Add Award" to record your honors and recognitions.</div>
+                </div>
+            </div>
+
+            <!-- ══ INQUIRIES / CONTACT INBOX ══ -->
+            <div id="view-inbox" class="view">
+                <div class="talks-stats" id="inbox-stats" style="margin-bottom: 24px;">
+                    <div class="stat-card blue">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div>
+                        <div class="stat-label">Total Inquiries</div>
+                        <div class="stat-value" id="inbox-stat-total">0</div>
+                    </div>
+                    <div class="stat-card red">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></div>
+                        <div class="stat-label">Unread Messages</div>
+                        <div class="stat-value" id="inbox-stat-unread">0</div>
+                    </div>
+                </div>
+
+                <div class="toolbar" style="margin-bottom: 24px;">
+                    <div class="search-wrap">
+                        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input type="text" id="inbox-q" placeholder="Search inquiries by sender name, email, or message content..." oninput="renderInboxList()">
+                    </div>
+                    <select id="inbox-status-filter" class="filter-select" onchange="renderInboxList()">
+                        <option value="all">All Inquiries</option>
+                        <option value="unread">Unread Only</option>
+                        <option value="read">Read Only</option>
+                    </select>
+                    <button class="btn btn-secondary" onclick="loadInbox()" style="flex-shrink:0;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                        Refresh Inbox
+                    </button>
+                </div>
+
+                <div class="inbox-container" id="inbox-list" style="display: flex; flex-direction: column; gap: 12px;"></div>
+                <div class="empty-state" id="inbox-empty" style="display:none">
+                    <div class="empty-icon"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--g-blue);"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div>
+                    <div class="empty-title">Inbox is Empty</div>
+                    <div class="empty-desc">Inquiries sent from the portfolio contact form will arrive here in real-time.</div>
                 </div>
             </div>
 
@@ -2867,6 +3049,276 @@
     </div>
 </div>
 
+<!-- ════ WORK EXPERIENCE DRAWER ════ -->
+<div class="drawer-backdrop" id="exp-backdrop" onclick="closeExperienceDrawer()"></div>
+<div class="drawer" id="exp-drawer">
+    <div class="drawer-head">
+        <div>
+            <div class="drawer-title" id="exp-drawer-title">Add Work Experience</div>
+            <div class="drawer-subtitle">Career history synced to portfolio timeline</div>
+        </div>
+        <button class="modal-close" onclick="closeExperienceDrawer()">✕</button>
+    </div>
+    <div class="drawer-body">
+        <input type="hidden" id="exp-id">
+        <div class="field-group">
+            <label class="field-label">Role Title *</label>
+            <input class="field-input" id="exp-role" placeholder="e.g. AI Trainer, Co-Founder (AI & Product Lead)">
+        </div>
+        <div class="field-group">
+            <label class="field-label">Company / Organization *</label>
+            <input class="field-input" id="exp-company" placeholder="e.g. AksaraHub Nusantara, RevoU, Samsung R&D">
+        </div>
+        <div class="field-group">
+            <label class="field-label">Location / Work Type</label>
+            <input class="field-input" id="exp-location" placeholder="e.g. Hybrid, Remote, Jakarta, ID">
+        </div>
+        <div class="fields-2col">
+            <div class="field-group">
+                <label class="field-label">Start Date *</label>
+                <input class="field-input" id="exp-start" placeholder="e.g. Jan 2026, Jul 2024">
+            </div>
+            <div class="field-group">
+                <label class="field-label">End Date</label>
+                <input class="field-input" id="exp-end" placeholder="e.g. Present, Dec 2025">
+            </div>
+        </div>
+        <div class="field-group" style="flex-direction:row; align-items:center; gap:8px;">
+            <input type="checkbox" id="exp-current" style="width:16px;height:16px;cursor:pointer;">
+            <label for="exp-current" style="font-size:0.85rem; font-weight:600; cursor:pointer;">Currently working in this role</label>
+        </div>
+        <div class="field-group">
+            <label class="field-label">Accent Color</label>
+            <select class="field-select" id="exp-color">
+                <option value="var(--blue)">Google Blue</option>
+                <option value="var(--red)">Coral Red</option>
+                <option value="var(--green)">Emerald Green</option>
+                <option value="var(--yellow)">Amber Gold</option>
+                <option value="var(--purple)">Indigo Purple</option>
+            </select>
+        </div>
+        <div class="field-group">
+            <label class="field-label">Tech Stack (comma-separated)</label>
+            <input class="field-input" id="exp-stack" placeholder="e.g. PyTorch, Computer Vision, OCR, FastAPI">
+        </div>
+        <div class="field-group">
+            <label class="field-label">Sort Order (lower = first)</label>
+            <input class="field-input" id="exp-sort" type="number" value="0">
+        </div>
+        <div class="field-group">
+            <label class="field-label">Role Description &amp; Achievements</label>
+            <textarea class="field-input" id="exp-desc" rows="4" style="resize:vertical;" placeholder="Key responsibilities and tangible impact..."></textarea>
+        </div>
+    </div>
+    <div class="drawer-foot">
+        <button class="btn-sm-ghost" onclick="closeExperienceDrawer()">Cancel</button>
+        <button class="btn btn-primary" id="exp-save-btn" onclick="saveExperience()">Save Experience</button>
+    </div>
+</div>
+
+<!-- ════ EDUCATION DRAWER ════ -->
+<div class="drawer-backdrop" id="edu-backdrop" onclick="closeEducationDrawer()"></div>
+<div class="drawer" id="edu-drawer">
+    <div class="drawer-head">
+        <div>
+            <div class="drawer-title" id="edu-drawer-title">Add Education</div>
+            <div class="drawer-subtitle">Academic foundations synced to portfolio</div>
+        </div>
+        <button class="modal-close" onclick="closeEducationDrawer()">✕</button>
+    </div>
+    <div class="drawer-body">
+        <input type="hidden" id="edu-id">
+        <div class="field-group">
+            <label class="field-label">Degree Title *</label>
+            <input class="field-input" id="edu-degree" placeholder="e.g. Bachelor of Computer Science">
+        </div>
+        <div class="field-group">
+            <label class="field-label">Institution / University *</label>
+            <input class="field-input" id="edu-institution" placeholder="e.g. Hasanuddin University">
+        </div>
+        <div class="field-group">
+            <label class="field-label">Institution Logo URL</label>
+            <input class="field-input" id="edu-logo" placeholder="https://… or /assets/images/unhas-logo.png">
+        </div>
+        <div class="fields-2col">
+            <div class="field-group">
+                <label class="field-label">Start Date</label>
+                <input class="field-input" id="edu-start" placeholder="e.g. September 2020">
+            </div>
+            <div class="field-group">
+                <label class="field-label">End Date</label>
+                <input class="field-input" id="edu-end" placeholder="e.g. July 2024">
+            </div>
+        </div>
+        <div class="fields-2col">
+            <div class="field-group">
+                <label class="field-label">Grade / GPA</label>
+                <input class="field-input" id="edu-grade" placeholder="e.g. 3.97 / 4.00">
+            </div>
+            <div class="field-group">
+                <label class="field-label">Honors</label>
+                <input class="field-input" id="edu-honors" placeholder="e.g. Cumlaude">
+            </div>
+        </div>
+        <div class="field-group">
+            <label class="field-label">Specialization</label>
+            <input class="field-input" id="edu-spec" placeholder="e.g. Artificial Intelligence and Data Science">
+        </div>
+        <div class="field-group">
+            <label class="field-label">Thesis Title</label>
+            <textarea class="field-input" id="edu-thesis" rows="2" style="resize:vertical;" placeholder="Thesis title and description..."></textarea>
+        </div>
+        <div class="field-group">
+            <label class="field-label">Relevant Courseworks (comma-separated)</label>
+            <input class="field-input" id="edu-courseworks" placeholder="Data Mining, Machine Learning, Deep Learning, Computer Vision, NLP">
+        </div>
+        <div class="field-group">
+            <label class="field-label">Activities and Societies (one per line)</label>
+            <textarea class="field-input" id="edu-activities" rows="3" style="resize:vertical;" placeholder="GenBI Chapter Hasanuddin University 2022&#10;Unit of Scientific Knowledge and Reasoning"></textarea>
+        </div>
+        <div class="fields-2col">
+            <div class="field-group">
+                <label class="field-label">Awards Summary</label>
+                <input class="field-input" id="edu-awards-summary" placeholder="e.g. 3× Most Outstanding Student">
+            </div>
+            <div class="field-group">
+                <label class="field-label">Sort Order</label>
+                <input class="field-input" id="edu-sort" type="number" value="0">
+            </div>
+        </div>
+    </div>
+    <div class="drawer-foot">
+        <button class="btn-sm-ghost" onclick="closeEducationDrawer()">Cancel</button>
+        <button class="btn btn-primary" id="edu-save-btn" onclick="saveEducation()">Save Education</button>
+    </div>
+</div>
+
+<!-- ════ CERTIFICATION DRAWER ════ -->
+<div class="drawer-backdrop" id="cert-backdrop" onclick="closeCertificationDrawer()"></div>
+<div class="drawer" id="cert-drawer">
+    <div class="drawer-head">
+        <div>
+            <div class="drawer-title" id="cert-drawer-title">Add Certification</div>
+            <div class="drawer-subtitle">Credentials and licenses synced to portfolio</div>
+        </div>
+        <button class="modal-close" onclick="closeCertificationDrawer()">✕</button>
+    </div>
+    <div class="drawer-body">
+        <input type="hidden" id="cert-id">
+        <div class="field-group">
+            <label class="field-label">Certification Title *</label>
+            <input class="field-input" id="cert-title" placeholder="e.g. Machine Learning Specialization">
+        </div>
+        <div class="field-group">
+            <label class="field-label">Issuing Organization *</label>
+            <input class="field-input" id="cert-issuer" placeholder="e.g. DeepLearning.AI & Stanford, Google Cloud">
+        </div>
+        <div class="fields-2col">
+            <div class="field-group">
+                <label class="field-label">Issue Date</label>
+                <input class="field-input" id="cert-date" placeholder="e.g. March 2023, May 2024">
+            </div>
+            <div class="field-group">
+                <label class="field-label">Category</label>
+                <input class="field-input" id="cert-category" placeholder="e.g. Specialization, Professional MLOps">
+            </div>
+        </div>
+        <div class="field-group">
+            <label class="field-label">Skills &amp; Competencies (comma-separated)</label>
+            <input class="field-input" id="cert-skills" placeholder="e.g. Supervised Learning, Neural Networks, MLOps, Docker">
+        </div>
+        <div class="field-group">
+            <label class="field-label">Credential Verification URL</label>
+            <input class="field-input" id="cert-url" type="url" placeholder="https://coursera.org/verify/…">
+        </div>
+        <div class="fields-2col">
+            <div class="field-group">
+                <label class="field-label">Credential ID (Optional)</label>
+                <input class="field-input" id="cert-cred-id" placeholder="e.g. ABC123XYZ">
+            </div>
+            <div class="field-group">
+                <label class="field-label">Accent Color</label>
+                <select class="field-select" id="cert-color">
+                    <option value="var(--blue)">Google Blue</option>
+                    <option value="var(--red)">Coral Red</option>
+                    <option value="var(--green)">Emerald Green</option>
+                    <option value="var(--yellow)">Amber Gold</option>
+                    <option value="var(--purple)">Indigo Purple</option>
+                </select>
+            </div>
+        </div>
+        <div class="field-group">
+            <label class="field-label">Sort Order</label>
+            <input class="field-input" id="cert-sort" type="number" value="0">
+        </div>
+    </div>
+    <div class="drawer-foot">
+        <button class="btn-sm-ghost" onclick="closeCertificationDrawer()">Cancel</button>
+        <button class="btn btn-primary" id="cert-save-btn" onclick="saveCertification()">Save Certification</button>
+    </div>
+</div>
+
+<!-- ════ AWARD DRAWER ════ -->
+<div class="drawer-backdrop" id="award-backdrop" onclick="closeAwardDrawer()"></div>
+<div class="drawer" id="award-drawer">
+    <div class="drawer-head">
+        <div>
+            <div class="drawer-title" id="award-drawer-title">Add Honor &amp; Award</div>
+            <div class="drawer-subtitle">Accolades and recognitions synced to portfolio</div>
+        </div>
+        <button class="modal-close" onclick="closeAwardDrawer()">✕</button>
+    </div>
+    <div class="drawer-body">
+        <input type="hidden" id="award-id">
+        <div class="field-group">
+            <label class="field-label">Award Title *</label>
+            <input class="field-input" id="award-title" placeholder="e.g. Most Outstanding Student — Computer Science">
+        </div>
+        <div class="field-group">
+            <label class="field-label">Issuing Organization *</label>
+            <input class="field-input" id="award-issuer" placeholder="e.g. Hasanuddin University, Kemendikbud">
+        </div>
+        <div class="fields-2col">
+            <div class="field-group">
+                <label class="field-label">Metric / Subtitle Tag</label>
+                <input class="field-input" id="award-metric" placeholder="e.g. 3 Consecutive Years, National Rank #1">
+            </div>
+            <div class="field-group">
+                <label class="field-label">Badge Text</label>
+                <input class="field-input" id="award-badge" placeholder="e.g. 🏆 Outstanding Student, 🥇 1st Place">
+            </div>
+        </div>
+        <div class="fields-2col">
+            <div class="field-group">
+                <label class="field-label">Badge Theme Color</label>
+                <select class="field-select" id="award-color">
+                    <option value="blue">Blue</option>
+                    <option value="yellow">Yellow / Gold</option>
+                    <option value="green">Green</option>
+                    <option value="red">Red</option>
+                    <option value="purple">Purple</option>
+                </select>
+            </div>
+            <div class="field-group">
+                <label class="field-label">Sort Order</label>
+                <input class="field-input" id="award-sort" type="number" value="0">
+            </div>
+        </div>
+        <div class="field-group">
+            <label class="field-label">Chips / Highlights (comma-separated)</label>
+            <input class="field-input" id="award-chips" placeholder="Rank #1 Department, Univ. Selection, Academic Excellence">
+        </div>
+        <div class="field-group">
+            <label class="field-label">Award Description</label>
+            <textarea class="field-input" id="award-desc" rows="3" style="resize:vertical;" placeholder="Detailed background and selection criteria..."></textarea>
+        </div>
+    </div>
+    <div class="drawer-foot">
+        <button class="btn-sm-ghost" onclick="closeAwardDrawer()">Cancel</button>
+        <button class="btn btn-primary" id="award-save-btn" onclick="saveAward()">Save Award</button>
+    </div>
+</div>
+
 <script>
 // Attach Admin Session Bearer Token automatically
 var _origFetch = window.fetch;
@@ -2971,7 +3423,12 @@ var viewMeta = {
     feedbacks:     {title:'Feedback',      crumb:'Portfolio'},
     projects:      {title:'Projects',      crumb:'Management'},
     talks:         {title:'Talks',         crumb:'Management'},
-    forms:         {title:'Forms',         crumb:'Management'}
+    forms:         {title:'Forms',         crumb:'Management'},
+    experiences:   {title:'Work Experiences', crumb:'Portfolio CMS'},
+    education:     {title:'Education',        crumb:'Portfolio CMS'},
+    certifications:{title:'Certifications',   crumb:'Portfolio CMS'},
+    awards:        {title:'Honors & Awards',  crumb:'Portfolio CMS'},
+    inbox:         {title:'Contact Messages', crumb:'Inquiries'}
 };
 
 function toggleMobileSidebar() {
@@ -3007,7 +3464,7 @@ function switchView(view, el) {
     var m = viewMeta[view] || {title:view,crumb:'Portfolio'};
     document.getElementById('topbar-title').textContent = m.title;
     document.getElementById('topbar-crumb').textContent = m.crumb;
-    document.getElementById('btn-refresh').style.display = (view==='feedbacks') ? 'flex' : 'none';
+    document.getElementById('btn-refresh').style.display = (view==='feedbacks' || view==='inbox') ? 'flex' : 'none';
 
     // Instant render from memory cache if available, else fetch
     if (view === 'feedbacks') {
@@ -3033,6 +3490,32 @@ function switchView(view, el) {
             updateProjectsStats();
             renderProjectsGrid();
         }
+    } else if (view === 'experiences') {
+        if (!experiencesLoaded) loadExperiences();
+        else {
+            updateExperiencesStats();
+            renderExperiencesGrid();
+        }
+    } else if (view === 'education') {
+        if (!educationsLoaded) loadEducations();
+        else {
+            updateEducationsStats();
+            renderEducationsGrid();
+        }
+    } else if (view === 'certifications') {
+        if (!certificationsLoaded) loadCertifications();
+        else {
+            updateCertificationsStats();
+            renderCertificationsGrid();
+        }
+    } else if (view === 'awards') {
+        if (!awardsLoaded) loadAwards();
+        else {
+            updateAwardsStats();
+            renderAwardsGrid();
+        }
+    } else if (view === 'inbox') {
+        loadInbox();
     }
     localStorage.setItem('activeView', view);
 }
@@ -3044,6 +3527,11 @@ function refreshData() {
     else if (id==='projects') { projectsLoaded=false; loadProjects(); }
     else if (id==='forms') { formsLoaded=false; loadForms(true); }
     else if (id==='dashboard') { overviewLoaded=false; loadOverview(); }
+    else if (id==='experiences') { experiencesLoaded=false; loadExperiences(); }
+    else if (id==='education') { educationsLoaded=false; loadEducations(); }
+    else if (id==='certifications') { certificationsLoaded=false; loadCertifications(); }
+    else if (id==='awards') { awardsLoaded=false; loadAwards(); }
+    else if (id==='inbox') { loadInbox(); }
     
     var icon = document.getElementById('refresh-icon');
     if (icon) {
@@ -3110,10 +3598,35 @@ async function loadOverview() {
         animateCount(document.getElementById('sc-feedbacks'), feedbacks.length, '', false);
 
         // Roadmap stats
-        ['sc-certs', 'sc-awards', 'sc-pubs', 'sc-blogs'].forEach(function(id) {
+        ['sc-pubs', 'sc-blogs'].forEach(function(id) {
             var el = document.getElementById(id);
             if (el) el.innerHTML = '<span class="stat-pill-roadmap">Roadmap · Soon</span>';
         });
+
+        // Hydrate CMS stats on Overview
+        fetch('/api/experiences').then(r=>r.json()).then(function(d){
+            if (d && d.success) animateCount(document.getElementById('sc-experiences'), (d.data||[]).length, '', false);
+        }).catch(function(){});
+        fetch('/api/certifications').then(r=>r.json()).then(function(d){
+            if (d && d.success) animateCount(document.getElementById('sc-certs'), (d.data||[]).length, '', false);
+        }).catch(function(){});
+        fetch('/api/awards').then(r=>r.json()).then(function(d){
+            if (d && d.success) animateCount(document.getElementById('sc-awards'), (d.data||[]).length, '', false);
+        }).catch(function(){});
+        fetch('/api/contact').then(r=>r.json()).then(function(d){
+            if (d && d.success) {
+                animateCount(document.getElementById('sc-inbox'), d.count || 0, '', false);
+                var b = document.getElementById('inbox-badge-count');
+                if (b) {
+                    if (d.unreadCount > 0) {
+                        b.textContent = d.unreadCount;
+                        b.style.display = 'inline-block';
+                    } else {
+                        b.style.display = 'none';
+                    }
+                }
+            }
+        }).catch(function(){});
 
         // Recent Projects
         var recentProj = projects.slice(0, 3);
@@ -6963,6 +7476,841 @@ function handleLightboxKey(e) {
     if (e.key === 'Escape') closeLightbox();
     else if (e.key === 'ArrowLeft') stepLightbox(-1);
     else if (e.key === 'ArrowRight') stepLightbox(1);
+}
+
+/* ══════════════════════════════════════════════════════════
+   PORTFOLIO CMS TWO-WAY SYNC: EXPERIENCES CRUD
+   ══════════════════════════════════════════════════════════ */
+var experiencesData = [];
+var experiencesLoaded = false;
+var _expMap = {};
+
+async function loadExperiences() {
+    try {
+        var res = await fetch('/api/experiences');
+        var data = await res.json();
+        if (data.success) {
+            experiencesData = data.data || [];
+            experiencesLoaded = true;
+            _expMap = {};
+            experiencesData.forEach(function(e){ _expMap[e.id] = e; });
+            updateExperiencesStats();
+            renderExperiencesGrid();
+        }
+    } catch(err) {
+        console.error('Failed to load experiences:', err);
+    }
+}
+
+function updateExperiencesStats() {
+    var total = experiencesData.length;
+    var active = experiencesData.filter(function(e){ return e.is_current; }).length;
+    var totalEl = document.getElementById('exp-stat-total');
+    var actEl = document.getElementById('exp-stat-active');
+    if (totalEl) totalEl.textContent = total;
+    if (actEl) actEl.textContent = active;
+    var scEl = document.getElementById('sc-experiences');
+    if (scEl) scEl.textContent = total;
+}
+
+function renderExperiencesGrid() {
+    var grid = document.getElementById('exp-grid');
+    var empty = document.getElementById('exp-empty');
+    if (!grid) return;
+
+    var q = (document.getElementById('exp-q') ? document.getElementById('exp-q').value.toLowerCase().trim() : '');
+    var filtered = experiencesData.filter(function(e) {
+        if (!q) return true;
+        var hay = (e.role + ' ' + e.company + ' ' + (e.location||'') + ' ' + (e.stack||[]).join(' ')).toLowerCase();
+        return hay.includes(q);
+    });
+
+    if (!filtered.length) {
+        grid.style.display = 'none';
+        if (empty) empty.style.display = 'flex';
+        return;
+    }
+
+    grid.style.display = 'grid';
+    if (empty) empty.style.display = 'none';
+
+    grid.innerHTML = filtered.map(function(exp) {
+        var stackPills = (exp.stack || []).map(function(s) {
+            return '<span style="background:var(--sidebar-hover); color:var(--ink-2); font-size:0.72rem; font-weight:700; padding:4px 10px; border-radius:12px; border:1px solid var(--sidebar-border);">' + esc(s) + '</span>';
+        }).join('');
+
+        var dateRange = esc(exp.start_date || '') + (exp.end_date ? ' — ' + esc(exp.end_date) : (exp.is_current ? ' — <strong style="color:var(--g-green);">Present</strong>' : ''));
+
+        return '<div class="project-card" style="display:flex; flex-direction:column; gap:12px; padding:22px; border:1.5px solid var(--sidebar-border); border-radius:var(--r-md); background:var(--surface);">' +
+            '<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px;">' +
+                '<div style="flex:1;">' +
+                    '<div style="font-size:1.05rem; font-weight:800; color:var(--ink);">' + esc(exp.role) + '</div>' +
+                    '<div style="font-size:0.86rem; font-weight:700; color:var(--g-blue); margin-top:2px;">' + esc(exp.company) + (exp.location ? ' · <span style="color:var(--ink-3); font-weight:500;">' + esc(exp.location) + '</span>' : '') + '</div>' +
+                    '<div style="font-size:0.76rem; color:var(--ink-4); margin-top:4px;">' + dateRange + '</div>' +
+                '</div>' +
+                (exp.is_current ? '<span style="background:var(--g-green-soft); color:var(--g-green); font-size:0.72rem; font-weight:800; padding:3px 8px; border-radius:10px; border:1px solid rgba(52,168,83,0.3); flex-shrink:0;">ACTIVE</span>' : '') +
+            '</div>' +
+            (exp.description ? '<div style="font-size:0.84rem; color:var(--ink-2); line-height:1.55; margin-top:2px;">' + esc(exp.description) + '</div>' : '') +
+            (stackPills ? '<div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:10px;">' + stackPills + '</div>' : '') +
+            '<div style="display:flex; gap:8px; justify-content:flex-end; border-top:1px solid var(--line-soft); padding-top:12px; margin-top:auto;">' +
+                '<button class="btn-sm-ghost" onclick="openExperienceDrawerById(\'' + exp.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface);">Edit</button>' +
+                '<button class="btn-sm-ghost" onclick="deleteExperience(\'' + exp.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; color:var(--g-red); border-radius:var(--r-pill); border:1.5px solid rgba(234,67,53,0.2); background:var(--g-red-soft);">Delete</button>' +
+            '</div>' +
+        '</div>';
+    }).join('');
+}
+
+function openExperienceDrawerById(id) {
+    openExperienceDrawer(_expMap[id] || null);
+}
+
+function openExperienceDrawer(exp) {
+    document.getElementById('exp-id').value = exp ? exp.id : '';
+    document.getElementById('exp-drawer-title').textContent = exp ? 'Edit Work Experience' : 'Add Work Experience';
+    document.getElementById('exp-role').value = exp ? (exp.role || '') : '';
+    document.getElementById('exp-company').value = exp ? (exp.company || '') : '';
+    document.getElementById('exp-location').value = exp ? (exp.location || '') : '';
+    document.getElementById('exp-start').value = exp ? (exp.start_date || '') : '';
+    document.getElementById('exp-end').value = exp ? (exp.end_date || '') : '';
+    document.getElementById('exp-current').checked = exp ? !!exp.is_current : false;
+    document.getElementById('exp-color').value = exp ? (exp.accent_color || 'var(--blue)') : 'var(--blue)';
+    document.getElementById('exp-stack').value = exp && exp.stack ? exp.stack.join(', ') : '';
+    document.getElementById('exp-sort').value = exp ? (exp.sort_order || 0) : 0;
+    document.getElementById('exp-desc').value = exp ? (exp.description || '') : '';
+
+    document.getElementById('exp-backdrop').classList.add('open');
+    document.getElementById('exp-drawer').classList.add('open');
+}
+
+function closeExperienceDrawer() {
+    document.getElementById('exp-backdrop').classList.remove('open');
+    document.getElementById('exp-drawer').classList.remove('open');
+}
+
+async function saveExperience() {
+    var id = document.getElementById('exp-id').value;
+    var role = document.getElementById('exp-role').value.trim();
+    var company = document.getElementById('exp-company').value.trim();
+    var location = document.getElementById('exp-location').value.trim();
+    var start_date = document.getElementById('exp-start').value.trim();
+    var end_date = document.getElementById('exp-end').value.trim();
+    var is_current = document.getElementById('exp-current').checked;
+    var accent_color = document.getElementById('exp-color').value;
+    var stackStr = document.getElementById('exp-stack').value;
+    var stack = stackStr.split(',').map(function(s){ return s.trim(); }).filter(Boolean);
+    var sort_order = parseInt(document.getElementById('exp-sort').value, 10) || 0;
+    var description = document.getElementById('exp-desc').value.trim();
+
+    if (!role || !company || !start_date) {
+        showToast('Role, company, and start date are required');
+        return;
+    }
+
+    var payload = { role, company, location, start_date, end_date, is_current, accent_color, stack, sort_order, description };
+    var saveBtn = document.getElementById('exp-save-btn');
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving…';
+
+    try {
+        var url = id ? '/api/experiences/' + id : '/api/experiences';
+        var method = id ? 'PUT' : 'POST';
+        var res = await fetch(url, {
+            method: method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        var data = await res.json();
+        if (data.success) {
+            showToast(id ? 'Experience updated successfully!' : 'Experience added successfully!');
+            closeExperienceDrawer();
+            await loadExperiences();
+        } else {
+            showToast(data.error || 'Failed to save experience');
+        }
+    } catch(err) {
+        showToast('Network error while saving experience');
+    } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Save Experience';
+    }
+}
+
+async function deleteExperience(id) {
+    if (!confirm('Are you sure you want to delete this work experience?')) return;
+    try {
+        var res = await fetch('/api/experiences/' + id, { method: 'DELETE' });
+        var data = await res.json();
+        if (data.success) {
+            showToast('Experience deleted');
+            await loadExperiences();
+        } else {
+            showToast(data.error || 'Delete failed');
+        }
+    } catch(err) {
+        showToast('Error deleting experience');
+    }
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   PORTFOLIO CMS TWO-WAY SYNC: EDUCATION CRUD
+   ══════════════════════════════════════════════════════════ */
+var educationsData = [];
+var educationsLoaded = false;
+var _eduMap = {};
+
+async function loadEducations() {
+    try {
+        var res = await fetch('/api/educations');
+        var data = await res.json();
+        if (data.success) {
+            educationsData = data.data || [];
+            educationsLoaded = true;
+            _eduMap = {};
+            educationsData.forEach(function(e){ _eduMap[e.id] = e; });
+            updateEducationsStats();
+            renderEducationsGrid();
+        }
+    } catch(err) {
+        console.error('Failed to load educations:', err);
+    }
+}
+
+function updateEducationsStats() {
+    var total = educationsData.length;
+    var grade = educationsData.length ? (educationsData[0].grade || '3.97') : '3.97';
+    var totalEl = document.getElementById('edu-stat-total');
+    var gradeEl = document.getElementById('edu-stat-grade');
+    if (totalEl) totalEl.textContent = total;
+    if (gradeEl) gradeEl.textContent = grade;
+}
+
+function renderEducationsGrid() {
+    var grid = document.getElementById('edu-grid');
+    var empty = document.getElementById('edu-empty');
+    if (!grid) return;
+
+    var q = (document.getElementById('edu-q') ? document.getElementById('edu-q').value.toLowerCase().trim() : '');
+    var filtered = educationsData.filter(function(e) {
+        if (!q) return true;
+        var hay = (e.degree + ' ' + e.institution + ' ' + (e.specialization||'')).toLowerCase();
+        return hay.includes(q);
+    });
+
+    if (!filtered.length) {
+        grid.style.display = 'none';
+        if (empty) empty.style.display = 'flex';
+        return;
+    }
+
+    grid.style.display = 'grid';
+    if (empty) empty.style.display = 'none';
+
+    grid.innerHTML = filtered.map(function(edu) {
+        var cwPills = (edu.courseworks || []).map(function(c) {
+            return '<span style="background:#e8f0fe; color:#1a73e8; font-size:0.72rem; font-weight:700; padding:3px 8px; border-radius:12px;">' + esc(c) + '</span>';
+        }).join('');
+
+        var actList = (edu.activities || []).map(function(a) {
+            return '<li style="font-size:0.8rem; color:var(--ink-2); margin-bottom:4px;">• ' + esc(a) + '</li>';
+        }).join('');
+
+        var dateRange = esc(edu.start_date || '') + (edu.end_date ? ' — ' + esc(edu.end_date) : '');
+
+        return '<div class="project-card" style="display:flex; flex-direction:column; gap:14px; padding:24px; border:1.5px solid var(--sidebar-border); border-radius:var(--r-md); background:var(--surface);">' +
+            '<div style="display:flex; gap:16px; align-items:flex-start;">' +
+                (edu.logo_url ? '<img src="' + esc(edu.logo_url) + '" alt="Logo" style="width:50px; height:60px; object-fit:contain; flex-shrink:0;">' : '<div style="width:48px; height:48px; border-radius:var(--r-sm); background:var(--g-blue-soft); color:var(--g-blue); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.1rem;">🎓</div>') +
+                '<div style="flex:1;">' +
+                    '<div style="font-size:1.1rem; font-weight:800; color:var(--ink);">' + esc(edu.degree) + '</div>' +
+                    '<div style="font-size:0.92rem; font-weight:700; color:var(--g-blue); margin-top:2px;">' + esc(edu.institution) + '</div>' +
+                    '<div style="font-size:0.78rem; color:var(--ink-4); margin-top:4px;">' + dateRange + '</div>' +
+                '</div>' +
+                '<div style="text-align:right; flex-shrink:0;">' +
+                    (edu.grade ? '<div style="font-size:1.1rem; font-weight:800; color:var(--ink);">' + esc(edu.grade) + '</div>' : '') +
+                    (edu.honors ? '<div style="font-size:0.75rem; font-weight:700; color:var(--g-green);">' + esc(edu.honors) + '</div>' : '') +
+                '</div>' +
+            '</div>' +
+            (edu.specialization ? '<div style="font-size:0.84rem; color:var(--ink-2);"><strong>Specialization:</strong> ' + esc(edu.specialization) + '</div>' : '') +
+            (edu.thesis ? '<div style="font-size:0.82rem; color:var(--ink-2); background:var(--bg); padding:10px 14px; border-radius:var(--r-sm); border:1px solid var(--sidebar-border);"><strong>Thesis:</strong> ' + esc(edu.thesis) + '</div>' : '') +
+            (cwPills ? '<div><div style="font-size:0.75rem; font-weight:700; color:var(--ink-4); text-transform:uppercase; margin-bottom:6px;">Courseworks</div><div style="display:flex; flex-wrap:wrap; gap:6px;">' + cwPills + '</div></div>' : '') +
+            (actList ? '<div><div style="font-size:0.75rem; font-weight:700; color:var(--ink-4); text-transform:uppercase; margin-bottom:4px;">Activities</div><ul style="list-style:none; padding-left:0; margin:0;">' + actList + '</ul></div>' : '') +
+            '<div style="display:flex; gap:8px; justify-content:flex-end; border-top:1px solid var(--line-soft); padding-top:14px; margin-top:auto;">' +
+                '<button class="btn-sm-ghost" onclick="openEducationDrawerById(\'' + edu.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface);">Edit</button>' +
+                '<button class="btn-sm-ghost" onclick="deleteEducation(\'' + edu.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; color:var(--g-red); border-radius:var(--r-pill); border:1.5px solid rgba(234,67,53,0.2); background:var(--g-red-soft);">Delete</button>' +
+            '</div>' +
+        '</div>';
+    }).join('');
+}
+
+function openEducationDrawerById(id) {
+    openEducationDrawer(_eduMap[id] || null);
+}
+
+function openEducationDrawer(edu) {
+    document.getElementById('edu-id').value = edu ? edu.id : '';
+    document.getElementById('edu-drawer-title').textContent = edu ? 'Edit Education' : 'Add Education';
+    document.getElementById('edu-degree').value = edu ? (edu.degree || '') : '';
+    document.getElementById('edu-institution').value = edu ? (edu.institution || '') : '';
+    document.getElementById('edu-logo').value = edu ? (edu.logo_url || '') : '';
+    document.getElementById('edu-start').value = edu ? (edu.start_date || '') : '';
+    document.getElementById('edu-end').value = edu ? (edu.end_date || '') : '';
+    document.getElementById('edu-grade').value = edu ? (edu.grade || '') : '';
+    document.getElementById('edu-honors').value = edu ? (edu.honors || '') : '';
+    document.getElementById('edu-spec').value = edu ? (edu.specialization || '') : '';
+    document.getElementById('edu-thesis').value = edu ? (edu.thesis || '') : '';
+    document.getElementById('edu-courseworks').value = edu && edu.courseworks ? edu.courseworks.join(', ') : '';
+    document.getElementById('edu-activities').value = edu && edu.activities ? edu.activities.join('\n') : '';
+    document.getElementById('edu-awards-summary').value = edu ? (edu.awards_summary || '') : '';
+    document.getElementById('edu-sort').value = edu ? (edu.sort_order || 0) : 0;
+
+    document.getElementById('edu-backdrop').classList.add('open');
+    document.getElementById('edu-drawer').classList.add('open');
+}
+
+function closeEducationDrawer() {
+    document.getElementById('edu-backdrop').classList.remove('open');
+    document.getElementById('edu-drawer').classList.remove('open');
+}
+
+async function saveEducation() {
+    var id = document.getElementById('edu-id').value;
+    var degree = document.getElementById('edu-degree').value.trim();
+    var institution = document.getElementById('edu-institution').value.trim();
+    var logo_url = document.getElementById('edu-logo').value.trim();
+    var start_date = document.getElementById('edu-start').value.trim();
+    var end_date = document.getElementById('edu-end').value.trim();
+    var grade = document.getElementById('edu-grade').value.trim();
+    var honors = document.getElementById('edu-honors').value.trim();
+    var specialization = document.getElementById('edu-spec').value.trim();
+    var thesis = document.getElementById('edu-thesis').value.trim();
+    var courseworks = document.getElementById('edu-courseworks').value.split(',').map(function(s){ return s.trim(); }).filter(Boolean);
+    var activities = document.getElementById('edu-activities').value.split('\n').map(function(s){ return s.trim(); }).filter(Boolean);
+    var awards_summary = document.getElementById('edu-awards-summary').value.trim();
+    var sort_order = parseInt(document.getElementById('edu-sort').value, 10) || 0;
+
+    if (!degree || !institution) {
+        showToast('Degree and institution are required');
+        return;
+    }
+
+    var payload = { degree, institution, logo_url, start_date, end_date, grade, honors, specialization, thesis, courseworks, activities, awards_summary, sort_order };
+    var saveBtn = document.getElementById('edu-save-btn');
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving…';
+
+    try {
+        var url = id ? '/api/educations/' + id : '/api/educations';
+        var method = id ? 'PUT' : 'POST';
+        var res = await fetch(url, {
+            method: method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        var data = await res.json();
+        if (data.success) {
+            showToast(id ? 'Education updated successfully!' : 'Education added successfully!');
+            closeEducationDrawer();
+            await loadEducations();
+        } else {
+            showToast(data.error || 'Failed to save education');
+        }
+    } catch(err) {
+        showToast('Network error while saving education');
+    } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Save Education';
+    }
+}
+
+async function deleteEducation(id) {
+    if (!confirm('Are you sure you want to delete this education record?')) return;
+    try {
+        var res = await fetch('/api/educations/' + id, { method: 'DELETE' });
+        var data = await res.json();
+        if (data.success) {
+            showToast('Education record deleted');
+            await loadEducations();
+        } else {
+            showToast(data.error || 'Delete failed');
+        }
+    } catch(err) {
+        showToast('Error deleting education');
+    }
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   PORTFOLIO CMS TWO-WAY SYNC: CERTIFICATIONS CRUD
+   ══════════════════════════════════════════════════════════ */
+var certificationsData = [];
+var certificationsLoaded = false;
+var _certMap = {};
+
+async function loadCertifications() {
+    try {
+        var res = await fetch('/api/certifications');
+        var data = await res.json();
+        if (data.success) {
+            certificationsData = data.data || [];
+            certificationsLoaded = true;
+            _certMap = {};
+            certificationsData.forEach(function(c){ _certMap[c.id] = c; });
+            updateCertificationsStats();
+            populateCertCategoryFilter();
+            renderCertificationsGrid();
+        }
+    } catch(err) {
+        console.error('Failed to load certifications:', err);
+    }
+}
+
+function updateCertificationsStats() {
+    var total = certificationsData.length;
+    var totalEl = document.getElementById('cert-stat-total');
+    if (totalEl) totalEl.textContent = total;
+    var scEl = document.getElementById('sc-certs');
+    if (scEl) scEl.textContent = total;
+}
+
+function populateCertCategoryFilter() {
+    var sel = document.getElementById('cert-cat-filter');
+    if (!sel) return;
+    var current = sel.value;
+    var cats = Array.from(new Set(certificationsData.map(function(c){ return c.category; }).filter(Boolean)));
+    sel.innerHTML = '<option value="">All Categories</option>' + cats.map(function(cat) {
+        return '<option value="' + esc(cat) + '"' + (current === cat ? ' selected' : '') + '>' + esc(cat) + '</option>';
+    }).join('');
+}
+
+function renderCertificationsGrid() {
+    var grid = document.getElementById('cert-grid-dash');
+    var empty = document.getElementById('cert-empty');
+    if (!grid) return;
+
+    var q = (document.getElementById('cert-q') ? document.getElementById('cert-q').value.toLowerCase().trim() : '');
+    var catFilter = (document.getElementById('cert-cat-filter') ? document.getElementById('cert-cat-filter').value : '');
+
+    var filtered = certificationsData.filter(function(c) {
+        if (catFilter && c.category !== catFilter) return false;
+        if (!q) return true;
+        var hay = (c.title + ' ' + c.issuer + ' ' + (c.skills||[]).join(' ')).toLowerCase();
+        return hay.includes(q);
+    });
+
+    if (!filtered.length) {
+        grid.style.display = 'none';
+        if (empty) empty.style.display = 'flex';
+        return;
+    }
+
+    grid.style.display = 'grid';
+    if (empty) empty.style.display = 'none';
+
+    grid.innerHTML = filtered.map(function(cert) {
+        var skillsPills = (cert.skills || []).map(function(s) {
+            return '<span style="background:#e8f0fe; color:#1a73e8; font-size:0.72rem; font-weight:700; padding:3px 8px; border-radius:12px;">' + esc(s) + '</span>';
+        }).join('');
+
+        return '<div class="project-card" style="display:flex; flex-direction:column; gap:12px; padding:22px; border:1.5px solid var(--sidebar-border); border-radius:var(--r-md); background:var(--surface);">' +
+            '<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px;">' +
+                '<div style="flex:1;">' +
+                    '<div style="font-size:1.02rem; font-weight:800; color:var(--ink);">' + esc(cert.title) + '</div>' +
+                    '<div style="font-size:0.86rem; font-weight:700; color:var(--g-blue); margin-top:2px;">' + esc(cert.issuer) + '</div>' +
+                    (cert.issue_date ? '<div style="font-size:0.75rem; color:var(--ink-4); margin-top:3px;">Issued ' + esc(cert.issue_date) + '</div>' : '') +
+                '</div>' +
+                (cert.category ? '<span style="background:var(--sidebar-hover); color:var(--ink-3); font-size:0.7rem; font-weight:700; padding:3px 8px; border-radius:10px; border:1px solid var(--sidebar-border); flex-shrink:0;">' + esc(cert.category) + '</span>' : '') +
+            '</div>' +
+            (skillsPills ? '<div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:8px;">' + skillsPills + '</div>' : '') +
+            (cert.credential_url ? '<div style="font-size:0.78rem; margin-top:4px;"><a href="' + esc(cert.credential_url) + '" target="_blank" rel="noopener" style="color:var(--g-blue); font-weight:600; text-decoration:none;">🔗 View Credential ↗</a></div>' : '') +
+            '<div style="display:flex; gap:8px; justify-content:flex-end; border-top:1px solid var(--line-soft); padding-top:12px; margin-top:auto;">' +
+                '<button class="btn-sm-ghost" onclick="openCertificationDrawerById(\'' + cert.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface);">Edit</button>' +
+                '<button class="btn-sm-ghost" onclick="deleteCertification(\'' + cert.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; color:var(--g-red); border-radius:var(--r-pill); border:1.5px solid rgba(234,67,53,0.2); background:var(--g-red-soft);">Delete</button>' +
+            '</div>' +
+        '</div>';
+    }).join('');
+}
+
+function openCertificationDrawerById(id) {
+    openCertificationDrawer(_certMap[id] || null);
+}
+
+function openCertificationDrawer(cert) {
+    document.getElementById('cert-id').value = cert ? cert.id : '';
+    document.getElementById('cert-drawer-title').textContent = cert ? 'Edit Certification' : 'Add Certification';
+    document.getElementById('cert-title').value = cert ? (cert.title || '') : '';
+    document.getElementById('cert-issuer').value = cert ? (cert.issuer || '') : '';
+    document.getElementById('cert-date').value = cert ? (cert.issue_date || '') : '';
+    document.getElementById('cert-category').value = cert ? (cert.category || '') : '';
+    document.getElementById('cert-skills').value = cert && cert.skills ? cert.skills.join(', ') : '';
+    document.getElementById('cert-url').value = cert ? (cert.credential_url || '') : '';
+    document.getElementById('cert-cred-id').value = cert ? (cert.credential_id || '') : '';
+    document.getElementById('cert-color').value = cert ? (cert.accent_color || 'var(--blue)') : 'var(--blue)';
+    document.getElementById('cert-sort').value = cert ? (cert.sort_order || 0) : 0;
+
+    document.getElementById('cert-backdrop').classList.add('open');
+    document.getElementById('cert-drawer').classList.add('open');
+}
+
+function closeCertificationDrawer() {
+    document.getElementById('cert-backdrop').classList.remove('open');
+    document.getElementById('cert-drawer').classList.remove('open');
+}
+
+async function saveCertification() {
+    var id = document.getElementById('cert-id').value;
+    var title = document.getElementById('cert-title').value.trim();
+    var issuer = document.getElementById('cert-issuer').value.trim();
+    var issue_date = document.getElementById('cert-date').value.trim();
+    var category = document.getElementById('cert-category').value.trim();
+    var skills = document.getElementById('cert-skills').value.split(',').map(function(s){ return s.trim(); }).filter(Boolean);
+    var credential_url = document.getElementById('cert-url').value.trim();
+    var credential_id = document.getElementById('cert-cred-id').value.trim();
+    var accent_color = document.getElementById('cert-color').value;
+    var sort_order = parseInt(document.getElementById('cert-sort').value, 10) || 0;
+
+    if (!title || !issuer) {
+        showToast('Title and issuer are required');
+        return;
+    }
+
+    var payload = { title, issuer, issue_date, category, skills, credential_url, credential_id, accent_color, sort_order };
+    var saveBtn = document.getElementById('cert-save-btn');
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving…';
+
+    try {
+        var url = id ? '/api/certifications/' + id : '/api/certifications';
+        var method = id ? 'PUT' : 'POST';
+        var res = await fetch(url, {
+            method: method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        var data = await res.json();
+        if (data.success) {
+            showToast(id ? 'Certification updated successfully!' : 'Certification added successfully!');
+            closeCertificationDrawer();
+            await loadCertifications();
+        } else {
+            showToast(data.error || 'Failed to save certification');
+        }
+    } catch(err) {
+        showToast('Network error while saving certification');
+    } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Save Certification';
+    }
+}
+
+async function deleteCertification(id) {
+    if (!confirm('Are you sure you want to delete this certification?')) return;
+    try {
+        var res = await fetch('/api/certifications/' + id, { method: 'DELETE' });
+        var data = await res.json();
+        if (data.success) {
+            showToast('Certification deleted');
+            await loadCertifications();
+        } else {
+            showToast(data.error || 'Delete failed');
+        }
+    } catch(err) {
+        showToast('Error deleting certification');
+    }
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   PORTFOLIO CMS TWO-WAY SYNC: AWARDS CRUD
+   ══════════════════════════════════════════════════════════ */
+var awardsData = [];
+var awardsLoaded = false;
+var _awardMap = {};
+
+async function loadAwards() {
+    try {
+        var res = await fetch('/api/awards');
+        var data = await res.json();
+        if (data.success) {
+            awardsData = data.data || [];
+            awardsLoaded = true;
+            _awardMap = {};
+            awardsData.forEach(function(a){ _awardMap[a.id] = a; });
+            updateAwardsStats();
+            renderAwardsGrid();
+        }
+    } catch(err) {
+        console.error('Failed to load awards:', err);
+    }
+}
+
+function updateAwardsStats() {
+    var total = awardsData.length;
+    var totalEl = document.getElementById('award-stat-total');
+    if (totalEl) totalEl.textContent = total;
+    var scEl = document.getElementById('sc-awards');
+    if (scEl) scEl.textContent = total;
+}
+
+function renderAwardsGrid() {
+    var grid = document.getElementById('award-grid-dash');
+    var empty = document.getElementById('award-empty');
+    if (!grid) return;
+
+    var q = (document.getElementById('award-q') ? document.getElementById('award-q').value.toLowerCase().trim() : '');
+    var filtered = awardsData.filter(function(a) {
+        if (!q) return true;
+        var hay = (a.title + ' ' + a.issuer + ' ' + (a.badge_text||'') + ' ' + (a.metric_tag||'') + ' ' + (a.chips||[]).join(' ')).toLowerCase();
+        return hay.includes(q);
+    });
+
+    if (!filtered.length) {
+        grid.style.display = 'none';
+        if (empty) empty.style.display = 'flex';
+        return;
+    }
+
+    grid.style.display = 'grid';
+    if (empty) empty.style.display = 'none';
+
+    grid.innerHTML = filtered.map(function(aw) {
+        var chipsPills = (aw.chips || []).map(function(c) {
+            return '<span style="background:var(--sidebar-hover); color:var(--ink-2); font-size:0.72rem; font-weight:700; padding:3px 8px; border-radius:12px; border:1px solid var(--sidebar-border);">' + esc(c) + '</span>';
+        }).join('');
+
+        return '<div class="project-card" style="display:flex; flex-direction:column; gap:12px; padding:22px; border:1.5px solid var(--sidebar-border); border-radius:var(--r-md); background:var(--surface);">' +
+            '<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px;">' +
+                '<div style="flex:1;">' +
+                    '<div style="font-size:1.02rem; font-weight:800; color:var(--ink);">' + esc(aw.title) + '</div>' +
+                    '<div style="font-size:0.86rem; font-weight:700; color:var(--g-blue); margin-top:2px;">' + esc(aw.issuer) + '</div>' +
+                    (aw.metric_tag ? '<div style="font-size:0.75rem; color:var(--ink-4); margin-top:3px;">' + esc(aw.metric_tag) + '</div>' : '') +
+                '</div>' +
+                (aw.badge_text ? '<span style="background:var(--g-yellow-soft); color:var(--ink); font-size:0.72rem; font-weight:800; padding:3px 10px; border-radius:10px; border:1px solid rgba(251,188,4,0.4); flex-shrink:0;">' + esc(aw.badge_text) + '</span>' : '') +
+            '</div>' +
+            (aw.description ? '<div style="font-size:0.84rem; color:var(--ink-2); line-height:1.5;">' + esc(aw.description) + '</div>' : '') +
+            (chipsPills ? '<div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:8px;">' + chipsPills + '</div>' : '') +
+            '<div style="display:flex; gap:8px; justify-content:flex-end; border-top:1px solid var(--line-soft); padding-top:12px; margin-top:auto;">' +
+                '<button class="btn-sm-ghost" onclick="openAwardDrawerById(\'' + aw.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface);">Edit</button>' +
+                '<button class="btn-sm-ghost" onclick="deleteAward(\'' + aw.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; color:var(--g-red); border-radius:var(--r-pill); border:1.5px solid rgba(234,67,53,0.2); background:var(--g-red-soft);">Delete</button>' +
+            '</div>' +
+        '</div>';
+    }).join('');
+}
+
+function openAwardDrawerById(id) {
+    openAwardDrawer(_awardMap[id] || null);
+}
+
+function openAwardDrawer(aw) {
+    document.getElementById('award-id').value = aw ? aw.id : '';
+    document.getElementById('award-drawer-title').textContent = aw ? 'Edit Award' : 'Add Award';
+    document.getElementById('award-title').value = aw ? (aw.title || '') : '';
+    document.getElementById('award-issuer').value = aw ? (aw.issuer || '') : '';
+    document.getElementById('award-metric').value = aw ? (aw.metric_tag || '') : '';
+    document.getElementById('award-badge').value = aw ? (aw.badge_text || '') : '';
+    document.getElementById('award-color').value = aw ? (aw.badge_color || 'blue') : 'blue';
+    document.getElementById('award-chips').value = aw && aw.chips ? aw.chips.join(', ') : '';
+    document.getElementById('award-desc').value = aw ? (aw.description || '') : '';
+    document.getElementById('award-sort').value = aw ? (aw.sort_order || 0) : 0;
+
+    document.getElementById('award-backdrop').classList.add('open');
+    document.getElementById('award-drawer').classList.add('open');
+}
+
+function closeAwardDrawer() {
+    document.getElementById('award-backdrop').classList.remove('open');
+    document.getElementById('award-drawer').classList.remove('open');
+}
+
+async function saveAward() {
+    var id = document.getElementById('award-id').value;
+    var title = document.getElementById('award-title').value.trim();
+    var issuer = document.getElementById('award-issuer').value.trim();
+    var metric_tag = document.getElementById('award-metric').value.trim();
+    var badge_text = document.getElementById('award-badge').value.trim();
+    var badge_color = document.getElementById('award-color').value;
+    var chips = document.getElementById('award-chips').value.split(',').map(function(s){ return s.trim(); }).filter(Boolean);
+    var description = document.getElementById('award-desc').value.trim();
+    var sort_order = parseInt(document.getElementById('award-sort').value, 10) || 0;
+
+    if (!title || !issuer) {
+        showToast('Title and issuer are required');
+        return;
+    }
+
+    var payload = { title, issuer, metric_tag, badge_text, badge_color, chips, description, sort_order };
+    var saveBtn = document.getElementById('award-save-btn');
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving…';
+
+    try {
+        var url = id ? '/api/awards/' + id : '/api/awards';
+        var method = id ? 'PUT' : 'POST';
+        var res = await fetch(url, {
+            method: method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        var data = await res.json();
+        if (data.success) {
+            showToast(id ? 'Award updated successfully!' : 'Award added successfully!');
+            closeAwardDrawer();
+            await loadAwards();
+        } else {
+            showToast(data.error || 'Failed to save award');
+        }
+    } catch(err) {
+        showToast('Network error while saving award');
+    } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Save Award';
+    }
+}
+
+async function deleteAward(id) {
+    if (!confirm('Are you sure you want to delete this award?')) return;
+    try {
+        var res = await fetch('/api/awards/' + id, { method: 'DELETE' });
+        var data = await res.json();
+        if (data.success) {
+            showToast('Award deleted');
+            await loadAwards();
+        } else {
+            showToast(data.error || 'Delete failed');
+        }
+    } catch(err) {
+        showToast('Error deleting award');
+    }
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   PORTFOLIO CMS TWO-WAY SYNC: CONTACT MESSAGES INBOX
+   ══════════════════════════════════════════════════════════ */
+var inboxData = [];
+
+async function loadInbox() {
+    try {
+        var res = await fetch('/api/contact');
+        var data = await res.json();
+        if (data.success) {
+            inboxData = data.data || [];
+            updateInboxStats(data.unreadCount);
+            renderInboxList();
+        }
+    } catch(err) {
+        console.error('Failed to load inbox:', err);
+    }
+}
+
+function updateInboxStats(unreadCount) {
+    var total = inboxData.length;
+    var unread = unreadCount !== undefined ? unreadCount : inboxData.filter(function(m){ return m.status === 'unread'; }).length;
+    var totalEl = document.getElementById('inbox-stat-total');
+    var unreadEl = document.getElementById('inbox-stat-unread');
+    if (totalEl) totalEl.textContent = total;
+    if (unreadEl) unreadEl.textContent = unread;
+    var scEl = document.getElementById('sc-inbox');
+    if (scEl) scEl.textContent = total;
+
+    var badge = document.getElementById('inbox-badge-count');
+    if (badge) {
+        if (unread > 0) {
+            badge.textContent = unread;
+            badge.style.display = 'inline-block';
+        } else {
+            badge.style.display = 'none';
+        }
+    }
+}
+
+function renderInboxList() {
+    var list = document.getElementById('inbox-list');
+    var empty = document.getElementById('inbox-empty');
+    if (!list) return;
+
+    var q = (document.getElementById('inbox-q') ? document.getElementById('inbox-q').value.toLowerCase().trim() : '');
+    var filter = (document.getElementById('inbox-status-filter') ? document.getElementById('inbox-status-filter').value : 'all');
+
+    var filtered = inboxData.filter(function(m) {
+        if (filter !== 'all' && m.status !== filter) return false;
+        if (!q) return true;
+        var hay = (m.name + ' ' + m.email + ' ' + m.message).toLowerCase();
+        return hay.includes(q);
+    });
+
+    if (!filtered.length) {
+        list.style.display = 'none';
+        if (empty) empty.style.display = 'flex';
+        return;
+    }
+
+    list.style.display = 'flex';
+    if (empty) empty.style.display = 'none';
+
+    list.innerHTML = filtered.map(function(msg) {
+        var isUnread = msg.status === 'unread';
+        var dateFormatted = msg.created_at ? new Date(msg.created_at).toLocaleString('en-US', { dateStyle:'medium', timeStyle:'short' }) : '—';
+        var subject = encodeURIComponent('Re: Portfolio Inquiry from ' + msg.name);
+        var replyHref = 'mailto:' + encodeURIComponent(msg.email) + '?subject=' + subject;
+
+        return '<div style="background:var(--surface); border:1.5px solid ' + (isUnread ? 'rgba(66,133,244,0.4)' : 'var(--sidebar-border)') + '; border-radius:var(--r-md); padding:20px; display:flex; flex-direction:column; gap:12px; transition:var(--t); ' + (isUnread ? 'box-shadow:0 2px 10px rgba(66,133,244,0.08);' : '') + '">' +
+            '<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap;">' +
+                '<div style="display:flex; align-items:center; gap:10px;">' +
+                    '<div style="width:38px; height:38px; border-radius:50%; background:' + (isUnread ? 'var(--g-blue)' : 'var(--sidebar-border)') + '; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.9rem;">' + initials(msg.name) + '</div>' +
+                    '<div>' +
+                        '<div style="font-size:0.98rem; font-weight:800; color:var(--ink);">' + esc(msg.name) + '</div>' +
+                        '<a href="mailto:' + esc(msg.email) + '" style="font-size:0.82rem; color:var(--g-blue); text-decoration:none; font-weight:600;">' + esc(msg.email) + '</a>' +
+                    '</div>' +
+                '</div>' +
+                '<div style="display:flex; align-items:center; gap:8px;">' +
+                    (isUnread ? '<span style="background:var(--g-red-soft); color:var(--g-red); font-size:0.72rem; font-weight:800; padding:3px 8px; border-radius:10px; border:1px solid rgba(234,67,53,0.3);">UNREAD</span>' : '<span style="background:var(--sidebar-hover); color:var(--ink-4); font-size:0.72rem; font-weight:600; padding:3px 8px; border-radius:10px;">READ</span>') +
+                    '<span style="font-size:0.75rem; color:var(--ink-4);">' + esc(dateFormatted) + '</span>' +
+                '</div>' +
+            '</div>' +
+            '<div style="font-size:0.88rem; color:var(--ink-2); line-height:1.6; white-space:pre-wrap; background:var(--bg); padding:14px; border-radius:var(--r-sm); border:1px solid var(--sidebar-border);">' + esc(msg.message) + '</div>' +
+            '<div style="display:flex; gap:10px; justify-content:flex-end; align-items:center; padding-top:6px;">' +
+                '<a href="' + replyHref + '" class="btn-sm-ghost" style="text-decoration:none; display:inline-flex; align-items:center; gap:5px; font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface); color:var(--ink);">' +
+                    '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 0 0-4-4H4"/></svg> Reply' +
+                '</a>' +
+                (isUnread ?
+                    '<button class="btn-sm-ghost" onclick="toggleMessageStatus(\'' + msg.id + '\', \'read\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface);">Mark Read</button>' :
+                    '<button class="btn-sm-ghost" onclick="toggleMessageStatus(\'' + msg.id + '\', \'unread\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface);">Mark Unread</button>'
+                ) +
+                '<button class="btn-sm-ghost" onclick="deleteMessage(\'' + msg.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; color:var(--g-red); border-radius:var(--r-pill); border:1.5px solid rgba(234,67,53,0.2); background:var(--g-red-soft);">Delete</button>' +
+            '</div>' +
+        '</div>';
+    }).join('');
+}
+
+async function toggleMessageStatus(id, newStatus) {
+    try {
+        var res = await fetch('/api/contact/' + id + '/status', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: newStatus })
+        });
+        var data = await res.json();
+        if (data.success) {
+            showToast('Message marked as ' + newStatus);
+            await loadInbox();
+        }
+    } catch(err) {
+        showToast('Failed to update message status');
+    }
+}
+
+async function deleteMessage(id) {
+    if (!confirm('Are you sure you want to delete this inquiry?')) return;
+    try {
+        var res = await fetch('/api/contact/' + id, { method: 'DELETE' });
+        var data = await res.json();
+        if (data.success) {
+            showToast('Message deleted');
+            await loadInbox();
+        }
+    } catch(err) {
+        showToast('Failed to delete message');
+    }
 }
 </script>
 

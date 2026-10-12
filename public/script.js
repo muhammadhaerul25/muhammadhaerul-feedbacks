@@ -320,6 +320,10 @@
   let liveProjects = [];
   let liveTalks = [];
   let liveFeedbacks = [];
+  let liveExperiences = [];
+  let liveEducations = [];
+  let liveCertifications = [];
+  let liveAwards = [];
   let currentProjectFilter = 'all';
   let currentProjectPage = 1;
   const PROJECTS_PER_PAGE = 6;
@@ -819,6 +823,242 @@
     }).join('');
   }
 
+  // Render Experiences Timeline Dynamically
+  function renderTimeline(experiences = liveExperiences) {
+    const timelineEl = document.getElementById('timeline');
+    if (!timelineEl || !experiences || !experiences.length) return;
+
+    timelineEl.innerHTML = experiences.map(exp => {
+      const accent = exp.accent_color || 'var(--blue)';
+      const dateStr = `${escapeHtml(exp.start_date || '')}${exp.end_date ? ' — ' + escapeHtml(exp.end_date) : (exp.is_current ? ' — Present' : '')}`;
+      const stackList = Array.isArray(exp.stack) ? exp.stack : [];
+
+      return `
+        <div class="timeline-item reveal in-view">
+          <div class="timeline-marker" style="--accent:${escapeHtml(accent)}"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div class="timeline-company-logo" aria-label="${escapeHtml(exp.company)} Logo"></div>
+              <div class="timeline-header-main">
+                <div class="timeline-top">
+                  <h3>${escapeHtml(exp.role)}</h3>
+                  <span class="timeline-date">${dateStr}</span>
+                </div>
+                <p class="timeline-company">${escapeHtml(exp.company)}${exp.location ? ` <span class="timeline-loc">· ${escapeHtml(exp.location)}</span>` : ''}</p>
+              </div>
+            </div>
+            ${exp.description ? `<p class="timeline-desc">${escapeHtml(exp.description)}</p>` : ''}
+            ${stackList.length ? `
+              <div class="timeline-stack">
+                ${stackList.map(s => `<span>${escapeHtml(s)}</span>`).join('')}
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // Render Education Section Dynamically
+  function renderEducations(educations = liveEducations) {
+    const eduWrap = document.getElementById('edu-cards-wrap');
+    if (!eduWrap || !educations || !educations.length) return;
+
+    eduWrap.innerHTML = educations.map(edu => {
+      const courseworks = Array.isArray(edu.courseworks) ? edu.courseworks : [];
+      const activities = Array.isArray(edu.activities) ? edu.activities : [];
+      const dateStr = `${escapeHtml(edu.start_date || '')}${edu.end_date ? ' — ' + escapeHtml(edu.end_date) : ''}`;
+
+      return `
+        <div class="edu-card reveal in-view">
+          <div class="edu-card-main">
+            <div class="edu-header">
+              <div class="edu-logo-wrap">
+                <img src="${escapeHtml(edu.logo_url || '/assets/images/unhas-logo.png')}" 
+                     onerror="this.src='https://www.unhas.ac.id/wp-content/uploads/2026/10/logo-unhas-resmi-berwarna-png-transparan-768x918.png'" 
+                     alt="${escapeHtml(edu.institution)} Logo" 
+                     class="edu-logo" 
+                     width="58" 
+                     height="70" 
+                     loading="lazy">
+              </div>
+              <div class="edu-header-info">
+                <h3>${escapeHtml(edu.degree)}</h3>
+                <p class="edu-school">${escapeHtml(edu.institution)}</p>
+                <p class="edu-date">${dateStr}</p>
+              </div>
+            </div>
+
+            <div class="edu-details-body">
+              ${edu.specialization ? `
+              <div class="edu-section-block">
+                <span class="edu-block-label">Specialization</span>
+                <span class="edu-spec-val">${escapeHtml(edu.specialization)}</span>
+              </div>` : ''}
+
+              ${edu.thesis ? `
+              <div class="edu-section-block">
+                <span class="edu-block-label">Thesis</span>
+                <div class="edu-thesis-box">${escapeHtml(edu.thesis)}</div>
+              </div>` : ''}
+
+              ${courseworks.length ? `
+              <div class="edu-section-block">
+                <span class="edu-block-label">Relevant Courseworks</span>
+                <div class="edu-coursework-tags">
+                  ${courseworks.map(cw => `<span class="edu-cw-tag">${escapeHtml(cw)}</span>`).join('')}
+                </div>
+              </div>` : ''}
+
+              ${activities.length ? `
+              <div class="edu-section-block">
+                <span class="edu-block-label">Activities and Societies</span>
+                <ul class="edu-societies-list">
+                  ${activities.map(act => `
+                    <li>
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                      <span>${escapeHtml(act)}</span>
+                    </li>
+                  `).join('')}
+                </ul>
+              </div>` : ''}
+            </div>
+          </div>
+
+          <div class="edu-card-stats">
+            <div>
+              <span>${escapeHtml(edu.grade ? edu.grade.split('/')[0].trim() : '3.97')}</span>
+              <small>Grade: ${escapeHtml(edu.grade || '3.97 / 4.00')} (CGPA)</small>
+            </div>
+            <div>
+              <span>${escapeHtml(edu.honors || 'Cumlaude')}</span>
+              <small>Honors</small>
+            </div>
+            <div>
+              <span>${escapeHtml(edu.awards_summary ? edu.awards_summary.split(' ')[0] : '3×')}</span>
+              <small>${escapeHtml(edu.awards_summary || 'Most Outstanding Student')}</small>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // Render Certifications Grid Dynamically
+  function renderCertifications(certifications = liveCertifications) {
+    const certGrid = document.getElementById('cert-grid');
+    if (!certGrid || !certifications || !certifications.length) return;
+
+    certGrid.innerHTML = certifications.map(cert => {
+      const skills = Array.isArray(cert.skills) ? cert.skills : [];
+      const accent = cert.accent_color || 'var(--blue)';
+
+      return `
+        <div class="cert-card reveal in-view">
+          <div class="cert-card-top">
+            <div class="cert-issuer-badge">
+              <span class="cert-issuer-icon" style="--accent:${escapeHtml(accent)}">${escapeHtml(getInitials(cert.issuer))}</span>
+              <div class="cert-issuer-meta">
+                <span class="cert-issuer-name">${escapeHtml(cert.issuer)}</span>
+                <span class="cert-date">${escapeHtml(cert.issue_date || '')}</span>
+              </div>
+            </div>
+            ${cert.category ? `<span class="cert-category-pill">${escapeHtml(cert.category)}</span>` : ''}
+          </div>
+          <div class="cert-card-mid">
+            <h4 class="cert-title">${escapeHtml(cert.title)}</h4>
+            ${skills.length ? `
+              <div class="cert-tags-row">
+                ${skills.map(s => `<span class="cert-tag">${escapeHtml(s)}</span>`).join('')}
+              </div>
+            ` : ''}
+          </div>
+          <div class="cert-card-bottom">
+            <span class="cert-status-tag">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Credential Verified
+            </span>
+            ${cert.credential_url ? `
+              <a href="${escapeHtml(cert.credential_url)}" target="_blank" rel="noopener" class="cert-doc-hint" style="text-decoration:none; color:inherit;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                View Credential
+              </a>
+            ` : `
+              <span class="cert-doc-hint">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Certificate on Record
+              </span>
+            `}
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // Render Awards Grid Dynamically
+  function renderAwards(awards = liveAwards) {
+    const awardsGrid = document.getElementById('awards-grid');
+    if (!awardsGrid || !awards || !awards.length) return;
+
+    awardsGrid.innerHTML = awards.map(aw => {
+      const color = aw.badge_color || 'blue';
+      const chips = Array.isArray(aw.chips) ? aw.chips : [];
+
+      return `
+        <article class="award-card accent-${escapeHtml(color)} reveal in-view">
+          <div class="award-insignia-banner">
+            <span class="award-badge-pill ${escapeHtml(color)}">
+              ${escapeHtml(aw.badge_text || '🏆 Honor & Award')}
+            </span>
+            <div class="award-insignia-watermark" aria-hidden="true">
+              <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <div class="award-insignia-emblem">
+              <div class="award-emblem-icon-wrap">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="8" r="6"/>
+                  <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="award-card-body">
+            <div>
+              <div class="award-meta-row">
+                <span class="award-issuer">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                  ${escapeHtml(aw.issuer)}
+                </span>
+                ${aw.metric_tag ? `<span class="award-metric-tag ${escapeHtml(color)}">${escapeHtml(aw.metric_tag)}</span>` : ''}
+              </div>
+              <h3 class="award-title">${escapeHtml(aw.title)}</h3>
+              ${aw.description ? `<p class="award-desc">${escapeHtml(aw.description)}</p>` : ''}
+              ${chips.length ? `
+                <div class="award-chips-row">
+                  ${chips.map(chip => `<span class="award-chip">${escapeHtml(chip)}</span>`).join('')}
+                </div>
+              ` : ''}
+            </div>
+
+            <div class="award-doc-slot">
+              <div class="award-doc-slot-info">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                <span>Official Certificate Record</span>
+              </div>
+              <span class="award-doc-slot-pill">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><polyline points="20 6 9 17 4 12"/></svg>
+                Verified
+              </span>
+            </div>
+          </div>
+        </article>
+      `;
+    }).join('');
+  }
+
   // Update Hero Stats Banner
   function updateHeroStats() {
     const pCountEl = document.getElementById('stat-count-projects');
@@ -1151,10 +1391,14 @@
     setupProjectFilters();
 
     try {
-      const [projRes, talksRes, feedRes] = await Promise.allSettled([
+      const [projRes, talksRes, feedRes, expRes, eduRes, certRes, awardRes] = await Promise.allSettled([
         fetch('/api/projects').then(r => r.json()),
         fetch('/api/talks').then(r => r.json()),
-        fetch('/api/get_feedback').then(r => r.json())
+        fetch('/api/get_feedback').then(r => r.json()),
+        fetch('/api/experiences').then(r => r.json()),
+        fetch('/api/educations').then(r => r.json()),
+        fetch('/api/certifications').then(r => r.json()),
+        fetch('/api/awards').then(r => r.json())
       ]);
 
       if (projRes.status === 'fulfilled' && projRes.value && projRes.value.data) {
@@ -1173,6 +1417,26 @@
         renderTestimonials();
       }
 
+      if (expRes.status === 'fulfilled' && expRes.value && expRes.value.data && expRes.value.data.length) {
+        liveExperiences = expRes.value.data;
+        renderTimeline(liveExperiences);
+      }
+
+      if (eduRes.status === 'fulfilled' && eduRes.value && eduRes.value.data && eduRes.value.data.length) {
+        liveEducations = eduRes.value.data;
+        renderEducations(liveEducations);
+      }
+
+      if (certRes.status === 'fulfilled' && certRes.value && certRes.value.data && certRes.value.data.length) {
+        liveCertifications = certRes.value.data;
+        renderCertifications(liveCertifications);
+      }
+
+      if (awardRes.status === 'fulfilled' && awardRes.value && awardRes.value.data && awardRes.value.data.length) {
+        liveAwards = awardRes.value.data;
+        renderAwards(liveAwards);
+      }
+
       updateHeroStats();
     } catch (err) {
       console.warn('[Portfolio Sync] Offline or API error:', err);
@@ -1181,13 +1445,13 @@
 
   initLivePortfolioSync();
 
-  /* ============ CONTACT FORM ============ */
+  /* ============ CONTACT FORM (DIRECT DB INBOX + FALLBACK) ============ */
   const contactForm = document.getElementById('contactForm');
   const formNote = document.getElementById('formNote');
   const cfSubmit = document.getElementById('cfSubmit');
 
   if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const name = document.getElementById('cf-name').value.trim();
       const email = document.getElementById('cf-email').value.trim();
@@ -1201,18 +1465,51 @@
         return;
       }
 
-      const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
-      const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
-      if (cfSubmit) cfSubmit.querySelector('.btn-label').textContent = 'Opening your email client…';
-      if (formNote) {
-        formNote.style.color = 'var(--green)';
-        formNote.textContent = 'Thanks! Your email client will open to send the message directly.';
+      if (cfSubmit) {
+        cfSubmit.disabled = true;
+        const btnLabel = cfSubmit.querySelector('.btn-label');
+        if (btnLabel) btnLabel.textContent = 'Sending inquiry…';
       }
-      window.location.href = `mailto:haerulmuhammad01@gmail.com?subject=${subject}&body=${body}`;
-      setTimeout(() => {
-        if (cfSubmit) cfSubmit.querySelector('.btn-label').textContent = 'Send message';
-        contactForm.reset();
-      }, 1600);
+      if (formNote) {
+        formNote.style.color = 'var(--blue)';
+        formNote.textContent = 'Transmitting your message to Muhammad Haerul…';
+      }
+
+      try {
+        const resp = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, message })
+        });
+        const data = await resp.json();
+
+        if (data && data.success) {
+          if (formNote) {
+            formNote.style.color = 'var(--green)';
+            formNote.textContent = '✓ Inquiry sent successfully! Thank you, Muhammad Haerul will reply shortly.';
+          }
+          contactForm.reset();
+        } else {
+          throw new Error(data.error || 'Failed to submit inquiry');
+        }
+      } catch (err) {
+        console.warn('[Contact Submit Warning]:', err);
+        if (formNote) {
+          formNote.style.color = 'var(--green)';
+          formNote.textContent = 'Direct inbox sync queued. Opening email client as backup…';
+        }
+        const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
+        const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+        window.location.href = `mailto:haerulmuhammad01@gmail.com?subject=${subject}&body=${body}`;
+      } finally {
+        setTimeout(() => {
+          if (cfSubmit) {
+            cfSubmit.disabled = false;
+            const btnLabel = cfSubmit.querySelector('.btn-label');
+            if (btnLabel) btnLabel.textContent = 'Send message';
+          }
+        }, 1500);
+      }
     });
   }
 

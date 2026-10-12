@@ -7,6 +7,11 @@ const talksRoutes = require('./talks.routes');
 const projectsRoutes = require('./projects.routes');
 const feedbacksRoutes = require('./feedbacks.routes');
 const authRoutes = require('./auth.routes');
+const experiencesRoutes = require('./experiences.routes');
+const educationsRoutes = require('./educations.routes');
+const certificationsRoutes = require('./certifications.routes');
+const awardsRoutes = require('./awards.routes');
+const contactRoutes = require('./contact.routes');
 
 // Health Check & Uptime Endpoint
 router.get('/health', async (req, res) => {
@@ -90,6 +95,26 @@ router.get('/', (req, res) => {
                 list: 'GET /api/projects',
                 create: 'POST /api/projects'
             },
+            experiences: {
+                list: 'GET /api/experiences',
+                create: 'POST /api/experiences'
+            },
+            educations: {
+                list: 'GET /api/educations',
+                create: 'POST /api/educations'
+            },
+            certifications: {
+                list: 'GET /api/certifications',
+                create: 'POST /api/certifications'
+            },
+            awards: {
+                list: 'GET /api/awards',
+                create: 'POST /api/awards'
+            },
+            contact: {
+                submit: 'POST /api/contact',
+                list: 'GET /api/contact'
+            },
             feedbacks: {
                 list: 'GET /api/get_feedback (or GET /api/feedbacks)',
                 submit: 'POST /api/submit_feedback (or POST /api/feedbacks)',
@@ -104,6 +129,11 @@ router.use('/auth', authRoutes);
 router.use('/forms', formsRoutes);
 router.use('/talks', talksRoutes);
 router.use('/projects', projectsRoutes);
+router.use('/experiences', experiencesRoutes);
+router.use('/educations', educationsRoutes);
+router.use('/certifications', certificationsRoutes);
+router.use('/awards', awardsRoutes);
+router.use('/contact', contactRoutes);
 router.use('/', feedbacksRoutes);
 
 module.exports = router;

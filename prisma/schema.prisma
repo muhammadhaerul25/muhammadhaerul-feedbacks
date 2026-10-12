@@ -187,3 +187,93 @@ model AllowedAdmin {
   @@map("allowed_admins")
 }
 
+model Experience {
+  id           String    @id @default(cuid())
+  role         String
+  company      String
+  location     String?
+  start_date   String
+  end_date     String?
+  is_current   Boolean   @default(false)
+  description  String?
+  stack        String[]  @default([])
+  accent_color String?   @default("var(--blue)")
+  sort_order   Int       @default(0)
+  created_at   DateTime  @default(now())
+  updated_at   DateTime  @updatedAt
+
+  @@index([sort_order(sort: Asc), created_at(sort: Desc)])
+  @@map("experiences")
+}
+
+model Education {
+  id             String    @id @default(cuid())
+  degree         String
+  institution    String
+  start_date     String?
+  end_date       String?
+  grade          String?
+  honors         String?
+  specialization String?
+  thesis         String?
+  courseworks    String[]  @default([])
+  activities     String[]  @default([])
+  awards_summary String?
+  logo_url       String?
+  sort_order     Int       @default(0)
+  created_at     DateTime  @default(now())
+  updated_at     DateTime  @updatedAt
+
+  @@index([sort_order(sort: Asc), created_at(sort: Desc)])
+  @@map("educations")
+}
+
+model Certification {
+  id             String    @id @default(cuid())
+  title          String
+  issuer         String
+  issue_date     String?
+  category       String?
+  skills         String[]  @default([])
+  credential_url String?
+  credential_id  String?
+  accent_color   String?   @default("var(--blue)")
+  sort_order     Int       @default(0)
+  created_at     DateTime  @default(now())
+  updated_at     DateTime  @updatedAt
+
+  @@index([sort_order(sort: Asc), created_at(sort: Desc)])
+  @@map("certifications")
+}
+
+model Award {
+  id          String    @id @default(cuid())
+  title       String
+  issuer      String
+  metric_tag  String?
+  badge_text  String?
+  badge_color String?   @default("blue")
+  description String?
+  chips       String[]  @default([])
+  sort_order  Int       @default(0)
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+
+  @@index([sort_order(sort: Asc), created_at(sort: Desc)])
+  @@map("awards")
+}
+
+model ContactMessage {
+  id         String    @id @default(cuid())
+  name       String
+  email      String
+  message    String
+  status     String    @default("unread")
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+
+  @@index([created_at(sort: Desc)])
+  @@map("contact_messages")
+}
+
+
