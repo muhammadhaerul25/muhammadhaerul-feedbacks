@@ -57,6 +57,10 @@ async function googleLogin(req, res) {
       // Check client_id if configured
       if (process.env.GOOGLE_CLIENT_ID && googleData.aud !== process.env.GOOGLE_CLIENT_ID) {
         console.warn('[Google Auth] aud mismatch:', googleData.aud, 'expected:', process.env.GOOGLE_CLIENT_ID);
+        return res.status(401).json({
+          success: false,
+          error: 'ID token Google tidak cocok dengan Google Client ID yang terdaftar.'
+        });
       }
 
       googleUser = {

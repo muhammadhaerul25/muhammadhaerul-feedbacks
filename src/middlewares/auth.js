@@ -1,7 +1,7 @@
 const { verifyToken } = require('../utils/token');
 const prisma = require('../config/db');
 
-const PRIMARY_ADMIN_EMAIL = 'haerulmuhammad01@gmail.com';
+const PRIMARY_ADMIN_EMAIL = (process.env.PRIMARY_ADMIN_EMAIL || 'haerulmuhammad01@gmail.com').toLowerCase().trim();
 
 /**
  * Helper to parse cookies from req.headers.cookie without requiring external packages
