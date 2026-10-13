@@ -25,7 +25,7 @@ const getAllExperiences = asyncHandler(async (req, res) => {
 
 // CREATE experience (Admin Protected)
 const createExperience = asyncHandler(async (req, res) => {
-    const { role, company, location, start_date, end_date, is_current, description, stack, accent_color, sort_order } = req.body;
+    const { role, company, location, start_date, end_date, is_current, description, stack, accent_color, sort_order, logo_url } = req.body;
     if (!role || !company || !start_date) {
         return res.status(400).json({ success: false, error: 'Role, company, and start date are required' });
     }
@@ -41,7 +41,8 @@ const createExperience = asyncHandler(async (req, res) => {
             description: description ? String(description).trim() : null,
             stack: Array.isArray(stack) ? stack.map(s => String(s).trim()).filter(Boolean) : [],
             accent_color: accent_color ? String(accent_color).trim() : 'var(--blue)',
-            sort_order: Number.isInteger(Number(sort_order)) ? Number(sort_order) : 0
+            sort_order: Number.isInteger(Number(sort_order)) ? Number(sort_order) : 0,
+            logo_url: logo_url ? String(logo_url).trim() : null
         }
     });
 
@@ -52,7 +53,7 @@ const createExperience = asyncHandler(async (req, res) => {
 // UPDATE experience (Admin Protected)
 const updateExperience = asyncHandler(async (req, res) => {
     const { id } = req.params;
-    const { role, company, location, start_date, end_date, is_current, description, stack, accent_color, sort_order } = req.body;
+    const { role, company, location, start_date, end_date, is_current, description, stack, accent_color, sort_order, logo_url } = req.body;
 
     const existing = await prisma.experience.findUnique({ where: { id } });
     if (!existing) {
@@ -71,7 +72,8 @@ const updateExperience = asyncHandler(async (req, res) => {
             description: description !== undefined ? (description ? String(description).trim() : null) : undefined,
             stack: Array.isArray(stack) ? stack.map(s => String(s).trim()).filter(Boolean) : undefined,
             accent_color: accent_color !== undefined ? String(accent_color).trim() : undefined,
-            sort_order: sort_order !== undefined ? Number(sort_order) : undefined
+            sort_order: sort_order !== undefined ? Number(sort_order) : undefined,
+            logo_url: logo_url !== undefined ? (logo_url ? String(logo_url).trim() : null) : undefined
         }
     });
 

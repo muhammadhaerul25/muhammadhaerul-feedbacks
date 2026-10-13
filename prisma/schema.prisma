@@ -200,6 +200,7 @@ model Experience {
   stack        String[]  @default([])
   accent_color String?   @default("var(--blue)")
   sort_order   Int       @default(0)
+  logo_url     String?
   created_at   DateTime  @default(now())
   updated_at   DateTime  @updatedAt
 
@@ -295,6 +296,41 @@ model GalleryItem {
   @@index([sort_order(sort: Asc), created_at(sort: Desc)])
   @@index([category])
   @@map("gallery_items")
+}
+
+model Publication {
+  id           String    @id @default(cuid())
+  title        String
+  description  String?
+  date         String?
+  publisher    String?
+  link         String?
+  accent_color String?   @default("var(--blue)")
+  sort_order   Int       @default(0)
+  created_at   DateTime  @default(now())
+  updated_at   DateTime  @updatedAt
+
+  @@index([sort_order(sort: Asc), created_at(sort: Desc)])
+  @@map("publications")
+}
+
+model BlogPost {
+  id          String    @id @default(cuid())
+  title       String
+  excerpt     String?
+  content     String?
+  date        String?
+  read_time   String?   @default("5 min read")
+  badge       String?
+  tags        String[]  @default([])
+  link        String?
+  art_type    String?   @default("rag-pattern")
+  sort_order  Int       @default(0)
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+
+  @@index([sort_order(sort: Asc), created_at(sort: Desc)])
+  @@map("blog_posts")
 }
 
 

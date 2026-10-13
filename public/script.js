@@ -183,8 +183,8 @@
       });
     }, { threshold: 0.15 });
 
-    const strip = document.querySelector('.hero-stats-strip');
-    if (strip) observer.observe(strip);
+    const heroStrips = document.querySelectorAll('.hero-stats-wrapper, .hero-stats-strip');
+    heroStrips.forEach(s => observer.observe(s));
   }
   initStatCounters();
 
@@ -843,7 +843,9 @@
           <div class="timeline-marker" style="--accent:${escapeHtml(accent)}"></div>
           <div class="timeline-content">
             <div class="timeline-header">
-              <div class="timeline-company-logo" aria-label="${escapeHtml(exp.company)} Logo"></div>
+              <div class="timeline-company-logo" aria-label="${escapeHtml(exp.company)} Logo">
+                ${exp.logo_url ? `<img src="${escapeHtml(exp.logo_url)}" alt="${escapeHtml(exp.company)}" loading="lazy">` : (exp.company && exp.company.toLowerCase().includes('aksarahub') ? `<img src="/assets/images/aksarahub-logo.png" alt="${escapeHtml(exp.company)}" loading="lazy">` : '')}
+              </div>
               <div class="timeline-header-main">
                 <div class="timeline-top">
                   <h3>${escapeHtml(exp.role)}</h3>
@@ -1083,12 +1085,11 @@
     }
 
     const pubCountEl = document.getElementById('stat-count-publications');
-    const pubCards = document.querySelectorAll('#publications .talk-card');
-    const pubCount = (pubCards && pubCards.length) ? pubCards.length : 3;
+    const pubCount = (livePublications && livePublications.length) ? livePublications.length : 0;
     if (pubCountEl) {
       pubCountEl.setAttribute('data-target', String(pubCount));
-      if (triggerAnimation) animateStatElement(pubCountEl, pubCount, '+', 0);
-      else pubCountEl.textContent = `${pubCount}+`;
+      if (triggerAnimation) animateStatElement(pubCountEl, pubCount, pubCount > 0 ? '+' : '', 0);
+      else pubCountEl.textContent = pubCount > 0 ? `${pubCount}+` : '0';
     }
 
     const tCountEl = document.getElementById('stat-count-talks');
@@ -1443,13 +1444,42 @@
     }
   });
 
-  /* ============ GALLERY DYNAMIC HYDRATION & FILTERS ============ */
+  /* ============ GALLERY DYNAMIC HYDRATION & ANIMATED MOVING SHOWCASE ============ */
   let liveGallery = [];
   let currentGalleryFilter = 'All';
+  let isGalleryMotionPaused = false;
+
+  function buildGalleryCardHtml(item) {
+    const dateText = item.date ? escapeHtml(item.date) : '';
+    const titleText = escapeHtml(item.title);
+    const captionText = item.description ? escapeHtml(item.description) : '';
+    const imgUrl = escapeHtml(item.image_url);
+
+    return `
+      <article class="gallery-card" onclick="window.openLightbox('${imgUrl}', '${titleText}')" role="button" tabindex="0" aria-label="${titleText}">
+        <div class="gallery-card-thumb-wrap">
+          <img class="gallery-card-thumb" src="${imgUrl}" alt="${titleText}" loading="lazy">
+          <div class="gallery-zoom-overlay">
+            <div class="gallery-zoom-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-card-content">
+          <div class="gallery-card-head">
+            <h3 class="gallery-card-title">${titleText}</h3>
+            ${dateText ? `<span class="gallery-card-date">${dateText}</span>` : ''}
+          </div>
+          ${captionText ? `<p class="gallery-card-caption">${captionText}</p>` : ''}
+        </div>
+      </article>
+    `;
+  }
 
   function renderGallery(filter = 'All') {
-    const container = document.getElementById('galleryGrid');
-    if (!container) return;
+    const track1 = document.getElementById('galleryTrack1');
+    const track2 = document.getElementById('galleryTrack2');
+    if (!track1 || !track2) return;
 
     currentGalleryFilter = filter;
     const items = (!filter || filter === 'All')
@@ -1457,60 +1487,186 @@
       : liveGallery.filter(item => (item.category || '').toLowerCase() === filter.toLowerCase());
 
     if (!items || items.length === 0) {
-      container.innerHTML = `
-        <div style="grid-column: 1 / -1; text-align: center; padding: 48px 24px; background: var(--surface); border: 1.5px dashed var(--line); border-radius: var(--r-card);">
-          <div style="font-size: 2.2rem; margin-bottom: 12px;">📷</div>
-          <h4 style="font-size: 1.1rem; color: var(--ink); margin-bottom: 6px;">No moments found in this category</h4>
-          <p style="font-size: 0.88rem; color: var(--ink-3);">Select "All Moments" to explore other speaking engagements, campus milestones, and research photos.</p>
+      track1.innerHTML = `
+        <div style="padding: 40px 24px; text-align: center; width: 100%;">
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">No moments found in this category.</p>
         </div>
       `;
+      track2.innerHTML = '';
       return;
     }
 
-    container.innerHTML = items.map(item => {
-      const tagsHtml = (item.tags || []).slice(0, 3).map(tag => `<span class="gallery-card-tag">${escapeHtml(tag)}</span>`).join('');
-      const dateText = item.date ? escapeHtml(item.date) : '';
-      const locText = item.location ? `📍 ${escapeHtml(item.location)}` : '';
-      const catText = item.category ? escapeHtml(item.category) : 'Highlight';
-      const titleText = escapeHtml(item.title);
-      const descText = item.description ? escapeHtml(item.description) : '';
-      const imgUrl = escapeHtml(item.image_url);
+    // Build seamless infinite loop sequence
+    // Track 1
+    let seq1 = [...items];
+    while (seq1.length < 8) {
+      seq1 = seq1.concat(items);
+    }
+    const loopItems1 = seq1.concat(seq1);
 
-      return `
-        <article class="gallery-card" onclick="window.openLightbox('${imgUrl}', '${titleText}')">
-          <div class="gallery-card-thumb-wrap">
-            <span class="gallery-category-badge">${catText}</span>
-            <img class="gallery-card-thumb" src="${imgUrl}" alt="${titleText}" loading="lazy">
-            <div class="gallery-zoom-overlay">
-              <div class="gallery-zoom-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
-              </div>
-            </div>
-          </div>
-          <div class="gallery-card-content">
-            <div class="gallery-card-meta">
-              <span>${locText}</span>
-              <span>${dateText}</span>
-            </div>
-            <h3 class="gallery-card-title">${titleText}</h3>
-            ${descText ? `<p class="gallery-card-desc">${descText}</p>` : ''}
-            ${tagsHtml ? `<div class="gallery-card-tags">${tagsHtml}</div>` : ''}
-          </div>
-        </article>
-      `;
-    }).join('');
+    // Track 2 (staggered offset)
+    let seq2 = [...items];
+    if (seq2.length > 2) {
+      const half = Math.floor(seq2.length / 2);
+      seq2 = seq2.slice(half).concat(seq2.slice(0, half));
+    }
+    while (seq2.length < 8) {
+      seq2 = seq2.concat(items);
+    }
+    const loopItems2 = seq2.concat(seq2);
+
+    track1.innerHTML = loopItems1.map(item => buildGalleryCardHtml(item)).join('');
+    track2.innerHTML = loopItems2.map(item => buildGalleryCardHtml(item)).join('');
+  }
+
+  function updateGalleryFilterCounts() {
+    if (!liveGallery) return;
+    const allCountEl = document.querySelector('.gallery-tab[data-category="All"] .gallery-tab-count');
+    if (allCountEl) allCountEl.textContent = liveGallery.length;
+
+    const tabs = document.querySelectorAll('.gallery-tab[data-category]:not([data-category="All"])');
+    tabs.forEach(tab => {
+      const cat = tab.getAttribute('data-category');
+      const countEl = tab.querySelector('.gallery-tab-count');
+      const count = liveGallery.filter(i => (i.category || '').toLowerCase() === cat.toLowerCase()).length;
+      if (countEl) countEl.textContent = count;
+      if (count === 0) {
+        tab.style.display = 'none';
+      } else {
+        tab.style.display = 'inline-flex';
+      }
+    });
+  }
+
+  function setupGalleryMotionToggle() {
+    const btn = document.getElementById('galleryMotionPill');
+    const stage = document.getElementById('galleryStreamStage');
+    if (!btn || !stage) return;
+
+    btn.addEventListener('click', () => {
+      isGalleryMotionPaused = !isGalleryMotionPaused;
+      stage.classList.toggle('is-paused', isGalleryMotionPaused);
+
+      const pauseIcon = btn.querySelector('.gallery-motion-icon-pause');
+      const playIcon = btn.querySelector('.gallery-motion-icon-play');
+      const text = btn.querySelector('.gallery-motion-text');
+
+      if (isGalleryMotionPaused) {
+        if (pauseIcon) pauseIcon.style.display = 'none';
+        if (playIcon) playIcon.style.display = 'inline-flex';
+        if (text) text.textContent = 'Paused';
+        btn.setAttribute('aria-label', 'Resume moving slideshow animation');
+      } else {
+        if (pauseIcon) pauseIcon.style.display = 'inline-flex';
+        if (playIcon) playIcon.style.display = 'none';
+        if (text) text.textContent = 'Auto-moving';
+        btn.setAttribute('aria-label', 'Pause moving slideshow animation');
+      }
+    });
   }
 
   function setupGalleryFilters() {
+    setupGalleryMotionToggle();
     const tabs = document.querySelectorAll('.gallery-tab');
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
+        tabs.forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
         tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
         const cat = tab.getAttribute('data-category') || 'All';
         renderGallery(cat);
       });
     });
+  }
+
+  let livePublications = [];
+  let liveBlogs = [];
+
+  function renderPublications(pubs) {
+    const grid = document.querySelector('#publications .talks-grid');
+    if (!grid) return;
+    if (!Array.isArray(pubs) || !pubs.length) {
+      grid.innerHTML = `
+        <div style="grid-column:1/-1; padding:36px 20px; text-align:center; color:var(--ink-muted); font-size:14px; border:1px dashed var(--border-soft); border-radius:12px;">
+          Publications and open-source write-ups will appear here once added in the dashboard.
+        </div>`;
+      return;
+    }
+    grid.innerHTML = pubs.map(p => `
+      <article class="talk-card reveal active" ${p.link ? `onclick="window.open('${escapeHtml(p.link)}','_blank','noopener')"` : ''} style="${p.link ? 'cursor:pointer;' : ''}">
+        <span class="talk-icon" style="--accent:${escapeHtml(p.accent_color || 'var(--blue)')}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M9 18V6l10 6-10 6Z" />
+          </svg>
+        </span>
+        ${p.date ? `<p class="talk-date">${escapeHtml(p.date)}</p>` : ''}
+        <h3>${escapeHtml(p.title)}</h3>
+        ${p.description ? `<p class="talk-org">${escapeHtml(p.description)}</p>` : ''}
+        ${p.link ? `
+          <div style="margin-top:12px; display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:600; color:var(--blue);">
+            View Publication <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </div>` : ''}
+      </article>
+    `).join('');
+  }
+
+  function getBlogArtSvg(type) {
+    if (type === 'cv-pattern') {
+      return `<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>`;
+    } else if (type === 'db-pattern') {
+      return `<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>`;
+    } else {
+      return `<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg>`;
+    }
+  }
+
+  function renderBlogs(blogs) {
+    const grid = document.querySelector('#blog .blog-grid');
+    if (!grid) return;
+    if (!Array.isArray(blogs) || !blogs.length) {
+      grid.innerHTML = `
+        <div style="grid-column:1/-1; padding:36px 20px; text-align:center; color:var(--ink-muted); font-size:14px; border:1px dashed var(--border-soft); border-radius:12px;">
+          Technical writings and case studies will appear here once published in the dashboard.
+        </div>`;
+      return;
+    }
+    grid.innerHTML = blogs.map(b => {
+      const artClass = escapeHtml(b.art_type || 'ai-pattern');
+      const tags = Array.isArray(b.tags) ? b.tags : [];
+      return `
+        <article class="blog-card reveal active">
+          <div class="blog-card-media">
+            ${b.badge ? `<span class="blog-tag-badge">${escapeHtml(b.badge)}</span>` : ''}
+            <div class="blog-art-pattern ${artClass}">
+              ${getBlogArtSvg(b.art_type)}
+            </div>
+          </div>
+          <div class="blog-card-content">
+            <div class="blog-meta">
+              ${b.date ? `<span class="blog-date">${escapeHtml(b.date)}</span>` : ''}
+              ${b.date && b.read_time ? `<span class="blog-dot">·</span>` : ''}
+              ${b.read_time ? `<span class="blog-read">${escapeHtml(b.read_time)}</span>` : ''}
+            </div>
+            <h3 class="blog-title">${escapeHtml(b.title)}</h3>
+            ${b.excerpt ? `<p class="blog-excerpt">${escapeHtml(b.excerpt)}</p>` : ''}
+            ${tags.length ? `
+              <div class="blog-chips">
+                ${tags.map(t => `<span class="blog-chip">${escapeHtml(t)}</span>`).join('')}
+              </div>
+            ` : ''}
+            ${b.link ? `
+              <a href="${escapeHtml(b.link)}" target="_blank" rel="noopener" class="blog-link">
+                Read Article
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </a>
+            ` : ''}
+          </div>
+        </article>
+      `;
+    }).join('');
   }
 
   // Main Live Data Fetcher & Hydrator
@@ -1519,7 +1675,7 @@
     setupGalleryFilters();
 
     try {
-      const [projRes, talksRes, feedRes, expRes, eduRes, certRes, awardRes, galRes] = await Promise.allSettled([
+      const [projRes, talksRes, feedRes, expRes, eduRes, certRes, awardRes, galRes, pubRes, blogRes] = await Promise.allSettled([
         fetch('/api/projects').then(r => r.json()),
         fetch('/api/talks').then(r => r.json()),
         fetch('/api/get_feedback').then(r => r.json()),
@@ -1527,7 +1683,9 @@
         fetch('/api/educations').then(r => r.json()),
         fetch('/api/certifications').then(r => r.json()),
         fetch('/api/awards').then(r => r.json()),
-        fetch('/api/gallery').then(r => r.json())
+        fetch('/api/gallery').then(r => r.json()),
+        fetch('/api/publications').then(r => r.json()),
+        fetch('/api/blogs').then(r => r.json())
       ]);
 
       if (projRes.status === 'fulfilled' && projRes.value && projRes.value.data) {
@@ -1569,6 +1727,21 @@
       if (galRes.status === 'fulfilled' && galRes.value && galRes.value.data && galRes.value.data.length) {
         liveGallery = galRes.value.data;
         renderGallery('All');
+        updateGalleryFilterCounts();
+      }
+
+      if (pubRes.status === 'fulfilled' && pubRes.value && Array.isArray(pubRes.value.data)) {
+        livePublications = pubRes.value.data;
+        renderPublications(livePublications);
+      } else {
+        renderPublications([]);
+      }
+
+      if (blogRes.status === 'fulfilled' && blogRes.value && Array.isArray(blogRes.value.data)) {
+        liveBlogs = blogRes.value.data;
+        renderBlogs(liveBlogs);
+      } else {
+        renderBlogs([]);
       }
 
       updateHeroStats(true);

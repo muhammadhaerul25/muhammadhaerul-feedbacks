@@ -119,46 +119,52 @@
           </a>
         </div>
 
-        <!-- Live Portfolio Stat Counter Strip (Dynamic from Database) -->
-        <div class="hero-stats-strip reveal">
-          <div class="hero-stat-item">
-            <span class="hero-stat-val" id="stat-count-years" data-target="4" data-suffix="+ Yrs">4+ Yrs</span>
-            <span class="hero-stat-label">AI Experience</span>
+        <!-- Live Portfolio Stat Counter Strips (Dynamic from Database) -->
+        <div class="hero-stats-wrapper reveal">
+          <!-- Tier 1: Engineering Track Record & Accreditations -->
+          <div class="hero-stats-strip">
+            <div class="hero-stat-item">
+              <span class="hero-stat-val" id="stat-count-years" data-target="4" data-suffix="+ Yrs">4+ Yrs</span>
+              <span class="hero-stat-label">AI Experience</span>
+            </div>
+            <span class="hero-stat-sep" aria-hidden="true"></span>
+            <div class="hero-stat-item">
+              <span class="hero-stat-val" id="stat-count-projects" data-target="13" data-suffix="+">13+</span>
+              <span class="hero-stat-label">Shipped Projects</span>
+            </div>
+            <span class="hero-stat-sep" aria-hidden="true"></span>
+            <div class="hero-stat-item">
+              <span class="hero-stat-val" id="stat-count-certs" data-target="8" data-suffix="+">8+</span>
+              <span class="hero-stat-label">Certifications</span>
+            </div>
+            <span class="hero-stat-sep" aria-hidden="true"></span>
+            <div class="hero-stat-item">
+              <span class="hero-stat-val" id="stat-count-awards" data-target="3" data-suffix="+">3+</span>
+              <span class="hero-stat-label">Honors &amp; Awards</span>
+            </div>
           </div>
-          <span class="hero-stat-sep" aria-hidden="true"></span>
-          <div class="hero-stat-item">
-            <span class="hero-stat-val" id="stat-count-projects" data-target="13" data-suffix="+">13+</span>
-            <span class="hero-stat-label">Shipped Projects</span>
-          </div>
-          <span class="hero-stat-sep" aria-hidden="true"></span>
-          <div class="hero-stat-item">
-            <span class="hero-stat-val" id="stat-count-publications" data-target="3" data-suffix="+">3+</span>
-            <span class="hero-stat-label">Publications</span>
-          </div>
-          <span class="hero-stat-sep" aria-hidden="true"></span>
-          <div class="hero-stat-item">
-            <span class="hero-stat-val" id="stat-count-talks" data-target="5" data-suffix="+">5+</span>
-            <span class="hero-stat-label">Talks Delivered</span>
-          </div>
-          <span class="hero-stat-sep" aria-hidden="true"></span>
-          <div class="hero-stat-item">
-            <span class="hero-stat-val" id="stat-count-attendees" data-target="650" data-suffix="+">650+</span>
-            <span class="hero-stat-label">Workshop Attendees</span>
-          </div>
-          <span class="hero-stat-sep" aria-hidden="true"></span>
-          <div class="hero-stat-item">
-            <span class="hero-stat-val" id="stat-count-awards" data-target="3" data-suffix="+">3+</span>
-            <span class="hero-stat-label">Honors &amp; Awards</span>
-          </div>
-          <span class="hero-stat-sep" aria-hidden="true"></span>
-          <div class="hero-stat-item">
-            <span class="hero-stat-val" id="stat-count-certs" data-target="8" data-suffix="+">8+</span>
-            <span class="hero-stat-label">Certifications</span>
-          </div>
-          <span class="hero-stat-sep" aria-hidden="true"></span>
-          <div class="hero-stat-item">
-            <span class="hero-stat-val" id="stat-count-rating" data-target="9.4" data-decimals="1" data-suffix="★">9.4★</span>
-            <span class="hero-stat-label">Satisfaction</span>
+
+          <!-- Tier 2: Research, Speaking & Community Impact -->
+          <div class="hero-stats-strip">
+            <div class="hero-stat-item">
+              <span class="hero-stat-val" id="stat-count-publications" data-target="3" data-suffix="+">3+</span>
+              <span class="hero-stat-label">Publications</span>
+            </div>
+            <span class="hero-stat-sep" aria-hidden="true"></span>
+            <div class="hero-stat-item">
+              <span class="hero-stat-val" id="stat-count-talks" data-target="5" data-suffix="+">5+</span>
+              <span class="hero-stat-label">Talks Delivered</span>
+            </div>
+            <span class="hero-stat-sep" aria-hidden="true"></span>
+            <div class="hero-stat-item">
+              <span class="hero-stat-val" id="stat-count-attendees" data-target="650" data-suffix="+">650+</span>
+              <span class="hero-stat-label">Workshop Attendees</span>
+            </div>
+            <span class="hero-stat-sep" aria-hidden="true"></span>
+            <div class="hero-stat-item">
+              <span class="hero-stat-val" id="stat-count-rating" data-target="9.4" data-decimals="1" data-suffix="★">9.4★</span>
+              <span class="hero-stat-label">Satisfaction</span>
+            </div>
           </div>
         </div>
       </div>
@@ -340,8 +346,10 @@
             <div class="timeline-marker" style="--accent:var(--blue)"></div>
             <div class="timeline-content">
               <div class="timeline-header">
-                <!-- AksaraHub Logo Slot: Insert <img> or <svg> inside (e.g. <img src="assets/images/aksarahub.png" alt="AksaraHub Nusantara">) -->
-                <div class="timeline-company-logo" aria-label="AksaraHub Nusantara Logo"></div>
+                <!-- AksaraHub Logo -->
+                <div class="timeline-company-logo" aria-label="AksaraHub Nusantara Logo">
+                  <img src="/assets/images/aksarahub-logo.png" alt="AksaraHub Nusantara" loading="lazy">
+                </div>
                 <div class="timeline-header-main">
                   <div class="timeline-top">
                     <h3>Co-Founder (AI &amp; Product Lead)</h3>
@@ -1533,37 +1541,7 @@
         </div>
 
         <div class="talks-grid">
-          <div class="talk-card reveal">
-            <span class="talk-icon" style="--accent:var(--red)">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                <path d="M9 18V6l10 6-10 6Z" />
-              </svg>
-            </span>
-            <p class="talk-date">2024 — 2025</p>
-            <h3>GraphRAG Chatbot</h3>
-            <p class="talk-org">Open-source retrieval-augmented chatbot using graph-based context retrieval</p>
-          </div>
-          <div class="talk-card reveal">
-            <span class="talk-icon" style="--accent:var(--yellow)">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                <path d="M9 18V6l10 6-10 6Z" />
-              </svg>
-            </span>
-            <p class="talk-date">2024 — 2025</p>
-            <h3>ALPR Core</h3>
-            <p class="talk-org">Reusable automatic license-plate recognition module, extracted from the Galaxy ALPR
-              project</p>
-          </div>
-          <div class="talk-card reveal">
-            <span class="talk-icon" style="--accent:var(--green)">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                <path d="M9 18V6l10 6-10 6Z" />
-              </svg>
-            </span>
-            <p class="talk-date">2024 — 2025</p>
-            <h3>Object Detection Utilities</h3>
-            <p class="talk-org">Shared helper library for training and evaluating YOLO-family detection models</p>
-          </div>
+          <!-- Dynamically populated via /api/publications without dummy data -->
         </div>
 
         <div class="talks-links reveal">
@@ -2051,117 +2029,7 @@
         </div>
 
         <div class="blog-grid reveal">
-          <!-- Article 1: PPE Detection Thesis / CV -->
-          <article class="blog-card">
-            <div class="blog-card-media">
-              <span class="blog-tag-badge">Computer Vision</span>
-              <div class="blog-art-pattern cv-pattern">
-                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
-                  <circle cx="12" cy="12" r="3"/>
-                </svg>
-              </div>
-            </div>
-            <div class="blog-card-content">
-              <div class="blog-meta">
-                <span class="blog-date">Oct 2026</span>
-                <span class="blog-dot">·</span>
-                <span class="blog-read">7 min read</span>
-              </div>
-              <h3 class="blog-title">
-                Development and Comparison of PPE Detection Models in Industrial Environments
-              </h3>
-              <p class="blog-excerpt">
-                A comparative analysis of YOLOv8, Faster R-CNN, and SSD architectures for real-time safety gear compliance on edge computing devices, achieving 98.4% mAP.
-              </p>
-              <div class="blog-chips">
-                <span class="blog-chip">Python</span>
-                <span class="blog-chip">PyTorch</span>
-                <span class="blog-chip">YOLOv8</span>
-                <span class="blog-chip">Edge AI</span>
-              </div>
-              <a href="https://github.com/muhammadhaerul25" target="_blank" rel="noopener" class="blog-link">
-                Read Research Note
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M7 7h10v10"/></svg>
-              </a>
-            </div>
-          </article>
-
-          <!-- Article 2: Database & Backend Architecture -->
-          <article class="blog-card">
-            <div class="blog-card-media">
-              <span class="blog-tag-badge">Backend &amp; DB</span>
-              <div class="blog-art-pattern db-pattern">
-                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <ellipse cx="12" cy="5" rx="9" ry="3"/>
-                  <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
-                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
-                </svg>
-              </div>
-            </div>
-            <div class="blog-card-content">
-              <div class="blog-meta">
-                <span class="blog-date">Sep 2026</span>
-                <span class="blog-dot">·</span>
-                <span class="blog-read">5 min read</span>
-              </div>
-              <h3 class="blog-title">
-                Designing Resilient Database Pooling and In-Memory Caching with Prisma ORM 7
-              </h3>
-              <p class="blog-excerpt">
-                Best practices for PostgreSQL connection management, idle client error recovery, statement timeouts, and multi-tier caching in cloud-native applications.
-              </p>
-              <div class="blog-chips">
-                <span class="blog-chip">PostgreSQL</span>
-                <span class="blog-chip">Prisma</span>
-                <span class="blog-chip">Node.js</span>
-                <span class="blog-chip">Security</span>
-              </div>
-              <a href="https://github.com/muhammadhaerul25" target="_blank" rel="noopener" class="blog-link">
-                Read Architecture Guide
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M7 7h10v10"/></svg>
-              </a>
-            </div>
-          </article>
-
-          <!-- Article 3: Agentic AI & LLMs -->
-          <article class="blog-card">
-            <div class="blog-card-media">
-              <span class="blog-tag-badge">Agentic AI</span>
-              <div class="blog-art-pattern ai-pattern">
-                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <rect x="3" y="11" width="18" height="10" rx="2"/>
-                  <circle cx="12" cy="5" r="2"/>
-                  <path d="M12 7v4"/>
-                  <line x1="8" y1="16" x2="8" y2="16"/>
-                  <line x1="16" y1="16" x2="16" y2="16"/>
-                </svg>
-              </div>
-            </div>
-            <div class="blog-card-content">
-              <div class="blog-meta">
-                <span class="blog-date">Aug 2026</span>
-                <span class="blog-dot">·</span>
-                <span class="blog-read">6 min read</span>
-              </div>
-              <h3 class="blog-title">
-                Autonomous Agent Workflows: Bridging LLM Reasoning with Deterministic Tool Execution
-              </h3>
-              <p class="blog-excerpt">
-                How state machines, schema validations, and reactive polling transform probabilistic language models into robust, autonomous production systems.
-              </p>
-              <div class="blog-chips">
-                <span class="blog-chip">LLMs</span>
-                <span class="blog-chip">Agentic AI</span>
-                <span class="blog-chip">LangChain</span>
-                <span class="blog-chip">TypeScript</span>
-              </div>
-              <a href="https://github.com/muhammadhaerul25" target="_blank" rel="noopener" class="blog-link">
-                Read Case Study
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M7 7h10v10"/></svg>
-              </a>
-            </div>
-          </article>
+          <!-- Dynamically populated via /api/blogs without dummy data -->
         </div>
       </div>
     </section>
@@ -2175,84 +2043,45 @@
           <p class="section-desc">Documenting speaking sessions, campus milestones, hands-on developer workshops, AI research, and collaborative communities.</p>
         </div>
 
-        <!-- Filter Category Tabs -->
-        <div class="gallery-filters reveal" id="galleryFilters">
-          <button class="gallery-tab active" data-category="All">All Moments</button>
-          <button class="gallery-tab" data-category="Speaking &amp; Workshops">Speaking &amp; Workshops</button>
-          <button class="gallery-tab" data-category="Campus &amp; Honors">Campus &amp; Honors</button>
-          <button class="gallery-tab" data-category="Projects &amp; AI">Projects &amp; AI</button>
-          <button class="gallery-tab" data-category="Leadership &amp; Community">Leadership &amp; Community</button>
+        <!-- Filter Category Tabs & Motion Toggle Bar -->
+        <div class="gallery-controls-bar reveal" id="galleryControls">
+          <div class="gallery-filter-group" role="tablist" aria-label="Filter gallery moments">
+            <button class="gallery-tab active" data-category="All" role="tab" aria-selected="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+              <span>All Moments</span>
+              <span class="gallery-tab-count">5</span>
+            </button>
+            <button class="gallery-tab" data-category="Speaking &amp; Workshops" role="tab" aria-selected="false">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+              <span>Speaking &amp; Workshops</span>
+              <span class="gallery-tab-count">5</span>
+            </button>
+          </div>
+
+          <!-- Motion Pause/Play Toggle Pill -->
+          <button class="gallery-motion-pill" id="galleryMotionPill" type="button" aria-label="Toggle moving slideshow animation" title="Pause or resume auto-moving slideshow">
+            <span class="gallery-motion-dot" aria-hidden="true"></span>
+            <span class="gallery-motion-icon-pause" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"></rect><rect x="14" y="4" width="4" height="16" rx="1"></rect></svg>
+            </span>
+            <span class="gallery-motion-icon-play" aria-hidden="true" style="display:none;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"></polygon></svg>
+            </span>
+            <span class="gallery-motion-text">Auto-moving</span>
+          </button>
         </div>
 
-        <!-- Dynamic Gallery Grid Container -->
-        <div class="gallery-grid" id="galleryGrid">
-          <!-- Populated dynamically via /api/gallery with fallback -->
-          <article class="gallery-card" onclick="window.openLightbox('/uploads/talks/saveclip_app_671241768_18351262810240133_2482393838735247827_n_1787292713669.webp', 'Build with AI Keynote')">
-            <div class="gallery-card-thumb-wrap">
-              <span class="gallery-category-badge">Speaking &amp; Workshops</span>
-              <img class="gallery-card-thumb" src="/uploads/talks/saveclip_app_671241768_18351262810240133_2482393838735247827_n_1787292713669.webp" alt="Build with AI Keynote" loading="lazy">
-              <div class="gallery-zoom-overlay">
-                <div class="gallery-zoom-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg></div>
-              </div>
-            </div>
-            <div class="gallery-card-content">
-              <div class="gallery-card-meta">
-                <span>📍 Universitas Ciputra Makassar</span>
-                <span>May 2026</span>
-              </div>
-              <h3 class="gallery-card-title">Build with AI: AI-Driven Development Keynote</h3>
-              <p class="gallery-card-desc">Delivering an in-depth session on generative AI, prompt engineering, vibe coding, and autonomous agents for 100+ developers.</p>
-              <div class="gallery-card-tags">
-                <span class="gallery-card-tag">Speaking</span>
-                <span class="gallery-card-tag">GDG</span>
-                <span class="gallery-card-tag">GenAI</span>
-              </div>
-            </div>
-          </article>
-          <article class="gallery-card" onclick="window.openLightbox('/uploads/talks/saveclip_app_752916423_18047968217611708_109289192688503691_n_1787293047380.webp', 'GSA AI Forge Workshop')">
-            <div class="gallery-card-thumb-wrap">
-              <span class="gallery-category-badge">Speaking &amp; Workshops</span>
-              <img class="gallery-card-thumb" src="/uploads/talks/saveclip_app_752916423_18047968217611708_109289192688503691_n_1787293047380.webp" alt="GSA AI Forge Workshop" loading="lazy">
-              <div class="gallery-zoom-overlay">
-                <div class="gallery-zoom-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg></div>
-              </div>
-            </div>
-            <div class="gallery-card-content">
-              <div class="gallery-card-meta">
-                <span>📍 Makassar Government Center</span>
-                <span>July 2026</span>
-              </div>
-              <h3 class="gallery-card-title">GSA AI Forge: Digital Portfolio &amp; Personal Branding</h3>
-              <p class="gallery-card-desc">Interactive workshop guiding 150+ participants on leveraging Google Gemini and AI workflows to engineer digital presence.</p>
-              <div class="gallery-card-tags">
-                <span class="gallery-card-tag">GSA</span>
-                <span class="gallery-card-tag">Gemini</span>
-                <span class="gallery-card-tag">Portfolio</span>
-              </div>
-            </div>
-          </article>
-          <article class="gallery-card" onclick="window.openLightbox('/uploads/talks/saveclip_app_775154220_18087205625558486_2093555353223423387_n_1787290933586.webp', 'Mindful AI Keynote')">
-            <div class="gallery-card-thumb-wrap">
-              <span class="gallery-category-badge">Speaking &amp; Workshops</span>
-              <img class="gallery-card-thumb" src="/uploads/talks/saveclip_app_775154220_18087205625558486_2093555353223423387_n_1787290933586.webp" alt="Mindful AI Keynote" loading="lazy">
-              <div class="gallery-zoom-overlay">
-                <div class="gallery-zoom-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg></div>
-              </div>
-            </div>
-            <div class="gallery-card-content">
-              <div class="gallery-card-meta">
-                <span>📍 Yayasan Khouw Kalbe (Virtual)</span>
-                <span>August 2026</span>
-              </div>
-              <h3 class="gallery-card-title">Mindful AI: Personalization for Next-Gen Scholars</h3>
-              <p class="gallery-card-desc">Keynote presentation introducing Gemini Gems, custom context frameworks, and intelligent research assistants for students.</p>
-              <div class="gallery-card-tags">
-                <span class="gallery-card-tag">Kalbe</span>
-                <span class="gallery-card-tag">Gems</span>
-                <span class="gallery-card-tag">AI Education</span>
-              </div>
-            </div>
-          </article>
+        <!-- Full-Width Animated Dual-Track Moving Showcase (Yang Rame) -->
+        <div class="gallery-stream-stage reveal" id="galleryStreamStage">
+          <!-- Row 1: Gliding Left -->
+          <div class="gallery-stream-row">
+            <div class="gallery-stream-track move-left" id="galleryTrack1" aria-label="Gallery moments top track"></div>
+          </div>
+
+          <!-- Row 2: Gliding Right -->
+          <div class="gallery-stream-row">
+            <div class="gallery-stream-track move-right" id="galleryTrack2" aria-label="Gallery moments bottom track"></div>
+          </div>
         </div>
       </div>
     </section>

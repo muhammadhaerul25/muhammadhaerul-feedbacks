@@ -86,36 +86,6 @@ async function setupGallery() {
         location: 'Hotel Villa Bogor, Majene · Universitas Sulawesi Barat',
         tags: ['Universitas Sulawesi Barat', 'Hands-on', 'Majene'],
         sort_order: 5
-      },
-      {
-        title: 'Hasanuddin University Informatics Engineering Degree',
-        description: 'Graduated with 3.97 / 4.00 GPA in Artificial Intelligence & Data Science, defending thesis on Computer Vision PPE industrial safety detection.',
-        image_url: '/assets/images/unhas-logo.png',
-        category: 'Campus & Honors',
-        date: 'Class of 2026',
-        location: 'Universitas Hasanuddin, Makassar',
-        tags: ['Unhas', 'S.Kom', 'Graduation', 'Academic'],
-        sort_order: 6
-      },
-      {
-        title: 'PPE Detection Computer Vision Industrial Evaluation',
-        description: 'Real-time edge testing of YOLOv8 and lightweight vision models achieving 94.2% mAP50 for worker helmet, vest, and protective gear compliance.',
-        image_url: '/assets/images/profile-highres.png',
-        category: 'Projects & AI',
-        date: '2026',
-        location: 'Industrial Safety Lab & Edge Testbed',
-        tags: ['Computer Vision', 'YOLOv8', 'Edge AI', 'Thesis'],
-        sort_order: 7
-      },
-      {
-        title: 'Google Student Ambassador Leadership & Community',
-        description: 'Spearheading regional tech literacy drives, hands-on hackathons, and Google AI ecosystem adoption across eastern Indonesian campuses.',
-        image_url: '/assets/images/profile-photo.webp',
-        category: 'Leadership & Community',
-        date: '2025 - 2026',
-        location: 'Makassar Chapter',
-        tags: ['Leadership', 'GSA', 'Community', 'Makassar'],
-        sort_order: 8
       }
     ];
 

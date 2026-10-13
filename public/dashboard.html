@@ -1475,56 +1475,247 @@
 
     .project-manage { margin-left: auto; display: flex; gap: 8px; }
 
-    /* ── Drawer ── */
+    /* ── High-End Modern Drawer System ── */
     .drawer-backdrop {
-        position: fixed; inset: 0; background: rgba(32,33,36,0.4);
-        backdrop-filter: blur(3px); z-index: 400;
-        opacity: 0; pointer-events: none; transition: opacity 0.3s;
+        position: fixed; inset: 0;
+        background: rgba(15, 23, 42, 0.48);
+        backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+        z-index: 400;
+        opacity: 0; pointer-events: none;
+        transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .drawer-backdrop.open { opacity: 1; pointer-events: auto; }
+    .drawer-backdrop.open, .drawer-backdrop.show { opacity: 1; pointer-events: auto; }
 
     .drawer {
         position: fixed; top: 0; right: 0; height: 100vh;
-        width: 100%; max-width: 520px;
-        background: var(--surface);
-        box-shadow: -8px 0 40px rgba(0,0,0,0.18);
+        width: 100%; max-width: 620px;
+        background: #FFFFFF;
+        box-shadow: -16px 0 60px rgba(15, 23, 42, 0.16), -4px 0 20px rgba(15, 23, 42, 0.08);
+        border-left: 1px solid rgba(226, 232, 240, 0.9);
         z-index: 401;
         display: flex; flex-direction: column;
         transform: translateX(100%);
-        transition: transform 0.32s cubic-bezier(0.4,0,0.2,1), visibility 0.32s;
+        transition: transform 0.34s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.34s;
         visibility: hidden;
+        overflow: hidden;
+    }
+    .drawer::before {
+        content: '';
+        position: absolute; top: 0; left: 0; right: 0; height: 3.5px;
+        background: linear-gradient(90deg, #4285F4 0%, #34A853 35%, #FBBC04 70%, #EA4335 100%);
+        z-index: 20;
     }
     .drawer.open { transform: translateX(0); visibility: visible; }
+
     .drawer-head {
-        padding: 22px 24px 16px;
-        border-bottom: 1.5px solid var(--line-soft);
-        display: flex; justify-content: space-between; align-items: flex-start;
+        padding: 20px 26px 18px;
+        background: #FFFFFF;
+        border-bottom: 1px solid #E2E8F0;
+        display: flex; justify-content: space-between; align-items: center;
         flex-shrink: 0;
+        position: relative;
     }
-    .drawer-title { font-size: 1.05rem; font-weight: 800; color: var(--ink); }
-    .drawer-subtitle { font-size: 0.75rem; color: var(--ink-4); margin-top: 2px; }
-    .drawer-body { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 20px 24px; display: flex; flex-direction: column; gap: 16px; }
-    .drawer-foot {
-        padding: 14px 24px; border-top: 1.5px solid var(--line-soft);
-        display: flex; gap: 10px; flex-shrink: 0; background: var(--surface);
-        justify-content: flex-end;
+    .drawer-head-info {
+        display: flex; align-items: center; gap: 14px; min-width: 0;
+    }
+    .drawer-head-badge {
+        width: 44px; height: 44px; border-radius: 12px;
+        background: linear-gradient(135deg, rgba(66, 133, 244, 0.12) 0%, rgba(66, 133, 244, 0.04) 100%);
+        border: 1px solid rgba(66, 133, 244, 0.22);
+        color: #1A73E8; display: grid; place-items: center;
+        flex-shrink: 0;
+        box-shadow: 0 2px 6px rgba(66, 133, 244, 0.08);
+    }
+    .drawer-head-badge svg { width: 22px; height: 22px; }
+    .drawer-head-badge.purple {
+        background: linear-gradient(135deg, rgba(147, 51, 234, 0.12) 0%, rgba(147, 51, 234, 0.04) 100%);
+        border-color: rgba(147, 51, 234, 0.22); color: #7E22CE;
+        box-shadow: 0 2px 6px rgba(147, 51, 234, 0.08);
+    }
+    .drawer-head-badge.green {
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0.04) 100%);
+        border-color: rgba(16, 185, 129, 0.22); color: #047857;
+        box-shadow: 0 2px 6px rgba(16, 185, 129, 0.08);
+    }
+    .drawer-head-badge.yellow {
+        background: linear-gradient(135deg, rgba(245, 158, 11, 0.14) 0%, rgba(245, 158, 11, 0.04) 100%);
+        border-color: rgba(245, 158, 11, 0.28); color: #B45309;
+        box-shadow: 0 2px 6px rgba(245, 158, 11, 0.08);
+    }
+    .drawer-head-badge.red {
+        background: linear-gradient(135deg, rgba(239, 68, 68, 0.12) 0%, rgba(239, 68, 68, 0.04) 100%);
+        border-color: rgba(239, 68, 68, 0.22); color: #B91C1C;
+        box-shadow: 0 2px 6px rgba(239, 68, 68, 0.08);
+    }
+    .drawer-head-text { min-width: 0; }
+    .drawer-title {
+        font-family: 'Google Sans', 'Inter', system-ui, sans-serif;
+        font-size: 1.25rem; font-weight: 700; color: #0F172A;
+        letter-spacing: -0.025em; line-height: 1.25;
+    }
+    .drawer-subtitle {
+        font-size: 0.82rem; color: #64748B; margin-top: 3px; font-weight: 500;
+        display: flex; align-items: center; gap: 6px;
     }
 
+    .modal-close, .drawer-close-btn {
+        width: 36px; height: 36px; border-radius: 50%;
+        background: #F8FAFC; border: 1px solid #E2E8F0;
+        color: #64748B; display: grid; place-items: center;
+        cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        flex-shrink: 0; outline: none; font-size: 0.95rem;
+    }
+    .modal-close:hover, .drawer-close-btn:hover {
+        background: #F1F5F9; color: #0F172A;
+        border-color: #CBD5E1; transform: rotate(90deg) scale(1.05);
+    }
+
+    .drawer-body {
+        flex: 1; overflow-y: auto; overflow-x: hidden;
+        padding: 22px 26px;
+        display: flex; flex-direction: column; gap: 16px;
+        background: #F8FAFC;
+        scrollbar-width: thin;
+        scrollbar-color: #CBD5E1 transparent;
+    }
+    /* Sleek custom modern scrollbar */
+    .drawer-body::-webkit-scrollbar { width: 6px; }
+    .drawer-body::-webkit-scrollbar-track { background: transparent; }
+    .drawer-body::-webkit-scrollbar-thumb {
+        background: #CBD5E1; border-radius: 99px;
+    }
+    .drawer-body::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+    .drawer-foot {
+        padding: 16px 26px;
+        border-top: 1px solid #E2E8F0;
+        display: flex; align-items: center; justify-content: space-between;
+        gap: 12px; flex-shrink: 0;
+        background: rgba(255, 255, 255, 0.97);
+        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        position: relative; z-index: 10;
+    }
+    .drawer-kbd-hint {
+        display: inline-flex; align-items: center; gap: 5px; font-size: 0.73rem; color: #64748B; font-weight: 500;
+    }
+    .drawer-kbd-hint kbd {
+        padding: 2.5px 6px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 0.68rem; font-weight: 700; color: #475569;
+        background: #F1F5F9; border: 1px solid #CBD5E1; border-radius: 5px;
+        box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+    }
+    .drawer-foot-actions {
+        display: flex; align-items: center; gap: 10px; margin-left: auto;
+    }
+
+    .field-card {
+        background: #FFFFFF;
+        border: 1px solid #E2E8F0;
+        border-radius: 14px;
+        padding: 18px 20px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02);
+        display: flex; flex-direction: column; gap: 14px;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .field-card:focus-within {
+        border-color: #CBD5E1;
+        box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+    }
+    .field-card-title {
+        font-size: 0.76rem; font-weight: 700; text-transform: uppercase;
+        letter-spacing: 0.06em; color: #475569;
+        display: flex; align-items: center; gap: 8px;
+        padding-bottom: 10px; border-bottom: 1px solid #F1F5F9; margin-bottom: 2px;
+    }
+    .field-card-title svg {
+        width: 15px; height: 15px; color: #3B82F6; flex-shrink: 0;
+    }
     .field-group { display: flex; flex-direction: column; gap: 6px; }
     .field-label {
-        font-size: 0.72rem; font-weight: 800; text-transform: uppercase;
-        letter-spacing: 0.06em; color: var(--ink-3);
+        font-size: 0.82rem; font-weight: 600;
+        color: #334155; display: flex; align-items: center; justify-content: space-between;
+        letter-spacing: -0.01em;
     }
-    .field-input, .field-select {
-        width: 100%; padding: 10px 14px;
-        border: 1.5px solid var(--line); border-radius: var(--r-md);
-        font-family: inherit; font-size: 0.9rem; font-weight: 500;
-        color: var(--ink); outline: none; transition: var(--t); background: var(--bg);
+    .field-label .req {
+        color: #EA4335; font-weight: 800; margin-left: 3px;
     }
-    .field-input:focus, .field-select:focus {
-        border-color: var(--g-blue); background: var(--surface); box-shadow: 0 0 0 3px var(--g-blue-soft);
+    .field-label .opt {
+        font-size: 0.72rem; font-weight: 500; color: #94A3B8; text-transform: none; letter-spacing: normal;
     }
-    .fields-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .field-hint {
+        font-size: 0.75rem; color: #64748B; margin-top: 3px; font-weight: 400; line-height: 1.4;
+    }
+    .field-input, .field-select, textarea.field-input {
+        width: 100%; padding: 10.5px 14px;
+        border: 1.5px solid #E2E8F0; border-radius: 10px;
+        font-family: inherit; font-size: 0.92rem; font-weight: 500;
+        color: #0F172A; outline: none;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        background: #FFFFFF;
+        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.02);
+    }
+    .field-input::placeholder, textarea.field-input::placeholder {
+        color: #94A3B8; font-weight: 400;
+    }
+    .field-input:hover, .field-select:hover, textarea.field-input:hover {
+        border-color: #CBD5E1;
+    }
+    .field-input:focus, .field-select:focus, textarea.field-input:focus {
+        border-color: #3B82F6; background: #FFFFFF;
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.14), 0 1px 3px rgba(0,0,0,0.04);
+        transform: translateY(-1px);
+    }
+    .field-select {
+        appearance: none; -webkit-appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 14px center;
+        padding-right: 38px;
+        cursor: pointer;
+    }
+    .fields-2col {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    }
+    @media (max-width: 540px) {
+        .fields-2col { grid-template-columns: 1fr; }
+        .drawer { max-width: 100vw; }
+        .drawer-head, .drawer-body, .drawer-foot { padding-left: 18px; padding-right: 18px; }
+        .drawer-kbd-hint { display: none; }
+    }
+
+    .btn-drawer-cancel, .drawer-foot .btn-sm-ghost {
+        padding: 10px 18px; border-radius: 9px;
+        font-family: inherit; font-size: 0.88rem; font-weight: 600;
+        color: #475569; background: #F1F5F9; border: 1.5px solid #E2E8F0;
+        cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        display: inline-flex; align-items: center; gap: 6px;
+    }
+    .btn-drawer-cancel:hover, .drawer-foot .btn-sm-ghost:hover {
+        background: #E2E8F0; color: #0F172A; transform: translateY(-1px);
+        border-color: #CBD5E1;
+    }
+    .btn-drawer-save, .drawer-foot .btn-primary {
+        padding: 10px 22px; border-radius: 9px;
+        font-family: inherit; font-size: 0.88rem; font-weight: 600;
+        color: #FFFFFF;
+        background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+        border: none; cursor: pointer;
+        display: inline-flex; align-items: center; gap: 8px;
+        box-shadow: 0 2px 8px rgba(37, 99, 235, 0.28);
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-drawer-save:hover, .drawer-foot .btn-primary:hover {
+        background: linear-gradient(135deg, #1D4ED8 0%, #1E40AF 100%);
+        box-shadow: 0 4px 16px rgba(37, 99, 235, 0.38);
+        transform: translateY(-1.5px);
+    }
+    .btn-drawer-save:active, .drawer-foot .btn-primary:active {
+        transform: translateY(0);
+        box-shadow: 0 1px 4px rgba(37, 99, 235, 0.2);
+    }
+    .btn-drawer-save:disabled, .drawer-foot .btn-primary:disabled {
+        opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none;
+    }
 
     .poster-preview {
         width: 160px; aspect-ratio: 4 / 5; object-fit: cover;
@@ -2095,13 +2286,13 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
                     Licences &amp; Certifications
                 </li>
-                <li class="nav-item nav-item-disabled">
+                <li class="nav-item" id="nav-publications" onclick="switchView('publications',this)">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    Publications <span class="badge-soon">Soon</span>
+                    Publications
                 </li>
-                <li class="nav-item nav-item-disabled">
+                <li class="nav-item" id="nav-blogs" onclick="switchView('blogs',this)">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-                    Blogs <span class="badge-soon">Soon</span>
+                    Blogs
                 </li>
                                 <li class="nav-item" id="nav-gallery" onclick="switchView('gallery',this)">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -2248,13 +2439,13 @@
                         <div class="stat-label">Inquiries Received</div>
                         <div class="stat-value" id="sc-inbox">—</div>
                     </div>
-                    <div class="stat-card green">
+                    <div class="stat-card green" onclick="switchView('publications', document.getElementById('nav-publications'))" style="cursor:pointer;" title="View Publications">
                         <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
                         <div class="stat-label">Total Publications</div>
                         <div class="stat-value" id="sc-pubs">0</div>
                     </div>
-                    <div class="stat-card purple">
-                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg></div>
+                    <div class="stat-card purple" onclick="switchView('blogs', document.getElementById('nav-blogs'))" style="cursor:pointer;" title="View Blog Articles">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></div>
                         <div class="stat-label">Total Article Blog</div>
                         <div class="stat-value" id="sc-blogs">0</div>
                     </div>
@@ -2594,6 +2785,64 @@
                 </div>
             </div>
 
+            <!-- ══ PUBLICATIONS CMS ══ -->
+            <div id="view-publications" class="view">
+                <div class="talks-stats" id="pub-stats" style="margin-bottom: 24px;">
+                    <div class="stat-card blue">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
+                        <div class="stat-label">Total Publications</div>
+                        <div class="stat-value" id="pub-stat-total">0</div>
+                    </div>
+                </div>
+
+                <div class="toolbar" style="margin-bottom: 24px;">
+                    <div class="search-wrap">
+                        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input type="text" id="pub-q" placeholder="Search publications by title, description, or year..." oninput="renderPublicationsGrid()">
+                    </div>
+                    <button class="btn btn-primary" onclick="openPublicationDrawer(null)" style="flex-shrink:0;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        Add Publication
+                    </button>
+                </div>
+
+                <div class="talks-list" id="pub-grid-dash"></div>
+                <div class="empty-state" id="pub-empty" style="display:none">
+                    <div class="empty-icon"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--g-blue);"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
+                    <div class="empty-title">No Publications Yet</div>
+                    <div class="empty-desc">Click "Add Publication" to record your open-source research and repositories.</div>
+                </div>
+            </div>
+
+            <!-- ══ BLOGS CMS ══ -->
+            <div id="view-blogs" class="view">
+                <div class="talks-stats" id="blog-stats" style="margin-bottom: 24px;">
+                    <div class="stat-card purple">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></div>
+                        <div class="stat-label">Total Blog Articles</div>
+                        <div class="stat-value" id="blog-stat-total">0</div>
+                    </div>
+                </div>
+
+                <div class="toolbar" style="margin-bottom: 24px;">
+                    <div class="search-wrap">
+                        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input type="text" id="blog-q" placeholder="Search blog articles by title, badge, or tags..." oninput="renderBlogsGrid()">
+                    </div>
+                    <button class="btn btn-primary" onclick="openBlogDrawer(null)" style="flex-shrink:0;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        Add Article
+                    </button>
+                </div>
+
+                <div class="talks-list" id="blog-grid-dash"></div>
+                <div class="empty-state" id="blog-empty" style="display:none">
+                    <div class="empty-icon"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--g-purple);"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></div>
+                    <div class="empty-title">No Blog Articles Yet</div>
+                    <div class="empty-desc">Click "Add Article" to publish architecture guides and tech notes.</div>
+                </div>
+            </div>
+
             <!-- ══ AWARDS CMS ══ -->
             <div id="view-awards" class="view">
                 <div class="talks-stats" id="award-stats" style="margin-bottom: 24px;">
@@ -2744,130 +2993,153 @@
 <div class="drawer-backdrop" id="dp-backdrop" onclick="closeProjectDrawer()"></div>
 <div class="drawer" id="dp-drawer">
     <div class="drawer-head">
-        <div>
-            <div class="drawer-title" id="dp-title">Add Project</div>
-            <div class="drawer-subtitle">Showcase your portfolio</div>
+        <div class="drawer-head-info">
+            <div class="drawer-head-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+            </div>
+            <div class="drawer-head-text">
+                <div class="drawer-title" id="dp-title">Add Project</div>
+                <div class="drawer-subtitle">Showcase your portfolio and flagship builds</div>
+            </div>
         </div>
-        <button class="modal-close" onclick="closeProjectDrawer()">✕</button>
+        <button class="drawer-close-btn" onclick="closeProjectDrawer()" title="Close (Esc)">✕</button>
     </div>
     <div class="drawer-body">
         <input type="hidden" id="dp-id">
-        
-        <!-- Project Name -->
-        <div class="field-group">
-            <label class="field-label">Project Name *</label>
-            <input class="field-input" id="dp-name" type="text" placeholder="e.g. AI Feedback Dashboard">
-        </div>
 
-        <!-- Description -->
-        <div class="field-group">
-            <label class="field-label">Description</label>
-            <textarea class="field-input" id="dp-description" placeholder="Briefly describe the project..." style="min-height:80px; resize:vertical; padding-top:12px;"></textarea>
-        </div>
-
-        <!-- Date Range -->
-        <div class="field-group">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-                <label class="field-label" style="margin:0;">Date Range</label>
-                <span id="dp-date-preview" style="font-size:0.75rem; font-weight:700; color:var(--g-blue); background:var(--g-blue-soft); padding:2px 8px; border-radius:var(--r-pill); display:none;"></span>
-            </div>
-            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-                <!-- Start Date -->
-                <div style="background:#f8f9fa; border:1.5px solid var(--line); border-radius:var(--r-md); padding:10px 12px;">
-                    <div style="font-size:0.72rem; font-weight:800; color:var(--ink-3); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:6px; display:flex; align-items:center; gap:6px;">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--g-blue)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> Start Date
-                    </div>
-                    <div style="display:flex; gap:6px;">
-                        <select id="dp-start-month" class="field-input" style="flex:1.2; padding:8px 8px; font-size:0.85rem;" onchange="updateProjectDateState()">
-                            <option value="">Month</option>
-                            <option value="01">Jan</option>
-                            <option value="02">Feb</option>
-                            <option value="03">Mar</option>
-                            <option value="04">Apr</option>
-                            <option value="05">May</option>
-                            <option value="06">Jun</option>
-                            <option value="07">Jul</option>
-                            <option value="08">Aug</option>
-                            <option value="09">Sep</option>
-                            <option value="10">Oct</option>
-                            <option value="11">Nov</option>
-                            <option value="12">Dec</option>
-                        </select>
-                        <select id="dp-start-year" class="field-input" style="flex:1; padding:8px 8px; font-size:0.85rem;" onchange="updateProjectDateState()">
-                            <option value="">Year</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- End Date -->
-                <div id="dp-end-container" style="background:#f8f9fa; border:1.5px solid var(--line); border-radius:var(--r-md); padding:10px 12px; transition:opacity 0.2s;">
-                    <div style="font-size:0.72rem; font-weight:800; color:var(--ink-3); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:6px; display:flex; align-items:center; gap:6px;">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--g-green)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> End Date
-                    </div>
-                    <div style="display:flex; gap:6px;">
-                        <select id="dp-end-month" class="field-input" style="flex:1.2; padding:8px 8px; font-size:0.85rem;" onchange="updateProjectDateState()">
-                            <option value="">Month</option>
-                            <option value="01">Jan</option>
-                            <option value="02">Feb</option>
-                            <option value="03">Mar</option>
-                            <option value="04">Apr</option>
-                            <option value="05">May</option>
-                            <option value="06">Jun</option>
-                            <option value="07">Jul</option>
-                            <option value="08">Aug</option>
-                            <option value="09">Sep</option>
-                            <option value="10">Oct</option>
-                            <option value="11">Nov</option>
-                            <option value="12">Dec</option>
-                        </select>
-                        <select id="dp-end-year" class="field-input" style="flex:1; padding:8px 8px; font-size:0.85rem;" onchange="updateProjectDateState()">
-                            <option value="">Year</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
-                <label style="display:inline-flex; align-items:center; gap:6px; cursor:pointer; font-size:0.78rem; color:var(--ink-2); font-weight:600; user-select:none;">
-                    <input type="checkbox" id="dp-is-present" onchange="toggleProjectPresent(this.checked)" style="width:15px; height:15px; accent-color:var(--g-blue); cursor:pointer;">
-                    Currently ongoing (Present)
-                </label>
-                <button type="button" class="btn-sm-ghost" onclick="clearProjectDates()" style="font-size:0.72rem; padding:2px 8px; border:none; color:var(--ink-4); cursor:pointer; background:none;">✕ Clear</button>
-            </div>
-        </div>
-
-        <!-- Thumbnail -->
-        <div class="field-group">
-            <label class="field-label">Thumbnail</label>
-            <img class="poster-preview" id="dp-thumbnail-prev" src="" alt="Thumbnail preview" style="display:none" onerror="this.style.display='none'">
-            <div class="input-row">
-                <input class="field-input" id="dp-thumbnail" type="url" placeholder="https://… (Image URL)" oninput="updateThumbnailPreview()">
-                <input type="file" id="dp-thumbnail-file" accept="image/*" style="display:none" onchange="uploadThumbnail()">
-                <button type="button" class="btn-upload" id="dp-upload-btn" onclick="document.getElementById('dp-thumbnail-file').click()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload</button>
-            </div>
-        </div>
-
-        <!-- Tech Stack Mapping -->
-        <div class="field-group">
-            <label class="field-label">Tech Stack Map</label>
-            <div id="dp-tech-map-container" style="display:flex; flex-direction:column; gap:12px;"></div>
-            <button type="button" class="btn-sm-ghost" onclick="addTechMapGroup()" style="margin-top:8px;">+ Add Category</button>
-        </div>
-
-        <!-- Links -->
-        <div class="fields-2col">
-            <div class="field-group">
-                <label class="field-label">Video Demo URL</label>
-                <input class="field-input" id="dp-videoDemo" type="url" placeholder="https://...">
+        <!-- Card 1: Project Overview -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                Project Overview
             </div>
             <div class="field-group">
-                <label class="field-label">Project URL</label>
-                <input class="field-input" id="dp-linkProject" type="url" placeholder="https://...">
+                <label class="field-label">Project Name <span class="req">*</span></label>
+                <input class="field-input" id="dp-name" type="text" placeholder="e.g. AI Feedback Dashboard">
+            </div>
+            <div class="field-group">
+                <label class="field-label">Description</label>
+                <textarea class="field-input" id="dp-description" placeholder="Briefly describe the project architecture and business value..." style="min-height:80px; resize:vertical; padding-top:10px;"></textarea>
+            </div>
+            <div class="field-group">
+                <label class="field-label">Thumbnail Preview &amp; Upload</label>
+                <img class="poster-preview" id="dp-thumbnail-prev" src="" alt="Thumbnail preview" style="display:none; max-height:160px; border-radius:10px; margin-bottom:8px;" onerror="this.style.display='none'">
+                <div class="input-row">
+                    <input class="field-input" id="dp-thumbnail" type="url" placeholder="https://… (Image URL)" oninput="updateThumbnailPreview()">
+                    <input type="file" id="dp-thumbnail-file" accept="image/*" style="display:none" onchange="uploadThumbnail()">
+                    <button type="button" class="btn-upload" id="dp-upload-btn" onclick="document.getElementById('dp-thumbnail-file').click()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2: Date Range & Timeline -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+                Timeline &amp; Status
+            </div>
+            <div class="field-group">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                    <label class="field-label" style="margin:0;">Project Period</label>
+                    <span id="dp-date-preview" style="font-size:0.75rem; font-weight:700; color:var(--g-blue); background:var(--g-blue-soft); padding:2px 8px; border-radius:var(--r-pill); display:none;"></span>
+                </div>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
+                    <!-- Start Date -->
+                    <div style="background:#F8FAFC; border:1.5px solid #E2E8F0; border-radius:10px; padding:10px 12px;">
+                        <div style="font-size:0.72rem; font-weight:800; color:#475569; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:6px; display:flex; align-items:center; gap:6px;">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> Start Date
+                        </div>
+                        <div style="display:flex; gap:6px;">
+                            <select id="dp-start-month" class="field-input" style="flex:1.2; padding:7px 8px; font-size:0.85rem;" onchange="updateProjectDateState()">
+                                <option value="">Month</option>
+                                <option value="01">Jan</option>
+                                <option value="02">Feb</option>
+                                <option value="03">Mar</option>
+                                <option value="04">Apr</option>
+                                <option value="05">May</option>
+                                <option value="06">Jun</option>
+                                <option value="07">Jul</option>
+                                <option value="08">Aug</option>
+                                <option value="09">Sep</option>
+                                <option value="10">Oct</option>
+                                <option value="11">Nov</option>
+                                <option value="12">Dec</option>
+                            </select>
+                            <select id="dp-start-year" class="field-input" style="flex:1; padding:7px 8px; font-size:0.85rem;" onchange="updateProjectDateState()">
+                                <option value="">Year</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- End Date -->
+                    <div id="dp-end-container" style="background:#F8FAFC; border:1.5px solid #E2E8F0; border-radius:10px; padding:10px 12px; transition:opacity 0.2s;">
+                        <div style="font-size:0.72rem; font-weight:800; color:#475569; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:6px; display:flex; align-items:center; gap:6px;">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> End Date
+                        </div>
+                        <div style="display:flex; gap:6px;">
+                            <select id="dp-end-month" class="field-input" style="flex:1.2; padding:7px 8px; font-size:0.85rem;" onchange="updateProjectDateState()">
+                                <option value="">Month</option>
+                                <option value="01">Jan</option>
+                                <option value="02">Feb</option>
+                                <option value="03">Mar</option>
+                                <option value="04">Apr</option>
+                                <option value="05">May</option>
+                                <option value="06">Jun</option>
+                                <option value="07">Jul</option>
+                                <option value="08">Aug</option>
+                                <option value="09">Sep</option>
+                                <option value="10">Oct</option>
+                                <option value="11">Nov</option>
+                                <option value="12">Dec</option>
+                            </select>
+                            <select id="dp-end-year" class="field-input" style="flex:1; padding:7px 8px; font-size:0.85rem;" onchange="updateProjectDateState()">
+                                <option value="">Year</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
+                    <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer; font-size:0.82rem; color:#334155; font-weight:600; user-select:none;">
+                        <input type="checkbox" id="dp-is-present" onchange="toggleProjectPresent(this.checked)" style="width:16px; height:16px; accent-color:var(--g-blue); cursor:pointer;">
+                        Currently ongoing (Present)
+                    </label>
+                    <button type="button" class="btn-sm-ghost" onclick="clearProjectDates()" style="font-size:0.75rem; padding:3px 10px; border:none; color:#64748B; cursor:pointer; background:none;">✕ Clear Dates</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3: Tech Stack & Links -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                Tech Stack &amp; Links
+            </div>
+            <div class="field-group">
+                <label class="field-label">Tech Stack Mapping</label>
+                <div id="dp-tech-map-container" style="display:flex; flex-direction:column; gap:12px;"></div>
+                <button type="button" class="btn-sm-ghost" onclick="addTechMapGroup()" style="margin-top:8px; align-self:flex-start;">+ Add Category</button>
+            </div>
+            <div class="fields-2col">
+                <div class="field-group">
+                    <label class="field-label">Video Demo URL</label>
+                    <input class="field-input" id="dp-videoDemo" type="url" placeholder="https://...">
+                </div>
+                <div class="field-group">
+                    <label class="field-label">Project URL</label>
+                    <input class="field-input" id="dp-linkProject" type="url" placeholder="https://...">
+                </div>
             </div>
         </div>
     </div>
     <div class="drawer-foot">
-        <button class="btn-sm-ghost" onclick="closeProjectDrawer()">Cancel</button>
-        <button class="btn btn-primary" id="dp-save" onclick="saveProject()">Save Project</button>
+        <span class="drawer-kbd-hint"><kbd>Esc</kbd> to close &bull; <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to save</span>
+        <div class="drawer-foot-actions">
+            <button class="btn-drawer-cancel" onclick="closeProjectDrawer()">Cancel</button>
+            <button class="btn-drawer-save" id="dp-save" onclick="saveProject()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                Save Project
+            </button>
+        </div>
     </div>
 </div>
 
@@ -2875,61 +3147,79 @@
 <div class="drawer-backdrop" id="nf-form-backdrop" onclick="closeNewFormModal()"></div>
 <div class="drawer" id="nf-form-drawer">
     <div class="drawer-head">
-        <div>
-            <div class="drawer-title" id="nf-drawer-title">Create New Form</div>
-            <div class="drawer-subtitle" id="nf-drawer-subtitle">Set up a new feedback form</div>
+        <div class="drawer-head-info">
+            <div class="drawer-head-badge yellow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+            </div>
+            <div class="drawer-head-text">
+                <div class="drawer-title" id="nf-drawer-title">Create New Form</div>
+                <div class="drawer-subtitle" id="nf-drawer-subtitle">Set up a new feedback form</div>
+            </div>
         </div>
-        <button class="modal-close" onclick="closeNewFormModal()">✕</button>
+        <button class="drawer-close-btn" onclick="closeNewFormModal()" title="Close (Esc)">✕</button>
     </div>
     <div class="drawer-body">
-        <!-- Form Type -->
-        <div class="field-group" id="nf-type-group">
-            <label class="field-label">Form Type</label>
-            <div class="ftype-selector">
-                <div id="ftype-card-feedback" class="ftype-card active" onclick="selectFormType('feedback')">
-                    <div style="display:flex;align-items:center;gap:7px;font-size:0.86rem;font-weight:800;color:#B06000;">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="flex-shrink:0"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                        <span>Feedback Form</span>
+        <!-- Card 1: Form Type & Basics -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+                Form Type &amp; Information
+            </div>
+            <!-- Form Type -->
+            <div class="field-group" id="nf-type-group">
+                <label class="field-label">Form Type</label>
+                <div class="ftype-selector">
+                    <div id="ftype-card-feedback" class="ftype-card active" onclick="selectFormType('feedback')">
+                        <div style="display:flex;align-items:center;gap:7px;font-size:0.86rem;font-weight:800;color:#B06000;">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="flex-shrink:0"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            <span>Feedback Form</span>
+                        </div>
+                        <div style="font-size:0.73rem;color:var(--ink-3);line-height:1.35;margin-top:2px;">Standardized fields, syncs to table feedbacks.</div>
                     </div>
-                    <div style="font-size:0.73rem;color:var(--ink-3);line-height:1.35;margin-top:2px;">Standardized fields, syncs to table feedbacks.</div>
-                </div>
-                <div id="ftype-card-general" class="ftype-card" onclick="selectFormType('general')">
-                    <div style="display:flex;align-items:center;gap:7px;font-size:0.86rem;font-weight:800;color:var(--ink);">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
-                        <span>General Form</span>
+                    <div id="ftype-card-general" class="ftype-card" onclick="selectFormType('general')">
+                        <div style="display:flex;align-items:center;gap:7px;font-size:0.86rem;font-weight:800;color:var(--ink);">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                            <span>General Form</span>
+                        </div>
+                        <div style="font-size:0.73rem;color:var(--ink-3);line-height:1.35;margin-top:2px;">Custom questions builder for dynamic surveys.</div>
                     </div>
-                    <div style="font-size:0.73rem;color:var(--ink-3);line-height:1.35;margin-top:2px;">Custom questions builder for dynamic surveys.</div>
                 </div>
+            </div>
+
+            <div class="field-group">
+                <label class="field-label">Form Title <span class="req">*</span></label>
+                <input class="field-input" id="nf-title" placeholder="e.g. Session Feedback, Workshop Survey…" oninput="updateSlugPreview()" onblur="saveFormMeta()">
+            </div>
+
+            <div class="field-group">
+                <label class="field-label">Description <span class="opt">Optional</span></label>
+                <textarea class="field-input" id="nf-desc" placeholder="Tell respondents what this form is about..." style="resize:vertical;min-height:72px;line-height:1.6" onblur="saveFormMeta()"></textarea>
+            </div>
+
+            <div class="field-group">
+                <label class="field-label">Tag <span class="opt">Optional</span></label>
+                <input class="field-input" id="nf-tag" placeholder="e.g. Workshop AI, Google Cloud Summit, Web Dev 2026…" onblur="saveFormMeta()">
             </div>
         </div>
 
-        <div class="field-group">
-            <label class="field-label">Form Title *</label>
-            <input class="field-input" id="nf-title" placeholder="e.g. Session Feedback, Workshop Survey…" oninput="updateSlugPreview()" onblur="saveFormMeta()">
+        <!-- Card 2: Appearance & Link -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                Appearance &amp; URL
+            </div>
+            <div class="field-group">
+                <label class="field-label">Header Accent Color</label>
+                <div class="color-row" id="nf-colors"></div>
+            </div>
+
+            <div class="field-group">
+                <label class="field-label">URL Slug Preview</label>
+                <div style="font-size:0.84rem;font-family:monospace;color:#334155;background:#F8FAFC;padding:10px 14px;border-radius:10px;border:1.5px solid #E2E8F0;word-break:break-all;" id="nf-slug-preview">.../form/...</div>
+            </div>
         </div>
 
-        <div class="field-group">
-            <label class="field-label">Description</label>
-            <textarea class="field-input" id="nf-desc" placeholder="Optional — tell respondents what this form is about." style="resize:vertical;min-height:72px;line-height:1.6" onblur="saveFormMeta()"></textarea>
-        </div>
-
-        <div class="field-group">
-            <label class="field-label">Tag</label>
-            <input class="field-input" id="nf-tag" placeholder="Optional — e.g. Workshop AI, Google Cloud Summit, Web Dev 2026…" onblur="saveFormMeta()">
-        </div>
-
-        <div class="field-group">
-            <label class="field-label">Header Color</label>
-            <div class="color-row" id="nf-colors"></div>
-        </div>
-
-        <div class="field-group">
-            <label class="field-label">URL Preview</label>
-            <div style="font-size:0.82rem;font-family:monospace;color:var(--ink-3);background:var(--bg);padding:9px 13px;border-radius:var(--r-sm);border:1.5px solid var(--line)" id="nf-slug-preview">.../form/...</div>
-        </div>
-
-
-        <div id="drawer-fields-section" style="display:none; margin-top:24px; padding-top:24px; border-top:1.5px dashed var(--line);">
+        <div id="drawer-fields-section" style="display:none; margin-top:14px; padding-top:16px; border-top:1.5px dashed #CBD5E1;">
             <div class="fb-fields-head">
                 <div class="fb-fields-label" id="df-count">Fields (0)</div>
             </div>
@@ -2938,9 +3228,12 @@
         </div>
     </div>
     <div class="drawer-foot">
-        <button class="btn-sm-ghost" id="df-btn-cancel" onclick="closeNewFormModal()" style="flex:1">Cancel</button>
-        <button class="btn btn-primary" id="df-btn-create" onclick="createForm()" style="flex:2">Create Form</button>
-        <button class="btn btn-primary" id="df-btn-save" onclick="saveFormAndClose()" style="display:none; flex:2">Save Changes</button>
+        <span class="drawer-kbd-hint"><kbd>Esc</kbd> to close &bull; <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to save</span>
+        <div class="drawer-foot-actions">
+            <button class="btn-drawer-cancel" id="df-btn-cancel" onclick="closeNewFormModal()">Cancel</button>
+            <button class="btn-drawer-save" id="df-btn-create" onclick="createForm()">Create Form</button>
+            <button class="btn-drawer-save" id="df-btn-save" onclick="saveFormAndClose()" style="display:none;">Save Changes</button>
+        </div>
     </div>
 </div>
 
@@ -2960,7 +3253,7 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                 Export CSV
             </button>
-            <button class="modal-close" onclick="closeFormResponses()" title="Close">✕</button>
+            <button class="drawer-close-btn" onclick="closeFormResponses()" title="Close (Esc)">✕</button>
         </div>
     </div>
 
@@ -2992,8 +3285,11 @@
     </div>
     
     <div class="drawer-foot">
-        <button class="btn-sm-ghost" onclick="closeFormResponses()">Close</button>
-        <button class="btn btn-primary" id="resp-btn-open-form" onclick="openCurrentFormPublic()">View Public Form ↗</button>
+        <span class="drawer-kbd-hint"><kbd>Esc</kbd> to close</span>
+        <div class="drawer-foot-actions">
+            <button class="btn-drawer-cancel" onclick="closeFormResponses()">Close</button>
+            <button class="btn-drawer-save" id="resp-btn-open-form" onclick="openCurrentFormPublic()">View Public Form ↗</button>
+        </div>
     </div>
 </div>
 
@@ -3001,101 +3297,111 @@
 <div class="drawer-backdrop" id="talk-backdrop" onclick="closeTalkDrawer()"></div>
 <div class="drawer" id="talk-drawer">
     <div class="drawer-head">
-        <div>
-            <div class="drawer-title" id="dk-title">Add Talk</div>
-            <div class="drawer-subtitle" id="dk-sub">Add a new speaking engagement</div>
+        <div class="drawer-head-info">
+            <div class="drawer-head-badge red">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+            </div>
+            <div class="drawer-head-text">
+                <div class="drawer-title" id="dk-title">Add Talk</div>
+                <div class="drawer-subtitle" id="dk-sub">Add a new speaking engagement</div>
+            </div>
         </div>
-        <button class="modal-close" onclick="closeTalkDrawer()">✕</button>
+        <button class="drawer-close-btn" onclick="closeTalkDrawer()" title="Close (Esc)">✕</button>
     </div>
     <div class="drawer-body">
         <div class="err-banner" id="dk-err"></div>
 
-        <!-- Event -->
-        <div class="field-group">
-            <label class="field-label">Event *</label>
-            <input class="field-input" id="dk-event" type="text" placeholder="Event / conference name…">
-        </div>
-
-        <!-- Organizer -->
-        <div class="field-group">
-            <label class="field-label">Organizer</label>
-            <input class="field-input" id="dk-organizer" type="text" placeholder="Organizer name">
-        </div>
-
-        <!-- Place + Date -->
-        <div class="fields-2col">
-            <div class="field-group">
-                <label class="field-label">Place</label>
-                <input class="field-input" id="dk-place" type="text" placeholder="City / Venue">
+        <!-- Card 1: Event Details -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg>
+                Event &amp; Venue
             </div>
             <div class="field-group">
-                <label class="field-label">Date</label>
-                <input class="field-input" id="dk-date" type="date">
+                <label class="field-label">Event Name <span class="req">*</span></label>
+                <input class="field-input" id="dk-event" type="text" placeholder="e.g. Google I/O Extended Makassar">
+            </div>
+            <div class="field-group">
+                <label class="field-label">Organizer <span class="opt">Optional</span></label>
+                <input class="field-input" id="dk-organizer" type="text" placeholder="e.g. GDG Makassar, Developer Student Clubs">
+            </div>
+            <div class="fields-2col">
+                <div class="field-group">
+                    <label class="field-label">Place / Venue</label>
+                    <input class="field-input" id="dk-place" type="text" placeholder="City or Campus venue">
+                </div>
+                <div class="field-group">
+                    <label class="field-label">Date</label>
+                    <input class="field-input" id="dk-date" type="date">
+                </div>
+            </div>
+            <div class="field-group">
+                <label class="field-label">Total Attendees</label>
+                <input class="field-input" id="dk-peserta" type="number" min="0" placeholder="e.g. 250">
             </div>
         </div>
 
-        <!-- Jumlah Peserta -->
-        <div class="field-group">
-            <label class="field-label">Total Attendees</label>
-            <input class="field-input" id="dk-peserta" type="number" min="0" placeholder="Example: 250">
+        <!-- Card 2: Topics & Media Documentation -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                Topics &amp; Documentation
+            </div>
+            <div class="field-group">
+                <label class="field-label">Topics</label>
+                <div class="tags-input-container" id="dk-topics-container" onclick="document.getElementById('dk-topics-input').focus()">
+                    <div id="dk-topics-list" class="tags-list"></div>
+                    <input type="text" class="tags-input" id="dk-topics-input" placeholder="Type topic and press Enter..." onkeydown="handleTopicKey(event)">
+                </div>
+                <div class="field-hint">Press Enter to tag topics like Agentic AI, Computer Vision, FastAPI.</div>
+            </div>
+            <div class="field-group">
+                <label class="field-label">Poster Image</label>
+                <img class="poster-preview" id="dk-poster-prev" src="" alt="Poster preview" style="display:none; max-height:160px; border-radius:10px; margin-bottom:8px;" onerror="this.style.display='none'">
+                <div class="input-row">
+                    <input class="field-input" id="dk-poster" type="url" placeholder="https://… (Poster image URL)" oninput="updatePosterPreview()">
+                    <input type="file" id="dk-poster-file" accept="image/*" style="display:none" onchange="uploadPoster()">
+                    <button type="button" class="btn-upload" id="dk-upload-btn" onclick="document.getElementById('dk-poster-file').click()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload</button>
+                </div>
+            </div>
+            <div class="field-group">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                    <label class="field-label" style="margin:0;">Event Photos (Gallery)</label>
+                    <span id="dk-gallery-count" style="font-size:0.75rem; font-weight:700; color:#475569; background:#F1F5F9; padding:2px 8px; border-radius:99px;">0 photos</span>
+                </div>
+                <div id="dk-gallery-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(72px, 1fr)); gap:8px; margin-bottom:10px;"></div>
+                <div class="input-row">
+                    <input class="field-input" id="dk-gallery-url" type="url" placeholder="https://… (Photo URL)" onkeydown="if(event.key==='Enter'){event.preventDefault();addGalleryUrl();}">
+                    <button type="button" class="btn-sm-ghost" onclick="addGalleryUrl()" style="padding:0 12px; font-size:0.8rem; font-weight:700;">+ Add URL</button>
+                    <input type="file" id="dk-gallery-files" accept="image/*" multiple style="display:none" onchange="uploadTalkGalleryFiles(this.files)">
+                    <button type="button" class="btn-upload" id="dk-gallery-upbtn" onclick="document.getElementById('dk-gallery-files').click()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload Photos
+                    </button>
+                </div>
+            </div>
         </div>
 
-        <!-- Topics -->
-        <div class="field-group">
-            <label class="field-label">Topics</label>
-            <div class="tags-input-container" id="dk-topics-container" onclick="document.getElementById('dk-topics-input').focus()">
-                <div id="dk-topics-list" class="tags-list"></div>
-                <input type="text" class="tags-input" id="dk-topics-input" placeholder="Type a topic and press Enter..." onkeydown="handleTopicKey(event)">
+        <!-- Card 3: Presentation Slides -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h20v14H2z"></path><path d="M8 21h8"></path><path d="M12 17v4"></path></svg>
+                Presentation Slides
             </div>
-            <div style="font-size:0.75rem; color:var(--ink-4); margin-top:6px;">Add multiple topics by pressing Enter.</div>
-        </div>
-
-        <!-- Poster -->
-        <div class="field-group">
-            <label class="field-label">Poster</label>
-            <img class="poster-preview" id="dk-poster-prev" src="" alt="Poster preview" style="display:none" onerror="this.style.display='none'">
-            <div class="input-row">
-                <input class="field-input" id="dk-poster" type="url" placeholder="https://… (Image URL)" oninput="updatePosterPreview()">
-                <input type="file" id="dk-poster-file" accept="image/*" style="display:none" onchange="uploadPoster()">
-                <button type="button" class="btn-upload" id="dk-upload-btn" onclick="document.getElementById('dk-poster-file').click()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload</button>
+            <div class="field-group">
+                <div class="slide-rows" id="dk-slides"></div>
+                <button type="button" class="btn-add-slide" onclick="addSlide()" style="margin-top:8px">+ Add Slide</button>
             </div>
-        </div>
-
-        <!-- Gallery (Event Photos) -->
-        <div class="field-group">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-                <label class="field-label" style="margin:0; display:flex; align-items:center; gap:6px;">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--g-blue)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-                    Gallery (Event Photos)
-                </label>
-                <span id="dk-gallery-count" style="font-size:0.72rem; font-weight:700; color:var(--ink-4); background:#f1f3f4; padding:2px 8px; border-radius:var(--r-pill);">0 photos</span>
-            </div>
-            
-            <div id="dk-gallery-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(72px, 1fr)); gap:8px; margin-bottom:10px;"></div>
-            
-            <div class="input-row">
-                <input class="field-input" id="dk-gallery-url" type="url" placeholder="https://… (Photo URL)" onkeydown="if(event.key==='Enter'){event.preventDefault();addGalleryUrl();}">
-                <button type="button" class="btn-sm-ghost" onclick="addGalleryUrl()" style="padding:0 12px; font-size:0.8rem; font-weight:700; border:1.5px solid var(--line); border-radius:var(--r-md); background:var(--surface);">+ Add URL</button>
-                <input type="file" id="dk-gallery-files" accept="image/*" multiple style="display:none" onchange="uploadTalkGalleryFiles(this.files)">
-                <button type="button" class="btn-upload" id="dk-gallery-upbtn" onclick="document.getElementById('dk-gallery-files').click()">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload Photos
-                </button>
-            </div>
-            <div style="font-size:0.75rem; color:var(--ink-4); margin-top:6px;">Upload multiple photos or paste image URLs to showcase event documentation.</div>
-        </div>
-
-        <!-- Slides -->
-        <div class="field-group">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-                <label class="field-label" style="margin:0">Presentation Slides</label>
-            </div>
-            <div class="slide-rows" id="dk-slides"></div>
-            <button type="button" class="btn-add-slide" onclick="addSlide()" style="margin-top:8px">+ Add Slide</button>
         </div>
     </div>
     <div class="drawer-foot">
-        <button class="btn-sm-ghost" onclick="closeTalkDrawer()">Cancel</button>
-        <button class="btn btn-primary" id="dk-save" onclick="saveTalk()">Save Talk</button>
+        <span class="drawer-kbd-hint"><kbd>Esc</kbd> to close &bull; <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to save</span>
+        <div class="drawer-foot-actions">
+            <button class="btn-drawer-cancel" onclick="closeTalkDrawer()">Cancel</button>
+            <button class="btn-drawer-save" id="dk-save" onclick="saveTalk()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                Save Talk
+            </button>
+        </div>
     </div>
 </div>
 
@@ -3103,66 +3409,122 @@
 <div class="drawer-backdrop" id="exp-backdrop" onclick="closeExperienceDrawer()"></div>
 <div class="drawer" id="exp-drawer">
     <div class="drawer-head">
-        <div>
-            <div class="drawer-title" id="exp-drawer-title">Add Work Experience</div>
-            <div class="drawer-subtitle">Career history synced to portfolio timeline</div>
+        <div class="drawer-head-info">
+            <div class="drawer-head-badge green" id="exp-drawer-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+            </div>
+            <div class="drawer-head-text">
+                <div class="drawer-title" id="exp-drawer-title">Add Work Experience</div>
+                <div class="drawer-subtitle">Career history synced to live portfolio timeline</div>
+            </div>
         </div>
-        <button class="modal-close" onclick="closeExperienceDrawer()">✕</button>
+        <button class="drawer-close-btn" onclick="closeExperienceDrawer()" title="Close (Esc)">✕</button>
     </div>
     <div class="drawer-body">
         <input type="hidden" id="exp-id">
-        <div class="field-group">
-            <label class="field-label">Role Title *</label>
-            <input class="field-input" id="exp-role" placeholder="e.g. AI Trainer, Co-Founder (AI & Product Lead)">
-        </div>
-        <div class="field-group">
-            <label class="field-label">Company / Organization *</label>
-            <input class="field-input" id="exp-company" placeholder="e.g. AksaraHub Nusantara, RevoU, Samsung R&D">
-        </div>
-        <div class="field-group">
-            <label class="field-label">Location / Work Type</label>
-            <input class="field-input" id="exp-location" placeholder="e.g. Hybrid, Remote, Jakarta, ID">
-        </div>
-        <div class="fields-2col">
-            <div class="field-group">
-                <label class="field-label">Start Date *</label>
-                <input class="field-input" id="exp-start" placeholder="e.g. Jan 2026, Jul 2024">
+
+        <!-- Card 1: Role & Organization -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                Role &amp; Organization
             </div>
             <div class="field-group">
-                <label class="field-label">End Date</label>
-                <input class="field-input" id="exp-end" placeholder="e.g. Present, Dec 2025">
+                <label class="field-label">Role Title <span class="req">*</span></label>
+                <input class="field-input" id="exp-role" placeholder="e.g. AI Trainer, Co-Founder &amp; Product Lead">
+            </div>
+            <div class="field-group">
+                <label class="field-label">Company / Organization <span class="req">*</span></label>
+                <input class="field-input" id="exp-company" placeholder="e.g. AksaraHub Nusantara, RevoU, Samsung R&amp;D">
+            </div>
+            <div class="field-group">
+                <label class="field-label">Location / Work Type <span class="opt">Optional</span></label>
+                <input class="field-input" id="exp-location" placeholder="e.g. Jakarta, ID &bull; Hybrid or Remote">
+            </div>
+
+            <!-- Visual Company Logo with Preview & Upload -->
+            <div class="field-group">
+                <label class="field-label">Company Logo <span class="opt">Visual Preview &amp; Upload</span></label>
+                <div style="display:flex; align-items:center; gap:14px; background:#F8FAFC; border:1.5px solid #E2E8F0; border-radius:12px; padding:12px 14px;">
+                    <div style="width:64px; height:64px; border-radius:12px; background:#FFFFFF; border:1.5px solid #E2E8F0; display:grid; place-items:center; overflow:hidden; flex-shrink:0; box-shadow:0 1px 3px rgba(15,23,42,0.06); padding:4px;">
+                        <img id="exp-logo-preview" src="" alt="Company Logo" style="width:100%; height:100%; object-fit:contain; display:none;" onerror="this.style.display='none'; document.getElementById('exp-logo-fallback').style.display='grid';">
+                        <div id="exp-logo-fallback" style="font-size:1.6rem; display:grid; place-items:center; color:#0F9D58;">💼</div>
+                    </div>
+                    <div style="flex:1; min-width:0; display:flex; flex-direction:column; gap:6px;">
+                        <div style="display:flex; gap:8px;">
+                            <input class="field-input" id="exp-logo" placeholder="e.g. /assets/images/aksarahub-logo.png or https://…" oninput="updateExpLogoPreview()" style="font-size:0.86rem; padding:8px 12px;">
+                            <input type="file" id="exp-logo-file" accept="image/*" style="display:none" onchange="uploadExpLogo()">
+                            <button type="button" class="btn-upload" id="exp-logo-upload-btn" onclick="document.getElementById('exp-logo-file').click()" style="padding:8px 14px; flex-shrink:0;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload
+                            </button>
+                        </div>
+                        <div class="field-hint" style="margin:0; font-size:0.75rem;">Insert image URL, relative path (<code>/assets/images/...</code>), or upload a new logo.</div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="field-group" style="flex-direction:row; align-items:center; gap:8px;">
-            <input type="checkbox" id="exp-current" style="width:16px;height:16px;cursor:pointer;">
-            <label for="exp-current" style="font-size:0.85rem; font-weight:600; cursor:pointer;">Currently working in this role</label>
+
+        <!-- Card 2: Timeline & Status -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+                Timeline &amp; Display
+            </div>
+            <div class="fields-2col">
+                <div class="field-group">
+                    <label class="field-label">Start Date <span class="req">*</span></label>
+                    <input class="field-input" id="exp-start" placeholder="e.g. Jan 2026, Jul 2024">
+                </div>
+                <div class="field-group">
+                    <label class="field-label">End Date <span class="opt">Leave blank if current</span></label>
+                    <input class="field-input" id="exp-end" placeholder="e.g. Present, Dec 2025">
+                </div>
+            </div>
+            <div class="field-group" style="flex-direction:row; align-items:center; gap:10px; padding:6px 0;">
+                <input type="checkbox" id="exp-current" style="width:17px; height:17px; cursor:pointer; accent-color:var(--g-blue);">
+                <label for="exp-current" style="font-size:0.84rem; font-weight:600; color:#334155; cursor:pointer;">Currently working in this role</label>
+            </div>
+            <div class="field-group">
+                <label class="field-label">Timeline Accent Color</label>
+                <select class="field-select" id="exp-color">
+                    <option value="var(--blue)">Google Blue</option>
+                    <option value="var(--red)">Coral Red</option>
+                    <option value="var(--green)">Emerald Green</option>
+                    <option value="var(--yellow)">Amber Gold</option>
+                    <option value="var(--purple)">Indigo Purple</option>
+                </select>
+            </div>
         </div>
-        <div class="field-group">
-            <label class="field-label">Accent Color</label>
-            <select class="field-select" id="exp-color">
-                <option value="var(--blue)">Google Blue</option>
-                <option value="var(--red)">Coral Red</option>
-                <option value="var(--green)">Emerald Green</option>
-                <option value="var(--yellow)">Amber Gold</option>
-                <option value="var(--purple)">Indigo Purple</option>
-            </select>
-        </div>
-        <div class="field-group">
-            <label class="field-label">Tech Stack (comma-separated)</label>
-            <input class="field-input" id="exp-stack" placeholder="e.g. PyTorch, Computer Vision, OCR, FastAPI">
-        </div>
-        <div class="field-group">
-            <label class="field-label">Sort Order (lower = first)</label>
-            <input class="field-input" id="exp-sort" type="number" value="0">
-        </div>
-        <div class="field-group">
-            <label class="field-label">Role Description &amp; Achievements</label>
-            <textarea class="field-input" id="exp-desc" rows="4" style="resize:vertical;" placeholder="Key responsibilities and tangible impact..."></textarea>
+
+        <!-- Card 3: Skills & Experience Details -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                Tech Stack &amp; Achievements
+            </div>
+            <div class="field-group">
+                <label class="field-label">Tech Stack (comma-separated)</label>
+                <input class="field-input" id="exp-stack" placeholder="e.g. PyTorch, Computer Vision, OCR, FastAPI, PostgreSQL">
+            </div>
+            <div class="field-group">
+                <label class="field-label">Role Description &amp; Achievements</label>
+                <textarea class="field-input" id="exp-desc" rows="4" style="resize:vertical;" placeholder="Key responsibilities, shipped architectures, and tangible business impact..."></textarea>
+            </div>
+            <div class="field-group">
+                <label class="field-label">Sort Order <span class="opt">Lower numbers appear first</span></label>
+                <input class="field-input" id="exp-sort" type="number" value="0">
+            </div>
         </div>
     </div>
     <div class="drawer-foot">
-        <button class="btn-sm-ghost" onclick="closeExperienceDrawer()">Cancel</button>
-        <button class="btn btn-primary" id="exp-save-btn" onclick="saveExperience()">Save Experience</button>
+        <span class="drawer-kbd-hint"><kbd>Esc</kbd> to close &bull; <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to save</span>
+        <div class="drawer-foot-actions">
+            <button class="btn-drawer-cancel" onclick="closeExperienceDrawer()">Cancel</button>
+            <button class="btn-drawer-save" id="exp-save-btn" onclick="saveExperience()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                Save Experience
+            </button>
+        </div>
     </div>
 </div>
 
@@ -3170,76 +3532,128 @@
 <div class="drawer-backdrop" id="edu-backdrop" onclick="closeEducationDrawer()"></div>
 <div class="drawer" id="edu-drawer">
     <div class="drawer-head">
-        <div>
-            <div class="drawer-title" id="edu-drawer-title">Add Education</div>
-            <div class="drawer-subtitle">Academic foundations synced to portfolio</div>
+        <div class="drawer-head-info">
+            <div class="drawer-head-badge" id="edu-drawer-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+            </div>
+            <div class="drawer-head-text">
+                <div class="drawer-title" id="edu-drawer-title">Add Education</div>
+                <div class="drawer-subtitle">Academic foundations synced to live portfolio</div>
+            </div>
         </div>
-        <button class="modal-close" onclick="closeEducationDrawer()">✕</button>
+        <button class="drawer-close-btn" onclick="closeEducationDrawer()" title="Close (Esc)">✕</button>
     </div>
     <div class="drawer-body">
         <input type="hidden" id="edu-id">
-        <div class="field-group">
-            <label class="field-label">Degree Title *</label>
-            <input class="field-input" id="edu-degree" placeholder="e.g. Bachelor of Computer Science">
-        </div>
-        <div class="field-group">
-            <label class="field-label">Institution / University *</label>
-            <input class="field-input" id="edu-institution" placeholder="e.g. Hasanuddin University">
-        </div>
-        <div class="field-group">
-            <label class="field-label">Institution Logo URL</label>
-            <input class="field-input" id="edu-logo" placeholder="https://… or /assets/images/unhas-logo.png">
-        </div>
-        <div class="fields-2col">
-            <div class="field-group">
-                <label class="field-label">Start Date</label>
-                <input class="field-input" id="edu-start" placeholder="e.g. September 2020">
+
+        <!-- Card 1: Degree & Institution -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+                Degree &amp; Institution
             </div>
             <div class="field-group">
-                <label class="field-label">End Date</label>
-                <input class="field-input" id="edu-end" placeholder="e.g. July 2024">
-            </div>
-        </div>
-        <div class="fields-2col">
-            <div class="field-group">
-                <label class="field-label">Grade / GPA</label>
-                <input class="field-input" id="edu-grade" placeholder="e.g. 3.97 / 4.00">
+                <label class="field-label">Degree Title <span class="req">*</span></label>
+                <input class="field-input" id="edu-degree" placeholder="e.g. Bachelor of Computer Science">
             </div>
             <div class="field-group">
-                <label class="field-label">Honors</label>
-                <input class="field-input" id="edu-honors" placeholder="e.g. Cumlaude">
+                <label class="field-label">Institution / University <span class="req">*</span></label>
+                <input class="field-input" id="edu-institution" placeholder="e.g. Hasanuddin University">
+            </div>
+
+            <!-- Visual Institution Logo with Preview & Upload -->
+            <div class="field-group">
+                <label class="field-label">Institution Logo <span class="opt">Visual Preview &amp; Upload</span></label>
+                <div style="display:flex; align-items:center; gap:14px; background:#F8FAFC; border:1.5px solid #E2E8F0; border-radius:12px; padding:12px 14px;">
+                    <div style="width:64px; height:64px; border-radius:12px; background:#FFFFFF; border:1.5px solid #E2E8F0; display:grid; place-items:center; overflow:hidden; flex-shrink:0; box-shadow:0 1px 3px rgba(15,23,42,0.06); padding:4px;">
+                        <img id="edu-logo-preview" src="" alt="Institution Logo" style="width:100%; height:100%; object-fit:contain; display:none;" onerror="this.style.display='none'; document.getElementById('edu-logo-fallback').style.display='grid';">
+                        <div id="edu-logo-fallback" style="font-size:1.6rem; display:grid; place-items:center; color:#1A73E8;">🎓</div>
+                    </div>
+                    <div style="flex:1; min-width:0; display:flex; flex-direction:column; gap:6px;">
+                        <div style="display:flex; gap:8px;">
+                            <input class="field-input" id="edu-logo" placeholder="e.g. /assets/images/unhas-logo.png or https://…" oninput="updateEduLogoPreview()" style="font-size:0.86rem; padding:8px 12px;">
+                            <input type="file" id="edu-logo-file" accept="image/*" style="display:none" onchange="uploadEduLogo()">
+                            <button type="button" class="btn-upload" id="edu-logo-upload-btn" onclick="document.getElementById('edu-logo-file').click()" style="padding:8px 14px; flex-shrink:0;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload
+                            </button>
+                        </div>
+                        <div class="field-hint" style="margin:0; font-size:0.75rem;">Insert image URL, relative path (<code>/assets/images/...</code>), or upload a new logo.</div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="field-group">
-            <label class="field-label">Specialization</label>
-            <input class="field-input" id="edu-spec" placeholder="e.g. Artificial Intelligence and Data Science">
-        </div>
-        <div class="field-group">
-            <label class="field-label">Thesis Title</label>
-            <textarea class="field-input" id="edu-thesis" rows="2" style="resize:vertical;" placeholder="Thesis title and description..."></textarea>
-        </div>
-        <div class="field-group">
-            <label class="field-label">Relevant Courseworks (comma-separated)</label>
-            <input class="field-input" id="edu-courseworks" placeholder="Data Mining, Machine Learning, Deep Learning, Computer Vision, NLP">
-        </div>
-        <div class="field-group">
-            <label class="field-label">Activities and Societies (one per line)</label>
-            <textarea class="field-input" id="edu-activities" rows="3" style="resize:vertical;" placeholder="GenBI Chapter Hasanuddin University 2022&#10;Unit of Scientific Knowledge and Reasoning"></textarea>
-        </div>
-        <div class="fields-2col">
-            <div class="field-group">
-                <label class="field-label">Awards Summary</label>
-                <input class="field-input" id="edu-awards-summary" placeholder="e.g. 3× Most Outstanding Student">
+
+        <!-- Card 2: Timeline & Academic Standing -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+                Timeline &amp; Academic Standing
+            </div>
+            <div class="fields-2col">
+                <div class="field-group">
+                    <label class="field-label">Start Date</label>
+                    <input class="field-input" id="edu-start" placeholder="e.g. September 2020">
+                </div>
+                <div class="field-group">
+                    <label class="field-label">End Date</label>
+                    <input class="field-input" id="edu-end" placeholder="e.g. July 2024">
+                </div>
+            </div>
+            <div class="fields-2col">
+                <div class="field-group">
+                    <label class="field-label">Grade / GPA</label>
+                    <input class="field-input" id="edu-grade" placeholder="e.g. 3.97 / 4.00 (CGPA)">
+                </div>
+                <div class="field-group">
+                    <label class="field-label">Honors</label>
+                    <input class="field-input" id="edu-honors" placeholder="e.g. Cumlaude">
+                </div>
             </div>
             <div class="field-group">
-                <label class="field-label">Sort Order</label>
-                <input class="field-input" id="edu-sort" type="number" value="0">
+                <label class="field-label">Specialization</label>
+                <input class="field-input" id="edu-spec" placeholder="e.g. Artificial Intelligence and Data Science">
+            </div>
+        </div>
+
+        <!-- Card 3: Research, Coursework & Details -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                Research &amp; Coursework
+            </div>
+            <div class="field-group">
+                <label class="field-label">Thesis Title</label>
+                <textarea class="field-input" id="edu-thesis" rows="2" style="resize:vertical;" placeholder="Thesis title and research topic..."></textarea>
+            </div>
+            <div class="field-group">
+                <label class="field-label">Relevant Courseworks (comma-separated)</label>
+                <input class="field-input" id="edu-courseworks" placeholder="Data Mining, Machine Learning, Deep Learning, Computer Vision, NLP">
+            </div>
+            <div class="field-group">
+                <label class="field-label">Activities and Societies (one per line)</label>
+                <textarea class="field-input" id="edu-activities" rows="3" style="resize:vertical;" placeholder="GenBI Chapter Hasanuddin University 2022&#10;Unit of Scientific Knowledge and Reasoning"></textarea>
+            </div>
+            <div class="fields-2col">
+                <div class="field-group">
+                    <label class="field-label">Awards Summary</label>
+                    <input class="field-input" id="edu-awards-summary" placeholder="e.g. 3× Most Outstanding Student">
+                </div>
+                <div class="field-group">
+                    <label class="field-label">Sort Order</label>
+                    <input class="field-input" id="edu-sort" type="number" value="0">
+                </div>
             </div>
         </div>
     </div>
     <div class="drawer-foot">
-        <button class="btn-sm-ghost" onclick="closeEducationDrawer()">Cancel</button>
-        <button class="btn btn-primary" id="edu-save-btn" onclick="saveEducation()">Save Education</button>
+        <span class="drawer-kbd-hint"><kbd>Esc</kbd> to close &bull; <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to save</span>
+        <div class="drawer-foot-actions">
+            <button class="btn-drawer-cancel" onclick="closeEducationDrawer()">Cancel</button>
+            <button class="btn-drawer-save" id="edu-save-btn" onclick="saveEducation()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                Save Education
+            </button>
+        </div>
     </div>
 </div>
 
@@ -3247,47 +3661,62 @@
 <div class="drawer-backdrop" id="cert-backdrop" onclick="closeCertificationDrawer()"></div>
 <div class="drawer" id="cert-drawer">
     <div class="drawer-head">
-        <div>
-            <div class="drawer-title" id="cert-drawer-title">Add Certification</div>
-            <div class="drawer-subtitle">Credentials and licenses synced to portfolio</div>
+        <div class="drawer-head-info">
+            <div class="drawer-head-badge purple">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
+            </div>
+            <div class="drawer-head-text">
+                <div class="drawer-title" id="cert-drawer-title">Add Certification</div>
+                <div class="drawer-subtitle">Credentials and verified licenses synced to portfolio</div>
+            </div>
         </div>
-        <button class="modal-close" onclick="closeCertificationDrawer()">✕</button>
+        <button class="drawer-close-btn" onclick="closeCertificationDrawer()" title="Close (Esc)">✕</button>
     </div>
     <div class="drawer-body">
         <input type="hidden" id="cert-id">
-        <div class="field-group">
-            <label class="field-label">Certification Title *</label>
-            <input class="field-input" id="cert-title" placeholder="e.g. Machine Learning Specialization">
-        </div>
-        <div class="field-group">
-            <label class="field-label">Issuing Organization *</label>
-            <input class="field-input" id="cert-issuer" placeholder="e.g. DeepLearning.AI & Stanford, Google Cloud">
-        </div>
-        <div class="fields-2col">
+
+        <!-- Card 1: Credential Information -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
+                Credential Information
+            </div>
             <div class="field-group">
-                <label class="field-label">Issue Date</label>
-                <input class="field-input" id="cert-date" placeholder="e.g. March 2023, May 2024">
+                <label class="field-label">Certification Title <span class="req">*</span></label>
+                <input class="field-input" id="cert-title" placeholder="e.g. Machine Learning Specialization">
+            </div>
+            <div class="field-group">
+                <label class="field-label">Issuing Organization <span class="req">*</span></label>
+                <input class="field-input" id="cert-issuer" placeholder="e.g. DeepLearning.AI &amp; Stanford, Google Cloud">
             </div>
             <div class="field-group">
                 <label class="field-label">Category</label>
                 <input class="field-input" id="cert-category" placeholder="e.g. Specialization, Professional MLOps">
             </div>
         </div>
-        <div class="field-group">
-            <label class="field-label">Skills &amp; Competencies (comma-separated)</label>
-            <input class="field-input" id="cert-skills" placeholder="e.g. Supervised Learning, Neural Networks, MLOps, Docker">
-        </div>
-        <div class="field-group">
-            <label class="field-label">Credential Verification URL</label>
-            <input class="field-input" id="cert-url" type="url" placeholder="https://coursera.org/verify/…">
-        </div>
-        <div class="fields-2col">
-            <div class="field-group">
-                <label class="field-label">Credential ID (Optional)</label>
-                <input class="field-input" id="cert-cred-id" placeholder="e.g. ABC123XYZ">
+
+        <!-- Card 2: Verification & Accent -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                Verification &amp; Timeline
+            </div>
+            <div class="fields-2col">
+                <div class="field-group">
+                    <label class="field-label">Issue Date</label>
+                    <input class="field-input" id="cert-date" placeholder="e.g. March 2023, May 2024">
+                </div>
+                <div class="field-group">
+                    <label class="field-label">Credential ID <span class="opt">Optional</span></label>
+                    <input class="field-input" id="cert-cred-id" placeholder="e.g. ABC123XYZ">
+                </div>
             </div>
             <div class="field-group">
-                <label class="field-label">Accent Color</label>
+                <label class="field-label">Credential Verification URL</label>
+                <input class="field-input" id="cert-url" type="url" placeholder="https://coursera.org/verify/…">
+            </div>
+            <div class="field-group">
+                <label class="field-label">Card Accent Color</label>
                 <select class="field-select" id="cert-color">
                     <option value="var(--blue)">Google Blue</option>
                     <option value="var(--red)">Coral Red</option>
@@ -3297,14 +3726,32 @@
                 </select>
             </div>
         </div>
-        <div class="field-group">
-            <label class="field-label">Sort Order</label>
-            <input class="field-input" id="cert-sort" type="number" value="0">
+
+        <!-- Card 3: Skills & Sorting -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                Competencies &amp; Ordering
+            </div>
+            <div class="field-group">
+                <label class="field-label">Skills &amp; Competencies (comma-separated)</label>
+                <input class="field-input" id="cert-skills" placeholder="e.g. Supervised Learning, Neural Networks, MLOps, Docker">
+            </div>
+            <div class="field-group">
+                <label class="field-label">Sort Order</label>
+                <input class="field-input" id="cert-sort" type="number" value="0">
+            </div>
         </div>
     </div>
     <div class="drawer-foot">
-        <button class="btn-sm-ghost" onclick="closeCertificationDrawer()">Cancel</button>
-        <button class="btn btn-primary" id="cert-save-btn" onclick="saveCertification()">Save Certification</button>
+        <span class="drawer-kbd-hint"><kbd>Esc</kbd> to close &bull; <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to save</span>
+        <div class="drawer-foot-actions">
+            <button class="btn-drawer-cancel" onclick="closeCertificationDrawer()">Cancel</button>
+            <button class="btn-drawer-save" id="cert-save-btn" onclick="saveCertification()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                Save Certification
+            </button>
+        </div>
     </div>
 </div>
 
@@ -3312,71 +3759,299 @@
 <div class="drawer-backdrop" id="gallery-backdrop" onclick="closeGalleryDrawer()"></div>
 <div class="drawer" id="gallery-drawer">
     <div class="drawer-head">
-        <div>
-            <div class="drawer-title" id="gallery-drawer-title">Add Photo to Gallery</div>
-            <div class="drawer-subtitle">Sync speaking and milestone photos to live portfolio</div>
+        <div class="drawer-head-info">
+            <div class="drawer-head-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+            </div>
+            <div class="drawer-head-text">
+                <div class="drawer-title" id="gallery-drawer-title">Add Photo to Gallery</div>
+                <div class="drawer-subtitle">Sync speaking and milestone moments to live gallery</div>
+            </div>
         </div>
-        <button class="modal-close" onclick="closeGalleryDrawer()">✕</button>
+        <button class="drawer-close-btn" onclick="closeGalleryDrawer()" title="Close (Esc)">✕</button>
     </div>
     <div class="drawer-body">
         <input type="hidden" id="gal-id">
-        <div class="field-group">
-            <label class="field-label">Photo Title *</label>
-            <input class="field-input" id="gal-title" placeholder="e.g. Build with AI Keynote at GDG Campus">
-        </div>
-        <div class="fields-2col">
-            <div class="field-group">
-                <label class="field-label">Category</label>
-                <select class="field-select" id="gal-category">
-                    <option value="Speaking &amp; Workshops">Speaking &amp; Workshops</option>
-                    <option value="Campus &amp; Honors">Campus &amp; Honors</option>
-                    <option value="Projects &amp; AI">Projects &amp; AI</option>
-                    <option value="Leadership &amp; Community">Leadership &amp; Community</option>
-                    <option value="General">General</option>
-                </select>
+
+        <!-- Card 1: Photo Information -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                Event &amp; Categorization
             </div>
             <div class="field-group">
-                <label class="field-label">Sort Order</label>
-                <input class="field-input" id="gal-sort" type="number" value="0">
+                <label class="field-label">Photo Title <span class="req">*</span></label>
+                <input class="field-input" id="gal-title" placeholder="e.g. Build with AI Keynote at GDG Campus">
+            </div>
+            <div class="fields-2col">
+                <div class="field-group">
+                    <label class="field-label">Category</label>
+                    <select class="field-select" id="gal-category">
+                        <option value="Speaking &amp; Workshops">Speaking &amp; Workshops</option>
+                        <option value="Campus &amp; Honors">Campus &amp; Honors</option>
+                        <option value="Projects &amp; AI">Projects &amp; AI</option>
+                        <option value="Leadership &amp; Community">Leadership &amp; Community</option>
+                        <option value="General">General</option>
+                    </select>
+                </div>
+                <div class="field-group">
+                    <label class="field-label">Sort Order</label>
+                    <input class="field-input" id="gal-sort" type="number" value="0">
+                </div>
+            </div>
+            <div class="fields-2col">
+                <div class="field-group">
+                    <label class="field-label">Date / Month</label>
+                    <input class="field-input" id="gal-date" placeholder="e.g. May 2026">
+                </div>
+                <div class="field-group">
+                    <label class="field-label">Location / Venue</label>
+                    <input class="field-input" id="gal-location" placeholder="e.g. Universitas Ciputra Makassar">
+                </div>
             </div>
         </div>
-        <div class="field-group">
-            <label class="field-label">Image File Upload (WebP, PNG, JPEG)</label>
-            <input class="field-input" id="gal-file-input" type="file" accept="image/*" onchange="previewGalleryUpload(event)" style="padding: 8px;">
-        </div>
-        <div class="field-group">
-            <label class="field-label">Or Image URL Path</label>
-            <input class="field-input" id="gal-image-url" placeholder="e.g. /uploads/talks/my_photo.webp or https://..." oninput="updateGalleryPreviewFromUrl()">
-        </div>
-        <!-- Live Image Preview Box -->
-        <div class="field-group" id="gal-preview-wrap" style="display:none;">
-            <label class="field-label">Selected Preview</label>
-            <div style="border-radius: var(--r-md); overflow: hidden; border: 1.5px solid var(--line); max-height: 180px; width: 100%; background: var(--surface-2); display: flex; align-items: center; justify-content: center;">
-                <img id="gal-preview-img" src="" alt="Preview" style="max-height: 180px; width: auto; max-width: 100%; object-fit: contain;">
+
+        <!-- Card 2: Image Asset -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                Image Media
             </div>
-        </div>
-        <div class="fields-2col">
             <div class="field-group">
-                <label class="field-label">Date / Month</label>
-                <input class="field-input" id="gal-date" placeholder="e.g. May 2026">
+                <label class="field-label">Image File Upload <span class="opt">WebP, PNG, JPEG</span></label>
+                <input class="field-input" id="gal-file-input" type="file" accept="image/*" onchange="previewGalleryUpload(event)" style="padding: 9px 12px;">
             </div>
             <div class="field-group">
-                <label class="field-label">Location / Venue</label>
-                <input class="field-input" id="gal-location" placeholder="e.g. Universitas Ciputra Makassar">
+                <label class="field-label">Or Image URL Path</label>
+                <input class="field-input" id="gal-image-url" placeholder="e.g. /uploads/talks/my_photo.webp or https://..." oninput="updateGalleryPreviewFromUrl()">
+            </div>
+            <!-- Live Image Preview Box -->
+            <div class="field-group" id="gal-preview-wrap" style="display:none;">
+                <label class="field-label">Selected Preview</label>
+                <div style="border-radius: 12px; overflow: hidden; border: 1.5px solid #E2E8F0; max-height: 200px; width: 100%; background: #F8FAFC; display: flex; align-items: center; justify-content: center; padding: 6px;">
+                    <img id="gal-preview-img" src="" alt="Preview" style="max-height: 190px; width: auto; max-width: 100%; object-fit: contain; border-radius: 8px;">
+                </div>
             </div>
         </div>
-        <div class="field-group">
-            <label class="field-label">Tags / Badges (comma-separated)</label>
-            <input class="field-input" id="gal-tags" placeholder="e.g. Keynote, GDG, AI, Workshop">
-        </div>
-        <div class="field-group">
-            <label class="field-label">Caption / Description</label>
-            <textarea class="field-input" id="gal-desc" rows="3" style="resize:vertical;" placeholder="Context, attendee size, or milestone significance..."></textarea>
+
+        <!-- Card 3: Context & Description -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                Caption &amp; Metadata
+            </div>
+            <div class="field-group">
+                <label class="field-label">Tags / Badges (comma-separated)</label>
+                <input class="field-input" id="gal-tags" placeholder="e.g. Keynote, GDG, AI, Workshop">
+            </div>
+            <div class="field-group">
+                <label class="field-label">Caption / Description</label>
+                <textarea class="field-input" id="gal-desc" rows="3" style="resize:vertical;" placeholder="Context, attendee size, or milestone significance..."></textarea>
+            </div>
         </div>
     </div>
     <div class="drawer-foot">
-        <button class="btn-sm-ghost" onclick="closeGalleryDrawer()">Cancel</button>
-        <button class="btn btn-primary" id="gal-save-btn" onclick="saveGalleryItem()">Save Photo</button>
+        <span class="drawer-kbd-hint"><kbd>Esc</kbd> to close &bull; <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to save</span>
+        <div class="drawer-foot-actions">
+            <button class="btn-drawer-cancel" onclick="closeGalleryDrawer()">Cancel</button>
+            <button class="btn-drawer-save" id="gal-save-btn" onclick="saveGalleryItem()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                Save Photo
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ════ PUBLICATION DRAWER ════ -->
+<div class="drawer-backdrop" id="pub-backdrop" onclick="closePublicationDrawer()"></div>
+<div class="drawer" id="pub-drawer">
+    <div class="drawer-head">
+        <div class="drawer-head-info">
+            <div class="drawer-head-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            </div>
+            <div class="drawer-head-text">
+                <div class="drawer-title" id="pub-drawer-title">Add Publication</div>
+                <div class="drawer-subtitle">Open-source work and write-ups synced to live portfolio</div>
+            </div>
+        </div>
+        <button class="drawer-close-btn" onclick="closePublicationDrawer()" title="Close (Esc)">✕</button>
+    </div>
+    <div class="drawer-body">
+        <input type="hidden" id="pub-id">
+
+        <!-- Card 1: Publication Overview -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                Publication Information
+            </div>
+            <div class="field-group">
+                <label class="field-label">Publication Title <span class="req">*</span></label>
+                <input class="field-input" id="pub-title" placeholder="e.g. GraphRAG Chatbot">
+            </div>
+            <div class="fields-2col">
+                <div class="field-group">
+                    <label class="field-label">Year / Date Range</label>
+                    <input class="field-input" id="pub-date" placeholder="e.g. 2024 — 2025">
+                </div>
+                <div class="field-group">
+                    <label class="field-label">Publisher / Type Tag</label>
+                    <input class="field-input" id="pub-publisher" placeholder="e.g. Open-source Project, Developer Toolkit">
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2: Links & Display -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                Link &amp; Appearance
+            </div>
+            <div class="field-group">
+                <label class="field-label">Repository / Paper URL</label>
+                <input class="field-input" id="pub-link" placeholder="https://github.com/muhammadhaerul25/...">
+            </div>
+            <div class="fields-2col">
+                <div class="field-group">
+                    <label class="field-label">Accent Color</label>
+                    <select class="field-select" id="pub-color">
+                        <option value="var(--blue)">Google Blue</option>
+                        <option value="var(--red)">Coral Red</option>
+                        <option value="var(--yellow)">Amber Gold</option>
+                        <option value="var(--green)">Emerald Green</option>
+                        <option value="var(--purple)">Indigo Purple</option>
+                    </select>
+                </div>
+                <div class="field-group">
+                    <label class="field-label">Sort Order</label>
+                    <input class="field-input" id="pub-sort" type="number" value="0">
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3: Summary -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                Summary &amp; Abstract
+            </div>
+            <div class="field-group">
+                <label class="field-label">Short Description / Abstract</label>
+                <textarea class="field-input" id="pub-desc" rows="3" style="resize:vertical;" placeholder="Open-source retrieval-augmented chatbot using graph-based context retrieval..."></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="drawer-foot">
+        <span class="drawer-kbd-hint"><kbd>Esc</kbd> to close &bull; <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to save</span>
+        <div class="drawer-foot-actions">
+            <button class="btn-drawer-cancel" onclick="closePublicationDrawer()">Cancel</button>
+            <button class="btn-drawer-save" id="pub-save-btn" onclick="savePublication()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                Save Publication
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ════ BLOG DRAWER ════ -->
+<div class="drawer-backdrop" id="blog-backdrop" onclick="closeBlogDrawer()"></div>
+<div class="drawer" id="blog-drawer">
+    <div class="drawer-head">
+        <div class="drawer-head-info">
+            <div class="drawer-head-badge purple">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+            </div>
+            <div class="drawer-head-text">
+                <div class="drawer-title" id="blog-drawer-title">Add Blog Article</div>
+                <div class="drawer-subtitle">Technical writing and architecture guides synced to live portfolio</div>
+            </div>
+        </div>
+        <button class="drawer-close-btn" onclick="closeBlogDrawer()" title="Close (Esc)">✕</button>
+    </div>
+    <div class="drawer-body">
+        <input type="hidden" id="blog-id">
+
+        <!-- Card 1: Article Identity -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                Article Details
+            </div>
+            <div class="field-group">
+                <label class="field-label">Article Title <span class="req">*</span></label>
+                <input class="field-input" id="blog-title" placeholder="e.g. Designing Resilient Database Pooling and In-Memory Caching">
+            </div>
+            <div class="fields-2col">
+                <div class="field-group">
+                    <label class="field-label">Badge / Category</label>
+                    <input class="field-input" id="blog-badge" placeholder="e.g. System Architecture, Agentic AI, Computer Vision">
+                </div>
+                <div class="field-group">
+                    <label class="field-label">Card Art Pattern</label>
+                    <select class="field-select" id="blog-art-type">
+                        <option value="rag-pattern">RAG / Agent Pattern</option>
+                        <option value="db-pattern">Database / Cache Pattern</option>
+                        <option value="ai-pattern">AI / Robotics Pattern</option>
+                        <option value="cv-pattern">Computer Vision Pattern</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2: Publishing & Links -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+                Publication &amp; Reading Info
+            </div>
+            <div class="fields-2col">
+                <div class="field-group">
+                    <label class="field-label">Date</label>
+                    <input class="field-input" id="blog-date" placeholder="e.g. Oct 2026">
+                </div>
+                <div class="field-group">
+                    <label class="field-label">Read Time</label>
+                    <input class="field-input" id="blog-read-time" placeholder="e.g. 6 min read">
+                </div>
+            </div>
+            <div class="fields-2col">
+                <div class="field-group">
+                    <label class="field-label">Article Link / URL</label>
+                    <input class="field-input" id="blog-link" placeholder="https://github.com/muhammadhaerul25 or Medium URL">
+                </div>
+                <div class="field-group">
+                    <label class="field-label">Sort Order</label>
+                    <input class="field-input" id="blog-sort" type="number" value="0">
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3: Content & Topics -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                Content &amp; Tags
+            </div>
+            <div class="field-group">
+                <label class="field-label">Tags (comma-separated)</label>
+                <input class="field-input" id="blog-tags" placeholder="e.g. PostgreSQL, Prisma, Node.js, Security">
+            </div>
+            <div class="field-group">
+                <label class="field-label">Article Excerpt</label>
+                <textarea class="field-input" id="blog-excerpt" rows="3" style="resize:vertical;" placeholder="A deep dive into architecture and best practices..."></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="drawer-foot">
+        <span class="drawer-kbd-hint"><kbd>Esc</kbd> to close &bull; <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to save</span>
+        <div class="drawer-foot-actions">
+            <button class="btn-drawer-cancel" onclick="closeBlogDrawer()">Cancel</button>
+            <button class="btn-drawer-save" id="blog-save-btn" onclick="saveBlog()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                Save Article
+            </button>
+        </div>
     </div>
 </div>
 
@@ -3384,60 +4059,93 @@
 <div class="drawer-backdrop" id="award-backdrop" onclick="closeAwardDrawer()"></div>
 <div class="drawer" id="award-drawer">
     <div class="drawer-head">
-        <div>
-            <div class="drawer-title" id="award-drawer-title">Add Honor &amp; Award</div>
-            <div class="drawer-subtitle">Accolades and recognitions synced to portfolio</div>
+        <div class="drawer-head-info">
+            <div class="drawer-head-badge yellow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            </div>
+            <div class="drawer-head-text">
+                <div class="drawer-title" id="award-drawer-title">Add Honor &amp; Award</div>
+                <div class="drawer-subtitle">Accolades and recognitions synced to live portfolio</div>
+            </div>
         </div>
-        <button class="modal-close" onclick="closeAwardDrawer()">✕</button>
+        <button class="drawer-close-btn" onclick="closeAwardDrawer()" title="Close (Esc)">✕</button>
     </div>
     <div class="drawer-body">
         <input type="hidden" id="award-id">
-        <div class="field-group">
-            <label class="field-label">Award Title *</label>
-            <input class="field-input" id="award-title" placeholder="e.g. Most Outstanding Student — Computer Science">
-        </div>
-        <div class="field-group">
-            <label class="field-label">Issuing Organization *</label>
-            <input class="field-input" id="award-issuer" placeholder="e.g. Hasanuddin University, Kemendikbud">
-        </div>
-        <div class="fields-2col">
+
+        <!-- Card 1: Award & Organization -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                Award Information
+            </div>
+            <div class="field-group">
+                <label class="field-label">Award Title <span class="req">*</span></label>
+                <input class="field-input" id="award-title" placeholder="e.g. Most Outstanding Student — Computer Science">
+            </div>
+            <div class="field-group">
+                <label class="field-label">Issuing Organization <span class="req">*</span></label>
+                <input class="field-input" id="award-issuer" placeholder="e.g. Hasanuddin University, Kemendikbud">
+            </div>
             <div class="field-group">
                 <label class="field-label">Metric / Subtitle Tag</label>
                 <input class="field-input" id="award-metric" placeholder="e.g. 3 Consecutive Years, National Rank #1">
+            </div>
+        </div>
+
+        <!-- Card 2: Badging & Theme -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v8"></path><path d="M8 12h8"></path></svg>
+                Badging &amp; Ordering
             </div>
             <div class="field-group">
                 <label class="field-label">Badge Text</label>
                 <input class="field-input" id="award-badge" placeholder="e.g. 🏆 Outstanding Student, 🥇 1st Place">
             </div>
+            <div class="fields-2col">
+                <div class="field-group">
+                    <label class="field-label">Badge Theme Color</label>
+                    <select class="field-select" id="award-color">
+                        <option value="blue">Blue</option>
+                        <option value="yellow">Yellow / Gold</option>
+                        <option value="green">Green</option>
+                        <option value="red">Red</option>
+                        <option value="purple">Purple</option>
+                    </select>
+                </div>
+                <div class="field-group">
+                    <label class="field-label">Sort Order</label>
+                    <input class="field-input" id="award-sort" type="number" value="0">
+                </div>
+            </div>
         </div>
-        <div class="fields-2col">
-            <div class="field-group">
-                <label class="field-label">Badge Theme Color</label>
-                <select class="field-select" id="award-color">
-                    <option value="blue">Blue</option>
-                    <option value="yellow">Yellow / Gold</option>
-                    <option value="green">Green</option>
-                    <option value="red">Red</option>
-                    <option value="purple">Purple</option>
-                </select>
+
+        <!-- Card 3: Context & Highlights -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                Highlights &amp; Background
             </div>
             <div class="field-group">
-                <label class="field-label">Sort Order</label>
-                <input class="field-input" id="award-sort" type="number" value="0">
+                <label class="field-label">Chips / Highlights (comma-separated)</label>
+                <input class="field-input" id="award-chips" placeholder="Rank #1 Department, Univ. Selection, Academic Excellence">
             </div>
-        </div>
-        <div class="field-group">
-            <label class="field-label">Chips / Highlights (comma-separated)</label>
-            <input class="field-input" id="award-chips" placeholder="Rank #1 Department, Univ. Selection, Academic Excellence">
-        </div>
-        <div class="field-group">
-            <label class="field-label">Award Description</label>
-            <textarea class="field-input" id="award-desc" rows="3" style="resize:vertical;" placeholder="Detailed background and selection criteria..."></textarea>
+            <div class="field-group">
+                <label class="field-label">Award Description</label>
+                <textarea class="field-input" id="award-desc" rows="3" style="resize:vertical;" placeholder="Detailed background and selection criteria..."></textarea>
+            </div>
         </div>
     </div>
     <div class="drawer-foot">
-        <button class="btn-sm-ghost" onclick="closeAwardDrawer()">Cancel</button>
-        <button class="btn btn-primary" id="award-save-btn" onclick="saveAward()">Save Award</button>
+        <span class="drawer-kbd-hint"><kbd>Esc</kbd> to close &bull; <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to save</span>
+        <div class="drawer-foot-actions">
+            <button class="btn-drawer-cancel" onclick="closeAwardDrawer()">Cancel</button>
+            <button class="btn-drawer-save" id="award-save-btn" onclick="saveAward()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                Save Award
+            </button>
+        </div>
     </div>
 </div>
 
@@ -3540,6 +4248,13 @@ function debounce(func, wait) {
     };
 }
 
+var publicationsLoaded = false;
+var blogsLoaded = false;
+var publicationsData = [];
+var blogsData = [];
+var _pubMap = {};
+var _blogMap = {};
+
 var viewMeta = {
     dashboard:     {title:'Overview',      crumb:'Portfolio'},
     feedbacks:     {title:'Feedback',      crumb:'Portfolio'},
@@ -3550,6 +4265,8 @@ var viewMeta = {
     education:     {title:'Education',        crumb:'Portfolio CMS'},
     certifications:{title:'Certifications',   crumb:'Portfolio CMS'},
     awards:        {title:'Honors & Awards',  crumb:'Portfolio CMS'},
+    publications:  {title:'Publications',     crumb:'Portfolio CMS'},
+    blogs:         {title:'Blog Articles',    crumb:'Portfolio CMS'},
     gallery:       {title:'Visual Gallery',   crumb:'Management'},
     inbox:         {title:'Contact Messages', crumb:'Inquiries'}
 };
@@ -3637,6 +4354,18 @@ function switchView(view, el) {
             updateAwardsStats();
             renderAwardsGrid();
         }
+    } else if (view === 'publications') {
+        if (!publicationsLoaded) loadPublications();
+        else {
+            updatePublicationsStats();
+            renderPublicationsGrid();
+        }
+    } else if (view === 'blogs') {
+        if (!blogsLoaded) loadBlogs();
+        else {
+            updateBlogsStats();
+            renderBlogsGrid();
+        }
     } else if (view === 'gallery') {
         if (!galleryLoaded) loadGallery();
         else {
@@ -3660,6 +4389,8 @@ function refreshData() {
     else if (id==='education') { educationsLoaded=false; loadEducations(); }
     else if (id==='certifications') { certificationsLoaded=false; loadCertifications(); }
     else if (id==='awards') { awardsLoaded=false; loadAwards(); }
+    else if (id==='publications') { publicationsLoaded=false; loadPublications(); }
+    else if (id==='blogs') { blogsLoaded=false; loadBlogs(); }
     else if (id==='gallery') { galleryLoaded=false; loadGallery(); }
     else if (id==='inbox') { loadInbox(); }
     
@@ -3727,11 +4458,13 @@ async function loadOverview() {
         animateCount(document.getElementById('sc-forms'), forms.length, '', false);
         animateCount(document.getElementById('sc-feedbacks'), feedbacks.length, '', false);
 
-        // Roadmap stats
-        ['sc-pubs', 'sc-blogs'].forEach(function(id) {
-            var el = document.getElementById(id);
-            if (el) el.innerHTML = '<span class="stat-pill-roadmap">Roadmap · Soon</span>';
-        });
+        // Publications & Blogs Stats on Overview
+        fetch('/api/publications').then(r=>r.json()).then(function(d){
+            if (d && d.success) animateCount(document.getElementById('sc-pubs'), (d.data||[]).length, '', false);
+        }).catch(function(){});
+        fetch('/api/blogs').then(r=>r.json()).then(function(d){
+            if (d && d.success) animateCount(document.getElementById('sc-blogs'), (d.data||[]).length, '', false);
+        }).catch(function(){});
 
         // Hydrate CMS stats on Overview
         fetch('/api/experiences').then(r=>r.json()).then(function(d){
@@ -7675,7 +8408,8 @@ function renderExperiencesGrid() {
         var dateRange = esc(exp.start_date || '') + (exp.end_date ? ' — ' + esc(exp.end_date) : (exp.is_current ? ' — <strong style="color:var(--g-green);">Present</strong>' : ''));
 
         return '<div class="project-card" style="display:flex; flex-direction:column; gap:12px; padding:22px; border:1.5px solid var(--sidebar-border); border-radius:var(--r-md); background:var(--surface);">' +
-            '<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px;">' +
+            '<div style="display:flex; gap:14px; align-items:flex-start;">' +
+                (exp.logo_url ? '<div style="width:48px; height:48px; border-radius:10px; border:1.5px solid var(--sidebar-border); background:#fff; padding:4px; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><img src="' + esc(exp.logo_url) + '" alt="Logo" style="width:100%; height:100%; object-fit:contain;"></div>' : '<div style="width:48px; height:48px; border-radius:10px; background:rgba(52,168,83,0.1); color:var(--g-green); display:flex; align-items:center; justify-content:center; font-size:1.3rem; flex-shrink:0;">💼</div>') +
                 '<div style="flex:1;">' +
                     '<div style="font-size:1.05rem; font-weight:800; color:var(--ink);">' + esc(exp.role) + '</div>' +
                     '<div style="font-size:0.86rem; font-weight:700; color:var(--g-blue); margin-top:2px;">' + esc(exp.company) + (exp.location ? ' · <span style="color:var(--ink-3); font-weight:500;">' + esc(exp.location) + '</span>' : '') + '</div>' +
@@ -7697,11 +8431,73 @@ function openExperienceDrawerById(id) {
     openExperienceDrawer(_expMap[id] || null);
 }
 
+function updateExpLogoPreview() {
+    var input = document.getElementById('exp-logo');
+    var url = (input ? input.value : '').trim();
+    var img = document.getElementById('exp-logo-preview');
+    var fallback = document.getElementById('exp-logo-fallback');
+    var badge = document.getElementById('exp-drawer-badge');
+
+    if (url) {
+        if (img) {
+            img.src = url;
+            img.style.display = 'block';
+        }
+        if (fallback) fallback.style.display = 'none';
+        if (badge) {
+            badge.innerHTML = '<img src="' + esc(url) + '" alt="Logo" style="width:28px; height:28px; object-fit:contain;" onerror="this.onerror=null; this.parentElement.innerHTML=\'<svg viewBox=\\\'0 0 24 24\\\' fill=\\\'none\\\' stroke=\\\'currentColor\\\' stroke-width=\\\'2\\\' stroke-linecap=\\\'round\\\' stroke-linejoin=\\\'round\\\'><rect x=\\\'2\\\' y=\\\'7\\\' width=\\\'20\\\' height=\\\'14\\\' rx=\\\'2\\\' ry=\\\'2\\\'></rect><path d=\\\'M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16\\\'></path></svg>\';">';
+        }
+    } else {
+        if (img) {
+            img.style.display = 'none';
+            img.src = '';
+        }
+        if (fallback) fallback.style.display = 'grid';
+        if (badge) {
+            badge.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>';
+        }
+    }
+}
+
+async function uploadExpLogo() {
+    var fileInput = document.getElementById('exp-logo-file');
+    var file = fileInput ? fileInput.files[0] : null;
+    if (!file) return;
+    var btn = document.getElementById('exp-logo-upload-btn');
+    var origHtml = btn ? btn.innerHTML : '';
+    if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Uploading…';
+    }
+    var fd = new FormData();
+    fd.append('file', file);
+    try {
+        var res = await fetch('/api/talks/upload', { method: 'POST', body: fd });
+        var json = await res.json();
+        if (json.url) {
+            document.getElementById('exp-logo').value = json.url;
+            updateExpLogoPreview();
+            showToast('Logo uploaded successfully!');
+        } else {
+            showToast(json.error || 'Failed to upload logo');
+        }
+    } catch(err) {
+        showToast('Error uploading logo');
+    } finally {
+        if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = origHtml;
+        }
+        if (fileInput) fileInput.value = '';
+    }
+}
+
 function openExperienceDrawer(exp) {
     document.getElementById('exp-id').value = exp ? exp.id : '';
     document.getElementById('exp-drawer-title').textContent = exp ? 'Edit Work Experience' : 'Add Work Experience';
     document.getElementById('exp-role').value = exp ? (exp.role || '') : '';
     document.getElementById('exp-company').value = exp ? (exp.company || '') : '';
+    document.getElementById('exp-logo').value = exp ? (exp.logo_url || '') : '';
     document.getElementById('exp-location').value = exp ? (exp.location || '') : '';
     document.getElementById('exp-start').value = exp ? (exp.start_date || '') : '';
     document.getElementById('exp-end').value = exp ? (exp.end_date || '') : '';
@@ -7710,6 +8506,8 @@ function openExperienceDrawer(exp) {
     document.getElementById('exp-stack').value = exp && exp.stack ? exp.stack.join(', ') : '';
     document.getElementById('exp-sort').value = exp ? (exp.sort_order || 0) : 0;
     document.getElementById('exp-desc').value = exp ? (exp.description || '') : '';
+
+    updateExpLogoPreview();
 
     document.getElementById('exp-backdrop').classList.add('open');
     document.getElementById('exp-drawer').classList.add('open');
@@ -7724,6 +8522,7 @@ async function saveExperience() {
     var id = document.getElementById('exp-id').value;
     var role = document.getElementById('exp-role').value.trim();
     var company = document.getElementById('exp-company').value.trim();
+    var logo_url = document.getElementById('exp-logo').value.trim();
     var location = document.getElementById('exp-location').value.trim();
     var start_date = document.getElementById('exp-start').value.trim();
     var end_date = document.getElementById('exp-end').value.trim();
@@ -7739,7 +8538,7 @@ async function saveExperience() {
         return;
     }
 
-    var payload = { role, company, location, start_date, end_date, is_current, accent_color, stack, sort_order, description };
+    var payload = { role, company, location, start_date, end_date, is_current, accent_color, stack, sort_order, description, logo_url };
     var saveBtn = document.getElementById('exp-save-btn');
     saveBtn.disabled = true;
     saveBtn.textContent = 'Saving…';
@@ -7879,6 +8678,67 @@ function openEducationDrawerById(id) {
     openEducationDrawer(_eduMap[id] || null);
 }
 
+function updateEduLogoPreview() {
+    var input = document.getElementById('edu-logo');
+    var url = (input ? input.value : '').trim();
+    var img = document.getElementById('edu-logo-preview');
+    var fallback = document.getElementById('edu-logo-fallback');
+    var badge = document.getElementById('edu-drawer-badge');
+
+    if (url) {
+        if (img) {
+            img.src = url;
+            img.style.display = 'block';
+        }
+        if (fallback) fallback.style.display = 'none';
+        if (badge) {
+            badge.innerHTML = '<img src="' + esc(url) + '" alt="Logo" style="width:28px; height:28px; object-fit:contain;" onerror="this.onerror=null; this.parentElement.innerHTML=\'<svg viewBox=\\\'0 0 24 24\\\' fill=\\\'none\\\' stroke=\\\'currentColor\\\' stroke-width=\\\'2\\\' stroke-linecap=\\\'round\\\' stroke-linejoin=\\\'round\\\'><path d=\\\'M22 10v6M2 10l10-5 10 5-10 5z\\\'></path><path d=\\\'M6 12v5c3 3 9 3 12 0v-5\\\'></path></svg>\';">';
+        }
+    } else {
+        if (img) {
+            img.style.display = 'none';
+            img.src = '';
+        }
+        if (fallback) fallback.style.display = 'grid';
+        if (badge) {
+            badge.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>';
+        }
+    }
+}
+
+async function uploadEduLogo() {
+    var fileInput = document.getElementById('edu-logo-file');
+    var file = fileInput ? fileInput.files[0] : null;
+    if (!file) return;
+    var btn = document.getElementById('edu-logo-upload-btn');
+    var origHtml = btn ? btn.innerHTML : '';
+    if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Uploading…';
+    }
+    var fd = new FormData();
+    fd.append('file', file);
+    try {
+        var res = await fetch('/api/talks/upload', { method: 'POST', body: fd });
+        var json = await res.json();
+        if (json.url) {
+            document.getElementById('edu-logo').value = json.url;
+            updateEduLogoPreview();
+            showToast('Logo uploaded successfully!');
+        } else {
+            showToast(json.error || 'Failed to upload logo');
+        }
+    } catch(err) {
+        showToast('Error uploading logo');
+    } finally {
+        if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = origHtml;
+        }
+        if (fileInput) fileInput.value = '';
+    }
+}
+
 function openEducationDrawer(edu) {
     document.getElementById('edu-id').value = edu ? edu.id : '';
     document.getElementById('edu-drawer-title').textContent = edu ? 'Edit Education' : 'Add Education';
@@ -7895,6 +8755,8 @@ function openEducationDrawer(edu) {
     document.getElementById('edu-activities').value = edu && edu.activities ? edu.activities.join('\n') : '';
     document.getElementById('edu-awards-summary').value = edu ? (edu.awards_summary || '') : '';
     document.getElementById('edu-sort').value = edu ? (edu.sort_order || 0) : 0;
+
+    updateEduLogoPreview();
 
     document.getElementById('edu-backdrop').classList.add('open');
     document.getElementById('edu-drawer').classList.add('open');
@@ -8703,6 +9565,413 @@ async function deleteGalleryItem(id) {
     }
 }
 
+/* ══════════════════════════════════════════════════════════
+   PORTFOLIO CMS TWO-WAY SYNC: PUBLICATIONS
+   ══════════════════════════════════════════════════════════ */
+async function loadPublications() {
+    try {
+        var res = await fetch('/api/publications');
+        var data = await res.json();
+        if (data.success) {
+            publicationsData = data.data || [];
+            _pubMap = {};
+            publicationsData.forEach(function(item) {
+                _pubMap[item.id] = item;
+            });
+            publicationsLoaded = true;
+            updatePublicationsStats();
+            renderPublicationsGrid();
+        }
+    } catch (err) {
+        console.error('Failed to load publications:', err);
+        showToast('Error loading publications');
+    }
+}
+
+function updatePublicationsStats() {
+    var total = publicationsData.length;
+    var totalEl = document.getElementById('pub-stat-total');
+    if (totalEl) totalEl.textContent = total;
+    var scEl = document.getElementById('sc-pubs');
+    if (scEl) scEl.textContent = total;
+}
+
+function renderPublicationsGrid() {
+    var grid = document.getElementById('pub-grid-dash');
+    var empty = document.getElementById('pub-empty');
+    if (!grid) return;
+
+    var q = (document.getElementById('pub-q') ? document.getElementById('pub-q').value.toLowerCase().trim() : '');
+
+    var filtered = publicationsData.filter(function(p) {
+        if (!q) return true;
+        var hay = (p.title + ' ' + (p.description || '') + ' ' + (p.publisher || '') + ' ' + (p.date || '')).toLowerCase();
+        return hay.includes(q);
+    });
+
+    if (!filtered.length) {
+        grid.style.display = 'none';
+        if (empty) empty.style.display = 'flex';
+        return;
+    }
+
+    grid.style.display = 'grid';
+    if (empty) empty.style.display = 'none';
+
+    grid.innerHTML = filtered.map(function(pub) {
+        return '<div class="project-card" style="display:flex; flex-direction:column; gap:12px; padding:22px; border:1.5px solid var(--sidebar-border); border-radius:var(--r-md); background:var(--surface);">' +
+            '<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px;">' +
+                '<div style="flex:1;">' +
+                    '<div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">' +
+                        '<span style="width:10px; height:10px; border-radius:50%; background:' + (pub.accent_color || 'var(--blue)') + '; display:inline-block; flex-shrink:0;"></span>' +
+                        '<span style="font-size:1.02rem; font-weight:800; color:var(--ink);">' + esc(pub.title) + '</span>' +
+                    '</div>' +
+                    (pub.publisher ? '<div style="font-size:0.86rem; font-weight:700; color:var(--g-blue); margin-top:2px;">' + esc(pub.publisher) + '</div>' : '') +
+                    (pub.date ? '<div style="font-size:0.75rem; color:var(--ink-4); margin-top:2px;">' + esc(pub.date) + '</div>' : '') +
+                '</div>' +
+            '</div>' +
+            (pub.description ? '<p style="font-size:0.86rem; color:var(--ink-3); line-height:1.55; margin:0;">' + esc(pub.description) + '</p>' : '') +
+            (pub.link ? '<div style="font-size:0.78rem; margin-top:auto;"><a href="' + esc(pub.link) + '" target="_blank" rel="noopener" style="color:var(--g-blue); font-weight:600; text-decoration:none;">🔗 View Repository / Paper ↗</a></div>' : '') +
+            '<div style="display:flex; gap:8px; justify-content:flex-end; border-top:1px solid var(--line-soft); padding-top:12px; margin-top:auto;">' +
+                '<button class="btn-sm-ghost" onclick="openPublicationDrawerById(\'' + pub.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface);">Edit</button>' +
+                '<button class="btn-sm-ghost" onclick="deletePublication(\'' + pub.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; color:var(--g-red); border-radius:var(--r-pill); border:1.5px solid rgba(234,67,53,0.2); background:var(--g-red-soft);">Delete</button>' +
+            '</div>' +
+        '</div>';
+    }).join('');
+}
+
+function openPublicationDrawerById(id) {
+    openPublicationDrawer(_pubMap[id] || null);
+}
+
+function openPublicationDrawer(pub) {
+    document.getElementById('pub-id').value = pub ? pub.id : '';
+    document.getElementById('pub-drawer-title').textContent = pub ? 'Edit Publication' : 'Add Publication';
+    document.getElementById('pub-title').value = pub ? (pub.title || '') : '';
+    document.getElementById('pub-date').value = pub ? (pub.date || '') : '';
+    document.getElementById('pub-publisher').value = pub ? (pub.publisher || '') : '';
+    document.getElementById('pub-color').value = pub ? (pub.accent_color || 'var(--blue)') : 'var(--blue)';
+    document.getElementById('pub-sort').value = pub ? (pub.sort_order || 0) : 0;
+    document.getElementById('pub-link').value = pub ? (pub.link || '') : '';
+    document.getElementById('pub-desc').value = pub ? (pub.description || '') : '';
+
+    var d = document.getElementById('pub-drawer');
+    var b = document.getElementById('pub-backdrop');
+    if (d) d.classList.add('open');
+    if (b) b.classList.add('show');
+}
+
+function closePublicationDrawer() {
+    var d = document.getElementById('pub-drawer');
+    var b = document.getElementById('pub-backdrop');
+    if (d) d.classList.remove('open');
+    if (b) b.classList.remove('show');
+}
+
+async function savePublication() {
+    var id = document.getElementById('pub-id').value;
+    var title = document.getElementById('pub-title').value.trim();
+    var date = document.getElementById('pub-date').value.trim();
+    var publisher = document.getElementById('pub-publisher').value.trim();
+    var accent_color = document.getElementById('pub-color').value;
+    var sort_order = parseInt(document.getElementById('pub-sort').value, 10) || 0;
+    var link = document.getElementById('pub-link').value.trim();
+    var description = document.getElementById('pub-desc').value.trim();
+
+    if (!title) {
+        showToast('Publication title is required');
+        return;
+    }
+
+    var payload = { title, date, publisher, accent_color, sort_order, link, description };
+    var saveBtn = document.getElementById('pub-save-btn');
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving…';
+
+    try {
+        var url = id ? '/api/publications/' + id : '/api/publications';
+        var method = id ? 'PUT' : 'POST';
+        var res = await fetch(url, {
+            method: method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        var data = await res.json();
+        if (data.success) {
+            showToast(id ? 'Publication updated!' : 'Publication created!');
+            closePublicationDrawer();
+            await loadPublications();
+        } else {
+            showToast(data.error || 'Failed to save publication');
+        }
+    } catch(err) {
+        showToast('Network error while saving publication');
+    } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Save Publication';
+    }
+}
+
+async function deletePublication(id) {
+    if (!confirm('Are you sure you want to delete this publication?')) return;
+    try {
+        var res = await fetch('/api/publications/' + id, { method: 'DELETE' });
+        var data = await res.json();
+        if (data.success) {
+            showToast('Publication deleted');
+            await loadPublications();
+        } else {
+            showToast(data.error || 'Delete failed');
+        }
+    } catch(err) {
+        showToast('Error deleting publication');
+    }
+}
+
+/* ══════════════════════════════════════════════════════════
+   PORTFOLIO CMS TWO-WAY SYNC: BLOGS
+   ══════════════════════════════════════════════════════════ */
+async function loadBlogs() {
+    try {
+        var res = await fetch('/api/blogs');
+        var data = await res.json();
+        if (data.success) {
+            blogsData = data.data || [];
+            _blogMap = {};
+            blogsData.forEach(function(item) {
+                _blogMap[item.id] = item;
+            });
+            blogsLoaded = true;
+            updateBlogsStats();
+            renderBlogsGrid();
+        }
+    } catch (err) {
+        console.error('Failed to load blogs:', err);
+        showToast('Error loading blog articles');
+    }
+}
+
+function updateBlogsStats() {
+    var total = blogsData.length;
+    var totalEl = document.getElementById('blog-stat-total');
+    if (totalEl) totalEl.textContent = total;
+    var scEl = document.getElementById('sc-blogs');
+    if (scEl) scEl.textContent = total;
+}
+
+function renderBlogsGrid() {
+    var grid = document.getElementById('blog-grid-dash');
+    var empty = document.getElementById('blog-empty');
+    if (!grid) return;
+
+    var q = (document.getElementById('blog-q') ? document.getElementById('blog-q').value.toLowerCase().trim() : '');
+
+    var filtered = blogsData.filter(function(b) {
+        if (!q) return true;
+        var hay = (b.title + ' ' + (b.excerpt || '') + ' ' + (b.badge || '') + ' ' + (b.tags || []).join(' ')).toLowerCase();
+        return hay.includes(q);
+    });
+
+    if (!filtered.length) {
+        grid.style.display = 'none';
+        if (empty) empty.style.display = 'flex';
+        return;
+    }
+
+    grid.style.display = 'grid';
+    if (empty) empty.style.display = 'none';
+
+    grid.innerHTML = filtered.map(function(blog) {
+        var tagsPills = (blog.tags || []).map(function(t) {
+            return '<span style="background:var(--sidebar-hover); color:var(--ink-2); font-size:0.72rem; font-weight:700; padding:2px 8px; border-radius:10px; border:1px solid var(--sidebar-border);">' + esc(t) + '</span>';
+        }).join('');
+
+        return '<div class="project-card" style="display:flex; flex-direction:column; gap:12px; padding:22px; border:1.5px solid var(--sidebar-border); border-radius:var(--r-md); background:var(--surface);">' +
+            '<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px;">' +
+                '<div style="flex:1;">' +
+                    '<div style="font-size:1.02rem; font-weight:800; color:var(--ink);">' + esc(blog.title) + '</div>' +
+                    '<div style="display:flex; align-items:center; gap:6px; font-size:0.76rem; color:var(--ink-4); margin-top:4px;">' +
+                        (blog.date ? '<span>' + esc(blog.date) + '</span>' : '') +
+                        (blog.date && blog.read_time ? '<span>·</span>' : '') +
+                        (blog.read_time ? '<span>' + esc(blog.read_time) + '</span>' : '') +
+                    '</div>' +
+                '</div>' +
+                (blog.badge ? '<span style="background:rgba(66,133,244,0.1); color:var(--g-blue); font-size:0.72rem; font-weight:700; padding:3px 8px; border-radius:10px; border:1px solid rgba(66,133,244,0.25); flex-shrink:0;">' + esc(blog.badge) + '</span>' : '') +
+            '</div>' +
+            (blog.excerpt ? '<p style="font-size:0.86rem; color:var(--ink-3); line-height:1.55; margin:0;">' + esc(blog.excerpt) + '</p>' : '') +
+            (tagsPills ? '<div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:6px;">' + tagsPills + '</div>' : '') +
+            (blog.link ? '<div style="font-size:0.78rem; margin-top:4px;"><a href="' + esc(blog.link) + '" target="_blank" rel="noopener" style="color:var(--g-blue); font-weight:600; text-decoration:none;">🔗 Read Article ↗</a></div>' : '') +
+            '<div style="display:flex; gap:8px; justify-content:flex-end; border-top:1px solid var(--line-soft); padding-top:12px; margin-top:auto;">' +
+                '<button class="btn-sm-ghost" onclick="openBlogDrawerById(\'' + blog.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface);">Edit</button>' +
+                '<button class="btn-sm-ghost" onclick="deleteBlog(\'' + blog.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; color:var(--g-red); border-radius:var(--r-pill); border:1.5px solid rgba(234,67,53,0.2); background:var(--g-red-soft);">Delete</button>' +
+            '</div>' +
+        '</div>';
+    }).join('');
+}
+
+function openBlogDrawerById(id) {
+    openBlogDrawer(_blogMap[id] || null);
+}
+
+function openBlogDrawer(blog) {
+    document.getElementById('blog-id').value = blog ? blog.id : '';
+    document.getElementById('blog-drawer-title').textContent = blog ? 'Edit Article' : 'Add Article';
+    document.getElementById('blog-title').value = blog ? (blog.title || '') : '';
+    document.getElementById('blog-date').value = blog ? (blog.date || '') : '';
+    document.getElementById('blog-read-time').value = blog ? (blog.read_time || '5 min read') : '5 min read';
+    document.getElementById('blog-badge').value = blog ? (blog.badge || '') : '';
+    document.getElementById('blog-art-type').value = blog ? (blog.art_type || 'rag-pattern') : 'rag-pattern';
+    document.getElementById('blog-sort').value = blog ? (blog.sort_order || 0) : 0;
+    document.getElementById('blog-link').value = blog ? (blog.link || '') : '';
+    document.getElementById('blog-tags').value = blog ? (blog.tags || []).join(', ') : '';
+    document.getElementById('blog-excerpt').value = blog ? (blog.excerpt || '') : '';
+
+    var d = document.getElementById('blog-drawer');
+    var b = document.getElementById('blog-backdrop');
+    if (d) d.classList.add('open');
+    if (b) b.classList.add('show');
+}
+
+function closeBlogDrawer() {
+    var d = document.getElementById('blog-drawer');
+    var b = document.getElementById('blog-backdrop');
+    if (d) d.classList.remove('open');
+    if (b) b.classList.remove('show');
+}
+
+async function saveBlog() {
+    var id = document.getElementById('blog-id').value;
+    var title = document.getElementById('blog-title').value.trim();
+    var date = document.getElementById('blog-date').value.trim();
+    var read_time = document.getElementById('blog-read-time').value.trim();
+    var badge = document.getElementById('blog-badge').value.trim();
+    var art_type = document.getElementById('blog-art-type').value;
+    var sort_order = parseInt(document.getElementById('blog-sort').value, 10) || 0;
+    var link = document.getElementById('blog-link').value.trim();
+    var tags = document.getElementById('blog-tags').value.split(',').map(function(s){ return s.trim(); }).filter(Boolean);
+    var excerpt = document.getElementById('blog-excerpt').value.trim();
+
+    if (!title) {
+        showToast('Article title is required');
+        return;
+    }
+
+    var payload = { title, date, read_time, badge, art_type, sort_order, link, tags, excerpt };
+    var saveBtn = document.getElementById('blog-save-btn');
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving…';
+
+    try {
+        var url = id ? '/api/blogs/' + id : '/api/blogs';
+        var method = id ? 'PUT' : 'POST';
+        var res = await fetch(url, {
+            method: method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        var data = await res.json();
+        if (data.success) {
+            showToast(id ? 'Article updated!' : 'Article published!');
+            closeBlogDrawer();
+            await loadBlogs();
+        } else {
+            showToast(data.error || 'Failed to save article');
+        }
+    } catch(err) {
+        showToast('Network error while saving article');
+    } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Save Article';
+    }
+}
+
+async function deleteBlog(id) {
+    if (!confirm('Are you sure you want to delete this blog article?')) return;
+    try {
+        var res = await fetch('/api/blogs/' + id, { method: 'DELETE' });
+        var data = await res.json();
+        if (data.success) {
+            showToast('Article deleted');
+            await loadBlogs();
+        } else {
+            showToast(data.error || 'Delete failed');
+        }
+    } catch(err) {
+        showToast('Error deleting article');
+    }
+}
+
+// ════ GLOBAL DRAWER INTERACTION & ERGONOMICS ════
+(function() {
+    function getActiveDrawer() {
+        return document.querySelector('.drawer.open');
+    }
+
+    function closeActiveDrawer() {
+        var active = getActiveDrawer();
+        if (!active) return;
+        var id = active.id;
+        if (id === 'edu-drawer') closeEducationDrawer();
+        else if (id === 'exp-drawer') closeExperienceDrawer();
+        else if (id === 'cert-drawer') closeCertificationDrawer();
+        else if (id === 'gallery-drawer') closeGalleryDrawer();
+        else if (id === 'pub-drawer') closePublicationDrawer();
+        else if (id === 'blog-drawer') closeBlogDrawer();
+        else if (id === 'award-drawer') closeAwardDrawer();
+        else if (id === 'dp-drawer') closeProjectDrawer();
+        else if (id === 'nf-form-drawer') closeNewFormModal();
+        else if (id === 'resp-drawer') closeFormResponses();
+        else if (id === 'talk-drawer') closeTalkDrawer();
+        else {
+            active.classList.remove('open');
+            var backdrops = document.querySelectorAll('.drawer-backdrop.open, .drawer-backdrop.show');
+            backdrops.forEach(function(b) { b.classList.remove('open', 'show'); });
+        }
+    }
+
+    // Global Esc and Ctrl+Enter / Cmd+Enter
+    document.addEventListener('keydown', function(e) {
+        var active = getActiveDrawer();
+        if (!active) return;
+
+        // Esc -> Close active drawer
+        if (e.key === 'Escape') {
+            e.preventDefault();
+            closeActiveDrawer();
+            return;
+        }
+
+        // Ctrl+Enter or Cmd+Enter -> Save active drawer
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+            e.preventDefault();
+            var saveBtn = active.querySelector('.btn-drawer-save, .drawer-foot .btn-primary, #df-btn-create, #df-btn-save:not([style*="display: none"])');
+            if (saveBtn && !saveBtn.disabled) {
+                saveBtn.click();
+            }
+        }
+    });
+
+    // Auto-focus first input on drawer open using MutationObserver
+    var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(m) {
+            if (m.type === 'attributes' && m.attributeName === 'class') {
+                var target = m.target;
+                if (target.classList && target.classList.contains('drawer') && target.classList.contains('open')) {
+                    setTimeout(function() {
+                        var firstInput = target.querySelector('.drawer-body input:not([type="hidden"]):not([type="file"]):not([disabled]), .drawer-body textarea:not([disabled]), .drawer-body select:not([disabled])');
+                        if (firstInput) {
+                            firstInput.focus();
+                        }
+                    }, 80);
+                }
+            }
+        });
+    });
+
+    document.querySelectorAll('.drawer').forEach(function(drawer) {
+        observer.observe(drawer, { attributes: true, attributeFilter: ['class'] });
+    });
+})();
 </script>
 
 </body>
