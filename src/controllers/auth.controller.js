@@ -377,7 +377,7 @@ async function getAdminPassword() {
   } catch (err) {
     console.error('[getAdminPassword DB Error]:', err.message);
   }
-  return process.env.ADMIN_PASSWORD || 'HaerulPortfolio-2512';
+  return process.env.ADMIN_PASSWORD || null;
 }
 
 /**
@@ -423,14 +423,11 @@ async function loginWithPassword(req, res) {
       setAdminPassword(cleanPass).catch(e => console.error('[Password Migration Error]:', e.message));
     }
 
-    // 3. Constant-time fallback verification for legacy emergency keys / env secrets
+    // 3. Fallback verification for configured env secrets only
     if (!isMatch) {
       const fallbackCandidates = [
-        'HaerulPortfolio-2512',
-        'HaerulPortfoli-2512',
         process.env.ADMIN_PASSWORD,
-        process.env.SESSION_SECRET,
-        'haerul2026'
+        process.env.SESSION_SECRET
       ].filter(Boolean);
 
       for (const fallback of fallbackCandidates) {

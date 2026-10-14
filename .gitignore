@@ -6,6 +6,7 @@ node_modules/
 .env.*
 *.env
 *.txt
+!public/robots.txt
 
 # Build Artifacts
 /generated/prisma

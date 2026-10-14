@@ -92,6 +92,7 @@ const createGallery = asyncHandler(async (req, res) => {
     });
 
     cache.del('gallery');
+    cache.del('portfolio:bootstrap');
     res.status(201).json({ success: true, data: item, message: 'Gallery item created successfully' });
 });
 
@@ -144,6 +145,7 @@ const updateGallery = asyncHandler(async (req, res) => {
     });
 
     cache.del('gallery');
+    cache.del('portfolio:bootstrap');
     res.json({ success: true, data: updated, message: 'Gallery item updated successfully' });
 });
 
@@ -157,6 +159,7 @@ const deleteGallery = asyncHandler(async (req, res) => {
 
     await prisma.galleryItem.delete({ where: { id } });
     cache.del('gallery');
+    cache.del('portfolio:bootstrap');
     res.json({ success: true, message: 'Gallery item deleted successfully' });
 });
 

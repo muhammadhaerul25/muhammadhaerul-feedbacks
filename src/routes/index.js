@@ -16,6 +16,11 @@ const contactRoutes = require('./contact.routes');
 const galleryRoutes = require('./gallery.routes');
 const publicationsRoutes = require('./publications.routes');
 const blogsRoutes = require('./blogs.routes');
+const { getPortfolioBootstrap } = require('../controllers/bootstrap.controller');
+
+// Consolidated Portfolio Bootstrap Endpoint (Single-request live data hydration)
+router.get('/portfolio/bootstrap', getPortfolioBootstrap);
+router.get('/bootstrap', getPortfolioBootstrap);
 
 // Health Check & Uptime Endpoint (Optimized with Database Pool & Cache Metrics)
 router.get('/health', async (req, res) => {

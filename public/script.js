@@ -828,6 +828,117 @@
     }).join('');
   }
 
+  // Parse raw experience description into { general, projects }
+  function parseExperienceDescription(raw) {
+    if (!raw || typeof raw !== 'string') return { general: '', projects: [] };
+    const text = raw.trim();
+    if (!text) return { general: '', projects: [] };
+
+    const headerMatch = text.match(/(?:^|\n)\s*(?:(?:My\s+)?projects(?:\s+included)?|Key\s+Projects|Selected\s+Projects)\s*:\s*/i);
+    let generalPart = '';
+    let projectsPart = '';
+
+    if (headerMatch) {
+      const idx = headerMatch.index;
+      generalPart = text.slice(0, idx).trim();
+      projectsPart = text.slice(idx + headerMatch[0].length).trim();
+    } else {
+      const firstNumMatch = text.match(/(?:^|\n|\.\s+)\s*1[\.\)]\s+/);
+      if (firstNumMatch) {
+        const idx = firstNumMatch.index;
+        if (idx === 0) {
+          generalPart = '';
+          projectsPart = text;
+        } else {
+          const offset = firstNumMatch[0].startsWith('.') ? 1 : 0;
+          generalPart = text.slice(0, idx + offset).trim();
+          projectsPart = text.slice(idx + offset).trim();
+        }
+      } else {
+        return { general: text, projects: [] };
+      }
+    }
+
+    const items = [];
+    const numRegex = /(?:^|\n|\s+)(\d+)[\.\)]\s+/g;
+    const matches = [];
+    let m;
+    while ((m = numRegex.exec(projectsPart)) !== null) {
+      matches.push({
+        index: m.index + (m[0].startsWith('\n') || m[0].startsWith(' ') ? 1 : 0),
+        length: m[0].trim().length,
+        num: m[1]
+      });
+    }
+
+    if (matches.length > 0) {
+      for (let i = 0; i < matches.length; i++) {
+        const cur = matches[i];
+        const next = matches[i + 1];
+        const start = cur.index + cur.length;
+        const end = next ? next.index : projectsPart.length;
+        const fullItem = projectsPart.slice(start, end).trim();
+        if (fullItem) {
+          const colonIdx = fullItem.indexOf(':');
+          if (colonIdx > 0 && colonIdx < 100) {
+            items.push({ num: cur.num, title: fullItem.slice(0, colonIdx).trim(), desc: fullItem.slice(colonIdx + 1).trim() });
+          } else {
+            items.push({ num: cur.num, title: '', desc: fullItem });
+          }
+        }
+      }
+    } else {
+      const lines = projectsPart.split('\n').map(l => l.trim()).filter(Boolean);
+      let n = 1;
+      for (const line of lines) {
+        const clean = line.replace(/^[-•*]\s*/, '').trim();
+        if (clean) {
+          const colonIdx = clean.indexOf(':');
+          if (colonIdx > 0 && colonIdx < 100) {
+            items.push({ num: String(n++), title: clean.slice(0, colonIdx).trim(), desc: clean.slice(colonIdx + 1).trim() });
+          } else {
+            items.push({ num: String(n++), title: '', desc: clean });
+          }
+        }
+      }
+    }
+
+    return { general: generalPart, projects: items };
+  }
+
+  // Format experience description into structured HTML (General Description + Projects: 1., 2., 3.)
+  function formatExperienceDescriptionHtml(desc, accent = 'var(--blue)') {
+    if (!desc) return '';
+    const parsed = parseExperienceDescription(desc);
+
+    if (!parsed.projects || !parsed.projects.length) {
+      return `<p class="timeline-desc">${escapeHtml(desc).replace(/\n/g, '<br>')}</p>`;
+    }
+
+    let html = '';
+    if (parsed.general) {
+      html += `<p class="timeline-desc timeline-general-desc">${escapeHtml(parsed.general).replace(/\n/g, '<br>')}</p>`;
+    }
+
+    html += `
+      <div class="timeline-projects-block" style="--accent:${escapeHtml(accent)}">
+        <div class="timeline-projects-heading">Projects:</div>
+        <ol class="timeline-projects-list">
+          ${parsed.projects.map(p => `
+            <li class="timeline-project-row">
+              <span class="timeline-project-num">${escapeHtml(p.num)}.</span>
+              <div class="timeline-project-detail">
+                ${p.title ? `<strong class="timeline-project-title">${escapeHtml(p.title)}:</strong> ` : ''}<span class="timeline-project-text">${escapeHtml(p.desc)}</span>
+              </div>
+            </li>
+          `).join('')}
+        </ol>
+      </div>
+    `;
+
+    return html;
+  }
+
   // Render Experiences Timeline Dynamically
   function renderTimeline(experiences = liveExperiences) {
     const timelineEl = document.getElementById('timeline');
@@ -837,6 +948,10 @@
       const accent = exp.accent_color || 'var(--blue)';
       const dateStr = `${escapeHtml(exp.start_date || '')}${exp.end_date ? ' — ' + escapeHtml(exp.end_date) : (exp.is_current ? ' — Present' : '')}`;
       const stackList = Array.isArray(exp.stack) ? exp.stack : [];
+      const metaParts = [];
+      if (exp.work_type) metaParts.push(exp.work_type);
+      if (exp.location) metaParts.push(exp.location);
+      const metaStr = metaParts.map(p => ` <span class="timeline-loc">· ${escapeHtml(p)}</span>`).join('');
 
       return `
         <div class="timeline-item reveal in-view">
@@ -851,10 +966,10 @@
                   <h3>${escapeHtml(exp.role)}</h3>
                   <span class="timeline-date">${dateStr}</span>
                 </div>
-                <p class="timeline-company">${escapeHtml(exp.company)}${exp.location ? ` <span class="timeline-loc">· ${escapeHtml(exp.location)}</span>` : ''}</p>
+                <p class="timeline-company">${escapeHtml(exp.company)}${metaStr}</p>
               </div>
             </div>
-            ${exp.description ? `<p class="timeline-desc">${escapeHtml(exp.description)}</p>` : ''}
+            ${formatExperienceDescriptionHtml(exp.description, accent)}
             ${stackList.length ? `
               <div class="timeline-stack">
                 ${stackList.map(s => `<span>${escapeHtml(s)}</span>`).join('')}
@@ -974,6 +1089,11 @@
           </div>
           <div class="cert-card-mid">
             <h4 class="cert-title">${escapeHtml(cert.title)}</h4>
+            ${cert.image_url ? `
+              <div class="cert-card-preview" onclick="openLightbox('${escapeHtml(cert.image_url)}', '${escapeHtml(cert.title)}')" title="Click to view full certificate">
+                <img src="${escapeHtml(cert.image_url)}" alt="${escapeHtml(cert.title)}" loading="lazy" onerror="this.parentElement.style.display='none'">
+              </div>
+            ` : ''}
             ${skills.length ? `
               <div class="cert-tags-row">
                 ${skills.map(s => `<span class="cert-tag">${escapeHtml(s)}</span>`).join('')}
@@ -1344,12 +1464,22 @@
   };
 
   /* ============ COPY EMAIL TO CLIPBOARD ============ */
-  window.copyEmailToClipboard = function() {
+  window.copyEmailToClipboard = function(btn) {
     const email = 'haerulmuhammad01@gmail.com';
+    const targetBtn = btn || document.querySelector('.btn-copy-icon');
+    const onDone = () => {
+      window.showToast('Email address copied to clipboard!');
+      if (targetBtn) {
+        targetBtn.classList.add('copied');
+        targetBtn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+        setTimeout(() => {
+          targetBtn.classList.remove('copied');
+          targetBtn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`;
+        }, 2000);
+      }
+    };
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(email).then(() => {
-        window.showToast('Email address copied to clipboard!');
-      }).catch(() => {
+      navigator.clipboard.writeText(email).then(onDone).catch(() => {
         window.showToast(email);
       });
     } else {
@@ -1638,11 +1768,18 @@
       const tags = Array.isArray(b.tags) ? b.tags : [];
       return `
         <article class="blog-card reveal active">
-          <div class="blog-card-media">
+          <div class="blog-card-media" style="position:relative; overflow:hidden;">
             ${b.badge ? `<span class="blog-tag-badge">${escapeHtml(b.badge)}</span>` : ''}
-            <div class="blog-art-pattern ${artClass}">
-              ${getBlogArtSvg(b.art_type)}
-            </div>
+            ${b.cover_image ? `
+              <img src="${escapeHtml(b.cover_image)}" alt="${escapeHtml(b.title)}" class="blog-card-cover" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="blog-art-pattern ${artClass}" style="display:none;">
+                ${getBlogArtSvg(b.art_type)}
+              </div>
+            ` : `
+              <div class="blog-art-pattern ${artClass}">
+                ${getBlogArtSvg(b.art_type)}
+              </div>
+            `}
           </div>
           <div class="blog-card-content">
             <div class="blog-meta">
@@ -1669,12 +1806,171 @@
     }).join('');
   }
 
-  // Main Live Data Fetcher & Hydrator
+  /* ============ HERO AMBIENT JOURNEY GLIMPSES ============ */
+  let heroGlimpseTimer = null;
+  let heroGlimpseIndex = 0;
+  let heroGlimpseSlotIndex = 0;
+
+  function initHeroJourneyGlimpses() {
+    const stage = document.getElementById('heroGlimpseStage');
+    if (!stage) return;
+    if (heroGlimpseTimer) return; // already running
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.innerWidth < 900) return;
+
+    const slots = [
+      { top: '10%', left: '3%' },
+      { top: '56%', left: '3.5%' },
+      { top: '12%', right: '3%' },
+      { bottom: '15%', right: '3.5%' }
+    ];
+
+    function spawnGlimpse() {
+      if (document.hidden || window.innerWidth < 900) return;
+      const hero = document.getElementById('hero');
+      if (hero) {
+        const rect = hero.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+      }
+
+      const items = (Array.isArray(liveGallery) && liveGallery.length) ? liveGallery : [
+        {
+          title: 'Build with AI Keynote',
+          category: 'Keynote',
+          image_url: '/uploads/talks/saveclip_app_671241768_18351262810240133_2825725287413554497_n_1787520000000.webp'
+        },
+        {
+          title: 'GSA AI Forge',
+          category: 'Mentorship',
+          image_url: '/uploads/talks/saveclip_app_752916423_18047968217611708_1368945415777708577_n_1787520000000.webp'
+        },
+        {
+          title: 'Mindful AI Forum',
+          category: 'Keynote',
+          image_url: '/uploads/talks/saveclip_app_775154220_18087205625558486_2869970966455113945_n_1787520000000.webp'
+        }
+      ];
+
+      if (!items.length) return;
+
+      const itemData = items[heroGlimpseIndex % items.length];
+      heroGlimpseIndex++;
+
+      const slot = slots[heroGlimpseSlotIndex % slots.length];
+      heroGlimpseSlotIndex++;
+
+      const el = document.createElement('div');
+      el.className = 'hero-glimpse-item active';
+      Object.assign(el.style, slot);
+
+      const title = itemData.title || 'Journey Moment';
+      const category = itemData.category || itemData.year || 'Milestone';
+      const img = itemData.image_url || '/favicon.webp';
+
+      el.innerHTML = `
+        <img src="${escapeHtml(img)}" alt="${escapeHtml(title)}" loading="lazy" onerror="this.src='/favicon.webp'">
+        <div class="hero-glimpse-caption">
+          <span>${escapeHtml(title)}</span>
+          <span class="hero-glimpse-tag">${escapeHtml(category)}</span>
+        </div>
+      `;
+
+      el.addEventListener('click', () => {
+        if (typeof openLightbox === 'function') {
+          openLightbox(img, title);
+        }
+      });
+
+      el.addEventListener('animationend', () => {
+        el.remove();
+      });
+
+      stage.appendChild(el);
+
+      const activeItems = stage.querySelectorAll('.hero-glimpse-item');
+      if (activeItems.length > 3) {
+        activeItems[0].remove();
+      }
+    }
+
+    setTimeout(spawnGlimpse, 1400);
+    heroGlimpseTimer = setInterval(spawnGlimpse, 4200);
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth < 900) {
+        stage.innerHTML = '';
+      }
+    }, { passive: true });
+  }
+
+  // Main Live Data Fetcher & Hydrator (Optimized with Batch Bootstrap + Fallback)
   async function initLivePortfolioSync() {
     setupProjectFilters();
     setupGalleryFilters();
+    initHeroJourneyGlimpses();
 
     try {
+      // 1. Fast-path: Single consolidated request (<2ms response from in-memory cache)
+      let bootstrapData = null;
+      try {
+        const bootRes = await fetch('/api/portfolio/bootstrap');
+        if (bootRes.ok) {
+          const bootJson = await bootRes.json();
+          if (bootJson.success && bootJson.data) {
+            bootstrapData = bootJson.data;
+          }
+        }
+      } catch (e) {
+        console.warn('[Bootstrap] Falling back to multi-endpoint queries:', e.message);
+      }
+
+      if (bootstrapData) {
+        if (bootstrapData.projects) {
+          liveProjects = bootstrapData.projects;
+          renderProjects(currentProjectFilter);
+          updateProjectFilterCounts();
+        }
+        if (bootstrapData.talks) {
+          liveTalks = bootstrapData.talks;
+          renderTalks();
+        }
+        if (bootstrapData.feedbacks) {
+          liveFeedbacks = bootstrapData.feedbacks;
+          renderTestimonials();
+        }
+        if (bootstrapData.experiences && bootstrapData.experiences.length) {
+          liveExperiences = bootstrapData.experiences;
+          renderTimeline(liveExperiences);
+        }
+        if (bootstrapData.educations && bootstrapData.educations.length) {
+          liveEducations = bootstrapData.educations;
+          renderEducations(liveEducations);
+        }
+        if (bootstrapData.certifications && bootstrapData.certifications.length) {
+          liveCertifications = bootstrapData.certifications;
+          renderCertifications(liveCertifications);
+        }
+        if (bootstrapData.awards && bootstrapData.awards.length) {
+          liveAwards = bootstrapData.awards;
+          renderAwards(liveAwards);
+        }
+        if (bootstrapData.gallery && bootstrapData.gallery.length) {
+          liveGallery = bootstrapData.gallery;
+          renderGallery('All');
+          updateGalleryFilterCounts();
+        }
+        livePublications = bootstrapData.publications || [];
+        renderPublications(livePublications);
+
+        liveBlogs = bootstrapData.blogs || [];
+        renderBlogs(liveBlogs);
+
+        updateHeroStats(true);
+        return;
+      }
+
+      // 2. Graceful fallback path if bootstrap endpoint is unavailable
       const [projRes, talksRes, feedRes, expRes, eduRes, certRes, awardRes, galRes, pubRes, blogRes] = await Promise.allSettled([
         fetch('/api/projects').then(r => r.json()),
         fetch('/api/talks').then(r => r.json()),

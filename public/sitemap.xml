@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url>
+    <loc>https://muhammadhaerul.tech/</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://muhammadhaerul.tech/profile.webp</image:loc>
+      <image:title>Muhammad Haerul — AI Full-Stack Engineer &amp; AI Trainer</image:title>
+      <image:caption>Official portrait of Muhammad Haerul, AI Full-Stack Engineer and AI Trainer</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://muhammadhaerul.tech/uploads/talks/saveclip_app_671241768_18351262810240133_2825725287413554497_n_1787520000000.webp</image:loc>
+      <image:title>Muhammad Haerul Keynote Speaker at Build with AI</image:title>
+      <image:caption>Muhammad Haerul delivering AI-driven development keynote</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://muhammadhaerul.tech/uploads/talks/saveclip_app_752916423_18047968217611708_1368945415777708577_n_1787520000000.webp</image:loc>
+      <image:title>Muhammad Haerul Speaking at GSA AI Forge</image:title>
+      <image:caption>Mentorship and AI workshop led by Muhammad Haerul</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://muhammadhaerul.tech/uploads/talks/saveclip_app_775154220_18087205625558486_2869970966455113945_n_1787520000000.webp</image:loc>
+      <image:title>Muhammad Haerul Keynote at Mindful AI Forum</image:title>
+      <image:caption>National tech symposium keynote by Muhammad Haerul</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://muhammadhaerul.tech/feedback</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://muhammadhaerul.tech/form/feedback-gsa-ai-forge-2026</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>

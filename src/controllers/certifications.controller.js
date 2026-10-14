@@ -1,6 +1,7 @@
 const prisma = require('../config/db');
 const cache = require('../utils/cache');
 const asyncHandler = require('../utils/asyncHandler');
+const { processUploadedFile } = require('../middlewares/upload');
 
 // GET all certifications (Public)
 const getAllCertifications = asyncHandler(async (req, res) => {
@@ -25,6 +26,12 @@ const getAllCertifications = asyncHandler(async (req, res) => {
 
 // CREATE certification (Admin Protected)
 const createCertification = asyncHandler(async (req, res) => {
+    let imageUrl = req.body.image_url ? String(req.body.image_url).trim() : null;
+    if (req.file) {
+        const uploadedPath = await processUploadedFile(req.file);
+        if (uploadedPath) imageUrl = uploadedPath;
+    }
+
     const {
         title,
         issuer,
@@ -54,18 +61,33 @@ const createCertification = asyncHandler(async (req, res) => {
                     : [],
             credential_url: credential_url ? String(credential_url).trim() : null,
             credential_id: credential_id ? String(credential_id).trim() : null,
+            image_url: imageUrl,
             accent_color: accent_color ? String(accent_color).trim() : 'var(--blue)',
             sort_order: Number.isInteger(Number(sort_order)) ? Number(sort_order) : 0
         }
     });
 
-    cache.del('certifications');
+    cache.del('certifications:all');
+    cache.del('portfolio:bootstrap');
     res.status(201).json({ success: true, data: cert, message: 'Certification created successfully' });
 });
 
 // UPDATE certification (Admin Protected)
 const updateCertification = asyncHandler(async (req, res) => {
     const { id } = req.params;
+    const existing = await prisma.certification.findUnique({ where: { id } });
+    if (!existing) {
+        return res.status(404).json({ success: false, error: 'Certification not found' });
+    }
+
+    let imageUrl = existing.image_url;
+    if (req.file) {
+        const uploadedPath = await processUploadedFile(req.file);
+        if (uploadedPath) imageUrl = uploadedPath;
+    } else if (req.body.image_url !== undefined) {
+        imageUrl = req.body.image_url ? String(req.body.image_url).trim() : null;
+    }
+
     const {
         title,
         issuer,
@@ -77,11 +99,6 @@ const updateCertification = asyncHandler(async (req, res) => {
         accent_color,
         sort_order
     } = req.body;
-
-    const existing = await prisma.certification.findUnique({ where: { id } });
-    if (!existing) {
-        return res.status(404).json({ success: false, error: 'Certification not found' });
-    }
 
     const updated = await prisma.certification.update({
         where: { id },
@@ -99,12 +116,14 @@ const updateCertification = asyncHandler(async (req, res) => {
                 : undefined,
             credential_url: credential_url !== undefined ? (credential_url ? String(credential_url).trim() : null) : undefined,
             credential_id: credential_id !== undefined ? (credential_id ? String(credential_id).trim() : null) : undefined,
+            image_url: imageUrl,
             accent_color: accent_color !== undefined ? String(accent_color).trim() : undefined,
             sort_order: sort_order !== undefined ? Number(sort_order) : undefined
         }
     });
 
-    cache.del('certifications');
+    cache.del('certifications:all');
+    cache.del('portfolio:bootstrap');
     res.json({ success: true, data: updated, message: 'Certification updated successfully' });
 });
 
@@ -117,7 +136,8 @@ const deleteCertification = asyncHandler(async (req, res) => {
     }
 
     await prisma.certification.delete({ where: { id } });
-    cache.del('certifications');
+    cache.del('certifications:all');
+    cache.del('portfolio:bootstrap');
     res.json({ success: true, message: 'Certification deleted successfully' });
 });
 

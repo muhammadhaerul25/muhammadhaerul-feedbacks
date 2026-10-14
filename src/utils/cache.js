@@ -58,6 +58,8 @@ class MemoryCache {
             this.cache.clear();
             return;
         }
+        // Invalidate portfolio:bootstrap whenever any CMS entity is updated
+        this.cache.delete('portfolio:bootstrap');
         for (const key of this.cache.keys()) {
             if (key.includes(pattern)) {
                 this.cache.delete(key);

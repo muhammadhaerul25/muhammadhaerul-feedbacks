@@ -25,7 +25,7 @@ const getAllExperiences = asyncHandler(async (req, res) => {
 
 // CREATE experience (Admin Protected)
 const createExperience = asyncHandler(async (req, res) => {
-    const { role, company, location, start_date, end_date, is_current, description, stack, accent_color, sort_order, logo_url } = req.body;
+    const { role, company, location, work_type, start_date, end_date, is_current, description, stack, accent_color, sort_order, logo_url } = req.body;
     if (!role || !company || !start_date) {
         return res.status(400).json({ success: false, error: 'Role, company, and start date are required' });
     }
@@ -35,6 +35,7 @@ const createExperience = asyncHandler(async (req, res) => {
             role: String(role).trim(),
             company: String(company).trim(),
             location: location ? String(location).trim() : null,
+            work_type: work_type ? String(work_type).trim() : null,
             start_date: String(start_date).trim(),
             end_date: end_date ? String(end_date).trim() : null,
             is_current: Boolean(is_current),
@@ -53,7 +54,7 @@ const createExperience = asyncHandler(async (req, res) => {
 // UPDATE experience (Admin Protected)
 const updateExperience = asyncHandler(async (req, res) => {
     const { id } = req.params;
-    const { role, company, location, start_date, end_date, is_current, description, stack, accent_color, sort_order, logo_url } = req.body;
+    const { role, company, location, work_type, start_date, end_date, is_current, description, stack, accent_color, sort_order, logo_url } = req.body;
 
     const existing = await prisma.experience.findUnique({ where: { id } });
     if (!existing) {
@@ -66,6 +67,7 @@ const updateExperience = asyncHandler(async (req, res) => {
             role: role !== undefined ? String(role).trim() : undefined,
             company: company !== undefined ? String(company).trim() : undefined,
             location: location !== undefined ? (location ? String(location).trim() : null) : undefined,
+            work_type: work_type !== undefined ? (work_type ? String(work_type).trim() : null) : undefined,
             start_date: start_date !== undefined ? String(start_date).trim() : undefined,
             end_date: end_date !== undefined ? (end_date ? String(end_date).trim() : null) : undefined,
             is_current: is_current !== undefined ? Boolean(is_current) : undefined,

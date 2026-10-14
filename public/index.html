@@ -4,9 +4,98 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Muhammad Haerul — AI Full-Stack Engineer</title>
+  <title>Muhammad Haerul — AI Full-Stack Engineer &amp; AI Trainer</title>
   <meta name="description"
-    content="Muhammad Haerul — AI Full-Stack Engineer with 4 Year of Experiences.">
+    content="Muhammad Haerul — AI Full-Stack Engineer &amp; AI Trainer. Building intelligent systems and dependable software architectures that ship. Specialized in applied AI, LLM systems, computer vision, and engineering mentorship.">
+  <meta name="keywords"
+    content="Muhammad Haerul, Muhammad Haerul AI, Muhammad Haerul S.Kom, AI Full-Stack Engineer, AI Trainer, AI Engineer Indonesia, Full-Stack Developer, Computer Vision, Generative AI, Large Language Models, Hasanuddin University">
+  <meta name="author" content="Muhammad Haerul">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://muhammadhaerul.tech/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="profile">
+  <meta property="og:url" content="https://muhammadhaerul.tech/">
+  <meta property="og:title" content="Muhammad Haerul — AI Full-Stack Engineer &amp; AI Trainer">
+  <meta property="og:description"
+    content="Building intelligent systems and dependable software architectures that ship. AI Engineering, Computer Vision, Generative AI, and Tech Mentorship.">
+  <meta property="og:image" content="https://muhammadhaerul.tech/assets/profile.png">
+  <meta property="og:image:alt" content="Muhammad Haerul — AI Full-Stack Engineer &amp; AI Trainer">
+  <meta property="profile:first_name" content="Muhammad">
+  <meta property="profile:last_name" content="Haerul">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://muhammadhaerul.tech/">
+  <meta name="twitter:title" content="Muhammad Haerul — AI Full-Stack Engineer &amp; AI Trainer">
+  <meta name="twitter:description"
+    content="Building intelligent systems and dependable software architectures that ship. AI Engineering, Computer Vision, Generative AI, and Tech Mentorship.">
+  <meta name="twitter:image" content="https://muhammadhaerul.tech/assets/profile.png">
+
+  <!-- Schema.org JSON-LD Structured Data for Google Search & Knowledge Graph -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://muhammadhaerul.tech/#person",
+        "name": "Muhammad Haerul",
+        "givenName": "Muhammad",
+        "familyName": "Haerul",
+        "alternateName": ["Haerul", "Muhammad Haerul, S.Kom"],
+        "jobTitle": "AI Full-Stack Engineer & AI Trainer",
+        "description": "AI Full-Stack Engineer & AI Trainer. Building intelligent systems and dependable software architectures that ship.",
+        "url": "https://muhammadhaerul.tech/",
+        "image": "https://muhammadhaerul.tech/assets/profile.png",
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "Hasanuddin University"
+        },
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Full-Stack Engineering",
+          "Computer Vision",
+          "Deep Learning",
+          "Large Language Models",
+          "AI Agents",
+          "Machine Learning in Production",
+          "FastAPI",
+          "PostgreSQL",
+          "Cloud Architecture"
+        ],
+        "sameAs": [
+          "https://github.com/muhammadhaerul25",
+          "https://www.linkedin.com/in/muhammadhaerul",
+          "https://www.instagram.com/muhammadhaerul.25/"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://muhammadhaerul.tech/#website",
+        "url": "https://muhammadhaerul.tech/",
+        "name": "Muhammad Haerul — Portfolio",
+        "description": "Official portfolio of Muhammad Haerul — AI Full-Stack Engineer & AI Trainer.",
+        "publisher": {
+          "@id": "https://muhammadhaerul.tech/#person"
+        }
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": "https://muhammadhaerul.tech/#webpage",
+        "url": "https://muhammadhaerul.tech/",
+        "name": "Muhammad Haerul — AI Full-Stack Engineer & AI Trainer",
+        "isPartOf": {
+          "@id": "https://muhammadhaerul.tech/#website"
+        },
+        "mainEntity": {
+          "@id": "https://muhammadhaerul.tech/#person"
+        }
+      }
+    ]
+  }
+  </script>
+
   <link rel="icon" type="image/webp" href="/favicon.webp?v=5">
   <link rel="icon" type="image/png" sizes="256x256" href="/favicon.png?v=5">
   <link rel="apple-touch-icon" href="/favicon.png?v=5">
@@ -26,6 +115,10 @@
   <!-- ============ NAVIGATION ============ -->
   <header class="nav" id="nav">
     <div class="nav-inner">
+      <a href="#top" class="nav-brand" aria-label="Muhammad Haerul">
+        <span class="nav-brand-text">Muhammad Haerul</span>
+      </a>
+
       <nav class="nav-links" id="navLinks">
         <a href="#about" data-nav>Profile</a>
         <a href="#education" data-nav>Education</a>
@@ -39,7 +132,6 @@
         <a href="#blog" data-nav>Blog</a>
         <a href="#gallery" data-nav>Gallery</a>
         <a href="#testimonials" data-nav>Feedbacks</a>
-        <a href="#contact" data-nav>Contacts</a>
       </nav>
 
       <div class="nav-actions">
@@ -70,25 +162,27 @@
       <div class="hero-bg" aria-hidden="true">
         <canvas id="heroCanvas"></canvas>
         <div class="hero-grid"></div>
+        <!-- Ambient Floating Journey Glimpses from Gallery -->
+        <div class="hero-glimpse-stage" id="heroGlimpseStage"></div>
       </div>
 
       <div class="hero-inner container">
         <p class="eyebrow reveal">AI Full-Stack Engineer</p>
 
         <h1 class="hero-title reveal">
-          <span class="hero-title-line">I <span class="hero-accent hero-accent-blue">build</span>, <span class="hero-accent hero-accent-red">research</span> and <span class="hero-accent hero-accent-green">teach</span> <span class="hero-accent hero-accent-yellow">AI</span> solutions</span>
+          <span class="hero-title-line">I <span class="hero-accent hero-accent-blue">build</span>, <span class="hero-accent hero-accent-red">research</span> and <span class="hero-accent hero-accent-green">teach</span></span>
+          <span class="hero-title-line"><span class="hero-ai-gradient">AI solutions</span></span>
           <span class="hero-title-line">for real-world use cases</span>
         </h1>
 
         <div class="hero-cta reveal">
-          <a href="#projects" class="btn btn-primary">
+          <a href="#projects" class="btn btn-primary btn-cta-nudge">
             View my work
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                 stroke-linejoin="round" />
             </svg>
           </a>
-          <a href="#contact" class="btn btn-ghost">Get in touch</a>
         </div>
 
         <div class="hero-social reveal">
@@ -212,9 +306,13 @@
               </li>
               <li>
                 <span>Role</span>
-                <strong>AI Full-Stack Engineer <small class="about-role-sub">(Engineer, Researcher, Trainer)</small></strong>
+                <strong>AI Full-Stack Engineer <small class="about-role-sub">(AI Engineer &amp; AI Trainer)</small></strong>
               </li>
-              <li><span>Education</span><strong>B.Sc. Computer Science, Cum Laude</strong></li>
+              <li>
+                <span>Mission</span>
+                <strong style="font-size:13.5px; font-weight:600; line-height:1.45;">Building intelligent systems and dependable software architectures that ship.</strong>
+              </li>
+              <li><span>Education</span><strong>Bachelor of Computer Science</strong></li>
               <li><span>Experience</span><strong id="about-exp-val">4+ years in AI &amp; Data Science</strong></li>
               <li>
                 <span>Area of Expertise</span>
@@ -237,7 +335,7 @@
           <div class="about-story reveal">
             <p>My work sits at the intersection of AI engineering, applied research, product development, and education. I develop end-to-end AI solutions, from data preparation and model development to application integration and deployment, while exploring new approaches to make AI more practical, reliable, and impactful. Beyond engineering, I help individuals and organizations understand, adopt, and apply AI through training, mentorship, and hands-on learning.</p>
             <p>I enjoy bridging the gap between AI research and real-world implementation, translating emerging technologies into useful products and empowering people to use AI with confidence. My experience spans industry, public-sector digital transformation, and AI education, with a particular interest in responsible AI, data, and technology that addresses meaningful challenges.</p>
-            <p>My mission is to build, research, and teach AI solutions that create real value, making AI more accessible, practical, and impactful for people, businesses, and society.</p>
+            <p>My mission is to build, research, and teach AI solutions that create real value — building intelligent systems and dependable software architectures that ship to make AI more accessible, practical, and impactful for people, businesses, and society.</p>
           </div>
         </div>
       </div>
@@ -429,9 +527,33 @@
                   <p class="timeline-company">Masa Geosciences <span class="timeline-loc">· Remote, Jakarta</span></p>
                 </div>
               </div>
-              <p class="timeline-desc">Fine-tuned YOLOv8 / YOLO-World models to detect and segment minerals across
-                1,000+ field images, built a color-matching pipeline against known mineral references, and trained
-                regression models to estimate mineral content using engineered geological features.</p>
+              <p class="timeline-desc timeline-general-desc">Researched, developed, and deployed computer vision models and machine learning pipelines for automated geological mineral identification, color segmentation, and mineral content estimation.</p>
+              <div class="timeline-projects-block" style="--accent:var(--yellow)">
+                <div class="timeline-projects-heading">Projects:</div>
+                <ol class="timeline-projects-list">
+                  <li class="timeline-project-row">
+                    <span class="timeline-project-num">1.</span>
+                    <div class="timeline-project-detail">
+                      <strong class="timeline-project-title">Mineral Shape Detector &amp; Segmentator:</strong>
+                      <span class="timeline-project-text">Collected and labeled over 1,000+ mineral images, including soil and boulder samples. Fine-tuned a model for mineral detection and segmentation using YOLOv8 and YOLO-World. Developed a Python program for precise mineral detection and segmentation.</span>
+                    </div>
+                  </li>
+                  <li class="timeline-project-row">
+                    <span class="timeline-project-num">2.</span>
+                    <div class="timeline-project-detail">
+                      <strong class="timeline-project-title">Mineral Color Detector &amp; Segmentator:</strong>
+                      <span class="timeline-project-text">Extracted color palettes from 1,000+ segmented mineral images and matched each to the closest known mineral web colors. Developed a color segmentation algorithm to analyze pixel distribution for minerals. Utilized Python (OpenCV, ColorThief, and Numpy) for accurate color matching and segmentation.</span>
+                    </div>
+                  </li>
+                  <li class="timeline-project-row">
+                    <span class="timeline-project-num">3.</span>
+                    <div class="timeline-project-detail">
+                      <strong class="timeline-project-title">Mineral Content Regressor:</strong>
+                      <span class="timeline-project-text">Extracted, transformed, cleaned, and analyzed over 1,000+ mineral records using Python. Performed feature engineering, feature selection, and principal component analysis (PCA) for model optimization. Trained a mineral regressor model using a range of algorithms, including Linear Regression, Ridge Regression, Random Forest, Support Vector Machine, and Neural Networks.</span>
+                    </div>
+                  </li>
+                </ol>
+              </div>
               <div class="timeline-stack">
                 <span>YOLOv8</span><span>OpenCV</span><span>Feature Engineering</span><span>Regression</span>
               </div>
@@ -2130,14 +2252,11 @@
 
           <div class="contact-links">
             <a href="mailto:haerulmuhammad01@gmail.com" class="contact-link" id="emailContactLink" title="Email haerulmuhammad01@gmail.com">
-              <div style="display:flex; justify-content:space-between; align-items:center; width:100%; gap:8px;">
-                <div>
-                  <span>Email</span>
-                  <strong>haerulmuhammad01@gmail.com</strong>
-                </div>
-                <button type="button" class="btn-copy-chip" aria-label="Copy email address" onclick="event.preventDefault(); event.stopPropagation(); window.copyEmailToClipboard();" title="Copy to clipboard">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                  <span>Copy</span>
+              <span>Email</span>
+              <div class="contact-link-right">
+                <strong>haerulmuhammad01@gmail.com</strong>
+                <button type="button" class="btn-copy-icon" aria-label="Copy email address" onclick="event.preventDefault(); event.stopPropagation(); window.copyEmailToClipboard(this);" title="Copy email address">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                 </button>
               </div>
             </a>

@@ -71,9 +71,9 @@ async function isAuthorizedAdmin(email) {
  * Strict authentication middleware: blocks request if not logged in as authorized admin
  */
 async function requireAdminAuth(req, res, next) {
-  // Test bypass key for CI/CD automated routing tests
+  // Test bypass key for CI/CD automated routing tests (strictly requires environment variable)
   const testKey = req.headers['x-admin-test-key'];
-  if (testKey && testKey === (process.env.ADMIN_TEST_KEY || 'automated-routing-test-secret')) {
+  if (testKey && process.env.ADMIN_TEST_KEY && testKey === process.env.ADMIN_TEST_KEY) {
     req.admin = {
       email: PRIMARY_ADMIN_EMAIL,
       name: 'Muhammad Haerul (Automated Test)',

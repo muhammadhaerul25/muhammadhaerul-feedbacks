@@ -35,6 +35,18 @@
         --g-red-dark:   #A50E0E;
         --g-red-soft:   rgba(234,67,53,0.1);
 
+        /* Accent Palette */
+        --blue:   #4285F4;
+        --red:    #EA4335;
+        --yellow: #FBBC04;
+        --green:  #34A853;
+        --orange: #FF7043;
+        --purple: #7C3AED;
+        --cyan:   #06B6D4;
+        --teal:   #14B8A6;
+        --pink:   #EC4899;
+        --amber:  #F59E0B;
+
         /* Sidebar (Light) */
         --sidebar-bg:          #FFFFFF;
         --sidebar-border:      #E8EAED;
@@ -729,6 +741,112 @@
     /* ════════════════════════════════════════
        TOAST
     ════════════════════════════════════════ */
+    /* ════════════════════════════════════════
+       MODERN GLASSMORPHIC MULTI-TOAST SYSTEM
+    ════════════════════════════════════════ */
+    .toast-container {
+        position: fixed;
+        bottom: 24px;
+        right: 28px;
+        z-index: 10000;
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 10px;
+        pointer-events: none;
+        max-width: 420px;
+        width: calc(100% - 48px);
+    }
+    .toast-card {
+        pointer-events: auto;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 13px 16px;
+        border-radius: 14px;
+        background: rgba(15, 23, 42, 0.94);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 10px 32px rgba(0, 0, 0, 0.32), 0 2px 8px rgba(0, 0, 0, 0.16);
+        color: #F8FAFC;
+        transform: translateY(18px) scale(0.96);
+        opacity: 0;
+        transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, margin 0.25s ease;
+    }
+    .toast-card.show {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    .toast-card.hide {
+        transform: translateX(36px) scale(0.92);
+        opacity: 0;
+    }
+    .toast-icon-wrap {
+        width: 30px;
+        height: 30px;
+        border-radius: 9px;
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        margin-top: 1px;
+    }
+    .toast-card.toast-success .toast-icon-wrap {
+        background: rgba(52, 168, 83, 0.2);
+        color: #34A853;
+        border: 1px solid rgba(52, 168, 83, 0.32);
+    }
+    .toast-card.toast-error .toast-icon-wrap {
+        background: rgba(234, 67, 53, 0.2);
+        color: #EA4335;
+        border: 1px solid rgba(234, 67, 53, 0.32);
+    }
+    .toast-card.toast-warning .toast-icon-wrap {
+        background: rgba(251, 188, 4, 0.2);
+        color: #FBBC04;
+        border: 1px solid rgba(251, 188, 4, 0.35);
+    }
+    .toast-card.toast-info .toast-icon-wrap {
+        background: rgba(66, 133, 244, 0.2);
+        color: #4285F4;
+        border: 1px solid rgba(66, 133, 244, 0.32);
+    }
+    .toast-content {
+        flex: 1;
+        min-width: 0;
+    }
+    .toast-title {
+        font-size: 0.84rem;
+        font-weight: 700;
+        color: #FFFFFF;
+        line-height: 1.25;
+        margin-bottom: 2px;
+    }
+    .toast-msg {
+        font-size: 0.81rem;
+        color: #CBD5E1;
+        line-height: 1.45;
+        word-break: break-word;
+    }
+    .toast-close-btn {
+        background: transparent;
+        border: none;
+        color: #94A3B8;
+        cursor: pointer;
+        padding: 3px 5px;
+        border-radius: 6px;
+        display: grid;
+        place-items: center;
+        font-size: 0.85rem;
+        line-height: 1;
+        transition: color 0.15s, background 0.15s;
+        flex-shrink: 0;
+    }
+    .toast-close-btn:hover {
+        color: #FFFFFF;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Legacy #toast fallback */
     #toast {
         position: fixed; bottom: 28px; left: 50%;
         transform: translateX(-50%) translateY(80px);
@@ -740,6 +858,71 @@
         opacity: 0; pointer-events: none; z-index: 1000; white-space: nowrap;
     }
     #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+    /* Button Loading Spinners & Save Feedback */
+    .btn-loading {
+        position: relative;
+        pointer-events: none;
+        opacity: 0.86;
+        cursor: not-allowed !important;
+    }
+    .spinner-svg {
+        animation: btnSpin 0.75s linear infinite;
+        vertical-align: -2.5px;
+        margin-right: 6px;
+    }
+    @keyframes btnSpin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+    .btn-success-flash {
+        background: #10B981 !important;
+        border-color: #059669 !important;
+        color: #FFFFFF !important;
+        transition: all 0.25s ease !important;
+    }
+
+    /* Form Validation Feedback: Drawer Shake & Highlight */
+    .drawer-shake {
+        animation: drawerShake 0.44s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    }
+    @keyframes drawerShake {
+        10%, 90% { transform: translateX(-5px); }
+        20%, 80% { transform: translateX(7px); }
+        30%, 50%, 70% { transform: translateX(-7px); }
+        40%, 60% { transform: translateX(5px); }
+    }
+    .field-invalid {
+        border-color: #EA4335 !important;
+        box-shadow: 0 0 0 3.5px rgba(234, 67, 53, 0.22) !important;
+        background-color: #FFF5F5 !important;
+        animation: fieldPulse 0.3s ease;
+    }
+    @keyframes fieldPulse {
+        0% { transform: scale(0.99); }
+        50% { transform: scale(1.01); }
+        100% { transform: scale(1); }
+    }
+
+    /* Drag & Drop Upload Zone */
+    .dropzone-area {
+        border: 2px dashed #CBD5E1;
+        border-radius: 12px;
+        padding: 16px;
+        text-align: center;
+        background: #F8FAFC;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        position: relative;
+    }
+    .dropzone-area:hover, .dropzone-area.drag-over {
+        border-color: #4285F4;
+        background: rgba(66, 133, 244, 0.05);
+    }
+    .dropzone-area.drag-over {
+        transform: scale(1.01);
+        box-shadow: 0 0 0 4px rgba(66, 133, 244, 0.15);
+    }
 
     /* ════════════════════════════════════════
        RESPONSIVE
@@ -1365,6 +1548,8 @@
     .btn-talk.edit:hover { background: var(--g-blue); color: #fff; box-shadow: var(--glow-blue); transform: translateY(-1px); }
     .btn-talk.del { background: #f1f3f4; color: var(--ink-3); }
     .btn-talk.del:hover { background: var(--g-red-soft); color: var(--g-red); transform: translateY(-1px); }
+    .btn-talk.clone { background: #f1f3f4; color: var(--ink-2); }
+    .btn-talk.clone:hover { background: rgba(147, 51, 234, 0.12); color: #7E22CE; transform: translateY(-1px); }
 
     /* ════════════════════════════════════════
        PROJECTS
@@ -2454,6 +2639,11 @@
                         <div class="stat-label">Visual Gallery</div>
                         <div class="stat-value" id="sc-gallery">—</div>
                     </div>
+                    <div class="stat-card blue" onclick="switchView('education', document.getElementById('nav-education'))" style="cursor:pointer;" title="View Education">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg></div>
+                        <div class="stat-label">Formal Education</div>
+                        <div class="stat-value" id="sc-educations">—</div>
+                    </div>
                 </div>
 
                 <div class="panel" style="margin-bottom: 24px;">
@@ -2987,7 +3177,8 @@
     </main>
 </div>
 
-<div id="toast"></div>
+<div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+<div id="toast" style="display:none;"></div>
 
 <!-- ════ PROJECT DRAWER ════ -->
 <div class="drawer-backdrop" id="dp-backdrop" onclick="closeProjectDrawer()"></div>
@@ -3022,10 +3213,16 @@
                 <textarea class="field-input" id="dp-description" placeholder="Briefly describe the project architecture and business value..." style="min-height:80px; resize:vertical; padding-top:10px;"></textarea>
             </div>
             <div class="field-group">
-                <label class="field-label">Thumbnail Preview &amp; Upload</label>
-                <img class="poster-preview" id="dp-thumbnail-prev" src="" alt="Thumbnail preview" style="display:none; max-height:160px; border-radius:10px; margin-bottom:8px;" onerror="this.style.display='none'">
-                <div class="input-row">
-                    <input class="field-input" id="dp-thumbnail" type="url" placeholder="https://… (Image URL)" oninput="updateThumbnailPreview()">
+                <label class="field-label">Thumbnail Preview &amp; Upload <span class="opt">Drag &amp; drop supported</span></label>
+                <div class="dropzone-area" id="dp-thumb-dropzone" onclick="document.getElementById('dp-thumbnail-file').click()">
+                    <img class="poster-preview" id="dp-thumbnail-prev" src="" alt="Thumbnail preview" style="display:none; max-height:160px; border-radius:10px; margin: 0 auto 8px;" onerror="this.style.display='none'">
+                    <div id="dp-thumb-droptext" style="font-size:0.8rem; color:#64748B; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                        <span>Drop thumbnail here or click to browse</span>
+                    </div>
+                </div>
+                <div class="input-row" style="margin-top:8px;">
+                    <input class="field-input" id="dp-thumbnail" type="url" placeholder="https://… (Or paste Image URL)" oninput="updateThumbnailPreview()">
                     <input type="file" id="dp-thumbnail-file" accept="image/*" style="display:none" onchange="uploadThumbnail()">
                     <button type="button" class="btn-upload" id="dp-upload-btn" onclick="document.getElementById('dp-thumbnail-file').click()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload</button>
                 </div>
@@ -3356,10 +3553,16 @@
                 <div class="field-hint">Press Enter to tag topics like Agentic AI, Computer Vision, FastAPI.</div>
             </div>
             <div class="field-group">
-                <label class="field-label">Poster Image</label>
-                <img class="poster-preview" id="dk-poster-prev" src="" alt="Poster preview" style="display:none; max-height:160px; border-radius:10px; margin-bottom:8px;" onerror="this.style.display='none'">
-                <div class="input-row">
-                    <input class="field-input" id="dk-poster" type="url" placeholder="https://… (Poster image URL)" oninput="updatePosterPreview()">
+                <label class="field-label">Poster Image <span class="opt">Drag &amp; drop supported</span></label>
+                <div class="dropzone-area" id="dk-poster-dropzone" onclick="document.getElementById('dk-poster-file').click()">
+                    <img class="poster-preview" id="dk-poster-prev" src="" alt="Poster preview" style="display:none; max-height:160px; border-radius:10px; margin:0 auto 8px;" onerror="this.style.display='none'">
+                    <div id="dk-poster-droptext" style="font-size:0.8rem; color:#64748B; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                        <span>Drop poster image here or click to browse</span>
+                    </div>
+                </div>
+                <div class="input-row" style="margin-top:8px;">
+                    <input class="field-input" id="dk-poster" type="url" placeholder="https://… (Or paste Poster URL)" oninput="updatePosterPreview()">
                     <input type="file" id="dk-poster-file" accept="image/*" style="display:none" onchange="uploadPoster()">
                     <button type="button" class="btn-upload" id="dk-upload-btn" onclick="document.getElementById('dk-poster-file').click()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload</button>
                 </div>
@@ -3437,9 +3640,25 @@
                 <label class="field-label">Company / Organization <span class="req">*</span></label>
                 <input class="field-input" id="exp-company" placeholder="e.g. AksaraHub Nusantara, RevoU, Samsung R&amp;D">
             </div>
-            <div class="field-group">
-                <label class="field-label">Location / Work Type <span class="opt">Optional</span></label>
-                <input class="field-input" id="exp-location" placeholder="e.g. Jakarta, ID &bull; Hybrid or Remote">
+            <div class="fields-2col">
+                <div class="field-group">
+                    <label class="field-label">Location <span class="opt">City, Country</span></label>
+                    <input class="field-input" id="exp-location" placeholder="e.g. Jakarta, Indonesia">
+                </div>
+                <div class="field-group">
+                    <label class="field-label">Work Type <span class="opt">Arrangement</span></label>
+                    <input class="field-input" id="exp-work-type" list="exp-work-types" placeholder="e.g. Remote, Hybrid, On-site">
+                    <datalist id="exp-work-types">
+                        <option value="Remote">
+                        <option value="Hybrid">
+                        <option value="On-site">
+                        <option value="Contract">
+                        <option value="Full-time">
+                        <option value="Part-time">
+                        <option value="Freelance">
+                        <option value="Internship">
+                    </datalist>
+                </div>
             </div>
 
             <!-- Visual Company Logo with Preview & Upload -->
@@ -3486,12 +3705,17 @@
             </div>
             <div class="field-group">
                 <label class="field-label">Timeline Accent Color</label>
-                <select class="field-select" id="exp-color">
+                <select class="field-select" id="exp-color" onchange="updateExpLivePreview()">
                     <option value="var(--blue)">Google Blue</option>
                     <option value="var(--red)">Coral Red</option>
+                    <option value="var(--yellow)">Google Yellow</option>
                     <option value="var(--green)">Emerald Green</option>
-                    <option value="var(--yellow)">Amber Gold</option>
+                    <option value="var(--orange)">Sunset Orange</option>
                     <option value="var(--purple)">Indigo Purple</option>
+                    <option value="var(--cyan)">Sky Cyan</option>
+                    <option value="var(--teal)">Teal Mint</option>
+                    <option value="var(--pink)">Rose Pink</option>
+                    <option value="var(--amber)">Amber Gold</option>
                 </select>
             </div>
         </div>
@@ -3506,10 +3730,53 @@
                 <label class="field-label">Tech Stack (comma-separated)</label>
                 <input class="field-input" id="exp-stack" placeholder="e.g. PyTorch, Computer Vision, OCR, FastAPI, PostgreSQL">
             </div>
-            <div class="field-group">
-                <label class="field-label">Role Description &amp; Achievements</label>
-                <textarea class="field-input" id="exp-desc" rows="4" style="resize:vertical;" placeholder="Key responsibilities, shipped architectures, and tangible business impact..."></textarea>
+
+            <!-- Job Description & Projects Editor -->
+            <div class="field-group" style="margin-top:4px;">
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; gap:8px; flex-wrap:wrap;">
+                    <label class="field-label" style="margin:0;">Job Description &amp; Projects</label>
+                    <div class="resp-segmented">
+                        <button type="button" class="resp-tab-btn active" id="exp-mode-btn-structured" onclick="setExpEditorMode('structured')">✨ Structured</button>
+                        <button type="button" class="resp-tab-btn" id="exp-mode-btn-raw" onclick="setExpEditorMode('raw')">📝 Full Text</button>
+                    </div>
+                </div>
+
+                <!-- Structured Editor Mode -->
+                <div id="exp-editor-structured" style="display:flex; flex-direction:column; gap:12px;">
+                    <div>
+                        <label class="field-label" style="font-size:0.78rem; margin-bottom:4px; color:var(--ink-2);">General Description <span class="opt">Overview of role, responsibilities &amp; mission</span></label>
+                        <textarea class="field-input" id="exp-general-desc" rows="3" style="resize:vertical;" placeholder="e.g. Overview of role, team leadership, or core mission..." oninput="syncExpStructuredToRaw()"></textarea>
+                    </div>
+
+                    <div>
+                        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+                            <label class="field-label" style="margin:0; font-size:0.78rem; color:var(--ink-2); font-weight:700;">Projects: <span class="opt">Numbered key initiatives (1., 2., 3.)</span></label>
+                            <button type="button" class="btn-sm-ghost" onclick="addExpProjectRow()" style="font-size:0.75rem; font-weight:700; color:var(--g-blue); background:rgba(66,133,244,0.08); border:1px solid rgba(66,133,244,0.25); border-radius:12px; padding:3px 10px; cursor:pointer;">＋ Add Project</button>
+                        </div>
+                        <div id="exp-projects-list" style="display:flex; flex-direction:column; gap:8px;">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Raw / Markdown Editor Mode -->
+                <div id="exp-editor-raw" style="display:none; flex-direction:column; gap:6px;">
+                    <textarea class="field-input" id="exp-desc" rows="8" style="resize:vertical; font-family:var(--font-mono, monospace); font-size:0.82rem; line-height:1.55;" placeholder="General description...&#10;&#10;Projects:&#10;1. Mineral Shape Detector &amp; Segmentator: Collected and labeled 1,000+ mineral images...&#10;2. Mineral Color Detector: Extracted palettes..." oninput="syncExpRawToStructured()"></textarea>
+                    <div class="field-hint" style="margin:0; font-size:0.73rem;">Format with general description at top, then "Projects:" followed by numbered items (1. Title: Description).</div>
+                </div>
+
+                <!-- Live Preview on Card -->
+                <div style="margin-top:14px; border:1px solid var(--sidebar-border); border-radius:10px; background:var(--sidebar-hover); padding:12px 14px;">
+                    <div style="font-size:0.72rem; font-weight:800; color:var(--ink-3); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:8px; display:flex; align-items:center; gap:5px;">
+                        <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--g-green);"></span>
+                        Live Preview on Portfolio
+                    </div>
+                    <div id="exp-live-preview" style="font-size:0.84rem; line-height:1.6; color:var(--ink);">
+                        <span style="color:var(--ink-4); font-style:italic;">Enter description above to see live preview...</span>
+                    </div>
+                </div>
             </div>
+
             <div class="field-group">
                 <label class="field-label">Sort Order <span class="opt">Lower numbers appear first</span></label>
                 <input class="field-input" id="exp-sort" type="number" value="0">
@@ -3716,13 +3983,31 @@
                 <input class="field-input" id="cert-url" type="url" placeholder="https://coursera.org/verify/…">
             </div>
             <div class="field-group">
+                <label class="field-label">Certificate Image / Scan <span class="opt">Card Preview &amp; Lightbox</span></label>
+                <div style="display:flex; gap:8px;">
+                    <input class="field-input" id="cert-image-url" placeholder="https://… or /uploads/talks/…" oninput="updateCertImagePreview()">
+                    <input type="file" id="cert-image-file" accept="image/*" style="display:none;" onchange="uploadCertImage()">
+                    <button type="button" class="btn-upload" id="cert-upload-btn" onclick="document.getElementById('cert-image-file').click()" style="padding:0 14px; height:42px; font-size:0.82rem; font-weight:700; border-radius:var(--r-md); border:1.5px solid var(--line); background:var(--surface); cursor:pointer; flex-shrink:0;">
+                        📤 Upload
+                    </button>
+                </div>
+                <div id="cert-img-preview-box" style="margin-top:8px; display:none;">
+                    <img id="cert-img-preview" src="" alt="Cert Preview" style="max-height:100px; border-radius:6px; border:1px solid var(--line); object-fit:cover;">
+                </div>
+            </div>
+            <div class="field-group">
                 <label class="field-label">Card Accent Color</label>
                 <select class="field-select" id="cert-color">
                     <option value="var(--blue)">Google Blue</option>
                     <option value="var(--red)">Coral Red</option>
+                    <option value="var(--yellow)">Google Yellow</option>
                     <option value="var(--green)">Emerald Green</option>
-                    <option value="var(--yellow)">Amber Gold</option>
+                    <option value="var(--orange)">Sunset Orange</option>
                     <option value="var(--purple)">Indigo Purple</option>
+                    <option value="var(--cyan)">Sky Cyan</option>
+                    <option value="var(--teal)">Teal Mint</option>
+                    <option value="var(--pink)">Rose Pink</option>
+                    <option value="var(--amber)">Amber Gold</option>
                 </select>
             </div>
         </div>
@@ -3964,7 +4249,7 @@
             </div>
             <div class="drawer-head-text">
                 <div class="drawer-title" id="blog-drawer-title">Add Blog Article</div>
-                <div class="drawer-subtitle">Technical writing and architecture guides synced to live portfolio</div>
+                <div class="drawer-subtitle">Publish technical articles, architecture deep-dives &amp; case studies</div>
             </div>
         </div>
         <button class="drawer-close-btn" onclick="closeBlogDrawer()" title="Close (Esc)">✕</button>
@@ -3976,30 +4261,74 @@
         <div class="field-card">
             <div class="field-card-title">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
-                Article Details
+                Article Details &amp; Status
             </div>
             <div class="field-group">
                 <label class="field-label">Article Title <span class="req">*</span></label>
-                <input class="field-input" id="blog-title" placeholder="e.g. Designing Resilient Database Pooling and In-Memory Caching">
+                <input class="field-input" id="blog-title" placeholder="e.g. Designing Resilient Database Pooling and In-Memory Caching" oninput="updateBlogLivePreview()">
             </div>
             <div class="fields-2col">
                 <div class="field-group">
-                    <label class="field-label">Badge / Category</label>
-                    <input class="field-input" id="blog-badge" placeholder="e.g. System Architecture, Agentic AI, Computer Vision">
+                    <label class="field-label">Category / Badge</label>
+                    <input class="field-input" id="blog-badge" list="blog-cat-list" placeholder="e.g. System Architecture, Agentic AI" oninput="updateBlogLivePreview()">
+                    <datalist id="blog-cat-list">
+                        <option value="System Architecture">
+                        <option value="Agentic AI">
+                        <option value="Computer Vision">
+                        <option value="MLOps &amp; Cloud">
+                        <option value="Security &amp; Auth">
+                        <option value="Database Engineering">
+                        <option value="Full-Stack Dev">
+                    </datalist>
                 </div>
                 <div class="field-group">
-                    <label class="field-label">Card Art Pattern</label>
-                    <select class="field-select" id="blog-art-type">
-                        <option value="rag-pattern">RAG / Agent Pattern</option>
-                        <option value="db-pattern">Database / Cache Pattern</option>
-                        <option value="ai-pattern">AI / Robotics Pattern</option>
-                        <option value="cv-pattern">Computer Vision Pattern</option>
+                    <label class="field-label">Publication Status</label>
+                    <select class="field-select" id="blog-status" onchange="updateBlogLivePreview()">
+                        <option value="published">Published (Live on Portfolio)</option>
+                        <option value="draft">Draft (Private in CMS)</option>
                     </select>
                 </div>
             </div>
         </div>
 
-        <!-- Card 2: Publishing & Links -->
+        <!-- Card 2: Cover Media & Visual Art -->
+        <div class="field-card">
+            <div class="field-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                Cover Media &amp; Graphic Art
+            </div>
+            <div class="field-group">
+                <label class="field-label">Cover Image <span class="opt">Upload or enter image URL</span></label>
+                <div style="display:flex; align-items:center; gap:14px; background:#F8FAFC; border:1.5px solid #E2E8F0; border-radius:12px; padding:12px 14px;">
+                    <div style="width:72px; height:50px; border-radius:8px; background:#FFFFFF; border:1.5px solid #E2E8F0; display:grid; place-items:center; overflow:hidden; flex-shrink:0;">
+                        <img id="blog-cover-preview" src="" alt="Cover" style="width:100%; height:100%; object-fit:cover; display:none;" onerror="this.style.display='none'; document.getElementById('blog-cover-fallback').style.display='grid';">
+                        <div id="blog-cover-fallback" style="font-size:1.4rem; display:grid; place-items:center; color:var(--g-purple);">✍️</div>
+                    </div>
+                    <div style="flex:1; min-width:0; display:flex; flex-direction:column; gap:6px;">
+                        <div style="display:flex; gap:8px;">
+                            <input class="field-input" id="blog-cover-url" placeholder="e.g. /uploads/... or https://..." oninput="updateBlogCoverPreview()" style="font-size:0.86rem; padding:8px 12px;">
+                            <input type="file" id="blog-cover-file" accept="image/*" style="display:none" onchange="previewBlogCoverUpload(event)">
+                            <button type="button" class="btn-upload" onclick="document.getElementById('blog-cover-file').click()" style="padding:8px 14px; flex-shrink:0;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload
+                            </button>
+                            <button type="button" id="blog-cover-clear-btn" onclick="clearBlogCover()" style="display:none; padding:8px 10px; border:1.5px solid #E2E8F0; background:#fff; border-radius:var(--r-sm); color:var(--g-red); font-size:0.8rem; cursor:pointer;" title="Remove cover">✕</button>
+                        </div>
+                        <div class="field-hint" style="margin:0; font-size:0.75rem;">Upload photo or paste URL. If left empty, fallback geometric art pattern below is displayed.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="field-group">
+                <label class="field-label">Fallback Geometric Pattern</label>
+                <select class="field-select" id="blog-art-type" onchange="updateBlogLivePreview()">
+                    <option value="rag-pattern">RAG / Agent Pattern (Indigo Flow)</option>
+                    <option value="db-pattern">Database / Cache Pattern (Cylinder &amp; Cache)</option>
+                    <option value="ai-pattern">AI / Robotics Pattern (Neural Core)</option>
+                    <option value="cv-pattern">Computer Vision Pattern (Scan Aperture)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Card 3: Publishing & Reading Info -->
         <div class="field-card">
             <div class="field-card-title">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
@@ -4007,18 +4336,18 @@
             </div>
             <div class="fields-2col">
                 <div class="field-group">
-                    <label class="field-label">Date</label>
-                    <input class="field-input" id="blog-date" placeholder="e.g. Oct 2026">
+                    <label class="field-label">Publication Date</label>
+                    <input class="field-input" id="blog-date" placeholder="e.g. Oct 2026, May 2024" oninput="updateBlogLivePreview()">
                 </div>
                 <div class="field-group">
-                    <label class="field-label">Read Time</label>
-                    <input class="field-input" id="blog-read-time" placeholder="e.g. 6 min read">
+                    <label class="field-label">Estimated Read Time</label>
+                    <input class="field-input" id="blog-read-time" placeholder="e.g. 5 min read" oninput="updateBlogLivePreview()">
                 </div>
             </div>
             <div class="fields-2col">
                 <div class="field-group">
-                    <label class="field-label">Article Link / URL</label>
-                    <input class="field-input" id="blog-link" placeholder="https://github.com/muhammadhaerul25 or Medium URL">
+                    <label class="field-label">External Canonical / Read URL <span class="opt">Optional</span></label>
+                    <input class="field-input" id="blog-link" placeholder="e.g. https://medium.com/... or GitHub link">
                 </div>
                 <div class="field-group">
                     <label class="field-label">Sort Order</label>
@@ -4027,7 +4356,7 @@
             </div>
         </div>
 
-        <!-- Card 3: Content & Topics -->
+        <!-- Card 4: Content & Summary -->
         <div class="field-card">
             <div class="field-card-title">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
@@ -4035,12 +4364,25 @@
             </div>
             <div class="field-group">
                 <label class="field-label">Tags (comma-separated)</label>
-                <input class="field-input" id="blog-tags" placeholder="e.g. PostgreSQL, Prisma, Node.js, Security">
+                <input class="field-input" id="blog-tags" placeholder="e.g. PostgreSQL, Prisma, Node.js, Caching" oninput="updateBlogLivePreview()">
             </div>
             <div class="field-group">
-                <label class="field-label">Article Excerpt</label>
-                <textarea class="field-input" id="blog-excerpt" rows="3" style="resize:vertical;" placeholder="A deep dive into architecture and best practices..."></textarea>
+                <label class="field-label">Article Excerpt <span class="opt">Short abstract on card</span></label>
+                <textarea class="field-input" id="blog-excerpt" rows="2" style="resize:vertical;" placeholder="A deep dive into architecture patterns, caching mechanisms, and system resiliency..." oninput="updateBlogLivePreview()"></textarea>
             </div>
+            <div class="field-group">
+                <label class="field-label">Full Article Body <span class="opt">Markdown or formatted text for in-app reader</span></label>
+                <textarea class="field-input" id="blog-content" rows="6" style="resize:vertical; font-family:monospace; font-size:0.86rem;" placeholder="## Overview&#10;&#10;Write full article contents, code examples, or case study analysis here..."></textarea>
+            </div>
+        </div>
+
+        <!-- Card 5: Live Card Preview -->
+        <div class="field-card" style="background:#F8FAFC; border:1.5px dashed #CBD5E1;">
+            <div class="field-card-title" style="color:var(--ink-2); font-size:0.86rem;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                Live Card Preview
+            </div>
+            <div id="blog-live-preview-box" style="margin-top:6px;"></div>
         </div>
     </div>
     <div class="drawer-foot">
@@ -4187,14 +4529,191 @@ function initials(n) {
     var p = n.trim().split(/\s+/);
     return p.length >= 2 ? (p[0][0]+p[1][0]).toUpperCase() : p[0].slice(0,2).toUpperCase();
 }
-function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function esc(s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+var escapeHtml = esc;
+window.esc = esc;
+window.escapeHtml = esc;
 function fmtDate(d) { return d ? new Date(d).toLocaleDateString('en-US',{day:'2-digit',month:'short',year:'numeric'}) : '—'; }
 function ratingClass(r) { r=+r; return r>=9?'high':r>=7?'mid':r>=5?'low':'poor'; }
 
-function showToast(msg) {
-    var t = document.getElementById('toast');
-    t.textContent = msg; t.classList.add('show');
-    setTimeout(function(){ t.classList.remove('show'); }, 2800);
+/* ════ MODERN NOTIFICATIONS & CRUD WORKFLOW HELPERS ════ */
+function showToast(msg, type, title) {
+    var container = document.getElementById('toast-container');
+    if (!container) {
+        var legacy = document.getElementById('toast');
+        if (legacy) {
+            legacy.textContent = msg; legacy.style.display = 'block'; legacy.classList.add('show');
+            setTimeout(function(){ legacy.classList.remove('show'); }, 3000);
+        }
+        return;
+    }
+
+    var cleanMsg = String(msg || '');
+    if (!type || type === 'auto') {
+        if (/error|fail|gagal|invalid|required|tidak|err/i.test(cleanMsg)) type = 'error';
+        else if (/success|berhasil|saved|updated|created|added|deleted|dihapus|terhapus|copied|terkirim/i.test(cleanMsg)) type = 'success';
+        else if (/warning|caution|perhatian|awas/i.test(cleanMsg)) type = 'warning';
+        else type = 'info';
+    }
+
+    var iconSvg = '';
+    if (type === 'success') {
+        iconSvg = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+    } else if (type === 'error') {
+        iconSvg = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>';
+    } else if (type === 'warning') {
+        iconSvg = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>';
+    } else {
+        iconSvg = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>';
+    }
+
+    var card = document.createElement('div');
+    card.className = 'toast-card toast-' + type;
+
+    var defaultTitle = '';
+    if (title) defaultTitle = '<div class="toast-title">' + esc(title) + '</div>';
+
+    card.innerHTML = 
+        '<div class="toast-icon-wrap">' + iconSvg + '</div>' +
+        '<div class="toast-content">' +
+            defaultTitle +
+            '<div class="toast-msg">' + esc(cleanMsg) + '</div>' +
+        '</div>' +
+        '<button class="toast-close-btn" aria-label="Close notification">✕</button>';
+
+    var dismissTimer = null;
+    function dismiss() {
+        if (!card.parentNode) return;
+        card.classList.remove('show');
+        card.classList.add('hide');
+        setTimeout(function() {
+            if (card.parentNode) card.parentNode.removeChild(card);
+        }, 260);
+    }
+
+    card.querySelector('.toast-close-btn').onclick = function(e) {
+        e.stopPropagation();
+        if (dismissTimer) clearTimeout(dismissTimer);
+        dismiss();
+    };
+
+    var duration = type === 'error' ? 4500 : 3200;
+    dismissTimer = setTimeout(dismiss, duration);
+
+    card.onmouseenter = function() { if (dismissTimer) clearTimeout(dismissTimer); };
+    card.onmouseleave = function() { dismissTimer = setTimeout(dismiss, 1800); };
+
+    container.appendChild(card);
+    requestAnimationFrame(function() {
+        card.classList.add('show');
+    });
+}
+
+function setBtnLoading(btn, isLoading, loadingText, successFlash) {
+    if (!btn) return;
+    if (isLoading) {
+        if (!btn.dataset.originalHtml) {
+            btn.dataset.originalHtml = btn.innerHTML;
+        }
+        btn.disabled = true;
+        btn.classList.add('btn-loading');
+        btn.innerHTML = '<svg class="spinner-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle><path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"></path></svg> ' + esc(loadingText || 'Saving…');
+    } else {
+        if (successFlash) {
+            btn.classList.remove('btn-loading');
+            btn.classList.add('btn-success-flash');
+            btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Saved!';
+            setTimeout(function() {
+                btn.disabled = false;
+                btn.classList.remove('btn-success-flash');
+                if (btn.dataset.originalHtml) {
+                    btn.innerHTML = btn.dataset.originalHtml;
+                    delete btn.dataset.originalHtml;
+                }
+            }, 1000);
+        } else {
+            btn.disabled = false;
+            btn.classList.remove('btn-loading');
+            btn.classList.remove('btn-success-flash');
+            if (btn.dataset.originalHtml) {
+                btn.innerHTML = btn.dataset.originalHtml;
+                delete btn.dataset.originalHtml;
+            }
+        }
+    }
+}
+
+function validateDrawerFields(drawerEl, rules) {
+    if (!drawerEl || !rules || !rules.length) return true;
+    var firstInvalid = null;
+    var invalidLabel = '';
+
+    rules.forEach(function(r) {
+        var el = document.getElementById(r.id);
+        if (!el) return;
+        var val = el.value;
+        if (val == null || String(val).trim() === '') {
+            el.classList.add('field-invalid');
+            if (!firstInvalid) {
+                firstInvalid = el;
+                invalidLabel = r.label || 'This field';
+            }
+            var onInputHandler = function() {
+                el.classList.remove('field-invalid');
+                el.removeEventListener('input', onInputHandler);
+                el.removeEventListener('change', onInputHandler);
+            };
+            el.addEventListener('input', onInputHandler);
+            el.addEventListener('change', onInputHandler);
+        } else {
+            el.classList.remove('field-invalid');
+        }
+    });
+
+    if (firstInvalid) {
+        drawerEl.classList.remove('drawer-shake');
+        void drawerEl.offsetWidth; // force reflow
+        drawerEl.classList.add('drawer-shake');
+        setTimeout(function() { drawerEl.classList.remove('drawer-shake'); }, 500);
+
+        firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        firstInvalid.focus();
+        showToast(invalidLabel + ' is required', 'error');
+        return false;
+    }
+    return true;
+}
+
+function setupDropZone(dropZoneEl, fileInputEl, onFileDrop) {
+    if (!dropZoneEl) return;
+    dropZoneEl.classList.add('dropzone-area');
+
+    ['dragenter', 'dragover'].forEach(function(name) {
+        dropZoneEl.addEventListener(name, function(e) {
+            e.preventDefault(); e.stopPropagation();
+            dropZoneEl.classList.add('drag-over');
+        });
+    });
+
+    ['dragleave', 'drop'].forEach(function(name) {
+        dropZoneEl.addEventListener(name, function(e) {
+            e.preventDefault(); e.stopPropagation();
+            dropZoneEl.classList.remove('drag-over');
+        });
+    });
+
+    dropZoneEl.addEventListener('drop', function(e) {
+        var files = e.dataTransfer ? e.dataTransfer.files : null;
+        if (!files || !files.length) return;
+        if (fileInputEl) {
+            fileInputEl.files = files;
+            var changeEvt = new Event('change', { bubbles: true });
+            fileInputEl.dispatchEvent(changeEvt);
+        }
+        if (typeof onFileDrop === 'function') {
+            onFileDrop(files);
+        }
+    });
 }
 
 /* ── Topic Color Palette (No green to avoid collision with attendees badge) ── */
@@ -4236,6 +4755,13 @@ var formsLoaded = false;
 var talksLoaded = false;
 var projectsLoaded = false;
 var dataLoaded = false;
+var experiencesLoaded = false;
+var educationsLoaded = false;
+var certificationsLoaded = false;
+var awardsLoaded = false;
+var publicationsLoaded = false;
+var blogsLoaded = false;
+var galleryLoaded = false;
 
 function debounce(func, wait) {
     var timeout;
@@ -4415,19 +4941,26 @@ function animateCount(el, target, suffix, isFloat) {
 
 async function loadOverview() {
     try {
-        var [resFeedbacks, resProjects, resTalks, resForms] = await Promise.all([
-            fetch('/api/get_feedback').then(r=>r.json()).catch(()=>({data:[]})),
-            fetch('/api/projects').then(r=>r.json()).catch(()=>({data:[]})),
-            fetch('/api/talks').then(r=>r.json()).catch(()=>({data:[]})),
-            fetch('/api/forms').then(r=>r.json()).catch(()=>({data:[]}))
+        var [resBoot, resForms, resContact] = await Promise.all([
+            fetch('/api/portfolio/bootstrap').then(r => r.json()).catch(() => ({ success: false })),
+            fetch('/api/forms').then(r => r.json()).catch(() => ({ data: [] })),
+            fetch('/api/contact').then(r => r.json()).catch(() => ({ count: 0, unreadCount: 0 }))
         ]);
-        
-        var feedbacks = resFeedbacks.data || [];
-        var projects = (typeof sortProjectsByDate === 'function') ? sortProjectsByDate(resProjects.data || []) : (resProjects.data || []);
-        var talks = (resTalks.data || []).sort(function(a,b){ return (b.date ? new Date(b.date).getTime() : 0) - (a.date ? new Date(a.date).getTime() : 0); });
-        var forms = resForms.data || [];
 
-        // Populate in-memory caches so switching views is instant (0ms delay)
+        var bootData = (resBoot && resBoot.success && resBoot.data) ? resBoot.data : {};
+        var feedbacks = bootData.feedbacks || [];
+        var projects = bootData.projects || [];
+        var talks = (bootData.talks || []).sort(function(a,b){ return (b.date ? new Date(b.date).getTime() : 0) - (a.date ? new Date(a.date).getTime() : 0); });
+        var forms = resForms.data || [];
+        var experiences = bootData.experiences || [];
+        var educations = bootData.educations || [];
+        var certifications = bootData.certifications || [];
+        var awards = bootData.awards || [];
+        var gallery = bootData.gallery || [];
+        var publications = bootData.publications || [];
+        var blogs = bootData.blogs || [];
+
+        // Pre-populate in-memory CMS caches so navigating any section is 0ms instant!
         allData = feedbacks;
         dataLoaded = true;
         allProjects = projects;
@@ -4438,13 +4971,49 @@ async function loadOverview() {
         formsLoaded = true;
         formsDataMap = {};
         forms.forEach(function(f){ formsDataMap[f.id] = f; });
+
+        experiencesData = experiences;
+        experiencesLoaded = true;
+        _expMap = {};
+        experiences.forEach(function(e){ _expMap[e.id] = e; });
+
+        educationsData = educations;
+        educationsLoaded = true;
+        _eduMap = {};
+        educations.forEach(function(e){ _eduMap[e.id] = e; });
+
+        certificationsData = certifications;
+        certificationsLoaded = true;
+        _certMap = {};
+        certifications.forEach(function(c){ _certMap[c.id] = c; });
+
+        awardsData = awards;
+        awardsLoaded = true;
+        _awardMap = {};
+        awards.forEach(function(a){ _awardMap[a.id] = a; });
+
+        galleryData = gallery;
+        galleryLoaded = true;
+        _galleryMap = {};
+        gallery.forEach(function(g){ _galleryMap[g.id] = g; });
+
+        publicationsData = publications;
+        publicationsLoaded = true;
+        _pubMap = {};
+        publications.forEach(function(p){ _pubMap[p.id] = p; });
+
+        blogsData = blogs;
+        blogsLoaded = true;
+        _blogMap = {};
+        blogs.forEach(function(b){ _blogMap[b.id] = b; });
+
         overviewLoaded = true;
 
-        // Hero Stats (100% genuine data)
+        // Hero Stats
         var attendees = talks.reduce(function(s,t) { return s + (t.jumlah_peserta||0); }, 0);
         animateCount(document.getElementById('hs-feedbacks'), feedbacks.length, '', false);
         animateCount(document.getElementById('hs-attendees'), attendees, '', false);
-        
+
         var avgRate = 0;
         if (feedbacks.length > 0) {
             var sum = feedbacks.reduce(function(acc, d) { return acc + (+d.rating || 0); }, 0);
@@ -4452,47 +5021,29 @@ async function loadOverview() {
         }
         animateCount(document.getElementById('hs-avg-rate'), avgRate, ' ★', true);
 
-        // Grid Stats
+        // All 12 Grid Stats
         animateCount(document.getElementById('sc-projects'), projects.length, '', false);
         animateCount(document.getElementById('sc-talks'), talks.length, '', false);
         animateCount(document.getElementById('sc-forms'), forms.length, '', false);
         animateCount(document.getElementById('sc-feedbacks'), feedbacks.length, '', false);
+        animateCount(document.getElementById('sc-experiences'), experiences.length, '', false);
+        animateCount(document.getElementById('sc-educations'), educations.length, '', false);
+        animateCount(document.getElementById('sc-certs'), certifications.length, '', false);
+        animateCount(document.getElementById('sc-awards'), awards.length, '', false);
+        animateCount(document.getElementById('sc-inbox'), resContact.count || 0, '', false);
+        animateCount(document.getElementById('sc-pubs'), publications.length, '', false);
+        animateCount(document.getElementById('sc-blogs'), blogs.length, '', false);
+        animateCount(document.getElementById('sc-gallery'), gallery.length, '', false);
 
-        // Publications & Blogs Stats on Overview
-        fetch('/api/publications').then(r=>r.json()).then(function(d){
-            if (d && d.success) animateCount(document.getElementById('sc-pubs'), (d.data||[]).length, '', false);
-        }).catch(function(){});
-        fetch('/api/blogs').then(r=>r.json()).then(function(d){
-            if (d && d.success) animateCount(document.getElementById('sc-blogs'), (d.data||[]).length, '', false);
-        }).catch(function(){});
-
-        // Hydrate CMS stats on Overview
-        fetch('/api/experiences').then(r=>r.json()).then(function(d){
-            if (d && d.success) animateCount(document.getElementById('sc-experiences'), (d.data||[]).length, '', false);
-        }).catch(function(){});
-        fetch('/api/certifications').then(r=>r.json()).then(function(d){
-            if (d && d.success) animateCount(document.getElementById('sc-certs'), (d.data||[]).length, '', false);
-        }).catch(function(){});
-        fetch('/api/gallery').then(r=>r.json()).then(function(d){
-            if (d && d.success) animateCount(document.getElementById('sc-gallery'), (d.data||[]).length, '', false);
-        }).catch(function(){});
-        fetch('/api/awards').then(r=>r.json()).then(function(d){
-            if (d && d.success) animateCount(document.getElementById('sc-awards'), (d.data||[]).length, '', false);
-        }).catch(function(){});
-        fetch('/api/contact').then(r=>r.json()).then(function(d){
-            if (d && d.success) {
-                animateCount(document.getElementById('sc-inbox'), d.count || 0, '', false);
-                var b = document.getElementById('inbox-badge-count');
-                if (b) {
-                    if (d.unreadCount > 0) {
-                        b.textContent = d.unreadCount;
-                        b.style.display = 'inline-block';
-                    } else {
-                        b.style.display = 'none';
-                    }
-                }
+        var b = document.getElementById('inbox-badge-count');
+        if (b) {
+            if (resContact.unreadCount > 0) {
+                b.textContent = resContact.unreadCount;
+                b.style.display = 'inline-block';
+            } else {
+                b.style.display = 'none';
             }
-        }).catch(function(){});
+        }
 
         // Recent Projects
         var recentProj = projects.slice(0, 3);
@@ -4501,7 +5052,7 @@ async function loadOverview() {
         if (!recentProj.length) { if(projCont) projCont.style.display='none'; if(projEmpty) projEmpty.style.display='flex'; }
         else { if(projEmpty) projEmpty.style.display='none'; if(projCont) { projCont.style.display='grid'; projCont.innerHTML=recentProj.map(buildProjectCardOverview).join(''); } }
 
-        // Recent Talks
+        // Recent Talks (Optimized presentation & layout)
         var recentTalks = talks.slice(0, 3);
         var talksCont = document.getElementById('overview-talks');
         var talksEmpty = document.getElementById('overview-talks-empty');
@@ -4516,7 +5067,7 @@ async function loadOverview() {
         if (!recentFb.length) { if(fbCont) fbCont.style.display='none'; if(fbEmpty) fbEmpty.style.display='flex'; }
         else { if(fbEmpty) fbEmpty.style.display='none'; if(fbCont) { fbCont.style.display='grid'; fbCont.innerHTML=recentFb.map(buildCard).join(''); } }
 
-        if (feedbacks.length>0) { var b=document.getElementById('nav-badge'); if(b){ b.textContent=feedbacks.length; b.style.display='block'; } }
+        if (feedbacks.length>0) { var navBadge=document.getElementById('nav-badge'); if(navBadge){ navBadge.textContent=feedbacks.length; navBadge.style.display='block'; } }
     } catch(e) {
         console.error('Error in loadOverview:', e);
     }
@@ -4559,27 +5110,29 @@ function buildProjectCardOverview(p) {
 function buildTalkCardOverview(t) {
     var dateStr = t.date ? new Date(t.date).toLocaleDateString('en-US',{day:'numeric',month:'short',year:'numeric'}) : null;
     var attendeesHtml = (t.jumlah_peserta != null)
-        ? '<div style="margin-top:4px;"><span class="talk-attendees-tag" title="Total Attendees"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> '+t.jumlah_peserta.toLocaleString('en-US')+' attendees</span></div>'
+        ? '<div style="margin-top:2px;"><span class="talk-attendees-tag" title="Total Attendees"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> '+t.jumlah_peserta.toLocaleString('en-US')+' attendees</span></div>'
         : '';
-    var topicsHtml = (t.topics && t.topics.length)
-        ? '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;">' +
-            t.topics.map(buildTopicBadge).join('') +
+    var topicsList = (t.topics && t.topics.length) ? t.topics : [];
+    var topicsHtml = topicsList.length
+        ? '<div style="display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin-top:4px;">' +
+            topicsList.slice(0, 3).map(buildTopicBadge).join('') +
+            (topicsList.length > 3 ? '<span class="talk-topic-tag" style="background:var(--line-soft);color:var(--ink-3);font-size:0.68rem;font-weight:700;">+' + (topicsList.length - 3) + ' more</span>' : '') +
           '</div>'
         : '';
     var tJson = JSON.stringify(t).replace(/"/g,'&quot;');
-    return '<div class="talk-card" onclick="openTalkViewModal('+tJson+')" style="cursor:pointer;" title="Click to view details">' +
-        '<div class="talk-poster">' +
-            (t.poster_url ? '<img src="'+esc(t.poster_url)+'" loading="lazy">' : '🎤') +
+    return '<div class="talk-card overview-talk-card" onclick="openTalkViewModal('+tJson+')" style="cursor:pointer; display:flex; flex-direction:row; align-items:flex-start; gap:16px; padding:18px; border-radius:var(--r-lg); border:1.5px solid var(--line); background:var(--surface);" title="Click to view details">' +
+        '<div class="talk-poster" style="width:110px; height:150px; flex-shrink:0; border-radius:12px; overflow:hidden; position:relative; background:#f1f3f4; align-self:flex-start;">' +
+            (t.poster_url ? '<img src="'+esc(t.poster_url)+'" loading="lazy" style="width:100%; height:100%; object-fit:cover;">' : '<div style="width:100%;height:100%;display:grid;place-items:center;font-size:2.2rem;">🎤</div>') +
             '<div class="talk-poster-overlay"></div>' +
         '</div>' +
-        '<div class="talk-body">' +
-            '<div class="talk-event">'+esc(t.event)+'</div>' +
+        '<div class="talk-body" style="flex:1; min-width:0; display:flex; flex-direction:column; gap:6px;">' +
+            '<div class="talk-event" style="font-size:1.02rem; font-weight:800; line-height:1.35; color:var(--ink); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;" title="'+esc(t.event)+'">'+esc(t.event)+'</div>' +
             attendeesHtml +
             topicsHtml +
-            (t.organizer ? '<div class="talk-org"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><path d="M9 22v-4h6v4"></path><path d="M8 6h.01"></path><path d="M16 6h.01"></path><path d="M12 6h.01"></path><path d="M12 10h.01"></path><path d="M12 14h.01"></path><path d="M16 10h.01"></path><path d="M16 14h.01"></path><path d="M8 10h.01"></path><path d="M8 14h.01"></path></svg>'+esc(t.organizer)+'</div>' : '') +
-            '<div class="talk-meta">' +
-                (t.place ? '<span class="talk-meta-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>'+esc(t.place)+'</span>' : '') +
-                (dateStr ? '<span class="talk-meta-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>'+esc(dateStr)+'</span>' : '') +
+            '<div style="margin-top:auto; padding-top:6px; display:flex; flex-direction:column; gap:4px; font-size:0.78rem; color:var(--ink-3);">' +
+                (t.organizer ? '<div class="talk-org" style="font-size:0.78rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><path d="M9 22v-4h6v4"></path></svg><span style="overflow:hidden; text-overflow:ellipsis;">'+esc(t.organizer)+'</span></div>' : '') +
+                (t.place ? '<div style="display:flex; align-items:center; gap:5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span style="overflow:hidden; text-overflow:ellipsis;">'+esc(t.place)+'</span></div>' : '') +
+                (dateStr ? '<div style="display:flex; align-items:center; gap:5px; color:var(--ink-4); font-size:0.74rem;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg><span>'+esc(dateStr)+'</span></div>' : '') +
             '</div>' +
         '</div>' +
     '</div>';
@@ -5758,8 +6311,15 @@ function darkenHex(hex, amount) {
     var b = Math.max(0, (num & 0xFF) - amount);
     return '#' + ((r << 16)|(g << 8)|b).toString(16).padStart(6,'0');
 }
-var initView = localStorage.getItem('activeView') || 'dashboard';
-switchView(initView);
+function initActiveView() {
+    var initView = localStorage.getItem('activeView') || 'dashboard';
+    switchView(initView);
+}
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initActiveView);
+} else {
+    setTimeout(initActiveView, 0);
+}
 
 /* ══════════════════════════════════════════════════════
    TALKS CRUD
@@ -5923,10 +6483,29 @@ function renderTalksGrid() {
             '<div class="talk-side">' +
                 '<button class="btn-talk view" onclick="openTalkViewModal('+tJson+')">View</button>' +
                 '<button class="btn-talk edit" onclick="openTalkDrawer('+tJson+')">Edit</button>' +
+                '<button class="btn-talk clone" onclick="duplicateTalk('+tJson+')" title="Duplicate Talk">Clone</button>' +
                 '<button class="btn-talk del" onclick="confirmDeleteTalk(\''+t.id+'\',\''+esc(t.event)+'\')" >Delete</button>' +
             '</div>' +
         '</div>';
     }).join('');
+}
+
+function duplicateTalk(talk) {
+    if (!talk) return;
+    if (typeof talk === 'string') {
+        try { talk = JSON.parse(talk); } catch(e){}
+    }
+    var clone = JSON.parse(JSON.stringify(talk));
+    delete clone.id;
+    clone.event = (clone.event || '') + ' (Copy)';
+    openTalkDrawer(clone);
+    talkDrawerMode = 'create';
+    talkEditId = null;
+    document.getElementById('dk-title').textContent = 'Duplicate Talk';
+    document.getElementById('dk-sub').textContent = 'Creating a duplicate copy of ' + (talk.event || 'talk');
+    var saveBtn = document.getElementById('dk-save');
+    if (saveBtn) saveBtn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg> Create Duplicate';
+    showToast('Talk duplicated to draft. Review and click Save.', 'info');
 }
 
 var talkSlides = [];
@@ -5974,8 +6553,15 @@ function closeTalkDrawer() {
 function updatePosterPreview() {
     var url = document.getElementById('dk-poster').value.trim();
     var prev = document.getElementById('dk-poster-prev');
-    if (url) { prev.src=url; prev.style.display='block'; }
-    else { prev.style.display='none'; }
+    var dropText = document.getElementById('dk-poster-droptext');
+    if (url) {
+        prev.src = url;
+        prev.style.display = 'block';
+        if (dropText) dropText.style.display = 'none';
+    } else {
+        prev.style.display = 'none';
+        if (dropText) dropText.style.display = 'flex';
+    }
 }
 
 /* ── Gallery Functions ── */
@@ -6122,10 +6708,15 @@ async function uploadPoster() {
 
 /* ── Save ── */
 async function saveTalk() {
-    var event   = document.getElementById('dk-event').value.trim();
-    var errEl   = document.getElementById('dk-err');
-    if (!event) { errEl.textContent='Event name is required.'; errEl.style.display='block'; document.getElementById('dk-event').focus(); return; }
-    errEl.style.display='none';
+    var drawer = document.getElementById('talk-drawer');
+    var isValid = validateDrawerFields(drawer, [
+        { id: 'dk-event', label: 'Event Name' }
+    ]);
+    if (!isValid) return;
+
+    var event = document.getElementById('dk-event').value.trim();
+    var errEl = document.getElementById('dk-err');
+    errEl.style.display = 'none';
 
     var payload = {
         event,
@@ -6142,47 +6733,85 @@ async function saveTalk() {
     var url    = talkDrawerMode==='edit' ? '/api/talks/'+talkEditId : '/api/talks';
     var method = talkDrawerMode==='edit' ? 'PUT' : 'POST';
     var saveBtn = document.getElementById('dk-save');
-    saveBtn.disabled=true; saveBtn.textContent='Saving…';
+    setBtnLoading(saveBtn, true, 'Saving…');
+
     try {
         var res  = await fetch(url, { method, headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
         var json = await res.json();
-        if (!res.ok) { errEl.textContent=json.error||'Failed to save.'; errEl.style.display='block'; return; }
-        closeTalkDrawer();
+        if (!res.ok) {
+            setBtnLoading(saveBtn, false);
+            errEl.textContent = json.error || 'Failed to save.';
+            errEl.style.display = 'block';
+            showToast(json.error || 'Failed to save talk.', 'error');
+            return;
+        }
+        setBtnLoading(saveBtn, false, null, true);
+        showToast(talkDrawerMode==='edit' ? 'Talk updated successfully! ✅' : 'Talk added successfully! 🎉', 'success');
+        setTimeout(function() {
+            closeTalkDrawer();
+        }, 600);
         await loadTalks();
-        showToast(talkDrawerMode==='edit'?'Talk updated! ✅':'Talk added! 🎉');
-    } catch(e) { errEl.textContent='Network error.'; errEl.style.display='block'; }
-    saveBtn.disabled=false; saveBtn.textContent='Save Talk';
+    } catch(e) {
+        setBtnLoading(saveBtn, false);
+        errEl.textContent = 'Network error.';
+        errEl.style.display = 'block';
+        showToast('Network error while saving talk.', 'error');
+    }
 }
 
 function updateThumbnailPreview() {
     var url = document.getElementById('dp-thumbnail').value.trim();
     var img = document.getElementById('dp-thumbnail-prev');
-    if (url) { img.src=url; img.style.display='block'; } else { img.style.display='none'; }
+    var dropText = document.getElementById('dp-thumb-droptext');
+    if (url) { 
+        img.src = url; 
+        img.style.display = 'block'; 
+        if (dropText) dropText.style.display = 'none';
+    } else { 
+        img.style.display = 'none'; 
+        if (dropText) dropText.style.display = 'flex';
+    }
 }
 
 async function uploadThumbnail() {
     var file = document.getElementById('dp-thumbnail-file').files[0];
     if (!file) return;
     var btn = document.getElementById('dp-upload-btn');
-    btn.disabled=true; btn.textContent='⏳…';
+    setBtnLoading(btn, true, 'Uploading…');
     var fd = new FormData(); fd.append('file', file);
     try {
         var res = await fetch('/api/talks/upload', { method:'POST', body: fd });
         var json = await res.json();
-        if (json.url) { document.getElementById('dp-thumbnail').value = json.url; updateThumbnailPreview(); showToast('Thumbnail uploaded! ✅'); }
-        else { showToast(json.error || 'Upload failed.'); }
-    } catch(e) { showToast('Upload error.'); }
-    btn.disabled=false; btn.textContent='📤 Upload';
+        if (json.url) { 
+            document.getElementById('dp-thumbnail').value = json.url; 
+            updateThumbnailPreview(); 
+            showToast('Thumbnail uploaded successfully! ✅', 'success'); 
+        } else { 
+            showToast(json.error || 'Upload failed.', 'error'); 
+        }
+    } catch(e) { 
+        showToast('Upload error.', 'error'); 
+    } finally {
+        setBtnLoading(btn, false);
+    }
 }
 
-
 async function confirmDeleteTalk(id, name) {
-    showConfirm('Hapus "'+name+'"? Tindakan ini tidak bisa dibatalkan.', async function() {
-        try {
-            await fetch('/api/talks/'+id, { method:'DELETE' });
-            await loadTalks();
-            showToast('Talk dihapus.');
-        } catch(e) { showToast('Gagal menghapus.'); }
+    showConfirm({
+        title: 'Delete Speaking Engagement?',
+        itemTitle: name,
+        message: 'This talk and all associated topics, slides, and event media will be permanently deleted.',
+        confirmText: 'Delete Talk',
+        onConfirm: async function() {
+            var res = await fetch('/api/talks/' + id, { method: 'DELETE' });
+            var data = await res.json();
+            if (res.ok && data.success) {
+                await loadTalks();
+                showToast('Talk deleted successfully', 'success');
+            } else {
+                showToast(data.error || 'Failed to delete talk', 'error');
+            }
+        }
     });
 }
 
@@ -6615,12 +7244,30 @@ function renderProjectsGrid() {
                     '<div class="project-manage">' +
                         '<button class="btn-talk view" onclick="openProjectViewModal('+pJson+')">View</button>' +
                         '<button class="btn-talk edit" onclick="openProjectDrawer('+pJson+')">Edit</button>' +
+                        '<button class="btn-talk clone" onclick="duplicateProject('+pJson+')" title="Duplicate Project">Clone</button>' +
                         '<button class="btn-talk del" onclick="confirmDeleteProject(\''+p.id+'\',\''+esc(p.name)+'\')" >Delete</button>' +
                     '</div>' +
                 '</div>' +
             '</div>' +
         '</div>';
     }).join('');
+}
+
+function duplicateProject(project) {
+    if (!project) return;
+    if (typeof project === 'string') {
+        try { project = JSON.parse(project); } catch(e){}
+    }
+    var clone = JSON.parse(JSON.stringify(project));
+    delete clone.id;
+    clone.name = (clone.name || '') + ' (Copy)';
+    openProjectDrawer(clone);
+    projectDrawerMode = 'create';
+    projectEditId = null;
+    document.getElementById('dp-title').textContent = 'Duplicate Project';
+    var saveBtn = document.getElementById('dp-save');
+    if (saveBtn) saveBtn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg> Create Duplicate';
+    showToast('Project duplicated to draft. Review and click Save.', 'info');
 }
 
 function openProjectViewModal(p) {
@@ -6978,9 +7625,13 @@ function removeTechMapTag(cat, j) {
 }
 
 async function saveProject() {
+    var drawer = document.getElementById('dp-drawer');
+    var isValid = validateDrawerFields(drawer, [
+        { id: 'dp-name', label: 'Project Name' }
+    ]);
+    if (!isValid) return;
+
     var name = document.getElementById('dp-name').value.trim();
-    if (!name) { showToast('Project Name is required.'); return; }
-    
     var startY = document.getElementById('dp-start-year').value;
     var startM = document.getElementById('dp-start-month').value;
     var endY = document.getElementById('dp-end-year').value;
@@ -7015,42 +7666,127 @@ async function saveProject() {
     var url = projectDrawerMode === 'edit' ? '/api/projects/'+projectEditId : '/api/projects';
     var method = projectDrawerMode === 'edit' ? 'PUT' : 'POST';
     var saveBtn = document.getElementById('dp-save');
-    saveBtn.disabled = true; saveBtn.textContent = 'Saving…';
+    setBtnLoading(saveBtn, true, 'Saving…');
     
     try {
         var res = await fetch(url, { method, headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
         if (!res.ok) throw new Error('Save failed');
-        closeProjectDrawer();
+        setBtnLoading(saveBtn, false, null, true);
+        showToast(projectDrawerMode === 'edit' ? 'Project updated successfully! ✅' : 'Project added successfully! 🎉', 'success');
+        setTimeout(function() {
+            closeProjectDrawer();
+        }, 600);
         await loadProjects();
-        showToast(projectDrawerMode === 'edit' ? 'Project updated! ✅' : 'Project added! 🎉');
-    } catch(e) { showToast('Failed to save project.'); }
-    saveBtn.disabled = false; saveBtn.textContent = 'Save Project';
+    } catch(e) {
+        setBtnLoading(saveBtn, false);
+        showToast('Failed to save project.', 'error');
+    }
 }
 
 async function confirmDeleteProject(id, name) {
-    showConfirm('Hapus "'+name+'"?', async function() {
-        try {
-            await fetch('/api/projects/'+id, { method:'DELETE' });
-            await loadProjects();
-            showToast('Project dihapus.');
-        } catch(e) { showToast('Gagal menghapus.'); }
+    showConfirm({
+        title: 'Delete Showcase Project?',
+        itemTitle: name,
+        message: 'This project and its tech stack mapping will be permanently removed from your portfolio.',
+        confirmText: 'Delete Project',
+        onConfirm: async function() {
+            var res = await fetch('/api/projects/'+id, { method:'DELETE' });
+            var data = await res.json();
+            if (res.ok && (data.success !== false)) {
+                await loadProjects();
+                showToast('Project deleted successfully', 'success');
+            } else {
+                showToast(data.error || 'Failed to delete project', 'error');
+            }
+        }
     });
 }
 
 /* ── Custom Confirm ── */
 var confirmCallback = null;
-function showConfirm(msg, callback) {
-    document.getElementById('confirm-msg').textContent = msg;
-    confirmCallback = callback;
+function showConfirm(optionsOrMsg, callback) {
+    var title = 'Are you sure?';
+    var message = '';
+    var itemTitle = '';
+    var confirmText = 'Yes, Delete';
+    var confirmType = 'danger';
+    var onConfirm = null;
+
+    if (typeof optionsOrMsg === 'string') {
+        message = optionsOrMsg;
+        onConfirm = callback;
+    } else if (typeof optionsOrMsg === 'object' && optionsOrMsg !== null) {
+        title = optionsOrMsg.title || title;
+        message = optionsOrMsg.message || optionsOrMsg.msg || '';
+        itemTitle = optionsOrMsg.itemTitle || '';
+        confirmText = optionsOrMsg.confirmText || confirmText;
+        confirmType = optionsOrMsg.confirmType || confirmType;
+        onConfirm = optionsOrMsg.onConfirm || callback;
+    }
+
+    var titleEl = document.getElementById('confirm-title');
+    if (titleEl) titleEl.textContent = title;
+
+    var badgeEl = document.getElementById('confirm-item-badge');
+    if (badgeEl) {
+        if (itemTitle) {
+            badgeEl.textContent = itemTitle;
+            badgeEl.style.display = 'inline-block';
+        } else {
+            badgeEl.textContent = '';
+            badgeEl.style.display = 'none';
+        }
+    }
+
+    var msgEl = document.getElementById('confirm-msg');
+    if (msgEl) msgEl.textContent = message;
+
+    var btn = document.getElementById('confirm-exec-btn');
+    if (btn) {
+        btn.textContent = confirmText;
+        if (btn.dataset.originalHtml) delete btn.dataset.originalHtml;
+        btn.disabled = false;
+        btn.classList.remove('btn-loading');
+        if (confirmType === 'danger') {
+            btn.style.background = 'var(--g-red)';
+            btn.style.borderColor = 'var(--g-red)';
+        } else {
+            btn.style.background = 'var(--g-blue)';
+            btn.style.borderColor = 'var(--g-blue)';
+        }
+    }
+
+    confirmCallback = onConfirm;
     document.getElementById('confirm-overlay').classList.add('show');
 }
+
 function hideConfirm() {
-    document.getElementById('confirm-overlay').classList.remove('show');
+    var overlay = document.getElementById('confirm-overlay');
+    if (overlay) overlay.classList.remove('show');
+    var btn = document.getElementById('confirm-exec-btn');
+    if (btn) {
+        btn.disabled = false;
+        btn.classList.remove('btn-loading');
+        if (btn.dataset.originalHtml) {
+            btn.innerHTML = btn.dataset.originalHtml;
+            delete btn.dataset.originalHtml;
+        }
+    }
     confirmCallback = null;
 }
-function execConfirm() {
-    if (confirmCallback) confirmCallback();
-    hideConfirm();
+
+async function execConfirm() {
+    if (!confirmCallback) { hideConfirm(); return; }
+    var btn = document.getElementById('confirm-exec-btn');
+    setBtnLoading(btn, true, 'Deleting…');
+    try {
+        await confirmCallback();
+        hideConfirm();
+    } catch(err) {
+        console.error('Confirm action failed:', err);
+        showToast('Operation failed: ' + (err.message || 'unknown error'), 'error');
+        setBtnLoading(btn, false);
+    }
 }
 
 /* ════════════════════════════════════════
@@ -7946,29 +8682,29 @@ async function handleAddAdmin(e) {
 
 async function handleRemoveAdmin(email) {
     if (email === 'haerulmuhammad01@gmail.com') {
-        alert('Super Admin utama (haerulmuhammad01@gmail.com) diproteksi dan tidak dapat dihapus.');
+        showToast('Super Admin utama (haerulmuhammad01@gmail.com) diproteksi dan tidak dapat dihapus.', 'warning');
         return;
     }
 
-    if (!confirm('Apakah Anda yakin ingin mencabut izin akses untuk ' + email + '? Pengguna tidak akan dapat mengakses dashboard lagi.')) {
-        return;
-    }
+    showConfirm({
+        title: 'Revoke Admin Access?',
+        itemTitle: email,
+        message: 'Pengguna tidak akan dapat mengakses admin dashboard lagi. Anda dapat menambahkannya kembali kapan saja.',
+        confirmText: 'Revoke Access',
+        onConfirm: async function() {
+            var res = await fetch('/api/auth/admins/' + encodeURIComponent(email), {
+                method: 'DELETE'
+            });
+            var data = await res.json();
 
-    try {
-        var res = await fetch('/api/auth/admins/' + encodeURIComponent(email), {
-            method: 'DELETE'
-        });
-        var data = await res.json();
-
-        if (res.ok && data.success) {
-            showToast('Izin akses ' + email + ' berhasil dicabut');
-            loadAdminList();
-        } else {
-            alert(data.error || 'Gagal mencabut izin akses.');
+            if (res.ok && data.success) {
+                showToast('Izin akses ' + email + ' berhasil dicabut', 'success');
+                loadAdminList();
+            } else {
+                showToast(data.error || 'Gagal mencabut izin akses.', 'error');
+            }
         }
-    } catch(err) {
-        alert('Terjadi kesalahan saat menghapus: ' + err.message);
-    }
+    });
 }
 
 // Kick off auth check on page load
@@ -8225,21 +8961,23 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 
     <!-- Confirm Modal -->
-    <div class="modal-overlay" id="confirm-overlay" style="z-index:9999;">
-        <div class="modal" style="max-width:380px; padding: 24px; text-align: center;">
-            <div style="width:60px; height:60px; border-radius:50%; background:var(--g-red-soft); color:var(--g-red); display:flex; align-items:center; justify-content:center; margin:0 auto 16px auto;">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+    <div class="modal-overlay" id="confirm-overlay" style="z-index:9999;" onclick="if(event.target===this)hideConfirm()">
+        <div class="modal" style="max-width:400px; padding: 28px 24px; text-align: center; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.22); border: 1px solid rgba(226, 232, 240, 0.9);">
+            <div style="width:64px; height:64px; border-radius:50%; background:linear-gradient(135deg, rgba(234,67,53,0.14) 0%, rgba(234,67,53,0.06) 100%); color:var(--g-red); display:flex; align-items:center; justify-content:center; margin:0 auto 16px auto; border: 1.5px solid rgba(234,67,53,0.25); box-shadow: 0 4px 14px rgba(234,67,53,0.15);">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
             </div>
-            <div class="modal-title" style="margin-bottom: 8px;">Are you sure?</div>
-            <div id="confirm-msg" style="color:var(--ink-3); font-size:0.9rem; line-height:1.5; margin-bottom: 24px;"></div>
+            <div class="modal-title" id="confirm-title" style="margin-bottom: 6px; font-size: 1.25rem; font-weight: 800;">Are you sure?</div>
+            <div id="confirm-item-badge" style="display:none; margin: 0 auto 12px; max-width: 90%; font-size:0.83rem; font-weight:700; color:var(--ink); background:#F1F5F9; padding:5px 14px; border-radius:var(--r-pill); border:1px solid #CBD5E1; word-break:break-word;"></div>
+            <div id="confirm-msg" style="color:var(--ink-3); font-size:0.9rem; line-height:1.55; margin-bottom: 24px;"></div>
             <div style="display:flex; gap:12px; justify-content:center;">
-                <button class="btn btn-ghost" onclick="hideConfirm()">Cancel</button>
-                <button class="btn btn-primary" style="background:var(--g-red); box-shadow:none;" onclick="execConfirm()">Yes, Delete</button>
+                <button class="btn btn-ghost" id="confirm-cancel-btn" onclick="hideConfirm()" style="min-width: 100px;">Cancel</button>
+                <button class="btn btn-primary" id="confirm-exec-btn" style="background:var(--g-red); border-color:var(--g-red); box-shadow: 0 4px 14px rgba(234,67,53,0.3); min-width: 120px;" onclick="execConfirm()">Yes, Delete</button>
             </div>
         </div>
     </div>
 
 <script>
+var escapeHtml = window.escapeHtml || window.esc || function(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
 /* ── Form QR Code & Copy Logic ── */
 var currentFormQrUrl = '';
 
@@ -8379,6 +9117,110 @@ function updateExperiencesStats() {
     if (scEl) scEl.textContent = total;
 }
 
+// Parse raw experience description into { general, projects }
+function parseExperienceDescription(raw) {
+    if (!raw || typeof raw !== 'string') return { general: '', projects: [] };
+    var text = raw.trim();
+    if (!text) return { general: '', projects: [] };
+
+    var headerMatch = text.match(/(?:^|\n)\s*(?:(?:My\s+)?projects(?:\s+included)?|Key\s+Projects|Selected\s+Projects)\s*:\s*/i);
+    var generalPart = '';
+    var projectsPart = '';
+
+    if (headerMatch) {
+        var idx = headerMatch.index;
+        generalPart = text.slice(0, idx).trim();
+        projectsPart = text.slice(idx + headerMatch[0].length).trim();
+    } else {
+        var firstNumMatch = text.match(/(?:^|\n|\.\s+)\s*1[\.\)]\s+/);
+        if (firstNumMatch) {
+            var fIdx = firstNumMatch.index;
+            if (fIdx === 0) {
+                generalPart = '';
+                projectsPart = text;
+            } else {
+                var offset = firstNumMatch[0].startsWith('.') ? 1 : 0;
+                generalPart = text.slice(0, fIdx + offset).trim();
+                projectsPart = text.slice(fIdx + offset).trim();
+            }
+        } else {
+            return { general: text, projects: [] };
+        }
+    }
+
+    var items = [];
+    var numRegex = /(?:^|\n|\s+)(\d+)[\.\)]\s+/g;
+    var matches = [];
+    var m;
+    while ((m = numRegex.exec(projectsPart)) !== null) {
+        matches.push({
+            index: m.index + (m[0].startsWith('\n') || m[0].startsWith(' ') ? 1 : 0),
+            length: m[0].trim().length,
+            num: m[1]
+        });
+    }
+
+    if (matches.length > 0) {
+        for (var i = 0; i < matches.length; i++) {
+            var cur = matches[i];
+            var next = matches[i + 1];
+            var start = cur.index + cur.length;
+            var end = next ? next.index : projectsPart.length;
+            var fullItem = projectsPart.slice(start, end).trim();
+            if (fullItem) {
+                var colonIdx = fullItem.indexOf(':');
+                if (colonIdx > 0 && colonIdx < 100) {
+                    items.push({ num: cur.num, title: fullItem.slice(0, colonIdx).trim(), desc: fullItem.slice(colonIdx + 1).trim() });
+                } else {
+                    items.push({ num: cur.num, title: '', desc: fullItem });
+                }
+            }
+        }
+    } else {
+        var lines = projectsPart.split('\n').map(function(l){ return l.trim(); }).filter(Boolean);
+        var n = 1;
+        for (var j = 0; j < lines.length; j++) {
+            var clean = lines[j].replace(/^[-•*]\s*/, '').trim();
+            if (clean) {
+                var cIdx = clean.indexOf(':');
+                if (cIdx > 0 && cIdx < 100) {
+                    items.push({ num: String(n++), title: clean.slice(0, cIdx).trim(), desc: clean.slice(cIdx + 1).trim() });
+                } else {
+                    items.push({ num: String(n++), title: '', desc: clean });
+                }
+            }
+        }
+    }
+
+    return { general: generalPart, projects: items };
+}
+
+function formatDashboardExpDescriptionHtml(desc) {
+    if (!desc) return '';
+    var p = parseExperienceDescription(desc);
+    if (!p.projects || !p.projects.length) {
+        return '<div style="font-size:0.84rem; color:var(--ink-2); line-height:1.55; margin-top:2px; white-space:pre-line;">' + esc(desc) + '</div>';
+    }
+    var html = '<div style="margin-top:4px;">';
+    if (p.general) {
+        html += '<div style="font-size:0.84rem; color:var(--ink-2); line-height:1.55; margin-bottom:8px; white-space:pre-line;">' + esc(p.general) + '</div>';
+    }
+    html += '<div style="background:var(--sidebar-hover); border:1px solid var(--sidebar-border); border-radius:8px; padding:10px 12px;">' +
+        '<div style="font-size:0.72rem; font-weight:800; color:var(--ink-3); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px; display:flex; align-items:center; gap:5px;">' +
+            '<span style="display:inline-block; width:5px; height:5px; border-radius:50%; background:var(--g-blue);"></span> Projects:' +
+        '</div>' +
+        '<div style="display:flex; flex-direction:column; gap:6px; font-size:0.82rem; line-height:1.5; color:var(--ink-2);">' +
+            p.projects.map(function(item) {
+                return '<div style="display:flex; align-items:flex-start; gap:6px;">' +
+                    '<span style="font-weight:800; color:var(--g-blue); font-family:monospace; min-width:16px;">' + esc(item.num) + '.</span>' +
+                    '<div>' + (item.title ? '<strong style="color:var(--ink); font-weight:700;">' + esc(item.title) + ':</strong> ' : '') + esc(item.desc) + '</div>' +
+                '</div>';
+            }).join('') +
+        '</div>' +
+    '</div></div>';
+    return html;
+}
+
 function renderExperiencesGrid() {
     var grid = document.getElementById('exp-grid');
     var empty = document.getElementById('exp-empty');
@@ -8387,7 +9229,7 @@ function renderExperiencesGrid() {
     var q = (document.getElementById('exp-q') ? document.getElementById('exp-q').value.toLowerCase().trim() : '');
     var filtered = experiencesData.filter(function(e) {
         if (!q) return true;
-        var hay = (e.role + ' ' + e.company + ' ' + (e.location||'') + ' ' + (e.stack||[]).join(' ')).toLowerCase();
+        var hay = (e.role + ' ' + e.company + ' ' + (e.location||'') + ' ' + (e.work_type||'') + ' ' + (e.stack||[]).join(' ')).toLowerCase();
         return hay.includes(q);
     });
 
@@ -8407,17 +9249,22 @@ function renderExperiencesGrid() {
 
         var dateRange = esc(exp.start_date || '') + (exp.end_date ? ' — ' + esc(exp.end_date) : (exp.is_current ? ' — <strong style="color:var(--g-green);">Present</strong>' : ''));
 
+        var metaParts = [];
+        if (exp.work_type) metaParts.push(esc(exp.work_type));
+        if (exp.location) metaParts.push(esc(exp.location));
+        var metaStr = metaParts.length ? ' · <span style="color:var(--ink-3); font-weight:500;">' + metaParts.join(' · ') + '</span>' : '';
+
         return '<div class="project-card" style="display:flex; flex-direction:column; gap:12px; padding:22px; border:1.5px solid var(--sidebar-border); border-radius:var(--r-md); background:var(--surface);">' +
             '<div style="display:flex; gap:14px; align-items:flex-start;">' +
                 (exp.logo_url ? '<div style="width:48px; height:48px; border-radius:10px; border:1.5px solid var(--sidebar-border); background:#fff; padding:4px; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><img src="' + esc(exp.logo_url) + '" alt="Logo" style="width:100%; height:100%; object-fit:contain;"></div>' : '<div style="width:48px; height:48px; border-radius:10px; background:rgba(52,168,83,0.1); color:var(--g-green); display:flex; align-items:center; justify-content:center; font-size:1.3rem; flex-shrink:0;">💼</div>') +
                 '<div style="flex:1;">' +
                     '<div style="font-size:1.05rem; font-weight:800; color:var(--ink);">' + esc(exp.role) + '</div>' +
-                    '<div style="font-size:0.86rem; font-weight:700; color:var(--g-blue); margin-top:2px;">' + esc(exp.company) + (exp.location ? ' · <span style="color:var(--ink-3); font-weight:500;">' + esc(exp.location) + '</span>' : '') + '</div>' +
+                    '<div style="font-size:0.86rem; font-weight:700; color:var(--g-blue); margin-top:2px;">' + esc(exp.company) + metaStr + '</div>' +
                     '<div style="font-size:0.76rem; color:var(--ink-4); margin-top:4px;">' + dateRange + '</div>' +
                 '</div>' +
                 (exp.is_current ? '<span style="background:var(--g-green-soft); color:var(--g-green); font-size:0.72rem; font-weight:800; padding:3px 8px; border-radius:10px; border:1px solid rgba(52,168,83,0.3); flex-shrink:0;">ACTIVE</span>' : '') +
             '</div>' +
-            (exp.description ? '<div style="font-size:0.84rem; color:var(--ink-2); line-height:1.55; margin-top:2px;">' + esc(exp.description) + '</div>' : '') +
+            (exp.description ? formatDashboardExpDescriptionHtml(exp.description) : '') +
             (stackPills ? '<div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:10px;">' + stackPills + '</div>' : '') +
             '<div style="display:flex; gap:8px; justify-content:flex-end; border-top:1px solid var(--line-soft); padding-top:12px; margin-top:auto;">' +
                 '<button class="btn-sm-ghost" onclick="openExperienceDrawerById(\'' + exp.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface);">Edit</button>' +
@@ -8492,6 +9339,180 @@ async function uploadExpLogo() {
     }
 }
 
+var _expEditorMode = 'structured';
+
+function setExpEditorMode(mode) {
+    _expEditorMode = mode;
+    var btnStructured = document.getElementById('exp-mode-btn-structured');
+    var btnRaw = document.getElementById('exp-mode-btn-raw');
+    var wrapStructured = document.getElementById('exp-editor-structured');
+    var wrapRaw = document.getElementById('exp-editor-raw');
+
+    if (mode === 'raw') {
+        syncExpStructuredToRaw();
+        if (btnStructured) btnStructured.classList.remove('active');
+        if (btnRaw) btnRaw.classList.add('active');
+        if (wrapStructured) wrapStructured.style.display = 'none';
+        if (wrapRaw) wrapRaw.style.display = 'flex';
+    } else {
+        syncExpRawToStructured();
+        if (btnStructured) btnStructured.classList.add('active');
+        if (btnRaw) btnRaw.classList.remove('active');
+        if (wrapStructured) wrapStructured.style.display = 'flex';
+        if (wrapRaw) wrapRaw.style.display = 'none';
+    }
+    updateExpLivePreview();
+}
+
+function addExpProjectRow(title, desc) {
+    var list = document.getElementById('exp-projects-list');
+    if (!list) return;
+
+    var row = document.createElement('div');
+    row.className = 'exp-proj-row';
+    row.style.cssText = 'background:var(--sidebar-hover); border:1px solid var(--sidebar-border); border-radius:10px; padding:10px 12px; position:relative;';
+
+    row.innerHTML =
+        '<div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">' +
+            '<span class="exp-proj-badge" style="font-size:0.72rem; font-weight:800; color:var(--g-blue); text-transform:uppercase; letter-spacing:0.04em;">Project #1</span>' +
+            '<button type="button" onclick="removeExpProjectRow(this)" style="background:none; border:none; color:var(--ink-4); cursor:pointer; font-size:1.1rem; line-height:1; padding:2px 6px;" title="Remove Project">✕</button>' +
+        '</div>' +
+        '<input type="text" class="field-input exp-proj-title" placeholder="Project Title (e.g. Mineral Shape Detector & Segmentator)" style="font-size:0.84rem; margin-bottom:6px; font-weight:600;" oninput="syncExpStructuredToRaw()">' +
+        '<textarea class="field-input exp-proj-desc" rows="2" placeholder="Project Description & Impact..." style="font-size:0.82rem; resize:vertical;" oninput="syncExpStructuredToRaw()"></textarea>';
+
+    if (title) row.querySelector('.exp-proj-title').value = title;
+    if (desc) row.querySelector('.exp-proj-desc').value = desc;
+
+    list.appendChild(row);
+    reindexExpProjects();
+    syncExpStructuredToRaw();
+}
+
+function removeExpProjectRow(btn) {
+    var row = btn.closest('.exp-proj-row');
+    if (row) {
+        row.remove();
+        reindexExpProjects();
+        syncExpStructuredToRaw();
+    }
+}
+
+function reindexExpProjects() {
+    var list = document.getElementById('exp-projects-list');
+    if (!list) return;
+    var rows = list.querySelectorAll('.exp-proj-row');
+    rows.forEach(function(row, idx) {
+        var badge = row.querySelector('.exp-proj-badge');
+        if (badge) badge.textContent = 'Project #' + (idx + 1);
+    });
+}
+
+function syncExpStructuredToRaw() {
+    var general = (document.getElementById('exp-general-desc') ? document.getElementById('exp-general-desc').value.trim() : '');
+    var list = document.getElementById('exp-projects-list');
+    var rows = list ? list.querySelectorAll('.exp-proj-row') : [];
+
+    var compiled = '';
+    if (general) {
+        compiled += general;
+    }
+
+    if (rows.length > 0) {
+        if (compiled) compiled += '\n\n';
+        compiled += 'Projects:\n';
+        var itemsText = [];
+        rows.forEach(function(r, idx) {
+            var t = (r.querySelector('.exp-proj-title') ? r.querySelector('.exp-proj-title').value.trim() : '');
+            var d = (r.querySelector('.exp-proj-desc') ? r.querySelector('.exp-proj-desc').value.trim() : '');
+            if (t && d) {
+                itemsText.push((idx + 1) + '. ' + t + ': ' + d);
+            } else if (t) {
+                itemsText.push((idx + 1) + '. ' + t);
+            } else if (d) {
+                itemsText.push((idx + 1) + '. ' + d);
+            }
+        });
+        compiled += itemsText.join('\n');
+    }
+
+    var rawInput = document.getElementById('exp-desc');
+    if (rawInput) rawInput.value = compiled;
+
+    updateExpLivePreview();
+}
+
+function syncExpRawToStructured() {
+    var rawInput = document.getElementById('exp-desc');
+    var raw = rawInput ? rawInput.value : '';
+    populateExpStructuredFields(raw);
+    updateExpLivePreview();
+}
+
+function populateExpStructuredFields(rawDesc) {
+    var parsed = parseExperienceDescription(rawDesc);
+    var genInput = document.getElementById('exp-general-desc');
+    if (genInput) genInput.value = parsed.general || '';
+
+    var list = document.getElementById('exp-projects-list');
+    if (list) {
+        list.innerHTML = '';
+        if (parsed.projects && parsed.projects.length) {
+            parsed.projects.forEach(function(p) {
+                addExpProjectRow(p.title, p.desc);
+            });
+        }
+    }
+}
+
+function getExpCombinedDescription() {
+    if (_expEditorMode === 'structured') {
+        syncExpStructuredToRaw();
+    }
+    var rawInput = document.getElementById('exp-desc');
+    return rawInput ? rawInput.value.trim() : '';
+}
+
+function updateExpLivePreview() {
+    var previewEl = document.getElementById('exp-live-preview');
+    if (!previewEl) return;
+
+    var raw = (document.getElementById('exp-desc') ? document.getElementById('exp-desc').value.trim() : '');
+    if (!raw) {
+        previewEl.innerHTML = '<span style="color:var(--ink-4); font-style:italic;">Enter description above to see live preview...</span>';
+        return;
+    }
+
+    var parsed = parseExperienceDescription(raw);
+    var colorSelect = document.getElementById('exp-color');
+    var accent = colorSelect ? colorSelect.value : 'var(--blue)';
+
+    if (!parsed.projects || !parsed.projects.length) {
+        previewEl.innerHTML = '<div style="white-space:pre-line;">' + esc(raw) + '</div>';
+        return;
+    }
+
+    var html = '';
+    if (parsed.general) {
+        html += '<div style="margin-bottom:10px; line-height:1.6; white-space:pre-line;">' + esc(parsed.general) + '</div>';
+    }
+
+    html += '<div style="background:var(--surface); border:1px solid var(--sidebar-border); border-radius:8px; padding:12px 14px;">' +
+        '<div style="font-size:0.75rem; font-weight:800; color:var(--ink); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:8px; display:flex; align-items:center; gap:6px;">' +
+            '<span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:' + esc(accent) + ';"></span> Projects:' +
+        '</div>' +
+        '<div style="display:flex; flex-direction:column; gap:8px;">' +
+            parsed.projects.map(function(p) {
+                return '<div style="display:flex; align-items:flex-start; gap:8px; font-size:0.83rem; line-height:1.55;">' +
+                    '<span style="font-weight:800; color:' + esc(accent) + '; font-family:monospace; min-width:16px;">' + esc(p.num) + '.</span>' +
+                    '<div>' + (p.title ? '<strong style="color:var(--ink); font-weight:700;">' + esc(p.title) + ':</strong> ' : '') + esc(p.desc) + '</div>' +
+                '</div>';
+            }).join('') +
+        '</div>' +
+    '</div>';
+
+    previewEl.innerHTML = html;
+}
+
 function openExperienceDrawer(exp) {
     document.getElementById('exp-id').value = exp ? exp.id : '';
     document.getElementById('exp-drawer-title').textContent = exp ? 'Edit Work Experience' : 'Add Work Experience';
@@ -8499,13 +9520,19 @@ function openExperienceDrawer(exp) {
     document.getElementById('exp-company').value = exp ? (exp.company || '') : '';
     document.getElementById('exp-logo').value = exp ? (exp.logo_url || '') : '';
     document.getElementById('exp-location').value = exp ? (exp.location || '') : '';
+    document.getElementById('exp-work-type').value = exp ? (exp.work_type || '') : '';
     document.getElementById('exp-start').value = exp ? (exp.start_date || '') : '';
     document.getElementById('exp-end').value = exp ? (exp.end_date || '') : '';
     document.getElementById('exp-current').checked = exp ? !!exp.is_current : false;
     document.getElementById('exp-color').value = exp ? (exp.accent_color || 'var(--blue)') : 'var(--blue)';
     document.getElementById('exp-stack').value = exp && exp.stack ? exp.stack.join(', ') : '';
     document.getElementById('exp-sort').value = exp ? (exp.sort_order || 0) : 0;
-    document.getElementById('exp-desc').value = exp ? (exp.description || '') : '';
+
+    var rawDesc = exp ? (exp.description || '') : '';
+    document.getElementById('exp-desc').value = rawDesc;
+    setExpEditorMode('structured');
+    populateExpStructuredFields(rawDesc);
+    updateExpLivePreview();
 
     updateExpLogoPreview();
 
@@ -8519,11 +9546,20 @@ function closeExperienceDrawer() {
 }
 
 async function saveExperience() {
+    var drawer = document.getElementById('exp-drawer');
+    var isValid = validateDrawerFields(drawer, [
+        { id: 'exp-role', label: 'Role / Job Title' },
+        { id: 'exp-company', label: 'Company / Organization' },
+        { id: 'exp-start', label: 'Start Date' }
+    ]);
+    if (!isValid) return;
+
     var id = document.getElementById('exp-id').value;
     var role = document.getElementById('exp-role').value.trim();
     var company = document.getElementById('exp-company').value.trim();
     var logo_url = document.getElementById('exp-logo').value.trim();
     var location = document.getElementById('exp-location').value.trim();
+    var work_type = document.getElementById('exp-work-type').value.trim();
     var start_date = document.getElementById('exp-start').value.trim();
     var end_date = document.getElementById('exp-end').value.trim();
     var is_current = document.getElementById('exp-current').checked;
@@ -8531,17 +9567,11 @@ async function saveExperience() {
     var stackStr = document.getElementById('exp-stack').value;
     var stack = stackStr.split(',').map(function(s){ return s.trim(); }).filter(Boolean);
     var sort_order = parseInt(document.getElementById('exp-sort').value, 10) || 0;
-    var description = document.getElementById('exp-desc').value.trim();
+    var description = getExpCombinedDescription();
 
-    if (!role || !company || !start_date) {
-        showToast('Role, company, and start date are required');
-        return;
-    }
-
-    var payload = { role, company, location, start_date, end_date, is_current, accent_color, stack, sort_order, description, logo_url };
+    var payload = { role, company, location, work_type, start_date, end_date, is_current, accent_color, stack, sort_order, description, logo_url };
     var saveBtn = document.getElementById('exp-save-btn');
-    saveBtn.disabled = true;
-    saveBtn.textContent = 'Saving…';
+    setBtnLoading(saveBtn, true, 'Saving…');
 
     try {
         var url = id ? '/api/experiences/' + id : '/api/experiences';
@@ -8553,34 +9583,41 @@ async function saveExperience() {
         });
         var data = await res.json();
         if (data.success) {
-            showToast(id ? 'Experience updated successfully!' : 'Experience added successfully!');
-            closeExperienceDrawer();
+            setBtnLoading(saveBtn, false, null, true);
+            showToast(id ? 'Experience updated successfully!' : 'Experience added successfully!', 'success');
+            setTimeout(function() {
+                closeExperienceDrawer();
+            }, 600);
             await loadExperiences();
         } else {
-            showToast(data.error || 'Failed to save experience');
+            setBtnLoading(saveBtn, false);
+            showToast(data.error || 'Failed to save experience', 'error');
         }
     } catch(err) {
-        showToast('Network error while saving experience');
-    } finally {
-        saveBtn.disabled = false;
-        saveBtn.textContent = 'Save Experience';
+        setBtnLoading(saveBtn, false);
+        showToast('Network error while saving experience', 'error');
     }
 }
 
 async function deleteExperience(id) {
-    if (!confirm('Are you sure you want to delete this work experience?')) return;
-    try {
-        var res = await fetch('/api/experiences/' + id, { method: 'DELETE' });
-        var data = await res.json();
-        if (data.success) {
-            showToast('Experience deleted');
-            await loadExperiences();
-        } else {
-            showToast(data.error || 'Delete failed');
+    var exp = _expMap[id];
+    var title = exp ? (exp.role + (exp.company ? ' at ' + exp.company : '')) : 'this experience';
+    showConfirm({
+        title: 'Delete Experience?',
+        itemTitle: title,
+        message: 'This work experience will be permanently removed from your portfolio.',
+        confirmText: 'Delete Experience',
+        onConfirm: async function() {
+            var res = await fetch('/api/experiences/' + id, { method: 'DELETE' });
+            var data = await res.json();
+            if (data.success) {
+                showToast('Experience deleted', 'success');
+                await loadExperiences();
+            } else {
+                showToast(data.error || 'Delete failed', 'error');
+            }
         }
-    } catch(err) {
-        showToast('Error deleting experience');
-    }
+    });
 }
 
 
@@ -8768,6 +9805,13 @@ function closeEducationDrawer() {
 }
 
 async function saveEducation() {
+    var drawer = document.getElementById('edu-drawer');
+    var isValid = validateDrawerFields(drawer, [
+        { id: 'edu-degree', label: 'Degree / Major' },
+        { id: 'edu-institution', label: 'School / Institution' }
+    ]);
+    if (!isValid) return;
+
     var id = document.getElementById('edu-id').value;
     var degree = document.getElementById('edu-degree').value.trim();
     var institution = document.getElementById('edu-institution').value.trim();
@@ -8783,15 +9827,9 @@ async function saveEducation() {
     var awards_summary = document.getElementById('edu-awards-summary').value.trim();
     var sort_order = parseInt(document.getElementById('edu-sort').value, 10) || 0;
 
-    if (!degree || !institution) {
-        showToast('Degree and institution are required');
-        return;
-    }
-
     var payload = { degree, institution, logo_url, start_date, end_date, grade, honors, specialization, thesis, courseworks, activities, awards_summary, sort_order };
     var saveBtn = document.getElementById('edu-save-btn');
-    saveBtn.disabled = true;
-    saveBtn.textContent = 'Saving…';
+    setBtnLoading(saveBtn, true, 'Saving…');
 
     try {
         var url = id ? '/api/educations/' + id : '/api/educations';
@@ -8803,34 +9841,41 @@ async function saveEducation() {
         });
         var data = await res.json();
         if (data.success) {
-            showToast(id ? 'Education updated successfully!' : 'Education added successfully!');
-            closeEducationDrawer();
+            setBtnLoading(saveBtn, false, null, true);
+            showToast(id ? 'Education updated successfully!' : 'Education added successfully!', 'success');
+            setTimeout(function() {
+                closeEducationDrawer();
+            }, 600);
             await loadEducations();
         } else {
-            showToast(data.error || 'Failed to save education');
+            setBtnLoading(saveBtn, false);
+            showToast(data.error || 'Failed to save education', 'error');
         }
     } catch(err) {
-        showToast('Network error while saving education');
-    } finally {
-        saveBtn.disabled = false;
-        saveBtn.textContent = 'Save Education';
+        setBtnLoading(saveBtn, false);
+        showToast('Network error while saving education', 'error');
     }
 }
 
 async function deleteEducation(id) {
-    if (!confirm('Are you sure you want to delete this education record?')) return;
-    try {
-        var res = await fetch('/api/educations/' + id, { method: 'DELETE' });
-        var data = await res.json();
-        if (data.success) {
-            showToast('Education record deleted');
-            await loadEducations();
-        } else {
-            showToast(data.error || 'Delete failed');
+    var edu = _eduMap[id];
+    var title = edu ? (edu.degree + (edu.institution ? ' at ' + edu.institution : '')) : 'this education record';
+    showConfirm({
+        title: 'Delete Education Record?',
+        itemTitle: title,
+        message: 'This education record will be permanently removed from your portfolio.',
+        confirmText: 'Delete Education',
+        onConfirm: async function() {
+            var res = await fetch('/api/educations/' + id, { method: 'DELETE' });
+            var data = await res.json();
+            if (data.success) {
+                showToast('Education record deleted', 'success');
+                await loadEducations();
+            } else {
+                showToast(data.error || 'Delete failed', 'error');
+            }
         }
-    } catch(err) {
-        showToast('Error deleting education');
-    }
+    });
 }
 
 
@@ -8938,6 +9983,8 @@ function openCertificationDrawer(cert) {
     document.getElementById('cert-category').value = cert ? (cert.category || '') : '';
     document.getElementById('cert-skills').value = cert && cert.skills ? cert.skills.join(', ') : '';
     document.getElementById('cert-url').value = cert ? (cert.credential_url || '') : '';
+    document.getElementById('cert-image-url').value = cert ? (cert.image_url || '') : '';
+    updateCertImagePreview();
     document.getElementById('cert-cred-id').value = cert ? (cert.credential_id || '') : '';
     document.getElementById('cert-color').value = cert ? (cert.accent_color || 'var(--blue)') : 'var(--blue)';
     document.getElementById('cert-sort').value = cert ? (cert.sort_order || 0) : 0;
@@ -8946,12 +9993,55 @@ function openCertificationDrawer(cert) {
     document.getElementById('cert-drawer').classList.add('open');
 }
 
+function updateCertImagePreview() {
+    var val = (document.getElementById('cert-image-url') ? document.getElementById('cert-image-url').value.trim() : '');
+    var box = document.getElementById('cert-img-preview-box');
+    var img = document.getElementById('cert-img-preview');
+    if (val && box && img) {
+        img.src = val;
+        box.style.display = 'block';
+    } else if (box) {
+        box.style.display = 'none';
+    }
+}
+
+async function uploadCertImage() {
+    var fileInput = document.getElementById('cert-image-file');
+    var file = fileInput && fileInput.files ? fileInput.files[0] : null;
+    if (!file) return;
+    var btn = document.getElementById('cert-upload-btn');
+    if (btn) { btn.disabled = true; btn.textContent = '⏳…'; }
+    var fd = new FormData();
+    fd.append('file', file);
+    try {
+        var res = await fetch('/api/talks/upload', { method: 'POST', body: fd });
+        var json = await res.json();
+        if (json.url) {
+            document.getElementById('cert-image-url').value = json.url;
+            updateCertImagePreview();
+            showToast('Certificate image uploaded! ✅', 'success');
+        } else {
+            showToast(json.error || 'Upload failed.', 'error');
+        }
+    } catch(e) {
+        showToast('Upload error.', 'error');
+    }
+    if (btn) { btn.disabled = false; btn.textContent = '📤 Upload'; }
+}
+
 function closeCertificationDrawer() {
     document.getElementById('cert-backdrop').classList.remove('open');
     document.getElementById('cert-drawer').classList.remove('open');
 }
 
 async function saveCertification() {
+    var drawer = document.getElementById('cert-drawer');
+    var isValid = validateDrawerFields(drawer, [
+        { id: 'cert-title', label: 'Certification Title' },
+        { id: 'cert-issuer', label: 'Issuer / Organization' }
+    ]);
+    if (!isValid) return;
+
     var id = document.getElementById('cert-id').value;
     var title = document.getElementById('cert-title').value.trim();
     var issuer = document.getElementById('cert-issuer').value.trim();
@@ -8959,19 +10049,14 @@ async function saveCertification() {
     var category = document.getElementById('cert-category').value.trim();
     var skills = document.getElementById('cert-skills').value.split(',').map(function(s){ return s.trim(); }).filter(Boolean);
     var credential_url = document.getElementById('cert-url').value.trim();
+    var image_url = (document.getElementById('cert-image-url') ? document.getElementById('cert-image-url').value.trim() : '') || null;
     var credential_id = document.getElementById('cert-cred-id').value.trim();
     var accent_color = document.getElementById('cert-color').value;
     var sort_order = parseInt(document.getElementById('cert-sort').value, 10) || 0;
 
-    if (!title || !issuer) {
-        showToast('Title and issuer are required');
-        return;
-    }
-
-    var payload = { title, issuer, issue_date, category, skills, credential_url, credential_id, accent_color, sort_order };
+    var payload = { title, issuer, issue_date, category, skills, credential_url, image_url, credential_id, accent_color, sort_order };
     var saveBtn = document.getElementById('cert-save-btn');
-    saveBtn.disabled = true;
-    saveBtn.textContent = 'Saving…';
+    setBtnLoading(saveBtn, true, 'Saving…');
 
     try {
         var url = id ? '/api/certifications/' + id : '/api/certifications';
@@ -8983,34 +10068,41 @@ async function saveCertification() {
         });
         var data = await res.json();
         if (data.success) {
-            showToast(id ? 'Certification updated successfully!' : 'Certification added successfully!');
-            closeCertificationDrawer();
+            setBtnLoading(saveBtn, false, null, true);
+            showToast(id ? 'Certification updated successfully!' : 'Certification added successfully!', 'success');
+            setTimeout(function() {
+                closeCertificationDrawer();
+            }, 600);
             await loadCertifications();
         } else {
-            showToast(data.error || 'Failed to save certification');
+            setBtnLoading(saveBtn, false);
+            showToast(data.error || 'Failed to save certification', 'error');
         }
     } catch(err) {
-        showToast('Network error while saving certification');
-    } finally {
-        saveBtn.disabled = false;
-        saveBtn.textContent = 'Save Certification';
+        setBtnLoading(saveBtn, false);
+        showToast('Network error while saving certification', 'error');
     }
 }
 
 async function deleteCertification(id) {
-    if (!confirm('Are you sure you want to delete this certification?')) return;
-    try {
-        var res = await fetch('/api/certifications/' + id, { method: 'DELETE' });
-        var data = await res.json();
-        if (data.success) {
-            showToast('Certification deleted');
-            await loadCertifications();
-        } else {
-            showToast(data.error || 'Delete failed');
+    var cert = _certMap[id];
+    var title = cert ? (cert.title + (cert.issuer ? ' from ' + cert.issuer : '')) : 'this certification';
+    showConfirm({
+        title: 'Delete Certification?',
+        itemTitle: title,
+        message: 'This certification record will be permanently removed from your portfolio.',
+        confirmText: 'Delete Certification',
+        onConfirm: async function() {
+            var res = await fetch('/api/certifications/' + id, { method: 'DELETE' });
+            var data = await res.json();
+            if (data.success) {
+                showToast('Certification deleted', 'success');
+                await loadCertifications();
+            } else {
+                showToast(data.error || 'Delete failed', 'error');
+            }
         }
-    } catch(err) {
-        showToast('Error deleting certification');
-    }
+    });
 }
 
 
@@ -9117,6 +10209,13 @@ function closeAwardDrawer() {
 }
 
 async function saveAward() {
+    var drawer = document.getElementById('award-drawer');
+    var isValid = validateDrawerFields(drawer, [
+        { id: 'award-title', label: 'Award Title' },
+        { id: 'award-issuer', label: 'Issuer / Organization' }
+    ]);
+    if (!isValid) return;
+
     var id = document.getElementById('award-id').value;
     var title = document.getElementById('award-title').value.trim();
     var issuer = document.getElementById('award-issuer').value.trim();
@@ -9127,15 +10226,9 @@ async function saveAward() {
     var description = document.getElementById('award-desc').value.trim();
     var sort_order = parseInt(document.getElementById('award-sort').value, 10) || 0;
 
-    if (!title || !issuer) {
-        showToast('Title and issuer are required');
-        return;
-    }
-
     var payload = { title, issuer, metric_tag, badge_text, badge_color, chips, description, sort_order };
     var saveBtn = document.getElementById('award-save-btn');
-    saveBtn.disabled = true;
-    saveBtn.textContent = 'Saving…';
+    setBtnLoading(saveBtn, true, 'Saving…');
 
     try {
         var url = id ? '/api/awards/' + id : '/api/awards';
@@ -9147,34 +10240,41 @@ async function saveAward() {
         });
         var data = await res.json();
         if (data.success) {
-            showToast(id ? 'Award updated successfully!' : 'Award added successfully!');
-            closeAwardDrawer();
+            setBtnLoading(saveBtn, false, null, true);
+            showToast(id ? 'Award updated successfully!' : 'Award added successfully!', 'success');
+            setTimeout(function() {
+                closeAwardDrawer();
+            }, 600);
             await loadAwards();
         } else {
-            showToast(data.error || 'Failed to save award');
+            setBtnLoading(saveBtn, false);
+            showToast(data.error || 'Failed to save award', 'error');
         }
     } catch(err) {
-        showToast('Network error while saving award');
-    } finally {
-        saveBtn.disabled = false;
-        saveBtn.textContent = 'Save Award';
+        setBtnLoading(saveBtn, false);
+        showToast('Network error while saving award', 'error');
     }
 }
 
 async function deleteAward(id) {
-    if (!confirm('Are you sure you want to delete this award?')) return;
-    try {
-        var res = await fetch('/api/awards/' + id, { method: 'DELETE' });
-        var data = await res.json();
-        if (data.success) {
-            showToast('Award deleted');
-            await loadAwards();
-        } else {
-            showToast(data.error || 'Delete failed');
+    var aw = _awardMap[id];
+    var title = aw ? (aw.title + (aw.issuer ? ' from ' + aw.issuer : '')) : 'this award';
+    showConfirm({
+        title: 'Delete Award?',
+        itemTitle: title,
+        message: 'This honor/award will be permanently removed from your portfolio.',
+        confirmText: 'Delete Award',
+        onConfirm: async function() {
+            var res = await fetch('/api/awards/' + id, { method: 'DELETE' });
+            var data = await res.json();
+            if (data.success) {
+                showToast('Award deleted', 'success');
+                await loadAwards();
+            } else {
+                showToast(data.error || 'Delete failed', 'error');
+            }
         }
-    } catch(err) {
-        showToast('Error deleting award');
-    }
+    });
 }
 
 
@@ -9295,17 +10395,24 @@ async function toggleMessageStatus(id, newStatus) {
 }
 
 async function deleteMessage(id) {
-    if (!confirm('Are you sure you want to delete this inquiry?')) return;
-    try {
-        var res = await fetch('/api/contact/' + id, { method: 'DELETE' });
-        var data = await res.json();
-        if (data.success) {
-            showToast('Message deleted');
-            await loadInbox();
+    var msg = (inboxData || []).find(function(m){ return String(m.id) === String(id); });
+    var sender = msg ? (msg.name + ' (' + msg.email + ')') : 'this inquiry';
+    showConfirm({
+        title: 'Delete Inquiry Message?',
+        itemTitle: sender,
+        message: 'This message will be permanently deleted from your contact inbox.',
+        confirmText: 'Delete Inquiry',
+        onConfirm: async function() {
+            var res = await fetch('/api/contact/' + id, { method: 'DELETE' });
+            var data = await res.json();
+            if (data.success) {
+                showToast('Inquiry message deleted', 'success');
+                await loadInbox();
+            } else {
+                showToast(data.error || 'Failed to delete message', 'error');
+            }
         }
-    } catch(err) {
-        showToast('Failed to delete message');
-    }
+    });
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -9467,6 +10574,12 @@ function updateGalleryPreviewFromUrl() {
 }
 
 async function saveGalleryItem() {
+    var drawer = document.getElementById('gallery-drawer');
+    var isValid = validateDrawerFields(drawer, [
+        { id: 'gal-title', label: 'Photo Title' }
+    ]);
+    if (!isValid) return;
+
     var id = document.getElementById('gal-id').value;
     var title = document.getElementById('gal-title').value.trim();
     var category = document.getElementById('gal-category').value;
@@ -9479,19 +10592,13 @@ async function saveGalleryItem() {
     var description = document.getElementById('gal-desc').value.trim();
     var sort_order = parseInt(document.getElementById('gal-sort').value, 10) || 0;
 
-    if (!title) {
-        showToast('Photo title is required');
-        return;
-    }
-
     if (!id && !hasFile && !imageUrl) {
-        showToast('Please upload an image file or provide an image URL');
+        showToast('Please upload an image file or provide an image URL', 'warning');
         return;
     }
 
     var saveBtn = document.getElementById('gal-save-btn');
-    saveBtn.disabled = true;
-    saveBtn.textContent = 'Saving…';
+    setBtnLoading(saveBtn, true, 'Saving…');
 
     try {
         var url = id ? '/api/gallery/' + id : '/api/gallery';
@@ -9535,34 +10642,41 @@ async function saveGalleryItem() {
 
         var data = await res.json();
         if (data.success) {
-            showToast(id ? 'Photo updated successfully!' : 'Photo added to gallery!');
-            closeGalleryDrawer();
+            setBtnLoading(saveBtn, false, null, true);
+            showToast(id ? 'Photo updated successfully!' : 'Photo added to gallery!', 'success');
+            setTimeout(function() {
+                closeGalleryDrawer();
+            }, 600);
             await loadGallery();
         } else {
-            showToast(data.error || 'Failed to save photo');
+            setBtnLoading(saveBtn, false);
+            showToast(data.error || 'Failed to save photo', 'error');
         }
     } catch(err) {
-        showToast('Network error while saving photo');
-    } finally {
-        saveBtn.disabled = false;
-        saveBtn.textContent = 'Save Photo';
+        setBtnLoading(saveBtn, false);
+        showToast('Network error while saving photo', 'error');
     }
 }
 
 async function deleteGalleryItem(id) {
-    if (!confirm('Are you sure you want to delete this photo from the gallery?')) return;
-    try {
-        var res = await fetch('/api/gallery/' + id, { method: 'DELETE' });
-        var data = await res.json();
-        if (data.success) {
-            showToast('Photo deleted from gallery');
-            await loadGallery();
-        } else {
-            showToast(data.error || 'Delete failed');
+    var item = _galleryMap[id];
+    var title = item ? item.title : 'this gallery photo';
+    showConfirm({
+        title: 'Delete Photo from Gallery?',
+        itemTitle: title,
+        message: 'This photo will be removed from your public visual gallery.',
+        confirmText: 'Delete Photo',
+        onConfirm: async function() {
+            var res = await fetch('/api/gallery/' + id, { method: 'DELETE' });
+            var data = await res.json();
+            if (data.success) {
+                showToast('Photo deleted from gallery', 'success');
+                await loadGallery();
+            } else {
+                showToast(data.error || 'Delete failed', 'error');
+            }
         }
-    } catch(err) {
-        showToast('Error deleting photo');
-    }
+    });
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -9669,6 +10783,12 @@ function closePublicationDrawer() {
 }
 
 async function savePublication() {
+    var drawer = document.getElementById('pub-drawer');
+    var isValid = validateDrawerFields(drawer, [
+        { id: 'pub-title', label: 'Publication Title' }
+    ]);
+    if (!isValid) return;
+
     var id = document.getElementById('pub-id').value;
     var title = document.getElementById('pub-title').value.trim();
     var date = document.getElementById('pub-date').value.trim();
@@ -9678,15 +10798,9 @@ async function savePublication() {
     var link = document.getElementById('pub-link').value.trim();
     var description = document.getElementById('pub-desc').value.trim();
 
-    if (!title) {
-        showToast('Publication title is required');
-        return;
-    }
-
     var payload = { title, date, publisher, accent_color, sort_order, link, description };
     var saveBtn = document.getElementById('pub-save-btn');
-    saveBtn.disabled = true;
-    saveBtn.textContent = 'Saving…';
+    setBtnLoading(saveBtn, true, 'Saving…');
 
     try {
         var url = id ? '/api/publications/' + id : '/api/publications';
@@ -9698,34 +10812,41 @@ async function savePublication() {
         });
         var data = await res.json();
         if (data.success) {
-            showToast(id ? 'Publication updated!' : 'Publication created!');
-            closePublicationDrawer();
+            setBtnLoading(saveBtn, false, null, true);
+            showToast(id ? 'Publication updated!' : 'Publication created!', 'success');
+            setTimeout(function() {
+                closePublicationDrawer();
+            }, 600);
             await loadPublications();
         } else {
-            showToast(data.error || 'Failed to save publication');
+            setBtnLoading(saveBtn, false);
+            showToast(data.error || 'Failed to save publication', 'error');
         }
     } catch(err) {
-        showToast('Network error while saving publication');
-    } finally {
-        saveBtn.disabled = false;
-        saveBtn.textContent = 'Save Publication';
+        setBtnLoading(saveBtn, false);
+        showToast('Network error while saving publication', 'error');
     }
 }
 
 async function deletePublication(id) {
-    if (!confirm('Are you sure you want to delete this publication?')) return;
-    try {
-        var res = await fetch('/api/publications/' + id, { method: 'DELETE' });
-        var data = await res.json();
-        if (data.success) {
-            showToast('Publication deleted');
-            await loadPublications();
-        } else {
-            showToast(data.error || 'Delete failed');
+    var pub = _pubMap[id];
+    var title = pub ? pub.title : 'this publication';
+    showConfirm({
+        title: 'Delete Publication?',
+        itemTitle: title,
+        message: 'This publication record will be permanently deleted from your portfolio.',
+        confirmText: 'Delete Publication',
+        onConfirm: async function() {
+            var res = await fetch('/api/publications/' + id, { method: 'DELETE' });
+            var data = await res.json();
+            if (data.success) {
+                showToast('Publication deleted', 'success');
+                await loadPublications();
+            } else {
+                showToast(data.error || 'Delete failed', 'error');
+            }
         }
-    } catch(err) {
-        showToast('Error deleting publication');
-    }
+    });
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -9733,7 +10854,7 @@ async function deletePublication(id) {
    ══════════════════════════════════════════════════════════ */
 async function loadBlogs() {
     try {
-        var res = await fetch('/api/blogs');
+        var res = await fetch('/api/blogs?include_drafts=true');
         var data = await res.json();
         if (data.success) {
             blogsData = data.data || [];
@@ -9757,6 +10878,91 @@ function updateBlogsStats() {
     if (totalEl) totalEl.textContent = total;
     var scEl = document.getElementById('sc-blogs');
     if (scEl) scEl.textContent = total;
+}
+
+function updateBlogCoverPreview() {
+    var url = (document.getElementById('blog-cover-url') ? document.getElementById('blog-cover-url').value.trim() : '');
+    var preview = document.getElementById('blog-cover-preview');
+    var fallback = document.getElementById('blog-cover-fallback');
+    var clearBtn = document.getElementById('blog-cover-clear-btn');
+    if (url) {
+        if (preview) {
+            preview.src = url;
+            preview.style.display = 'block';
+        }
+        if (fallback) fallback.style.display = 'none';
+        if (clearBtn) clearBtn.style.display = 'inline-block';
+    } else {
+        if (preview) {
+            preview.src = '';
+            preview.style.display = 'none';
+        }
+        if (fallback) fallback.style.display = 'grid';
+        if (clearBtn) clearBtn.style.display = 'none';
+    }
+    updateBlogLivePreview();
+}
+
+function previewBlogCoverUpload(event) {
+    var file = event.target.files && event.target.files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var preview = document.getElementById('blog-cover-preview');
+            var fallback = document.getElementById('blog-cover-fallback');
+            var clearBtn = document.getElementById('blog-cover-clear-btn');
+            if (preview) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            }
+            if (fallback) fallback.style.display = 'none';
+            if (clearBtn) clearBtn.style.display = 'inline-block';
+            updateBlogLivePreview();
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+function clearBlogCover() {
+    var fileInput = document.getElementById('blog-cover-file');
+    if (fileInput) fileInput.value = '';
+    var urlInput = document.getElementById('blog-cover-url');
+    if (urlInput) urlInput.value = '';
+    updateBlogCoverPreview();
+}
+
+function updateBlogLivePreview() {
+    var box = document.getElementById('blog-live-preview-box');
+    if (!box) return;
+
+    var title = (document.getElementById('blog-title') ? document.getElementById('blog-title').value.trim() : '') || 'Untitled Article';
+    var badge = (document.getElementById('blog-badge') ? document.getElementById('blog-badge').value.trim() : '') || 'General';
+    var status = (document.getElementById('blog-status') ? document.getElementById('blog-status').value : 'published');
+    var date = (document.getElementById('blog-date') ? document.getElementById('blog-date').value.trim() : '') || 'Recent';
+    var readTime = (document.getElementById('blog-read-time') ? document.getElementById('blog-read-time').value.trim() : '') || '5 min read';
+    var excerpt = (document.getElementById('blog-excerpt') ? document.getElementById('blog-excerpt').value.trim() : '') || 'Article summary preview...';
+    var previewImg = document.getElementById('blog-cover-preview');
+    var hasCover = previewImg && previewImg.style.display !== 'none' && previewImg.src;
+
+    var statusBadge = status === 'draft'
+        ? '<span style="background:rgba(234,67,53,0.1); color:var(--g-red); font-size:0.7rem; font-weight:800; padding:2px 8px; border-radius:10px; border:1px solid rgba(234,67,53,0.25);">Draft</span>'
+        : '<span style="background:rgba(52,168,83,0.1); color:var(--g-green); font-size:0.7rem; font-weight:800; padding:2px 8px; border-radius:10px; border:1px solid rgba(52,168,83,0.25);">Published</span>';
+
+    box.innerHTML = '<div style="background:#FFFFFF; border:1.5px solid var(--sidebar-border); border-radius:12px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.04);">' +
+        (hasCover
+            ? '<div style="height:120px; overflow:hidden;"><img src="' + esc(previewImg.src) + '" style="width:100%; height:100%; object-fit:cover;"></div>'
+            : '<div style="height:70px; background:linear-gradient(135deg, rgba(66,133,244,0.12), rgba(124,58,237,0.12)); display:flex; align-items:center; justify-content:center; font-size:1.6rem;">✍️</div>'
+        ) +
+        '<div style="padding:14px; display:flex; flex-direction:column; gap:8px;">' +
+            '<div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">' +
+                '<span style="background:rgba(66,133,244,0.1); color:var(--g-blue); font-size:0.72rem; font-weight:700; padding:2px 8px; border-radius:8px;">' + esc(badge) + '</span>' +
+                statusBadge +
+            '</div>' +
+            '<div style="font-weight:700; font-size:0.95rem; color:var(--ink); line-height:1.35;">' + esc(title) + '</div>' +
+            '<div style="font-size:0.75rem; color:var(--ink-4);">' + esc(date) + ' · ' + esc(readTime) + '</div>' +
+            '<p style="font-size:0.8rem; color:var(--ink-3); line-height:1.45; margin:0;">' + esc(excerpt) + '</p>' +
+        '</div>' +
+    '</div>';
 }
 
 function renderBlogsGrid() {
@@ -9786,21 +10992,34 @@ function renderBlogsGrid() {
             return '<span style="background:var(--sidebar-hover); color:var(--ink-2); font-size:0.72rem; font-weight:700; padding:2px 8px; border-radius:10px; border:1px solid var(--sidebar-border);">' + esc(t) + '</span>';
         }).join('');
 
-        return '<div class="project-card" style="display:flex; flex-direction:column; gap:12px; padding:22px; border:1.5px solid var(--sidebar-border); border-radius:var(--r-md); background:var(--surface);">' +
+        var isDraft = blog.status === 'draft';
+        var statusBadge = isDraft
+            ? '<span style="background:rgba(234,67,53,0.1); color:var(--g-red); font-size:0.7rem; font-weight:800; padding:2px 8px; border-radius:10px; border:1px solid rgba(234,67,53,0.25);">Draft</span>'
+            : '<span style="background:rgba(52,168,83,0.1); color:var(--g-green); font-size:0.7rem; font-weight:800; padding:2px 8px; border-radius:10px; border:1px solid rgba(52,168,83,0.25);">Published</span>';
+
+        var coverThumb = blog.cover_image
+            ? '<div style="height:130px; border-radius:8px; overflow:hidden; margin-bottom:12px; background:#F1F3F4;"><img src="' + esc(blog.cover_image) + '" style="width:100%; height:100%; object-fit:cover;" onerror="this.parentElement.style.display=\'none\'"></div>'
+            : '';
+
+        return '<div class="project-card" style="display:flex; flex-direction:column; gap:10px; padding:20px; border:1.5px solid var(--sidebar-border); border-radius:var(--r-md); background:var(--surface);">' +
+            coverThumb +
             '<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px;">' +
                 '<div style="flex:1;">' +
-                    '<div style="font-size:1.02rem; font-weight:800; color:var(--ink);">' + esc(blog.title) + '</div>' +
+                    '<div style="font-size:1.02rem; font-weight:800; color:var(--ink); line-height:1.35;">' + esc(blog.title) + '</div>' +
                     '<div style="display:flex; align-items:center; gap:6px; font-size:0.76rem; color:var(--ink-4); margin-top:4px;">' +
                         (blog.date ? '<span>' + esc(blog.date) + '</span>' : '') +
                         (blog.date && blog.read_time ? '<span>·</span>' : '') +
                         (blog.read_time ? '<span>' + esc(blog.read_time) + '</span>' : '') +
                     '</div>' +
                 '</div>' +
-                (blog.badge ? '<span style="background:rgba(66,133,244,0.1); color:var(--g-blue); font-size:0.72rem; font-weight:700; padding:3px 8px; border-radius:10px; border:1px solid rgba(66,133,244,0.25); flex-shrink:0;">' + esc(blog.badge) + '</span>' : '') +
+                '<div style="display:flex; flex-direction:column; align-items:flex-end; gap:4px; flex-shrink:0;">' +
+                    (blog.badge ? '<span style="background:rgba(66,133,244,0.1); color:var(--g-blue); font-size:0.72rem; font-weight:700; padding:3px 8px; border-radius:10px; border:1px solid rgba(66,133,244,0.25);">' + esc(blog.badge) + '</span>' : '') +
+                    statusBadge +
+                '</div>' +
             '</div>' +
             (blog.excerpt ? '<p style="font-size:0.86rem; color:var(--ink-3); line-height:1.55; margin:0;">' + esc(blog.excerpt) + '</p>' : '') +
             (tagsPills ? '<div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:6px;">' + tagsPills + '</div>' : '') +
-            (blog.link ? '<div style="font-size:0.78rem; margin-top:4px;"><a href="' + esc(blog.link) + '" target="_blank" rel="noopener" style="color:var(--g-blue); font-weight:600; text-decoration:none;">🔗 Read Article ↗</a></div>' : '') +
+            (blog.link ? '<div style="font-size:0.78rem; margin-top:4px;"><a href="' + esc(blog.link) + '" target="_blank" rel="noopener" style="color:var(--g-blue); font-weight:600; text-decoration:none;">🔗 Read External Link ↗</a></div>' : '') +
             '<div style="display:flex; gap:8px; justify-content:flex-end; border-top:1px solid var(--line-soft); padding-top:12px; margin-top:auto;">' +
                 '<button class="btn-sm-ghost" onclick="openBlogDrawerById(\'' + blog.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface);">Edit</button>' +
                 '<button class="btn-sm-ghost" onclick="deleteBlog(\'' + blog.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; color:var(--g-red); border-radius:var(--r-pill); border:1.5px solid rgba(234,67,53,0.2); background:var(--g-red-soft);">Delete</button>' +
@@ -9820,11 +11039,20 @@ function openBlogDrawer(blog) {
     document.getElementById('blog-date').value = blog ? (blog.date || '') : '';
     document.getElementById('blog-read-time').value = blog ? (blog.read_time || '5 min read') : '5 min read';
     document.getElementById('blog-badge').value = blog ? (blog.badge || '') : '';
+    document.getElementById('blog-status').value = blog ? (blog.status || 'published') : 'published';
+    document.getElementById('blog-cover-url').value = blog ? (blog.cover_image || '') : '';
     document.getElementById('blog-art-type').value = blog ? (blog.art_type || 'rag-pattern') : 'rag-pattern';
     document.getElementById('blog-sort').value = blog ? (blog.sort_order || 0) : 0;
     document.getElementById('blog-link').value = blog ? (blog.link || '') : '';
     document.getElementById('blog-tags').value = blog ? (blog.tags || []).join(', ') : '';
     document.getElementById('blog-excerpt').value = blog ? (blog.excerpt || '') : '';
+    document.getElementById('blog-content').value = blog ? (blog.content || '') : '';
+
+    var fileInput = document.getElementById('blog-cover-file');
+    if (fileInput) fileInput.value = '';
+
+    updateBlogCoverPreview();
+    updateBlogLivePreview();
 
     var d = document.getElementById('blog-drawer');
     var b = document.getElementById('blog-backdrop');
@@ -9840,65 +11068,115 @@ function closeBlogDrawer() {
 }
 
 async function saveBlog() {
+    var drawer = document.getElementById('blog-drawer');
+    var isValid = validateDrawerFields(drawer, [
+        { id: 'blog-title', label: 'Article Title' }
+    ]);
+    if (!isValid) return;
+
     var id = document.getElementById('blog-id').value;
     var title = document.getElementById('blog-title').value.trim();
     var date = document.getElementById('blog-date').value.trim();
     var read_time = document.getElementById('blog-read-time').value.trim();
     var badge = document.getElementById('blog-badge').value.trim();
+    var status = document.getElementById('blog-status').value;
     var art_type = document.getElementById('blog-art-type').value;
     var sort_order = parseInt(document.getElementById('blog-sort').value, 10) || 0;
     var link = document.getElementById('blog-link').value.trim();
     var tags = document.getElementById('blog-tags').value.split(',').map(function(s){ return s.trim(); }).filter(Boolean);
     var excerpt = document.getElementById('blog-excerpt').value.trim();
+    var content = document.getElementById('blog-content').value.trim();
+    var coverUrl = document.getElementById('blog-cover-url').value.trim();
+    var fileInput = document.getElementById('blog-cover-file');
+    var hasFile = fileInput && fileInput.files && fileInput.files.length > 0;
 
-    if (!title) {
-        showToast('Article title is required');
-        return;
-    }
-
-    var payload = { title, date, read_time, badge, art_type, sort_order, link, tags, excerpt };
     var saveBtn = document.getElementById('blog-save-btn');
-    saveBtn.disabled = true;
-    saveBtn.textContent = 'Saving…';
+    setBtnLoading(saveBtn, true, 'Saving…');
 
     try {
         var url = id ? '/api/blogs/' + id : '/api/blogs';
         var method = id ? 'PUT' : 'POST';
-        var res = await fetch(url, {
-            method: method,
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
+        var res;
+
+        if (hasFile) {
+            var formData = new FormData();
+            formData.append('title', title);
+            formData.append('date', date);
+            formData.append('read_time', read_time);
+            formData.append('badge', badge);
+            formData.append('status', status);
+            formData.append('art_type', art_type);
+            formData.append('sort_order', sort_order);
+            formData.append('link', link);
+            formData.append('tags', tags.join(','));
+            formData.append('excerpt', excerpt);
+            formData.append('content', content);
+            formData.append('cover', fileInput.files[0]);
+            if (coverUrl) formData.append('cover_image', coverUrl);
+
+            res = await fetch(url, {
+                method: method,
+                body: formData
+            });
+        } else {
+            var payload = {
+                title: title,
+                date: date,
+                read_time: read_time,
+                badge: badge,
+                status: status,
+                art_type: art_type,
+                sort_order: sort_order,
+                link: link,
+                tags: tags,
+                excerpt: excerpt,
+                content: content,
+                cover_image: coverUrl
+            };
+            res = await fetch(url, {
+                method: method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+        }
+
         var data = await res.json();
         if (data.success) {
-            showToast(id ? 'Article updated!' : 'Article published!');
-            closeBlogDrawer();
+            setBtnLoading(saveBtn, false, null, true);
+            showToast(id ? 'Article updated!' : 'Article published!', 'success');
+            setTimeout(function() {
+                closeBlogDrawer();
+            }, 600);
             await loadBlogs();
         } else {
-            showToast(data.error || 'Failed to save article');
+            setBtnLoading(saveBtn, false);
+            showToast(data.error || 'Failed to save article', 'error');
         }
     } catch(err) {
-        showToast('Network error while saving article');
-    } finally {
-        saveBtn.disabled = false;
-        saveBtn.textContent = 'Save Article';
+        setBtnLoading(saveBtn, false);
+        showToast('Network error while saving article', 'error');
     }
 }
 
 async function deleteBlog(id) {
-    if (!confirm('Are you sure you want to delete this blog article?')) return;
-    try {
-        var res = await fetch('/api/blogs/' + id, { method: 'DELETE' });
-        var data = await res.json();
-        if (data.success) {
-            showToast('Article deleted');
-            await loadBlogs();
-        } else {
-            showToast(data.error || 'Delete failed');
+    var blog = _blogMap[id];
+    var title = blog ? blog.title : 'this blog article';
+    showConfirm({
+        title: 'Delete Blog Article?',
+        itemTitle: title,
+        message: 'This article will be permanently removed from your portfolio publication list.',
+        confirmText: 'Delete Article',
+        onConfirm: async function() {
+            var res = await fetch('/api/blogs/' + id, { method: 'DELETE' });
+            var data = await res.json();
+            if (data.success) {
+                showToast('Article deleted', 'success');
+                await loadBlogs();
+            } else {
+                showToast(data.error || 'Delete failed', 'error');
+            }
         }
-    } catch(err) {
-        showToast('Error deleting article');
-    }
+    });
 }
 
 // ════ GLOBAL DRAWER INTERACTION & ERGONOMICS ════
@@ -9929,8 +11207,22 @@ async function deleteBlog(id) {
         }
     }
 
-    // Global Esc and Ctrl+Enter / Cmd+Enter
+    // Global Keyboard Shortcuts (Esc, Ctrl+S, Ctrl+Enter, Modal handling)
     document.addEventListener('keydown', function(e) {
+        var confirmOverlay = document.getElementById('confirm-overlay');
+        if (confirmOverlay && confirmOverlay.classList.contains('show')) {
+            if (e.key === 'Escape') {
+                e.preventDefault();
+                hideConfirm();
+                return;
+            }
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                execConfirm();
+                return;
+            }
+        }
+
         var active = getActiveDrawer();
         if (!active) return;
 
@@ -9941,8 +11233,8 @@ async function deleteBlog(id) {
             return;
         }
 
-        // Ctrl+Enter or Cmd+Enter -> Save active drawer
-        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        // Ctrl+Enter / Cmd+Enter OR Ctrl+S / Cmd+S -> Save active drawer
+        if ((e.ctrlKey || e.metaKey) && (e.key === 'Enter' || e.key === 's' || e.key === 'S')) {
             e.preventDefault();
             var saveBtn = active.querySelector('.btn-drawer-save, .drawer-foot .btn-primary, #df-btn-create, #df-btn-save:not([style*="display: none"])');
             if (saveBtn && !saveBtn.disabled) {
@@ -9971,6 +11263,39 @@ async function deleteBlog(id) {
     document.querySelectorAll('.drawer').forEach(function(drawer) {
         observer.observe(drawer, { attributes: true, attributeFilter: ['class'] });
     });
+
+    // Initialize Dropzones across drawers
+    function initAllDropzones() {
+        var dpDropzone = document.getElementById('dp-thumb-dropzone');
+        var dpInput = document.getElementById('dp-thumbnail-file');
+        if (dpDropzone && dpInput) {
+            setupDropZone(dpDropzone, dpInput, function(files) {
+                if (files && files[0]) uploadThumbnail();
+            });
+        }
+
+        var dkDropzone = document.getElementById('dk-poster-dropzone');
+        var dkInput = document.getElementById('dk-poster-file');
+        if (dkDropzone && dkInput) {
+            setupDropZone(dkDropzone, dkInput, function(files) {
+                if (files && files[0]) uploadPoster();
+            });
+        }
+
+        var dkGalleryGrid = document.getElementById('dk-gallery-grid');
+        var dkGalleryFiles = document.getElementById('dk-gallery-files');
+        if (dkGalleryGrid && dkGalleryFiles) {
+            setupDropZone(dkGalleryGrid, dkGalleryFiles, function(files) {
+                if (files && files.length) uploadTalkGalleryFiles(files);
+            });
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAllDropzones);
+    } else {
+        initAllDropzones();
+    }
 })();
 </script>
 

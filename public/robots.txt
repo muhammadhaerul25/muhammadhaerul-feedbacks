@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Allow: /feedback
+Allow: /form/
+Disallow: /dashboard
+Disallow: /api/auth/
+Disallow: /api/contact/
+
+Sitemap: https://muhammadhaerul.tech/sitemap.xml
