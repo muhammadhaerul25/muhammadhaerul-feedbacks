@@ -1698,16 +1698,31 @@
 
           <div class="edu-card-stats">
             <div>
-              <span>${escapeHtml(edu.grade ? edu.grade.split('/')[0].trim() : '3.97')}</span>
-              <small>Grade: ${escapeHtml(edu.grade || '3.97 / 4.00')} (CGPA)</small>
+              <span>${escapeHtml(edu.grade ? edu.grade.replace(/\s*\(.*?\)/g, '').split('/')[0].trim() : '3.97')}</span>
+              <small>GPA: ${escapeHtml(edu.grade ? edu.grade.replace(/\s*\(.*?\)/g, '').trim() : '3.97 / 4.00')}</small>
             </div>
             <div>
               <span>${escapeHtml(edu.honors || 'Cumlaude')}</span>
               <small>Honors</small>
             </div>
             <div>
-              <span>${escapeHtml(edu.awards_summary ? edu.awards_summary.split(' ')[0] : '3×')}</span>
-              <small>${escapeHtml(edu.awards_summary || 'Most Outstanding Student')}</small>
+              ${(function(){
+                var aItems = [];
+                if (edu.awards_summary) {
+                  var raw = String(edu.awards_summary).trim();
+                  if (raw.startsWith('[') && raw.endsWith(']')) {
+                    try { aItems = JSON.parse(raw); } catch(e) {}
+                  } else if (raw.includes('\n')) {
+                    aItems = raw.split('\n').map(s => s.trim()).filter(Boolean);
+                  } else {
+                    aItems = [raw];
+                  }
+                }
+                var pAward = aItems.length ? aItems[0] : 'Most Outstanding Student';
+                var aMetric = aItems.length > 1 ? (aItems.length + '×') : (pAward.split(' ')[0] || '3×');
+                return `<span>${escapeHtml(aMetric)}</span>
+                <small>${escapeHtml(pAward)}</small>`;
+              })()}
             </div>
           </div>
         </div>
@@ -2636,6 +2651,21 @@
   function initHeroJourneyGlimpses() {
     const stage = document.getElementById('heroGlimpseStage');
     if (!stage) return;
+
+    const heroCfg = (window.liveSettings && window.liveSettings.hero) ||
+                    (bootstrapData && bootstrapData.settings && bootstrapData.settings.hero) || {};
+
+    if (heroCfg.showGlimpse === false) {
+      if (heroGlimpseTimer) {
+        clearInterval(heroGlimpseTimer);
+        heroGlimpseTimer = null;
+      }
+      stage.innerHTML = '';
+      stage.style.display = 'none';
+      return;
+    }
+    stage.style.display = '';
+
     if (heroGlimpseTimer) return; // already running
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -2656,25 +2686,38 @@
         if (rect.bottom < 0 || rect.top > window.innerHeight) return;
       }
 
-      const items = (Array.isArray(liveGallery) && liveGallery.length) ? liveGallery : [
-        {
-          title: 'Build with AI Keynote',
-          category: 'Keynote',
-          image_url: '/uploads/talks/saveclip_app_671241768_18351262810240133_2825725287413554497_n_1787520000000.webp'
-        },
-        {
-          title: 'GSA AI Forge',
-          category: 'Mentorship',
-          image_url: '/uploads/talks/saveclip_app_752916423_18047968217611708_1368945415777708577_n_1787520000000.webp'
-        },
-        {
-          title: 'Mindful AI Forum',
-          category: 'Keynote',
-          image_url: '/uploads/talks/saveclip_app_775154220_18087205625558486_2869970966455113945_n_1787520000000.webp'
+      // Filter gallery items by active IDs if configured in Settings
+      let activeItems = (Array.isArray(liveGallery) && liveGallery.length) ? liveGallery : [];
+      if (Array.isArray(heroCfg.glimpseActiveIds)) {
+        if (heroCfg.glimpseActiveIds.length > 0) {
+          activeItems = activeItems.filter(item => heroCfg.glimpseActiveIds.includes(item.id));
+        } else if (heroCfg.hasConfiguredGlimpse) {
+          activeItems = [];
         }
-      ];
+      }
 
-      if (!items.length) return;
+      if (!activeItems.length) {
+        if (heroCfg.showGlimpse === false) return;
+        activeItems = [
+          {
+            title: 'Build with AI Keynote',
+            category: 'Keynote',
+            image_url: '/uploads/talks/saveclip_app_671241768_18351262810240133_2825725287413554497_n_1787520000000.webp'
+          },
+          {
+            title: 'GSA AI Forge',
+            category: 'Mentorship',
+            image_url: '/uploads/talks/saveclip_app_752916423_18047968217611708_1368945415777708577_n_1787520000000.webp'
+          },
+          {
+            title: 'Mindful AI Forum',
+            category: 'Keynote',
+            image_url: '/uploads/talks/saveclip_app_775154220_18087205625558486_2869970966455113945_n_1787520000000.webp'
+          }
+        ];
+      }
+
+      const items = activeItems;
 
       const itemData = items[heroGlimpseIndex % items.length];
       heroGlimpseIndex++;
@@ -2825,11 +2868,29 @@
     }
 
     if (settings.hero) {
+      window.liveSettings = settings;
       const heroSec = document.getElementById('hero');
       if (heroSec) {
         if (settings.hero.eyebrow) {
           const eb = heroSec.querySelector('.eyebrow');
           if (eb) eb.textContent = settings.hero.eyebrow;
+        }
+      }
+
+      const stage = document.getElementById('heroGlimpseStage');
+      if (settings.hero.showGlimpse === false) {
+        if (heroGlimpseTimer) {
+          clearInterval(heroGlimpseTimer);
+          heroGlimpseTimer = null;
+        }
+        if (stage) {
+          stage.innerHTML = '';
+          stage.style.display = 'none';
+        }
+      } else {
+        if (stage) stage.style.display = '';
+        if (!heroGlimpseTimer) {
+          initHeroJourneyGlimpses();
         }
       }
     }
@@ -3127,5 +3188,22 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
+
+  /* ============ VISITOR ANALYTICS TRACKING ============ */
+  (function trackVisitor() {
+    try {
+      let vid = localStorage.getItem('mhaerul_visitor_id');
+      if (!vid) {
+        vid = 'v_' + Math.random().toString(36).substring(2, 10) + '_' + Date.now().toString(36);
+        localStorage.setItem('mhaerul_visitor_id', vid);
+      }
+      fetch('/api/analytics/track', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ visitorId: vid, path: window.location.pathname + window.location.hash }),
+        keepalive: true
+      }).catch(() => {});
+    } catch (_) {}
+  })();
 
 })();

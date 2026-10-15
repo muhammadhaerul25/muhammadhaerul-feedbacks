@@ -34,7 +34,9 @@ const DEFAULT_SETTINGS = {
         ctaPrimaryText: "Explore Works",
         ctaPrimaryUrl: "#projects",
         ctaSecondaryText: "Get in Touch",
-        ctaSecondaryUrl: "#contact"
+        ctaSecondaryUrl: "#contact",
+        showGlimpse: true,
+        glimpseActiveIds: []
     },
     sections: {
         experiences: { title: "Career Journey & Work Experience", subtitle: "Track record in software engineering, artificial intelligence, and technical leadership." },
@@ -99,7 +101,10 @@ function mergeSettings(base, override) {
     return {
         general: Object.assign({}, base.general, override.general || {}),
         navbar: Object.assign({}, base.navbar, override.navbar || {}),
-        hero: Object.assign({}, base.hero, override.hero || {}),
+        hero: Object.assign({}, base.hero, override.hero || {}, {
+            showGlimpse: (override.hero && override.hero.showGlimpse !== undefined) ? Boolean(override.hero.showGlimpse) : (base.hero && base.hero.showGlimpse !== undefined ? base.hero.showGlimpse : true),
+            glimpseActiveIds: (override.hero && Array.isArray(override.hero.glimpseActiveIds)) ? override.hero.glimpseActiveIds : (base.hero && Array.isArray(base.hero.glimpseActiveIds) ? base.hero.glimpseActiveIds : [])
+        }),
         sections: Object.assign({}, base.sections, override.sections || {}),
         localization: Object.assign({}, base.localization, override.localization || {}),
         footer: {

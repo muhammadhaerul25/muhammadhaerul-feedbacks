@@ -2449,7 +2449,145 @@
         color: #fff;
     }
 
-</style>
+
+    /* ════ ATS CV MAKER STYLES & PRINT MEDIA ════ */
+    .cv-paper {
+        background: #ffffff;
+        color: #111827;
+        padding: 40px 45px;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        border: 1px solid #E5E7EB;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        line-height: 1.45;
+        font-size: 9.5pt;
+        min-height: 1000px;
+    }
+    .cv-paper.tpl-classic {
+        font-family: 'Georgia', 'Times New Roman', serif;
+        line-height: 1.48;
+    }
+    .cv-paper.tpl-compact {
+        padding: 30px 35px;
+        font-size: 9pt;
+        line-height: 1.35;
+    }
+    .ats-header {
+        text-align: center;
+        border-bottom: 2px solid #111827;
+        padding-bottom: 14px;
+        margin-bottom: 16px;
+    }
+    .ats-name {
+        font-size: 19pt;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: #111827;
+        margin-bottom: 4px;
+        text-transform: uppercase;
+    }
+    .ats-title {
+        font-size: 10.5pt;
+        font-weight: 700;
+        color: #374151;
+        margin-bottom: 6px;
+    }
+    .ats-contacts {
+        font-size: 8.5pt;
+        color: #4B5563;
+    }
+    .ats-section {
+        margin-bottom: 16px;
+    }
+    .ats-heading {
+        font-size: 11pt;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #111827;
+        border-bottom: 1.2px solid #D1D5DB;
+        padding-bottom: 3px;
+        margin-bottom: 10px;
+    }
+    .ats-item {
+        margin-bottom: 12px;
+    }
+    .ats-item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        font-size: 9.5pt;
+        margin-bottom: 3px;
+    }
+    .ats-item-role strong {
+        font-weight: 700;
+        color: #111827;
+    }
+    .ats-item-date {
+        font-size: 8.5pt;
+        color: #4B5563;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+    .ats-item-desc {
+        font-size: 9pt;
+        color: #374151;
+        margin-bottom: 4px;
+    }
+    .ats-bullets {
+        margin: 4px 0 0 18px;
+        padding: 0;
+        font-size: 9pt;
+        color: #374151;
+    }
+    .ats-bullets li {
+        margin-bottom: 3px;
+    }
+    .ats-meta-line, .ats-awards-line, .ats-cw-line, .ats-tech-line {
+        font-size: 8.8pt;
+        color: #374151;
+        margin-top: 3px;
+    }
+    .ats-skills-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        font-size: 9pt;
+    }
+    .ats-skill-row strong {
+        color: #111827;
+        font-weight: 700;
+    }
+
+    /* ════ STRICT ATS A4 PRINT MEDIA QUERIES ════ */
+    @media print {
+        @page {
+            size: A4 portrait;
+            margin: 12mm 14mm;
+        }
+        body * {
+            visibility: hidden;
+        }
+        #cv-ats-paper, #cv-ats-paper * {
+            visibility: visible;
+        }
+        #cv-ats-paper {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            border: none !important;
+            box-shadow: none !important;
+            border-radius: 0 !important;
+        }
+        .sidebar, .topbar, .drawer, .drawer-backdrop, .toast-container, .btn, .btn-sm-ghost {
+            display: none !important;
+        }
+    }
+
+    </style>
 </head>
 <body>
 
@@ -2574,6 +2712,11 @@
                 <li class="nav-item active" id="nav-dashboard" onclick="switchView('dashboard',this)">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
                     Overview
+                </li>
+                <li class="nav-item" id="nav-cv-maker" onclick="switchView('cv-maker',this)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    <span>CV Maker</span>
+                    <span style="font-size:0.65rem; font-weight:800; background:var(--g-blue-soft); color:var(--g-blue); padding:2px 7px; border-radius:10px; margin-left:auto;">ATS</span>
                 </li>
 
                 <div class="nav-label">Pages</div>
@@ -2732,17 +2875,13 @@
                         </div>
                     </div>
                     <div class="hero-right">
-                        <div class="hero-stat">
-                            <div class="hero-stat-num" id="hs-feedbacks">—</div>
-                            <div class="hero-stat-label">Feedbacks</div>
+                        <div class="hero-stat" title="Total visitors who visited your portfolio website">
+                            <div class="hero-stat-num" id="hs-total-visitors">—</div>
+                            <div class="hero-stat-label">Total Visitors</div>
                         </div>
-                        <div class="hero-stat">
-                            <div class="hero-stat-num" id="hs-attendees">—</div>
-                            <div class="hero-stat-label">Attendees</div>
-                        </div>
-                        <div class="hero-stat">
-                            <div class="hero-stat-num" id="hs-avg-rate">—</div>
-                            <div class="hero-stat-label">Average Rate</div>
+                        <div class="hero-stat" title="Unique individuals who visited your portfolio website">
+                            <div class="hero-stat-num" id="hs-unique-visitors">—</div>
+                            <div class="hero-stat-label">Unique Visitors</div>
                         </div>
                     </div>
                 </div>
@@ -2840,47 +2979,10 @@
                     </div>
                 </div>
 
-                <div class="panel" style="margin-bottom: 24px;">
-                    <div class="section-head">
-                        <div class="section-title">Recent Projects</div>
-                        <button class="btn btn-ghost" onclick="switchView('projects', document.getElementById('nav-projects'))" style="font-size:0.8rem;padding:7px 14px;">View All →</button>
-                    </div>
-                    <div class="talks-list" id="overview-projects" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); display: grid; gap: 24px;"></div>
-                    <div class="empty-state" id="overview-projects-empty" style="padding:36px;display:none">
-                        <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></div>
-                        <div class="empty-title">No Projects Yet</div>
-                        <div class="empty-desc">Your latest projects will appear here.</div>
-                    </div>
-                </div>
-
-                <div class="panel" style="margin-bottom: 24px;">
-                    <div class="section-head">
-                        <div class="section-title">Recent Talks</div>
-                        <button class="btn btn-ghost" onclick="switchView('talks', document.getElementById('nav-talks'))" style="font-size:0.8rem;padding:7px 14px;">View All →</button>
-                    </div>
-                    <div class="talks-list" id="overview-talks" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); display: grid; gap: 24px;"></div>
-                    <div class="empty-state" id="overview-talks-empty" style="padding:36px;display:none">
-                        <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-1.7 0-3 1.2-3 2.6v6.8c0 1.4 1.3 2.6 3 2.6s3-1.2 3-2.6V4.6C15 3.2 13.7 2 12 2z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg></div>
-                        <div class="empty-title">No Talks Yet</div>
-                        <div class="empty-desc">Your latest speaking engagements will appear here.</div>
-                    </div>
-                </div>
-
-                <div class="panel">
-                    <div class="section-head">
-                        <div class="section-title">Recent Feedback</div>
-                        <button class="btn btn-ghost" onclick="switchView('feedbacks', document.getElementById('nav-feedbacks'))" style="font-size:0.8rem;padding:7px 14px;">View All →</button>
-                    </div>
-                    <div class="cards-grid" id="overview-cards" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr))"></div>
-                    <div class="empty-state" id="overview-empty" style="padding:36px;display:none">
-                        <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
-                        <div class="empty-title">No Feedback Yet</div>
-                        <div class="empty-desc">Feedback submitted through your forms will appear here.</div>
-                    </div>
                 </div>
             </div>
 
-            <!-- ══ FEEDBACKS ══ -->
+            <!-- ══ FEEDBACKS ══ --><!-- ══ FEEDBACKS ══ -->
             <div id="view-feedbacks" class="view">
                 <div id="sk-wrap" style="display:none">
                     <div class="sk" style="height:96px;margin-bottom:18px"></div>
@@ -3259,23 +3361,43 @@
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>
                                     Section 01 Headline &amp; Eyebrow
                                 </div>
-                                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-bottom:12px;">
-                                    <div>
-                                        <label class="fm-label" style="font-size:0.74rem;">Section Eyebrow</label>
-                                        <input type="text" id="cfg-prof-eyebrow" class="fm-input" placeholder="01 — Profile">
+                                <div style="display:flex; flex-direction:column; gap:14px; margin-bottom:12px;">
+                                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                                        <div>
+                                            <label class="fm-label" style="font-size:0.74rem;">Section Eyebrow Tag</label>
+                                            <input type="text" id="cfg-prof-eyebrow" class="fm-input" placeholder="01 — Profile" oninput="updateProfileHeadingPreview()">
+                                        </div>
+                                        <div>
+                                            <label class="fm-label" style="font-size:0.74rem;">Lead Role Title <span class="opt">Default Tag</span></label>
+                                            <input type="text" id="cfg-prof-lead-role" class="fm-input" placeholder="AI Full-Stack Engineer" oninput="onProfileFormulaChange()">
+                                        </div>
                                     </div>
+
                                     <div>
-                                        <label class="fm-label" style="font-size:0.74rem;">Lead Role Title</label>
-                                        <input type="text" id="cfg-prof-lead-role" class="fm-input" placeholder="AI Full-Stack Engineer" oninput="updateProfileHeadingPreview()">
+                                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                                            <label class="fm-label" style="font-size:0.74rem; margin-bottom:0;">Custom Section Headline <span class="req">* (Fully Customizable)</span></label>
+                                            <span style="font-size:0.7rem; color:var(--ink-4);">You can write any freeform text</span>
+                                        </div>
+                                        <input type="text" id="cfg-prof-lead-headline" class="fm-input" style="font-weight:700;" placeholder="AI Full-Stack Engineer with 4 Years of Experiences" oninput="updateProfileHeadingPreview()">
                                     </div>
-                                    <div>
-                                        <label class="fm-label" style="font-size:0.74rem;">Years of Experience</label>
-                                        <input type="text" id="cfg-prof-lead-exp" class="fm-input" placeholder="4 Years" oninput="updateProfileHeadingPreview()">
+
+                                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                                        <div>
+                                            <label class="fm-label" style="font-size:0.74rem;">Years of Experience Tag</label>
+                                            <input type="text" id="cfg-prof-lead-exp" class="fm-input" placeholder="4 Years" oninput="onProfileFormulaChange()">
+                                        </div>
+                                        <div>
+                                            <label class="fm-label" style="font-size:0.74rem;">Headline Formula Preset</label>
+                                            <button type="button" class="btn-sm-ghost" onclick="applyStandardProfileFormula()" style="width:100%; height:38px; border:1px solid var(--line); border-radius:var(--r-sm); font-size:0.75rem; font-weight:700; background:var(--surface);">
+                                                ↺ Auto-Fill from Role + Years
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                                <div style="background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:10px 14px; font-size:0.8rem; color:var(--ink-2);">
-                                    <span style="font-size:0.72rem; color:var(--ink-4); display:block; margin-bottom:2px;">Live Section Headline Preview:</span>
-                                    <strong id="prof-lead-preview" style="color:var(--ink); font-weight:800;">AI Full-Stack Engineer with 4 Years of Experiences</strong>
+                                <div style="background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:12px 14px; font-size:0.8rem; color:var(--ink-2);">
+                                    <span style="font-size:0.72rem; font-weight:700; color:var(--ink-4); display:block; margin-bottom:4px; text-transform:uppercase; letter-spacing:0.04em;">Live Section 01 Headline Preview:</span>
+                                    <div style="font-size:0.75rem; color:var(--g-blue); font-weight:800; margin-bottom:2px;" id="prof-eyebrow-preview">01 — PROFILE</div>
+                                    <div id="prof-lead-preview" style="color:var(--ink); font-weight:800; font-size:1.05rem; letter-spacing:-0.01em;">AI Full-Stack Engineer with 4 Years of Experiences</div>
                                 </div>
                             </div>
 
@@ -3748,6 +3870,45 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- ══ HERO FLOATING PHOTO SHOWCASE (AMBIENT JOURNEY GLIMPSE) ══ -->
+                        <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:var(--r-md); padding:20px;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid var(--line-soft);">
+                                <div style="display:flex; align-items:center; gap:12px;">
+                                    <div style="width:38px; height:38px; border-radius:10px; background:var(--g-blue-soft); color:var(--g-blue); display:flex; align-items:center; justify-content:center;">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                                    </div>
+                                    <div>
+                                        <div style="font-size:1rem; font-weight:800; color:var(--ink);">Hero Floating Photo Showcase</div>
+                                        <div style="font-size:0.75rem; color:var(--ink-4);">Aktifkan atau nonaktifkan kartu foto showcase perjalanan yang melayang di bagian Hero portfolio</div>
+                                    </div>
+                                </div>
+                                <div style="display:flex; align-items:center; gap:10px;">
+                                    <span id="hero-glimpse-status-badge" style="font-size:0.72rem; font-weight:800; padding:4px 10px; border-radius:12px; background:var(--g-green-soft); color:var(--g-green);">
+                                        ● Active
+                                    </span>
+                                    <label style="display:inline-flex; align-items:center; cursor:pointer; gap:8px; font-size:0.85rem; font-weight:700;">
+                                        <input type="checkbox" id="cfg-hero-glimpse-toggle" checked onchange="onHeroGlimpseMasterToggle(this.checked)" style="width:20px; height:20px; accent-color:var(--g-blue); cursor:pointer;">
+                                        <span>Showcase Active</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div id="hero-glimpse-settings-body">
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+                                    <div style="font-size:0.78rem; font-weight:700; color:var(--ink-3);">
+                                        Pilih Foto Spesifik yang Muncul di Hero Showcase:
+                                    </div>
+                                    <div style="display:flex; gap:8px;">
+                                        <button type="button" class="btn-sm-ghost" onclick="toggleAllHeroPhotos(true)" style="font-size:0.72rem; font-weight:700; padding:3px 10px; border:1px solid var(--line); border-radius:6px; background:var(--surface); cursor:pointer;">Activate All</button>
+                                        <button type="button" class="btn-sm-ghost" onclick="toggleAllHeroPhotos(false)" style="font-size:0.72rem; font-weight:700; padding:3px 10px; border:1px solid var(--line); border-radius:6px; background:var(--surface); cursor:pointer;">Inactivate All</button>
+                                    </div>
+                                </div>
+                                <div id="hero-glimpse-photos-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:12px;">
+                                    <!-- Dynamic photo cards with active/inactive switches -->
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -4023,6 +4184,185 @@
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                                 <span>Save Language Settings</span>
                             </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<!-- ══ VIEW: CV ATS MAKER ══ -->
+            <div id="view-cv-maker" class="view">
+                <div class="panel" style="margin-bottom: 24px; padding: 24px;">
+                    <!-- Header -->
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:20px; padding-bottom:18px; border-bottom:1.5px solid var(--line-soft);">
+                        <div style="display:flex; align-items:center; gap:14px;">
+                            <div style="width:44px; height:44px; border-radius:12px; background:var(--g-blue-soft); color:var(--g-blue); display:flex; align-items:center; justify-content:center;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            </div>
+                            <div>
+                                <div style="display:flex; align-items:center; gap:8px;">
+                                    <span style="font-size:1.35rem; font-weight:800; color:var(--ink); letter-spacing:-0.02em;">ATS-Friendly CV Maker</span>
+                                    <span style="font-size:0.7rem; font-weight:800; background:var(--g-blue-soft); color:var(--g-blue); padding:3px 9px; border-radius:12px;">100% Parser Compliant</span>
+                                </div>
+                                <div style="font-size:0.85rem; color:var(--ink-3); margin-top:2px;">Select experiences, skills, education &amp; projects from your database to generate a minimalist, modern ATS resume ready for PDF export.</div>
+                            </div>
+                        </div>
+
+                        <!-- Top Toolbar Actions -->
+                        <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                            <div style="display:flex; align-items:center; background:var(--surface); border:1.5px solid var(--line); border-radius:var(--r-sm); padding:2px;">
+                                <button type="button" class="btn-cv-tpl selected" id="btn-tpl-modern" onclick="setCvTemplate('modern')" style="padding:6px 12px; font-size:0.75rem; font-weight:700; border:none; background:var(--g-blue); color:#fff; border-radius:6px; cursor:pointer;">Modern Tech</button>
+                                <button type="button" class="btn-cv-tpl" id="btn-tpl-classic" onclick="setCvTemplate('classic')" style="padding:6px 12px; font-size:0.75rem; font-weight:700; border:none; background:transparent; color:var(--ink-3); border-radius:6px; cursor:pointer;">Classic ATS</button>
+                                <button type="button" class="btn-cv-tpl" id="btn-tpl-compact" onclick="setCvTemplate('compact')" style="padding:6px 12px; font-size:0.75rem; font-weight:700; border:none; background:transparent; color:var(--ink-3); border-radius:6px; cursor:pointer;">Compact 1-Page</button>
+                            </div>
+                            <button type="button" class="btn btn-ghost" onclick="copyCvPlainText()" style="padding:8px 14px; font-size:0.82rem; font-weight:700; display:inline-flex; align-items:center; gap:6px;" title="Copy plain text formatted for job application textboxes">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                <span>Copy Text</span>
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="printCvAts()" style="padding:8px 18px; font-size:0.82rem; font-weight:800; display:inline-flex; align-items:center; gap:6px;">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                                <span>Print / Save PDF</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Split Workspace: Left Config & Checklists, Right ATS Live Sheet Preview -->
+                    <div style="display:flex; gap:24px; align-items:flex-start;" class="cv-maker-workspace">
+                        <!-- Left Selector Panel -->
+                        <div style="width:430px; flex-shrink:0; display:flex; flex-direction:column; gap:16px;" class="cv-selector-panel">
+                            
+                            <!-- Card 1: Candidate Header Info -->
+                            <div class="field-card" style="margin-bottom:0;">
+                                <div class="field-card-title">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    Candidate &amp; Contact Header
+                                </div>
+                                <div style="display:flex; flex-direction:column; gap:10px;">
+                                    <div>
+                                        <label class="field-label" style="font-size:0.72rem;">Full Name</label>
+                                        <input class="field-input" id="cv-cfg-name" value="Muhammad Haerul, S.Kom" oninput="renderCvAtsPreview()">
+                                    </div>
+                                    <div>
+                                        <label class="field-label" style="font-size:0.72rem;">Target Position / Headline</label>
+                                        <input class="field-input" id="cv-cfg-title" value="AI Full-Stack Engineer | AI Trainer" oninput="renderCvAtsPreview()">
+                                    </div>
+                                    <div class="fields-2col">
+                                        <div>
+                                            <label class="field-label" style="font-size:0.72rem;">Email</label>
+                                            <input class="field-input" id="cv-cfg-email" value="haerulmuhammad01@gmail.com" oninput="renderCvAtsPreview()">
+                                        </div>
+                                        <div>
+                                            <label class="field-label" style="font-size:0.72rem;">Location</label>
+                                            <input class="field-input" id="cv-cfg-location" value="Makassar, Indonesia" oninput="renderCvAtsPreview()">
+                                        </div>
+                                    </div>
+                                    <div class="fields-2col">
+                                        <div>
+                                            <label class="field-label" style="font-size:0.72rem;">LinkedIn URL</label>
+                                            <input class="field-input" id="cv-cfg-linkedin" value="linkedin.com/in/muhammadhaerul" oninput="renderCvAtsPreview()">
+                                        </div>
+                                        <div>
+                                            <label class="field-label" style="font-size:0.72rem;">GitHub URL</label>
+                                            <input class="field-input" id="cv-cfg-github" value="github.com/muhammadhaerul25" oninput="renderCvAtsPreview()">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="field-label" style="font-size:0.72rem;">Portfolio Website</label>
+                                        <input class="field-input" id="cv-cfg-website" value="https://muhammadhaerul.tech" oninput="renderCvAtsPreview()">
+                                    </div>
+                                    <div>
+                                        <label class="field-label" style="font-size:0.72rem;">Professional Summary</label>
+                                        <textarea class="field-input" id="cv-cfg-summary" rows="3" style="font-size:0.75rem; resize:vertical;" oninput="renderCvAtsPreview()">AI Full-Stack Engineer and Technical Trainer with 4+ years of experience architecting end-to-end intelligent systems, agentic AI workflows, and high-performance web applications. Proven track record in industry AI deployment, enterprise APIs, and empowering hundreds of engineers through hands-on technical training.</textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card 2: Select Work Experiences -->
+                            <div class="field-card" style="margin-bottom:0;">
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                                    <div class="field-card-title" style="margin-bottom:0;">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                                        Work Experience
+                                    </div>
+                                    <button type="button" class="btn-sm-ghost" onclick="toggleAllCvCheckboxes('cv-exp-check', true)" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Select All</button>
+                                </div>
+                                <div id="cv-selector-experiences" style="display:flex; flex-direction:column; gap:8px;">
+                                    <!-- Injected experience checkboxes -->
+                                </div>
+                            </div>
+
+                            <!-- Card 3: Select Education -->
+                            <div class="field-card" style="margin-bottom:0;">
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                                    <div class="field-card-title" style="margin-bottom:0;">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+                                        Education
+                                    </div>
+                                    <button type="button" class="btn-sm-ghost" onclick="toggleAllCvCheckboxes('cv-edu-check', true)" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Select All</button>
+                                </div>
+                                <div id="cv-selector-education" style="display:flex; flex-direction:column; gap:8px;">
+                                    <!-- Injected education checkboxes -->
+                                </div>
+                            </div>
+
+                            <!-- Card 4: Select Projects -->
+                            <div class="field-card" style="margin-bottom:0;">
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                                    <div class="field-card-title" style="margin-bottom:0;">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                                        Featured Projects
+                                    </div>
+                                    <button type="button" class="btn-sm-ghost" onclick="toggleAllCvCheckboxes('cv-proj-check', true)" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Select All</button>
+                                </div>
+                                <div id="cv-selector-projects" style="display:flex; flex-direction:column; gap:8px;">
+                                    <!-- Injected project checkboxes -->
+                                </div>
+                            </div>
+
+                            <!-- Card 5: Select Skills -->
+                            <div class="field-card" style="margin-bottom:0;">
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                                    <div class="field-card-title" style="margin-bottom:0;">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                                        Skills &amp; Competencies
+                                    </div>
+                                    <button type="button" class="btn-sm-ghost" onclick="toggleAllCvCheckboxes('cv-skill-check', true)" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Select All</button>
+                                </div>
+                                <div id="cv-selector-skills" style="display:flex; flex-direction:column; gap:8px;">
+                                    <!-- Injected skill domain checkboxes -->
+                                </div>
+                            </div>
+
+                            <!-- Card 6: Certifications & Honors -->
+                            <div class="field-card" style="margin-bottom:0;">
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                                    <div class="field-card-title" style="margin-bottom:0;">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"></path></svg>
+                                        Certifications &amp; Awards
+                                    </div>
+                                    <button type="button" class="btn-sm-ghost" onclick="toggleAllCvCheckboxes('cv-cert-check', true)" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Select All</button>
+                                </div>
+                                <div id="cv-selector-certifications" style="display:flex; flex-direction:column; gap:8px;">
+                                    <!-- Injected cert checkboxes -->
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Right ATS Preview Sheet -->
+                        <div style="flex:1; min-width:0; position:sticky; top:20px;" class="cv-preview-container">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                                <span style="font-size:0.78rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-4);">
+                                    Live ATS Document Preview (A4 Standard)
+                                </span>
+                                <span style="font-size:0.72rem; color:var(--ink-4);">
+                                    Instant Real-Time Sync &bull; Print-Optimized
+                                </span>
+                            </div>
+
+                            <!-- ATS Canvas Sheet -->
+                            <div id="cv-ats-paper" class="cv-paper tpl-modern">
+                                <!-- Dynamically Rendered ATS HTML -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -4758,7 +5098,7 @@
             <div class="fields-2col">
                 <div class="field-group">
                     <label class="field-label">Grade / GPA</label>
-                    <input class="field-input" id="edu-grade" placeholder="e.g. 3.97 / 4.00 (CGPA)">
+                    <input class="field-input" id="edu-grade" placeholder="e.g. 3.97 / 4.00 (GPA)">
                 </div>
                 <div class="field-group">
                     <label class="field-label">Honors</label>
@@ -4789,15 +5129,24 @@
                 <label class="field-label">Activities and Societies (one per line)</label>
                 <textarea class="field-input" id="edu-activities" rows="3" style="resize:vertical;" placeholder="GenBI Chapter Hasanuddin University 2022&#10;Unit of Scientific Knowledge and Reasoning"></textarea>
             </div>
-            <div class="fields-2col">
-                <div class="field-group">
-                    <label class="field-label">Awards Summary</label>
-                    <input class="field-input" id="edu-awards-summary" placeholder="e.g. 3× Most Outstanding Student">
+            <div class="field-group" style="margin-bottom:14px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
+                    <div>
+                        <label class="field-label" style="margin-bottom:2px;">Awards &amp; Academic Honors <span class="opt">(Optional — Multi-Item)</span></label>
+                        <div style="font-size:0.72rem; color:var(--ink-4);">Add multiple awards, recognitions, or honors. All items are optional.</div>
+                    </div>
+                    <button type="button" class="btn-sm-ghost" onclick="addEduAwardRow('')" style="font-size:0.75rem; font-weight:800; color:var(--g-blue); padding:4px 10px; border:1px solid var(--g-blue-soft); background:var(--g-blue-soft); border-radius:8px; cursor:pointer;">
+                        + Add Award
+                    </button>
                 </div>
-                <div class="field-group">
-                    <label class="field-label">Sort Order</label>
-                    <input class="field-input" id="edu-sort" type="number" value="0">
+                <div id="edu-awards-list" style="display:flex; flex-direction:column; gap:8px;">
+                    <!-- Dynamic award rows -->
                 </div>
+                <input type="hidden" id="edu-awards-summary">
+            </div>
+            <div class="field-group">
+                <label class="field-label">Sort Order</label>
+                <input class="field-input" id="edu-sort" type="number" value="0" style="width:120px;">
             </div>
         </div>
     </div>
@@ -5887,6 +6236,7 @@ var viewMeta = {
     projects:        {title:'Projects',          crumb:'Management'},
     talks:           {title:'Talks',             crumb:'Management'},
     forms:           {title:'Forms',             crumb:'Management'},
+    'cv-maker':      {title:'ATS CV Maker & Builder', crumb:'Tools & Career'},
     skills:          {title:'Skills & Tech Stack', crumb:'Management'},
     experiences:     {title:'Work Experiences',  crumb:'Portfolio CMS'},
     education:       {title:'Education',         crumb:'Portfolio CMS'},
@@ -5974,6 +6324,8 @@ function switchView(view, el) {
             updateExperiencesStats();
             renderExperiencesGrid();
         }
+    } else if (view === 'cv-maker') {
+        initCvMakerView();
     } else if (view === 'skills') {
         if (!skillsLoaded || !skillsData.length) loadSkills();
         else {
@@ -6147,17 +6499,18 @@ async function loadOverview() {
 
         overviewLoaded = true;
 
-        // Hero Stats
-        var attendees = talks.reduce(function(s,t) { return s + (t.jumlah_peserta||0); }, 0);
-        animateCount(document.getElementById('hs-feedbacks'), feedbacks.length, '', false);
-        animateCount(document.getElementById('hs-attendees'), attendees, '', false);
-
-        var avgRate = 0;
-        if (feedbacks.length > 0) {
-            var sum = feedbacks.reduce(function(acc, d) { return acc + (+d.rating || 0); }, 0);
-            avgRate = sum / feedbacks.length;
+        // Hero Visitor Stats (Total Visitors & Unique Visitors)
+        try {
+            var resStats = await fetch('/api/analytics/stats').then(r => r.json()).catch(() => ({ success: false }));
+            if (resStats && resStats.success && resStats.data) {
+                var totVis = resStats.data.totalVisitors !== undefined ? resStats.data.totalVisitors : (resStats.data.total_visitors || 0);
+                var unqVis = resStats.data.uniqueVisitors !== undefined ? resStats.data.uniqueVisitors : (resStats.data.unique_visitors || 0);
+                animateCount(document.getElementById('hs-total-visitors'), totVis, '', false);
+                animateCount(document.getElementById('hs-unique-visitors'), unqVis, '', false);
+            }
+        } catch(statErr) {
+            console.error('Failed to load visitor analytics:', statErr);
         }
-        animateCount(document.getElementById('hs-avg-rate'), avgRate, ' ★', true);
 
         // All 12 Grid Stats
         animateCount(document.getElementById('sc-projects'), projects.length, '', false);
@@ -12880,6 +13233,12 @@ function renderEducationsGrid() {
             (edu.thesis ? '<div style="font-size:0.82rem; color:var(--ink-2); background:var(--bg); padding:10px 14px; border-radius:var(--r-sm); border:1px solid var(--sidebar-border);"><strong>Thesis:</strong> ' + esc(edu.thesis) + '</div>' : '') +
             (cwPills ? '<div><div style="font-size:0.75rem; font-weight:700; color:var(--ink-4); text-transform:uppercase; margin-bottom:6px;">Courseworks</div><div style="display:flex; flex-wrap:wrap; gap:6px;">' + cwPills + '</div></div>' : '') +
             (actList ? '<div><div style="font-size:0.75rem; font-weight:700; color:var(--ink-4); text-transform:uppercase; margin-bottom:4px;">Activities</div><ul style="list-style:none; padding-left:0; margin:0;">' + actList + '</ul></div>' : '') +
+            (function(){
+                var pAwards = parseEduAwards(edu.awards_summary);
+                if (!pAwards || !pAwards.length) return '';
+                var chips = pAwards.map(function(aw){ return '<span style="font-size:0.74rem; font-weight:700; background:rgba(251,188,4,0.14); color:#B45309; padding:3px 9px; border-radius:6px; display:inline-flex; align-items:center; gap:4px;">🏆 ' + esc(aw) + '</span>'; }).join('');
+                return '<div><div style="font-size:0.75rem; font-weight:700; color:var(--ink-4); text-transform:uppercase; margin-bottom:4px;">Academic Honors &amp; Awards</div><div style="display:flex; flex-wrap:wrap; gap:6px;">' + chips + '</div></div>';
+            })() +
             '<div style="display:flex; gap:8px; justify-content:flex-end; border-top:1px solid var(--line-soft); padding-top:14px; margin-top:auto;">' +
                 '<button class="btn-sm-ghost" onclick="openEducationDrawerById(\'' + edu.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface);">Edit</button>' +
                 '<button class="btn-sm-ghost" onclick="deleteEducation(\'' + edu.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; color:var(--g-red); border-radius:var(--r-pill); border:1.5px solid rgba(234,67,53,0.2); background:var(--g-red-soft);">Delete</button>' +
@@ -12953,6 +13312,409 @@ async function uploadEduLogo() {
     }
 }
 
+
+// ══ EDUCATION AWARDS DYNAMIC BUILDER (MULTI-ITEM, ALL OPTIONAL) ══
+function parseEduAwards(raw) {
+    if (!raw) return [];
+    if (Array.isArray(raw)) return raw.map(function(s){ return String(s).trim(); }).filter(Boolean);
+    if (typeof raw === 'string') {
+        var str = raw.trim();
+        if (!str) return [];
+        if (str.startsWith('[') && str.endsWith(']')) {
+            try {
+                var arr = JSON.parse(str);
+                if (Array.isArray(arr)) return arr.map(function(s){ return String(s).trim(); }).filter(Boolean);
+            } catch(e) {}
+        }
+        if (str.includes('\n')) {
+            return str.split('\n').map(function(s){ return s.trim(); }).filter(Boolean);
+        }
+        if (str.includes(' • ')) {
+            return str.split(' • ').map(function(s){ return s.trim(); }).filter(Boolean);
+        }
+        return [str];
+    }
+    return [];
+}
+
+function renderEduAwardsRows(awards) {
+    var list = document.getElementById('edu-awards-list');
+    if (!list) return;
+    list.innerHTML = '';
+    var items = (awards && awards.length) ? awards : [''];
+    items.forEach(function(item) {
+        addEduAwardRow(item);
+    });
+}
+
+function addEduAwardRow(val) {
+    var list = document.getElementById('edu-awards-list');
+    if (!list) return;
+    var row = document.createElement('div');
+    row.className = 'edu-award-row';
+    row.style.cssText = 'display:flex; align-items:center; gap:8px; margin-bottom:4px;';
+    
+    var iconSpan = document.createElement('span');
+    iconSpan.style.cssText = 'width:34px; height:34px; border-radius:8px; background:rgba(251,188,4,0.12); color:#B45309; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1.05rem;';
+    iconSpan.innerHTML = '🏆';
+
+    var input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'field-input edu-award-item-input';
+    input.style.cssText = 'flex:1; font-size:0.86rem; padding:8px 12px;';
+    input.placeholder = 'e.g. 3× Most Outstanding Student (Mahasiswa Berprestasi Utama)';
+    input.value = val || '';
+
+    var delBtn = document.createElement('button');
+    delBtn.type = 'button';
+    delBtn.className = 'btn-sm-ghost';
+    delBtn.style.cssText = 'width:34px; height:34px; border-radius:8px; border:1px solid var(--line); color:var(--ink-4); display:flex; align-items:center; justify-content:center; flex-shrink:0; cursor:pointer; background:var(--surface);';
+    delBtn.title = 'Remove this award (optional)';
+    delBtn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+    delBtn.onclick = function() {
+        row.remove();
+        // If all rows removed, that is completely fine because all awards are optional
+    };
+
+    row.appendChild(iconSpan);
+    row.appendChild(input);
+    row.appendChild(delBtn);
+    list.appendChild(row);
+
+    if (val === '') {
+        input.focus();
+    }
+}
+
+function collectEduAwards() {
+    var inputs = document.querySelectorAll('#edu-awards-list .edu-award-item-input');
+    var values = [];
+    inputs.forEach(function(inp) {
+        var v = inp.value.trim();
+        if (v) values.push(v);
+    });
+    if (values.length === 0) return null;
+    if (values.length === 1) return values[0];
+    return JSON.stringify(values);
+}
+
+
+// ══════════════════════════════════════════════════════════════════════════════
+// CV ATS MAKER ENGINE (RESEARCH-BACKED, 100% ATS PARSER COMPLIANT)
+// ══════════════════════════════════════════════════════════════════════════════
+let _cvCurrentTemplate = 'modern';
+let _cvLoaded = false;
+
+async function initCvMakerView() {
+    if (!_cvLoaded) {
+        // Load data if not already cached
+        if (!experiencesLoaded || !educationsLoaded || !projectsLoaded || !skillsLoaded || !certificationsLoaded) {
+            try {
+                var res = await fetch('/api/portfolio/bootstrap').then(r => r.json());
+                if (res.success && res.data) {
+                    experiencesData = res.data.experiences || [];
+                    educationsData = res.data.educations || [];
+                    projectsData = res.data.projects || [];
+                    skillsData = res.data.skills || [];
+                    certificationsData = res.data.certifications || [];
+                    awardsData = res.data.awards || [];
+                }
+            } catch(e) {}
+        }
+        renderCvMakerChecklists();
+        _cvLoaded = true;
+    }
+    renderCvAtsPreview();
+}
+
+function renderCvMakerChecklists() {
+    // 1. Experiences Checkboxes
+    var expCont = document.getElementById('cv-selector-experiences');
+    if (expCont && experiencesData) {
+        expCont.innerHTML = experiencesData.map(function(exp, idx) {
+            return '<label style="display:flex; align-items:flex-start; gap:10px; padding:8px 10px; background:var(--surface); border:1px solid var(--line); border-radius:8px; cursor:pointer; font-size:0.8rem;">' +
+                '<input type="checkbox" class="cv-exp-check" data-id="' + esc(exp.id) + '" checked onchange="renderCvAtsPreview()" style="margin-top:2px; accent-color:var(--g-blue);">' +
+                '<div style="flex:1; min-width:0;">' +
+                    '<strong style="color:var(--ink); display:block;">' + esc(exp.role) + '</strong>' +
+                    '<span style="color:var(--g-blue); font-weight:600;">' + esc(exp.company) + '</span> &bull; <span style="color:var(--ink-4);">' + esc(exp.start_date || '') + ' - ' + esc(exp.is_current ? 'Present' : (exp.end_date || '')) + '</span>' +
+                '</div>' +
+            '</label>';
+        }).join('');
+    }
+
+    // 2. Education Checkboxes
+    var eduCont = document.getElementById('cv-selector-education');
+    if (eduCont && educationsData) {
+        eduCont.innerHTML = educationsData.map(function(edu) {
+            return '<label style="display:flex; align-items:flex-start; gap:10px; padding:8px 10px; background:var(--surface); border:1px solid var(--line); border-radius:8px; cursor:pointer; font-size:0.8rem;">' +
+                '<input type="checkbox" class="cv-edu-check" data-id="' + esc(edu.id) + '" checked onchange="renderCvAtsPreview()" style="margin-top:2px; accent-color:var(--g-blue);">' +
+                '<div style="flex:1; min-width:0;">' +
+                    '<strong style="color:var(--ink); display:block;">' + esc(edu.degree) + '</strong>' +
+                    '<span style="color:var(--g-blue); font-weight:600;">' + esc(edu.institution) + '</span> &bull; <span style="color:var(--ink-4);">' + esc(edu.grade ? 'GPA: ' + edu.grade : '') + '</span>' +
+                '</div>' +
+            '</label>';
+        }).join('');
+    }
+
+    // 3. Projects Checkboxes
+    var projCont = document.getElementById('cv-selector-projects');
+    if (projCont && allProjects) {
+        projCont.innerHTML = allProjects.map(function(proj) {
+            return '<label style="display:flex; align-items:flex-start; gap:10px; padding:8px 10px; background:var(--surface); border:1px solid var(--line); border-radius:8px; cursor:pointer; font-size:0.8rem;">' +
+                '<input type="checkbox" class="cv-proj-check" data-id="' + esc(proj.id) + '" checked onchange="renderCvAtsPreview()" style="margin-top:2px; accent-color:var(--g-blue);">' +
+                '<div style="flex:1; min-width:0;">' +
+                    '<strong style="color:var(--ink); display:block;">' + esc(proj.title) + '</strong>' +
+                    '<span style="color:var(--ink-4); font-size:0.75rem;">' + esc(proj.role || 'Featured Engineering Project') + '</span>' +
+                '</div>' +
+            '</label>';
+        }).join('');
+    }
+
+    // 4. Skills Checkboxes
+    var skillCont = document.getElementById('cv-selector-skills');
+    if (skillCont && skillsData) {
+        skillCont.innerHTML = skillsData.map(function(sk) {
+            return '<label style="display:flex; align-items:flex-start; gap:10px; padding:8px 10px; background:var(--surface); border:1px solid var(--line); border-radius:8px; cursor:pointer; font-size:0.8rem;">' +
+                '<input type="checkbox" class="cv-skill-check" data-id="' + esc(sk.id) + '" checked onchange="renderCvAtsPreview()" style="margin-top:2px; accent-color:var(--g-blue);">' +
+                '<div style="flex:1; min-width:0;">' +
+                    '<strong style="color:var(--ink); display:block;">' + esc(sk.category) + '</strong>' +
+                    '<span style="color:var(--ink-4); font-size:0.72rem;">' + ((sk.tech_stack || []).slice(0, 4).join(', ')) + '</span>' +
+                '</div>' +
+            '</label>';
+        }).join('');
+    }
+
+    // 5. Certifications Checkboxes
+    var certCont = document.getElementById('cv-selector-certifications');
+    if (certCont && certificationsData) {
+        certCont.innerHTML = certificationsData.map(function(cert) {
+            return '<label style="display:flex; align-items:flex-start; gap:10px; padding:8px 10px; background:var(--surface); border:1px solid var(--line); border-radius:8px; cursor:pointer; font-size:0.8rem;">' +
+                '<input type="checkbox" class="cv-cert-check" data-id="' + esc(cert.id) + '" checked onchange="renderCvAtsPreview()" style="margin-top:2px; accent-color:var(--g-blue);">' +
+                '<div style="flex:1; min-width:0;">' +
+                    '<strong style="color:var(--ink); display:block;">' + esc(cert.title) + '</strong>' +
+                    '<span style="color:var(--ink-4); font-size:0.72rem;">' + esc(cert.issuer) + (cert.issue_date ? ' &bull; ' + esc(cert.issue_date) : '') + '</span>' +
+                '</div>' +
+            '</label>';
+        }).join('');
+    }
+}
+
+function toggleAllCvCheckboxes(cls, check) {
+    document.querySelectorAll('.' + cls).forEach(function(cb) {
+        cb.checked = check;
+    });
+    renderCvAtsPreview();
+}
+
+function setCvTemplate(tpl) {
+    _cvCurrentTemplate = tpl;
+    ['modern', 'classic', 'compact'].forEach(function(t) {
+        var btn = document.getElementById('btn-tpl-' + t);
+        if (btn) {
+            if (t === tpl) {
+                btn.style.background = 'var(--g-blue)';
+                btn.style.color = '#fff';
+            } else {
+                btn.style.background = 'transparent';
+                btn.style.color = 'var(--ink-3)';
+            }
+        }
+    });
+    var paper = document.getElementById('cv-ats-paper');
+    if (paper) {
+        paper.className = 'cv-paper tpl-' + tpl;
+    }
+    renderCvAtsPreview();
+}
+
+function renderCvAtsPreview() {
+    var paper = document.getElementById('cv-ats-paper');
+    if (!paper) return;
+
+    var name = (document.getElementById('cv-cfg-name') ? document.getElementById('cv-cfg-name').value : 'Muhammad Haerul, S.Kom').trim();
+    var title = (document.getElementById('cv-cfg-title') ? document.getElementById('cv-cfg-title').value : 'AI Full-Stack Engineer | AI Trainer').trim();
+    var email = (document.getElementById('cv-cfg-email') ? document.getElementById('cv-cfg-email').value : 'haerulmuhammad01@gmail.com').trim();
+    var location = (document.getElementById('cv-cfg-location') ? document.getElementById('cv-cfg-location').value : 'Makassar, Indonesia').trim();
+    var linkedin = (document.getElementById('cv-cfg-linkedin') ? document.getElementById('cv-cfg-linkedin').value : 'linkedin.com/in/muhammadhaerul').trim();
+    var github = (document.getElementById('cv-cfg-github') ? document.getElementById('cv-cfg-github').value : 'github.com/muhammadhaerul25').trim();
+    var website = (document.getElementById('cv-cfg-website') ? document.getElementById('cv-cfg-website').value : 'https://muhammadhaerul.tech').trim();
+    var summary = (document.getElementById('cv-cfg-summary') ? document.getElementById('cv-cfg-summary').value : '').trim();
+
+    // Collect checked items
+    var checkedExpIds = Array.from(document.querySelectorAll('.cv-exp-check:checked')).map(cb => cb.getAttribute('data-id'));
+    var checkedEduIds = Array.from(document.querySelectorAll('.cv-edu-check:checked')).map(cb => cb.getAttribute('data-id'));
+    var checkedProjIds = Array.from(document.querySelectorAll('.cv-proj-check:checked')).map(cb => cb.getAttribute('data-id'));
+    var checkedSkillIds = Array.from(document.querySelectorAll('.cv-skill-check:checked')).map(cb => cb.getAttribute('data-id'));
+    var checkedCertIds = Array.from(document.querySelectorAll('.cv-cert-check:checked')).map(cb => cb.getAttribute('data-id'));
+
+    var selExps = (experiencesData || []).filter(e => checkedExpIds.includes(e.id));
+    var selEdus = (educationsData || []).filter(e => checkedEduIds.includes(e.id));
+    var selProjs = (allProjects || []).filter(p => checkedProjIds.includes(p.id));
+    var selSkills = (skillsData || []).filter(s => checkedSkillIds.includes(s.id));
+    var selCerts = (certificationsData || []).filter(c => checkedCertIds.includes(c.id));
+
+    var contactParts = [];
+    if (email) contactParts.push(email);
+    if (location) contactParts.push(location);
+    if (linkedin) contactParts.push(linkedin);
+    if (github) contactParts.push(github);
+    if (website) contactParts.push(website);
+
+    var html = '';
+
+    // HEADER
+    html += '<header class="ats-header">';
+    html += '  <h1 class="ats-name">' + esc(name) + '</h1>';
+    if (title) html += '  <div class="ats-title">' + esc(title) + '</div>';
+    html += '  <div class="ats-contacts">' + contactParts.map(esc).join(' &bull; ') + '</div>';
+    html += '</header>';
+
+    // PROFESSIONAL SUMMARY
+    if (summary) {
+        html += '<section class="ats-section">';
+        html += '  <h2 class="ats-heading">Professional Summary</h2>';
+        html += '  <p class="ats-summary-text">' + esc(summary) + '</p>';
+        html += '</section>';
+    }
+
+    // WORK EXPERIENCE
+    if (selExps.length) {
+        html += '<section class="ats-section">';
+        html += '  <h2 class="ats-heading">Work Experience</h2>';
+        selExps.forEach(function(exp) {
+            var dateStr = (exp.start_date || '') + ' - ' + (exp.is_current ? 'Present' : (exp.end_date || ''));
+            html += '  <div class="ats-item">';
+            html += '    <div class="ats-item-header">';
+            html += '      <div class="ats-item-role"><strong>' + esc(exp.role) + '</strong> &bull; ' + esc(exp.company) + '</div>';
+            html += '      <div class="ats-item-date">' + esc(dateStr) + '</div>';
+            html += '    </div>';
+            if (exp.summary) {
+                html += '    <p class="ats-item-desc">' + esc(exp.summary) + '</p>';
+            }
+            if (exp.highlights && exp.highlights.length) {
+                html += '    <ul class="ats-bullets">';
+                exp.highlights.forEach(function(h) {
+                    html += '      <li>' + esc(h) + '</li>';
+                });
+                html += '    </ul>';
+            }
+            html += '  </div>';
+        });
+        html += '</section>';
+    }
+
+    // FEATURED PROJECTS
+    if (selProjs.length) {
+        html += '<section class="ats-section">';
+        html += '  <h2 class="ats-heading">Featured Engineering Projects</h2>';
+        selProjs.forEach(function(proj) {
+            html += '  <div class="ats-item">';
+            html += '    <div class="ats-item-header">';
+            html += '      <div class="ats-item-role"><strong>' + esc(proj.title) + '</strong>' + (proj.role ? ' (' + esc(proj.role) + ')' : '') + '</div>';
+            html += '      <div class="ats-item-date">' + esc(proj.year || '') + '</div>';
+            html += '    </div>';
+            if (proj.description) {
+                html += '    <p class="ats-item-desc">' + esc(proj.description) + '</p>';
+            }
+            if (proj.techStack && proj.techStack.length) {
+                html += '    <div class="ats-tech-line"><strong>Technologies:</strong> ' + esc(proj.techStack.join(', ')) + '</div>';
+            }
+            html += '  </div>';
+        });
+        html += '</section>';
+    }
+
+    // EDUCATION
+    if (selEdus.length) {
+        html += '<section class="ats-section">';
+        html += '  <h2 class="ats-heading">Education</h2>';
+        selEdus.forEach(function(edu) {
+            var dateStr = (edu.start_date || '') + ' - ' + (edu.end_date || '');
+            html += '  <div class="ats-item">';
+            html += '    <div class="ats-item-header">';
+            html += '      <div class="ats-item-role"><strong>' + esc(edu.degree) + '</strong> &bull; ' + esc(edu.institution) + '</div>';
+            html += '      <div class="ats-item-date">' + esc(dateStr) + '</div>';
+            html += '    </div>';
+            
+            var metaParts = [];
+            if (edu.grade) metaParts.push('<strong>GPA:</strong> ' + esc(edu.grade));
+            if (edu.honors) metaParts.push('<strong>Honors:</strong> ' + esc(edu.honors));
+            if (edu.specialization) metaParts.push('<strong>Focus:</strong> ' + esc(edu.specialization));
+            if (metaParts.length) {
+                html += '    <div class="ats-meta-line">' + metaParts.join(' &bull; ') + '</div>';
+            }
+
+            var pAwards = parseEduAwards(edu.awards_summary);
+            if (pAwards && pAwards.length) {
+                html += '    <div class="ats-awards-line"><strong>Honors &amp; Awards:</strong> ' + esc(pAwards.join(', ')) + '</div>';
+            }
+            if (edu.courseworks && edu.courseworks.length) {
+                html += '    <div class="ats-cw-line"><strong>Relevant Courseworks:</strong> ' + esc(edu.courseworks.join(', ')) + '</div>';
+            }
+            html += '  </div>';
+        });
+        html += '</section>';
+    }
+
+    // SKILLS & COMPETENCIES
+    if (selSkills.length) {
+        html += '<section class="ats-section">';
+        html += '  <h2 class="ats-heading">Technical Skills &amp; Competencies</h2>';
+        html += '  <div class="ats-skills-grid">';
+        selSkills.forEach(function(sk) {
+            var stack = (sk.tech_stack && sk.tech_stack.length) ? sk.tech_stack.join(', ') : (sk.items ? sk.items.join(', ') : '');
+            if (stack) {
+                html += '    <div class="ats-skill-row"><strong>' + esc(sk.category) + ':</strong> ' + esc(stack) + '</div>';
+            }
+        });
+        html += '  </div>';
+        html += '</section>';
+    }
+
+    // CERTIFICATIONS & LICENSES
+    if (selCerts.length) {
+        html += '<section class="ats-section">';
+        html += '  <h2 class="ats-heading">Certifications &amp; Credentials</h2>';
+        html += '  <ul class="ats-bullets">';
+        selCerts.forEach(function(c) {
+            html += '    <li><strong>' + esc(c.title) + '</strong> — ' + esc(c.issuer) + (c.issue_date ? ' (' + esc(c.issue_date) + ')' : '') + '</li>';
+        });
+        html += '  </ul>';
+        html += '</section>';
+    }
+
+    paper.innerHTML = html;
+}
+
+function printCvAts() {
+    window.print();
+}
+
+function copyCvPlainText() {
+    var paper = document.getElementById('cv-ats-paper');
+    if (!paper) return;
+    var text = paper.innerText || paper.textContent || '';
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(function() {
+            showToast('ATS Plain Text copied to clipboard!', 'success');
+        }).catch(function() {
+            fallbackCopy(text);
+        });
+    } else {
+        fallbackCopy(text);
+    }
+}
+
+function fallbackCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('ATS Plain Text copied to clipboard!', 'success');
+}
+
 function openEducationDrawer(edu) {
     document.getElementById('edu-id').value = edu ? edu.id : '';
     document.getElementById('edu-drawer-title').textContent = edu ? 'Edit Education' : 'Add Education';
@@ -12968,6 +13730,7 @@ function openEducationDrawer(edu) {
     document.getElementById('edu-courseworks').value = edu && edu.courseworks ? edu.courseworks.join(', ') : '';
     document.getElementById('edu-activities').value = edu && edu.activities ? edu.activities.join('\n') : '';
     document.getElementById('edu-awards-summary').value = edu ? (edu.awards_summary || '') : '';
+    renderEduAwardsRows(parseEduAwards(edu ? edu.awards_summary : ''));
     document.getElementById('edu-sort').value = edu ? (edu.sort_order || 0) : 0;
 
     updateEduLogoPreview();
@@ -13001,7 +13764,7 @@ async function saveEducation() {
     var thesis = document.getElementById('edu-thesis').value.trim();
     var courseworks = document.getElementById('edu-courseworks').value.split(',').map(function(s){ return s.trim(); }).filter(Boolean);
     var activities = document.getElementById('edu-activities').value.split('\n').map(function(s){ return s.trim(); }).filter(Boolean);
-    var awards_summary = document.getElementById('edu-awards-summary').value.trim();
+    var awards_summary = collectEduAwards();
     var sort_order = parseInt(document.getElementById('edu-sort').value, 10) || 0;
 
     var payload = { degree, institution, logo_url, start_date, end_date, grade, honors, specialization, thesis, courseworks, activities, awards_summary, sort_order };
