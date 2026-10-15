@@ -1,7 +1,19 @@
+User-agent: Googlebot-Image
+Allow: /
+Allow: /assets/
+Allow: /uploads/
+Allow: /*.webp$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.svg$
+
 User-agent: *
 Allow: /
 Allow: /feedback
 Allow: /form/
+Allow: /assets/
+Allow: /uploads/
 Disallow: /dashboard
 Disallow: /api/auth/
 Disallow: /api/contact/

@@ -328,10 +328,408 @@
   let liveExperiences = [];
   let liveEducations = [];
   let liveCertifications = [];
+
+  /* ════════════════════════════════════════════════════════════════
+     BILINGUAL LOCALIZATION & TRANSLATION ENGINE (EN / ID)
+  ════════════════════════════════════════════════════════════════ */
+  let currentLang = 'en';
+
+  function isIndonesian() {
+    return currentLang === 'id';
+  }
+
+  const I18N = {
+    en: {
+      nav_profile: "Profile",
+      nav_education: "Education",
+      nav_experiences: "Experiences",
+      nav_skills: "Skills",
+      nav_projects: "Projects",
+      nav_publications: "Publications",
+      nav_talks: "Talks",
+      nav_awards: "Awards",
+      nav_certifications: "Certifications",
+      nav_blog: "Blog",
+      nav_gallery: "Gallery",
+      nav_feedbacks: "Feedbacks",
+      nav_talk_btn: "Let's talk",
+
+      hero_eyebrow: "AI Full-Stack Engineer",
+      hero_title_html: '<span class="hero-title-line">I <span class="hero-accent hero-accent-blue">build</span>, <span class="hero-accent hero-accent-red">research</span> and <span class="hero-accent hero-accent-green">teach</span></span><span class="hero-title-line"><span class="hero-ai-gradient">AI solutions</span></span><span class="hero-title-line">for real-world use cases</span>',
+      hero_cta_work: "View my work",
+      hero_cta_touch: "Get in touch",
+
+      about_eyebrow: "01 — Profile",
+      about_title: "AI Full-Stack Engineer with 4 Years of Experiences",
+      about_bio1: "AI Full-Stack Engineer with a strong foundation in Applied Deep Learning, Agentic Workflows, and scalable modern web architectures. Bridging theoretical machine learning research into production-grade systems that deliver measurable business outcomes.",
+      about_bio2: "Passionate about open-source education, technical training, and developer community building. Have trained 2,000+ engineers, students, and professionals across Indonesia in Generative AI, PyTorch, and full-stack software development.",
+      about_fact_exp: "Experience",
+      about_fact_exp_val: "3+ Years in AI & Full-Stack",
+      about_fact_spec: "Specialization",
+      about_fact_spec_val: "Agentic AI, LLM Systems & Computer Vision",
+      about_fact_edu: "Formal Education",
+      about_fact_edu_val: "Informatics / Computer Science, Hasanuddin University",
+      about_fact_loc: "Location",
+      about_fact_loc_val: "Makassar & Remote Worldwide",
+
+      edu_eyebrow: "02 — Education",
+      edu_title: "Academic foundation & honors.",
+
+      exp_eyebrow: "03 — Experiences",
+      exp_title: "Shipping AI into production.",
+
+      skills_eyebrow: "04 — Core Skills",
+      skills_title: "Tools & Technologies",
+
+      projects_eyebrow: "05 — Projects",
+      projects_title: "Built for impact, backed by code.",
+
+      pubs_eyebrow: "06 — Publications",
+      pubs_title: "Open-source work, written up and shared.",
+      pubs_desc: "Code and write-ups released publicly so other engineers can learn from — or build on — the same systems.",
+
+      talks_eyebrow: "07 — Talks & Workshops",
+      talks_title: "Sharing what works in production.",
+
+      awards_eyebrow: "08 — Honors & Awards",
+      awards_title: "Recognitions & hackathon wins.",
+
+      certs_eyebrow: "09 — Licences & Certifications",
+      certs_title: "Continuous, deliberate learning.",
+
+      blog_eyebrow: "10 — Blog & Insights",
+      blog_title: "Technical Writings & Case Studies",
+
+      gallery_eyebrow: "11 — Journey & Visual Moments",
+      gallery_title: "Moments from workshops, stages, and milestones.",
+
+      feedback_eyebrow: "12 — Feedbacks & Testimonials",
+      feedback_title: "What participants & collaborators say.",
+      feedback_btn_give: "Give Feedback",
+      feedback_btn_desc: "Have you collaborated or attended a session? Share your thoughts.",
+
+      contact_eyebrow: "13 — Contact",
+      contact_title: "Let's build something remarkable.",
+      contact_name_lbl: "Your Name",
+      contact_name_ph: "e.g. John Doe",
+      contact_email_lbl: "Email Address",
+      contact_email_ph: "e.g. john@example.com",
+      contact_msg_lbl: "Message",
+      contact_msg_ph: "Tell me about your project, goals, or timeline...",
+      contact_btn_send: "Send message",
+
+      browse_all: "Browse All",
+      showing_all: "Showing all"
+    },
+    id: {
+      nav_profile: "Profil",
+      nav_education: "Pendidikan",
+      nav_experiences: "Pengalaman",
+      nav_skills: "Keahlian",
+      nav_projects: "Proyek",
+      nav_publications: "Publikasi",
+      nav_talks: "Seminar",
+      nav_awards: "Penghargaan",
+      nav_certifications: "Sertifikasi",
+      nav_blog: "Artikel",
+      nav_gallery: "Galeri",
+      nav_feedbacks: "Ulasan",
+      nav_talk_btn: "Hubungi Saya",
+
+      hero_eyebrow: "AI Full-Stack Engineer & AI Trainer",
+      hero_title_html: '<span class="hero-title-line">Saya <span class="hero-accent hero-accent-blue">membangun</span>, <span class="hero-accent hero-accent-red">meneliti</span> dan <span class="hero-accent hero-accent-green">mengajarkan</span></span><span class="hero-title-line"><span class="hero-ai-gradient">solusi cerdas AI</span></span><span class="hero-title-line">untuk kebutuhan dunia nyata</span>',
+      hero_cta_work: "Lihat karya saya",
+      hero_cta_touch: "Hubungi saya",
+
+      about_eyebrow: "01 — Profil Singkat",
+      about_title: "AI Full-Stack Engineer dengan Pengalaman 4 Tahun",
+      about_bio1: "AI Full-Stack Engineer dengan fondasi mendalam di bidang Applied Deep Learning, Agentic Workflows, dan arsitektur web modern berkinerja tinggi. Menerjemahkan riset teoritis machine learning ke sistem siap produksi yang memberikan dampak bisnis terukur.",
+      about_bio2: "Memiliki dedikasi tinggi terhadap edukasi open-source, pelatihan teknis, dan pengembangan komunitas pengembang. Telah melatih 2.000+ insinyur, mahasiswa, dan profesional di seluruh Indonesia dalam Generative AI, PyTorch, dan rekayasa full-stack software.",
+      about_fact_exp: "Pengalaman",
+      about_fact_exp_val: "3+ Tahun di AI & Full-Stack",
+      about_fact_spec: "Spesialisasi",
+      about_fact_spec_val: "Agentic AI, Sistem LLM & Computer Vision",
+      about_fact_edu: "Pendidikan Formal",
+      about_fact_edu_val: "Teknik Informatika, Universitas Hasanuddin",
+      about_fact_loc: "Lokasi",
+      about_fact_loc_val: "Makassar & Remote Worldwide",
+
+      edu_eyebrow: "02 — Pendidikan Formal",
+      edu_title: "Fondasi akademik & penghargaan prestasi.",
+
+      exp_eyebrow: "03 — Pengalaman Profesional",
+      exp_title: "Menghadirkan sistem AI ke lingkungan produksi.",
+
+      skills_eyebrow: "04 — Keahlian Inti",
+      skills_title: "Teknologi & Perangkat Rekayasa",
+
+      projects_eyebrow: "05 — Proyek Pilihan",
+      projects_title: "Dibuat untuk dampak nyata, didukung kode berkualitas.",
+
+      pubs_eyebrow: "06 — Publikasi & Riset",
+      pubs_title: "Karya ilmiah & sumber terbuka yang dibagikan.",
+      pubs_desc: "Kode dan tulisan ilmiah yang dirilis untuk publik agar pengembang lain dapat belajar dan mengembangkannya bersama.",
+
+      talks_eyebrow: "07 — Seminar & Lokakarya",
+      talks_title: "Berbagi wawasan & praktik terbaik di industri.",
+
+      awards_eyebrow: "08 — Penghargaan & Prestasi",
+      awards_title: "Apresiasi & kemenangan kompetisi.",
+
+      certs_eyebrow: "09 — Lisensi & Sertifikasi",
+      certs_title: "Pembelajaran berkelanjutan & terverifikasi.",
+
+      blog_eyebrow: "10 — Catatan & Artikel Teknis",
+      blog_title: "Wawasan arsitektur & rekayasa AI.",
+
+      gallery_eyebrow: "11 — Galeri Momen Perjalanan",
+      gallery_title: "Dokumentasi dari panggung, workshop, dan komunitas.",
+
+      feedback_eyebrow: "12 — Ulasan & Testimoni",
+      feedback_title: "Apa kata mitra kerja & peserta lokakarya.",
+      feedback_btn_give: "Kirim Ulasan",
+      feedback_btn_desc: "Pernah berkolaborasi atau mengikuti sesi saya? Bagikan kesan Anda.",
+
+      contact_eyebrow: "13 — Hubungi Saya",
+      contact_title: "Mari berkolaborasi mewujudkan karya luar biasa.",
+      contact_name_lbl: "Nama Lengkap",
+      contact_name_ph: "contoh: Budi Santoso",
+      contact_email_lbl: "Alamat Email",
+      contact_email_ph: "contoh: budi@example.com",
+      contact_msg_lbl: "Pesan Anda",
+      contact_msg_ph: "Ceritakan proyek, tujuan, atau jadwal yang Anda rencanakan...",
+      contact_btn_send: "Kirim pesan",
+
+      browse_all: "Lihat Semua",
+      showing_all: "Menampilkan semua"
+    }
+  };
+
+  function applyTranslations(lang) {
+    const t = I18N[lang] || I18N.en;
+
+    // Navigation Links
+    const navMap = {
+      '#about': t.nav_profile,
+      '#education': t.nav_education,
+      '#experience': t.nav_experiences,
+      '#skills': t.nav_skills,
+      '#projects': t.nav_projects,
+      '#publications': t.nav_publications,
+      '#talks': t.nav_talks,
+      '#awards': t.nav_awards,
+      '#certifications': t.nav_certifications,
+      '#blog': t.nav_blog,
+      '#gallery': t.nav_gallery,
+      '#testimonials': t.nav_feedbacks
+    };
+    Object.keys(navMap).forEach(sel => {
+      const el = document.querySelector('.nav-links a[href="' + sel + '"]');
+      if (el) el.textContent = navMap[sel];
+    });
+
+    const contactNavBtn = document.querySelector('.nav-actions a[href="#contact"]');
+    if (contactNavBtn) contactNavBtn.textContent = t.nav_talk_btn;
+
+    // Hero Section
+    const heroEyebrow = document.querySelector('#hero .eyebrow');
+    if (heroEyebrow) heroEyebrow.textContent = t.hero_eyebrow;
+
+    const heroTitle = document.querySelector('#hero .hero-title');
+    if (heroTitle) heroTitle.innerHTML = t.hero_title_html;
+
+    const heroCtaWork = document.querySelector('#hero .hero-cta a[href="#projects"]');
+    if (heroCtaWork) heroCtaWork.textContent = t.hero_cta_work;
+
+    const heroCtaTouch = document.querySelector('#hero .hero-cta a[href="#contact"]');
+    if (heroCtaTouch) heroCtaTouch.textContent = t.hero_cta_touch;
+
+    // About Section
+    const aboutEye = document.querySelector('#about .section-eyebrow');
+    if (aboutEye) aboutEye.textContent = t.about_eyebrow;
+
+    const aboutTitle = document.querySelector('#about .section-title');
+    if (aboutTitle) {
+      const roleHeading = aboutTitle.querySelector('.about-title-role');
+      const yearsHeading = document.getElementById('about-exp-heading');
+      if (roleHeading && yearsHeading) {
+        const role = roleHeading.textContent || 'AI Full-Stack Engineer';
+        const exp = yearsHeading.textContent || (lang === 'id' ? '4 Tahun' : '4 Years');
+        if (lang === 'id') {
+          aboutTitle.innerHTML = `<span class="about-title-role">${escapeHtml(role)}</span> dengan Pengalaman <span id="about-exp-heading">${escapeHtml(exp)}</span>`;
+        } else {
+          aboutTitle.innerHTML = `<span class="about-title-role">${escapeHtml(role)}</span> with <span id="about-exp-heading">${escapeHtml(exp)}</span> of Experiences`;
+        }
+      } else {
+        aboutTitle.textContent = t.about_title;
+      }
+    }
+
+    const bioParas = document.querySelectorAll('.about-bio p');
+    if (bioParas && bioParas[0]) bioParas[0].textContent = t.about_bio1;
+    if (bioParas && bioParas[1]) bioParas[1].textContent = t.about_bio2;
+
+    const facts = document.querySelectorAll('.about-facts li');
+    if (facts && facts.length >= 4) {
+      if (facts[0]) {
+        const l = facts[0].querySelector('.fact-label');
+        const v = facts[0].querySelector('.fact-val');
+        if (l) l.textContent = t.about_fact_exp;
+        if (v) v.textContent = t.about_fact_exp_val;
+      }
+      if (facts[1]) {
+        const l = facts[1].querySelector('.fact-label');
+        const v = facts[1].querySelector('.fact-val');
+        if (l) l.textContent = t.about_fact_spec;
+        if (v) v.textContent = t.about_fact_spec_val;
+      }
+      if (facts[2]) {
+        const l = facts[2].querySelector('.fact-label');
+        const v = facts[2].querySelector('.fact-val');
+        if (l) l.textContent = t.about_fact_edu;
+        if (v) v.textContent = t.about_fact_edu_val;
+      }
+      if (facts[3]) {
+        const l = facts[3].querySelector('.fact-label');
+        const v = facts[3].querySelector('.fact-val');
+        if (l) l.textContent = t.about_fact_loc;
+        if (v) v.textContent = t.about_fact_loc_val;
+      }
+    }
+
+    // Education Section
+    const eduEye = document.querySelector('#education .section-eyebrow');
+    if (eduEye) eduEye.textContent = t.edu_eyebrow;
+    const eduTitle = document.querySelector('#education .section-title');
+    if (eduTitle) eduTitle.textContent = t.edu_title;
+
+    // Experience Section
+    const expEye = document.querySelector('#experience .section-eyebrow');
+    if (expEye) expEye.textContent = t.exp_eyebrow;
+    const expTitle = document.querySelector('#experience .section-title');
+    if (expTitle) expTitle.textContent = t.exp_title;
+
+    // Skills Section
+    const skillsEye = document.querySelector('#skills .section-eyebrow');
+    if (skillsEye) skillsEye.textContent = t.skills_eyebrow;
+    const skillsTitle = document.querySelector('#skills .section-title');
+    if (skillsTitle) skillsTitle.textContent = t.skills_title;
+
+    // Projects Section
+    const projEye = document.querySelector('#projects .section-eyebrow');
+    if (projEye) projEye.textContent = t.projects_eyebrow;
+    const projTitle = document.querySelector('#projects .section-title');
+    if (projTitle) projTitle.textContent = t.projects_title;
+
+    // Publications Section
+    const pubEye = document.querySelector('#publications .section-eyebrow');
+    if (pubEye) pubEye.textContent = t.pubs_eyebrow;
+    const pubTitle = document.querySelector('#publications .section-title');
+    if (pubTitle) pubTitle.textContent = t.pubs_title;
+    const pubDesc = document.querySelector('#publications .section-desc');
+    if (pubDesc) pubDesc.textContent = t.pubs_desc;
+
+    // Talks Section
+    const talksEye = document.querySelector('#talks .section-eyebrow');
+    if (talksEye) talksEye.textContent = t.talks_eyebrow;
+    const talksTitle = document.querySelector('#talks .section-title');
+    if (talksTitle) talksTitle.textContent = t.talks_title;
+
+    // Awards Section
+    const awardsEye = document.querySelector('#awards .section-eyebrow');
+    if (awardsEye) awardsEye.textContent = t.awards_eyebrow;
+    const awardsTitle = document.querySelector('#awards .section-title');
+    if (awardsTitle) awardsTitle.textContent = t.awards_title;
+
+    // Certifications Section
+    const certsEye = document.querySelector('#certifications .section-eyebrow');
+    if (certsEye) certsEye.textContent = t.certs_eyebrow;
+    const certsTitle = document.querySelector('#certifications .section-title');
+    if (certsTitle) certsTitle.textContent = t.certs_title;
+
+    // Blog Section
+    const blogEye = document.querySelector('#blog .section-eyebrow');
+    if (blogEye) blogEye.textContent = t.blog_eyebrow;
+    const blogTitle = document.querySelector('#blog .section-title');
+    if (blogTitle) blogTitle.textContent = t.blog_title;
+
+    // Gallery Section
+    const galEye = document.querySelector('#gallery .section-eyebrow');
+    if (galEye) galEye.textContent = t.gallery_eyebrow;
+    const galTitle = document.querySelector('#gallery .section-title');
+    if (galTitle) galTitle.textContent = t.gallery_title;
+
+    // Feedbacks Section
+    const fbEye = document.querySelector('#testimonials .section-eyebrow');
+    if (fbEye) fbEye.textContent = t.feedback_eyebrow;
+    const fbTitle = document.querySelector('#testimonials .section-title');
+    if (fbTitle) fbTitle.textContent = t.feedback_title;
+    const fbDesc = document.querySelector('#testimonials .feedback-cta-desc');
+    if (fbDesc) fbDesc.textContent = t.feedback_btn_desc;
+    const fbBtn = document.getElementById('btnGiveFeedback');
+    if (fbBtn) {
+      const lbl = fbBtn.querySelector('.btn-label') || fbBtn;
+      lbl.textContent = t.feedback_btn_give;
+    }
+
+    // Contact Section
+    const conEye = document.querySelector('#contact .section-eyebrow');
+    if (conEye) conEye.textContent = t.contact_eyebrow;
+    const conTitle = document.querySelector('#contact .section-title');
+    if (conTitle) conTitle.textContent = t.contact_title;
+
+    const cfName = document.getElementById('cf-name');
+    if (cfName) cfName.placeholder = t.contact_name_ph;
+    const cfEmail = document.getElementById('cf-email');
+    if (cfEmail) cfEmail.placeholder = t.contact_email_ph;
+    const cfMsg = document.getElementById('cf-message');
+    if (cfMsg) cfMsg.placeholder = t.contact_msg_ph;
+    const cfSubmit = document.getElementById('cf-submit');
+    if (cfSubmit) {
+      const sLbl = cfSubmit.querySelector('.btn-label');
+      if (sLbl) sLbl.textContent = t.contact_btn_send;
+    }
+  }
+
+  function initLanguageSwitcher(locSettings) {
+    const wrap = document.getElementById('langSwitchWrap');
+    if (!wrap) return;
+
+    const isBilingual = locSettings ? (locSettings.bilingualEnabled !== false) : true;
+    wrap.style.display = isBilingual ? 'inline-flex' : 'none';
+
+    const savedLang = localStorage.getItem('mh_lang');
+    const initialLang = savedLang || (locSettings && locSettings.defaultLanguage) || 'en';
+    window.switchPortfolioLanguage(initialLang);
+  }
+
+  window.switchPortfolioLanguage = function(lang) {
+    currentLang = lang === 'id' ? 'id' : 'en';
+    localStorage.setItem('mh_lang', currentLang);
+
+    const btnEn = document.getElementById('langBtnEn');
+    const btnId = document.getElementById('langBtnId');
+    if (btnEn) btnEn.classList.toggle('active', currentLang === 'en');
+    if (btnId) btnId.classList.toggle('active', currentLang === 'id');
+
+    document.documentElement.lang = currentLang;
+    applyTranslations(currentLang);
+    if (window.liveProfileSettings && typeof applyProfileSettings === 'function') {
+      applyProfileSettings(window.liveProfileSettings);
+    }
+
+    // Re-render paginated sections
+    if (typeof renderProjects === 'function') renderProjects(currentProjectFilter, currentProjectPage);
+    if (typeof renderTalks === 'function') renderTalks(currentTalkPage);
+    if (typeof renderCertifications === 'function') renderCertifications(liveCertifications, currentCertPage);
+    if (typeof renderTestimonials === 'function') renderTestimonials(currentFeedbackPage);
+    if (typeof renderSkills === 'function' && Array.isArray(liveSkills) && liveSkills.length) renderSkills(liveSkills);
+  };
+
   let liveAwards = [];
   let currentProjectFilter = 'all';
   let currentProjectPage = 1;
-  const PROJECTS_PER_PAGE = 6;
+  const PROJECTS_PER_PAGE = 9;
   let showAllProjects = false;
 
   const COLOR_PALETTES = [
@@ -630,9 +1028,9 @@
           ? `Paginated (6 / page)` 
           : `Browse All (${totalProjects})`;
         controlsHtml += `
-          <button type="button" class="p-page-toggle-btn" onclick="window.toggleShowAllProjects()">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-            ${toggleBtnLabel}
+          <button type="button" class="p-page-toggle-btn" onclick="window.open('/projects', '_blank')" title="Open projects collection in a new dedicated page">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span>${isIndonesian() ? 'Lihat Semua' : 'Browse All'} (${totalProjects})</span>
           </button>
         `;
 
@@ -658,12 +1056,34 @@
     renderProjects(currentProjectFilter, currentProjectPage);
   };
 
-  // Render Talks Grid
-  function renderTalks() {
+  // Talks Pagination State (3 rows x 3 columns = 9 per page)
+  const CERTS_PER_PAGE = 9;
+  let currentCertPage = 1;
+  const TALKS_PER_PAGE = 9;
+  let currentTalkPage = 1;
+  let showAllTalks = false;
+
+  // Render Talks Grid with 3x3 Pagination
+  function renderTalks(page = currentTalkPage) {
     const grid = document.getElementById('talks-dynamic-grid');
     if (!grid) return;
 
-    grid.innerHTML = liveTalks.map(t => {
+    const paginationWrap = document.getElementById('talksPaginationWrap');
+    const paginationInfo = document.getElementById('talksPaginationInfo');
+    const paginationControls = document.getElementById('talksPaginationControls');
+
+    const totalTalks = (liveTalks || []).length;
+    const totalPages = Math.ceil(totalTalks / TALKS_PER_PAGE) || 1;
+
+    if (page > totalPages) page = totalPages;
+    if (page < 1) page = 1;
+    currentTalkPage = page;
+
+    const startIndex = (page - 1) * TALKS_PER_PAGE;
+    const endIndex = Math.min(startIndex + TALKS_PER_PAGE, totalTalks);
+    const displayedTalks = showAllTalks ? (liveTalks || []) : (liveTalks || []).slice(startIndex, endIndex);
+
+    grid.innerHTML = displayedTalks.map(t => {
       const dateText = formatTalkDate(t.date);
       const attendeeCount = t.jumlah_peserta ? `${t.jumlah_peserta}+ Attendees` : 'Exclusive Session';
       const posterImg = t.poster_url || '/favicon.webp';
@@ -688,7 +1108,7 @@
         <article class="talk-dynamic-card reveal in-view" data-tid="${t.id}">
           <div class="talk-poster-wrap" onclick="window.openLightbox('${escapeHtml(posterImg)}', '${escapeHtml(t.event)}')">
             <div class="talk-poster-backdrop" style="background-image: url('${escapeHtml(posterImg)}');"></div>
-            <img class="talk-poster-img" src="${escapeHtml(posterImg)}" alt="${escapeHtml(t.event)}" onerror="this.src='/favicon.webp'">
+            <img class="talk-poster-img" src="${escapeHtml(posterImg)}" alt="Muhammad Haerul speaking at ${escapeHtml(t.event)} — AI Trainer &amp; Full-Stack Engineer" title="Muhammad Haerul — ${escapeHtml(t.event)}" onerror="this.src='/favicon.webp'">
             <div class="talk-poster-overlay">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
               View Full Poster
@@ -723,109 +1143,338 @@
         </article>
       `;
     }).join('');
+
+    // Update Talks Pagination UI
+    if (paginationWrap && paginationInfo && paginationControls) {
+      if (totalTalks <= TALKS_PER_PAGE) {
+        paginationWrap.style.display = totalTalks > 0 ? 'flex' : 'none';
+        paginationInfo.innerHTML = `Showing all <strong>${totalTalks}</strong> ${totalTalks === 1 ? 'keynote & workshop' : 'keynotes & workshops'}`;
+        paginationControls.innerHTML = '';
+      } else {
+        paginationWrap.style.display = 'flex';
+        paginationInfo.innerHTML = showAllTalks
+          ? `Showing all <strong>${totalTalks}</strong> keynotes & workshops`
+          : `Showing <strong>${startIndex + 1}–${endIndex}</strong> of <strong>${totalTalks}</strong> keynotes & workshops`;
+
+        let controlsHtml = '';
+        if (!showAllTalks) {
+          const prevDisabled = currentTalkPage === 1 ? 'disabled' : '';
+          controlsHtml += `
+            <button type="button" class="p-page-btn" onclick="window.changeTalkPage(${currentTalkPage - 1})" ${prevDisabled} aria-label="Previous Page">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          `;
+
+          for (let i = 1; i <= totalPages; i++) {
+            const activeClass = i === currentTalkPage ? 'active' : '';
+            controlsHtml += `
+              <button type="button" class="p-page-btn ${activeClass}" onclick="window.changeTalkPage(${i})">
+                ${i}
+              </button>
+            `;
+          }
+
+          const nextDisabled = currentTalkPage === totalPages ? 'disabled' : '';
+          controlsHtml += `
+            <button type="button" class="p-page-btn" onclick="window.changeTalkPage(${currentTalkPage + 1})" ${nextDisabled} aria-label="Next Page">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          `;
+        }
+
+        const toggleBtnLabel = showAllTalks 
+          ? `Paginated (9 / page)` 
+          : `Browse All (${totalTalks})`;
+        controlsHtml += `
+          <button type="button" class="p-page-toggle-btn" onclick="window.open('/talks', '_blank')" title="Open talks archive in a new dedicated page">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span>${isIndonesian() ? 'Lihat Semua' : 'Browse All'} (${totalTalks})</span>
+          </button>
+        `;
+
+        paginationControls.innerHTML = controlsHtml;
+      }
+    }
   }
 
-  // Render Testimonials Grid
-  function renderTestimonials() {
+  window.changeTalkPage = function(page) {
+    showAllTalks = false;
+    currentTalkPage = page;
+    renderTalks(page);
+    const tSection = document.getElementById('talks');
+    if (tSection) tSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  window.toggleShowAllTalks = function() {
+    showAllTalks = !showAllTalks;
+    renderTalks(currentTalkPage);
+  };
+
+  // Feedback State (3x3 grid = 9 items per page, 10-to-1 default sort)
+  const FEEDBACKS_PER_PAGE = 9;
+  let currentFeedbackPage = 1;
+  let showAllFeedbacks = false;
+  let currentFeedbackRatingFilter = 'all';
+  let currentFeedbackSort = 'rating-desc'; // Default: Rating 10 down to 1
+
+  function updateFeedbackFilterCounts() {
+    const all = (liveFeedbacks || []).length;
+    const count10 = (liveFeedbacks || []).filter(f => Number(f.rating) === 10).length;
+    const count9 = (liveFeedbacks || []).filter(f => Number(f.rating) >= 9).length;
+    const count8 = (liveFeedbacks || []).filter(f => Number(f.rating) >= 8).length;
+
+    const elAll = document.getElementById('fbCountAll');
+    const el10 = document.getElementById('fbCount10');
+    const el9 = document.getElementById('fbCount9');
+    const el8 = document.getElementById('fbCount8');
+
+    if (elAll) elAll.textContent = all;
+    if (el10) el10.textContent = count10;
+    if (el9) el9.textContent = count9;
+    if (el8) el8.textContent = count8;
+  }
+
+  // Render Testimonials Grid with 10-1 Default Sort, Filter, and 3x3 Pagination
+  function renderTestimonials(page = currentFeedbackPage) {
     const grid = document.getElementById('testimonials-dynamic-grid');
     if (!grid) return;
 
-    if (!liveFeedbacks.length) {
-      grid.innerHTML = '<p style="color:var(--text-secondary);">No feedback records loaded.</p>';
+    if (!liveFeedbacks || !liveFeedbacks.length) {
+      grid.innerHTML = '<p style="color:var(--text-secondary); grid-column:1/-1; text-align:center; padding:40px 0;">No verified feedback records found.</p>';
       return;
     }
 
     // Dynamically update score banner
-    const avgScore = (liveFeedbacks.reduce((acc, f) => acc + (Number(f.rating) || 0), 0) / liveFeedbacks.length).toFixed(1);
+    const validRatings = liveFeedbacks.map(f => Number(f.rating)).filter(r => !isNaN(r) && r > 0);
+    const avgScore = validRatings.length 
+      ? (validRatings.reduce((acc, r) => acc + r, 0) / validRatings.length).toFixed(1) 
+      : '9.4';
     const scoreBig = document.querySelector('.t-score-big');
     if (scoreBig) scoreBig.textContent = avgScore;
     const scoreLbl = document.querySelector('.t-score-lbl');
     if (scoreLbl) scoreLbl.textContent = `Average Rating across ${liveFeedbacks.length} verified workshop reviews`;
 
-    grid.innerHTML = liveFeedbacks.map(f => {
-      const avatarBg = getAvatarColor(f.nama_lengkap);
-      const initials = getInitials(f.nama_lengkap);
-      const cleanName = formatName(f.nama_lengkap);
-      const dateText = f.created_at ? new Date(f.created_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'Jul 2026';
-      const rating = Number(f.rating) || 10;
-      const isPerfect = rating === 10;
+    updateFeedbackFilterCounts();
 
-      const pesan = f.pesan_kesan ? f.pesan_kesan.trim() : '';
-      const alasan = f.alasan ? f.alasan.trim() : '';
+    // 1. Filter Feedbacks
+    let list = [...liveFeedbacks];
+    if (currentFeedbackRatingFilter === '10') {
+      list = list.filter(f => Number(f.rating) === 10);
+    } else if (currentFeedbackRatingFilter === '9') {
+      list = list.filter(f => Number(f.rating) >= 9);
+    } else if (currentFeedbackRatingFilter === '8') {
+      list = list.filter(f => Number(f.rating) >= 8);
+    }
 
-      // Determine mainQuote and takeaway smartly
-      let mainQuote = '';
-      let takeaway = '';
+    // 2. Sort Feedbacks (Default: rating-desc from 10 to 1)
+    list.sort((a, b) => {
+      const rA = Number(a.rating) || 0;
+      const rB = Number(b.rating) || 0;
+      const tA = a.created_at ? new Date(a.created_at).getTime() : 0;
+      const tB = b.created_at ? new Date(b.created_at).getTime() : 0;
 
-      if (pesan && alasan) {
-        if (pesan.length < 15 && alasan.length > pesan.length) {
-          mainQuote = alasan;
-          takeaway = pesan;
-        } else {
-          mainQuote = pesan;
-          takeaway = alasan;
-        }
-      } else {
-        mainQuote = pesan || alasan || 'Sesi materi sangat bermanfaat!';
+      if (currentFeedbackSort === 'rating-desc') {
+        if (rB !== rA) return rB - rA; // 10 down to 1
+        return tB - tA;
       }
+      if (currentFeedbackSort === 'rating-asc') {
+        if (rA !== rB) return rA - rB; // 1 up to 10
+        return tB - tA;
+      }
+      if (currentFeedbackSort === 'date-asc') {
+        return tA - tB;
+      }
+      // date-desc
+      return tB - tA;
+    });
 
-      return `
-        <article class="t-card reveal in-view">
-          <svg class="t-watermark-quote" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-          </svg>
-          
-          <div>
-            <div class="t-card-head">
-              <div class="t-user-info">
-                <div class="t-avatar" style="background:${avatarBg};">${escapeHtml(initials)}</div>
-                <div class="t-user-names">
-                  <div class="t-name">${escapeHtml(cleanName)}</div>
-                  <div class="t-source">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                    </svg>
-                    <span>${escapeHtml(f.source || 'GSA AI Forge 2026')}</span>
+    const totalFeedbacks = list.length;
+    const totalPages = Math.ceil(totalFeedbacks / FEEDBACKS_PER_PAGE) || 1;
+
+    if (page > totalPages) page = totalPages;
+    if (page < 1) page = 1;
+    currentFeedbackPage = page;
+
+    const startIndex = (page - 1) * FEEDBACKS_PER_PAGE;
+    const endIndex = Math.min(startIndex + FEEDBACKS_PER_PAGE, totalFeedbacks);
+    const displayedFeedbacks = showAllFeedbacks ? list : list.slice(startIndex, endIndex);
+
+    if (!displayedFeedbacks.length) {
+      grid.innerHTML = '<p style="color:var(--text-secondary); grid-column:1/-1; text-align:center; padding:32px 0;">No reviews match this rating filter.</p>';
+    } else {
+      grid.innerHTML = displayedFeedbacks.map(f => {
+        const avatarBg = getAvatarColor(f.nama_lengkap);
+        const initials = getInitials(f.nama_lengkap);
+        const cleanName = formatName(f.nama_lengkap);
+        const dateText = f.created_at ? new Date(f.created_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'Jul 2026';
+        const rating = Number(f.rating) || 10;
+        const isPerfect = rating === 10;
+
+        const pesan = f.pesan_kesan ? f.pesan_kesan.trim() : '';
+        const alasan = f.alasan ? f.alasan.trim() : '';
+
+        let mainQuote = '';
+        let takeaway = '';
+
+        if (pesan && alasan) {
+          if (pesan.length < 15 && alasan.length > pesan.length) {
+            mainQuote = alasan;
+            takeaway = pesan;
+          } else {
+            mainQuote = pesan;
+            takeaway = alasan;
+          }
+        } else {
+          mainQuote = pesan || alasan || 'Sesi materi sangat bermanfaat!';
+        }
+
+        return `
+          <article class="t-card reveal in-view">
+            <svg class="t-watermark-quote" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+            
+            <div>
+              <div class="t-card-head">
+                <div class="t-user-info">
+                  <div class="t-avatar" style="background:${avatarBg};">${escapeHtml(initials)}</div>
+                  <div class="t-user-names">
+                    <div class="t-name">${escapeHtml(cleanName)}</div>
+                    <div class="t-source">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                      </svg>
+                      <span>${escapeHtml(f.source || 'GSA AI Forge 2026')}</span>
+                    </div>
                   </div>
                 </div>
+                <div class="t-rate-pill ${isPerfect ? 'perfect' : ''}">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                  </svg>
+                  <span>${rating}/10</span>
+                </div>
               </div>
-              <div class="t-rate-pill ${isPerfect ? 'perfect' : ''}">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+
+              <div class="t-review-body">
+                <p class="t-primary-quote">“${escapeHtml(mainQuote)}”</p>
+                
+                ${takeaway ? `
+                  <div class="t-takeaway-card">
+                    <div class="t-takeaway-header">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                      </svg>
+                      <span>Highlight Materi</span>
+                    </div>
+                    <p class="t-takeaway-text">“${escapeHtml(takeaway)}”</p>
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+
+            <div class="t-card-foot">
+              <span class="t-verified-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8">
+                  <polyline points="20 6 9 17 4 12"/>
                 </svg>
-                <span>${rating}/10</span>
-              </div>
+                Verified Attendee
+              </span>
+              <span class="t-foot-date">${escapeHtml(dateText)}</span>
             </div>
+          </article>
+        `;
+      }).join('');
+    }
 
-            <div class="t-review-body">
-              <p class="t-primary-quote">“${escapeHtml(mainQuote)}”</p>
-              
-              ${takeaway ? `
-                <div class="t-takeaway-card">
-                  <div class="t-takeaway-header">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                    </svg>
-                    <span>Highlight Materi</span>
-                  </div>
-                  <p class="t-takeaway-text">“${escapeHtml(takeaway)}”</p>
-                </div>
-              ` : ''}
-            </div>
-          </div>
+    // Feedback Pagination UI
+    const paginationWrap = document.getElementById('feedbackPaginationWrap');
+    const paginationInfo = document.getElementById('feedbackPaginationInfo');
+    const paginationControls = document.getElementById('feedbackPaginationControls');
 
-          <div class="t-card-foot">
-            <span class="t-verified-badge">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
-              Verified Attendee
-            </span>
-            <span class="t-foot-date">${escapeHtml(dateText)}</span>
-          </div>
-        </article>
-      `;
-    }).join('');
+    if (paginationWrap && paginationInfo && paginationControls) {
+      if (totalFeedbacks <= FEEDBACKS_PER_PAGE) {
+        paginationWrap.style.display = totalFeedbacks > 0 ? 'flex' : 'none';
+        paginationInfo.innerHTML = `Showing all <strong>${totalFeedbacks}</strong> verified reviews`;
+        paginationControls.innerHTML = '';
+      } else {
+        paginationWrap.style.display = 'flex';
+        paginationInfo.innerHTML = showAllFeedbacks
+          ? `Showing all <strong>${totalFeedbacks}</strong> verified reviews`
+          : `Showing <strong>${startIndex + 1}–${endIndex}</strong> of <strong>${totalFeedbacks}</strong> reviews`;
+
+        let controlsHtml = '';
+        if (!showAllFeedbacks) {
+          const prevDisabled = currentFeedbackPage === 1 ? 'disabled' : '';
+          controlsHtml += `
+            <button type="button" class="p-page-btn" onclick="window.changeFeedbackPage(${currentFeedbackPage - 1})" ${prevDisabled} aria-label="Previous Reviews Page">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          `;
+
+          for (let i = 1; i <= totalPages; i++) {
+            const activeClass = i === currentFeedbackPage ? 'active' : '';
+            controlsHtml += `
+              <button type="button" class="p-page-btn ${activeClass}" onclick="window.changeFeedbackPage(${i})">
+                ${i}
+              </button>
+            `;
+          }
+
+          const nextDisabled = currentFeedbackPage === totalPages ? 'disabled' : '';
+          controlsHtml += `
+            <button type="button" class="p-page-btn" onclick="window.changeFeedbackPage(${currentFeedbackPage + 1})" ${nextDisabled} aria-label="Next Reviews Page">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          `;
+        }
+
+        const toggleBtnLabel = showAllFeedbacks 
+          ? `Paginated (9 / page)` 
+          : `Browse All (${totalFeedbacks})`;
+        controlsHtml += `
+          <button type="button" class="p-page-toggle-btn" onclick="window.open('/feedbacks', '_blank')" title="Open verified feedbacks in a new dedicated page">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span>${isIndonesian() ? 'Lihat Semua' : 'Browse All'} (${totalFeedbacks})</span>
+          </button>
+        `;
+
+        paginationControls.innerHTML = controlsHtml;
+      }
+    }
+  }
+
+  window.handleFeedbackSortChange = function(val) {
+    currentFeedbackSort = val;
+    currentFeedbackPage = 1;
+    renderTestimonials(1);
+  };
+
+  window.changeFeedbackPage = function(page) {
+    showAllFeedbacks = false;
+    currentFeedbackPage = page;
+    renderTestimonials(page);
+    const fSection = document.getElementById('testimonials');
+    if (fSection) fSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  window.toggleShowAllFeedbacks = function() {
+    showAllFeedbacks = !showAllFeedbacks;
+    renderTestimonials(currentFeedbackPage);
+  };
+
+  function setupFeedbackFilters() {
+    const pills = document.querySelectorAll('.f-filter-pill');
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        currentFeedbackRatingFilter = pill.getAttribute('data-rating') || 'all';
+        currentFeedbackPage = 1;
+        showAllFeedbacks = false;
+        renderTestimonials(1);
+      });
+    });
   }
 
   // Parse raw experience description into { general, projects }
@@ -860,13 +1509,13 @@
     }
 
     const items = [];
-    const numRegex = /(?:^|\n|\s+)(\d+)[\.\)]\s+/g;
+    const numRegex = /(?:^|\n)\s*(\d+)[\.\)]\s+/g;
     const matches = [];
     let m;
     while ((m = numRegex.exec(projectsPart)) !== null) {
       matches.push({
-        index: m.index + (m[0].startsWith('\n') || m[0].startsWith(' ') ? 1 : 0),
-        length: m[0].trim().length,
+        index: m.index,
+        headerLength: m[0].length,
         num: m[1]
       });
     }
@@ -875,7 +1524,7 @@
       for (let i = 0; i < matches.length; i++) {
         const cur = matches[i];
         const next = matches[i + 1];
-        const start = cur.index + cur.length;
+        const start = cur.index + cur.headerLength;
         const end = next ? next.index : projectsPart.length;
         const fullItem = projectsPart.slice(start, end).trim();
         if (fullItem) {
@@ -1066,12 +1715,123 @@
     }).join('');
   }
 
-  // Render Certifications Grid Dynamically
-  function renderCertifications(certifications = liveCertifications) {
+  let liveSkills = [];
+
+  function initStackTabListeners() {
+    const stackTabs = document.querySelectorAll('.stack-tab');
+    const stackPanels = document.querySelectorAll('.stack-panel');
+    stackTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const cat = tab.getAttribute('data-cat');
+        stackTabs.forEach(t => t.classList.remove('active'));
+        stackPanels.forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        const panel = document.querySelector(`.stack-panel[data-cat="${cat}"]`);
+        if (panel) panel.classList.add('active');
+      });
+    });
+  }
+
+  function renderSkills(skills = liveSkills) {
+    if (!skills || !skills.length) return;
+    liveSkills = skills;
+
+    const skillsGrid = document.getElementById('skillsGrid');
+    if (skillsGrid) {
+      skillsGrid.innerHTML = skills.map(skill => {
+        const items = Array.isArray(skill.items) ? skill.items : [];
+        const accent = skill.accent_color || 'var(--blue)';
+        const iconSvg = skill.icon_svg || '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>';
+
+        return `
+          <div class="skill-card reveal in-view" style="--accent:${escapeHtml(accent)}">
+            <div class="skill-card-head">
+              <span class="skill-icon">
+                ${iconSvg}
+              </span>
+              <h3>${escapeHtml(skill.category)}</h3>
+            </div>
+            <ul class="skill-list">
+              ${items.map(it => `
+                <li class="skill-item">
+                  <div class="skill-item-head">
+                    <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span class="skill-name">${escapeHtml(it.name || '')}</span>
+                  </div>
+                  ${it.tags ? `<span class="skill-tags">${escapeHtml(it.tags)}</span>` : ''}
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+        `;
+      }).join('');
+    }
+
+    const stackCategories = document.getElementById('stackCategories');
+    if (stackCategories) {
+      const isId = isIndonesian();
+      const filterLabel = isId ? 'Jelajahi Berdasarkan Spesialisasi' : 'Explore by Specialization';
+
+      let tabsHtml = '';
+      let panelsHtml = '';
+
+      skills.forEach((s, idx) => {
+        const slug = s.category_slug || (s.category || '').toLowerCase().replace(/[^a-z0-9_-]/g, '-');
+        const isActive = idx === 0 ? 'active' : '';
+        tabsHtml += `<button class="stack-tab ${isActive}" data-cat="${escapeHtml(slug)}">${escapeHtml(s.category)}</button>`;
+
+        const techList = Array.isArray(s.tech_stack) ? s.tech_stack : [];
+        const badgesHtml = techList.map(t => {
+          const icon = t.icon_svg || '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>';
+          return `
+            <div class="stack-badge">
+              <span class="stack-badge-icon">${icon}</span>
+              <span>${escapeHtml(t.name)}</span>
+            </div>
+          `;
+        }).join('');
+
+        panelsHtml += `
+          <div class="stack-panel ${isActive}" data-cat="${escapeHtml(slug)}">
+            ${badgesHtml || '<div style="color:var(--text-muted); font-size:0.85rem; padding:12px;">No technology badges added yet</div>'}
+          </div>
+        `;
+      });
+
+      stackCategories.innerHTML = `
+        <div class="stack-filter-section reveal in-view">
+          <span class="stack-filter-label">${escapeHtml(filterLabel)}</span>
+          <div class="stack-tabs" role="tablist">
+            ${tabsHtml}
+          </div>
+          ${panelsHtml}
+        </div>
+      `;
+
+      initStackTabListeners();
+    }
+  }
+
+  // Render Certifications Grid Dynamically with 3x3 Pagination & Browse All
+  function renderCertifications(certifications = liveCertifications, page = currentCertPage) {
     const certGrid = document.getElementById('cert-grid');
+    const paginationWrap = document.getElementById('certPaginationWrap');
+    const paginationInfo = document.getElementById('certPaginationInfo');
+    const paginationControls = document.getElementById('certPaginationControls');
     if (!certGrid || !certifications || !certifications.length) return;
 
-    certGrid.innerHTML = certifications.map(cert => {
+    currentCertPage = page;
+    const totalCerts = certifications.length;
+    const totalPages = Math.ceil(totalCerts / CERTS_PER_PAGE) || 1;
+
+    if (currentCertPage > totalPages) currentCertPage = totalPages;
+    if (currentCertPage < 1) currentCertPage = 1;
+
+    const startIndex = (currentCertPage - 1) * CERTS_PER_PAGE;
+    const endIndex = Math.min(startIndex + CERTS_PER_PAGE, totalCerts);
+    const visibleCerts = certifications.slice(startIndex, endIndex);
+
+    certGrid.innerHTML = visibleCerts.map(cert => {
       const skills = Array.isArray(cert.skills) ? cert.skills : [];
       const accent = cert.accent_color || 'var(--blue)';
 
@@ -1091,7 +1851,11 @@
             <h4 class="cert-title">${escapeHtml(cert.title)}</h4>
             ${cert.image_url ? `
               <div class="cert-card-preview" onclick="openLightbox('${escapeHtml(cert.image_url)}', '${escapeHtml(cert.title)}')" title="Click to view full certificate">
-                <img src="${escapeHtml(cert.image_url)}" alt="${escapeHtml(cert.title)}" loading="lazy" onerror="this.parentElement.style.display='none'">
+                <img src="${escapeHtml(cert.image_url)}" alt="Sertifikat Muhammad Haerul — ${escapeHtml(cert.title)} (${escapeHtml(cert.issuer || '')})" title="Sertifikat Muhammad Haerul — ${escapeHtml(cert.title)}" loading="lazy" onerror="this.parentElement.style.display='none'">
+                <span class="cert-zoom-hint">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                  ${isIndonesian() ? 'Perbesar' : 'View Full'}
+                </span>
               </div>
             ` : ''}
             ${skills.length ? `
@@ -1103,24 +1867,82 @@
           <div class="cert-card-bottom">
             <span class="cert-status-tag">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              Credential Verified
+              ${isIndonesian() ? 'Kredensial Terverifikasi' : 'Credential Verified'}
             </span>
             ${cert.credential_url ? `
               <a href="${escapeHtml(cert.credential_url)}" target="_blank" rel="noopener" class="cert-doc-hint" style="text-decoration:none; color:inherit;">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                View Credential
+                ${isIndonesian() ? 'Lihat Kredensial' : 'View Credential'}
               </a>
             ` : `
               <span class="cert-doc-hint">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                Certificate on Record
+                ${isIndonesian() ? 'Sertifikat Terdaftar' : 'Certificate on Record'}
               </span>
             `}
           </div>
         </div>
       `;
     }).join('');
+
+    if (paginationWrap && paginationInfo && paginationControls) {
+      if (totalCerts <= CERTS_PER_PAGE) {
+        paginationWrap.style.display = 'flex';
+        paginationInfo.innerHTML = isIndonesian() 
+          ? `Menampilkan semua <strong>${totalCerts}</strong> lisensi &amp; sertifikasi`
+          : `Showing all <strong>${totalCerts}</strong> certifications`;
+        paginationControls.innerHTML = `
+          <button type="button" class="p-page-toggle-btn" onclick="window.open('/certifications', '_blank')" title="Open certifications in a new dedicated page">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span>${isIndonesian() ? 'Lihat Semua' : 'Browse All'} (${totalCerts})</span>
+          </button>
+        `;
+      } else {
+        paginationWrap.style.display = 'flex';
+        paginationInfo.innerHTML = isIndonesian()
+          ? `Menampilkan <strong>${startIndex + 1}–${endIndex}</strong> dari <strong>${totalCerts}</strong> sertifikasi`
+          : `Showing <strong>${startIndex + 1}–${endIndex}</strong> of <strong>${totalCerts}</strong> certifications`;
+
+        let controlsHtml = '';
+        const prevDisabled = currentCertPage === 1 ? 'disabled' : '';
+        controlsHtml += `
+          <button type="button" class="p-page-btn" onclick="window.changeCertPage(${currentCertPage - 1})" ${prevDisabled} aria-label="Previous Page">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        `;
+
+        for (let i = 1; i <= totalPages; i++) {
+          const activeClass = i === currentCertPage ? 'active' : '';
+          controlsHtml += `
+            <button type="button" class="p-page-btn ${activeClass}" onclick="window.changeCertPage(${i})">${i}</button>
+          `;
+        }
+
+        const nextDisabled = currentCertPage === totalPages ? 'disabled' : '';
+        controlsHtml += `
+          <button type="button" class="p-page-btn" onclick="window.changeCertPage(${currentCertPage + 1})" ${nextDisabled} aria-label="Next Page">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        `;
+
+        controlsHtml += `
+          <button type="button" class="p-page-toggle-btn" onclick="window.open('/certifications', '_blank')" title="Open certifications in a new dedicated page">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span>${isIndonesian() ? 'Lihat Semua' : 'Browse All'} (${totalCerts})</span>
+          </button>
+        `;
+
+        paginationControls.innerHTML = controlsHtml;
+      }
+    }
   }
+
+  window.changeCertPage = function(page) {
+    currentCertPage = page;
+    renderCertifications(liveCertifications, page);
+    const certSection = document.getElementById('certifications');
+    if (certSection) certSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   // Render Awards Grid Dynamically
   function renderAwards(awards = liveAwards) {
@@ -1588,7 +2410,7 @@
     return `
       <article class="gallery-card" onclick="window.openLightbox('${imgUrl}', '${titleText}')" role="button" tabindex="0" aria-label="${titleText}">
         <div class="gallery-card-thumb-wrap">
-          <img class="gallery-card-thumb" src="${imgUrl}" alt="${titleText}" loading="lazy">
+          <img class="gallery-card-thumb" src="${imgUrl}" alt="Muhammad Haerul — ${titleText}" title="Muhammad Haerul — ${titleText}" loading="lazy">
           <div class="gallery-zoom-overlay">
             <div class="gallery-zoom-icon" aria-hidden="true">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -1820,10 +2642,10 @@
     if (window.innerWidth < 900) return;
 
     const slots = [
-      { top: '10%', left: '3%' },
-      { top: '56%', left: '3.5%' },
-      { top: '12%', right: '3%' },
-      { bottom: '15%', right: '3.5%' }
+      { top: '8%', left: '2.5%' },
+      { top: '54%', left: '2.5%' },
+      { top: '10%', right: '2.5%' },
+      { bottom: '12%', right: '2.5%' }
     ];
 
     function spawnGlimpse() {
@@ -1866,13 +2688,20 @@
 
       const title = itemData.title || 'Journey Moment';
       const category = itemData.category || itemData.year || 'Milestone';
+      const dateText = itemData.date || itemData.year || '';
       const img = itemData.image_url || '/favicon.webp';
 
       el.innerHTML = `
-        <img src="${escapeHtml(img)}" alt="${escapeHtml(title)}" loading="lazy" onerror="this.src='/favicon.webp'">
+        <div class="hero-glimpse-media">
+          <img class="hero-glimpse-blur-bg" src="${escapeHtml(img)}" alt="" aria-hidden="true">
+          <img class="hero-glimpse-main-img" src="${escapeHtml(img)}" alt="${escapeHtml(title)}" loading="lazy" onerror="this.src='/favicon.webp'">
+        </div>
         <div class="hero-glimpse-caption">
-          <span>${escapeHtml(title)}</span>
-          <span class="hero-glimpse-tag">${escapeHtml(category)}</span>
+          <div class="hero-glimpse-meta">
+            <span class="hero-glimpse-tag">${escapeHtml(category)}</span>
+            ${dateText ? `<span class="hero-glimpse-date">${escapeHtml(dateText)}</span>` : ''}
+          </div>
+          <h4 class="hero-glimpse-title">${escapeHtml(title)}</h4>
         </div>
       `;
 
@@ -1904,10 +2733,153 @@
     }, { passive: true });
   }
 
+  // Apply CMS Profile Settings dynamically to Section 01 (#about)
+  function applyProfileSettings(profile) {
+    if (!profile) return;
+    const aboutSec = document.getElementById('about');
+    if (!aboutSec) return;
+
+    if (profile.eyebrow) {
+      const eb = aboutSec.querySelector('.section-eyebrow');
+      if (eb) eb.textContent = profile.eyebrow;
+    }
+
+    if (profile.avatarUrl) {
+      const img = aboutSec.querySelector('.portrait-photo');
+      if (img) img.src = profile.avatarUrl;
+      const source = aboutSec.querySelector('.portrait-frame picture source');
+      if (source) source.srcset = profile.avatarUrl;
+    }
+
+    const facts = aboutSec.querySelectorAll('.about-facts > li');
+    if (facts.length >= 4) {
+      if (profile.name) {
+        const nameEl = facts[0].querySelector('strong');
+        if (nameEl) nameEl.textContent = profile.name;
+      }
+      if (profile.role) {
+        const roleEl = facts[1].querySelector('strong');
+        if (roleEl) {
+          roleEl.innerHTML = `${escapeHtml(profile.role)} ${profile.roleSub ? `<small class="about-role-sub">${escapeHtml(profile.roleSub)}</small>` : ''}`;
+        }
+      }
+      if (profile.education) {
+        const eduEl = facts[2].querySelector('strong');
+        if (eduEl) eduEl.textContent = profile.education;
+      }
+      if (profile.experienceYears) {
+        const expEl = document.getElementById('about-exp-val') || facts[3].querySelector('strong');
+        if (expEl) expEl.textContent = profile.experienceYears;
+      }
+    }
+
+    if (Array.isArray(profile.expertiseTags) && profile.expertiseTags.length) {
+      const tagsContainer = aboutSec.querySelector('.about-focus-tags');
+      if (tagsContainer) {
+        tagsContainer.innerHTML = profile.expertiseTags.map(t => `<span class="focus-tag">${escapeHtml(t)}</span>`).join('');
+      }
+    }
+
+    if (profile.leadHeadingRole) {
+      const roleHeading = aboutSec.querySelector('.about-title-role');
+      if (roleHeading) roleHeading.textContent = profile.leadHeadingRole;
+    }
+    if (profile.leadHeadingYears) {
+      const yearsHeading = document.getElementById('about-exp-heading');
+      if (yearsHeading) yearsHeading.textContent = profile.leadHeadingYears;
+    }
+
+    const paragraphs = (Array.isArray(profile.storyParagraphs) && profile.storyParagraphs.length)
+      ? profile.storyParagraphs.filter(Boolean)
+      : [profile.storyParagraph1, profile.storyParagraph2, profile.storyParagraph3].filter(Boolean);
+    if (paragraphs.length) {
+      const storyEl = aboutSec.querySelector('.about-story');
+      if (storyEl) {
+        storyEl.innerHTML = paragraphs.map(p => `<p>${escapeHtml(p).replace(/\n/g, '<br>')}</p>`).join('');
+        storyEl.classList.add('in-view');
+      }
+    }
+  }
+
+  // Apply CMS Page Customizer settings (General, Hero, Sections, Footer)
+  function applyPageSettings(settings) {
+    if (!settings) return;
+
+    if (settings.general) {
+      if (settings.general.siteTitle) document.title = settings.general.siteTitle;
+      if (settings.general.metaDescription) {
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) metaDesc.setAttribute('content', settings.general.metaDescription);
+      }
+      if (settings.general.brandName) {
+        const brandEls = document.querySelectorAll('.nav-brand, .footer-brand');
+        brandEls.forEach(b => {
+          const textSpan = b.querySelector('.nav-brand-text, .footer-brand-text');
+          if (textSpan) {
+            textSpan.textContent = settings.general.brandName;
+          } else {
+            b.textContent = settings.general.brandName;
+          }
+        });
+      }
+    }
+
+    if (settings.hero) {
+      const heroSec = document.getElementById('hero');
+      if (heroSec) {
+        if (settings.hero.eyebrow) {
+          const eb = heroSec.querySelector('.eyebrow');
+          if (eb) eb.textContent = settings.hero.eyebrow;
+        }
+      }
+    }
+
+    if (settings.sections) {
+      Object.keys(settings.sections).forEach(secKey => {
+        const secCfg = settings.sections[secKey];
+        if (!secCfg) return;
+        const secEl = document.getElementById(secKey);
+        if (secEl) {
+          const titleEl = secEl.querySelector('.section-title');
+          if (titleEl && secCfg.title) {
+            titleEl.textContent = secCfg.title;
+          }
+        }
+      });
+    }
+
+    if (settings.footer) {
+      if (settings.footer.tagline) {
+        const taglineEl = document.querySelector('.footer-tagline, .footer-desc');
+        if (taglineEl) taglineEl.textContent = settings.footer.tagline;
+      }
+      if (settings.footer.copyright) {
+        const copyEl = document.querySelector('.footer-copy');
+        if (copyEl) copyEl.textContent = settings.footer.copyright;
+      }
+      if (settings.footer.socials) {
+        const soc = settings.footer.socials;
+        if (soc.github) {
+          document.querySelectorAll('a[href*="github.com"], a[aria-label="GitHub"]').forEach(a => a.href = soc.github);
+        }
+        if (soc.linkedin) {
+          document.querySelectorAll('a[href*="linkedin.com"], a[aria-label="LinkedIn"]').forEach(a => a.href = soc.linkedin);
+        }
+        if (soc.instagram) {
+          document.querySelectorAll('a[href*="instagram.com"], a[aria-label="Instagram"]').forEach(a => a.href = soc.instagram);
+        }
+        if (soc.email) {
+          document.querySelectorAll('a[href^="mailto:"], a[aria-label="Email"]').forEach(a => a.href = 'mailto:' + soc.email.replace(/^mailto:/, ''));
+        }
+      }
+    }
+  }
+
   // Main Live Data Fetcher & Hydrator (Optimized with Batch Bootstrap + Fallback)
   async function initLivePortfolioSync() {
     setupProjectFilters();
     setupGalleryFilters();
+    setupFeedbackFilters();
     initHeroJourneyGlimpses();
 
     try {
@@ -1943,6 +2915,10 @@
           liveExperiences = bootstrapData.experiences;
           renderTimeline(liveExperiences);
         }
+        if (bootstrapData.skills && bootstrapData.skills.length) {
+          liveSkills = bootstrapData.skills;
+          renderSkills(liveSkills);
+        }
         if (bootstrapData.educations && bootstrapData.educations.length) {
           liveEducations = bootstrapData.educations;
           renderEducations(liveEducations);
@@ -1967,11 +2943,24 @@
         renderBlogs(liveBlogs);
 
         updateHeroStats(true);
+
+        if (bootstrapData.settings) {
+          if (bootstrapData.settings.profile) {
+            window.liveProfileSettings = bootstrapData.settings.profile;
+            applyProfileSettings(bootstrapData.settings.profile);
+          }
+          applyPageSettings(bootstrapData.settings);
+        }
+
+        const locCfg = (bootstrapData.settings && bootstrapData.settings.localization) 
+          ? bootstrapData.settings.localization 
+          : { bilingualEnabled: true, defaultLanguage: 'en' };
+        initLanguageSwitcher(locCfg);
         return;
       }
 
       // 2. Graceful fallback path if bootstrap endpoint is unavailable
-      const [projRes, talksRes, feedRes, expRes, eduRes, certRes, awardRes, galRes, pubRes, blogRes] = await Promise.allSettled([
+      const [projRes, talksRes, feedRes, expRes, eduRes, certRes, awardRes, galRes, pubRes, blogRes, skillRes] = await Promise.allSettled([
         fetch('/api/projects').then(r => r.json()),
         fetch('/api/talks').then(r => r.json()),
         fetch('/api/get_feedback').then(r => r.json()),
@@ -1981,8 +2970,14 @@
         fetch('/api/awards').then(r => r.json()),
         fetch('/api/gallery').then(r => r.json()),
         fetch('/api/publications').then(r => r.json()),
-        fetch('/api/blogs').then(r => r.json())
+        fetch('/api/blogs').then(r => r.json()),
+        fetch('/api/skills').then(r => r.json())
       ]);
+
+      if (skillRes && skillRes.status === 'fulfilled' && skillRes.value && skillRes.value.data) {
+        liveSkills = skillRes.value.data;
+        renderSkills(liveSkills);
+      }
 
       if (projRes.status === 'fulfilled' && projRes.value && projRes.value.data) {
         liveProjects = projRes.value.data;
@@ -2041,6 +3036,15 @@
       }
 
       updateHeroStats(true);
+
+      fetch('/api/settings').then(r => r.json()).then(res => {
+        if (res && res.success && res.data) {
+          if (res.data.profile) applyProfileSettings(res.data.profile);
+          applyPageSettings(res.data);
+          const locCfg = res.data.localization || { bilingualEnabled: true, defaultLanguage: 'en' };
+          initLanguageSwitcher(locCfg);
+        }
+      }).catch(() => {});
     } catch (err) {
       console.warn('[Portfolio Sync] Offline or API error:', err);
     }

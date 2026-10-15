@@ -4,39 +4,158 @@
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
     <loc>https://muhammadhaerul.tech/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+
+    <!-- 1. Official Primary Portrait (WebP) -->
+    <image:image>
+      <image:loc>https://muhammadhaerul.tech/assets/profile.webp</image:loc>
+      <image:title>Muhammad Haerul — AI Full-Stack Engineer &amp; AI Trainer Official Portrait</image:title>
+      <image:caption>Official portrait photo of Muhammad Haerul, AI Full-Stack Engineer, AI Trainer, and Researcher based in Makassar, Indonesia.</image:caption>
+      <image:geo_location>Makassar, South Sulawesi, Indonesia</image:geo_location>
+    </image:image>
+
+    <!-- 2. High-Resolution Portrait (PNG) -->
+    <image:image>
+      <image:loc>https://muhammadhaerul.tech/assets/profile-highres.png</image:loc>
+      <image:title>Muhammad Haerul — High-Resolution Portrait Photo</image:title>
+      <image:caption>Foto resmi resolusi tinggi Muhammad Haerul, S.Kom — AI Full-Stack Engineer dan Trainer AI.</image:caption>
+      <image:geo_location>Makassar, South Sulawesi, Indonesia</image:geo_location>
+    </image:image>
+
+    <!-- 3. Standard PNG Portrait -->
+    <image:image>
+      <image:loc>https://muhammadhaerul.tech/assets/profile.png</image:loc>
+      <image:title>Muhammad Haerul — Profile Portrait</image:title>
+      <image:caption>Professional profile photo of Muhammad Haerul, S.Kom.</image:caption>
+      <image:geo_location>Makassar, South Sulawesi, Indonesia</image:geo_location>
+    </image:image>
+
+    <!-- 4. Root WebP Portrait -->
     <image:image>
       <image:loc>https://muhammadhaerul.tech/profile.webp</image:loc>
-      <image:title>Muhammad Haerul — AI Full-Stack Engineer &amp; AI Trainer</image:title>
-      <image:caption>Official portrait of Muhammad Haerul, AI Full-Stack Engineer and AI Trainer</image:caption>
+      <image:title>Muhammad Haerul — Headshot Photo</image:title>
+      <image:caption>Muhammad Haerul headshot photograph, AI Full-Stack Engineer and AI Trainer.</image:caption>
+      <image:geo_location>Makassar, South Sulawesi, Indonesia</image:geo_location>
     </image:image>
+
+    <!-- 5. Formal Zoom-In Portrait -->
     <image:image>
-      <image:loc>https://muhammadhaerul.tech/uploads/talks/saveclip_app_671241768_18351262810240133_2825725287413554497_n_1787520000000.webp</image:loc>
-      <image:title>Muhammad Haerul Keynote Speaker at Build with AI</image:title>
-      <image:caption>Muhammad Haerul delivering AI-driven development keynote</image:caption>
+      <image:loc>https://muhammadhaerul.tech/assets/images/muhammad-haerul-portrait-formal.webp</image:loc>
+      <image:title>Muhammad Haerul — Foto Formal Jas Resmi</image:title>
+      <image:caption>Foto formal resmi Muhammad Haerul dengan setelan jas, AI Full-Stack Engineer lulusan Universitas Hasanuddin.</image:caption>
+      <image:geo_location>Makassar, South Sulawesi, Indonesia</image:geo_location>
     </image:image>
+
+    <!-- 6. Square Avatar Portrait -->
     <image:image>
-      <image:loc>https://muhammadhaerul.tech/uploads/talks/saveclip_app_752916423_18047968217611708_1368945415777708577_n_1787520000000.webp</image:loc>
-      <image:title>Muhammad Haerul Speaking at GSA AI Forge</image:title>
-      <image:caption>Mentorship and AI workshop led by Muhammad Haerul</image:caption>
+      <image:loc>https://muhammadhaerul.tech/assets/images/muhammad_haerul_avatar_square.webp</image:loc>
+      <image:title>Muhammad Haerul — Square Profile Avatar</image:title>
+      <image:caption>Foto profil square avatar Muhammad Haerul untuk media sosial dan presentasi teknologi.</image:caption>
+      <image:geo_location>Makassar, South Sulawesi, Indonesia</image:geo_location>
     </image:image>
+
+    <!-- 7. Keynote Speaker Build with AI -->
     <image:image>
-      <image:loc>https://muhammadhaerul.tech/uploads/talks/saveclip_app_775154220_18087205625558486_2869970966455113945_n_1787520000000.webp</image:loc>
-      <image:title>Muhammad Haerul Keynote at Mindful AI Forum</image:title>
-      <image:caption>National tech symposium keynote by Muhammad Haerul</image:caption>
+      <image:loc>https://muhammadhaerul.tech/assets/images/muhammad-haerul-speaker-build-with-ai.webp</image:loc>
+      <image:title>Muhammad Haerul — Keynote Speaker at Build with AI Conference</image:title>
+      <image:caption>Dokumentasi foto Muhammad Haerul saat membawakan keynote AI-Driven Development di konferensi teknologi Build with AI.</image:caption>
+      <image:geo_location>Makassar, South Sulawesi, Indonesia</image:geo_location>
+    </image:image>
+
+    <!-- 8. Keynote Speaker GSA AI Forge -->
+    <image:image>
+      <image:loc>https://muhammadhaerul.tech/assets/images/muhammad-haerul-speaker-gsa-ai-forge.webp</image:loc>
+      <image:title>Muhammad Haerul — Speaker at GSA AI Forge Tech Summit</image:title>
+      <image:caption>Foto Muhammad Haerul memimpin sesi AI for Personal Branding &amp; Digital Portfolio di GSA AI Forge.</image:caption>
+      <image:geo_location>Makassar, South Sulawesi, Indonesia</image:geo_location>
+    </image:image>
+
+    <!-- 9. Keynote Speaker Mindful AI -->
+    <image:image>
+      <image:loc>https://muhammadhaerul.tech/assets/images/muhammad-haerul-speaker-mindful-ai.webp</image:loc>
+      <image:title>Muhammad Haerul — Keynote Speaker at Mindful AI Forum</image:title>
+      <image:caption>Dokumentasi foto panggung Muhammad Haerul menyampaikan materi Personalization for Next-Gen Scholars di Mindful AI Forum.</image:caption>
+      <image:geo_location>Makassar, South Sulawesi, Indonesia</image:geo_location>
+    </image:image>
+
+    <!-- 10. Speaker BSSN Cybersecurity Forum -->
+    <image:image>
+      <image:loc>https://muhammadhaerul.tech/assets/images/muhammad-haerul-speaker-bssn-cybersecurity.webp</image:loc>
+      <image:title>Muhammad Haerul — Speaker at National Cybersecurity &amp; AI Awareness Forum BSSN</image:title>
+      <image:caption>Foto dokumentasi Muhammad Haerul sebagai narasumber Artificial Intelligence &amp; Cybersecurity bersama Badan Siber dan Sandi Negara.</image:caption>
+      <image:geo_location>Makassar, South Sulawesi, Indonesia</image:geo_location>
+    </image:image>
+
+    <!-- 11. Hands-on Workshop Trainer -->
+    <image:image>
+      <image:loc>https://muhammadhaerul.tech/assets/images/muhammad-haerul-workshop-ai-web-engineering.webp</image:loc>
+      <image:title>Muhammad Haerul — AI Web Engineering &amp; Security Hands-on Workshop Trainer</image:title>
+      <image:caption>Foto dokumentasi Muhammad Haerul memandu hands-on coding workshop pengembangan aplikasi web berbasis AI dan keamanan.</image:caption>
+      <image:geo_location>Makassar, South Sulawesi, Indonesia</image:geo_location>
+    </image:image>
+
+    <!-- 12-19. Official Verified Certificates of Muhammad Haerul -->
+    <image:image>
+      <image:loc>https://muhammadhaerul.tech/assets/certificates/cert-ml-specialization.svg</image:loc>
+      <image:title>Sertifikat Muhammad Haerul — Machine Learning Specialization (DeepLearning.AI &amp; Stanford)</image:title>
+      <image:caption>Sertifikat resmi kompetensi Machine Learning Specialization diraih oleh Muhammad Haerul.</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://muhammadhaerul.tech/assets/certificates/cert-ml-production.svg</image:loc>
+      <image:title>Sertifikat Muhammad Haerul — Machine Learning in Production (DeepLearning.AI)</image:title>
+      <image:caption>Sertifikat resmi MLOps dan Machine Learning in Production diraih oleh Muhammad Haerul.</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://muhammadhaerul.tech/assets/certificates/cert-genai-software.svg</image:loc>
+      <image:title>Sertifikat Muhammad Haerul — Generative AI for Software Development (DeepLearning.AI)</image:title>
+      <image:caption>Sertifikat kompetensi Generative AI for Software Development atas nama Muhammad Haerul.</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://muhammadhaerul.tech/assets/certificates/cert-genai-langchain.svg</image:loc>
+      <image:title>Sertifikat Muhammad Haerul — Generative AI with LangChain &amp; HuggingFace</image:title>
+      <image:caption>Sertifikat kompetensi LLM and LangChain development atas nama Muhammad Haerul.</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://muhammadhaerul.tech/assets/certificates/cert-prompt-engineering.svg</image:loc>
+      <image:title>Sertifikat Muhammad Haerul — Prompt Engineering for Software Developers (Vanderbilt)</image:title>
+      <image:caption>Sertifikat resmi Prompt Engineering for Software Developers diraih oleh Muhammad Haerul.</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://muhammadhaerul.tech/assets/certificates/cert-deep-learning-dts.svg</image:loc>
+      <image:title>Sertifikat Muhammad Haerul — Deep Learning Digital Talent Scholarship (Kominfo)</image:title>
+      <image:caption>Sertifikat beasiswa nasional Deep Learning DTS Kominfo diraih oleh Muhammad Haerul.</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://muhammadhaerul.tech/assets/certificates/cert-data-science-dts.svg</image:loc>
+      <image:title>Sertifikat Muhammad Haerul — Data Science Digital Talent Scholarship (Kominfo)</image:title>
+      <image:caption>Sertifikat beasiswa nasional Data Science DTS Kominfo diraih oleh Muhammad Haerul.</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://muhammadhaerul.tech/assets/certificates/cert-sql-intermediate.svg</image:loc>
+      <image:title>Sertifikat Muhammad Haerul — SQL Intermediate Skill Certificate (HackerRank)</image:title>
+      <image:caption>Sertifikat verifikasi keahlian SQL Intermediate HackerRank atas nama Muhammad Haerul.</image:caption>
     </image:image>
   </url>
+
   <url>
     <loc>https://muhammadhaerul.tech/feedback</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://muhammadhaerul.tech/form/feedback-gsa-ai-forge-2026</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

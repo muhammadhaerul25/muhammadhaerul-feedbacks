@@ -1,6 +1,7 @@
 const prisma = require('../config/db');
 const cache = require('../utils/cache');
 const asyncHandler = require('../utils/asyncHandler');
+const { DEFAULT_SETTINGS } = require('./settings.controller');
 
 function getProjectDateSortValue(p) {
     if (!p) return '';
@@ -58,7 +59,8 @@ const getPortfolioBootstrap = asyncHandler(async (req, res) => {
         awards,
         gallery,
         publications,
-        blogs
+        blogs,
+        skills
     ] = await Promise.all([
         prisma.project.findMany(),
         prisma.talk.findMany({ orderBy: [{ date: 'desc' }, { created_at: 'desc' }] }),
@@ -75,10 +77,19 @@ const getPortfolioBootstrap = asyncHandler(async (req, res) => {
         prisma.blogPost.findMany({
             where: { OR: [{ status: 'published' }, { status: null }] },
             orderBy: [{ sort_order: 'asc' }, { created_at: 'desc' }]
-        })
+        }),
+        prisma.skill.findMany({ orderBy: [{ sort_order: 'asc' }, { created_at: 'asc' }] })
     ]);
 
     const sortedProjects = sortProjectsByDateDesc(projects);
+
+    let settings = Object.assign({}, DEFAULT_SETTINGS);
+    try {
+        const settingRows = await prisma.$queryRawUnsafe("SELECT value FROM site_settings WHERE key = 'site_page_settings' LIMIT 1");
+        if (settingRows && settingRows.length > 0 && settingRows[0].value) {
+            settings = Object.assign({}, DEFAULT_SETTINGS, settingRows[0].value);
+        }
+    } catch(e) {}
 
     const payload = {
         success: true,
@@ -89,11 +100,13 @@ const getPortfolioBootstrap = asyncHandler(async (req, res) => {
             feedbacks,
             experiences,
             educations,
+            skills,
             certifications,
             awards,
             gallery,
             publications,
-            blogs
+            blogs,
+            settings
         }
     };
 

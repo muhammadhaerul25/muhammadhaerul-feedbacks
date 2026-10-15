@@ -16,6 +16,8 @@ const contactRoutes = require('./contact.routes');
 const galleryRoutes = require('./gallery.routes');
 const publicationsRoutes = require('./publications.routes');
 const blogsRoutes = require('./blogs.routes');
+const settingsRoutes = require('./settings.routes');
+const skillsRoutes = require('./skills.routes');
 const { getPortfolioBootstrap } = require('../controllers/bootstrap.controller');
 
 // Consolidated Portfolio Bootstrap Endpoint (Single-request live data hydration)
@@ -163,6 +165,8 @@ router.use('/contact', contactRoutes);
 router.use('/gallery', galleryRoutes);
 router.use('/publications', publicationsRoutes);
 router.use('/blogs', blogsRoutes);
+router.use('/settings', settingsRoutes);
+router.use('/skills', skillsRoutes);
 router.use('/', feedbacksRoutes);
 
 module.exports = router;

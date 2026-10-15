@@ -177,7 +177,7 @@ async function googleLogin(req, res) {
     console.error('[Google Login Error]:', err);
     return res.status(500).json({
       success: false,
-      error: 'Terjadi kesalahan saat memproses autentikasi Google.',
+      error: 'An error occurred during Google authentication.',
       details: err.message
     });
   }
@@ -202,7 +202,7 @@ async function logout(req, res) {
 
   res.json({
     success: true,
-    message: 'Berhasil keluar dari sesi admin.'
+    message: 'Successfully logged out.'
   });
 }
 
@@ -240,7 +240,7 @@ async function listAdmins(req, res) {
     console.error('[List Admins Error]:', err);
     res.status(500).json({
       success: false,
-      error: 'Gagal mengambil daftar administrator.',
+      error: 'Failed to retrieve administrator list.',
       details: err.message
     });
   }
@@ -256,7 +256,7 @@ async function addAdmin(req, res) {
     if (!email || typeof email !== 'string') {
       return res.status(400).json({
         success: false,
-        error: 'Email Google harus diisi.'
+        error: 'Google email address is required.'
       });
     }
 
@@ -267,7 +267,7 @@ async function addAdmin(req, res) {
     if (!emailRegex.test(cleanEmail)) {
       return res.status(400).json({
         success: false,
-        error: 'Format email tidak valid.'
+        error: 'Invalid email address format.'
       });
     }
 
@@ -279,7 +279,7 @@ async function addAdmin(req, res) {
     if (existing) {
       return res.status(400).json({
         success: false,
-        error: `Akun Google ${cleanEmail} sudah terdaftar sebagai administrator.`
+        error: `Google account ${cleanEmail} is already registered.`
       });
     }
 
@@ -294,14 +294,14 @@ async function addAdmin(req, res) {
 
     res.status(201).json({
       success: true,
-      message: `Akun Google ${cleanEmail} berhasil ditambahkan sebagai administrator.`,
+      message: `Google account ${cleanEmail} authorized successfully.`,
       data: newAdmin
     });
   } catch (err) {
     console.error('[Add Admin Error]:', err);
     res.status(500).json({
       success: false,
-      error: 'Gagal menambahkan administrator.',
+      error: 'Failed to add administrator.',
       details: err.message
     });
   }
@@ -317,7 +317,7 @@ async function removeAdmin(req, res) {
     if (!email) {
       return res.status(400).json({
         success: false,
-        error: 'Parameter email harus disertakan.'
+        error: 'Email parameter is required.'
       });
     }
 
@@ -325,7 +325,7 @@ async function removeAdmin(req, res) {
     if (email === PRIMARY_ADMIN_EMAIL) {
       return res.status(400).json({
         success: false,
-        error: `Primary Super Admin (${PRIMARY_ADMIN_EMAIL}) tidak dapat dihapus.`
+        error: `Super Admin (${PRIMARY_ADMIN_EMAIL}) is protected and cannot be revoked.`
       });
     }
 
@@ -336,14 +336,14 @@ async function removeAdmin(req, res) {
     if (!existing) {
       return res.status(404).json({
         success: false,
-        error: `Akun administrator ${email} tidak ditemukan.`
+        error: `Administrator account ${email} not found.`
       });
     }
 
     if (existing.is_primary) {
       return res.status(400).json({
         success: false,
-        error: 'Super Admin utama tidak dapat dihapus.'
+        error: 'Super Admin is protected and cannot be revoked.'
       });
     }
 
@@ -353,13 +353,13 @@ async function removeAdmin(req, res) {
 
     res.json({
       success: true,
-      message: `Izin akses administrator untuk ${email} berhasil dicabut.`
+      message: `Access permissions for ${email} revoked successfully.`
     });
   } catch (err) {
     console.error('[Remove Admin Error]:', err);
     res.status(500).json({
       success: false,
-      error: 'Gagal mencabut izin administrator.',
+      error: 'Failed to revoke administrator access.',
       details: err.message
     });
   }
@@ -407,7 +407,7 @@ async function loginWithPassword(req, res) {
     if (!password || typeof password !== 'string') {
       return res.status(400).json({
         success: false,
-        error: 'Password admin harus diisi.'
+        error: 'Admin password is required.'
       });
     }
 
@@ -443,7 +443,7 @@ async function loginWithPassword(req, res) {
     if (!isMatch) {
       return res.status(401).json({
         success: false,
-        error: 'Password salah. Silakan periksa kembali password admin Anda.'
+        error: 'Invalid password. Please check your credentials and try again.'
       });
     }
 
@@ -486,7 +486,7 @@ async function loginWithPassword(req, res) {
     console.error('[Password Login Error]:', err);
     return res.status(500).json({
       success: false,
-      error: 'Terjadi kesalahan saat memproses login password.',
+      error: 'An error occurred during password sign-in.',
       details: err.message
     });
   }
@@ -502,7 +502,7 @@ async function changePassword(req, res) {
     if (!currentPassword || !newPassword) {
       return res.status(400).json({
         success: false,
-        error: 'Password saat ini dan password baru harus diisi.'
+        error: 'Current password and new password are required.'
       });
     }
 
@@ -532,14 +532,14 @@ async function changePassword(req, res) {
     if (!isCurrentValid) {
       return res.status(400).json({
         success: false,
-        error: 'Password lama yang Anda masukkan tidak sesuai.'
+        error: 'Incorrect current password.'
       });
     }
 
     if (cleanNew.length < 6) {
       return res.status(400).json({
         success: false,
-        error: 'Password baru minimal harus terdiri dari 6 karakter.'
+        error: 'New password must be at least 6 characters long.'
       });
     }
 
@@ -547,7 +547,7 @@ async function changePassword(req, res) {
 
     return res.json({
       success: true,
-      message: 'Password admin berhasil diperbarui dan diamankan dengan enkripsi PBKDF2.'
+      message: 'Administrator password updated successfully.'
     });
   } catch (err) {
     console.error('[Change Password Error]:', err);

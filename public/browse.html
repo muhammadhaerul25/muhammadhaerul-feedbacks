@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="pageTitle">Browse All · Muhammad Haerul</title>
+  <meta name="description" id="pageDesc" content="Explore complete works, talks, certifications, and feedback in Muhammad Haerul's digital portfolio.">
+  <link rel="icon" type="image/webp" href="/favicon.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700;800&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .browse-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+      color: var(--text-primary);
+    }
+    .browse-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    [data-theme="dark"] .browse-nav {
+      background: rgba(15, 17, 23, 0.85);
+    }
+    .browse-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .btn-back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+    .btn-back-home:hover {
+      background: var(--blue-soft);
+      border-color: var(--blue);
+      color: var(--blue);
+      transform: translateX(-2px);
+    }
+    .browse-collections-pills {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface);
+      padding: 4px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+    }
+    .b-pill {
+      padding: 6px 14px;
+      border-radius: 100px;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .b-pill:hover {
+      color: var(--text-primary);
+    }
+    .b-pill.active {
+      background: var(--blue);
+      color: #FFFFFF;
+      box-shadow: 0 2px 8px rgba(66, 133, 244, 0.25);
+    }
+    .browse-hero {
+      padding: 48px 24px 32px;
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .browse-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--blue);
+      background: var(--blue-soft);
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 12px;
+    }
+    .browse-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      line-height: 1.15;
+    }
+    .browse-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 720px;
+      line-height: 1.6;
+    }
+    .browse-container {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      flex: 1;
+    }
+    .browse-toolbar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px 20px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .browse-search-wrap {
+      flex: 1;
+      min-width: 260px;
+      position: relative;
+    }
+    .browse-search-input {
+      width: 100%;
+      padding: 10px 16px 10px 38px;
+      border-radius: 100px;
+      border: 1.5px solid var(--border);
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 500;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    .browse-search-input:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px var(--blue-soft);
+      background: var(--surface);
+    }
+    .browse-search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+      pointer-events: none;
+    }
+    .browse-filters-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .browse-filter-pill {
+      padding: 6px 14px;
+      border-radius: 100px;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .browse-filter-pill:hover {
+      border-color: var(--blue);
+      color: var(--text-primary);
+    }
+    .browse-filter-pill.active {
+      background: var(--blue-soft);
+      color: var(--blue);
+      border-color: var(--blue);
+    }
+    .browse-grid-3col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 1024px) {
+      .browse-grid-3col { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+      .browse-collections-pills { display: none; }
+    }
+    @media (max-width: 640px) {
+      .browse-grid-3col { grid-template-columns: 1fr; }
+      .browse-toolbar { flex-direction: column; align-items: stretch; }
+    }
+    .empty-browse {
+      text-align: center;
+      padding: 64px 20px;
+      border: 1.5px dashed var(--border);
+      border-radius: 20px;
+      background: var(--surface);
+      grid-column: 1 / -1;
+    }
+    .browse-footer {
+      border-top: 1px solid var(--border);
+      padding: 24px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      background: var(--surface);
+    }
+    /* Talk Poster in Browse Grid */
+    .b-talk-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: all 0.3s ease;
+    }
+    .b-talk-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--border-strong);
+    }
+    .b-talk-media {
+      width: 100%;
+      height: 220px;
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      background: #0F172A;
+      cursor: pointer;
+    }
+    .b-talk-blur-bg {
+      position: absolute;
+      inset: -15%;
+      width: 130%;
+      height: 130%;
+      object-fit: cover;
+      filter: blur(16px) brightness(0.65);
+      opacity: 0.75;
+      transform: scale(1.1);
+    }
+    .b-talk-main-img {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+    .b-talk-card:hover .b-talk-main-img {
+      transform: scale(1.03);
+    }
+
+    /* Language switcher in browse page */
+    .lang-switch-wrap {
+      display: inline-flex;
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 2px 4px;
+      gap: 2px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: all .25s ease;
+    }
+    .lang-pill-btn {
+      background: transparent;
+      border: none;
+      font-family: inherit;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      padding: 4px 8px;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all .2s ease;
+      line-height: 1;
+    }
+    .lang-pill-btn:hover { color: var(--text-primary); }
+    .lang-pill-btn.active {
+      background: var(--blue);
+      color: #FFFFFF;
+      box-shadow: 0 2px 6px rgba(66, 133, 244, 0.35);
+    }
+    .lang-pill-sep {
+      font-size: 0.72rem;
+      color: var(--border);
+      user-select: none;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body class="browse-page">
+
+  <!-- Sticky Top Navigation -->
+  <header class="browse-nav">
+    <div class="browse-nav-left">
+      <a href="/" class="btn-back-home" title="Back to Portfolio Overview">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        <span>Back to Home</span>
+      </a>
+      <a href="/#top" class="nav-brand" style="text-decoration:none;">
+        <span class="nav-brand-text" id="navBrandText">Muhammad Haerul</span>
+        <span class="nav-brand-dot"></span>
+      </a>
+    </div>
+
+    <!-- Collection Switcher Pills -->
+    <div class="browse-collections-pills">
+      <a href="/projects" class="b-pill" id="b-pill-projects">Projects</a>
+      <a href="/talks" class="b-pill" id="b-pill-talks">Talks</a>
+      <a href="/certifications" class="b-pill" id="b-pill-certifications">Certifications</a>
+      <a href="/feedbacks" class="b-pill" id="b-pill-feedbacks">Feedbacks</a>
+    </div>
+
+    <div style="display:flex; align-items:center; gap:10px;">
+      <!-- Language Switcher (EN | ID) -->
+      <div class="lang-switch-wrap" id="langSwitchWrap" style="display:none;" aria-label="Language selection">
+        <button type="button" class="lang-pill-btn active" id="langBtnEn" onclick="switchBrowseLanguage('en')" title="Switch to English">EN</button>
+        <span class="lang-pill-sep">/</span>
+        <button type="button" class="lang-pill-btn" id="langBtnId" onclick="switchBrowseLanguage('id')" title="Ganti ke Bahasa Indonesia">ID</button>
+      </div>
+
+      <!-- Theme Mode Toggle -->
+      <button type="button" class="theme-toggle" id="themeToggle" onclick="toggleThemeMode()" aria-label="Toggle visual theme" title="Toggle Light / Dark mode" style="width:38px;height:38px;border-radius:50%;border:1px solid var(--border);background:var(--surface);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-primary);">
+        <svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="browse-hero">
+    <div class="browse-eyebrow" id="collectionEyebrow">Archive Collection</div>
+    <h1 class="browse-title" id="collectionTitle">Browse All Items</h1>
+    <p class="browse-subtitle" id="collectionSubtitle">Comprehensive, filterable index of all works and credentials.</p>
+  </section>
+
+  <!-- Main Grid & Toolbar Container -->
+  <main class="browse-container">
+    <div class="browse-toolbar">
+      <div class="browse-search-wrap">
+        <svg class="browse-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="browseSearchInput" class="browse-search-input" placeholder="Search by title, technology, organizer, or keywords..." oninput="filterBrowseCollection()">
+      </div>
+
+      <div class="browse-filters-row" id="browseFiltersRow">
+        <!-- Filter pills injected dynamically based on collection -->
+      </div>
+
+      <div style="font-size:0.82rem; font-weight:700; color:var(--text-secondary);" id="browseCountBadge">
+        Showing all items
+      </div>
+    </div>
+
+    <!-- Dynamic 3-Column Grid -->
+    <div class="browse-grid-3col" id="browseGrid">
+      <div class="empty-browse">Loading items...</div>
+    </div>
+  </main>
+
+  <!-- Video Modal -->
+  <div class="video-modal-backdrop" id="videoModalBackdrop" onclick="closeVideoModal()">
+    <div class="video-modal-card" onclick="event.stopPropagation()">
+      <div class="video-modal-header">
+        <span class="video-modal-title" id="videoModalTitle">Video Demo</span>
+        <button type="button" class="video-modal-close" onclick="closeVideoModal()">✕</button>
+      </div>
+      <div class="video-modal-iframe-wrap" id="videoModalIframeWrap"></div>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox()">
+    <button type="button" class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img id="lightboxImg" src="" alt="Certificate" onclick="event.stopPropagation()">
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="browse-footer">
+    <div style="max-width:1280px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+      <div>© 2026 Muhammad Haerul. All rights reserved.</div>
+      <a href="/#top" style="color:var(--blue); text-decoration:none; font-weight:700;">↑ Return to Top</a>
+    </div>
+  </footer>
+
+  <script>
+    // Theme Management
+    function initTheme() {
+      const saved = localStorage.getItem('mh_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', saved);
+      updateThemeIcon(saved);
+    }
+    function toggleThemeMode() {
+      const curr = document.documentElement.getAttribute('data-theme') || 'light';
+      const next = curr === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('mh_theme', next);
+      updateThemeIcon(next);
+    }
+    function updateThemeIcon(t) {
+      const sun = document.querySelector('.theme-toggle .sun');
+      const moon = document.querySelector('.theme-toggle .moon');
+      if (sun && moon) {
+        sun.style.display = t === 'dark' ? 'none' : 'block';
+        moon.style.display = t === 'dark' ? 'block' : 'none';
+      }
+    }
+    initTheme();
+
+    // Determine Active Collection from Pathname or Query
+    function getActiveCollection() {
+      const path = window.location.pathname.toLowerCase();
+      const params = new URLSearchParams(window.location.search);
+      const colParam = params.get('collection');
+
+      if (colParam) return colParam.toLowerCase();
+      if (path.includes('talks')) return 'talks';
+      if (path.includes('certifications')) return 'certifications';
+      if (path.includes('feedback') || path.includes('testimonials')) return 'feedbacks';
+      return 'projects'; // Default
+    }
+
+    const currentCollection = getActiveCollection();
+    let bootstrapData = null;
+    let activeCategoryFilter = 'all';
+
+    // Highlight Active Collection Pill
+    document.querySelectorAll('.b-pill').forEach(pill => {
+      if (pill.id === `b-pill-${currentCollection}`) {
+        pill.classList.add('active');
+      } else {
+        pill.classList.remove('active');
+      }
+    });
+
+    const COLLECTION_META = {
+      projects: {
+        eyebrow: '05 — Featured & Case-Study Projects',
+        title: 'Selected work, built end-to-end.',
+        subtitle: 'A mix of commercial systems and independent products — each shipped, not just prototyped.',
+        searchPlaceholder: 'Search projects by name, technology, or keywords…'
+      },
+      talks: {
+        eyebrow: '07 — Speaking & Workshops',
+        title: 'Keynotes, workshops, and AI bootcamps.',
+        subtitle: 'Hands-on AI education delivered across universities, tech communities, and corporate programs.',
+        searchPlaceholder: 'Search talks by title, organizer, topic, or place…'
+      },
+      certifications: {
+        eyebrow: '09 — Licences & Certifications',
+        title: 'Continuous, deliberate learning.',
+        subtitle: 'Verified credentials in Machine Learning, Generative AI, and Cloud Infrastructure.',
+        searchPlaceholder: 'Search credentials by title, issuer, or skills…'
+      },
+      feedbacks: {
+        eyebrow: '11 — Feedbacks & Testimonials',
+        title: 'What participants and collaborators say.',
+        subtitle: 'Real, authentic impressions from workshop participants, mentees, and tech collaborators.',
+        searchPlaceholder: 'Search feedbacks by name, review text, or topic…'
+      }
+    };
+
+    // Initialize Hero Copy
+    const meta = COLLECTION_META[currentCollection] || COLLECTION_META.projects;
+    document.getElementById('collectionEyebrow').textContent = meta.eyebrow;
+    document.getElementById('collectionTitle').textContent = meta.title;
+    document.getElementById('collectionSubtitle').textContent = meta.subtitle;
+    document.getElementById('pageTitle').textContent = `${meta.title} · Muhammad Haerul`;
+    document.getElementById('browseSearchInput').placeholder = meta.searchPlaceholder;
+
+    // Fetch All Data via Bootstrap
+
+    let currentBrowseLang = localStorage.getItem('mh_lang') || 'en';
+
+    function initBrowseLanguage(locSettings) {
+      const wrap = document.getElementById('langSwitchWrap');
+      if (wrap) {
+        const isBilingual = locSettings ? (locSettings.bilingualEnabled !== false) : true;
+        wrap.style.display = isBilingual ? 'inline-flex' : 'none';
+      }
+      switchBrowseLanguage(currentBrowseLang);
+    }
+
+    function switchBrowseLanguage(lang) {
+      currentBrowseLang = lang === 'id' ? 'id' : 'en';
+      localStorage.setItem('mh_lang', currentBrowseLang);
+
+      const btnEn = document.getElementById('langBtnEn');
+      const btnId = document.getElementById('langBtnId');
+      if (btnEn) btnEn.classList.toggle('active', currentBrowseLang === 'en');
+      if (btnId) btnId.classList.toggle('active', currentBrowseLang === 'id');
+
+      const isId = currentBrowseLang === 'id';
+      const backHomeBtn = document.querySelector('.btn-back-home span');
+      if (backHomeBtn) backHomeBtn.textContent = isId ? 'Kembali ke Beranda' : 'Back to Home';
+
+      // Update meta texts
+      const meta = COLLECTION_META[currentCollection] || COLLECTION_META.projects;
+      const title = isId ? (meta.titleId || meta.title) : meta.title;
+      const subtitle = isId ? (meta.subtitleId || meta.subtitle) : meta.subtitle;
+      const eyebrow = isId ? (meta.eyebrowId || meta.eyebrow) : meta.eyebrow;
+
+      document.getElementById('collectionEyebrow').textContent = eyebrow;
+      document.getElementById('collectionTitle').textContent = title;
+      document.getElementById('collectionSubtitle').textContent = subtitle;
+      document.getElementById('pageTitle').textContent = `${title} · Muhammad Haerul`;
+      document.getElementById('browseSearchInput').placeholder = isId 
+        ? 'Cari berdasarkan judul, teknologi, penyelenggara, atau kata kunci...' 
+        : meta.searchPlaceholder;
+
+      renderCollection();
+    }
+
+    async function loadData() {
+      try {
+        const res = await fetch('/api/portfolio/bootstrap');
+        const json = await res.json();
+        if (json.success && json.data) {
+          bootstrapData = json.data;
+          const locCfg = (bootstrapData.settings && bootstrapData.settings.localization) 
+            ? bootstrapData.settings.localization 
+            : { bilingualEnabled: true, defaultLanguage: 'en' };
+          initBrowseLanguage(locCfg);
+          renderCollection();
+        }
+      } catch(e) {
+        console.error('Error fetching bootstrap data:', e);
+        document.getElementById('browseGrid').innerHTML = `
+          <div class="empty-browse">Failed to load items. Please try refreshing.</div>
+        `;
+      }
+    }
+
+    // Render Active Collection
+    function renderCollection() {
+      if (!bootstrapData) return;
+      const q = (document.getElementById('browseSearchInput').value || '').trim().toLowerCase();
+      const grid = document.getElementById('browseGrid');
+      const countEl = document.getElementById('browseCountBadge');
+      const filtersRow = document.getElementById('browseFiltersRow');
+
+      if (currentCollection === 'projects') {
+        const raw = bootstrapData.projects || [];
+        // Setup filter pills once
+        if (!filtersRow.dataset.rendered) {
+          filtersRow.innerHTML = `
+            <button class="browse-filter-pill active" onclick="setCategoryFilter('all', this)">All</button>
+            <button class="browse-filter-pill" onclick="setCategoryFilter('cv', this)">Computer Vision</button>
+            <button class="browse-filter-pill" onclick="setCategoryFilter('llm', this)">LLMs & Agents</button>
+            <button class="browse-filter-pill" onclick="setCategoryFilter('web', this)">Full-Stack & Web</button>
+          `;
+          filtersRow.dataset.rendered = 'true';
+        }
+
+        let filtered = raw.filter(p => {
+          const matchQ = !q || (p.name || '').toLowerCase().includes(q) || (p.description || '').toLowerCase().includes(q) || (p.techStack || []).join(' ').toLowerCase().includes(q);
+          if (!matchQ) return false;
+          if (activeCategoryFilter === 'cv') {
+            const str = (p.name + ' ' + (p.techStack||[]).join(' ')).toLowerCase();
+            return str.includes('vision') || str.includes('yolo') || str.includes('ocr') || str.includes('resnet');
+          }
+          if (activeCategoryFilter === 'llm') {
+            const str = (p.name + ' ' + (p.techStack||[]).join(' ')).toLowerCase();
+            return str.includes('llm') || str.includes('agent') || str.includes('langchain') || str.includes('rag') || str.includes('gemini');
+          }
+          if (activeCategoryFilter === 'web') {
+            const str = (p.name + ' ' + (p.techStack||[]).join(' ')).toLowerCase();
+            return str.includes('react') || str.includes('full-stack') || str.includes('fastapi') || str.includes('web') || str.includes('node');
+          }
+          return true;
+        });
+
+        countEl.textContent = `Showing ${filtered.length} of ${raw.length} projects`;
+
+        if (!filtered.length) {
+          grid.innerHTML = '<div class="empty-browse">No projects found matching your query.</div>';
+          return;
+        }
+
+        grid.innerHTML = filtered.map(p => {
+          const ytId = getYouTubeId(p.videoDemo);
+          const techTags = (p.techStack || []).map(t => {
+            const clean = t.includes(':') ? t.split(':')[1].trim() : t.trim();
+            return `<span class="p-tag">${escapeHtml(clean)}</span>`;
+          }).slice(0, 4).join('');
+
+          return `
+            <div class="project-card reveal in-view" style="display:flex; flex-direction:column; justify-content:space-between; border-radius:20px; overflow:hidden; border:1px solid var(--border); background:var(--surface);">
+              <div class="p-card-media" style="height:200px; background:#0F172A; position:relative; overflow:hidden;">
+                ${ytId ? `
+                  <div class="p-video-wrapper" onclick="openVideoModal('${ytId}', '${escapeHtml(p.name)}')" style="cursor:pointer; width:100%; height:100%;">
+                    <img src="https://img.youtube.com/vi/${ytId}/hqdefault.jpg" alt="${escapeHtml(p.name)}" style="width:100%; height:100%; object-fit:cover;">
+                    <div class="p-video-overlay">
+                      <div class="p-play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg></div>
+                      <span class="p-video-badge">Watch Demo</span>
+                    </div>
+                  </div>
+                ` : `
+                  <div style="display:flex; align-items:center; justify-content:center; height:100%; color:var(--text-secondary); font-size:0.85rem; font-weight:700;">
+                    Interactive Application
+                  </div>
+                `}
+              </div>
+              <div style="padding:22px; display:flex; flex-direction:column; gap:12px; flex:1;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:0.75rem; font-weight:700; color:var(--text-secondary);">${escapeHtml(p.dateRange || '')}</span>
+                  <span style="font-size:0.7rem; font-weight:800; text-transform:uppercase; color:var(--blue); background:var(--blue-soft); padding:3px 8px; border-radius:100px;">Production</span>
+                </div>
+                <h3 style="font-size:1.2rem; font-weight:800; color:var(--text-primary); line-height:1.25;">${escapeHtml(p.name)}</h3>
+                <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.55; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;">${escapeHtml(p.description || '')}</p>
+                <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:10px;">${techTags}</div>
+                <div style="display:flex; gap:10px; padding-top:14px; border-top:1px solid var(--border); margin-top:8px;">
+                  ${ytId ? `<button type="button" class="btn btn-small" onclick="openVideoModal('${ytId}', '${escapeHtml(p.name)}')" style="flex:1; justify-content:center;">Demo</button>` : ''}
+                  ${p.linkProject ? `<a href="${escapeHtml(p.linkProject)}" target="_blank" rel="noopener" class="btn btn-small btn-primary" style="flex:1; justify-content:center; text-decoration:none;">Live App</a>` : ''}
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      } 
+      else if (currentCollection === 'talks') {
+        const raw = bootstrapData.talks || [];
+        countEl.textContent = `Showing ${raw.length} talks`;
+        grid.innerHTML = raw.map(t => {
+          const poster = t.poster_url || '/uploads/talks/default.webp';
+          const topics = Array.isArray(t.topics) ? t.topics : [];
+          const dateStr = t.date ? new Date(t.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+
+          return `
+            <div class="b-talk-card">
+              <div class="b-talk-media" onclick="openLightbox('${escapeHtml(poster)}', '${escapeHtml(t.event)}')">
+                <img class="b-talk-blur-bg" src="${escapeHtml(poster)}" alt="" aria-hidden="true" loading="lazy">
+                <img class="b-talk-main-img" src="${escapeHtml(poster)}" alt="${escapeHtml(t.event)}" loading="lazy">
+              </div>
+              <div style="display:flex; flex-direction:column; gap:8px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.75rem; color:var(--text-secondary); font-weight:700;">
+                  <span>${dateStr}</span>
+                  ${t.jumlah_peserta ? `<span style="color:#0F9D58; font-weight:800;">${t.jumlah_peserta}+ Attendees</span>` : ''}
+                </div>
+                <h3 style="font-size:1.15rem; font-weight:800; color:var(--text-primary); line-height:1.25;">${escapeHtml(t.event)}</h3>
+                <div style="font-size:0.85rem; color:var(--blue); font-weight:700;">${escapeHtml(t.organizer || '')}</div>
+                ${topics.length ? `
+                  <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:6px;">
+                    ${topics.map(tp => `<span class="talk-tag" style="font-size:0.7rem; padding:3px 8px; border-radius:100px; background:var(--bg); border:1px solid var(--border); font-weight:600;">${escapeHtml(tp)}</span>`).join('')}
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+      else if (currentCollection === 'certifications') {
+        const raw = bootstrapData.certifications || [];
+        countEl.textContent = `Showing ${raw.length} certifications`;
+        grid.innerHTML = raw.map(cert => {
+          const skills = Array.isArray(cert.skills) ? cert.skills : [];
+          const accent = cert.accent_color || 'var(--blue)';
+
+          return `
+            <div class="cert-card reveal in-view" style="display:flex; flex-direction:column; justify-content:space-between;">
+              <div class="cert-card-top">
+                <div class="cert-issuer-badge">
+                  <span class="cert-issuer-icon" style="--accent:${escapeHtml(accent)}">${escapeHtml(getInitials(cert.issuer))}</span>
+                  <div class="cert-issuer-meta">
+                    <span class="cert-issuer-name">${escapeHtml(cert.issuer)}</span>
+                    <span class="cert-date">${escapeHtml(cert.issue_date || '')}</span>
+                  </div>
+                </div>
+                ${cert.category ? `<span class="cert-category-pill">${escapeHtml(cert.category)}</span>` : ''}
+              </div>
+              <div class="cert-card-mid">
+                <h4 class="cert-title">${escapeHtml(cert.title)}</h4>
+                ${cert.image_url ? `
+                  <div class="cert-card-preview" onclick="openLightbox('${escapeHtml(cert.image_url)}', '${escapeHtml(cert.title)}')" title="Click to view full certificate" style="margin:12px 0; border-radius:12px; overflow:hidden; border:1px solid var(--border); cursor:pointer;">
+                    <img src="${escapeHtml(cert.image_url)}" alt="${escapeHtml(cert.title)}" loading="lazy" style="width:100%; display:block;">
+                  </div>
+                ` : ''}
+                ${skills.length ? `
+                  <div class="cert-tags-row">
+                    ${skills.map(s => `<span class="cert-tag">${escapeHtml(s)}</span>`).join('')}
+                  </div>
+                ` : ''}
+              </div>
+              <div class="cert-card-bottom" style="margin-top:14px; padding-top:12px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+                <span class="cert-status-tag" style="display:inline-flex; align-items:center; gap:5px; font-size:0.75rem; font-weight:800; color:#0F9D58;">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  Credential Verified
+                </span>
+                ${cert.credential_url ? `
+                  <a href="${escapeHtml(cert.credential_url)}" target="_blank" rel="noopener" class="cert-doc-hint" style="text-decoration:none; color:var(--blue); font-size:0.75rem; font-weight:700;">
+                    View Credential →
+                  </a>
+                ` : `
+                  <span class="cert-doc-hint" style="font-size:0.75rem; color:var(--text-secondary);">Verified on Record</span>
+                `}
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+      else if (currentCollection === 'feedbacks') {
+        const raw = (bootstrapData.feedbacks || []).sort((a,b) => (+b.rating || 0) - (+a.rating || 0));
+        countEl.textContent = `Showing ${raw.length} feedbacks`;
+        grid.innerHTML = raw.map(f => {
+          const rating = +f.rating || 10;
+          return `
+            <div class="testimonial-card in-view" style="display:flex; flex-direction:column; justify-content:space-between; background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:24px;">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+                  <span style="font-weight:800; color:var(--text-primary); font-size:1.05rem;">${escapeHtml(f.nama_lengkap || 'Verified Attendee')}</span>
+                  <div class="t-rating" style="display:inline-flex; align-items:center; gap:4px; font-weight:800; font-size:0.85rem; color:#F59E0B; background:rgba(245,158,11,0.1); padding:3px 10px; border-radius:100px;">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    ${rating}/10
+                  </div>
+                </div>
+                ${f.alasan ? `<p style="font-size:0.92rem; color:var(--text-primary); line-height:1.55; margin-bottom:10px;">"${escapeHtml(f.alasan)}"</p>` : ''}
+                ${f.pesan_kesan ? `<p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.5; font-style:italic;">"${escapeHtml(f.pesan_kesan)}"</p>` : ''}
+              </div>
+              <div style="margin-top:16px; padding-top:12px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; font-size:0.75rem; color:var(--text-secondary); font-weight:600;">
+                <span>${escapeHtml(f.source || 'Session Feedback')}</span>
+                <span>${f.created_at ? new Date(f.created_at).toLocaleDateString() : ''}</span>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+    }
+
+    function setCategoryFilter(cat, btn) {
+      activeCategoryFilter = cat;
+      document.querySelectorAll('.browse-filter-pill').forEach(p => p.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      renderCollection();
+    }
+
+    function filterBrowseCollection() {
+      renderCollection();
+    }
+
+    function getYouTubeId(url) {
+      if (!url) return null;
+      const m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+      return m ? m[1] : null;
+    }
+
+    function getInitials(str) {
+      if (!str) return 'MH';
+      const parts = str.trim().split(/\s+/);
+      if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
+      return str.substring(0, 2).toUpperCase();
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/[&<>"']/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[m]);
+    }
+
+    // Video Modal Handlers
+    function openVideoModal(ytId, title) {
+      const backdrop = document.getElementById('videoModalBackdrop');
+      const titleEl = document.getElementById('videoModalTitle');
+      const wrap = document.getElementById('videoModalIframeWrap');
+      if (backdrop && wrap) {
+        if (titleEl) titleEl.textContent = title || 'Video Demo';
+        wrap.innerHTML = `<iframe src="https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%;"></iframe>`;
+        backdrop.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+    function closeVideoModal() {
+      const backdrop = document.getElementById('videoModalBackdrop');
+      const wrap = document.getElementById('videoModalIframeWrap');
+      if (backdrop) {
+        backdrop.classList.remove('open');
+        if (wrap) wrap.innerHTML = '';
+        document.body.style.overflow = '';
+      }
+    }
+
+    // Lightbox Handlers
+    function openLightbox(src, caption) {
+      const overlay = document.getElementById('lightboxOverlay');
+      const img = document.getElementById('lightboxImg');
+      const cap = document.getElementById('lightboxCaption');
+      if (overlay && img) {
+        img.src = src;
+        if (cap) cap.textContent = caption || '';
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+    function closeLightbox() {
+      const overlay = document.getElementById('lightboxOverlay');
+      if (overlay) {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        closeVideoModal();
+        closeLightbox();
+      }
+    });
+
+    loadData();
+  </script>
+</body>
+</html>

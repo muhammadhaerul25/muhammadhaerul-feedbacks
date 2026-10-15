@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="grad-VANDERBILT-PE-MH2023" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B8860B" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#1E293B" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D4AF37"/>
+      <stop offset="50%" stop-color="#FFDF73"/>
+      <stop offset="100%" stop-color="#AA771C"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="800" height="520" rx="14" fill="#FFFFFF"/>
+  <rect x="12" y="12" width="776" height="496" rx="10" fill="#FAFAFA" stroke="#E2E8F0" stroke-width="2"/>
+
+  <!-- Ornate Decorative Frame -->
+  <rect x="24" y="24" width="752" height="472" rx="6" fill="none" stroke="url(#grad-VANDERBILT-PE-MH2023)" stroke-width="3" stroke-dasharray="16 4"/>
+  <rect x="30" y="30" width="740" height="460" rx="4" fill="none" stroke="#CBD5E1" stroke-width="1"/>
+
+  <!-- Corner Flourishes -->
+  <circle cx="36" cy="36" r="6" fill="url(#grad-VANDERBILT-PE-MH2023)"/>
+  <circle cx="764" cy="36" r="6" fill="url(#grad-VANDERBILT-PE-MH2023)"/>
+  <circle cx="36" cy="484" r="6" fill="url(#grad-VANDERBILT-PE-MH2023)"/>
+  <circle cx="764" cy="484" r="6" fill="url(#grad-VANDERBILT-PE-MH2023)"/>
+
+  <!-- Top Rainbow Stripe -->
+  <rect x="180" y="30" width="440" height="4" rx="2" fill="url(#grad-VANDERBILT-PE-MH2023)"/>
+
+  <!-- Issuer Header -->
+  <text x="400" y="76" font-family="'Inter', -apple-system, sans-serif" font-size="14" font-weight="800" fill="#64748B" text-anchor="middle" letter-spacing="4" text-transform="uppercase">Vanderbilt University</text>
+
+  <!-- Certificate Subtitle -->
+  <text x="400" y="112" font-family="'Google Sans', 'Georgia', serif" font-size="20" font-weight="600" fill="#0F172A" text-anchor="middle" letter-spacing="2">CERTIFICATE OF ACCOMPLISHMENT</text>
+  
+  <text x="400" y="146" font-family="'Inter', sans-serif" font-size="12" font-weight="500" fill="#94A3B8" text-anchor="middle">PROUDLY PRESENTED TO</text>
+
+  <!-- Recipient Name -->
+  <text x="400" y="200" font-family="'Google Sans', 'Inter', sans-serif" font-size="34" font-weight="800" fill="#0F172A" text-anchor="middle" letter-spacing="-0.5">Muhammad Haerul</text>
+  <line x1="240" y1="216" x2="560" y2="216" stroke="url(#grad-VANDERBILT-PE-MH2023)" stroke-width="2"/>
+
+  <!-- Course Completion Note -->
+  <text x="400" y="248" font-family="'Inter', sans-serif" font-size="12" font-weight="500" fill="#64748B" text-anchor="middle">FOR SUCCESSFULLY COMPLETING THE REQUIREMENTS FOR</text>
+
+  <!-- Course Title -->
+  <text x="400" y="292" font-family="'Google Sans', 'Inter', sans-serif" font-size="22" font-weight="800" fill="url(#grad-VANDERBILT-PE-MH2023)" text-anchor="middle">Prompt Engineering for Software Developers</text>
+
+  <!-- Official Gold Seal Badge -->
+  <g transform="translate(400, 375)">
+    <circle cx="0" cy="0" r="42" fill="url(#gold)" filter="url(#shadow)"/>
+    <circle cx="0" cy="0" r="37" fill="#FFFFFF"/>
+    <circle cx="0" cy="0" r="34" fill="none" stroke="url(#gold)" stroke-width="1.5" stroke-dasharray="3 2"/>
+    <path d="M-8 8 L0 -10 L8 8 Z" fill="url(#gold)"/>
+    <text x="0" y="14" font-family="'Inter', sans-serif" font-size="7" font-weight="900" fill="#854D0E" text-anchor="middle" letter-spacing="1">VERIFIED</text>
+  </g>
+
+  <!-- Signature Line Left -->
+  <g transform="translate(140, 420)">
+    <line x1="0" y1="0" x2="160" y2="0" stroke="#94A3B8" stroke-width="1.5"/>
+    <text x="80" y="18" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#334155" text-anchor="middle">Dr. Jules White · Vanderbilt University</text>
+    <text x="80" y="32" font-family="'Inter', sans-serif" font-size="9" font-weight="500" fill="#94A3B8" text-anchor="middle">Instructor / Authority</text>
+  </g>
+
+  <!-- Date & Credential ID Right -->
+  <g transform="translate(500, 420)">
+    <line x1="0" y1="0" x2="160" y2="0" stroke="#94A3B8" stroke-width="1.5"/>
+    <text x="80" y="18" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#334155" text-anchor="middle">Issued: September 2023</text>
+    <text x="80" y="32" font-family="'Courier New', monospace" font-size="8.5" font-weight="600" fill="#64748B" text-anchor="middle">ID: VANDERBILT-PE-MH2023</text>
+  </g>
+
+  <!-- Security Verification Footer Bar -->
+  <rect x="24" y="468" width="752" height="28" fill="#F8FAFC"/>
+  <text x="400" y="486" font-family="'Inter', sans-serif" font-size="9" font-weight="600" fill="#94A3B8" text-anchor="middle">Verified Authentic Professional Credential · Muhammad Haerul Digital Portfolio</text>
+</svg>

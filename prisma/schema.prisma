@@ -337,5 +337,34 @@ model BlogPost {
   @@map("blog_posts")
 }
 
+model Skill {
+  id            String    @id @default(cuid())
+  category      String
+  category_slug String?
+  accent_color  String?   @default("var(--blue)")
+  icon_svg      String?
+  items         Json?
+  tech_stack    Json?
+  sort_order    Int       @default(0)
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
 
+  @@index([sort_order(sort: Asc), created_at(sort: Desc)])
+  @@map("skills")
+}
 
+model SiteSetting {
+  key        String    @id @db.VarChar(255)
+  value      Json
+  updated_at DateTime? @default(now()) @updatedAt @db.Timestamptz(6)
+
+  @@map("site_settings")
+}
+
+model AdminSecurity {
+  key        String    @id
+  value      String
+  updated_at DateTime? @default(now()) @updatedAt @db.Timestamptz(6)
+
+  @@map("admin_security")
+}
