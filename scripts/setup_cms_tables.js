@@ -196,13 +196,13 @@ async function setupAndSeed() {
       'Hasanuddin University',
       'September 2020',
       'July 2024',
-      '3.97 / 4.00 (CGPA)',
+      '3.97 / 4.00 (GPA)',
       'Cumlaude',
       'Artificial Intelligence and Data Science',
       'Development and Comparison of PPE Detection Models in Industrial Workers Based on Computer Vision',
       ['Data Mining', 'Data Analytics', 'Data Visualization', 'Machine Learning', 'Deep Learning', 'Computer Vision', 'Natural Language Processing'],
       ['GenBI Chapter Hasanuddin University 2022', 'Unit of Scientific Knowledge and Scientific Reasoning Generation XIII 2021'],
-      '3× Most Outstanding Student',
+      '3× Most Outstanding Student in Department (2021/2022/2023)',
       '/assets/images/unhas-logo.png',
       1
     ]);
@@ -323,10 +323,10 @@ async function setupAndSeed() {
       {
         title: 'Graduated Cumlaude (Highest Honors)',
         issuer: 'Hasanuddin University',
-        metric_tag: 'CGPA 3.97 / 4.00',
+        metric_tag: 'GPA 3.97 / 4.00',
         badge_text: '🎓 Highest Distinction',
         badge_color: 'yellow',
-        description: 'Graduated with highest academic distinction (Cumlaude) with a near-perfect CGPA of 3.97 out of 4.00 in Bachelor of Computer Science.',
+        description: 'Graduated with highest academic distinction (Cumlaude) with a near-perfect GPA of 3.97 out of 4.00 in Bachelor of Computer Science.',
         chips: ['Cumlaude', 'Dean Honor Roll', 'Valedictorian Candidate'],
         sort_order: 3
       }

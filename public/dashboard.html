@@ -157,6 +157,109 @@
         padding: 14px 10px 6px;
     }
 
+    /* ════ Collapsible Navigation Sections ════ */
+    .nav-section {
+        margin-bottom: 4px;
+    }
+    .nav-section-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 0.65rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--ink-4);
+        padding: 12px 10px 6px;
+        cursor: pointer;
+        user-select: none;
+        border-radius: var(--r-sm);
+        transition: color var(--t), background var(--t);
+    }
+    .nav-section-header:hover {
+        color: var(--ink);
+        background: var(--sidebar-hover);
+    }
+    .nav-section-chevron {
+        width: 14px;
+        height: 14px;
+        transition: transform var(--t);
+        color: var(--ink-4);
+    }
+    .nav-section-header:hover .nav-section-chevron {
+        color: var(--ink);
+    }
+    .nav-section.collapsed .nav-section-chevron {
+        transform: rotate(-90deg);
+    }
+    .nav-section.collapsed .nav-section-list {
+        display: none !important;
+    }
+    .nav-section-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* ════ CV Maker Collapsible Cards & Order Items ════ */
+    .cv-collapsible-card {
+        transition: box-shadow var(--t);
+    }
+    .cv-collapsible-card.cv-card-collapsed .cv-card-body {
+        display: none !important;
+    }
+    .cv-collapsible-card.cv-card-collapsed .cv-card-chevron {
+        transform: rotate(-90deg);
+    }
+    .cv-card-chevron {
+        transition: transform var(--t);
+        color: var(--ink-4);
+    }
+    .cv-card-head:hover .cv-card-chevron {
+        color: var(--ink);
+    }
+    .cv-sec-order-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 10px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--ink);
+        transition: background var(--t), border-color var(--t);
+    }
+    .cv-sec-order-item:hover {
+        border-color: var(--g-blue);
+    }
+    .cv-sec-btn-move {
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--ink-3);
+        transition: background var(--t), color var(--t);
+    }
+    .cv-sec-btn-move:hover:not(:disabled) {
+        background: var(--g-blue-soft);
+        color: var(--g-blue);
+        border-color: var(--g-blue);
+    }
+    .cv-sec-btn-move:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+    }
+
     .nav-item {
         display: flex; align-items: center; gap: 11px;
         padding: 10px 12px; border-radius: var(--r-sm);
@@ -2709,109 +2812,141 @@
 
         <nav class="sidebar-nav">
             <ul style="list-style:none">
+                <!-- Overview -->
                 <li class="nav-item active" id="nav-dashboard" onclick="switchView('dashboard',this)">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
                     Overview
                 </li>
-                <li class="nav-item" id="nav-cv-maker" onclick="switchView('cv-maker',this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    <span>CV Maker</span>
-                    <span style="font-size:0.65rem; font-weight:800; background:var(--g-blue-soft); color:var(--g-blue); padding:2px 7px; border-radius:10px; margin-left:auto;">ATS</span>
-                </li>
 
-                <div class="nav-label">Pages</div>
+                <!-- ════ TOOLS ════ -->
+                <div class="nav-section" id="nav-sec-tools">
+                    <div class="nav-section-header" onclick="toggleNavSection('tools')" role="button" tabindex="0" title="Click to collapse / expand Tools">
+                        <span>Tools</span>
+                        <svg class="nav-section-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                    <ul class="nav-section-list" id="nav-group-tools">
+                        <li class="nav-item" id="nav-cv-maker" onclick="switchView('cv-maker',this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            <span>CV Maker</span>
+                            <span style="font-size:0.65rem; font-weight:800; background:var(--g-blue-soft); color:var(--g-blue); padding:2px 7px; border-radius:10px; margin-left:auto;">ATS</span>
+                        </li>
+                    </ul>
+                </div>
 
-                <li class="nav-item" id="nav-page-identity" onclick="switchView('page-identity',this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
-                    Identity &amp; Brand
-                </li>
-                <li class="nav-item" id="nav-page-navbar" onclick="switchView('page-navbar',this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-                    Navbar Management
-                </li>
-                <li class="nav-item" id="nav-page-hero" onclick="switchView('page-hero',this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>
-                    Hero Customizer
-                </li>
-                <li class="nav-item" id="nav-page-sections" onclick="switchView('page-sections',this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>
-                    Section Headings
-                </li>
-                <li class="nav-item" id="nav-page-footer" onclick="switchView('page-footer',this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="17" x2="21" y2="17"></line></svg>
-                    Footer &amp; Socials
-                </li>
+                <!-- ════ PAGES ════ -->
+                <div class="nav-section" id="nav-sec-pages">
+                    <div class="nav-section-header" onclick="toggleNavSection('pages')" role="button" tabindex="0" title="Click to collapse / expand Pages">
+                        <span>Pages</span>
+                        <svg class="nav-section-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                    <ul class="nav-section-list" id="nav-group-pages">
+                        <li class="nav-item" id="nav-page-identity" onclick="switchView('page-identity',this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+                            Identity &amp; Brand
+                        </li>
+                        <li class="nav-item" id="nav-page-navbar" onclick="switchView('page-navbar',this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                            Navbar Management
+                        </li>
+                        <li class="nav-item" id="nav-page-hero" onclick="switchView('page-hero',this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>
+                            Hero Customizer
+                        </li>
+                        <li class="nav-item" id="nav-page-sections" onclick="switchView('page-sections',this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>
+                            Section Headings
+                        </li>
+                        <li class="nav-item" id="nav-page-footer" onclick="switchView('page-footer',this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="17" x2="21" y2="17"></line></svg>
+                            Footer &amp; Socials
+                        </li>
+                    </ul>
+                </div>
 
-                <div class="nav-label">Management</div>
+                <!-- ════ MANAGEMENT ════ -->
+                <div class="nav-section" id="nav-sec-management">
+                    <div class="nav-section-header" onclick="toggleNavSection('management')" role="button" tabindex="0" title="Click to collapse / expand Management">
+                        <span>Management</span>
+                        <svg class="nav-section-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                    <ul class="nav-section-list" id="nav-group-management">
+                        <li class="nav-item" id="nav-profile" onclick="switchView('profile',this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            Profile
+                        </li>
+                        <li class="nav-item" id="nav-education" onclick="switchView('education',this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                            Education
+                        </li>
+                        <li class="nav-item" id="nav-experiences" onclick="switchView('experiences',this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                            Work Experiences
+                        </li>
+                        <li class="nav-item" id="nav-skills" onclick="switchView('skills',this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                            Skills &amp; Tech Stack
+                        </li>
+                        <li class="nav-item" id="nav-projects" onclick="switchView('projects',this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                            Projects
+                        </li>
+                        <li class="nav-item" id="nav-talks" onclick="switchView('talks',this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/><circle cx="5" cy="19" r="0"/><path d="M2 12c0-3.31 2.69-6 6-6"/></svg>
+                            Talks
+                        </li>
+                        <li class="nav-item" id="nav-awards" onclick="switchView('awards',this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            Honors &amp; Awards
+                        </li>
+                        <li class="nav-item" id="nav-certifications" onclick="switchView('certifications',this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                            Licences &amp; Certifications
+                        </li>
+                        <li class="nav-item" id="nav-publications" onclick="switchView('publications',this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            Publications
+                        </li>
+                        <li class="nav-item" id="nav-blogs" onclick="switchView('blogs',this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                            Blogs
+                        </li>
+                        <li class="nav-item" id="nav-gallery" onclick="switchView('gallery',this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                            Gallery
+                        </li>
+                        <li class="nav-item" id="nav-feedbacks" onclick="switchView('feedbacks',this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                            Feedback
+                            <span class="nav-badge" id="nav-badge" style="display:none">0</span>
+                        </li>
+                        <li class="nav-item" id="nav-inbox" onclick="switchView('inbox',this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            Inquiries <span id="inbox-badge-count" style="display:none; margin-left:auto; background:var(--g-red); color:#fff; font-size:0.7rem; font-weight:800; padding:2px 7px; border-radius:10px;">0</span>
+                        </li>
+                        <li class="nav-item" id="nav-forms" onclick="switchView('forms',this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                            Forms
+                        </li>
+                    </ul>
+                </div>
 
-                <li class="nav-item" id="nav-profile" onclick="switchView('profile',this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                    Profile
-                </li>
-                <li class="nav-item" id="nav-education" onclick="switchView('education',this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-                    Education
-                </li>
-                <li class="nav-item" id="nav-experiences" onclick="switchView('experiences',this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-                    Work Experiences
-                </li>
-                <li class="nav-item" id="nav-skills" onclick="switchView('skills',this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-                    Skills &amp; Tech Stack
-                </li>
-                <li class="nav-item" id="nav-projects" onclick="switchView('projects',this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-                    Projects
-                </li>
-                <li class="nav-item" id="nav-talks" onclick="switchView('talks',this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/><circle cx="5" cy="19" r="0"/><path d="M2 12c0-3.31 2.69-6 6-6"/></svg>
-                    Talks
-                </li>
-                <li class="nav-item" id="nav-awards" onclick="switchView('awards',this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                    Honors &amp; Awards
-                </li>
-                <li class="nav-item" id="nav-certifications" onclick="switchView('certifications',this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
-                    Licences &amp; Certifications
-                </li>
-                <li class="nav-item" id="nav-publications" onclick="switchView('publications',this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    Publications
-                </li>
-                <li class="nav-item" id="nav-blogs" onclick="switchView('blogs',this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-                    Blogs
-                </li>
-                <li class="nav-item" id="nav-gallery" onclick="switchView('gallery',this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                    Gallery
-                </li>
-                <li class="nav-item" id="nav-feedbacks" onclick="switchView('feedbacks',this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                    Feedback
-                    <span class="nav-badge" id="nav-badge" style="display:none">0</span>
-                </li>
-                <li class="nav-item" id="nav-inbox" onclick="switchView('inbox',this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                    Inquiries <span id="inbox-badge-count" style="display:none; margin-left:auto; background:var(--g-red); color:#fff; font-size:0.7rem; font-weight:800; padding:2px 7px; border-radius:10px;">0</span>
-                </li>
-                <li class="nav-item" id="nav-forms" onclick="switchView('forms',this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                    Forms
-                </li>
-
-                <div class="nav-label">Setting</div>
-
-                <li class="nav-item" id="nav-security" onclick="switchView('security',this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><circle cx="12" cy="11" r="3"/></svg>
-                    Access &amp; Security
-                </li>
-                <li class="nav-item" id="nav-language" onclick="switchView('language',this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                    Language &amp; Region
-                </li>
+                <!-- ════ SETTINGS ════ -->
+                <div class="nav-section" id="nav-sec-settings">
+                    <div class="nav-section-header" onclick="toggleNavSection('settings')" role="button" tabindex="0" title="Click to collapse / expand Settings">
+                        <span>Settings</span>
+                        <svg class="nav-section-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                    <ul class="nav-section-list" id="nav-group-settings">
+                        <li class="nav-item" id="nav-security" onclick="switchView('security',this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><circle cx="12" cy="11" r="3"/></svg>
+                            Access &amp; Security
+                        </li>
+                        <li class="nav-item" id="nav-language" onclick="switchView('language',this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            Language &amp; Region
+                        </li>
+                    </ul>
+                </div>
             </ul>
         </nav>
 
@@ -2841,6 +2976,14 @@
                 </div>
             </div>
             <div style="display:flex;align-items:center;gap:10px">
+                <a href="/" target="_blank" class="btn btn-ghost" id="btn-view-site" title="Open Public Portfolio Website in New Tab" style="padding:7px 12px; font-size:0.8rem; display:inline-flex; align-items:center; gap:6px; text-decoration:none; color:var(--ink); font-weight:600; border:1px solid var(--line); border-radius:8px; background:var(--surface);">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--g-blue);">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                    <span>View Site</span>
+                </a>
                 <button class="btn btn-ghost" onclick="refreshData()" id="btn-refresh" style="display:none">
                     <svg id="refresh-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
                     Refresh
@@ -3051,7 +3194,7 @@
 
             <!-- ══ PROJECTS ══ -->
             <div id="view-projects" class="view">
-                <div class="project-stats" id="projects-stats" style="display:none; margin-bottom: 24px;">
+                <div class="project-stats" id="projects-stats" style="margin-bottom: 24px;">
                     <div class="stat-card blue">
                         <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></div>
                         <div class="stat-label">Total Projects</div>
@@ -3061,6 +3204,16 @@
                         <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></div>
                         <div class="stat-label">Tech Stacks Used</div>
                         <div class="stat-value" id="pstat-techs">0</div>
+                    </div>
+                    <div class="stat-card green">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></div>
+                        <div class="stat-label">Live Deployments</div>
+                        <div class="stat-value" id="pstat-live">0</div>
+                    </div>
+                    <div class="stat-card purple">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></div>
+                        <div class="stat-label">Featured Works</div>
+                        <div class="stat-value" id="pstat-featured">0</div>
                     </div>
                 </div>
 
@@ -3442,7 +3595,7 @@
                     </div>
                     <div class="stat-card green">
                         <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></div>
-                        <div class="stat-label">Top CGPA</div>
+                        <div class="stat-label">Top GPA</div>
                         <div class="stat-value" id="edu-stat-grade">3.97</div>
                     </div>
                 </div>
@@ -4208,35 +4361,77 @@
                         </div>
 
                         <!-- Top Toolbar Actions -->
-                        <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-                            <div style="display:flex; align-items:center; background:var(--surface); border:1.5px solid var(--line); border-radius:var(--r-sm); padding:2px;">
-                                <button type="button" class="btn-cv-tpl selected" id="btn-tpl-modern" onclick="setCvTemplate('modern')" style="padding:6px 12px; font-size:0.75rem; font-weight:700; border:none; background:var(--g-blue); color:#fff; border-radius:6px; cursor:pointer;">Modern Tech</button>
-                                <button type="button" class="btn-cv-tpl" id="btn-tpl-classic" onclick="setCvTemplate('classic')" style="padding:6px 12px; font-size:0.75rem; font-weight:700; border:none; background:transparent; color:var(--ink-3); border-radius:6px; cursor:pointer;">Classic ATS</button>
-                                <button type="button" class="btn-cv-tpl" id="btn-tpl-compact" onclick="setCvTemplate('compact')" style="padding:6px 12px; font-size:0.75rem; font-weight:700; border:none; background:transparent; color:var(--ink-3); border-radius:6px; cursor:pointer;">Compact 1-Page</button>
+                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; width:100%; margin-top:14px; padding:12px 14px; background:var(--bg); border:1.5px solid var(--line); border-radius:var(--r-md);">
+                            <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                                <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3);">Preset:</span>
+                                <select id="cv-version-select" onchange="switchCvVersion(this.value)" class="fm-select" style="padding:6px 12px; font-weight:700; font-size:0.82rem; border-radius:8px; border:1.5px solid var(--line); background:var(--surface); cursor:pointer;">
+                                    <option value="fullstack-ai">Full-Stack AI Engineer</option>
+                                    <option value="academic-research">Academic &amp; Researcher</option>
+                                    <option value="trainer-speaker">AI Technical Trainer &amp; Speaker</option>
+                                </select>
+                                <button type="button" class="btn btn-ghost" onclick="createNewCvVersion()" style="padding:6px 10px; font-size:0.75rem; font-weight:700;" title="Create new custom CV preset">+ New</button>
+                                <button type="button" class="btn btn-ghost" onclick="duplicateCurrentCvVersion()" style="padding:6px 10px; font-size:0.75rem; font-weight:700;" title="Duplicate active preset">Duplicate</button>
+                                <button type="button" class="btn btn-ghost" onclick="deleteCurrentCvVersion()" id="btn-delete-cv-ver" style="padding:6px 10px; font-size:0.75rem; font-weight:700; color:var(--g-red);" title="Delete current preset">Delete</button>
+                                <button type="button" class="btn btn-primary" onclick="saveActiveCvVersion(true)" style="padding:6px 14px; font-size:0.75rem; font-weight:700;">Save Version</button>
                             </div>
-                            <button type="button" class="btn btn-ghost" onclick="copyCvPlainText()" style="padding:8px 14px; font-size:0.82rem; font-weight:700; display:inline-flex; align-items:center; gap:6px;" title="Copy plain text formatted for job application textboxes">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                                <span>Copy Text</span>
-                            </button>
-                            <button type="button" class="btn btn-primary" onclick="printCvAts()" style="padding:8px 18px; font-size:0.82rem; font-weight:800; display:inline-flex; align-items:center; gap:6px;">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-                                <span>Print / Save PDF</span>
-                            </button>
+                            <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                                <div style="display:flex; align-items:center; background:var(--surface); border:1.5px solid var(--line); border-radius:var(--r-sm); padding:2px;">
+                                    <button type="button" class="btn-cv-tpl selected" id="btn-tpl-modern" onclick="setCvTemplate('modern')" style="padding:6px 10px; font-size:0.74rem; font-weight:700; border:none; background:var(--g-blue); color:#fff; border-radius:6px; cursor:pointer;">Modern Tech</button>
+                                    <button type="button" class="btn-cv-tpl" id="btn-tpl-classic" onclick="setCvTemplate('classic')" style="padding:6px 10px; font-size:0.74rem; font-weight:700; border:none; background:transparent; color:var(--ink-3); border-radius:6px; cursor:pointer;">Classic ATS</button>
+                                    <button type="button" class="btn-cv-tpl" id="btn-tpl-compact" onclick="setCvTemplate('compact')" style="padding:6px 10px; font-size:0.74rem; font-weight:700; border:none; background:transparent; color:var(--ink-3); border-radius:6px; cursor:pointer;">Compact 1-Page</button>
+                                </div>
+                                <button type="button" class="btn btn-ghost" onclick="copyCvPlainText()" style="padding:6px 12px; font-size:0.76rem; font-weight:700; display:inline-flex; align-items:center; gap:6px;" title="Copy plain text formatted for job application textboxes">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                    <span>Copy Text</span>
+                                </button>
+                                <button type="button" class="btn btn-primary" onclick="printCvAts()" style="padding:6px 14px; font-size:0.76rem; font-weight:800; display:inline-flex; align-items:center; gap:6px;">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                                    <span>Print / PDF</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Split Workspace: Left Config & Checklists, Right ATS Live Sheet Preview -->
                     <div style="display:flex; gap:24px; align-items:flex-start;" class="cv-maker-workspace">
                         <!-- Left Selector Panel -->
-                        <div style="width:430px; flex-shrink:0; display:flex; flex-direction:column; gap:16px;" class="cv-selector-panel">
+                        <div style="width:440px; flex-shrink:0; display:flex; flex-direction:column; gap:14px;" class="cv-selector-panel">
                             
-                            <!-- Card 1: Candidate Header Info -->
-                            <div class="field-card" style="margin-bottom:0;">
-                                <div class="field-card-title">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                    Candidate &amp; Contact Header
+                            <!-- Card 1: Section Order & Visibility Controller -->
+                            <div class="field-card cv-collapsible-card" style="margin-bottom:0;" id="cv-card-section-order">
+                                <div class="cv-card-head" onclick="toggleCvCard(this)" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer; user-select:none;">
+                                    <div class="field-card-title" style="margin-bottom:0; display:flex; align-items:center; gap:8px;">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:var(--g-blue);"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                                        <span>Section Order &amp; Layout</span>
+                                    </div>
+                                    <div style="display:flex; align-items:center; gap:8px;">
+                                        <button type="button" class="btn-sm-ghost" onclick="event.stopPropagation(); resetCvSectionOrder()" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Reset Order</button>
+                                        <svg class="cv-card-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                    </div>
                                 </div>
-                                <div style="display:flex; flex-direction:column; gap:10px;">
+                                <div class="cv-card-body" style="margin-top:12px;">
+                                    <div style="font-size:0.74rem; color:var(--ink-4); margin-bottom:8px; line-height:1.4;">
+                                        Toggle sections on/off and reorder them with &uarr; / &darr; buttons to choose which section comes first:
+                                    </div>
+                                    <div id="cv-section-order-list" style="display:flex; flex-direction:column; gap:6px;">
+                                        <!-- Rendered dynamically -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card 2: Candidate Header Info -->
+                            <div class="field-card cv-collapsible-card" style="margin-bottom:0;" id="cv-card-candidate-header">
+                                <div class="cv-card-head" onclick="toggleCvCard(this)" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer; user-select:none;">
+                                    <div class="field-card-title" style="margin-bottom:0; display:flex; align-items:center; gap:8px;">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:var(--g-blue);"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                        <span>Candidate &amp; Contact Header</span>
+                                    </div>
+                                    <div style="display:flex; align-items:center; gap:8px;">
+                                        <button type="button" class="btn-sm-ghost" onclick="event.stopPropagation(); syncCvCandidateFromProfile()" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;" title="Reload contact details from profile settings">Sync Profile</button>
+                                        <svg class="cv-card-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                    </div>
+                                </div>
+                                <div class="cv-card-body" style="margin-top:12px; display:flex; flex-direction:column; gap:10px;">
                                     <div>
                                         <label class="field-label" style="font-size:0.72rem;">Full Name</label>
                                         <input class="field-input" id="cv-cfg-name" value="Muhammad Haerul, S.Kom" oninput="renderCvAtsPreview()">
@@ -4276,73 +4471,155 @@
                                 </div>
                             </div>
 
-                            <!-- Card 2: Select Work Experiences -->
-                            <div class="field-card" style="margin-bottom:0;">
-                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                                    <div class="field-card-title" style="margin-bottom:0;">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-                                        Work Experience
+                            <!-- Card 3: Select Work Experiences -->
+                            <div class="field-card cv-collapsible-card" style="margin-bottom:0;" id="cv-card-experiences">
+                                <div class="cv-card-head" onclick="toggleCvCard(this)" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer; user-select:none;">
+                                    <div class="field-card-title" style="margin-bottom:0; display:flex; align-items:center; gap:8px;">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:var(--g-blue);"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                                        <span>Work Experience</span>
                                     </div>
-                                    <button type="button" class="btn-sm-ghost" onclick="toggleAllCvCheckboxes('cv-exp-check', true)" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Select All</button>
-                                </div>
-                                <div id="cv-selector-experiences" style="display:flex; flex-direction:column; gap:8px;">
-                                    <!-- Injected experience checkboxes -->
-                                </div>
-                            </div>
-
-                            <!-- Card 3: Select Education -->
-                            <div class="field-card" style="margin-bottom:0;">
-                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                                    <div class="field-card-title" style="margin-bottom:0;">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
-                                        Education
+                                    <div style="display:flex; align-items:center; gap:8px;">
+                                        <button type="button" class="btn-sm-ghost" onclick="event.stopPropagation(); toggleAllCvCheckboxes('cv-exp-check', true)" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Select All</button>
+                                        <svg class="cv-card-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
                                     </div>
-                                    <button type="button" class="btn-sm-ghost" onclick="toggleAllCvCheckboxes('cv-edu-check', true)" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Select All</button>
                                 </div>
-                                <div id="cv-selector-education" style="display:flex; flex-direction:column; gap:8px;">
-                                    <!-- Injected education checkboxes -->
+                                <div class="cv-card-body" style="margin-top:12px;">
+                                    <div id="cv-selector-experiences" style="display:flex; flex-direction:column; gap:8px;">
+                                        <!-- Injected experience checkboxes -->
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- Card 4: Select Projects -->
-                            <div class="field-card" style="margin-bottom:0;">
-                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                                    <div class="field-card-title" style="margin-bottom:0;">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-                                        Featured Projects
+                            <div class="field-card cv-collapsible-card" style="margin-bottom:0;" id="cv-card-projects">
+                                <div class="cv-card-head" onclick="toggleCvCard(this)" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer; user-select:none;">
+                                    <div class="field-card-title" style="margin-bottom:0; display:flex; align-items:center; gap:8px;">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:var(--g-blue);"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                                        <span>Featured Projects</span>
                                     </div>
-                                    <button type="button" class="btn-sm-ghost" onclick="toggleAllCvCheckboxes('cv-proj-check', true)" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Select All</button>
+                                    <div style="display:flex; align-items:center; gap:8px;">
+                                        <button type="button" class="btn-sm-ghost" onclick="event.stopPropagation(); toggleAllCvCheckboxes('cv-proj-check', true)" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Select All</button>
+                                        <svg class="cv-card-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                    </div>
                                 </div>
-                                <div id="cv-selector-projects" style="display:flex; flex-direction:column; gap:8px;">
-                                    <!-- Injected project checkboxes -->
+                                <div class="cv-card-body" style="margin-top:12px;">
+                                    <div id="cv-selector-projects" style="display:flex; flex-direction:column; gap:8px;">
+                                        <!-- Injected project checkboxes -->
+                                    </div>
                                 </div>
                             </div>
 
-                            <!-- Card 5: Select Skills -->
-                            <div class="field-card" style="margin-bottom:0;">
-                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                                    <div class="field-card-title" style="margin-bottom:0;">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-                                        Skills &amp; Competencies
+                            <!-- Card 5: Select Education -->
+                            <div class="field-card cv-collapsible-card" style="margin-bottom:0;" id="cv-card-education">
+                                <div class="cv-card-head" onclick="toggleCvCard(this)" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer; user-select:none;">
+                                    <div class="field-card-title" style="margin-bottom:0; display:flex; align-items:center; gap:8px;">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:var(--g-blue);"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+                                        <span>Education</span>
                                     </div>
-                                    <button type="button" class="btn-sm-ghost" onclick="toggleAllCvCheckboxes('cv-skill-check', true)" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Select All</button>
+                                    <div style="display:flex; align-items:center; gap:8px;">
+                                        <button type="button" class="btn-sm-ghost" onclick="event.stopPropagation(); toggleAllCvCheckboxes('cv-edu-check', true)" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Select All</button>
+                                        <svg class="cv-card-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                    </div>
                                 </div>
-                                <div id="cv-selector-skills" style="display:flex; flex-direction:column; gap:8px;">
-                                    <!-- Injected skill domain checkboxes -->
+                                <div class="cv-card-body" style="margin-top:12px;">
+                                    <div id="cv-selector-education" style="display:flex; flex-direction:column; gap:8px;">
+                                        <!-- Injected education checkboxes -->
+                                    </div>
                                 </div>
                             </div>
 
-                            <!-- Card 6: Certifications & Honors -->
-                            <div class="field-card" style="margin-bottom:0;">
-                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                                    <div class="field-card-title" style="margin-bottom:0;">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"></path></svg>
-                                        Certifications &amp; Awards
+                            <!-- Card 6: Select Skills -->
+                            <div class="field-card cv-collapsible-card" style="margin-bottom:0;" id="cv-card-skills">
+                                <div class="cv-card-head" onclick="toggleCvCard(this)" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer; user-select:none;">
+                                    <div class="field-card-title" style="margin-bottom:0; display:flex; align-items:center; gap:8px;">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:var(--g-blue);"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                                        <span>Skills &amp; Competencies</span>
                                     </div>
-                                    <button type="button" class="btn-sm-ghost" onclick="toggleAllCvCheckboxes('cv-cert-check', true)" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Select All</button>
+                                    <div style="display:flex; align-items:center; gap:8px;">
+                                        <button type="button" class="btn-sm-ghost" onclick="event.stopPropagation(); toggleAllCvCheckboxes('cv-skill-check', true)" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Select All</button>
+                                        <svg class="cv-card-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                    </div>
                                 </div>
-                                <div id="cv-selector-certifications" style="display:flex; flex-direction:column; gap:8px;">
-                                    <!-- Injected cert checkboxes -->
+                                <div class="cv-card-body" style="margin-top:12px;">
+                                    <div id="cv-selector-skills" style="display:flex; flex-direction:column; gap:8px;">
+                                        <!-- Injected skill domain checkboxes -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card 7: Licenses & Certifications -->
+                            <div class="field-card cv-collapsible-card" style="margin-bottom:0;" id="cv-card-certifications">
+                                <div class="cv-card-head" onclick="toggleCvCard(this)" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer; user-select:none;">
+                                    <div class="field-card-title" style="margin-bottom:0; display:flex; align-items:center; gap:8px;">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:var(--g-blue);"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"></path></svg>
+                                        <span>Licences &amp; Certifications</span>
+                                    </div>
+                                    <div style="display:flex; align-items:center; gap:8px;">
+                                        <button type="button" class="btn-sm-ghost" onclick="event.stopPropagation(); toggleAllCvCheckboxes('cv-cert-check', true)" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Select All</button>
+                                        <svg class="cv-card-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                    </div>
+                                </div>
+                                <div class="cv-card-body" style="margin-top:12px;">
+                                    <div id="cv-selector-certifications" style="display:flex; flex-direction:column; gap:8px;">
+                                        <!-- Injected cert checkboxes -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card 8: Honors & Awards -->
+                            <div class="field-card cv-collapsible-card" style="margin-bottom:0;" id="cv-card-awards">
+                                <div class="cv-card-head" onclick="toggleCvCard(this)" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer; user-select:none;">
+                                    <div class="field-card-title" style="margin-bottom:0; display:flex; align-items:center; gap:8px;">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:var(--g-blue);"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                        <span>Honors &amp; Awards</span>
+                                    </div>
+                                    <div style="display:flex; align-items:center; gap:8px;">
+                                        <button type="button" class="btn-sm-ghost" onclick="event.stopPropagation(); toggleAllCvCheckboxes('cv-award-check', true)" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Select All</button>
+                                        <svg class="cv-card-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                    </div>
+                                </div>
+                                <div class="cv-card-body" style="margin-top:12px;">
+                                    <div id="cv-selector-awards" style="display:flex; flex-direction:column; gap:8px;">
+                                        <!-- Injected awards checkboxes -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card 9: Publications & Articles -->
+                            <div class="field-card cv-collapsible-card" style="margin-bottom:0;" id="cv-card-publications">
+                                <div class="cv-card-head" onclick="toggleCvCard(this)" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer; user-select:none;">
+                                    <div class="field-card-title" style="margin-bottom:0; display:flex; align-items:center; gap:8px;">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:var(--g-blue);"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                                        <span>Publications &amp; Articles</span>
+                                    </div>
+                                    <div style="display:flex; align-items:center; gap:8px;">
+                                        <button type="button" class="btn-sm-ghost" onclick="event.stopPropagation(); toggleAllCvCheckboxes('cv-pub-check', true)" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Select All</button>
+                                        <svg class="cv-card-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                    </div>
+                                </div>
+                                <div class="cv-card-body" style="margin-top:12px;">
+                                    <div id="cv-selector-publications" style="display:flex; flex-direction:column; gap:8px;">
+                                        <!-- Injected publications checkboxes -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card 10: Keynote Talks & Workshops -->
+                            <div class="field-card cv-collapsible-card" style="margin-bottom:0;" id="cv-card-talks">
+                                <div class="cv-card-head" onclick="toggleCvCard(this)" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer; user-select:none;">
+                                    <div class="field-card-title" style="margin-bottom:0; display:flex; align-items:center; gap:8px;">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:var(--g-blue);"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                                        <span>Keynote Talks &amp; Workshops</span>
+                                    </div>
+                                    <div style="display:flex; align-items:center; gap:8px;">
+                                        <button type="button" class="btn-sm-ghost" onclick="event.stopPropagation(); toggleAllCvCheckboxes('cv-talk-check', true)" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Select All</button>
+                                        <svg class="cv-card-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                    </div>
+                                </div>
+                                <div class="cv-card-body" style="margin-top:12px;">
+                                    <div id="cv-selector-talks" style="display:flex; flex-direction:column; gap:8px;">
+                                        <!-- Injected talks checkboxes -->
+                                    </div>
                                 </div>
                             </div>
 
@@ -6278,12 +6555,57 @@ function closeMobileSidebar() {
     document.body.style.overflow = '';
 }
 
+function toggleNavSection(secName) {
+    var sec = document.getElementById('nav-sec-' + secName);
+    if (!sec) return;
+    sec.classList.toggle('collapsed');
+    saveNavSectionCollapseState();
+}
+
+function saveNavSectionCollapseState() {
+    try {
+        var states = {};
+        ['tools', 'pages', 'management', 'settings'].forEach(function(key) {
+            var el = document.getElementById('nav-sec-' + key);
+            if (el) states[key] = el.classList.contains('collapsed');
+        });
+        localStorage.setItem('mh_nav_sections_collapsed', JSON.stringify(states));
+    } catch(e) {}
+}
+
+function restoreNavSectionCollapseState() {
+    try {
+        var raw = localStorage.getItem('mh_nav_sections_collapsed');
+        if (!raw) return;
+        var states = JSON.parse(raw);
+        if (states && typeof states === 'object') {
+            Object.keys(states).forEach(function(key) {
+                var el = document.getElementById('nav-sec-' + key);
+                if (el) {
+                    if (states[key]) {
+                        el.classList.add('collapsed');
+                    } else {
+                        el.classList.remove('collapsed');
+                    }
+                }
+            });
+        }
+    } catch(e) {}
+}
+
 function switchView(view, el) {
     if (view === 'pages') view = 'page-identity';
     closeMobileSidebar();
     if (!el) el = document.getElementById('nav-' + view);
     document.querySelectorAll('.nav-item').forEach(function(n){ n.classList.remove('active'); });
-    if (el) el.classList.add('active');
+    if (el) {
+        el.classList.add('active');
+        var parentSec = el.closest('.nav-section');
+        if (parentSec && parentSec.classList.contains('collapsed')) {
+            parentSec.classList.remove('collapsed');
+            saveNavSectionCollapseState();
+        }
+    }
     document.querySelectorAll('.view').forEach(function(v){ v.classList.remove('active'); });
     var viewEl = document.getElementById('view-'+view);
     if (viewEl) viewEl.classList.add('active');
@@ -7804,6 +8126,7 @@ function darkenHex(hex, amount) {
     return '#' + ((r << 16)|(g << 8)|b).toString(16).padStart(6,'0');
 }
 function initActiveView() {
+    restoreNavSectionCollapseState();
     var initView = localStorage.getItem('activeView') || 'dashboard';
     switchView(initView);
 }
@@ -8577,13 +8900,30 @@ function toggleProjectDesc(id, btn) {
 
 function updateProjectsStats() {
     var uniqueTechs = new Set();
+    var liveCount = 0;
+    var featuredCount = 0;
     allProjects.forEach(function(p) {
+        if (p.demoUrl && p.demoUrl.trim()) liveCount++;
+        if (p.isFeatured || (p.featured === true) || (p.tags && p.tags.includes('Featured'))) featuredCount++;
         (p.techStack||[]).forEach(function(t) {
             var parts = t.split(':');
             var tag = parts.length > 1 ? parts.slice(1).join(':').trim() : t.trim();
             uniqueTechs.add(tag);
         });
     });
+
+    if (featuredCount === 0 && allProjects.length > 0) {
+        featuredCount = Math.min(allProjects.length, 6);
+    }
+
+    var elTot = document.getElementById('pstat-total');
+    if (elTot) elTot.textContent = allProjects.length;
+    var elTech = document.getElementById('pstat-techs');
+    if (elTech) elTech.textContent = uniqueTechs.size;
+    var elLive = document.getElementById('pstat-live');
+    if (elLive) elLive.textContent = liveCount;
+    var elFeat = document.getElementById('pstat-featured');
+    if (elFeat) elFeat.textContent = featuredCount;
 
     var filterEl = document.getElementById('projects-tech-filter');
     if (filterEl) {
@@ -13404,24 +13744,456 @@ function collectEduAwards() {
 // ══════════════════════════════════════════════════════════════════════════════
 let _cvCurrentTemplate = 'modern';
 let _cvLoaded = false;
+let _cvActiveVersionId = 'fullstack-ai';
+
+// Collapsible CV Maker card toggle
+function toggleCvCard(headEl) {
+    var card = headEl.closest('.cv-collapsible-card');
+    if (card) {
+        card.classList.toggle('cv-card-collapsed');
+    }
+}
+
+// 9 Customizable Sections (Reorderable & Toggleable)
+var _cvDefaultSections = [
+    { id: 'summary', name: 'Professional Summary', enabled: true },
+    { id: 'experience', name: 'Work Experience', enabled: true },
+    { id: 'projects', name: 'Featured Projects', enabled: true },
+    { id: 'education', name: 'Education', enabled: true },
+    { id: 'skills', name: 'Skills & Competencies', enabled: true },
+    { id: 'certifications', name: 'Certifications & Licenses', enabled: true },
+    { id: 'awards', name: 'Honors & Awards', enabled: true },
+    { id: 'publications', name: 'Publications & Articles', enabled: true },
+    { id: 'talks', name: 'Keynote Talks & Workshops', enabled: true }
+];
+var _cvSections = JSON.parse(JSON.stringify(_cvDefaultSections));
+
+function renderCvSectionOrderList() {
+    var cont = document.getElementById('cv-section-order-list');
+    if (!cont) return;
+    cont.innerHTML = _cvSections.map(function(sec, idx) {
+        var isFirst = idx === 0;
+        var isLast = idx === _cvSections.length - 1;
+        return '<div class="cv-sec-order-item">' +
+            '<input type="checkbox" ' + (sec.enabled ? 'checked' : '') + ' onchange="toggleCvSectionActive(\'' + sec.id + '\', this.checked)" style="accent-color:var(--g-blue); cursor:pointer;">' +
+            '<span style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;' + (sec.enabled ? '' : 'color:var(--ink-4); text-decoration:line-through;') + '">' + esc(sec.name) + '</span>' +
+            '<div style="display:flex; gap:4px; align-items:center;">' +
+                '<button type="button" class="cv-sec-btn-move" onclick="moveCvSection(\'' + sec.id + '\', -1)" ' + (isFirst ? 'disabled' : '') + ' title="Move Up">&uarr;</button>' +
+                '<button type="button" class="cv-sec-btn-move" onclick="moveCvSection(\'' + sec.id + '\', 1)" ' + (isLast ? 'disabled' : '') + ' title="Move Down">&darr;</button>' +
+            '</div>' +
+        '</div>';
+    }).join('');
+}
+
+function moveCvSection(secId, direction) {
+    var idx = _cvSections.findIndex(s => s.id === secId);
+    if (idx === -1) return;
+    var targetIdx = idx + direction;
+    if (targetIdx < 0 || targetIdx >= _cvSections.length) return;
+    var temp = _cvSections[idx];
+    _cvSections[idx] = _cvSections[targetIdx];
+    _cvSections[targetIdx] = temp;
+    renderCvSectionOrderList();
+    renderCvAtsPreview();
+    saveActiveCvVersion(false);
+}
+
+function toggleCvSectionActive(secId, isChecked) {
+    var sec = _cvSections.find(s => s.id === secId);
+    if (sec) {
+        sec.enabled = isChecked;
+        renderCvSectionOrderList();
+        renderCvAtsPreview();
+        saveActiveCvVersion(false);
+    }
+}
+
+function resetCvSectionOrder() {
+    _cvSections = JSON.parse(JSON.stringify(_cvDefaultSections));
+    renderCvSectionOrderList();
+    renderCvAtsPreview();
+    saveActiveCvVersion(false);
+    showToast('Section order reset to default!', 'success');
+}
+
+// ════ Version / Preset Management ════
+const CV_VERSIONS_KEY = 'mh_cv_saved_versions';
+
+function getDefaultCvVersions() {
+    return [
+        {
+            id: 'fullstack-ai',
+            name: 'Full-Stack AI Engineer',
+            template: 'modern',
+            header: {
+                name: 'Muhammad Haerul, S.Kom',
+                title: 'AI Full-Stack Engineer | AI Trainer',
+                email: 'haerulmuhammad01@gmail.com',
+                location: 'Makassar, Indonesia',
+                linkedin: 'linkedin.com/in/muhammadhaerul',
+                github: 'github.com/muhammadhaerul25',
+                website: 'https://muhammadhaerul.tech',
+                summary: 'AI Full-Stack Engineer and Technical Trainer with 4+ years of experience architecting end-to-end intelligent systems, agentic AI workflows, and high-performance web applications. Proven track record in industry AI deployment, enterprise APIs, and empowering hundreds of engineers through hands-on technical training.'
+            },
+            sections: JSON.parse(JSON.stringify(_cvDefaultSections))
+        },
+        {
+            id: 'academic-research',
+            name: 'Academic & Researcher',
+            template: 'classic',
+            header: {
+                name: 'Muhammad Haerul, S.Kom',
+                title: 'AI & Computer Science Researcher',
+                email: 'haerulmuhammad01@gmail.com',
+                location: 'Makassar, Indonesia',
+                linkedin: 'linkedin.com/in/muhammadhaerul',
+                github: 'github.com/muhammadhaerul25',
+                website: 'https://muhammadhaerul.tech',
+                summary: 'Computer Science graduate (GPA 3.97 / 4.00) and researcher specializing in Artificial Intelligence, Computer Vision, and applied NLP. Experienced in authoring technical publications, academic presentations, and scientific innovation.'
+            },
+            sections: [
+                { id: 'summary', name: 'Professional Summary', enabled: true },
+                { id: 'education', name: 'Education', enabled: true },
+                { id: 'awards', name: 'Honors & Awards', enabled: true },
+                { id: 'publications', name: 'Publications & Articles', enabled: true },
+                { id: 'projects', name: 'Featured Projects', enabled: true },
+                { id: 'experience', name: 'Work Experience', enabled: true },
+                { id: 'skills', name: 'Skills & Competencies', enabled: true },
+                { id: 'talks', name: 'Keynote Talks & Workshops', enabled: true },
+                { id: 'certifications', name: 'Certifications & Licenses', enabled: true }
+            ]
+        },
+        {
+            id: 'trainer-speaker',
+            name: 'AI Technical Trainer & Speaker',
+            template: 'compact',
+            header: {
+                name: 'Muhammad Haerul, S.Kom',
+                title: 'AI Technical Trainer & Keynote Speaker',
+                email: 'haerulmuhammad01@gmail.com',
+                location: 'Makassar, Indonesia',
+                linkedin: 'linkedin.com/in/muhammadhaerul',
+                github: 'github.com/muhammadhaerul25',
+                website: 'https://muhammadhaerul.tech',
+                summary: 'Experienced AI Trainer and public speaker who has trained over 650+ engineers, students, and professionals in Generative AI, Prompt Engineering, Agentic Workflows, and Modern Software Engineering.'
+            },
+            sections: [
+                { id: 'summary', name: 'Professional Summary', enabled: true },
+                { id: 'talks', name: 'Keynote Talks & Workshops', enabled: true },
+                { id: 'experience', name: 'Work Experience', enabled: true },
+                { id: 'skills', name: 'Skills & Competencies', enabled: true },
+                { id: 'projects', name: 'Featured Projects', enabled: true },
+                { id: 'awards', name: 'Honors & Awards', enabled: true },
+                { id: 'education', name: 'Education', enabled: true },
+                { id: 'certifications', name: 'Certifications & Licenses', enabled: true },
+                { id: 'publications', name: 'Publications & Articles', enabled: true }
+            ]
+        }
+    ];
+}
+
+function loadSavedCvVersions() {
+    try {
+        var raw = localStorage.getItem(CV_VERSIONS_KEY);
+        if (raw) {
+            var parsed = JSON.parse(raw);
+            if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        }
+    } catch(e) {}
+    var def = getDefaultCvVersions();
+    localStorage.setItem(CV_VERSIONS_KEY, JSON.stringify(def));
+    return def;
+}
+
+function initCvVersionsDropdown() {
+    var sel = document.getElementById('cv-version-select');
+    if (!sel) return;
+    var list = loadSavedCvVersions();
+    sel.innerHTML = list.map(function(v) {
+        return '<option value="' + esc(v.id) + '">' + esc(v.name) + '</option>';
+    }).join('');
+    if (list.some(v => v.id === _cvActiveVersionId)) {
+        sel.value = _cvActiveVersionId;
+    } else {
+        _cvActiveVersionId = list[0].id;
+        sel.value = _cvActiveVersionId;
+    }
+}
+
+function switchCvVersion(verId) {
+    var list = loadSavedCvVersions();
+    var ver = list.find(v => v.id === verId);
+    if (!ver) return;
+    _cvActiveVersionId = verId;
+
+    if (ver.header) {
+        if (document.getElementById('cv-cfg-name')) document.getElementById('cv-cfg-name').value = ver.header.name || '';
+        if (document.getElementById('cv-cfg-title')) document.getElementById('cv-cfg-title').value = ver.header.title || '';
+        if (document.getElementById('cv-cfg-email')) document.getElementById('cv-cfg-email').value = ver.header.email || '';
+        if (document.getElementById('cv-cfg-location')) document.getElementById('cv-cfg-location').value = ver.header.location || '';
+        if (document.getElementById('cv-cfg-linkedin')) document.getElementById('cv-cfg-linkedin').value = ver.header.linkedin || '';
+        if (document.getElementById('cv-cfg-github')) document.getElementById('cv-cfg-github').value = ver.header.github || '';
+        if (document.getElementById('cv-cfg-website')) document.getElementById('cv-cfg-website').value = ver.header.website || '';
+        if (document.getElementById('cv-cfg-summary')) document.getElementById('cv-cfg-summary').value = ver.header.summary || '';
+    }
+
+    if (ver.template) {
+        setCvTemplate(ver.template);
+    }
+
+    if (Array.isArray(ver.sections) && ver.sections.length) {
+        var currentIds = ver.sections.map(s => s.id);
+        _cvSections = ver.sections.slice();
+        _cvDefaultSections.forEach(function(ds) {
+            if (!currentIds.includes(ds.id)) {
+                _cvSections.push(JSON.parse(JSON.stringify(ds)));
+            }
+        });
+    } else {
+        _cvSections = JSON.parse(JSON.stringify(_cvDefaultSections));
+    }
+    renderCvSectionOrderList();
+
+    if (ver.checked) {
+        applyCheckedMap('.cv-exp-check', ver.checked.experiences);
+        applyCheckedMap('.cv-edu-check', ver.checked.education);
+        applyCheckedMap('.cv-proj-check', ver.checked.projects);
+        applyCheckedMap('.cv-skill-check', ver.checked.skills);
+        applyCheckedMap('.cv-cert-check', ver.checked.certifications);
+        applyCheckedMap('.cv-award-check', ver.checked.awards);
+        applyCheckedMap('.cv-pub-check', ver.checked.publications);
+        applyCheckedMap('.cv-talk-check', ver.checked.talks);
+    }
+
+    renderCvAtsPreview();
+}
+
+function applyCheckedMap(selector, ids) {
+    if (!Array.isArray(ids)) return;
+    document.querySelectorAll(selector).forEach(function(cb) {
+        var id = cb.getAttribute('data-id');
+        cb.checked = ids.includes(id);
+    });
+}
+
+function getActiveCheckedIds(selector) {
+    return Array.from(document.querySelectorAll(selector + ':checked')).map(cb => cb.getAttribute('data-id'));
+}
+
+function saveActiveCvVersion(showFeedback) {
+    var list = loadSavedCvVersions();
+    var idx = list.findIndex(v => v.id === _cvActiveVersionId);
+    if (idx === -1) return;
+
+    var header = {
+        name: (document.getElementById('cv-cfg-name')?.value || '').trim(),
+        title: (document.getElementById('cv-cfg-title')?.value || '').trim(),
+        email: (document.getElementById('cv-cfg-email')?.value || '').trim(),
+        location: (document.getElementById('cv-cfg-location')?.value || '').trim(),
+        linkedin: (document.getElementById('cv-cfg-linkedin')?.value || '').trim(),
+        github: (document.getElementById('cv-cfg-github')?.value || '').trim(),
+        website: (document.getElementById('cv-cfg-website')?.value || '').trim(),
+        summary: (document.getElementById('cv-cfg-summary')?.value || '').trim()
+    };
+
+    var checked = {
+        experiences: getActiveCheckedIds('.cv-exp-check'),
+        education: getActiveCheckedIds('.cv-edu-check'),
+        projects: getActiveCheckedIds('.cv-proj-check'),
+        skills: getActiveCheckedIds('.cv-skill-check'),
+        certifications: getActiveCheckedIds('.cv-cert-check'),
+        awards: getActiveCheckedIds('.cv-award-check'),
+        publications: getActiveCheckedIds('.cv-pub-check'),
+        talks: getActiveCheckedIds('.cv-talk-check')
+    };
+
+    list[idx].header = header;
+    list[idx].template = _cvCurrentTemplate;
+    list[idx].sections = _cvSections;
+    list[idx].checked = checked;
+
+    try {
+        localStorage.setItem(CV_VERSIONS_KEY, JSON.stringify(list));
+        if (showFeedback) {
+            showToast('Preset "' + list[idx].name + '" saved successfully!', 'success');
+        }
+    } catch(e) {
+        if (showFeedback) showToast('Failed to save preset to localStorage', 'error');
+    }
+}
+
+function createNewCvVersion() {
+    var name = prompt('Enter a name for the new CV preset:', 'Full-Stack Engineer — Target Role');
+    if (!name || !name.trim()) return;
+    name = name.trim();
+    var id = 'ver-' + Date.now();
+    var list = loadSavedCvVersions();
+    var newVer = {
+        id: id,
+        name: name,
+        template: _cvCurrentTemplate,
+        header: {
+            name: (document.getElementById('cv-cfg-name')?.value || 'Muhammad Haerul, S.Kom').trim(),
+            title: (document.getElementById('cv-cfg-title')?.value || 'AI Full-Stack Engineer').trim(),
+            email: (document.getElementById('cv-cfg-email')?.value || 'haerulmuhammad01@gmail.com').trim(),
+            location: (document.getElementById('cv-cfg-location')?.value || 'Makassar, Indonesia').trim(),
+            linkedin: (document.getElementById('cv-cfg-linkedin')?.value || 'linkedin.com/in/muhammadhaerul').trim(),
+            github: (document.getElementById('cv-cfg-github')?.value || 'github.com/muhammadhaerul25').trim(),
+            website: (document.getElementById('cv-cfg-website')?.value || 'https://muhammadhaerul.tech').trim(),
+            summary: (document.getElementById('cv-cfg-summary')?.value || '').trim()
+        },
+        sections: JSON.parse(JSON.stringify(_cvSections)),
+        checked: {
+            experiences: getActiveCheckedIds('.cv-exp-check'),
+            education: getActiveCheckedIds('.cv-edu-check'),
+            projects: getActiveCheckedIds('.cv-proj-check'),
+            skills: getActiveCheckedIds('.cv-skill-check'),
+            certifications: getActiveCheckedIds('.cv-cert-check'),
+            awards: getActiveCheckedIds('.cv-award-check'),
+            publications: getActiveCheckedIds('.cv-pub-check'),
+            talks: getActiveCheckedIds('.cv-talk-check')
+        }
+    };
+    list.push(newVer);
+    localStorage.setItem(CV_VERSIONS_KEY, JSON.stringify(list));
+    _cvActiveVersionId = id;
+    initCvVersionsDropdown();
+    switchCvVersion(id);
+    showToast('Created new preset "' + name + '"!', 'success');
+}
+
+function duplicateCurrentCvVersion() {
+    var list = loadSavedCvVersions();
+    var current = list.find(v => v.id === _cvActiveVersionId);
+    if (!current) return;
+    var newName = current.name + ' (Copy)';
+    var newId = 'ver-' + Date.now();
+    var clone = JSON.parse(JSON.stringify(current));
+    clone.id = newId;
+    clone.name = newName;
+    list.push(clone);
+    localStorage.setItem(CV_VERSIONS_KEY, JSON.stringify(list));
+    _cvActiveVersionId = newId;
+    initCvVersionsDropdown();
+    switchCvVersion(newId);
+    showToast('Duplicated preset as "' + newName + '"!', 'success');
+}
+
+function deleteCurrentCvVersion() {
+    var list = loadSavedCvVersions();
+    if (list.length <= 1) {
+        showToast('Cannot delete the only existing CV preset.', 'error');
+        return;
+    }
+    var current = list.find(v => v.id === _cvActiveVersionId);
+    if (!current) return;
+    if (!confirm('Are you sure you want to delete preset "' + current.name + '"?')) return;
+    list = list.filter(v => v.id !== _cvActiveVersionId);
+    localStorage.setItem(CV_VERSIONS_KEY, JSON.stringify(list));
+    _cvActiveVersionId = list[0].id;
+    initCvVersionsDropdown();
+    switchCvVersion(_cvActiveVersionId);
+    showToast('Preset deleted.', 'info');
+}
+
+// Sync Contact Header from Database Site Settings
+async function syncCvCandidateFromProfile() {
+    try {
+        var res = await fetch('/api/portfolio/bootstrap').then(r => r.json());
+        if (res.success && res.data && res.data.settings) {
+            var st = res.data.settings;
+            if (st.profile) {
+                if (st.profile.name && document.getElementById('cv-cfg-name')) document.getElementById('cv-cfg-name').value = st.profile.name;
+                if (st.profile.role && document.getElementById('cv-cfg-title')) {
+                    document.getElementById('cv-cfg-title').value = st.profile.role + (st.profile.roleSub ? ' | ' + st.profile.roleSub.replace(/[()]/g, '') : '');
+                }
+                if (st.profile.storyParagraph1 && document.getElementById('cv-cfg-summary')) {
+                    document.getElementById('cv-cfg-summary').value = st.profile.storyParagraph1;
+                }
+            }
+            if (st.footer && st.footer.socials) {
+                var soc = st.footer.socials;
+                if (soc.email && document.getElementById('cv-cfg-email')) document.getElementById('cv-cfg-email').value = soc.email;
+                if (soc.github && document.getElementById('cv-cfg-github')) {
+                    document.getElementById('cv-cfg-github').value = soc.github.replace(/^https?:\/\//i, '');
+                }
+                if (soc.linkedin && document.getElementById('cv-cfg-linkedin')) {
+                    document.getElementById('cv-cfg-linkedin').value = soc.linkedin.replace(/^https?:\/\//i, '');
+                }
+            }
+            if (st.general && st.general.siteTitle && document.getElementById('cv-cfg-website')) {
+                document.getElementById('cv-cfg-website').value = 'https://muhammadhaerul.tech';
+            }
+            renderCvAtsPreview();
+            saveActiveCvVersion(false);
+            showToast('Candidate header synchronized with profile!', 'success');
+        }
+    } catch(e) {
+        showToast('Failed to sync profile settings', 'error');
+    }
+}
+
+// ════ Robust Bullet & Description Parsing ════
+function formatExpDescription(desc) {
+    if (!desc) return '';
+    var clean = String(desc).replace(/\r/g, '').trim();
+    var lines = clean.split('\n').map(l => l.trim()).filter(Boolean);
+    var bullets = [];
+    var leadParagraphs = [];
+
+    lines.forEach(function(line) {
+        var m = line.match(/^(?:(?:\d+[\.\)])|[-*•])\s+(.+)$/);
+        if (m) {
+            bullets.push(m[1]);
+        } else if (line.match(/^projects:\s*$/i)) {
+            // skip project label
+        } else {
+            if (bullets.length === 0) {
+                leadParagraphs.push(line);
+            } else {
+                bullets.push(line);
+            }
+        }
+    });
+
+    var out = '';
+    if (leadParagraphs.length) {
+        out += '<p class="ats-item-desc">' + leadParagraphs.map(esc).join(' ') + '</p>';
+    }
+    if (bullets.length) {
+        out += '<ul class="ats-bullets">';
+        bullets.forEach(function(b) {
+            out += '<li>' + esc(b) + '</li>';
+        });
+        out += '</ul>';
+    } else if (!leadParagraphs.length && clean) {
+        out += '<p class="ats-item-desc">' + esc(clean) + '</p>';
+    }
+    return out;
+}
 
 async function initCvMakerView() {
     if (!_cvLoaded) {
-        // Load data if not already cached
-        if (!experiencesLoaded || !educationsLoaded || !projectsLoaded || !skillsLoaded || !certificationsLoaded) {
-            try {
-                var res = await fetch('/api/portfolio/bootstrap').then(r => r.json());
-                if (res.success && res.data) {
-                    experiencesData = res.data.experiences || [];
-                    educationsData = res.data.educations || [];
-                    projectsData = res.data.projects || [];
-                    skillsData = res.data.skills || [];
-                    certificationsData = res.data.certifications || [];
-                    awardsData = res.data.awards || [];
-                }
-            } catch(e) {}
-        }
+        try {
+            var res = await fetch('/api/portfolio/bootstrap').then(r => r.json());
+            if (res.success && res.data) {
+                experiencesData = res.data.experiences || [];
+                educationsData = res.data.educations || [];
+                projectsData = res.data.projects || [];
+                allProjects = projectsData;
+                skillsData = res.data.skills || [];
+                certificationsData = res.data.certifications || [];
+                awardsData = res.data.awards || [];
+                publicationsData = res.data.publications || [];
+                talksData = res.data.talks || [];
+                window.awardsData = awardsData;
+                window.publicationsData = publicationsData;
+                window.talksData = talksData;
+            }
+        } catch(e) {}
         renderCvMakerChecklists();
+        initCvVersionsDropdown();
+        renderCvSectionOrderList();
         _cvLoaded = true;
     }
     renderCvAtsPreview();
@@ -13431,7 +14203,7 @@ function renderCvMakerChecklists() {
     // 1. Experiences Checkboxes
     var expCont = document.getElementById('cv-selector-experiences');
     if (expCont && experiencesData) {
-        expCont.innerHTML = experiencesData.map(function(exp, idx) {
+        expCont.innerHTML = experiencesData.map(function(exp) {
             return '<label style="display:flex; align-items:flex-start; gap:10px; padding:8px 10px; background:var(--surface); border:1px solid var(--line); border-radius:8px; cursor:pointer; font-size:0.8rem;">' +
                 '<input type="checkbox" class="cv-exp-check" data-id="' + esc(exp.id) + '" checked onchange="renderCvAtsPreview()" style="margin-top:2px; accent-color:var(--g-blue);">' +
                 '<div style="flex:1; min-width:0;">' +
@@ -13460,11 +14232,13 @@ function renderCvMakerChecklists() {
     var projCont = document.getElementById('cv-selector-projects');
     if (projCont && allProjects) {
         projCont.innerHTML = allProjects.map(function(proj) {
+            var pName = proj.name || proj.title || 'Untitled Project';
+            var pSubtitle = proj.dateRange || proj.role || 'Featured Engineering Project';
             return '<label style="display:flex; align-items:flex-start; gap:10px; padding:8px 10px; background:var(--surface); border:1px solid var(--line); border-radius:8px; cursor:pointer; font-size:0.8rem;">' +
                 '<input type="checkbox" class="cv-proj-check" data-id="' + esc(proj.id) + '" checked onchange="renderCvAtsPreview()" style="margin-top:2px; accent-color:var(--g-blue);">' +
                 '<div style="flex:1; min-width:0;">' +
-                    '<strong style="color:var(--ink); display:block;">' + esc(proj.title) + '</strong>' +
-                    '<span style="color:var(--ink-4); font-size:0.75rem;">' + esc(proj.role || 'Featured Engineering Project') + '</span>' +
+                    '<strong style="color:var(--ink); display:block;">' + esc(pName) + '</strong>' +
+                    '<span style="color:var(--ink-4); font-size:0.75rem;">' + esc(pSubtitle) + '</span>' +
                 '</div>' +
             '</label>';
         }).join('');
@@ -13474,11 +14248,18 @@ function renderCvMakerChecklists() {
     var skillCont = document.getElementById('cv-selector-skills');
     if (skillCont && skillsData) {
         skillCont.innerHTML = skillsData.map(function(sk) {
+            var techPreviewList = [];
+            if (Array.isArray(sk.tech_stack) && sk.tech_stack.length) {
+                techPreviewList = sk.tech_stack.slice(0, 4).map(function(t) { return typeof t === 'string' ? t : (t.name || ''); }).filter(Boolean);
+            } else if (Array.isArray(sk.items) && sk.items.length) {
+                techPreviewList = sk.items.slice(0, 4).map(function(it) { return typeof it === 'string' ? it : (it.name || ''); }).filter(Boolean);
+            }
+            var previewText = techPreviewList.join(', ');
             return '<label style="display:flex; align-items:flex-start; gap:10px; padding:8px 10px; background:var(--surface); border:1px solid var(--line); border-radius:8px; cursor:pointer; font-size:0.8rem;">' +
                 '<input type="checkbox" class="cv-skill-check" data-id="' + esc(sk.id) + '" checked onchange="renderCvAtsPreview()" style="margin-top:2px; accent-color:var(--g-blue);">' +
                 '<div style="flex:1; min-width:0;">' +
                     '<strong style="color:var(--ink); display:block;">' + esc(sk.category) + '</strong>' +
-                    '<span style="color:var(--ink-4); font-size:0.72rem;">' + ((sk.tech_stack || []).slice(0, 4).join(', ')) + '</span>' +
+                    '<span style="color:var(--ink-4); font-size:0.72rem;">' + esc(previewText) + '</span>' +
                 '</div>' +
             '</label>';
         }).join('');
@@ -13497,6 +14278,52 @@ function renderCvMakerChecklists() {
             '</label>';
         }).join('');
     }
+
+    // 6. Honors & Awards Checkboxes
+    var awList = window.awardsData || awardsData || [];
+    var awardCont = document.getElementById('cv-selector-awards');
+    if (awardCont && awList) {
+        awardCont.innerHTML = awList.map(function(a) {
+            return '<label style="display:flex; align-items:flex-start; gap:10px; padding:8px 10px; background:var(--surface); border:1px solid var(--line); border-radius:8px; cursor:pointer; font-size:0.8rem;">' +
+                '<input type="checkbox" class="cv-award-check" data-id="' + esc(a.id) + '" checked onchange="renderCvAtsPreview()" style="margin-top:2px; accent-color:var(--g-blue);">' +
+                '<div style="flex:1; min-width:0;">' +
+                    '<strong style="color:var(--ink); display:block;">' + esc(a.title) + '</strong>' +
+                    '<span style="color:var(--ink-4); font-size:0.72rem;">' + esc(a.issuer) + (a.metric_tag ? ' &bull; ' + esc(a.metric_tag) : '') + '</span>' +
+                '</div>' +
+            '</label>';
+        }).join('');
+    }
+
+    // 7. Publications Checkboxes
+    var pubList = window.publicationsData || publicationsData || [];
+    var pubCont = document.getElementById('cv-selector-publications');
+    if (pubCont && pubList) {
+        pubCont.innerHTML = pubList.map(function(p) {
+            return '<label style="display:flex; align-items:flex-start; gap:10px; padding:8px 10px; background:var(--surface); border:1px solid var(--line); border-radius:8px; cursor:pointer; font-size:0.8rem;">' +
+                '<input type="checkbox" class="cv-pub-check" data-id="' + esc(p.id) + '" checked onchange="renderCvAtsPreview()" style="margin-top:2px; accent-color:var(--g-blue);">' +
+                '<div style="flex:1; min-width:0;">' +
+                    '<strong style="color:var(--ink); display:block;">' + esc(p.title) + '</strong>' +
+                    '<span style="color:var(--ink-4); font-size:0.72rem;">' + esc(p.publisher) + (p.date ? ' &bull; ' + esc(p.date) : '') + '</span>' +
+                '</div>' +
+            '</label>';
+        }).join('');
+    }
+
+    // 8. Keynote Talks Checkboxes
+    var talkList = window.talksData || allTalks || [];
+    var talkCont = document.getElementById('cv-selector-talks');
+    if (talkCont && talkList) {
+        talkCont.innerHTML = talkList.map(function(t) {
+            var dStr = t.date ? new Date(t.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : '';
+            return '<label style="display:flex; align-items:flex-start; gap:10px; padding:8px 10px; background:var(--surface); border:1px solid var(--line); border-radius:8px; cursor:pointer; font-size:0.8rem;">' +
+                '<input type="checkbox" class="cv-talk-check" data-id="' + esc(t.id) + '" checked onchange="renderCvAtsPreview()" style="margin-top:2px; accent-color:var(--g-blue);">' +
+                '<div style="flex:1; min-width:0;">' +
+                    '<strong style="color:var(--ink); display:block;">' + esc(t.event) + '</strong>' +
+                    '<span style="color:var(--ink-4); font-size:0.72rem;">' + esc(t.organizer) + (dStr ? ' &bull; ' + esc(dStr) : '') + '</span>' +
+                '</div>' +
+            '</label>';
+        }).join('');
+    }
 }
 
 function toggleAllCvCheckboxes(cls, check) {
@@ -13504,6 +14331,7 @@ function toggleAllCvCheckboxes(cls, check) {
         cb.checked = check;
     });
     renderCvAtsPreview();
+    saveActiveCvVersion(false);
 }
 
 function setCvTemplate(tpl) {
@@ -13540,18 +14368,27 @@ function renderCvAtsPreview() {
     var website = (document.getElementById('cv-cfg-website') ? document.getElementById('cv-cfg-website').value : 'https://muhammadhaerul.tech').trim();
     var summary = (document.getElementById('cv-cfg-summary') ? document.getElementById('cv-cfg-summary').value : '').trim();
 
-    // Collect checked items
+    // Collect checked IDs
     var checkedExpIds = Array.from(document.querySelectorAll('.cv-exp-check:checked')).map(cb => cb.getAttribute('data-id'));
     var checkedEduIds = Array.from(document.querySelectorAll('.cv-edu-check:checked')).map(cb => cb.getAttribute('data-id'));
     var checkedProjIds = Array.from(document.querySelectorAll('.cv-proj-check:checked')).map(cb => cb.getAttribute('data-id'));
     var checkedSkillIds = Array.from(document.querySelectorAll('.cv-skill-check:checked')).map(cb => cb.getAttribute('data-id'));
     var checkedCertIds = Array.from(document.querySelectorAll('.cv-cert-check:checked')).map(cb => cb.getAttribute('data-id'));
+    var checkedAwardIds = Array.from(document.querySelectorAll('.cv-award-check:checked')).map(cb => cb.getAttribute('data-id'));
+    var checkedPubIds = Array.from(document.querySelectorAll('.cv-pub-check:checked')).map(cb => cb.getAttribute('data-id'));
+    var checkedTalkIds = Array.from(document.querySelectorAll('.cv-talk-check:checked')).map(cb => cb.getAttribute('data-id'));
 
     var selExps = (experiencesData || []).filter(e => checkedExpIds.includes(e.id));
     var selEdus = (educationsData || []).filter(e => checkedEduIds.includes(e.id));
     var selProjs = (allProjects || []).filter(p => checkedProjIds.includes(p.id));
     var selSkills = (skillsData || []).filter(s => checkedSkillIds.includes(s.id));
     var selCerts = (certificationsData || []).filter(c => checkedCertIds.includes(c.id));
+    var awList = window.awardsData || awardsData || [];
+    var selAwards = awList.filter(a => checkedAwardIds.includes(a.id));
+    var pubList = window.publicationsData || publicationsData || [];
+    var selPubs = pubList.filter(p => checkedPubIds.includes(p.id));
+    var talkList = window.talksData || allTalks || [];
+    var selTalks = talkList.filter(t => checkedTalkIds.includes(t.id));
 
     var contactParts = [];
     if (email) contactParts.push(email);
@@ -13569,119 +14406,184 @@ function renderCvAtsPreview() {
     html += '  <div class="ats-contacts">' + contactParts.map(esc).join(' &bull; ') + '</div>';
     html += '</header>';
 
-    // PROFESSIONAL SUMMARY
-    if (summary) {
-        html += '<section class="ats-section">';
-        html += '  <h2 class="ats-heading">Professional Summary</h2>';
-        html += '  <p class="ats-summary-text">' + esc(summary) + '</p>';
-        html += '</section>';
-    }
+    // Render sections in exact user-defined order
+    _cvSections.forEach(function(sec) {
+        if (!sec.enabled) return;
 
-    // WORK EXPERIENCE
-    if (selExps.length) {
-        html += '<section class="ats-section">';
-        html += '  <h2 class="ats-heading">Work Experience</h2>';
-        selExps.forEach(function(exp) {
-            var dateStr = (exp.start_date || '') + ' - ' + (exp.is_current ? 'Present' : (exp.end_date || ''));
-            html += '  <div class="ats-item">';
-            html += '    <div class="ats-item-header">';
-            html += '      <div class="ats-item-role"><strong>' + esc(exp.role) + '</strong> &bull; ' + esc(exp.company) + '</div>';
-            html += '      <div class="ats-item-date">' + esc(dateStr) + '</div>';
-            html += '    </div>';
-            if (exp.summary) {
-                html += '    <p class="ats-item-desc">' + esc(exp.summary) + '</p>';
-            }
-            if (exp.highlights && exp.highlights.length) {
-                html += '    <ul class="ats-bullets">';
-                exp.highlights.forEach(function(h) {
-                    html += '      <li>' + esc(h) + '</li>';
-                });
-                html += '    </ul>';
-            }
+        // 1. SUMMARY
+        if (sec.id === 'summary' && summary) {
+            html += '<section class="ats-section">';
+            html += '  <h2 class="ats-heading">Professional Summary</h2>';
+            html += '  <p class="ats-summary-text">' + esc(summary) + '</p>';
+            html += '</section>';
+        }
+
+        // 2. EXPERIENCE
+        else if (sec.id === 'experience' && selExps.length) {
+            html += '<section class="ats-section">';
+            html += '  <h2 class="ats-heading">Work Experience</h2>';
+            selExps.forEach(function(exp) {
+                var dateStr = (exp.start_date || '') + ' - ' + (exp.is_current ? 'Present' : (exp.end_date || ''));
+                html += '  <div class="ats-item">';
+                html += '    <div class="ats-item-header">';
+                html += '      <div class="ats-item-role"><strong>' + esc(exp.role) + '</strong> &bull; ' + esc(exp.company) + '</div>';
+                html += '      <div class="ats-item-date">' + esc(dateStr) + '</div>';
+                html += '    </div>';
+                html += formatExpDescription(exp.description);
+                if (exp.stack && exp.stack.length) {
+                    html += '    <div class="ats-tech-line"><strong>Key Competencies &amp; Stack:</strong> ' + esc(exp.stack.join(', ')) + '</div>';
+                }
+                html += '  </div>';
+            });
+            html += '</section>';
+        }
+
+        // 3. PROJECTS
+        else if (sec.id === 'projects' && selProjs.length) {
+            html += '<section class="ats-section">';
+            html += '  <h2 class="ats-heading">Featured Engineering Projects</h2>';
+            selProjs.forEach(function(proj) {
+                var pTitle = proj.name || proj.title || 'Untitled Project';
+                var pDate = proj.dateRange || proj.year || '';
+                html += '  <div class="ats-item">';
+                html += '    <div class="ats-item-header">';
+                html += '      <div class="ats-item-role"><strong>' + esc(pTitle) + '</strong>' + (proj.role ? ' (' + esc(proj.role) + ')' : '') + '</div>';
+                html += '      <div class="ats-item-date">' + esc(pDate) + '</div>';
+                html += '    </div>';
+                if (proj.description) {
+                    html += '    <p class="ats-item-desc">' + esc(proj.description) + '</p>';
+                }
+                if (proj.techStack && proj.techStack.length) {
+                    html += '    <div class="ats-tech-line"><strong>Technologies:</strong> ' + esc(proj.techStack.join(', ')) + '</div>';
+                }
+                html += '  </div>';
+            });
+            html += '</section>';
+        }
+
+        // 4. EDUCATION
+        else if (sec.id === 'education' && selEdus.length) {
+            html += '<section class="ats-section">';
+            html += '  <h2 class="ats-heading">Education</h2>';
+            selEdus.forEach(function(edu) {
+                var dateStr = (edu.start_date || '') + ' - ' + (edu.end_date || '');
+                html += '  <div class="ats-item">';
+                html += '    <div class="ats-item-header">';
+                html += '      <div class="ats-item-role"><strong>' + esc(edu.degree) + '</strong> &bull; ' + esc(edu.institution) + '</div>';
+                html += '      <div class="ats-item-date">' + esc(dateStr) + '</div>';
+                html += '    </div>';
+                
+                var metaParts = [];
+                if (edu.grade) metaParts.push('<strong>GPA:</strong> ' + esc(edu.grade));
+                if (edu.honors) metaParts.push('<strong>Honors:</strong> ' + esc(edu.honors));
+                if (edu.specialization) metaParts.push('<strong>Focus:</strong> ' + esc(edu.specialization));
+                if (metaParts.length) {
+                    html += '    <div class="ats-meta-line">' + metaParts.join(' &bull; ') + '</div>';
+                }
+
+                var pAwards = parseEduAwards(edu.awards_summary);
+                if (pAwards && pAwards.length) {
+                    html += '    <div class="ats-awards-line"><strong>Honors &amp; Awards:</strong> ' + esc(pAwards.join(', ')) + '</div>';
+                }
+                if (edu.courseworks && edu.courseworks.length) {
+                    html += '    <div class="ats-cw-line"><strong>Relevant Courseworks:</strong> ' + esc(edu.courseworks.join(', ')) + '</div>';
+                }
+                html += '  </div>';
+            });
+            html += '</section>';
+        }
+
+        // 5. SKILLS
+        else if (sec.id === 'skills' && selSkills.length) {
+            html += '<section class="ats-section">';
+            html += '  <h2 class="ats-heading">Technical Skills &amp; Competencies</h2>';
+            html += '  <div class="ats-skills-grid">';
+            selSkills.forEach(function(sk) {
+                var stackNames = [];
+                if (Array.isArray(sk.tech_stack) && sk.tech_stack.length) {
+                    stackNames = sk.tech_stack.map(function(t) { return typeof t === 'string' ? t : (t.name || ''); }).filter(Boolean);
+                } else if (Array.isArray(sk.items) && sk.items.length) {
+                    stackNames = sk.items.map(function(it) { return typeof it === 'string' ? it : (it.name || ''); }).filter(Boolean);
+                }
+                var stack = stackNames.join(', ');
+                if (stack) {
+                    html += '    <div class="ats-skill-row"><strong>' + esc(sk.category) + ':</strong> ' + esc(stack) + '</div>';
+                }
+            });
             html += '  </div>';
-        });
-        html += '</section>';
-    }
+            html += '</section>';
+        }
 
-    // FEATURED PROJECTS
-    if (selProjs.length) {
-        html += '<section class="ats-section">';
-        html += '  <h2 class="ats-heading">Featured Engineering Projects</h2>';
-        selProjs.forEach(function(proj) {
-            html += '  <div class="ats-item">';
-            html += '    <div class="ats-item-header">';
-            html += '      <div class="ats-item-role"><strong>' + esc(proj.title) + '</strong>' + (proj.role ? ' (' + esc(proj.role) + ')' : '') + '</div>';
-            html += '      <div class="ats-item-date">' + esc(proj.year || '') + '</div>';
-            html += '    </div>';
-            if (proj.description) {
-                html += '    <p class="ats-item-desc">' + esc(proj.description) + '</p>';
-            }
-            if (proj.techStack && proj.techStack.length) {
-                html += '    <div class="ats-tech-line"><strong>Technologies:</strong> ' + esc(proj.techStack.join(', ')) + '</div>';
-            }
-            html += '  </div>';
-        });
-        html += '</section>';
-    }
+        // 6. CERTIFICATIONS
+        else if (sec.id === 'certifications' && selCerts.length) {
+            html += '<section class="ats-section">';
+            html += '  <h2 class="ats-heading">Certifications &amp; Credentials</h2>';
+            html += '  <ul class="ats-bullets">';
+            selCerts.forEach(function(c) {
+                html += '    <li><strong>' + esc(c.title) + '</strong> — ' + esc(c.issuer) + (c.issue_date ? ' (' + esc(c.issue_date) + ')' : '') + '</li>';
+            });
+            html += '  </ul>';
+            html += '</section>';
+        }
 
-    // EDUCATION
-    if (selEdus.length) {
-        html += '<section class="ats-section">';
-        html += '  <h2 class="ats-heading">Education</h2>';
-        selEdus.forEach(function(edu) {
-            var dateStr = (edu.start_date || '') + ' - ' + (edu.end_date || '');
-            html += '  <div class="ats-item">';
-            html += '    <div class="ats-item-header">';
-            html += '      <div class="ats-item-role"><strong>' + esc(edu.degree) + '</strong> &bull; ' + esc(edu.institution) + '</div>';
-            html += '      <div class="ats-item-date">' + esc(dateStr) + '</div>';
-            html += '    </div>';
-            
-            var metaParts = [];
-            if (edu.grade) metaParts.push('<strong>GPA:</strong> ' + esc(edu.grade));
-            if (edu.honors) metaParts.push('<strong>Honors:</strong> ' + esc(edu.honors));
-            if (edu.specialization) metaParts.push('<strong>Focus:</strong> ' + esc(edu.specialization));
-            if (metaParts.length) {
-                html += '    <div class="ats-meta-line">' + metaParts.join(' &bull; ') + '</div>';
-            }
+        // 7. HONORS & AWARDS
+        else if (sec.id === 'awards' && selAwards.length) {
+            html += '<section class="ats-section">';
+            html += '  <h2 class="ats-heading">Honors &amp; Awards</h2>';
+            selAwards.forEach(function(a) {
+                html += '  <div class="ats-item">';
+                html += '    <div class="ats-item-header">';
+                html += '      <div class="ats-item-role"><strong>' + esc(a.title) + '</strong> &bull; ' + esc(a.issuer) + '</div>';
+                html += '      <div class="ats-item-date">' + esc(a.metric_tag || '') + '</div>';
+                html += '    </div>';
+                if (a.description) {
+                    html += '    <p class="ats-item-desc">' + esc(a.description) + '</p>';
+                }
+                html += '  </div>';
+            });
+            html += '</section>';
+        }
 
-            var pAwards = parseEduAwards(edu.awards_summary);
-            if (pAwards && pAwards.length) {
-                html += '    <div class="ats-awards-line"><strong>Honors &amp; Awards:</strong> ' + esc(pAwards.join(', ')) + '</div>';
-            }
-            if (edu.courseworks && edu.courseworks.length) {
-                html += '    <div class="ats-cw-line"><strong>Relevant Courseworks:</strong> ' + esc(edu.courseworks.join(', ')) + '</div>';
-            }
-            html += '  </div>';
-        });
-        html += '</section>';
-    }
+        // 8. PUBLICATIONS & ARTICLES
+        else if (sec.id === 'publications' && selPubs.length) {
+            html += '<section class="ats-section">';
+            html += '  <h2 class="ats-heading">Publications &amp; Articles</h2>';
+            selPubs.forEach(function(p) {
+                html += '  <div class="ats-item">';
+                html += '    <div class="ats-item-header">';
+                html += '      <div class="ats-item-role"><strong>' + esc(p.title) + '</strong> &bull; ' + esc(p.publisher) + '</div>';
+                html += '      <div class="ats-item-date">' + esc(p.date || '') + '</div>';
+                html += '    </div>';
+                if (p.description) {
+                    html += '    <p class="ats-item-desc">' + esc(p.description) + '</p>';
+                }
+                if (p.link) {
+                    html += '    <div class="ats-tech-line"><strong>Publication Link:</strong> ' + esc(p.link) + '</div>';
+                }
+                html += '  </div>';
+            });
+            html += '</section>';
+        }
 
-    // SKILLS & COMPETENCIES
-    if (selSkills.length) {
-        html += '<section class="ats-section">';
-        html += '  <h2 class="ats-heading">Technical Skills &amp; Competencies</h2>';
-        html += '  <div class="ats-skills-grid">';
-        selSkills.forEach(function(sk) {
-            var stack = (sk.tech_stack && sk.tech_stack.length) ? sk.tech_stack.join(', ') : (sk.items ? sk.items.join(', ') : '');
-            if (stack) {
-                html += '    <div class="ats-skill-row"><strong>' + esc(sk.category) + ':</strong> ' + esc(stack) + '</div>';
-            }
-        });
-        html += '  </div>';
-        html += '</section>';
-    }
-
-    // CERTIFICATIONS & LICENSES
-    if (selCerts.length) {
-        html += '<section class="ats-section">';
-        html += '  <h2 class="ats-heading">Certifications &amp; Credentials</h2>';
-        html += '  <ul class="ats-bullets">';
-        selCerts.forEach(function(c) {
-            html += '    <li><strong>' + esc(c.title) + '</strong> — ' + esc(c.issuer) + (c.issue_date ? ' (' + esc(c.issue_date) + ')' : '') + '</li>';
-        });
-        html += '  </ul>';
-        html += '</section>';
-    }
+        // 9. KEYNOTE TALKS & WORKSHOPS
+        else if (sec.id === 'talks' && selTalks.length) {
+            html += '<section class="ats-section">';
+            html += '  <h2 class="ats-heading">Speaking &amp; Technical Workshops</h2>';
+            selTalks.forEach(function(t) {
+                var dStr = t.date ? new Date(t.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : '';
+                html += '  <div class="ats-item">';
+                html += '    <div class="ats-item-header">';
+                html += '      <div class="ats-item-role"><strong>' + esc(t.event) + '</strong> &bull; ' + esc(t.organizer) + (t.place ? ' (' + esc(t.place) + ')' : '') + '</div>';
+                html += '      <div class="ats-item-date">' + esc(dStr) + '</div>';
+                html += '    </div>';
+                if (t.topics && t.topics.length) {
+                    html += '    <div class="ats-tech-line"><strong>Topics:</strong> ' + esc(t.topics.join(', ')) + '</div>';
+                }
+                html += '  </div>';
+            });
+            html += '</section>';
+        }
+    });
 
     paper.innerHTML = html;
 }

@@ -328,6 +328,7 @@
   let liveExperiences = [];
   let liveEducations = [];
   let liveCertifications = [];
+  let bootstrapData = null;
 
   /* ════════════════════════════════════════════════════════════════
      BILINGUAL LOCALIZATION & TRANSLATION ENGINE (EN / ID)
@@ -1718,10 +1719,20 @@
                     aItems = [raw];
                   }
                 }
-                var pAward = aItems.length ? aItems[0] : 'Most Outstanding Student';
-                var aMetric = aItems.length > 1 ? (aItems.length + '×') : (pAward.split(' ')[0] || '3×');
+                var pAward = aItems.length ? aItems[0] : 'Most Outstanding Student in Department (2021/2022/2023)';
+                var aMetric = '3×';
+                var cleanAward = pAward;
+                var match = pAward.match(/^([0-9]+[×xX]|🏆|\d{4}[–-]\d{4})\s*(.*)$/);
+                if (match) {
+                  aMetric = match[1];
+                  cleanAward = match[2] || pAward;
+                } else if (aItems.length > 1) {
+                  aMetric = aItems.length + '×';
+                } else if (pAward.includes('2021') || pAward.toLowerCase().includes('outstanding')) {
+                  aMetric = '3×';
+                }
                 return `<span>${escapeHtml(aMetric)}</span>
-                <small>${escapeHtml(pAward)}</small>`;
+                <small>${escapeHtml(cleanAward)}</small>`;
               })()}
             </div>
           </div>
@@ -2749,8 +2760,8 @@
       `;
 
       el.addEventListener('click', () => {
-        if (typeof openLightbox === 'function') {
-          openLightbox(img, title);
+        if (typeof window.openLightbox === 'function') {
+          window.openLightbox(img, title);
         }
       });
 
@@ -2760,9 +2771,9 @@
 
       stage.appendChild(el);
 
-      const activeItems = stage.querySelectorAll('.hero-glimpse-item');
-      if (activeItems.length > 3) {
-        activeItems[0].remove();
+      const existingGlimpses = stage.querySelectorAll('.hero-glimpse-item');
+      if (existingGlimpses.length > 3) {
+        existingGlimpses[0].remove();
       }
     }
 
@@ -2945,7 +2956,7 @@
 
     try {
       // 1. Fast-path: Single consolidated request (<2ms response from in-memory cache)
-      let bootstrapData = null;
+      bootstrapData = null;
       try {
         const bootRes = await fetch('/api/portfolio/bootstrap');
         if (bootRes.ok) {
