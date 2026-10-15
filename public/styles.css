@@ -204,11 +204,13 @@ img {
 .nav-inner {
   max-width: var(--container-w);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 clamp(12px, 1.8vw, 24px);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: clamp(8px, 1.2vw, 16px);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .nav-brand {
@@ -263,16 +265,28 @@ img {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: clamp(6px, 1.05vw, 18px);
+  min-width: 0;
+}
+
+@media (min-width: 1281px) {
+  .nav-links {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .nav-links a {
-  font-size: 13.5px;
+  font-size: clamp(11.5px, 0.88vw, 13.5px);
   font-weight: 500;
   color: var(--text-secondary);
   white-space: nowrap;
   position: relative;
-  padding: 4px 0;
+  padding: 4px clamp(2px, 0.35vw, 6px);
   transition: color .25s var(--ease);
 }
 
@@ -298,8 +312,9 @@ img {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: clamp(8px, 1vw, 14px);
   margin-left: 0;
+  flex-shrink: 0;
 }
 
 .nav-actions::before {
@@ -2888,7 +2903,7 @@ img {
   }
 }
 
-@media (max-width: 1240px) {
+@media (max-width: 1280px) {
   .nav-inner {
     justify-content: flex-end;
   }

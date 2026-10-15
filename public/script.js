@@ -2665,8 +2665,14 @@
 
     const heroCfg = (window.liveSettings && window.liveSettings.hero) ||
                     (bootstrapData && bootstrapData.settings && bootstrapData.settings.hero) || {};
+    const slideCfg = (window.liveSettings && window.liveSettings.imageSlideshow) ||
+                     (bootstrapData && bootstrapData.settings && bootstrapData.settings.imageSlideshow) || {};
 
-    if (heroCfg.showGlimpse === false) {
+    const isEnabled = (slideCfg.enabled !== undefined)
+      ? Boolean(slideCfg.enabled)
+      : (heroCfg.showGlimpse !== false);
+
+    if (!isEnabled) {
       if (heroGlimpseTimer) {
         clearInterval(heroGlimpseTimer);
         heroGlimpseTimer = null;
@@ -2699,16 +2705,17 @@
 
       // Filter gallery items by active IDs if configured in Settings
       let activeItems = (Array.isArray(liveGallery) && liveGallery.length) ? liveGallery : [];
-      if (Array.isArray(heroCfg.glimpseActiveIds)) {
-        if (heroCfg.glimpseActiveIds.length > 0) {
-          activeItems = activeItems.filter(item => heroCfg.glimpseActiveIds.includes(item.id));
-        } else if (heroCfg.hasConfiguredGlimpse) {
+      const configuredActiveIds = Array.isArray(slideCfg.activeIds) ? slideCfg.activeIds : (Array.isArray(heroCfg.glimpseActiveIds) ? heroCfg.glimpseActiveIds : null);
+      if (Array.isArray(configuredActiveIds)) {
+        if (configuredActiveIds.length > 0) {
+          activeItems = activeItems.filter(item => configuredActiveIds.includes(item.id));
+        } else if (slideCfg.source === 'selected' || heroCfg.hasConfiguredGlimpse) {
           activeItems = [];
         }
       }
 
       if (!activeItems.length) {
-        if (heroCfg.showGlimpse === false) return;
+        if (!isEnabled) return;
         activeItems = [
           {
             title: 'Build with AI Keynote',
@@ -2771,14 +2778,16 @@
 
       stage.appendChild(el);
 
+      const maxCards = Number(slideCfg.maxVisible) || 3;
       const existingGlimpses = stage.querySelectorAll('.hero-glimpse-item');
-      if (existingGlimpses.length > 3) {
+      if (existingGlimpses.length > maxCards) {
         existingGlimpses[0].remove();
       }
     }
 
     setTimeout(spawnGlimpse, 1400);
-    heroGlimpseTimer = setInterval(spawnGlimpse, 4200);
+    const intervalSec = Number(slideCfg.intervalSeconds) || 4.2;
+    heroGlimpseTimer = setInterval(spawnGlimpse, intervalSec * 1000);
 
     window.addEventListener('resize', () => {
       if (window.innerWidth < 900) {
@@ -2878,10 +2887,10 @@
       }
     }
 
-    if (settings.hero) {
+    if (settings.hero || settings.imageSlideshow) {
       window.liveSettings = settings;
       const heroSec = document.getElementById('hero');
-      if (heroSec) {
+      if (heroSec && settings.hero) {
         if (settings.hero.eyebrow) {
           const eb = heroSec.querySelector('.eyebrow');
           if (eb) eb.textContent = settings.hero.eyebrow;
@@ -2889,7 +2898,11 @@
       }
 
       const stage = document.getElementById('heroGlimpseStage');
-      if (settings.hero.showGlimpse === false) {
+      const isSlideshowActive = (settings.imageSlideshow && settings.imageSlideshow.enabled !== undefined)
+        ? Boolean(settings.imageSlideshow.enabled)
+        : (settings.hero && settings.hero.showGlimpse !== false);
+
+      if (!isSlideshowActive) {
         if (heroGlimpseTimer) {
           clearInterval(heroGlimpseTimer);
           heroGlimpseTimer = null;

@@ -91,6 +91,13 @@ const DEFAULT_SETTINGS = {
     localization: {
         bilingualEnabled: true,
         defaultLanguage: "en"
+    },
+    imageSlideshow: {
+        enabled: true,
+        intervalSeconds: 5.0,
+        maxVisible: 3,
+        source: "all",
+        activeIds: []
     }
 };
 
@@ -98,12 +105,44 @@ const SETTINGS_KEY = 'site_page_settings';
 
 function mergeSettings(base, override) {
     if (!override) return base;
+
+    const imgSlideOverride = override.imageSlideshow || {};
+    const imgSlideBase = base.imageSlideshow || {
+        enabled: true,
+        intervalSeconds: 5.0,
+        maxVisible: 3,
+        source: "all",
+        activeIds: []
+    };
+
+    let isSlideshowEnabled = imgSlideBase.enabled !== false;
+    if (imgSlideOverride.enabled !== undefined) {
+        isSlideshowEnabled = Boolean(imgSlideOverride.enabled);
+    } else if (override.hero && override.hero.showGlimpse !== undefined) {
+        isSlideshowEnabled = Boolean(override.hero.showGlimpse);
+    }
+
+    let activeIds = Array.isArray(imgSlideOverride.activeIds)
+        ? imgSlideOverride.activeIds
+        : (override.hero && Array.isArray(override.hero.glimpseActiveIds)
+            ? override.hero.glimpseActiveIds
+            : (Array.isArray(imgSlideBase.activeIds) ? imgSlideBase.activeIds : []));
+
+    const mergedSlideshow = {
+        enabled: isSlideshowEnabled,
+        intervalSeconds: (imgSlideOverride.intervalSeconds !== undefined) ? Number(imgSlideOverride.intervalSeconds) : (imgSlideBase.intervalSeconds || 5.0),
+        maxVisible: (imgSlideOverride.maxVisible !== undefined) ? Number(imgSlideOverride.maxVisible) : (imgSlideBase.maxVisible || 3),
+        source: imgSlideOverride.source || imgSlideBase.source || 'all',
+        activeIds: activeIds
+    };
+
     return {
         general: Object.assign({}, base.general, override.general || {}),
         navbar: Object.assign({}, base.navbar, override.navbar || {}),
+        imageSlideshow: mergedSlideshow,
         hero: Object.assign({}, base.hero, override.hero || {}, {
-            showGlimpse: (override.hero && override.hero.showGlimpse !== undefined) ? Boolean(override.hero.showGlimpse) : (base.hero && base.hero.showGlimpse !== undefined ? base.hero.showGlimpse : true),
-            glimpseActiveIds: (override.hero && Array.isArray(override.hero.glimpseActiveIds)) ? override.hero.glimpseActiveIds : (base.hero && Array.isArray(base.hero.glimpseActiveIds) ? base.hero.glimpseActiveIds : [])
+            showGlimpse: isSlideshowEnabled,
+            glimpseActiveIds: activeIds
         }),
         sections: Object.assign({}, base.sections, override.sections || {}),
         localization: Object.assign({}, base.localization, override.localization || {}),
