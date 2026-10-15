@@ -2319,7 +2319,137 @@
         background: #E6F4EA; color: var(--g-green-dark);
         border: 1px solid rgba(52,168,83,0.3);
     }
-    </style>
+    
+    /* ══ SKILLS & TECH STACK CRUD UPGRADE ══ */
+    .skill-live-preview-box {
+        background: linear-gradient(135deg, rgba(66,133,244,0.04) 0%, rgba(52,168,83,0.04) 100%);
+        border: 1.5px solid var(--sidebar-border);
+        border-radius: var(--r-md);
+        padding: 16px;
+        margin-bottom: 20px;
+    }
+    .skill-icon-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        margin-top: 8px;
+    }
+    .skill-icon-btn {
+        padding: 10px 6px;
+        border-radius: 10px;
+        border: 1.5px solid var(--line);
+        background: var(--surface);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        cursor: pointer;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        color: var(--ink-3);
+    }
+    .skill-icon-btn:hover {
+        border-color: var(--g-blue);
+        color: var(--g-blue);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(66,133,244,0.12);
+        background: var(--g-blue-soft);
+    }
+    .skill-icon-btn.selected {
+        border-color: var(--g-blue);
+        background: var(--g-blue-soft);
+        color: var(--g-blue);
+        box-shadow: 0 0 0 2px var(--g-blue);
+        font-weight: 800;
+    }
+    .skill-icon-btn svg { width: 22px; height: 22px; }
+    .skill-icon-label { font-size: 0.68rem; font-weight: 700; text-align: center; line-height: 1.1; }
+
+    .color-swatches-wrap {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-top: 8px;
+    }
+    .color-swatch-item {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 3px solid transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s, box-shadow 0.2s;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    }
+    .color-swatch-item:hover { transform: scale(1.15); }
+    .color-swatch-item.selected {
+        border-color: #ffffff;
+        box-shadow: 0 0 0 3px var(--ink);
+        transform: scale(1.1);
+    }
+    .color-swatch-item svg { width: 14px; height: 14px; stroke: #ffffff; }
+
+    .quick-preset-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 12px;
+    }
+    .quick-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: var(--surface-2);
+        border: 1px solid var(--sidebar-border);
+        padding: 4px 10px;
+        border-radius: 14px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--ink-2);
+        cursor: pointer;
+        transition: all 0.15s ease;
+    }
+    .quick-chip:hover {
+        background: var(--g-blue-soft);
+        border-color: var(--g-blue);
+        color: var(--g-blue);
+        transform: translateY(-1px);
+    }
+
+    .row-btn-action {
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--ink-3);
+        transition: all 0.15s ease;
+    }
+    .row-btn-action:hover {
+        border-color: var(--ink);
+        color: var(--ink);
+        background: var(--sidebar-hover);
+    }
+    .row-btn-action.delete {
+        color: var(--g-red);
+        background: var(--g-red-soft);
+        border-color: rgba(234,67,53,0.25);
+    }
+    .row-btn-action.delete:hover {
+        background: var(--g-red);
+        color: #fff;
+    }
+
+</style>
 </head>
 <body>
 
@@ -5258,12 +5388,12 @@
     </div>
 </div>
 
-<!-- ════ SKILL DOMAIN & TECH STACK DRAWER ════ -->
+<!-- ════ SKILL DOMAIN & TECH STACK DRAWER (PREMIUM CRUD) ════ -->
 <div class="drawer-backdrop" id="skill-backdrop" onclick="closeSkillDrawer()"></div>
-<div class="drawer" id="skill-drawer">
+<div class="drawer" id="skill-drawer" style="max-width: 680px;">
     <div class="drawer-head">
         <div class="drawer-head-info">
-            <div class="drawer-head-badge blue">
+            <div class="drawer-head-badge blue" id="skill-drawer-badge">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
             </div>
             <div class="drawer-head-text">
@@ -5273,91 +5403,173 @@
         </div>
         <button class="drawer-close-btn" onclick="closeSkillDrawer()" title="Close (Esc)">✕</button>
     </div>
-    <div class="drawer-body">
+    <div class="drawer-body" style="padding: 22px 26px;">
         <input type="hidden" id="skill-id">
 
-        <!-- Card 1: Domain Information -->
-        <div class="field-card">
+        <!-- ══ REAL-TIME LIVE PORTFOLIO PREVIEW ══ -->
+        <div class="skill-live-preview-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-4); display:flex; align-items:center; gap:6px;">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    Live Portfolio Card Preview
+                </span>
+                <span style="font-size:0.7rem; font-weight:800; color:var(--g-blue); background:var(--g-blue-soft); padding:3px 10px; border-radius:12px; display:inline-flex; align-items:center; gap:5px;">
+                    <span style="width:6px; height:6px; border-radius:50%; background:var(--g-blue); display:inline-block;"></span>
+                    Live Sync
+                </span>
+            </div>
+            
+            <div id="skill-preview-card" style="border: 1.5px solid var(--sidebar-border); border-top: 4px solid var(--blue); border-radius: 12px; background: var(--surface); padding: 18px 20px; display: flex; flex-direction: column; gap: 14px; box-shadow: 0 4px 16px rgba(0,0,0,0.05); transition: all 0.25s ease;">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
+                    <div style="display:flex; align-items:center; gap:12px; min-width:0;">
+                        <div id="skill-prev-icon-box" style="width:40px; height:40px; border-radius:10px; background:var(--sidebar-hover); color:var(--blue); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                        </div>
+                        <div style="min-width:0;">
+                            <div id="skill-prev-title" style="font-size:1.1rem; font-weight:800; color:var(--ink); letter-spacing:-0.01em;">Domain Name</div>
+                            <div id="skill-prev-slug" style="font-size:0.75rem; color:var(--ink-4); margin-top:2px;">#domain-slug &bull; Sort 0</div>
+                        </div>
+                    </div>
+                    <span id="skill-prev-meta-counts" style="background:var(--sidebar-hover); color:var(--ink-3); font-size:0.7rem; font-weight:700; padding:4px 8px; border-radius:10px; border:1px solid var(--sidebar-border); flex-shrink:0;">
+                        0 Competencies &bull; 0 Tech
+                    </span>
+                </div>
+
+                <div id="skill-prev-items-box" style="background:var(--surface-2); padding:12px 14px; border-radius:8px; border:1px solid var(--line-soft);">
+                    <div style="font-size:0.68rem; font-weight:800; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-4); margin-bottom:8px;">Core Competencies</div>
+                    <ul id="skill-prev-items-list" style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:6px;">
+                        <li style="color:var(--ink-4); font-size:0.75rem;">No competency items added yet</li>
+                    </ul>
+                </div>
+
+                <div id="skill-prev-tech-box" style="display:flex; flex-direction:column; gap:6px;">
+                    <div style="font-size:0.68rem; font-weight:800; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-4);">Tech Stack Badges</div>
+                    <div id="skill-prev-tech-list" style="display:flex; flex-wrap:wrap; gap:6px;">
+                        <span style="color:var(--ink-4); font-size:0.75rem;">No badges added</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ CARD 1: DOMAIN METADATA & ACCENT THEME ══ -->
+        <div class="field-card" style="margin-bottom: 20px;">
             <div class="field-card-title">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line></svg>
-                Domain Category
+                Domain Category &amp; Accent
             </div>
+
             <div class="fields-2col">
                 <div class="field-group">
                     <label class="field-label">Domain Name <span class="req">*</span></label>
-                    <input class="field-input" id="skill-category" placeholder="e.g. Programming, Computer Vision" oninput="autoFillSkillSlug()">
+                    <input class="field-input" id="skill-category" placeholder="e.g. Programming, Computer Vision" oninput="onSkillCategoryInput()">
                 </div>
                 <div class="field-group">
-                    <label class="field-label">Category Slug <span class="opt">Filter tab ID</span></label>
-                    <input class="field-input" id="skill-slug" placeholder="e.g. programming, computer-vision">
+                    <label class="field-label">Category Slug <span class="opt">Filter Tab Identifier</span></label>
+                    <input class="field-input" id="skill-slug" placeholder="e.g. programming, computer-vision" oninput="updateSkillDrawerLivePreview()">
                 </div>
             </div>
-            <div class="fields-2col">
-                <div class="field-group">
-                    <label class="field-label">Accent Color</label>
-                    <select class="field-select" id="skill-color">
-                        <option value="var(--blue)">Google Blue</option>
-                        <option value="var(--green)">Emerald Green</option>
-                        <option value="var(--red)">Coral Red</option>
-                        <option value="var(--yellow)">Google Yellow</option>
-                        <option value="var(--purple)">Indigo Purple</option>
-                        <option value="var(--cyan)">Sky Cyan</option>
-                        <option value="var(--teal)">Teal Mint</option>
-                        <option value="var(--orange)">Sunset Orange</option>
-                    </select>
-                </div>
-                <div class="field-group">
-                    <label class="field-label">Sort Order</label>
-                    <input class="field-input" id="skill-sort" type="number" value="0" min="0">
-                </div>
-            </div>
+
+            <!-- Accent Color Swatches -->
             <div class="field-group">
-                <label class="field-label">Card Icon SVG <span class="opt">Raw SVG element</span></label>
-                <div style="display:flex; gap:8px; margin-bottom:6px;">
-                    <select class="field-select" id="skill-icon-preset" onchange="applySkillIconPreset(this.value)" style="flex:1;">
-                        <option value="">-- Choose Preset Icon --</option>
-                        <option value="code">Code / Programming</option>
-                        <option value="chart">Data Analytics / Chart</option>
-                        <option value="vision">Computer Vision / Eye</option>
-                        <option value="nlp">Natural Language / Chat</option>
-                        <option value="genai">Generative AI / Sparkles</option>
-                        <option value="agents">AI Agents / Bot</option>
-                        <option value="software">Software Dev / Terminal</option>
-                        <option value="database">Database / Disk</option>
-                        <option value="cloud">Cloud &amp; DevOps</option>
-                    </select>
+                <label class="field-label">Accent Color Theme</label>
+                <input type="hidden" id="skill-color" value="var(--blue)">
+                <div class="color-swatches-wrap" id="skill-color-swatches">
+                    <div class="color-swatch-item selected" data-color="var(--blue)" style="background:#4285F4;" onclick="setSkillAccentColor('var(--blue)')" title="Google Blue">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <div class="color-swatch-item" data-color="var(--green)" style="background:#34A853;" onclick="setSkillAccentColor('var(--green)')" title="Emerald Green">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="display:none;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <div class="color-swatch-item" data-color="var(--red)" style="background:#EA4335;" onclick="setSkillAccentColor('var(--red)')" title="Coral Red">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="display:none;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <div class="color-swatch-item" data-color="var(--yellow)" style="background:#FBBC04;" onclick="setSkillAccentColor('var(--yellow)')" title="Google Yellow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="display:none;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <div class="color-swatch-item" data-color="var(--purple)" style="background:#9334E6;" onclick="setSkillAccentColor('var(--purple)')" title="Indigo Purple">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="display:none;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <div class="color-swatch-item" data-color="var(--cyan)" style="background:#00BCD4;" onclick="setSkillAccentColor('var(--cyan)')" title="Sky Cyan">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="display:none;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <div class="color-swatch-item" data-color="var(--orange)" style="background:#F97316;" onclick="setSkillAccentColor('var(--orange)')" title="Sunset Orange">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="display:none;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <div class="color-swatch-item" data-color="var(--pink)" style="background:#EC4899;" onclick="setSkillAccentColor('var(--pink)')" title="Modern Pink">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="display:none;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
                 </div>
-                <textarea class="field-input" id="skill-icon-svg" rows="2" style="font-family:monospace; font-size:0.75rem;" placeholder="<svg ...>...</svg>"></textarea>
+            </div>
+
+            <!-- Visual Icon Picker Grid -->
+            <div class="field-group" style="margin-top:16px;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <label class="field-label" style="margin-bottom:0;">Visual Icon Preset (1-Click Picker)</label>
+                    <button type="button" class="btn-sm-ghost" onclick="toggleCustomSvgDrawer()" style="font-size:0.72rem; font-weight:700; color:var(--ink-4); padding:2px 8px; border:none; background:none; cursor:pointer;">
+                        ⚙ Custom SVG Code
+                    </button>
+                </div>
+                
+                <div class="skill-icon-grid" id="skill-icon-grid">
+                    <!-- Injected 16 Visual Icon Buttons -->
+                </div>
+
+                <div id="skill-custom-svg-wrap" style="display:none; margin-top:10px;">
+                    <textarea class="field-input" id="skill-icon-svg" rows="3" style="font-family:monospace; font-size:0.75rem;" placeholder="<svg ...>...</svg>" oninput="onCustomSvgInput()"></textarea>
+                </div>
+            </div>
+
+            <!-- Display Sort Order -->
+            <div class="field-group" style="margin-top:16px;">
+                <label class="field-label">Display Sort Order</label>
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <button type="button" class="row-btn-action" onclick="adjustSortOrder(-1)">−</button>
+                    <input class="field-input" id="skill-sort" type="number" value="1" min="0" style="width:80px; text-align:center; font-weight:800;" oninput="updateSkillDrawerLivePreview()">
+                    <button type="button" class="row-btn-action" onclick="adjustSortOrder(1)">+</button>
+                    <span style="font-size:0.75rem; color:var(--ink-4); margin-left:6px;">Lower number appears first on the portfolio website</span>
+                </div>
             </div>
         </div>
 
-        <!-- Card 2: Core Competencies Builder -->
-        <div class="field-card">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <!-- ══ CARD 2: CORE COMPETENCIES BUILDER ══ -->
+        <div class="field-card" style="margin-bottom: 20px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
                 <div class="field-card-title" style="margin-bottom:0;">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    Core Competencies (Grid Card Items)
+                    Core Competencies (Grid Items)
                 </div>
-                <button type="button" class="btn-sm-ghost" onclick="addSkillItemRow('', '')" style="font-size:0.78rem; font-weight:700; padding:4px 10px; border-radius:6px; border:1px solid var(--line); background:var(--surface); cursor:pointer;">
-                    + Add Item
-                </button>
+                <div style="display:flex; gap:6px;">
+                    <button type="button" class="btn btn-primary" onclick="addSkillItemRow('', '')" style="font-size:0.78rem; font-weight:800; padding:6px 12px; border-radius:8px;">
+                        + Add Competency
+                    </button>
+                </div>
             </div>
+
             <div id="skill-items-list" style="display:flex; flex-direction:column; gap:10px;">
-                <!-- Injected item rows -->
+                <!-- Injected interactive competency rows -->
             </div>
         </div>
 
-        <!-- Card 3: Specialization Tech Stack Badges -->
-        <div class="field-card">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <!-- ══ CARD 3: SPECIALIZATION TECH STACK BADGES ══ -->
+        <div class="field-card" style="margin-bottom: 20px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:8px;">
                 <div class="field-card-title" style="margin-bottom:0;">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="12 8 8 12 12 16 16 12 12 8"></polygon></svg>
-                    Tech Stack Badges (Filter Tab Badges)
+                    Tech Stack Badges (Filter Tabs)
                 </div>
-                <button type="button" class="btn-sm-ghost" onclick="addTechBadgeRow('', '')" style="font-size:0.78rem; font-weight:700; padding:4px 10px; border-radius:6px; border:1px solid var(--line); background:var(--surface); cursor:pointer;">
+                <button type="button" class="btn btn-primary" onclick="addTechBadgeRow('', '')" style="font-size:0.78rem; font-weight:800; padding:6px 12px; border-radius:8px;">
                     + Add Tech Badge
                 </button>
             </div>
+
+            <!-- Quick Add Technology Preset Pills -->
+            <div style="margin-bottom: 12px;">
+                <div style="font-size:0.72rem; font-weight:800; text-transform:uppercase; color:var(--ink-4); margin-bottom:6px;">Quick Add Popular Tech:</div>
+                <div class="quick-preset-chips" id="quick-tech-presets">
+                    <!-- Injected chips -->
+                </div>
+            </div>
+
             <div id="skill-tech-list" style="display:flex; flex-direction:column; gap:10px;">
                 <!-- Injected tech badge rows -->
             </div>
@@ -11197,13 +11409,291 @@ function applySkillIconPreset(key) {
     }
 }
 
-function autoFillSkillSlug() {
+/* ══════════════════════════════════════════════════════════
+   PORTFOLIO CMS TWO-WAY SYNC: SKILLS & TECH STACK (PREMIUM CRUD)
+   ══════════════════════════════════════════════════════════ */
+var skillsData = [];
+var skillsLoaded = false;
+var _skillMap = {};
+
+// 16 Visual Domain Icon Presets
+var SKILL_ICON_PRESETS = {
+    code: {
+        label: 'Code / Dev',
+        icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>'
+    },
+    analytics: {
+        label: 'Data & Analytics',
+        icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 20V10M12 20V4M6 20v-6"></path></svg>'
+    },
+    vision: {
+        label: 'Computer Vision',
+        icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>'
+    },
+    nlp: {
+        label: 'NLP / Chat',
+        icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><path d="M8 10h.01M12 10h.01M16 10h.01"></path></svg>'
+    },
+    genai: {
+        label: 'Generative AI',
+        icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z"></path></svg>'
+    },
+    agent: {
+        label: 'AI Agents',
+        icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4M8 16h.01M16 16h.01"></path></svg>'
+    },
+    software: {
+        label: 'Software Dev',
+        icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>'
+    },
+    database: {
+        label: 'Databases',
+        icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>'
+    },
+    cloud: {
+        label: 'Cloud & DevOps',
+        icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path><polyline points="12 13 14 15 17 11"></polyline></svg>'
+    },
+    brain: {
+        label: 'Neural & ML',
+        icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="12" r="3"/><line x1="8.5" y1="7.5" x2="15.5" y2="10.5"/><line x1="8.5" y1="16.5" x2="15.5" y2="13.5"/></svg>'
+    },
+    mobile: {
+        label: 'Mobile / App',
+        icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>'
+    },
+    security: {
+        label: 'Cybersecurity',
+        icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>'
+    },
+    api: {
+        label: 'APIs & Services',
+        icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>'
+    },
+    layers: {
+        label: 'Architecture',
+        icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>'
+    },
+    terminal: {
+        label: 'CLI & Shell',
+        icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>'
+    },
+    chart: {
+        label: 'Metrics & Scale',
+        icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>'
+    }
+};
+
+// 54 Verified Technology SVG Logos (Auto-suggest and Auto-detection)
+var TECH_ICON_MAP = {
+    'python': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M11.927 2C6.738 2 7.062 4.254 7.062 4.254l.006 2.34h4.945v.7H5.087S2 7.034 2 12.222c0 5.19 2.695 5.02 2.695 5.02h1.61v-2.285s-.087-2.695 2.64-2.695h4.53s2.553.04 2.553-2.553V4.553S16.42 2 11.927 2zm-2.42 1.48a.9.9 0 110 1.8.9.9 0 010-1.8z" fill="#387EB8"/><path d="M12.073 22c5.189 0 4.865-2.254 4.865-2.254l-.006-2.34h-4.945v-.7h6.926S22 16.966 22 11.778c0-5.19-2.695-5.02-2.695-5.02h-1.61v2.285s.087 2.695-2.64 2.695h-4.53s-2.553-.04-2.553 2.553v5.151S7.58 22 12.073 22zm2.42-1.48a.9.9 0 110-1.8.9.9 0 010-1.8z" fill="#FFE052"/></svg>',
+    'javascript': '<svg width="20" height="20" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#F7DF1E"/><path d="M6 18.5l1.8-1.1c.4.7.8 1.3 1.6 1.3.8 0 1.3-.3 1.3-1.1v-5.2h2.2v5.3c0 2-1.2 2.9-3.2 2.9-1.8 0-2.9-.9-3.7-2.1zm8.3-.1l1.8-1c.5.8 1.1 1.4 2.1 1.4.9 0 1.5-.4 1.5-1 0-.7-.5-1-1.6-1.5l-.6-.3c-1.7-.7-2.8-1.6-2.8-3.5 0-1.7 1.3-3.1 3.4-3.1 1.5 0 2.6.5 3.3 1.8l-1.7 1.1c-.4-.7-.8-1-1.6-1-.8 0-1.3.4-1.3.9 0 .6.4.9 1.4 1.3l.6.3c2 1 3.1 1.8 3.1 3.7 0 2.1-1.6 3.3-3.7 3.3-2.1 0-3.3-1.1-3.9-2.4z" fill="#000"/></svg>',
+    'typescript': '<svg width="20" height="20" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#3178C6"/><path d="M12.5 12h-3v7.5H7.5V12h-3V10h8v2zm2.7 7.5v-1.7c.6.4 1.3.6 2 .6 1 0 1.6-.4 1.6-1.1 0-.7-.5-1-1.6-1.4l-.8-.3c-1.8-.7-2.7-1.7-2.7-3.3 0-2 1.5-3.3 3.7-3.3 1 0 1.9.3 2.7.8l-.6 1.7c-.6-.4-1.3-.6-2.1-.6-.9 0-1.5.4-1.5 1.1 0 .6.4.9 1.4 1.3l.7.3c2 .7 3 1.7 3 3.4 0 2.2-1.6 3.4-3.9 3.4-1.1 0-2.1-.3-2.9-.9z" fill="#FFF"/></svg>',
+    'sql': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4285F4" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></svg>',
+    'c++': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#00599C"/><path d="M7 14.5l5 3 5-3v-5l-5-3-5 3v5z" stroke="#FFF" stroke-width="1.8"/><path d="M14 10.5h2.5M15.25 9.25v2.5M17.5 10.5H20M18.75 9.25v2.5" stroke="#659AD2" stroke-width="1.5"/></svg>',
+    'bash / shell': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#293138"/><path d="M7 8l4 4-4 4M13 16h4" stroke="#4EAA25" stroke-width="2" stroke-linecap="round"/></svg>',
+    'bash': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#293138"/><path d="M7 8l4 4-4 4M13 16h4" stroke="#4EAA25" stroke-width="2" stroke-linecap="round"/></svg>',
+    'pandas': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#150458"/><path d="M7 7h3v10H7zm7 0h3v10h-3z" fill="#FFF"/><path d="M7 11h10v2H7z" fill="#E70488"/></svg>',
+    'numpy': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#013243"/><path d="M6 7l6-3 6 3v10l-6 3-6-3V7z" stroke="#4DABCF" stroke-width="1.8"/><path d="M12 4v16M6 7l12 10M18 7L6 17" stroke="#4DABCF" stroke-width="1.2"/></svg>',
+    'scikit-learn': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-4h2v4zm-2-8h-2V7h2v2z" fill="#F89939"/><circle cx="7" cy="14" r="2.5" fill="#3498DB"/><circle cx="17" cy="11" r="2.5" fill="#E67E22"/></svg>',
+    'google bigquery': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#4285F4"/><path d="M7 12l3-3 4 4 3-3" stroke="#FFF" stroke-width="2" stroke-linecap="round"/><ellipse cx="12" cy="7" rx="5" ry="2" stroke="#FFF" stroke-width="1.5"/></svg>',
+    'bigquery': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#4285F4"/><path d="M7 12l3-3 4 4 3-3" stroke="#FFF" stroke-width="2" stroke-linecap="round"/><ellipse cx="12" cy="7" rx="5" ry="2" stroke="#FFF" stroke-width="1.5"/></svg>',
+    'pyspark': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#E25A1C"/><path d="M12 4l2 4 5 1-4 3 1 5-4-3-4 3 1-5-4-3 5-1z" fill="#FFF"/></svg>',
+    'spark': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#E25A1C"/><path d="M12 4l2 4 5 1-4 3 1 5-4-3-4 3 1-5-4-3 5-1z" fill="#FFF"/></svg>',
+    'matplotlib / seaborn': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#11557C"/><path d="M5 17l4-6 4 3 6-8" stroke="#FFF" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="11" r="2" fill="#E24A33"/><circle cx="13" cy="14" r="2" fill="#FBC15E"/></svg>',
+    'opencv': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="7" r="4.5" stroke="#ED1C24" stroke-width="2.2"/><circle cx="7" cy="16" r="4.5" stroke="#22B14C" stroke-width="2.2"/><circle cx="17" cy="16" r="4.5" stroke="#00A2E8" stroke-width="2.2"/></svg>',
+    'yolov8 / yolo11': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#2563EB"/><path d="M5 6h3l2 4 2-4h3l-3.5 6.5V18h-3v-5.5L5 6zm10 0h4v12h-4V6z" fill="#FFF"/></svg>',
+    'yolo': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#2563EB"/><path d="M5 6h3l2 4 2-4h3l-3.5 6.5V18h-3v-5.5L5 6zm10 0h4v12h-4V6z" fill="#FFF"/></svg>',
+    'yolov8': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#2563EB"/><path d="M5 6h3l2 4 2-4h3l-3.5 6.5V18h-3v-5.5L5 6zm10 0h4v12h-4V6z" fill="#FFF"/></svg>',
+    'pytorch': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M13.5 2.5l-1 1 2.3 2.3A7.5 7.5 0 1019.5 12h-1.5a6 6 0 11-1.75-4.24l-2.75 2.74-1.5-1.5 3.25-3.25L13.5 2.5z" fill="#EE4C2C"/><circle cx="17.5" cy="4.5" r="1.5" fill="#EE4C2C"/></svg>',
+    'mediapipe': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#00838F"/><path d="M6 12l6-6 6 6-6 6-6-6z" stroke="#FFF" stroke-width="2"/><circle cx="12" cy="12" r="2" fill="#FFF"/></svg>',
+    'roboflow': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#6706CE"/><path d="M7 9a3 3 0 016 0c0 2-3 3-3 5m0 3h.01" stroke="#FFF" stroke-width="2" stroke-linecap="round"/></svg>',
+    'tesseract ocr': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#4285F4"/><path d="M5 7h14M12 7v11M8 18h8" stroke="#FFF" stroke-width="2" stroke-linecap="round"/></svg>',
+    'tesseract': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#4285F4"/><path d="M5 7h14M12 7v11M8 18h8" stroke="#FFF" stroke-width="2" stroke-linecap="round"/></svg>',
+    'hugging face': '<svg width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FFD21E"/><path d="M8 9.5c0 .8-.7 1.5-1.5 1.5S5 10.3 5 9.5 5.7 8 6.5 8 8 8.7 8 9.5zm11 0c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5.7-1.5 1.5-1.5 1.5.7 1.5 1.5zM8.5 14.5c.8 2 2.5 3 4.5 3s3.7-1 4.5-3" stroke="#202124" stroke-width="1.8" stroke-linecap="round"/></svg>',
+    'bert & transformers': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#FFB703"/><path d="M7 6h6a3 3 0 010 6H7V6zm0 6h7a3 3 0 010 6H7v-6z" fill="#023047"/></svg>',
+    'transformers': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#FFB703"/><path d="M7 6h6a3 3 0 010 6H7V6zm0 6h7a3 3 0 010 6H7v-6z" fill="#023047"/></svg>',
+    'spacy': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#09A3D5"/><circle cx="12" cy="12" r="5" stroke="#FFF" stroke-width="2"/><path d="M12 4v3M12 17v3M4 12h3M17 12h3" stroke="#FFF" stroke-width="1.8"/></svg>',
+    'nltk': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#3D5A80"/><path d="M6 18V6l6 8 6-8v12" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    'sentence-transformers': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#457B9D"/><circle cx="8" cy="12" r="2.5" fill="#A8DADC"/><circle cx="16" cy="12" r="2.5" fill="#A8DADC"/><path d="M10.5 12h3" stroke="#FFF" stroke-width="2"/></svg>',
+    'tokenizers & regex': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#E63946"/><path d="M7 9h10M7 12h7M7 15h4" stroke="#FFF" stroke-width="2" stroke-linecap="round"/></svg>',
+    'google gemini': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 7.5 7.5 12 2 12C7.5 12 12 16.5 12 22C12 16.5 16.5 12 22 12C16.5 12 12 7.5 12 2Z" fill="#4285F4"/></svg>',
+    'gemini': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 7.5 7.5 12 2 12C7.5 12 12 16.5 12 22C12 16.5 16.5 12 22 12C16.5 12 12 7.5 12 2Z" fill="#4285F4"/></svg>',
+    'openai gpt-4o': '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22.28 9.37a5.99 5.99 0 00-.51-4.88 6.09 6.09 0 00-6.47-2.88A6.05 6.05 0 0011 3.23a6.04 6.04 0 00-4.32 1.93 6.03 6.03 0 00-1.8 4.7 6.02 6.02 0 00-3.66 2.66 6.07 6.07 0 00.5 6.82 6 6 0 00.52 4.88 6.09 6.09 0 006.47 2.88 6.05 6.05 0 004.31-1.62 6.04 6.04 0 004.32-1.93 6.03 6.03 0 001.8-4.7 6.02 6.02 0 003.66-2.66 6.07 6.07 0 00-.5-6.82zM12 14.5a2.5 2.5 0 112.5-2.5 2.5 2.5 0 01-2.5 2.5z"/></svg>',
+    'openai': '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22.28 9.37a5.99 5.99 0 00-.51-4.88 6.09 6.09 0 00-6.47-2.88A6.05 6.05 0 0011 3.23a6.04 6.04 0 00-4.32 1.93 6.03 6.03 0 00-1.8 4.7 6.02 6.02 0 00-3.66 2.66 6.07 6.07 0 00.5 6.82 6 6 0 00.52 4.88 6.09 6.09 0 006.47 2.88 6.05 6.05 0 004.31-1.62 6.04 6.04 0 004.32-1.93 6.03 6.03 0 001.8-4.7 6.02 6.02 0 003.66-2.66 6.07 6.07 0 00-.5-6.82zM12 14.5a2.5 2.5 0 112.5-2.5 2.5 2.5 0 01-2.5 2.5z"/></svg>',
+    'gpt-4o': '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22.28 9.37a5.99 5.99 0 00-.51-4.88 6.09 6.09 0 00-6.47-2.88A6.05 6.05 0 0011 3.23a6.04 6.04 0 00-4.32 1.93 6.03 6.03 0 00-1.8 4.7 6.02 6.02 0 00-3.66 2.66 6.07 6.07 0 00.5 6.82 6 6 0 00.52 4.88 6.09 6.09 0 006.47 2.88 6.05 6.05 0 004.31-1.62 6.04 6.04 0 004.32-1.93 6.03 6.03 0 001.8-4.7 6.02 6.02 0 003.66-2.66 6.07 6.07 0 00-.5-6.82zM12 14.5a2.5 2.5 0 112.5-2.5 2.5 2.5 0 01-2.5 2.5z"/></svg>',
+    'anthropic claude': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#D97706"/><circle cx="12" cy="12" r="5" fill="#FFF"/><circle cx="12" cy="12" r="2.5" fill="#D97706"/></svg>',
+    'claude': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#D97706"/><circle cx="12" cy="12" r="5" fill="#FFF"/><circle cx="12" cy="12" r="2.5" fill="#D97706"/></svg>',
+    'ollama': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#1E293B"/><circle cx="12" cy="12" r="6" stroke="#FFF" stroke-width="2"/><circle cx="10" cy="11" r="1.5" fill="#FFF"/><circle cx="14" cy="11" r="1.5" fill="#FFF"/></svg>',
+    'prompt engineering': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z" fill="#FBBC04"/></svg>',
+    'vllm': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#4F46E5"/><path d="M13 3L6 14h6l-1 7 7-11h-6l1-7z" fill="#FFF"/></svg>',
+    'langchain': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#1C3C3C"/><path d="M7 12a3 3 0 116 0 3 3 0 01-6 0zm8-2h2a3 3 0 010 6h-2M9 14H7a3 3 0 010-6h2" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/></svg>',
+    'langgraph': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#065F46"/><circle cx="8" cy="8" r="2.5" fill="#34D399"/><circle cx="16" cy="16" r="2.5" fill="#34D399"/><circle cx="16" cy="8" r="2" fill="#FFF"/><path d="M8 8l8 8M8 8h8" stroke="#34D399" stroke-width="1.6"/></svg>',
+    'crewai': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#BE123C"/><circle cx="12" cy="9" r="3" fill="#FFF"/><path d="M6 18c0-3 3-4 6-4s6 1 6 4" stroke="#FFF" stroke-width="2"/></svg>',
+    'flowise': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#4F46E5"/><path d="M6 8h5v8H6zm7 0h5v4h-5zm0 6h5v2h-5z" fill="#FFF"/><path d="M11 10h2M11 14h2" stroke="#FFF" stroke-width="1.5"/></svg>',
+    'n8n': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#EA4B71"/><circle cx="7" cy="12" r="2.5" fill="#FFF"/><circle cx="17" cy="12" r="2.5" fill="#FFF"/><circle cx="12" cy="7" r="2" fill="#FFF"/><circle cx="12" cy="17" r="2" fill="#FFF"/><path d="M7 12h10M12 7v10" stroke="#FFF" stroke-width="1.5"/></svg>',
+    'agentic rag': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#047857"/><circle cx="12" cy="12" r="4" stroke="#A7F3D0" stroke-width="2"/><path d="M12 4v4M12 16v4M4 12h4M16 12h4" stroke="#A7F3D0" stroke-width="1.8"/></svg>',
+    'rag': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#047857"/><circle cx="12" cy="12" r="4" stroke="#A7F3D0" stroke-width="2"/><path d="M12 4v4M12 16v4M4 12h4M16 12h4" stroke="#A7F3D0" stroke-width="1.8"/></svg>',
+    'fastapi': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10.5" fill="#059669"/><path d="M12.5 4L7 13.5h4.5l-1 6.5 6.5-10H12.5V4z" fill="#FFF"/></svg>',
+    'node.js': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2l8.5 5v10L12 22l-8.5-5V7L12 2z" fill="#339933"/><path d="M12 6.5L7 9.5v5l5 3 5-3v-5l-5-3z" fill="#FFF"/></svg>',
+    'nodejs': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2l8.5 5v10L12 22l-8.5-5V7L12 2z" fill="#339933"/><path d="M12 6.5L7 9.5v5l5 3 5-3v-5l-5-3z" fill="#FFF"/></svg>',
+    'flask': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 3h6M10 3v5L5 19a2 2 0 002 2h10a2 2 0 002-2l-5-11V3M8 14h8"/></svg>',
+    'streamlit': '<svg width="20" height="20" viewBox="0 0 24 24" fill="#FF4B4B"><path d="M12 4L3 18h18L12 4zm0 4.5l5.5 8.5h-11L12 8.5z"/></svg>',
+    'react': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#20232A"/><circle cx="12" cy="12" r="2.5" fill="#61DAFB"/><ellipse cx="12" cy="12" rx="7" ry="2.8" stroke="#61DAFB" stroke-width="1.2" transform="rotate(30 12 12)"/><ellipse cx="12" cy="12" rx="7" ry="2.8" stroke="#61DAFB" stroke-width="1.2" transform="rotate(90 12 12)"/><ellipse cx="12" cy="12" rx="7" ry="2.8" stroke="#61DAFB" stroke-width="1.2" transform="rotate(150 12 12)"/></svg>',
+    'rest & websockets': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#1E293B"/><path d="M7 9h10M7 15h10M12 5v14" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"/></svg>',
+    'postgresql': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3C7 3 5 6 5 10c0 4.5 2 7 4 8.5V21h3v-2.2c1.2.2 2.5.2 3.8 0V21h3v-2.5c2-1.5 4-4 4-8.5 0-4-2-7-7-7h-3.8z" fill="#336791"/><circle cx="9" cy="9" r="1.5" fill="#FFF"/><circle cx="15" cy="9" r="1.5" fill="#FFF"/></svg>',
+    'postgres': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3C7 3 5 6 5 10c0 4.5 2 7 4 8.5V21h3v-2.2c1.2.2 2.5.2 3.8 0V21h3v-2.5c2-1.5 4-4 4-8.5 0-4-2-7-7-7h-3.8z" fill="#336791"/><circle cx="9" cy="9" r="1.5" fill="#FFF"/><circle cx="15" cy="9" r="1.5" fill="#FFF"/></svg>',
+    'mongodb': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 2 6.5 7.5 6.5 13.5C6.5 17.5 9 20.8 12 22C15 20.8 17.5 17.5 17.5 13.5C17.5 7.5 12 2 12 2Z" fill="#47A248"/><path d="M12 2V22C12.3 21.8 12.6 21.6 12.8 21.4C15.4 19.8 17.5 16.9 17.5 13.5C17.5 7.5 12 2 12 2Z" fill="#3FA037"/></svg>',
+    'prisma orm': '<svg width="20" height="20" viewBox="0 0 24 24" fill="#10B981"><path d="M12 2l3.5 6h-7L12 2zm-4 7l4 7-4 3-3.5-6 3.5-4zm8 0l3.5 4-3.5 6-4-3 4-7z"/></svg>',
+    'prisma': '<svg width="20" height="20" viewBox="0 0 24 24" fill="#10B981"><path d="M12 2l3.5 6h-7L12 2zm-4 7l4 7-4 3-3.5-6 3.5-4zm8 0l3.5 4-3.5 6-4-3 4-7z"/></svg>',
+    'chromadb': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#EA580C"/><circle cx="12" cy="12" r="5" stroke="#FFF" stroke-width="2"/><circle cx="12" cy="12" r="2" fill="#FFF"/></svg>',
+    'pinecone': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#0284C7"/><path d="M12 4l3 5h-6l3-5zm-3 6l3 5 3-5h-6z" fill="#FFF"/></svg>',
+    'redis': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#DC2626"/><path d="M6 10l6-3 6 3-6 3-6-3zm0 4l6 3 6-3" stroke="#FFF" stroke-width="1.8" stroke-linecap="round"/></svg>',
+    'docker': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#2496ED"/><path d="M6 13h2v2H6zm3 0h2v2H9zm3 0h2v2h-2zm3 0h2v2h-2zm-6-3h2v2H9zm3 0h2v2h-2zm3 0h2v2h-2z" fill="#FFF"/><path d="M4 15c1 3 4 4 8 4s7-1 8-4" stroke="#FFF" stroke-width="1.8" stroke-linecap="round"/></svg>',
+    'google cloud platform': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#4285F4"/><path d="M7 14a4 4 0 013.9-3.1 4.5 4.5 0 018.6 1.1A3.5 3.5 0 0118.5 19H7a3 3 0 010-6z" fill="#FFF"/></svg>',
+    'gcp': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#4285F4"/><path d="M7 14a4 4 0 013.9-3.1 4.5 4.5 0 018.6 1.1A3.5 3.5 0 0118.5 19H7a3 3 0 010-6z" fill="#FFF"/></svg>',
+    'github actions': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#2088FF"/><circle cx="8" cy="8" r="2.5" fill="#FFF"/><circle cx="16" cy="16" r="2.5" fill="#FFF"/><circle cx="8" cy="16" r="2.5" fill="#FFF"/><path d="M8 8v8M8 12h8" stroke="#FFF" stroke-width="1.8"/></svg>',
+    'git': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#F05032"/><circle cx="9" cy="9" r="2" fill="#FFF"/><circle cx="15" cy="15" r="2" fill="#FFF"/><circle cx="9" cy="15" r="2" fill="#FFF"/><path d="M9 9l6 6M9 9v6" stroke="#FFF" stroke-width="1.8"/></svg>',
+    'linux / ubuntu': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#E95420"/><circle cx="12" cy="12" r="5" stroke="#FFF" stroke-width="2"/><circle cx="12" cy="7" r="1.5" fill="#FFF"/><circle cx="7.7" cy="14.5" r="1.5" fill="#FFF"/><circle cx="16.3" cy="14.5" r="1.5" fill="#FFF"/></svg>',
+    'linux': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#E95420"/><circle cx="12" cy="12" r="5" stroke="#FFF" stroke-width="2"/><circle cx="12" cy="7" r="1.5" fill="#FFF"/><circle cx="7.7" cy="14.5" r="1.5" fill="#FFF"/><circle cx="16.3" cy="14.5" r="1.5" fill="#FFF"/></svg>',
+    'raspberry pi': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#C51A4A"/><circle cx="10" cy="11" r="2.5" fill="#FFF"/><circle cx="14" cy="11" r="2.5" fill="#FFF"/><circle cx="8" cy="14" r="2" fill="#FFF"/><circle cx="16" cy="14" r="2" fill="#FFF"/><circle cx="12" cy="16" r="2.2" fill="#FFF"/></svg>'
+};
+
+// Popular tech presets for 1-click addition chips
+var POPULAR_TECH_LIST = [
+    'Python', 'TypeScript', 'FastAPI', 'PyTorch', 'Google Gemini', 
+    'LangChain', 'Docker', 'PostgreSQL', 'React', 'OpenCV', 
+    'Pandas', 'Node.js', 'Google Cloud Platform', 'Hugging Face', 'MongoDB', 'Redis'
+];
+
+function getTechIcon(name) {
+    if (!name) return '';
+    var clean = name.toLowerCase().trim();
+    if (TECH_ICON_MAP[clean]) return TECH_ICON_MAP[clean];
+    // Try substring matching
+    for (var k in TECH_ICON_MAP) {
+        if (clean.includes(k) || k.includes(clean)) return TECH_ICON_MAP[k];
+    }
+    return '';
+}
+
+function renderSkillIconGrid() {
+    var container = document.getElementById('skill-icon-grid');
+    if (!container) return;
+    var currentSvg = (document.getElementById('skill-icon-svg') ? document.getElementById('skill-icon-svg').value.trim() : '');
+    
+    var html = '';
+    for (var key in SKILL_ICON_PRESETS) {
+        var p = SKILL_ICON_PRESETS[key];
+        var isSelected = currentSvg && (currentSvg === p.icon.trim());
+        html += '<button type="button" class="skill-icon-btn ' + (isSelected ? 'selected' : '') + '" data-preset="' + key + '" onclick="selectSkillIconPreset(\'' + key + '\')" title="' + esc(p.label) + '">' +
+            p.icon +
+            '<span class="skill-icon-label">' + esc(p.label) + '</span>' +
+        '</button>';
+    }
+    container.innerHTML = html;
+}
+
+function selectSkillIconPreset(key) {
+    var preset = SKILL_ICON_PRESETS[key];
+    if (!preset) return;
+    var svgInput = document.getElementById('skill-icon-svg');
+    if (svgInput) svgInput.value = preset.icon;
+    
+    // Highlight active button
+    var btns = document.querySelectorAll('#skill-icon-grid .skill-icon-btn');
+    btns.forEach(function(b) {
+        if (b.dataset.preset === key) b.classList.add('selected');
+        else b.classList.remove('selected');
+    });
+    
+    updateSkillDrawerLivePreview();
+}
+
+function toggleCustomSvgDrawer() {
+    var wrap = document.getElementById('skill-custom-svg-wrap');
+    if (!wrap) return;
+    var isHidden = wrap.style.display === 'none' || !wrap.style.display;
+    wrap.style.display = isHidden ? 'block' : 'none';
+}
+
+function onCustomSvgInput() {
+    // Unselect presets if user manually changes SVG
+    var currentSvg = document.getElementById('skill-icon-svg').value.trim();
+    var btns = document.querySelectorAll('#skill-icon-grid .skill-icon-btn');
+    var matchedKey = null;
+    btns.forEach(function(b) {
+        var key = b.dataset.preset;
+        if (SKILL_ICON_PRESETS[key] && SKILL_ICON_PRESETS[key].icon.trim() === currentSvg) {
+            b.classList.add('selected');
+            matchedKey = key;
+        } else {
+            b.classList.remove('selected');
+        }
+    });
+    updateSkillDrawerLivePreview();
+}
+
+function setSkillAccentColor(color) {
+    var input = document.getElementById('skill-color');
+    if (input) input.value = color;
+    
+    var swatches = document.querySelectorAll('#skill-color-swatches .color-swatch-item');
+    swatches.forEach(function(sw) {
+        var match = (sw.dataset.color === color);
+        var checkSvg = sw.querySelector('svg');
+        if (match) {
+            sw.classList.add('selected');
+            if (checkSvg) checkSvg.style.display = 'block';
+        } else {
+            sw.classList.remove('selected');
+            if (checkSvg) checkSvg.style.display = 'none';
+        }
+    });
+    
+    updateSkillDrawerLivePreview();
+}
+
+function adjustSortOrder(delta) {
+    var sortInput = document.getElementById('skill-sort');
+    if (!sortInput) return;
+    var current = parseInt(sortInput.value, 10) || 0;
+    var nextVal = Math.max(0, current + delta);
+    sortInput.value = nextVal;
+    updateSkillDrawerLivePreview();
+}
+
+function onSkillCategoryInput() {
     var cat = document.getElementById('skill-category').value.trim();
     var slugInput = document.getElementById('skill-slug');
     if (!slugInput.value || slugInput.dataset.autofilled === 'true') {
         slugInput.value = cat.toLowerCase().replace(/[^a-z0-9_-]/g, '-').replace(/-+/g, '-');
         slugInput.dataset.autofilled = 'true';
     }
+    updateSkillDrawerLivePreview();
+}
+
+function renderQuickTechPresets() {
+    var container = document.getElementById('quick-tech-presets');
+    if (!container) return;
+    var html = POPULAR_TECH_LIST.map(function(name) {
+        var icon = getTechIcon(name);
+        return '<button type="button" class="quick-chip" onclick="quickAddTechBadge(\'' + esc(name) + '\')" title="1-Click Add ' + esc(name) + '">' +
+            (icon ? '<span style="display:inline-flex; width:13px; height:13px; align-items:center; justify-content:center;">' + icon + '</span>' : '') +
+            '+ ' + esc(name) +
+        '</button>';
+    }).join('');
+    container.innerHTML = html;
+}
+
+function quickAddTechBadge(techName) {
+    var icon = getTechIcon(techName);
+    addTechBadgeRow(techName, icon);
+    showToast('Added ' + techName + ' badge! 🏷️', 'success');
+}
+
+function autoFillSkillSlug() {
+    onSkillCategoryInput();
 }
 
 async function loadSkills() {
@@ -11289,7 +11779,7 @@ function renderSkillsGrid() {
             '</span>';
         }).join('');
 
-        return '<div class="project-card" style="display:flex; flex-direction:column; gap:14px; padding:22px; border:1.5px solid var(--sidebar-border); border-radius:var(--r-md); background:var(--surface); border-top:4px solid ' + esc(color) + ';">' +
+        return '<div class="project-card" style="display:flex; flex-direction:column; gap:14px; padding:22px; border:1.5px solid var(--sidebar-border); border-radius:var(--r-md); background:var(--surface); border-top:4px solid ' + esc(color) + '; box-shadow:0 4px 16px rgba(0,0,0,0.03); transition:transform 0.2s, box-shadow 0.2s;">' +
             '<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">' +
                 '<div style="display:flex; align-items:center; gap:12px; min-width:0;">' +
                     '<div style="width:38px; height:38px; border-radius:10px; background:var(--sidebar-hover); display:flex; align-items:center; justify-content:center; flex-shrink:0; color:' + esc(color) + ';">' +
@@ -11301,7 +11791,7 @@ function renderSkillsGrid() {
                     '</div>' +
                 '</div>' +
                 '<span style="background:var(--sidebar-hover); color:var(--ink-3); font-size:0.7rem; font-weight:700; padding:3px 8px; border-radius:10px; border:1px solid var(--sidebar-border); flex-shrink:0;">' +
-                    items.length + ' Competencies &bull; ' + tech.length + ' Tech' +
+                    items.length + ' Items &bull; ' + tech.length + ' Tech' +
                 '</span>' +
             '</div>' +
 
@@ -11315,9 +11805,15 @@ function renderSkillsGrid() {
                 '<div style="display:flex; flex-wrap:wrap; gap:6px;">' + techBadgesHtml + '</div>' +
             '</div>' : '') +
 
-            '<div style="display:flex; gap:8px; justify-content:flex-end; border-top:1px solid var(--line-soft); padding-top:12px; margin-top:auto;">' +
-                '<button class="btn-sm-ghost" onclick="openSkillDrawerById(\'' + s.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface); cursor:pointer;">Edit</button>' +
-                '<button class="btn-sm-ghost" onclick="deleteSkillDomain(\'' + s.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; color:var(--g-red); border-radius:var(--r-pill); border:1.5px solid rgba(234,67,53,0.2); background:var(--g-red-soft); cursor:pointer;">Delete</button>' +
+            '<div style="display:flex; gap:8px; justify-content:space-between; align-items:center; border-top:1px solid var(--line-soft); padding-top:12px; margin-top:auto;">' +
+                '<a href="/#skills" target="_blank" style="font-size:0.75rem; font-weight:700; color:var(--ink-4); text-decoration:none; display:inline-flex; align-items:center; gap:4px;" title="View on Live Portfolio">' +
+                    '<span>View Live</span> <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>' +
+                '</a>' +
+                '<div style="display:flex; gap:6px;">' +
+                    '<button class="btn-sm-ghost" onclick="duplicateSkillDomain(\'' + s.id + '\')" style="font-size:0.75rem; font-weight:700; padding:5px 10px; border-radius:var(--r-pill); border:1px solid var(--line); background:var(--surface); cursor:pointer;" title="Clone this domain">⧉ Clone</button>' +
+                    '<button class="btn-sm-ghost" onclick="openSkillDrawerById(\'' + s.id + '\')" style="font-size:0.75rem; font-weight:700; padding:5px 12px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface); cursor:pointer;">Edit</button>' +
+                    '<button class="btn-sm-ghost" onclick="deleteSkillDomain(\'' + s.id + '\')" style="font-size:0.75rem; font-weight:700; padding:5px 12px; color:var(--g-red); border-radius:var(--r-pill); border:1.5px solid rgba(234,67,53,0.2); background:var(--g-red-soft); cursor:pointer;">Delete</button>' +
+                '</div>' +
             '</div>' +
         '</div>';
     }).join('');
@@ -11333,10 +11829,19 @@ function openSkillDrawer(skill) {
     document.getElementById('skill-category').value = skill ? (skill.category || '') : '';
     document.getElementById('skill-slug').value = skill ? (skill.category_slug || '') : '';
     document.getElementById('skill-slug').dataset.autofilled = skill ? 'false' : 'true';
-    document.getElementById('skill-color').value = skill ? (skill.accent_color || 'var(--blue)') : 'var(--blue)';
-    document.getElementById('skill-sort').value = skill ? (skill.sort_order || 0) : 0;
-    document.getElementById('skill-icon-svg').value = skill ? (skill.icon_svg || '') : '';
-    document.getElementById('skill-icon-preset').value = '';
+    
+    var color = skill ? (skill.accent_color || 'var(--blue)') : 'var(--blue)';
+    document.getElementById('skill-color').value = color;
+    setSkillAccentColor(color);
+
+    var sortVal = skill ? (skill.sort_order || 0) : (skillsData.length + 1);
+    document.getElementById('skill-sort').value = sortVal;
+
+    var iconSvg = skill ? (skill.icon_svg || '') : (SKILL_ICON_PRESETS.code ? SKILL_ICON_PRESETS.code.icon : '');
+    document.getElementById('skill-icon-svg').value = iconSvg;
+
+    renderSkillIconGrid();
+    renderQuickTechPresets();
 
     // Render competency items
     var itemsList = document.getElementById('skill-items-list');
@@ -11358,6 +11863,8 @@ function openSkillDrawer(skill) {
         addTechBadgeRow('', '');
     }
 
+    updateSkillDrawerLivePreview();
+
     document.getElementById('skill-backdrop').classList.add('open');
     document.getElementById('skill-drawer').classList.add('open');
 }
@@ -11367,32 +11874,292 @@ function closeSkillDrawer() {
     document.getElementById('skill-drawer').classList.remove('open');
 }
 
+function recalcSkillIndexes() {
+    var compRows = document.querySelectorAll('#skill-items-list .skill-item-edit-row');
+    compRows.forEach(function(row, idx) {
+        var num = row.querySelector('.skill-row-num');
+        if (num) num.textContent = '#' + (idx + 1);
+    });
+
+    var techRows = document.querySelectorAll('#skill-tech-list .skill-tech-edit-row');
+    techRows.forEach(function(row, idx) {
+        var num = row.querySelector('.skill-row-num');
+        if (num) num.textContent = '#' + (idx + 1);
+    });
+}
+
 function addSkillItemRow(name, tags) {
     var container = document.getElementById('skill-items-list');
     var row = document.createElement('div');
     row.className = 'skill-item-edit-row';
-    row.style.cssText = 'display:flex; gap:8px; align-items:center; background:var(--surface-2); padding:8px 10px; border-radius:8px; border:1px solid var(--line-soft);';
+    row.style.cssText = 'display:flex; gap:8px; align-items:center; background:var(--surface-2); padding:10px 12px; border-radius:10px; border:1px solid var(--line-soft); transition:all 0.15s ease;';
+    
     row.innerHTML = 
-        '<div style="flex:1; display:flex; flex-direction:column; gap:4px;">' +
-            '<input class="field-input skill-item-name" style="padding:6px 10px; font-size:0.82rem; font-weight:700;" placeholder="Competency Title (e.g. Python)" value="' + esc(name) + '">' +
-            '<input class="field-input skill-item-tags" style="padding:6px 10px; font-size:0.75rem;" placeholder="Tags / Subskills (e.g. AsyncIO · OOP · Performance)" value="' + esc(tags) + '">' +
+        '<div class="skill-row-num" style="font-size:0.72rem; font-weight:800; color:var(--ink-4); width:24px; text-align:center;">#1</div>' +
+        '<div style="flex:1; display:flex; flex-direction:column; gap:6px;">' +
+            '<input class="field-input skill-item-name" style="padding:6px 10px; font-size:0.82rem; font-weight:700;" placeholder="Competency Title (e.g. Python, Object Detection)" value="' + esc(name) + '" oninput="updateSkillDrawerLivePreview()">' +
+            '<div style="display:flex; gap:6px; align-items:center;">' +
+                '<input class="field-input skill-item-tags" style="padding:6px 10px; font-size:0.75rem; flex:1;" placeholder="Tags / Subskills (e.g. AsyncIO · OOP · Performance)" value="' + esc(tags) + '" oninput="updateSkillDrawerLivePreview()">' +
+                '<button type="button" class="row-btn-action" onclick="insertDotIntoTags(this)" title="Insert middle dot ( · ) separator" style="font-size:0.72rem; font-weight:800; width:auto; padding:0 8px;">+ &bull;</button>' +
+            '</div>' +
         '</div>' +
-        '<button type="button" onclick="this.closest(\'.skill-item-edit-row\').remove()" style="padding:6px 10px; background:var(--g-red-soft); color:var(--g-red); border:1px solid rgba(234,67,53,0.2); border-radius:6px; cursor:pointer; font-weight:700;" title="Remove Item">✕</button>';
+        '<div style="display:flex; flex-direction:column; gap:4px;">' +
+            '<div style="display:flex; gap:4px;">' +
+                '<button type="button" class="row-btn-action" onclick="moveSkillItemRow(this, -1)" title="Move Up">↑</button>' +
+                '<button type="button" class="row-btn-action" onclick="moveSkillItemRow(this, 1)" title="Move Down">↓</button>' +
+            '</div>' +
+            '<div style="display:flex; gap:4px;">' +
+                '<button type="button" class="row-btn-action" onclick="duplicateSkillItemRow(this)" title="Duplicate Row">⧉</button>' +
+                '<button type="button" class="row-btn-action delete" onclick="removeSkillItemRow(this)" title="Remove Item">✕</button>' +
+            '</div>' +
+        '</div>';
+
     container.appendChild(row);
+    recalcSkillIndexes();
+    updateSkillDrawerLivePreview();
+}
+
+function removeSkillItemRow(btn) {
+    var row = btn.closest('.skill-item-edit-row');
+    if (row) row.remove();
+    recalcSkillIndexes();
+    updateSkillDrawerLivePreview();
+}
+
+function moveSkillItemRow(btn, direction) {
+    var row = btn.closest('.skill-item-edit-row');
+    if (!row) return;
+    if (direction === -1 && row.previousElementSibling) {
+        row.parentNode.insertBefore(row, row.previousElementSibling);
+    } else if (direction === 1 && row.nextElementSibling) {
+        row.parentNode.insertBefore(row.nextElementSibling, row);
+    }
+    recalcSkillIndexes();
+    updateSkillDrawerLivePreview();
+}
+
+function duplicateSkillItemRow(btn) {
+    var row = btn.closest('.skill-item-edit-row');
+    if (!row) return;
+    var name = row.querySelector('.skill-item-name').value;
+    var tags = row.querySelector('.skill-item-tags').value;
+    addSkillItemRow(name, tags);
+}
+
+function insertDotIntoTags(btn) {
+    var row = btn.closest('.skill-item-edit-row');
+    if (!row) return;
+    var input = row.querySelector('.skill-item-tags');
+    if (!input) return;
+    var start = input.selectionStart || input.value.length;
+    var end = input.selectionEnd || input.value.length;
+    var text = input.value;
+    var insertion = ' · ';
+    input.value = text.substring(0, start) + insertion + text.substring(end);
+    input.selectionStart = input.selectionEnd = start + insertion.length;
+    input.focus();
+    updateSkillDrawerLivePreview();
 }
 
 function addTechBadgeRow(name, icon_svg) {
     var container = document.getElementById('skill-tech-list');
     var row = document.createElement('div');
     row.className = 'skill-tech-edit-row';
-    row.style.cssText = 'display:flex; gap:8px; align-items:center; background:var(--surface-2); padding:8px 10px; border-radius:8px; border:1px solid var(--line-soft);';
+    row.style.cssText = 'display:flex; gap:8px; align-items:center; background:var(--surface-2); padding:10px 12px; border-radius:10px; border:1px solid var(--line-soft); transition:all 0.15s ease;';
+    
+    // Auto lookup icon if not provided
+    if (!icon_svg && name) {
+        icon_svg = getTechIcon(name);
+    }
+
     row.innerHTML = 
-        '<div style="flex:1; display:flex; flex-direction:column; gap:4px;">' +
-            '<input class="field-input skill-tech-name" style="padding:6px 10px; font-size:0.82rem; font-weight:700;" placeholder="Technology Name (e.g. Docker, PyTorch)" value="' + esc(name) + '">' +
-            '<input class="field-input skill-tech-icon" style="padding:6px 10px; font-size:0.72rem; font-family:monospace;" placeholder="Icon SVG (e.g. <svg ...>...</svg>)" value="' + esc(icon_svg) + '">' +
+        '<div class="skill-row-num" style="font-size:0.72rem; font-weight:800; color:var(--ink-4); width:24px; text-align:center;">#1</div>' +
+        '<div class="skill-tech-icon-preview" style="width:34px; height:34px; border-radius:8px; background:var(--sidebar-hover); display:flex; align-items:center; justify-content:center; border:1px solid var(--sidebar-border); flex-shrink:0;">' +
+            (icon_svg || '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>') +
         '</div>' +
-        '<button type="button" onclick="this.closest(\'.skill-tech-edit-row\').remove()" style="padding:6px 10px; background:var(--g-red-soft); color:var(--g-red); border:1px solid rgba(234,67,53,0.2); border-radius:6px; cursor:pointer; font-weight:700;" title="Remove Badge">✕</button>';
+        '<div style="flex:1; display:flex; flex-direction:column; gap:4px;">' +
+            '<input class="field-input skill-tech-name" style="padding:6px 10px; font-size:0.82rem; font-weight:700;" placeholder="Tech Name (e.g. Docker, PyTorch)" value="' + esc(name) + '" oninput="onTechNameChange(this)">' +
+            '<input class="field-input skill-tech-icon" style="padding:4px 8px; font-size:0.68rem; font-family:monospace;" placeholder="Icon SVG (Auto-detected from library or custom <svg ...>)" value="' + esc(icon_svg) + '" oninput="onTechIconChange(this)">' +
+        '</div>' +
+        '<div style="display:flex; flex-direction:column; gap:4px;">' +
+            '<div style="display:flex; gap:4px;">' +
+                '<button type="button" class="row-btn-action" onclick="moveTechBadgeRow(this, -1)" title="Move Up">↑</button>' +
+                '<button type="button" class="row-btn-action" onclick="moveTechBadgeRow(this, 1)" title="Move Down">↓</button>' +
+            '</div>' +
+            '<div style="display:flex; gap:4px;">' +
+                '<button type="button" class="row-btn-action" onclick="duplicateTechBadgeRow(this)" title="Duplicate Badge">⧉</button>' +
+                '<button type="button" class="row-btn-action delete" onclick="removeTechBadgeRow(this)" title="Remove Badge">✕</button>' +
+            '</div>' +
+        '</div>';
+
     container.appendChild(row);
+    recalcSkillIndexes();
+    updateSkillDrawerLivePreview();
+}
+
+function removeTechBadgeRow(btn) {
+    var row = btn.closest('.skill-tech-edit-row');
+    if (row) row.remove();
+    recalcSkillIndexes();
+    updateSkillDrawerLivePreview();
+}
+
+function moveTechBadgeRow(btn, direction) {
+    var row = btn.closest('.skill-tech-edit-row');
+    if (!row) return;
+    if (direction === -1 && row.previousElementSibling) {
+        row.parentNode.insertBefore(row, row.previousElementSibling);
+    } else if (direction === 1 && row.nextElementSibling) {
+        row.parentNode.insertBefore(row.nextElementSibling, row);
+    }
+    recalcSkillIndexes();
+    updateSkillDrawerLivePreview();
+}
+
+function duplicateTechBadgeRow(btn) {
+    var row = btn.closest('.skill-tech-edit-row');
+    if (!row) return;
+    var name = row.querySelector('.skill-tech-name').value;
+    var icon = row.querySelector('.skill-tech-icon').value;
+    addTechBadgeRow(name, icon);
+}
+
+function onTechNameChange(input) {
+    var row = input.closest('.skill-tech-edit-row');
+    if (!row) return;
+    var iconInput = row.querySelector('.skill-tech-icon');
+    var val = input.value.trim();
+    var match = getTechIcon(val);
+    if (match && (!iconInput.value || iconInput.value.length < 50)) {
+        iconInput.value = match;
+    }
+    var prev = row.querySelector('.skill-tech-icon-preview');
+    if (prev) {
+        prev.innerHTML = iconInput.value || '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>';
+    }
+    updateSkillDrawerLivePreview();
+}
+
+function onTechIconChange(input) {
+    var row = input.closest('.skill-tech-edit-row');
+    if (!row) return;
+    var prev = row.querySelector('.skill-tech-icon-preview');
+    if (prev) {
+        prev.innerHTML = input.value || '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>';
+    }
+    updateSkillDrawerLivePreview();
+}
+
+function updateSkillDrawerLivePreview() {
+    var category = (document.getElementById('skill-category') ? document.getElementById('skill-category').value.trim() : '') || 'Domain Name';
+    var slug = (document.getElementById('skill-slug') ? document.getElementById('skill-slug').value.trim() : '') || 'slug';
+    var color = (document.getElementById('skill-color') ? document.getElementById('skill-color').value : 'var(--blue)') || 'var(--blue)';
+    var sort = (document.getElementById('skill-sort') ? document.getElementById('skill-sort').value : '0') || '0';
+    var iconSvg = (document.getElementById('skill-icon-svg') ? document.getElementById('skill-icon-svg').value.trim() : '');
+
+    // Card frame
+    var card = document.getElementById('skill-preview-card');
+    if (card) {
+        card.style.borderTopColor = color;
+    }
+
+    // Icon Box
+    var iconBox = document.getElementById('skill-prev-icon-box');
+    if (iconBox) {
+        iconBox.style.color = color;
+        iconBox.innerHTML = iconSvg || '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>';
+    }
+
+    // Title & Slug
+    var titleEl = document.getElementById('skill-prev-title');
+    if (titleEl) titleEl.textContent = category;
+    var slugEl = document.getElementById('skill-prev-slug');
+    if (slugEl) slugEl.innerHTML = '#' + esc(slug) + ' &bull; Sort ' + esc(sort);
+
+    // Items list
+    var itemsList = document.getElementById('skill-prev-items-list');
+    var compRows = document.querySelectorAll('#skill-items-list .skill-item-edit-row');
+    var validItems = [];
+    compRows.forEach(function(row) {
+        var n = row.querySelector('.skill-item-name').value.trim();
+        var t = row.querySelector('.skill-item-tags').value.trim();
+        if (n) validItems.push({ name: n, tags: t });
+    });
+
+    if (itemsList) {
+        if (!validItems.length) {
+            itemsList.innerHTML = '<li style="color:var(--ink-4); font-size:0.75rem;">No competency items added yet</li>';
+        } else {
+            itemsList.innerHTML = validItems.map(function(it) {
+                return '<li style="display:flex; flex-direction:column; gap:2px; font-size:0.8rem;">' +
+                    '<strong style="color:var(--ink); font-weight:700;">' + esc(it.name) + '</strong>' +
+                    '<span style="color:var(--ink-4); font-size:0.72rem;">' + esc(it.tags || 'No tags') + '</span>' +
+                '</li>';
+            }).join('');
+        }
+    }
+
+    // Tech badges
+    var techList = document.getElementById('skill-prev-tech-list');
+    var techRows = document.querySelectorAll('#skill-tech-list .skill-tech-edit-row');
+    var validTech = [];
+    techRows.forEach(function(row) {
+        var n = row.querySelector('.skill-tech-name').value.trim();
+        var icon = row.querySelector('.skill-tech-icon').value.trim();
+        if (n) validTech.push({ name: n, icon: icon });
+    });
+
+    if (techList) {
+        if (!validTech.length) {
+            techList.innerHTML = '<span style="color:var(--ink-4); font-size:0.75rem;">No badges added</span>';
+        } else {
+            techList.innerHTML = validTech.map(function(t) {
+                return '<span style="display:inline-flex; align-items:center; gap:5px; background:var(--sidebar-hover); border:1px solid var(--sidebar-border); padding:3px 8px; border-radius:12px; font-size:0.72rem; font-weight:700; color:var(--ink-2);">' +
+                    (t.icon ? '<span style="display:inline-flex; width:13px; height:13px; align-items:center; justify-content:center;">' + t.icon + '</span>' : '') +
+                    esc(t.name) +
+                '</span>';
+            }).join('');
+        }
+    }
+
+    // Meta counts badge
+    var counts = document.getElementById('skill-prev-meta-counts');
+    if (counts) {
+        counts.textContent = validItems.length + ' Competencies • ' + validTech.length + ' Tech';
+    }
+}
+
+async function duplicateSkillDomain(id) {
+    var original = _skillMap[id];
+    if (!original) return;
+    
+    var payload = {
+        category: original.category + ' (Copy)',
+        category_slug: (original.category_slug || 'domain') + '-copy',
+        accent_color: original.accent_color || 'var(--blue)',
+        sort_order: (original.sort_order || 0) + 1,
+        icon_svg: original.icon_svg || null,
+        items: original.items || [],
+        tech_stack: original.tech_stack || []
+    };
+
+    try {
+        var res = await fetch('/api/skills', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        var data = await res.json();
+        if (data.success) {
+            showToast('Duplicated ' + original.category + '! 📋', 'success');
+            await loadSkills();
+        } else {
+            showToast(data.error || 'Failed to duplicate domain', 'error');
+        }
+    } catch(err) {
+        console.error('Duplicate error:', err);
+        showToast('Network error while duplicating', 'error');
+    }
 }
 
 async function saveSkillDomain() {
@@ -11403,7 +12170,7 @@ async function saveSkillDomain() {
         return;
     }
     var category_slug = document.getElementById('skill-slug').value.trim() || category.toLowerCase().replace(/[^a-z0-9_-]/g, '-');
-    var accent_color = document.getElementById('skill-color').value;
+    var accent_color = document.getElementById('skill-color').value || 'var(--blue)';
     var sort_order = parseInt(document.getElementById('skill-sort').value, 10) || 0;
     var icon_svg = document.getElementById('skill-icon-svg').value.trim() || null;
 
@@ -11479,6 +12246,18 @@ async function deleteSkillDomain(id) {
         showToast('Network error while deleting skill domain', 'error');
     }
 }
+
+// Drawer keyboard listener (Ctrl+Enter to save)
+document.addEventListener('keydown', function(e) {
+    var drawer = document.getElementById('skill-drawer');
+    if (!drawer || !drawer.classList.contains('open')) return;
+    if (e.key === 'Escape') {
+        closeSkillDrawer();
+    } else if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+        saveSkillDomain();
+    }
+});
 
 /* ══════════════════════════════════════════════════════════
    PORTFOLIO CMS TWO-WAY SYNC: EXPERIENCES CRUD
