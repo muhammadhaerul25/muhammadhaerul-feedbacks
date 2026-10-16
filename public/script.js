@@ -1912,58 +1912,49 @@
     }).join('');
 
     if (paginationWrap && paginationInfo && paginationControls) {
-      if (totalCerts <= CERTS_PER_PAGE) {
-        paginationWrap.style.display = 'flex';
-        paginationInfo.innerHTML = isIndonesian() 
-          ? `Menampilkan semua <strong>${totalCerts}</strong> lisensi &amp; sertifikasi`
-          : `Showing all <strong>${totalCerts}</strong> certifications`;
-        paginationControls.innerHTML = `
-          <button type="button" class="p-page-toggle-btn" onclick="window.open('/certifications', '_blank')" title="Open certifications in a new dedicated page">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            <span>${isIndonesian() ? 'Lihat Semua' : 'Browse All'} (${totalCerts})</span>
-          </button>
-        `;
-      } else {
-        paginationWrap.style.display = 'flex';
-        paginationInfo.innerHTML = isIndonesian()
-          ? `Menampilkan <strong>${startIndex + 1}–${endIndex}</strong> dari <strong>${totalCerts}</strong> sertifikasi`
-          : `Showing <strong>${startIndex + 1}–${endIndex}</strong> of <strong>${totalCerts}</strong> certifications`;
+      paginationWrap.style.display = 'flex';
+      
+      const isId = isIndonesian();
+      paginationInfo.innerHTML = isId
+        ? `Menampilkan <strong>${startIndex + 1}–${endIndex}</strong> dari <strong>${totalCerts}</strong> lisensi &amp; sertifikasi`
+        : `Showing <strong>${startIndex + 1}–${endIndex}</strong> of <strong>${totalCerts}</strong> certifications`;
 
-        let controlsHtml = '';
-        const prevDisabled = currentCertPage === 1 ? 'disabled' : '';
+      let controlsHtml = '';
+      const prevDisabled = currentCertPage <= 1 ? 'disabled' : '';
+      controlsHtml += `
+        <button type="button" class="p-page-btn" onclick="window.changeCertPage(${currentCertPage - 1})" ${prevDisabled} aria-label="Previous Page">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      `;
+
+      for (let i = 1; i <= totalPages; i++) {
+        const activeClass = i === currentCertPage ? 'active' : '';
         controlsHtml += `
-          <button type="button" class="p-page-btn" onclick="window.changeCertPage(${currentCertPage - 1})" ${prevDisabled} aria-label="Previous Page">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
+          <button type="button" class="p-page-btn ${activeClass}" onclick="window.changeCertPage(${i})">${i}</button>
         `;
-
-        for (let i = 1; i <= totalPages; i++) {
-          const activeClass = i === currentCertPage ? 'active' : '';
-          controlsHtml += `
-            <button type="button" class="p-page-btn ${activeClass}" onclick="window.changeCertPage(${i})">${i}</button>
-          `;
-        }
-
-        const nextDisabled = currentCertPage === totalPages ? 'disabled' : '';
-        controlsHtml += `
-          <button type="button" class="p-page-btn" onclick="window.changeCertPage(${currentCertPage + 1})" ${nextDisabled} aria-label="Next Page">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        `;
-
-        controlsHtml += `
-          <button type="button" class="p-page-toggle-btn" onclick="window.open('/certifications', '_blank')" title="Open certifications in a new dedicated page">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            <span>${isIndonesian() ? 'Lihat Semua' : 'Browse All'} (${totalCerts})</span>
-          </button>
-        `;
-
-        paginationControls.innerHTML = controlsHtml;
       }
+
+      const nextDisabled = currentCertPage >= totalPages ? 'disabled' : '';
+      controlsHtml += `
+        <button type="button" class="p-page-btn" onclick="window.changeCertPage(${currentCertPage + 1})" ${nextDisabled} aria-label="Next Page">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      `;
+
+      controlsHtml += `
+        <button type="button" class="p-page-toggle-btn" onclick="window.open('/certifications', '_blank')" title="Open certifications in a new dedicated page">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <span>${isId ? 'Lihat Semua' : 'Browse All'} (${totalCerts})</span>
+        </button>
+      `;
+
+      paginationControls.innerHTML = controlsHtml;
     }
   }
 
   window.changeCertPage = function(page) {
+    const totalPages = Math.ceil(((liveCertifications || []).length) / CERTS_PER_PAGE) || 1;
+    if (page < 1 || page > totalPages) return;
     currentCertPage = page;
     renderCertifications(liveCertifications, page);
     const certSection = document.getElementById('certifications');

@@ -200,7 +200,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=3.6">
+  <link rel="stylesheet" href="styles.css?v=3.7">
 </head>
 
 <body>
@@ -2323,9 +2323,23 @@
         </div>
 
         <!-- Certifications Pagination & Browse All -->
-        <div class="p-pagination-wrap reveal" id="certPaginationWrap" style="display:none; margin-top:36px;">
-          <div class="p-pagination-info" id="certPaginationInfo"></div>
-          <div class="p-pagination-controls" id="certPaginationControls"></div>
+        <div class="p-pagination-wrap reveal in-view" id="certPaginationWrap">
+          <div class="p-pagination-info" id="certPaginationInfo">
+            Showing <strong>1–8</strong> of <strong>8</strong> certifications
+          </div>
+          <div class="p-pagination-controls" id="certPaginationControls">
+            <button type="button" class="p-page-btn" disabled aria-label="Previous Page">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button type="button" class="p-page-btn active">1</button>
+            <button type="button" class="p-page-btn" disabled aria-label="Next Page">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button type="button" class="p-page-toggle-btn" onclick="window.open('/certifications', '_blank')" title="Open certifications in a new dedicated page">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <span>Browse All (8)</span>
+            </button>
+          </div>
         </div>
       </div>
     </section>
@@ -2665,7 +2679,7 @@
   <!-- Global Toast Notification -->
   <div id="portfolioToast" class="portfolio-toast" role="status" aria-live="polite"></div>
 
-  <script src="script.js?v=4.8"></script>
+  <script src="script.js?v=4.9"></script>
 </body>
 
 </html>
