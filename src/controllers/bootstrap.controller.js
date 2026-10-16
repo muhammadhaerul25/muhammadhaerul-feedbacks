@@ -1,7 +1,7 @@
 const prisma = require('../config/db');
 const cache = require('../utils/cache');
 const asyncHandler = require('../utils/asyncHandler');
-const { DEFAULT_SETTINGS } = require('./settings.controller');
+const { DEFAULT_SETTINGS, mergeSettings } = require('./settings.controller');
 
 function getProjectDateSortValue(p) {
     if (!p) return '';
@@ -42,11 +42,14 @@ function sortProjectsByDateDesc(projects) {
  * cached in-memory with automatic TTL expiration.
  */
 const getPortfolioBootstrap = asyncHandler(async (req, res) => {
-    const cached = cache.get('portfolio:bootstrap');
-    if (cached) {
-        res.set('X-Cache', 'HIT');
-        res.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=120');
-        return res.json(cached);
+    const forceRefresh = req.query.refresh !== undefined || req.headers['cache-control'] === 'no-cache';
+    if (!forceRefresh) {
+        const cached = cache.get('portfolio:bootstrap') || cache.get('portfolio_bootstrap');
+        if (cached) {
+            res.set('X-Cache', 'HIT');
+            res.set('Cache-Control', 'public, max-age=15, stale-while-revalidate=60');
+            return res.json(cached);
+        }
     }
 
     const [
@@ -71,7 +74,11 @@ const getPortfolioBootstrap = asyncHandler(async (req, res) => {
         prisma.experience.findMany({ orderBy: [{ sort_order: 'asc' }, { created_at: 'desc' }] }),
         prisma.education.findMany({ orderBy: [{ sort_order: 'asc' }, { created_at: 'desc' }] }),
         prisma.certification.findMany({ orderBy: [{ sort_order: 'asc' }, { created_at: 'desc' }] }),
-        prisma.award.findMany({ orderBy: [{ sort_order: 'asc' }, { created_at: 'desc' }] }),
+        prisma.$queryRawUnsafe(`
+            SELECT id, title, issuer, metric_tag, badge_text, badge_color, description, chips, image_url, sort_order, created_at, updated_at
+            FROM awards
+            ORDER BY sort_order ASC, created_at DESC;
+        `).catch(() => prisma.award.findMany({ orderBy: [{ sort_order: 'asc' }, { created_at: 'desc' }] })),
         prisma.galleryItem.findMany({ orderBy: [{ sort_order: 'asc' }, { created_at: 'desc' }] }),
         prisma.publication.findMany({ orderBy: [{ sort_order: 'asc' }, { created_at: 'desc' }] }),
         prisma.blogPost.findMany({
@@ -87,7 +94,7 @@ const getPortfolioBootstrap = asyncHandler(async (req, res) => {
     try {
         const settingRows = await prisma.$queryRawUnsafe("SELECT value FROM site_settings WHERE key = 'site_page_settings' LIMIT 1");
         if (settingRows && settingRows.length > 0 && settingRows[0].value) {
-            settings = Object.assign({}, DEFAULT_SETTINGS, settingRows[0].value);
+            settings = mergeSettings(DEFAULT_SETTINGS, settingRows[0].value);
         }
     } catch(e) {}
 

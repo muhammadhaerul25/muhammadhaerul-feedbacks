@@ -352,7 +352,7 @@
     .btn-ghost:hover { border-color: var(--g-blue); color: var(--g-blue); background: var(--g-blue-soft); }
 
     .content {
-        padding: 18px clamp(32px, 3vw, 48px) 40px;
+        padding: 18px clamp(32px, 3vw, 48px) 120px;
         max-width: 1440px;
         width: 100%;
         margin: 0 auto;
@@ -2949,18 +2949,18 @@
                         <svg class="nav-section-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                     </div>
                     <ul class="nav-section-list" id="nav-group-settings">
-                        <li class="nav-item" id="nav-security" onclick="switchView('security',this)">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><circle cx="12" cy="11" r="3"/></svg>
-                            Access &amp; Security
+                        <li class="nav-item" id="nav-image-slideshow" onclick="switchView('image-slideshow',this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                            <span>Image Slideshow</span>
+                            <span id="nav-slideshow-status-pill" style="font-size:0.62rem; font-weight:800; background:var(--g-green-soft); color:var(--g-green); padding:2px 7px; border-radius:10px; margin-left:auto;">ON</span>
                         </li>
                         <li class="nav-item" id="nav-language" onclick="switchView('language',this)">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
                             Language &amp; Region
                         </li>
-                        <li class="nav-item" id="nav-image-slideshow" onclick="switchView('image-slideshow',this)">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-                            <span>Image Slideshow</span>
-                            <span id="nav-slideshow-status-pill" style="font-size:0.62rem; font-weight:800; background:var(--g-green-soft); color:var(--g-green); padding:2px 7px; border-radius:10px; margin-left:auto;">ON</span>
+                        <li class="nav-item" id="nav-security" onclick="switchView('security',this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><circle cx="12" cy="11" r="3"/></svg>
+                            Access &amp; Security
                         </li>
                     </ul>
                 </div>
@@ -3137,8 +3137,6 @@
                         <div class="stat-label">Total Forms</div>
                         <div class="stat-value" id="sc-forms">—</div>
                     </div>
-                </div>
-
                 </div>
             </div>
 
@@ -3490,11 +3488,11 @@
                                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
                                         <div>
                                             <label class="fm-label" style="font-size:0.74rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-3); margin-top:0; margin-bottom:6px; display:block;">Primary Role</label>
-                                            <input type="text" id="cfg-prof-role" class="fm-input" placeholder="AI Full-Stack Engineer" style="background:var(--surface); border:1.5px solid var(--line); border-radius:10px; padding:10px 14px; font-size:0.86rem;">
+                                            <input type="text" id="cfg-prof-role" class="fm-input" placeholder="AI Full-Stack Specialist" style="background:var(--surface); border:1.5px solid var(--line); border-radius:10px; padding:10px 14px; font-size:0.86rem;">
                                         </div>
                                         <div>
                                             <label class="fm-label" style="font-size:0.74rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-3); margin-top:0; margin-bottom:6px; display:block;">Role Subtitle / Note</label>
-                                            <input type="text" id="cfg-prof-rolesub" class="fm-input" placeholder="(AI Engineer &amp; AI Trainer)" style="background:var(--surface); border:1.5px solid var(--line); border-radius:10px; padding:10px 14px; font-size:0.86rem;">
+                                            <input type="text" id="cfg-prof-rolesub" class="fm-input" placeholder="(Engineer, Researcher, and Trainer)" style="background:var(--surface); border:1.5px solid var(--line); border-radius:10px; padding:10px 14px; font-size:0.86rem;">
                                         </div>
                                     </div>
                                     <div>
@@ -3539,7 +3537,7 @@
                                         </div>
                                         <div>
                                             <label class="fm-label" style="font-size:0.74rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-3); margin-top:0; margin-bottom:6px; display:block;">Lead Role Title <span class="opt">Default Tag</span></label>
-                                            <input type="text" id="cfg-prof-lead-role" class="fm-input" placeholder="AI Full-Stack Engineer" oninput="onProfileFormulaChange()" style="background:var(--surface); border:1.5px solid var(--line); border-radius:10px; padding:10px 14px; font-size:0.86rem;">
+                                            <input type="text" id="cfg-prof-lead-role" class="fm-input" placeholder="AI Full-Stack Specialist" oninput="onProfileFormulaChange()" style="background:var(--surface); border:1.5px solid var(--line); border-radius:10px; padding:10px 14px; font-size:0.86rem;">
                                         </div>
                                     </div>
 
@@ -3548,7 +3546,7 @@
                                             <label class="fm-label" style="font-size:0.74rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-3); margin-top:0; margin-bottom:0; display:block;">Custom Section Headline <span class="req">* (Fully Customizable)</span></label>
                                             <span style="font-size:0.7rem; color:var(--ink-4);">You can write any freeform text</span>
                                         </div>
-                                        <input type="text" id="cfg-prof-lead-headline" class="fm-input" style="font-weight:700; background:var(--surface); border:1.5px solid var(--line); border-radius:10px; padding:10px 14px; font-size:0.86rem;" placeholder="AI Full-Stack Engineer with 4 Years of Experiences" oninput="updateProfileHeadingPreview()">
+                                        <input type="text" id="cfg-prof-lead-headline" class="fm-input" style="font-weight:700; background:var(--surface); border:1.5px solid var(--line); border-radius:10px; padding:10px 14px; font-size:0.86rem;" placeholder="AI Full-Stack Specialist with 4 Years of Experiences" oninput="updateProfileHeadingPreview()">
                                     </div>
 
                                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; align-items:end;">
@@ -3567,7 +3565,7 @@
                                 <div style="background:linear-gradient(135deg, rgba(66,133,244,0.05) 0%, rgba(52,168,83,0.05) 100%); border:1.5px solid rgba(66,133,244,0.25); border-radius:12px; padding:14px 18px; margin-top:14px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
                                     <span style="font-size:0.72rem; font-weight:800; color:var(--ink-4); display:block; margin-bottom:4px; text-transform:uppercase; letter-spacing:0.06em;">Live Section 01 Headline Preview:</span>
                                     <div style="font-size:0.75rem; color:var(--g-blue); font-weight:800; margin-bottom:3px; letter-spacing:0.04em; text-transform:uppercase;" id="prof-eyebrow-preview">01 — PROFILE</div>
-                                    <div id="prof-lead-preview" style="color:var(--ink); font-weight:800; font-size:1.05rem; letter-spacing:-0.02em;">AI Full-Stack Engineer with 4 Years of Experiences</div>
+                                    <div id="prof-lead-preview" style="color:var(--ink); font-weight:800; font-size:1.05rem; letter-spacing:-0.02em;">AI Full-Stack Specialist with 4 Years of Experiences</div>
                                 </div>
                             </div>
 
@@ -3991,52 +3989,85 @@
                     </div>
 
                     <div style="display:flex; flex-direction:column; gap:26px;">
+                        <!-- ══ HERO TYPOGRAPHY & HEADLINE CUSTOMIZER ══ -->
                         <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:16px; padding:26px 28px; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
                             <div style="font-size:0.88rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3); margin-bottom:20px; display:flex; align-items:center; gap:9px;">
                                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                                Badges &amp; Main Headline
+                                Hero Typography &amp; Main Headline
                             </div>
-                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:22px;">
-                                <div>
-                                    <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Eyebrow Pill / Role Badge</label>
-                                    <input type="text" id="cfg-hero-eyebrow" class="fm-input" placeholder="AI Full-Stack Engineer &amp; AI Trainer" style="background:var(--surface); border-radius:10px; padding:11px 16px;">
-                                </div>
-                                <div>
-                                    <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Status Pill (Availability)</label>
-                                    <input type="text" id="cfg-hero-status" class="fm-input" placeholder="Available for AI Consulting &amp; Engineering Roles" style="background:var(--surface); border-radius:10px; padding:11px 16px;">
-                                </div>
-                            </div>
+                            
                             <div style="margin-bottom:22px;">
-                                <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Hero Main Headline</label>
-                                <input type="text" id="cfg-hero-headline" class="fm-input" placeholder="Muhammad Haerul" style="background:var(--surface); border-radius:10px; padding:11px 16px;">
+                                <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Role Badge / Eyebrow Pill</label>
+                                <input type="text" id="cfg-hero-eyebrow" class="fm-input" placeholder="AI Full-Stack Specialist" oninput="updateHeroLivePreview()" style="background:var(--surface); border-radius:10px; padding:11px 16px; font-weight:600;">
+                                <div style="font-size:0.75rem; color:var(--ink-4); margin-top:5px;">Badge kecil melayang di atas judul utama Hero section (e.g. <code>AI Full-Stack Specialist</code> atau <code>AI FULL-STACK ENGINEER</code>).</div>
                             </div>
-                            <div>
-                                <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Hero Subheadline / Bio Pitch</label>
-                                <textarea id="cfg-hero-subheadline" class="fm-textarea" rows="3" placeholder="Brief executive summary shown on hero section" style="background:var(--surface); border-radius:10px; padding:12px 16px; line-height:1.5;"></textarea>
+
+                            <div style="display:flex; flex-direction:column; gap:16px; margin-bottom:24px;">
+                                <div>
+                                    <label class="fm-label" style="margin-top:0; margin-bottom:6px; font-size:0.8rem; display:flex; align-items:center; justify-content:space-between;">
+                                        <span>Headline Line 1 (Action Verbs &amp; Lead-in)</span>
+                                        <span style="font-size:0.7rem; font-weight:600; color:var(--g-blue);">Auto-colored: build (blue), research (red), teach (green)</span>
+                                    </label>
+                                    <input type="text" id="cfg-hero-line1" class="fm-input" placeholder="I build, research and teach" oninput="updateHeroLivePreview()" style="background:var(--surface); border-radius:10px; padding:11px 16px; font-weight:700;">
+                                    <div style="font-size:0.74rem; color:var(--ink-4); margin-top:4px;">Kata <code>build</code>, <code>research</code>, <code>teach</code> otomatis diberi aksen warna. Anda juga bisa memberi format kustom: <code>[blue:kata]</code>, <code>[red:kata]</code>, <code>[green:kata]</code>.</div>
+                                </div>
+
+                                <div>
+                                    <label class="fm-label" style="margin-top:0; margin-bottom:6px; font-size:0.8rem; display:flex; align-items:center; justify-content:space-between;">
+                                        <span>Headline Line 2 (Highlight Focus / Gradient)</span>
+                                        <span style="font-size:0.7rem; font-weight:600; color:#A855F7;">Animated AI Multi-Color Gradient Flow</span>
+                                    </label>
+                                    <input type="text" id="cfg-hero-line2" class="fm-input" placeholder="AI solutions" oninput="updateHeroLivePreview()" style="background:var(--surface); border-radius:10px; padding:11px 16px; font-weight:800;">
+                                    <div style="font-size:0.74rem; color:var(--ink-4); margin-top:4px;">Teks baris ini otomatis ditampilkan dengan efek gradasi warna AI multi-warna animasi berkilau.</div>
+                                </div>
+
+                                <div>
+                                    <label class="fm-label" style="margin-top:0; margin-bottom:6px; font-size:0.8rem;">Headline Line 3 (Suffix / Mission Scope)</label>
+                                    <input type="text" id="cfg-hero-line3" class="fm-input" placeholder="for real-world use cases" oninput="updateHeroLivePreview()" style="background:var(--surface); border-radius:10px; padding:11px 16px; font-weight:700;">
+                                    <div style="font-size:0.74rem; color:var(--ink-4); margin-top:4px;">Pernyataan penutup judul hero portfolio (e.g. <code>for real-world use cases</code>).</div>
+                                </div>
+                            </div>
+
+                            <!-- Live Preview Card -->
+                            <div style="background:#0B0F17; border:1px solid rgba(255,255,255,0.12); border-radius:14px; padding:28px 24px; text-align:center; position:relative; overflow:hidden;">
+                                <div style="position:absolute; top:10px; right:12px; font-size:0.65rem; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.4); background:rgba(255,255,255,0.06); padding:3px 8px; border-radius:4px;">
+                                    Live Hero Preview
+                                </div>
+                                <div style="margin-bottom:12px;">
+                                    <span id="hero-preview-eyebrow" style="display:inline-block; font-size:0.75rem; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:#38BDF8; background:rgba(56,189,248,0.1); border:1px solid rgba(56,189,248,0.25); padding:4px 14px; border-radius:999px;">
+                                        AI FULL-STACK SPECIALIST
+                                    </span>
+                                </div>
+                                <div id="hero-preview-title" style="font-size:1.65rem; font-weight:800; line-height:1.25; color:#F8FAFC; letter-spacing:-0.03em; margin-bottom:18px;">
+                                    <div>I <span style="color:#3B82F6;">build</span>, <span style="color:#EF4444;">research</span> and <span style="color:#10B981;">teach</span></div>
+                                    <div><span style="background:linear-gradient(90deg, #4285F4 0%, #7C3AED 25%, #EA4335 50%, #FBBC04 72%, #34A853 88%, #4285F4 100%); background-size:200% 100%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-weight:800;">AI solutions</span></div>
+                                    <div>for real-world use cases</div>
+                                </div>
+                                <div>
+                                    <span style="display:inline-flex; align-items:center; gap:8px; background:#0F172A; color:#FFFFFF; border:1px solid rgba(255,255,255,0.25); font-weight:700; font-size:0.85rem; padding:8px 22px; border-radius:999px; box-shadow:0 4px 14px rgba(0,0,0,0.4);">
+                                        <span id="hero-preview-cta-text">View my work</span>
+                                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                    </span>
+                                </div>
                             </div>
                         </div>
 
+                        <!-- ══ HERO CALL TO ACTION (CTA) BUTTON ══ -->
                         <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:16px; padding:26px 28px; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
                             <div style="font-size:0.88rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3); margin-bottom:20px; display:flex; align-items:center; gap:9px;">
                                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 3h6v6"/><path d="M10 14L21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
-                                Call To Action (CTA) Buttons
+                                Call To Action (CTA) Button
                             </div>
-                            <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:18px;">
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
                                 <div>
-                                    <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Primary CTA Label</label>
-                                    <input type="text" id="cfg-cta-primary-text" class="fm-input" placeholder="Explore Works" style="background:var(--surface); border-radius:10px; padding:11px 16px;">
+                                    <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Primary CTA Button Label</label>
+                                    <input type="text" id="cfg-cta-primary-text" class="fm-input" placeholder="View my work" oninput="updateHeroLivePreview()" style="background:var(--surface); border-radius:10px; padding:11px 16px; font-weight:700;">
+                                    <div style="font-size:0.74rem; color:var(--ink-4); margin-top:4px;">Teks tombol utama pada hero section (e.g. <code>View my work</code>).</div>
                                 </div>
                                 <div>
                                     <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Primary CTA Target URL</label>
-                                    <input type="text" id="cfg-cta-primary-url" class="fm-input" placeholder="#projects" style="background:var(--surface); border-radius:10px; padding:11px 16px;">
-                                </div>
-                                <div>
-                                    <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Secondary CTA Label</label>
-                                    <input type="text" id="cfg-cta-secondary-text" class="fm-input" placeholder="Get in Touch" style="background:var(--surface); border-radius:10px; padding:11px 16px;">
-                                </div>
-                                <div>
-                                    <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Secondary CTA Target URL</label>
-                                    <input type="text" id="cfg-cta-secondary-url" class="fm-input" placeholder="#contact" style="background:var(--surface); border-radius:10px; padding:11px 16px;">
+                                    <input type="text" id="cfg-cta-primary-url" class="fm-input" placeholder="#projects" style="background:var(--surface); border-radius:10px; padding:11px 16px; font-family:monospace;">
+                                    <div style="font-size:0.74rem; color:var(--ink-4); margin-top:4px;">Target link atau anchor section tujuan saat tombol diklik (default: <code>#projects</code>).</div>
                                 </div>
                             </div>
                         </div>
@@ -4839,8 +4870,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
             </div>
 
 
@@ -6150,6 +6179,10 @@
             <div class="field-group">
                 <label class="field-label">Metric / Subtitle Tag</label>
                 <input class="field-input" id="award-metric" placeholder="e.g. 3 Consecutive Years, National Rank #1">
+            </div>
+            <div class="field-group">
+                <label class="field-label">Certificate Image URL / Proof</label>
+                <input class="field-input" id="award-image" placeholder="e.g. /assets/images/awards/award_img_1.jpg">
             </div>
         </div>
 
@@ -10866,14 +10899,13 @@ async function loadPageSettings() {
 
         // Hero
         var hero = cfg.hero || {};
-        if (document.getElementById('cfg-hero-eyebrow')) document.getElementById('cfg-hero-eyebrow').value = hero.eyebrow || '';
-        if (document.getElementById('cfg-hero-status')) document.getElementById('cfg-hero-status').value = hero.statusPill || '';
-        if (document.getElementById('cfg-hero-headline')) document.getElementById('cfg-hero-headline').value = hero.headline || '';
-        if (document.getElementById('cfg-hero-subheadline')) document.getElementById('cfg-hero-subheadline').value = hero.subheadline || '';
-        if (document.getElementById('cfg-cta-primary-text')) document.getElementById('cfg-cta-primary-text').value = hero.ctaPrimaryText || '';
-        if (document.getElementById('cfg-cta-primary-url')) document.getElementById('cfg-cta-primary-url').value = hero.ctaPrimaryUrl || '';
-        if (document.getElementById('cfg-cta-secondary-text')) document.getElementById('cfg-cta-secondary-text').value = hero.ctaSecondaryText || '';
-        if (document.getElementById('cfg-cta-secondary-url')) document.getElementById('cfg-cta-secondary-url').value = hero.ctaSecondaryUrl || '';
+        if (document.getElementById('cfg-hero-eyebrow')) document.getElementById('cfg-hero-eyebrow').value = hero.eyebrow || 'AI Full-Stack Specialist';
+        if (document.getElementById('cfg-hero-line1')) document.getElementById('cfg-hero-line1').value = hero.titleLine1 || 'I build, research and teach';
+        if (document.getElementById('cfg-hero-line2')) document.getElementById('cfg-hero-line2').value = hero.titleLine2 || 'AI solutions';
+        if (document.getElementById('cfg-hero-line3')) document.getElementById('cfg-hero-line3').value = (hero.titleLine3 !== undefined) ? hero.titleLine3 : 'for real-world use cases';
+        if (document.getElementById('cfg-cta-primary-text')) document.getElementById('cfg-cta-primary-text').value = hero.ctaPrimaryText || 'View my work';
+        if (document.getElementById('cfg-cta-primary-url')) document.getElementById('cfg-cta-primary-url').value = hero.ctaPrimaryUrl || '#projects';
+        updateHeroLivePreview();
 
         // Sections
         renderSectionHeadingsEditor(cfg.sections || {});
@@ -10891,6 +10923,53 @@ async function loadPageSettings() {
     } catch (err) {
         console.error('Error loading page settings:', err);
         showToast('Error loading page settings', 'error');
+    }
+}
+
+function updateHeroLivePreview() {
+    var ebInput = document.getElementById('cfg-hero-eyebrow');
+    var l1Input = document.getElementById('cfg-hero-line1');
+    var l2Input = document.getElementById('cfg-hero-line2');
+    var l3Input = document.getElementById('cfg-hero-line3');
+    var ctaInput = document.getElementById('cfg-cta-primary-text');
+
+    var ebEl = document.getElementById('hero-preview-eyebrow');
+    var titleEl = document.getElementById('hero-preview-title');
+    var ctaEl = document.getElementById('hero-preview-cta-text');
+
+    if (ebEl) {
+        ebEl.textContent = (ebInput && ebInput.value.trim()) ? ebInput.value.trim() : 'AI FULL-STACK SPECIALIST';
+    }
+
+    if (titleEl) {
+        var raw1 = (l1Input && l1Input.value.trim()) ? l1Input.value.trim() : 'I build, research and teach';
+        var raw2 = (l2Input && l2Input.value.trim()) ? l2Input.value.trim() : 'AI solutions';
+        var raw3 = (l3Input && l3Input.value.trim()) ? l3Input.value.trim() : 'for real-world use cases';
+
+        var formatted1 = esc(raw1)
+            .replace(/\[blue:([^\]]+)\]/gi, '<span style="color:#3B82F6;">$1</span>')
+            .replace(/\[red:([^\]]+)\]/gi, '<span style="color:#EF4444;">$1</span>')
+            .replace(/\[green:([^\]]+)\]/gi, '<span style="color:#10B981;">$1</span>')
+            .replace(/\[yellow:([^\]]+)\]/gi, '<span style="color:#F59E0B;">$1</span>');
+
+        if (!/color:#/.test(formatted1)) {
+            formatted1 = formatted1
+                .replace(/\b(build|membangun)\b/gi, '<span style="color:#3B82F6;">$1</span>')
+                .replace(/\b(research|meneliti)\b/gi, '<span style="color:#EF4444;">$1</span>')
+                .replace(/\b(teach|mengajarkan)\b/gi, '<span style="color:#10B981;">$1</span>');
+        }
+
+        var gradientStyle = 'background:linear-gradient(90deg, #4285F4 0%, #7C3AED 25%, #EA4335 50%, #FBBC04 72%, #34A853 88%, #4285F4 100%); background-size:200% 100%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-weight:800;';
+
+        var html = '<div style="margin-bottom:2px;">' + formatted1 + '</div>' +
+            '<div style="margin-bottom:2px;"><span style="' + gradientStyle + '">' + esc(raw2) + '</span></div>' +
+            (raw3 ? '<div>' + esc(raw3) + '</div>' : '');
+
+        titleEl.innerHTML = html;
+    }
+
+    if (ctaEl) {
+        ctaEl.textContent = (ctaInput && ctaInput.value.trim()) ? ctaInput.value.trim() : 'View my work';
     }
 }
 
@@ -11022,13 +11101,12 @@ async function savePageSettings(section, btn) {
         },
         hero: {
             eyebrow: (document.getElementById('cfg-hero-eyebrow') ? document.getElementById('cfg-hero-eyebrow').value.trim() : ''),
-            statusPill: (document.getElementById('cfg-hero-status') ? document.getElementById('cfg-hero-status').value.trim() : ''),
-            headline: (document.getElementById('cfg-hero-headline') ? document.getElementById('cfg-hero-headline').value.trim() : ''),
-            subheadline: (document.getElementById('cfg-hero-subheadline') ? document.getElementById('cfg-hero-subheadline').value.trim() : ''),
+            titleLine1: (document.getElementById('cfg-hero-line1') ? document.getElementById('cfg-hero-line1').value.trim() : ''),
+            titleLine2: (document.getElementById('cfg-hero-line2') ? document.getElementById('cfg-hero-line2').value.trim() : ''),
+            titleLine3: (document.getElementById('cfg-hero-line3') ? document.getElementById('cfg-hero-line3').value.trim() : ''),
+            headline: (document.getElementById('cfg-hero-line1') ? document.getElementById('cfg-hero-line1').value.trim() : ''),
             ctaPrimaryText: (document.getElementById('cfg-cta-primary-text') ? document.getElementById('cfg-cta-primary-text').value.trim() : ''),
-            ctaPrimaryUrl: (document.getElementById('cfg-cta-primary-url') ? document.getElementById('cfg-cta-primary-url').value.trim() : ''),
-            ctaSecondaryText: (document.getElementById('cfg-cta-secondary-text') ? document.getElementById('cfg-cta-secondary-text').value.trim() : ''),
-            ctaSecondaryUrl: (document.getElementById('cfg-cta-secondary-url') ? document.getElementById('cfg-cta-secondary-url').value.trim() : '')
+            ctaPrimaryUrl: (document.getElementById('cfg-cta-primary-url') ? document.getElementById('cfg-cta-primary-url').value.trim() : '')
         },
         sections: sectionsPayload,
         footer: {
@@ -11728,8 +11806,8 @@ async function loadProfileSettings() {
             updateProfileAvatarPreview(prof.avatarUrl || '/assets/profile.webp');
         }
         if (document.getElementById('cfg-prof-name')) document.getElementById('cfg-prof-name').value = prof.name || 'Muhammad Haerul, S.Kom';
-        if (document.getElementById('cfg-prof-role')) document.getElementById('cfg-prof-role').value = prof.role || 'AI Full-Stack Engineer';
-        if (document.getElementById('cfg-prof-rolesub')) document.getElementById('cfg-prof-rolesub').value = prof.roleSub || '(AI Engineer & AI Trainer)';
+        if (document.getElementById('cfg-prof-role')) document.getElementById('cfg-prof-role').value = prof.role || 'AI Full-Stack Specialist';
+        if (document.getElementById('cfg-prof-rolesub')) document.getElementById('cfg-prof-rolesub').value = prof.roleSub || '(Engineer, Researcher, and Trainer)';
         if (document.getElementById('cfg-prof-edu')) document.getElementById('cfg-prof-edu').value = prof.education || 'Bachelor of Computer Science';
         if (document.getElementById('cfg-prof-exp')) document.getElementById('cfg-prof-exp').value = prof.experienceYears || '4+ years in AI & Data Science';
 
@@ -11811,11 +11889,11 @@ async function saveProfileSettings(btnEl) {
         eyebrow: document.getElementById('cfg-prof-eyebrow') ? document.getElementById('cfg-prof-eyebrow').value.trim() : '01 — Profile',
         avatarUrl: document.getElementById('cfg-prof-avatar') ? document.getElementById('cfg-prof-avatar').value.trim() : '/assets/profile.webp',
         name: document.getElementById('cfg-prof-name') ? document.getElementById('cfg-prof-name').value.trim() : 'Muhammad Haerul, S.Kom',
-        role: document.getElementById('cfg-prof-role') ? document.getElementById('cfg-prof-role').value.trim() : 'AI Full-Stack Engineer',
-        roleSub: document.getElementById('cfg-prof-rolesub') ? document.getElementById('cfg-prof-rolesub').value.trim() : '(AI Engineer & AI Trainer)',
+        role: document.getElementById('cfg-prof-role') ? document.getElementById('cfg-prof-role').value.trim() : 'AI Full-Stack Specialist',
+        roleSub: document.getElementById('cfg-prof-rolesub') ? document.getElementById('cfg-prof-rolesub').value.trim() : '(Engineer, Researcher, and Trainer)',
         education: document.getElementById('cfg-prof-edu') ? document.getElementById('cfg-prof-edu').value.trim() : 'Bachelor of Computer Science',
         experienceYears: document.getElementById('cfg-prof-exp') ? document.getElementById('cfg-prof-exp').value.trim() : '4+ years in AI & Data Science',
-        leadHeadingRole: document.getElementById('cfg-prof-lead-role') ? document.getElementById('cfg-prof-lead-role').value.trim() : 'AI Full-Stack Engineer',
+        leadHeadingRole: document.getElementById('cfg-prof-lead-role') ? document.getElementById('cfg-prof-lead-role').value.trim() : 'AI Full-Stack Specialist',
         leadHeadingYears: document.getElementById('cfg-prof-lead-exp') ? document.getElementById('cfg-prof-lead-exp').value.trim() : '4 Years',
         storyParagraph1: paragraphs[0] || '',
         storyParagraph2: paragraphs[1] || '',
@@ -15684,6 +15762,7 @@ function renderAwardsGrid() {
         }).join('');
 
         return '<div class="project-card" style="display:flex; flex-direction:column; gap:12px; padding:22px; border:1.5px solid var(--sidebar-border); border-radius:var(--r-md); background:var(--surface);">' +
+            (aw.image_url ? '<div style="border-radius:10px; overflow:hidden; border:1px solid var(--sidebar-border); height:120px; margin-bottom:4px; background:#0b0f19;"><img src="' + esc(aw.image_url) + '" style="width:100%; height:100%; object-fit:cover; object-position:center top; display:block;" /></div>' : '') +
             '<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px;">' +
                 '<div style="flex:1;">' +
                     '<div style="font-size:1.02rem; font-weight:800; color:var(--ink);">' + esc(aw.title) + '</div>' +
@@ -15712,6 +15791,7 @@ function openAwardDrawer(aw) {
     document.getElementById('award-title').value = aw ? (aw.title || '') : '';
     document.getElementById('award-issuer').value = aw ? (aw.issuer || '') : '';
     document.getElementById('award-metric').value = aw ? (aw.metric_tag || '') : '';
+    document.getElementById('award-image').value = aw ? (aw.image_url || '') : '';
     document.getElementById('award-badge').value = aw ? (aw.badge_text || '') : '';
     document.getElementById('award-color').value = aw ? (aw.badge_color || 'blue') : 'blue';
     document.getElementById('award-chips').value = aw && aw.chips ? aw.chips.join(', ') : '';
@@ -15739,13 +15819,14 @@ async function saveAward() {
     var title = document.getElementById('award-title').value.trim();
     var issuer = document.getElementById('award-issuer').value.trim();
     var metric_tag = document.getElementById('award-metric').value.trim();
+    var image_url = document.getElementById('award-image').value.trim();
     var badge_text = document.getElementById('award-badge').value.trim();
     var badge_color = document.getElementById('award-color').value;
     var chips = document.getElementById('award-chips').value.split(',').map(function(s){ return s.trim(); }).filter(Boolean);
     var description = document.getElementById('award-desc').value.trim();
     var sort_order = parseInt(document.getElementById('award-sort').value, 10) || 0;
 
-    var payload = { title, issuer, metric_tag, badge_text, badge_color, chips, description, sort_order };
+    var payload = { title, issuer, metric_tag, image_url, badge_text, badge_color, chips, description, sort_order };
     var saveBtn = document.getElementById('award-save-btn');
     setBtnLoading(saveBtn, true, 'Saving…');
 

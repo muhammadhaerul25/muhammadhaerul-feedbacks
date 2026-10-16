@@ -506,6 +506,33 @@
     }
   };
 
+  function formatHeroLine1(raw) {
+    if (!raw) return '';
+    let formatted = escapeHtml(raw);
+    formatted = formatted.replace(/\[blue:([^\]]+)\]/gi, '<span class="hero-accent hero-accent-blue">$1</span>');
+    formatted = formatted.replace(/\[red:([^\]]+)\]/gi, '<span class="hero-accent hero-accent-red">$1</span>');
+    formatted = formatted.replace(/\[green:([^\]]+)\]/gi, '<span class="hero-accent hero-accent-green">$1</span>');
+    formatted = formatted.replace(/\[yellow:([^\]]+)\]/gi, '<span class="hero-accent hero-accent-yellow">$1</span>');
+
+    if (!/hero-accent/.test(formatted)) {
+      formatted = formatted.replace(/\b(build|membangun)\b/gi, '<span class="hero-accent hero-accent-blue">$1</span>');
+      formatted = formatted.replace(/\b(research|meneliti)\b/gi, '<span class="hero-accent hero-accent-red">$1</span>');
+      formatted = formatted.replace(/\b(teach|mengajarkan)\b/gi, '<span class="hero-accent hero-accent-green">$1</span>');
+    }
+    return formatted;
+  }
+
+  function renderHeroTitleHtml(hero) {
+    if (!hero) return '';
+    const line1 = hero.titleLine1 || 'I build, research and teach';
+    const line2 = hero.titleLine2 || 'AI solutions';
+    const line3 = (hero.titleLine3 !== undefined) ? hero.titleLine3 : 'for real-world use cases';
+
+    return `<span class="hero-title-line">${formatHeroLine1(line1)}</span>` +
+           `<span class="hero-title-line"><span class="hero-ai-gradient">${escapeHtml(line2)}</span></span>` +
+           (line3 ? `<span class="hero-title-line">${escapeHtml(line3)}</span>` : '');
+  }
+
   function applyTranslations(lang) {
     const t = I18N[lang] || I18N.en;
 
@@ -532,15 +559,45 @@
     const contactNavBtn = document.querySelector('.nav-actions a[href="#contact"]');
     if (contactNavBtn) contactNavBtn.textContent = t.nav_talk_btn;
 
-    // Hero Section
+    // Hero Section (Preserve custom CMS settings if set)
     const heroEyebrow = document.querySelector('#hero .eyebrow');
-    if (heroEyebrow) heroEyebrow.textContent = t.hero_eyebrow;
+    if (heroEyebrow) {
+      if (window.liveHeroSettings && window.liveHeroSettings.eyebrow) {
+        heroEyebrow.textContent = window.liveHeroSettings.eyebrow;
+      } else {
+        heroEyebrow.textContent = t.hero_eyebrow;
+      }
+    }
 
     const heroTitle = document.querySelector('#hero .hero-title');
-    if (heroTitle) heroTitle.innerHTML = t.hero_title_html;
+    if (heroTitle) {
+      if (window.liveHeroSettings && (window.liveHeroSettings.titleLine1 || window.liveHeroSettings.titleLine2 || window.liveHeroSettings.titleLine3)) {
+        heroTitle.innerHTML = renderHeroTitleHtml(window.liveHeroSettings);
+      } else {
+        heroTitle.innerHTML = t.hero_title_html;
+      }
+    }
 
-    const heroCtaWork = document.querySelector('#hero .hero-cta a[href="#projects"]');
-    if (heroCtaWork) heroCtaWork.textContent = t.hero_cta_work;
+    const ctaLabel = document.getElementById('hero-cta-label');
+    if (ctaLabel) {
+      if (window.liveHeroSettings && window.liveHeroSettings.ctaPrimaryText) {
+        ctaLabel.textContent = window.liveHeroSettings.ctaPrimaryText;
+      } else {
+        ctaLabel.textContent = t.hero_cta_work;
+      }
+    } else {
+      const heroCtaWork = document.querySelector('#hero .hero-cta a[href="#projects"], #hero-cta-btn');
+      if (heroCtaWork) {
+        const customText = (window.liveHeroSettings && window.liveHeroSettings.ctaPrimaryText) ? window.liveHeroSettings.ctaPrimaryText : t.hero_cta_work;
+        const svg = heroCtaWork.querySelector('svg');
+        heroCtaWork.innerHTML = `<span id="hero-cta-label">${escapeHtml(customText)}</span>${svg ? svg.outerHTML : ''}`;
+      }
+    }
+
+    if (window.liveHeroSettings && window.liveHeroSettings.ctaPrimaryUrl) {
+      const heroCtaBtn = document.getElementById('hero-cta-btn') || document.querySelector('#hero .hero-cta a');
+      if (heroCtaBtn) heroCtaBtn.href = window.liveHeroSettings.ctaPrimaryUrl;
+    }
 
     const heroCtaTouch = document.querySelector('#hero .hero-cta a[href="#contact"]');
     if (heroCtaTouch) heroCtaTouch.textContent = t.hero_cta_touch;
@@ -718,6 +775,9 @@
     if (window.liveProfileSettings && typeof applyProfileSettings === 'function') {
       applyProfileSettings(window.liveProfileSettings);
     }
+    if (window.liveSettings && typeof applyPageSettings === 'function') {
+      applyPageSettings(window.liveSettings);
+    }
 
     // Re-render paginated sections
     if (typeof renderProjects === 'function') renderProjects(currentProjectFilter, currentProjectPage);
@@ -725,6 +785,9 @@
     if (typeof renderCertifications === 'function') renderCertifications(liveCertifications, currentCertPage);
     if (typeof renderTestimonials === 'function') renderTestimonials(currentFeedbackPage);
     if (typeof renderSkills === 'function' && Array.isArray(liveSkills) && liveSkills.length) renderSkills(liveSkills);
+    if (typeof renderPublications === 'function' && Array.isArray(livePublications)) renderPublications(livePublications);
+    if (typeof renderAwards === 'function' && Array.isArray(liveAwards)) renderAwards(liveAwards);
+    if (typeof renderBlogs === 'function' && Array.isArray(liveBlogs)) renderBlogs(liveBlogs);
   };
 
   let liveAwards = [];
@@ -1969,26 +2032,37 @@
     awardsGrid.innerHTML = awards.map(aw => {
       const color = aw.badge_color || 'blue';
       const chips = Array.isArray(aw.chips) ? aw.chips : [];
+      const hasImage = Boolean(aw.image_url);
 
       return `
         <article class="award-card accent-${escapeHtml(color)} reveal in-view">
-          <div class="award-insignia-banner">
+          <div class="award-insignia-banner ${hasImage ? 'has-cert-img' : ''}" ${hasImage ? `onclick="window.openLightbox('${escapeHtml(aw.image_url)}', '${escapeHtml(aw.title)}')" style="cursor:zoom-in;" title="Click to view full certificate proof"` : ''}>
             <span class="award-badge-pill ${escapeHtml(color)}">
               ${escapeHtml(aw.badge_text || '🏆 Honor & Award')}
             </span>
-            <div class="award-insignia-watermark" aria-hidden="true">
-              <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-              </svg>
-            </div>
-            <div class="award-insignia-emblem">
-              <div class="award-emblem-icon-wrap">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="8" r="6"/>
-                  <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
+            ${hasImage ? `
+              <img src="${escapeHtml(aw.image_url)}" alt="${escapeHtml(aw.title)}" class="award-cert-img" loading="lazy" />
+              <div class="award-cert-overlay">
+                <span class="award-cert-zoom-btn">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                  View Certificate Proof
+                </span>
+              </div>
+            ` : `
+              <div class="award-insignia-watermark" aria-hidden="true">
+                <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                 </svg>
               </div>
-            </div>
+              <div class="award-insignia-emblem">
+                <div class="award-emblem-icon-wrap">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="6"/>
+                    <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
+                  </svg>
+                </div>
+              </div>
+            `}
           </div>
 
           <div class="award-card-body">
@@ -2009,14 +2083,19 @@
               ` : ''}
             </div>
 
-            <div class="award-doc-slot">
+            <div class="award-doc-slot ${hasImage ? 'has-action' : ''}" ${hasImage ? `onclick="window.openLightbox('${escapeHtml(aw.image_url)}', '${escapeHtml(aw.title)}')" style="cursor:pointer;" title="Click to view full certificate proof"` : ''}>
               <div class="award-doc-slot-info">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                <span>Official Certificate Record</span>
+                <span>${hasImage ? 'Official Certificate Record' : 'Official Academic Record'}</span>
               </div>
-              <span class="award-doc-slot-pill">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><polyline points="20 6 9 17 4 12"/></svg>
-                Verified
+              <span class="award-doc-slot-pill ${hasImage ? 'view-pill' : ''}">
+                ${hasImage ? `
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  View Proof
+                ` : `
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><polyline points="20 6 9 17 4 12"/></svg>
+                  Verified
+                `}
               </span>
             </div>
           </div>
@@ -2908,11 +2987,35 @@
 
     if (settings.hero || settings.imageSlideshow) {
       window.liveSettings = settings;
+      if (settings.hero) window.liveHeroSettings = settings.hero;
       const heroSec = document.getElementById('hero');
       if (heroSec && settings.hero) {
         if (settings.hero.eyebrow) {
           const eb = heroSec.querySelector('.eyebrow');
           if (eb) eb.textContent = settings.hero.eyebrow;
+        }
+
+        const titleEl = heroSec.querySelector('.hero-title');
+        if (titleEl && (settings.hero.titleLine1 || settings.hero.titleLine2 || settings.hero.titleLine3)) {
+          titleEl.innerHTML = renderHeroTitleHtml(settings.hero);
+        }
+
+        if (settings.hero.ctaPrimaryText) {
+          const ctaLabel = document.getElementById('hero-cta-label');
+          if (ctaLabel) {
+            ctaLabel.textContent = settings.hero.ctaPrimaryText;
+          } else {
+            const ctaBtn = document.getElementById('hero-cta-btn') || heroSec.querySelector('.hero-cta a');
+            if (ctaBtn) {
+              const svg = ctaBtn.querySelector('svg');
+              ctaBtn.innerHTML = `<span id="hero-cta-label">${escapeHtml(settings.hero.ctaPrimaryText)}</span>${svg ? svg.outerHTML : ''}`;
+            }
+          }
+        }
+
+        if (settings.hero.ctaPrimaryUrl) {
+          const ctaBtn = document.getElementById('hero-cta-btn') || heroSec.querySelector('.hero-cta a');
+          if (ctaBtn) ctaBtn.href = settings.hero.ctaPrimaryUrl;
         }
       }
 
@@ -2947,6 +3050,10 @@
           const titleEl = secEl.querySelector('.section-title');
           if (titleEl && secCfg.title) {
             titleEl.textContent = secCfg.title;
+          }
+          const descEl = secEl.querySelector('.section-desc');
+          if (descEl && secCfg.subtitle) {
+            descEl.textContent = secCfg.subtitle;
           }
         }
       });
@@ -2990,7 +3097,9 @@
       // 1. Fast-path: Single consolidated request (<2ms response from in-memory cache)
       bootstrapData = null;
       try {
-        const bootRes = await fetch('/api/portfolio/bootstrap');
+        const hasRefresh = (window.location.search && window.location.search.includes('refresh'));
+        const bootUrl = '/api/portfolio/bootstrap' + (hasRefresh ? ('?refresh=' + Date.now()) : '');
+        const bootRes = await fetch(bootUrl);
         if (bootRes.ok) {
           const bootJson = await bootRes.json();
           if (bootJson.success && bootJson.data) {

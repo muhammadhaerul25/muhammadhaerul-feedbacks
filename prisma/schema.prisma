@@ -259,6 +259,7 @@ model Award {
   badge_color String?   @default("blue")
   description String?
   chips       String[]  @default([])
+  image_url   String?
   sort_order  Int       @default(0)
   created_at  DateTime  @default(now())
   updated_at  DateTime  @updatedAt

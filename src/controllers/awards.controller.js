@@ -4,16 +4,28 @@ const asyncHandler = require('../utils/asyncHandler');
 
 // GET all awards (Public)
 const getAllAwards = asyncHandler(async (req, res) => {
-    const cached = cache.get('awards:all');
-    if (cached) {
-        res.set('X-Cache', 'HIT');
-        res.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=120');
-        return res.json(cached);
+    const isRefresh = req.query.refresh === '1' || req.headers['cache-control'] === 'no-cache';
+    if (!isRefresh) {
+        const cached = cache.get('awards:all');
+        if (cached) {
+            res.set('X-Cache', 'HIT');
+            res.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=120');
+            return res.json(cached);
+        }
     }
 
-    const awards = await prisma.award.findMany({
-        orderBy: [{ sort_order: 'asc' }, { created_at: 'desc' }]
-    });
+    let awards;
+    try {
+        awards = await prisma.$queryRawUnsafe(`
+            SELECT id, title, issuer, metric_tag, badge_text, badge_color, description, chips, image_url, sort_order, created_at, updated_at
+            FROM awards
+            ORDER BY sort_order ASC, created_at DESC;
+        `);
+    } catch (e) {
+        awards = await prisma.award.findMany({
+            orderBy: [{ sort_order: 'asc' }, { created_at: 'desc' }]
+        });
+    }
 
     const responseData = { success: true, count: awards.length, data: awards };
     cache.set('awards:all', responseData, 60);
@@ -33,6 +45,7 @@ const createAward = asyncHandler(async (req, res) => {
         badge_color,
         description,
         chips,
+        image_url,
         sort_order
     } = req.body;
 
@@ -53,11 +66,15 @@ const createAward = asyncHandler(async (req, res) => {
                 : typeof chips === 'string'
                     ? chips.split(',').map(c => c.trim()).filter(Boolean)
                     : [],
+            image_url: image_url ? String(image_url).trim() : null,
             sort_order: Number.isInteger(Number(sort_order)) ? Number(sort_order) : 0
         }
     });
 
     cache.del('awards');
+    cache.del('awards:all');
+    cache.del('portfolio:bootstrap');
+    cache.del('portfolio_bootstrap');
     res.status(201).json({ success: true, data: award, message: 'Award created successfully' });
 });
 
@@ -72,6 +89,7 @@ const updateAward = asyncHandler(async (req, res) => {
         badge_color,
         description,
         chips,
+        image_url,
         sort_order
     } = req.body;
 
@@ -96,11 +114,15 @@ const updateAward = asyncHandler(async (req, res) => {
                         ? chips.split(',').map(c => c.trim()).filter(Boolean)
                         : [])
                 : undefined,
+            image_url: image_url !== undefined ? (image_url ? String(image_url).trim() : null) : undefined,
             sort_order: sort_order !== undefined ? Number(sort_order) : undefined
         }
     });
 
     cache.del('awards');
+    cache.del('awards:all');
+    cache.del('portfolio:bootstrap');
+    cache.del('portfolio_bootstrap');
     res.json({ success: true, data: updated, message: 'Award updated successfully' });
 });
 
@@ -114,6 +136,9 @@ const deleteAward = asyncHandler(async (req, res) => {
 
     await prisma.award.delete({ where: { id } });
     cache.del('awards');
+    cache.del('awards:all');
+    cache.del('portfolio:bootstrap');
+    cache.del('portfolio_bootstrap');
     res.json({ success: true, message: 'Award deleted successfully' });
 });
 

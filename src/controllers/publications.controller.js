@@ -4,11 +4,14 @@ const asyncHandler = require('../utils/asyncHandler');
 
 // GET all publications (Public)
 const getAllPublications = asyncHandler(async (req, res) => {
-    const cached = cache.get('publications:all');
-    if (cached) {
-        res.set('X-Cache', 'HIT');
-        res.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=120');
-        return res.json(cached);
+    const forceRefresh = req.query.refresh !== undefined || req.headers['cache-control'] === 'no-cache';
+    if (!forceRefresh) {
+        const cached = cache.get('publications:all');
+        if (cached) {
+            res.set('X-Cache', 'HIT');
+            res.set('Cache-Control', 'public, max-age=15, stale-while-revalidate=60');
+            return res.json(cached);
+        }
     }
 
     const publications = await prisma.publication.findMany({
@@ -19,7 +22,7 @@ const getAllPublications = asyncHandler(async (req, res) => {
     cache.set('publications:all', responseData, 60);
 
     res.set('X-Cache', 'MISS');
-    res.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=120');
+    res.set('Cache-Control', 'public, max-age=15, stale-while-revalidate=60');
     res.json(responseData);
 });
 
@@ -52,6 +55,8 @@ const createPublication = asyncHandler(async (req, res) => {
     });
 
     cache.del('publications:all');
+    cache.del('portfolio:bootstrap');
+    cache.del('portfolio_bootstrap');
     res.status(201).json({ success: true, data: pub, message: 'Publication created successfully' });
 });
 
@@ -87,6 +92,8 @@ const updatePublication = asyncHandler(async (req, res) => {
     });
 
     cache.del('publications:all');
+    cache.del('portfolio:bootstrap');
+    cache.del('portfolio_bootstrap');
     res.json({ success: true, data: updated, message: 'Publication updated successfully' });
 });
 
@@ -101,6 +108,8 @@ const deletePublication = asyncHandler(async (req, res) => {
 
     await prisma.publication.delete({ where: { id } });
     cache.del('publications:all');
+    cache.del('portfolio:bootstrap');
+    cache.del('portfolio_bootstrap');
     res.json({ success: true, message: 'Publication deleted successfully' });
 });
 

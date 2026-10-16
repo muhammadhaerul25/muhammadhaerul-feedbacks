@@ -3,8 +3,8 @@ const cache = require('../utils/cache');
 
 const DEFAULT_SETTINGS = {
     general: {
-        siteTitle: "Muhammad Haerul — AI Full-Stack Engineer & AI Trainer",
-        metaDescription: "Portfolio of Muhammad Haerul — AI Full-Stack Engineer, GenAI Developer, and Technical Trainer.",
+        siteTitle: "Muhammad Haerul — AI Full-Stack Specialist (Engineer, Researcher, and Trainer)",
+        metaDescription: "Portfolio of Muhammad Haerul — AI Full-Stack Specialist (Engineer, Researcher, and Trainer).",
         faviconUrl: "/favicon.webp",
         brandName: "Muhammad Haerul",
         brandColor: "#0F172A",
@@ -27,11 +27,14 @@ const DEFAULT_SETTINGS = {
         ]
     },
     hero: {
-        eyebrow: "AI Full-Stack Engineer & AI Trainer",
+        eyebrow: "AI Full-Stack Specialist",
+        titleLine1: "I build, research and teach",
+        titleLine2: "AI solutions",
+        titleLine3: "for real-world use cases",
         headline: "Muhammad Haerul",
         subheadline: "Architecting intelligent systems with Agentic AI, modern web stacks, and enterprise-grade generative intelligence.",
         statusPill: "Available for AI Engineering & Technical Training",
-        ctaPrimaryText: "Explore Works",
+        ctaPrimaryText: "View my work",
         ctaPrimaryUrl: "#projects",
         ctaSecondaryText: "Get in Touch",
         ctaSecondaryUrl: "#contact",
@@ -65,11 +68,11 @@ const DEFAULT_SETTINGS = {
         eyebrow: "01 — Profile",
         avatarUrl: "/assets/profile.webp",
         name: "Muhammad Haerul, S.Kom",
-        role: "AI Full-Stack Engineer",
-        roleSub: "(AI Engineer & AI Trainer)",
+        role: "AI Full-Stack Specialist",
+        roleSub: "(Engineer, Researcher, and Trainer)",
         education: "Bachelor of Computer Science",
         experienceYears: "4+ years in AI & Data Science",
-        leadHeadingRole: "AI Full-Stack Engineer",
+        leadHeadingRole: "AI Full-Stack Specialist",
         leadHeadingYears: "4 Years",
         storyParagraphs: [
             "My work sits at the intersection of AI engineering, applied research, product development, and education. I develop end-to-end AI solutions, from data preparation and model development to application integration and deployment, while exploring new approaches to make AI more practical, reliable, and impactful. Beyond engineering, I help individuals and organizations understand, adopt, and apply AI through training, mentorship, and hands-on learning.",
@@ -227,5 +230,6 @@ async function updateSettings(req, res) {
 module.exports = {
     getSettings,
     updateSettings,
-    DEFAULT_SETTINGS
+    DEFAULT_SETTINGS,
+    mergeSettings
 };

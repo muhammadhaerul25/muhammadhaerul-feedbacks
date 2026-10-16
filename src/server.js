@@ -55,3 +55,4 @@ process.on('unhandledRejection', (reason, promise) => {
 });
 
 module.exports = app;
+// Reload trigger for Prisma Client v7
