@@ -30,11 +30,15 @@ async function setupAnalyticsTable() {
         );
     `);
 
-    // Ensure initial row exists with realistic baseline
+    // Ensure initial row exists with real counts from visitor_logs (no dummy baseline)
     await prisma.$executeRawUnsafe(`
         INSERT INTO visitor_stats (id, total_visitors, unique_visitors, updated_at)
-        VALUES ('overview', 1420, 890, NOW())
-        ON CONFLICT (id) DO NOTHING;
+        SELECT 'overview', COUNT(*)::int, COUNT(DISTINCT visitor_id)::int, NOW()
+        FROM visitor_logs
+        ON CONFLICT (id) DO UPDATE
+        SET total_visitors = EXCLUDED.total_visitors,
+            unique_visitors = EXCLUDED.unique_visitors,
+            updated_at = NOW();
     `);
 
     const stats = await prisma.$queryRawUnsafe(`SELECT * FROM visitor_stats WHERE id = 'overview'`);
