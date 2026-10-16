@@ -352,7 +352,7 @@
     .btn-ghost:hover { border-color: var(--g-blue); color: var(--g-blue); background: var(--g-blue-soft); }
 
     .content {
-        padding: 20px clamp(36px, 3.2vw, 52px) 48px;
+        padding: 24px clamp(36px, 3.2vw, 52px) 48px;
         max-width: 1440px;
         width: 100%;
         margin: 0 auto;
@@ -796,9 +796,11 @@
     ════════════════════════════════════════ */
     .panel {
         background: var(--surface);
-        border: 1.5px solid var(--line);
-        border-radius: var(--r-md);
-        padding: 26px; margin-bottom: 22px;
+        border: 1.5px solid var(--sidebar-border);
+        border-radius: 20px;
+        padding: 32px 36px;
+        margin-bottom: 32px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.03);
     }
     .panel-title { font-size: 1.05rem; font-weight: 800; color: var(--ink); margin-bottom: 18px; }
 
@@ -3414,24 +3416,24 @@
 
             <!-- ══ PROFILE & ABOUT CMS VIEW ══ -->
             <div id="view-profile" class="view">
-                <div class="panel" style="margin-bottom: 24px; padding: 24px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:24px; padding-bottom:18px; border-bottom:1.5px solid var(--line-soft);">
-                        <div style="display:flex; align-items:center; gap:14px;">
-                            <div style="width:42px; height:42px; border-radius:12px; background:var(--g-blue-soft); color:var(--g-blue); display:flex; align-items:center; justify-content:center;">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <div class="panel" style="margin-bottom: 32px; padding: 32px 36px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1.5px solid var(--sidebar-border);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px; margin-bottom:28px; padding-bottom:22px; border-bottom:1.5px solid var(--line-soft);">
+                        <div style="display:flex; align-items:center; gap:16px;">
+                            <div style="width:46px; height:46px; border-radius:14px; background:var(--g-blue-soft); color:var(--g-blue); display:flex; align-items:center; justify-content:center; box-shadow:0 3px 10px rgba(66,133,244,0.15); flex-shrink:0;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                             </div>
                             <div>
-                                <div style="font-size:1.35rem; font-weight:800; color:var(--ink); letter-spacing:-0.02em;">Profile &amp; About Management</div>
-                                <div style="font-size:0.85rem; color:var(--ink-3); margin-top:2px;">Manage your portrait photo, biography story paragraphs, personal facts, and area of expertise tags.</div>
+                                <div style="font-size:1.45rem; font-weight:800; color:var(--ink); letter-spacing:-0.02em;">Profile &amp; About Management</div>
+                                <div style="font-size:0.88rem; color:var(--ink-3); margin-top:4px; line-height:1.5;">Manage your portrait photo, biography story paragraphs, personal facts, and area of expertise tags.</div>
                             </div>
                         </div>
-                        <div style="display:flex; gap:10px;">
-                            <a href="/#about" target="_blank" class="btn btn-ghost" style="padding:8px 16px; font-size:0.82rem; text-decoration:none;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        <div style="display:flex; gap:10px; align-items:center;">
+                            <a href="/#about" target="_blank" class="btn btn-ghost" style="padding:9px 18px; font-size:0.84rem; text-decoration:none; border-radius:var(--r-pill);">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                                 <span>Preview Profile</span>
                             </a>
-                            <button type="button" class="btn btn-primary" onclick="saveProfileSettings(this)" id="btn-save-profile-settings" style="padding:8px 20px; font-size:0.85rem;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <button type="button" class="btn btn-primary" onclick="saveProfileSettings(this)" id="btn-save-profile-settings" style="padding:9px 22px; font-size:0.85rem; font-weight:700; border-radius:var(--r-pill);">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                                 <span>Save Profile Changes</span>
                             </button>
                         </div>
@@ -3835,90 +3837,90 @@
 
             <!-- ══ VIEW 1: IDENTITY & BRAND ══ -->
             <div id="view-page-identity" class="view">
-                <div class="panel" style="margin-bottom: 24px; padding: 24px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:24px; padding-bottom:18px; border-bottom:1.5px solid var(--line-soft);">
-                        <div style="display:flex; align-items:center; gap:14px;">
-                            <div style="width:42px; height:42px; border-radius:12px; background:var(--g-blue-soft); color:var(--g-blue); display:flex; align-items:center; justify-content:center;">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+                <div class="panel" style="margin-bottom: 32px; padding: 32px 36px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1.5px solid var(--sidebar-border);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px; margin-bottom:28px; padding-bottom:22px; border-bottom:1.5px solid var(--line-soft);">
+                        <div style="display:flex; align-items:center; gap:16px;">
+                            <div style="width:46px; height:46px; border-radius:14px; background:var(--g-blue-soft); color:var(--g-blue); display:flex; align-items:center; justify-content:center; box-shadow:0 3px 10px rgba(66,133,244,0.15); flex-shrink:0;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
                             </div>
                             <div>
-                                <div style="font-size:1.35rem; font-weight:800; color:var(--ink); letter-spacing:-0.02em;">Identity &amp; Brand Settings</div>
-                                <div style="font-size:0.85rem; color:var(--ink-3); margin-top:2px;">Customize browser tab title, favicon, SEO meta description, and navbar brand styling.</div>
+                                <div style="font-size:1.45rem; font-weight:800; color:var(--ink); letter-spacing:-0.02em;">Identity &amp; Brand Settings</div>
+                                <div style="font-size:0.88rem; color:var(--ink-3); margin-top:4px; line-height:1.5;">Customize browser tab title, favicon, SEO meta description, and navbar brand styling.</div>
                             </div>
                         </div>
-                        <div style="display:flex; gap:10px;">
-                            <a href="/" target="_blank" class="btn btn-ghost" style="padding:8px 16px; font-size:0.82rem; text-decoration:none;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        <div style="display:flex; gap:10px; align-items:center;">
+                            <a href="/" target="_blank" class="btn btn-ghost" style="padding:9px 18px; font-size:0.84rem; text-decoration:none; border-radius:var(--r-pill);">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                                 <span>Preview Portfolio</span>
                             </a>
-                            <button type="button" class="btn btn-primary" onclick="savePageSettings('identity', this)" style="padding:8px 20px; font-size:0.85rem;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <button type="button" class="btn btn-primary" onclick="savePageSettings('identity', this)" style="padding:9px 22px; font-size:0.85rem; font-weight:700; border-radius:var(--r-pill);">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                                 <span>Save Identity Changes</span>
                             </button>
                         </div>
                     </div>
 
-                    <div style="display:flex; flex-direction:column; gap:20px;">
-                        <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:var(--r-md); padding:20px;">
-                            <div style="font-size:0.85rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3); margin-bottom:14px; display:flex; align-items:center; gap:8px;">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    <div style="display:flex; flex-direction:column; gap:26px;">
+                        <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:16px; padding:26px 28px; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
+                            <div style="font-size:0.88rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3); margin-bottom:20px; display:flex; align-items:center; gap:9px;">
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                                 SEO &amp; Browser Metadata
                             </div>
-                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:16px;">
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:22px;">
                                 <div>
-                                    <label class="fm-label">Browser Tab Title</label>
-                                    <input type="text" id="cfg-site-title" class="fm-input" placeholder="e.g. Muhammad Haerul — AI Full-Stack Engineer">
-                                    <span style="font-size:0.72rem; color:var(--ink-4); margin-top:4px; display:block;">Appears on browser tabs and bookmarks.</span>
+                                    <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Browser Tab Title</label>
+                                    <input type="text" id="cfg-site-title" class="fm-input" placeholder="e.g. Muhammad Haerul — AI Full-Stack Engineer" style="background:var(--surface); border-radius:10px; padding:11px 16px;">
+                                    <span style="font-size:0.75rem; color:var(--ink-4); margin-top:6px; display:block;">Appears on browser tabs and bookmarks.</span>
                                 </div>
                                 <div>
-                                    <label class="fm-label">Favicon Path / URL</label>
-                                    <div style="display:flex; gap:12px; align-items:center; margin-bottom:8px;">
+                                    <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Favicon Path / URL</label>
+                                    <div style="display:flex; gap:12px; align-items:center; margin-bottom:10px;">
                                         <div style="width:44px; height:44px; border-radius:10px; border:1.5px solid var(--line); background:var(--surface); display:flex; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; cursor:pointer;" onclick="openCropperForCurrentFavicon()" title="Click to Crop / Adjust Favicon">
                                             <img id="cfg-favicon-preview-img" src="/favicon.webp" alt="Favicon" style="width:28px; height:28px; object-fit:contain;" onerror="this.src='/favicon.ico'">
                                         </div>
-                                        <input type="text" id="cfg-favicon-url" class="fm-input" placeholder="/favicon.webp" oninput="updateFaviconPreview(this.value)" style="flex:1;">
+                                        <input type="text" id="cfg-favicon-url" class="fm-input" placeholder="/favicon.webp" oninput="updateFaviconPreview(this.value)" style="flex:1; background:var(--surface); border-radius:10px; padding:11px 16px;">
                                     </div>
                                     <div style="display:flex; gap:8px; flex-wrap:wrap;">
-                                        <button type="button" class="btn btn-primary" onclick="document.getElementById('favicon-file-input').click()" style="padding:5px 12px; font-size:0.75rem; font-weight:700; display:inline-flex; align-items:center; gap:6px;">
+                                        <button type="button" class="btn btn-primary" onclick="document.getElementById('favicon-file-input').click()" style="padding:6px 14px; font-size:0.78rem; font-weight:700; display:inline-flex; align-items:center; gap:6px; border-radius:var(--r-pill);">
                                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                                             <span>Upload Favicon</span>
                                         </button>
-                                        <button type="button" class="btn btn-ghost" onclick="openCropperForCurrentFavicon()" style="padding:5px 12px; font-size:0.75rem; font-weight:700; display:inline-flex; align-items:center; gap:6px;">
+                                        <button type="button" class="btn btn-ghost" onclick="openCropperForCurrentFavicon()" style="padding:6px 14px; font-size:0.78rem; font-weight:700; display:inline-flex; align-items:center; gap:6px; border-radius:var(--r-pill);">
                                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
                                             <span>Crop Favicon</span>
                                         </button>
                                         <input type="file" id="favicon-file-input" accept="image/*" style="display:none;" onchange="handleFaviconFileSelected(this)">
                                     </div>
-                                    <span style="font-size:0.72rem; color:var(--ink-4); margin-top:4px; display:block;">Favicons look best as 1:1 square WebP or PNG icons.</span>
+                                    <span style="font-size:0.75rem; color:var(--ink-4); margin-top:6px; display:block;">Favicons look best as 1:1 square WebP or PNG icons.</span>
                                 </div>
                             </div>
                             <div>
-                                <label class="fm-label">Meta Description (SEO)</label>
-                                <textarea id="cfg-meta-desc" class="fm-textarea" rows="2" placeholder="Brief portfolio description for search engines and social cards"></textarea>
-                                <span style="font-size:0.72rem; color:var(--ink-4); margin-top:4px; display:block;">Used by search engines and link preview generators.</span>
+                                <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Meta Description (SEO)</label>
+                                <textarea id="cfg-meta-desc" class="fm-textarea" rows="2" placeholder="Brief portfolio description for search engines and social cards" style="background:var(--surface); border-radius:10px; padding:12px 16px; line-height:1.5;"></textarea>
+                                <span style="font-size:0.75rem; color:var(--ink-4); margin-top:6px; display:block;">Used by search engines and link preview generators.</span>
                             </div>
                         </div>
 
-                        <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:var(--r-md); padding:20px;">
-                            <div style="font-size:0.85rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3); margin-bottom:14px; display:flex; align-items:center; gap:8px;">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                        <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:16px; padding:26px 28px; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
+                            <div style="font-size:0.88rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3); margin-bottom:20px; display:flex; align-items:center; gap:9px;">
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
                                 Navbar Branding &amp; Visuals
                             </div>
-                            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px;">
+                            <div style="display:grid; grid-template-columns:1.2fr 1fr 1.2fr; gap:24px;">
                                 <div>
-                                    <label class="fm-label">Navbar Brand Name</label>
-                                    <input type="text" id="cfg-brand-name" class="fm-input" placeholder="e.g. Muhammad Haerul">
+                                    <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Navbar Brand Name</label>
+                                    <input type="text" id="cfg-brand-name" class="fm-input" placeholder="e.g. Muhammad Haerul" style="background:var(--surface); border-radius:10px; padding:11px 16px;">
                                 </div>
                                 <div>
-                                    <label class="fm-label">Brand Text Color (HEX / CSS)</label>
-                                    <div style="display:flex; gap:8px; align-items:center;">
-                                        <input type="color" id="cfg-brand-color-picker" style="width:42px; height:42px; border:none; border-radius:8px; cursor:pointer; padding:0; background:none;" oninput="document.getElementById('cfg-brand-color').value=this.value">
-                                        <input type="text" id="cfg-brand-color" class="fm-input" placeholder="#0F172A" oninput="document.getElementById('cfg-brand-color-picker').value=this.value">
+                                    <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Brand Text Color (HEX / CSS)</label>
+                                    <div style="display:flex; gap:10px; align-items:center;">
+                                        <input type="color" id="cfg-brand-color-picker" style="width:44px; height:44px; border:1px solid var(--line); border-radius:10px; cursor:pointer; padding:2px; background:var(--surface);" oninput="document.getElementById('cfg-brand-color').value=this.value">
+                                        <input type="text" id="cfg-brand-color" class="fm-input" placeholder="#0F172A" oninput="document.getElementById('cfg-brand-color-picker').value=this.value" style="background:var(--surface); border-radius:10px; padding:11px 16px;">
                                     </div>
                                 </div>
                                 <div>
-                                    <label class="fm-label">Brand Subtitle / Badge</label>
-                                    <input type="text" id="cfg-brand-subtitle" class="fm-input" placeholder="Portfolio">
+                                    <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Brand Subtitle / Badge</label>
+                                    <input type="text" id="cfg-brand-subtitle" class="fm-input" placeholder="Portfolio" style="background:var(--surface); border-radius:10px; padding:11px 16px;">
                                 </div>
                             </div>
                         </div>
@@ -3928,35 +3930,35 @@
 
             <!-- ══ VIEW 2: NAVBAR MANAGEMENT ══ -->
             <div id="view-page-navbar" class="view">
-                <div class="panel" style="margin-bottom: 24px; padding: 24px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:24px; padding-bottom:18px; border-bottom:1.5px solid var(--line-soft);">
-                        <div style="display:flex; align-items:center; gap:14px;">
-                            <div style="width:42px; height:42px; border-radius:12px; background:var(--g-green-soft); color:var(--g-green); display:flex; align-items:center; justify-content:center;">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                <div class="panel" style="margin-bottom: 32px; padding: 32px 36px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1.5px solid var(--sidebar-border);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px; margin-bottom:28px; padding-bottom:22px; border-bottom:1.5px solid var(--line-soft);">
+                        <div style="display:flex; align-items:center; gap:16px;">
+                            <div style="width:46px; height:46px; border-radius:14px; background:var(--g-green-soft); color:var(--g-green); display:flex; align-items:center; justify-content:center; box-shadow:0 3px 10px rgba(52,168,83,0.15); flex-shrink:0;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
                             </div>
                             <div>
-                                <div style="font-size:1.35rem; font-weight:800; color:var(--ink); letter-spacing:-0.02em;">Navbar Management</div>
-                                <div style="font-size:0.85rem; color:var(--ink-3); margin-top:2px;">Reorder navigation links, customize display labels, and toggle live visibility.</div>
+                                <div style="font-size:1.45rem; font-weight:800; color:var(--ink); letter-spacing:-0.02em;">Navbar Management</div>
+                                <div style="font-size:0.88rem; color:var(--ink-3); margin-top:4px; line-height:1.5;">Reorder navigation links, customize display labels, and toggle live visibility.</div>
                             </div>
                         </div>
-                        <div style="display:flex; gap:10px;">
-                            <a href="/" target="_blank" class="btn btn-ghost" style="padding:8px 16px; font-size:0.82rem; text-decoration:none;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        <div style="display:flex; gap:10px; align-items:center;">
+                            <a href="/" target="_blank" class="btn btn-ghost" style="padding:9px 18px; font-size:0.84rem; text-decoration:none; border-radius:var(--r-pill);">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                                 <span>Preview Portfolio</span>
                             </a>
-                            <button type="button" class="btn btn-primary" onclick="savePageSettings('navbar', this)" style="padding:8px 20px; font-size:0.85rem;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <button type="button" class="btn btn-primary" onclick="savePageSettings('navbar', this)" style="padding:9px 22px; font-size:0.85rem; font-weight:700; border-radius:var(--r-pill);">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                                 <span>Save Navbar Changes</span>
                             </button>
                         </div>
                     </div>
 
-                    <div style="display:flex; flex-direction:column; gap:16px;">
-                        <div style="display:flex; justify-content:space-between; align-items:center; background:#F8FAFD; border:1px solid #D2E3FC; padding:12px 18px; border-radius:12px;">
-                            <div style="font-size:0.82rem; color:var(--ink-2); font-weight:600;">
+                    <div style="display:flex; flex-direction:column; gap:20px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; background:#F8FAFD; border:1px solid #D2E3FC; padding:14px 20px; border-radius:14px;">
+                            <div style="font-size:0.85rem; color:var(--ink-2); font-weight:600;">
                                 💡 Reorder items with the Up/Down buttons, update navigation labels, or toggle visibility on the live portfolio.
                             </div>
-                            <button type="button" class="btn btn-ghost" onclick="resetNavbarDefaults()" style="font-size:0.75rem; padding:5px 12px; height:auto;">Reset to Default</button>
+                            <button type="button" class="btn btn-ghost" onclick="resetNavbarDefaults()" style="font-size:0.78rem; padding:6px 14px; height:auto; border-radius:var(--r-pill);">Reset to Default</button>
                         </div>
                         <div id="navbar-items-table-container"></div>
                     </div>
@@ -3965,97 +3967,97 @@
 
             <!-- ══ VIEW 3: HERO CUSTOMIZER ══ -->
             <div id="view-page-hero" class="view">
-                <div class="panel" style="margin-bottom: 24px; padding: 24px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:24px; padding-bottom:18px; border-bottom:1.5px solid var(--line-soft);">
-                        <div style="display:flex; align-items:center; gap:14px;">
-                            <div style="width:42px; height:42px; border-radius:12px; background:var(--g-yellow-soft); color:var(--g-yellow); display:flex; align-items:center; justify-content:center;">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>
+                <div class="panel" style="margin-bottom: 32px; padding: 32px 36px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1.5px solid var(--sidebar-border);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px; margin-bottom:28px; padding-bottom:22px; border-bottom:1.5px solid var(--line-soft);">
+                        <div style="display:flex; align-items:center; gap:16px;">
+                            <div style="width:46px; height:46px; border-radius:14px; background:var(--g-yellow-soft); color:var(--g-yellow); display:flex; align-items:center; justify-content:center; box-shadow:0 3px 10px rgba(251,188,4,0.18); flex-shrink:0;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>
                             </div>
                             <div>
-                                <div style="font-size:1.35rem; font-weight:800; color:var(--ink); letter-spacing:-0.02em;">Hero Customizer</div>
-                                <div style="font-size:0.85rem; color:var(--ink-3); margin-top:2px;">Customize your hero introduction headline, subheadline pitch, availability status, and call-to-actions.</div>
+                                <div style="font-size:1.45rem; font-weight:800; color:var(--ink); letter-spacing:-0.02em;">Hero Customizer</div>
+                                <div style="font-size:0.88rem; color:var(--ink-3); margin-top:4px; line-height:1.5;">Customize your hero introduction headline, subheadline pitch, availability status, and call-to-actions.</div>
                             </div>
                         </div>
-                        <div style="display:flex; gap:10px;">
-                            <a href="/" target="_blank" class="btn btn-ghost" style="padding:8px 16px; font-size:0.82rem; text-decoration:none;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        <div style="display:flex; gap:10px; align-items:center;">
+                            <a href="/" target="_blank" class="btn btn-ghost" style="padding:9px 18px; font-size:0.84rem; text-decoration:none; border-radius:var(--r-pill);">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                                 <span>Preview Portfolio</span>
                             </a>
-                            <button type="button" class="btn btn-primary" onclick="savePageSettings('hero', this)" style="padding:8px 20px; font-size:0.85rem;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <button type="button" class="btn btn-primary" onclick="savePageSettings('hero', this)" style="padding:9px 22px; font-size:0.85rem; font-weight:700; border-radius:var(--r-pill);">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                                 <span>Save Hero Changes</span>
                             </button>
                         </div>
                     </div>
 
-                    <div style="display:flex; flex-direction:column; gap:20px;">
-                        <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:var(--r-md); padding:20px;">
-                            <div style="font-size:0.85rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3); margin-bottom:14px; display:flex; align-items:center; gap:8px;">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <div style="display:flex; flex-direction:column; gap:26px;">
+                        <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:16px; padding:26px 28px; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
+                            <div style="font-size:0.88rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3); margin-bottom:20px; display:flex; align-items:center; gap:9px;">
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                                 Badges &amp; Main Headline
                             </div>
-                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:16px;">
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:22px;">
                                 <div>
-                                    <label class="fm-label">Eyebrow Pill / Role Badge</label>
-                                    <input type="text" id="cfg-hero-eyebrow" class="fm-input" placeholder="AI Full-Stack Engineer &amp; AI Trainer">
+                                    <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Eyebrow Pill / Role Badge</label>
+                                    <input type="text" id="cfg-hero-eyebrow" class="fm-input" placeholder="AI Full-Stack Engineer &amp; AI Trainer" style="background:var(--surface); border-radius:10px; padding:11px 16px;">
                                 </div>
                                 <div>
-                                    <label class="fm-label">Status Pill (Availability)</label>
-                                    <input type="text" id="cfg-hero-status" class="fm-input" placeholder="Available for AI Consulting &amp; Engineering Roles">
+                                    <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Status Pill (Availability)</label>
+                                    <input type="text" id="cfg-hero-status" class="fm-input" placeholder="Available for AI Consulting &amp; Engineering Roles" style="background:var(--surface); border-radius:10px; padding:11px 16px;">
                                 </div>
                             </div>
-                            <div style="margin-bottom:16px;">
-                                <label class="fm-label">Hero Main Headline</label>
-                                <input type="text" id="cfg-hero-headline" class="fm-input" placeholder="Muhammad Haerul">
+                            <div style="margin-bottom:22px;">
+                                <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Hero Main Headline</label>
+                                <input type="text" id="cfg-hero-headline" class="fm-input" placeholder="Muhammad Haerul" style="background:var(--surface); border-radius:10px; padding:11px 16px;">
                             </div>
                             <div>
-                                <label class="fm-label">Hero Subheadline / Bio Pitch</label>
-                                <textarea id="cfg-hero-subheadline" class="fm-textarea" rows="3" placeholder="Brief executive summary shown on hero section"></textarea>
+                                <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Hero Subheadline / Bio Pitch</label>
+                                <textarea id="cfg-hero-subheadline" class="fm-textarea" rows="3" placeholder="Brief executive summary shown on hero section" style="background:var(--surface); border-radius:10px; padding:12px 16px; line-height:1.5;"></textarea>
                             </div>
                         </div>
 
-                        <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:var(--r-md); padding:20px;">
-                            <div style="font-size:0.85rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3); margin-bottom:14px; display:flex; align-items:center; gap:8px;">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 3h6v6"/><path d="M10 14L21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+                        <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:16px; padding:26px 28px; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
+                            <div style="font-size:0.88rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3); margin-bottom:20px; display:flex; align-items:center; gap:9px;">
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 3h6v6"/><path d="M10 14L21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
                                 Call To Action (CTA) Buttons
                             </div>
-                            <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:16px;">
+                            <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:18px;">
                                 <div>
-                                    <label class="fm-label">Primary CTA Label</label>
-                                    <input type="text" id="cfg-cta-primary-text" class="fm-input" placeholder="Explore Works">
+                                    <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Primary CTA Label</label>
+                                    <input type="text" id="cfg-cta-primary-text" class="fm-input" placeholder="Explore Works" style="background:var(--surface); border-radius:10px; padding:11px 16px;">
                                 </div>
                                 <div>
-                                    <label class="fm-label">Primary CTA Target URL</label>
-                                    <input type="text" id="cfg-cta-primary-url" class="fm-input" placeholder="#projects">
+                                    <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Primary CTA Target URL</label>
+                                    <input type="text" id="cfg-cta-primary-url" class="fm-input" placeholder="#projects" style="background:var(--surface); border-radius:10px; padding:11px 16px;">
                                 </div>
                                 <div>
-                                    <label class="fm-label">Secondary CTA Label</label>
-                                    <input type="text" id="cfg-cta-secondary-text" class="fm-input" placeholder="Get in Touch">
+                                    <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Secondary CTA Label</label>
+                                    <input type="text" id="cfg-cta-secondary-text" class="fm-input" placeholder="Get in Touch" style="background:var(--surface); border-radius:10px; padding:11px 16px;">
                                 </div>
                                 <div>
-                                    <label class="fm-label">Secondary CTA Target URL</label>
-                                    <input type="text" id="cfg-cta-secondary-url" class="fm-input" placeholder="#contact">
+                                    <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Secondary CTA Target URL</label>
+                                    <input type="text" id="cfg-cta-secondary-url" class="fm-input" placeholder="#contact" style="background:var(--surface); border-radius:10px; padding:11px 16px;">
                                 </div>
                             </div>
                         </div>
 
                         <!-- ══ HERO FLOATING PHOTO SHOWCASE (AMBIENT JOURNEY GLIMPSE) ══ -->
-                        <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:var(--r-md); padding:20px;">
-                            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid var(--line-soft);">
-                                <div style="display:flex; align-items:center; gap:12px;">
-                                    <div style="width:38px; height:38px; border-radius:10px; background:var(--g-blue-soft); color:var(--g-blue); display:flex; align-items:center; justify-content:center;">
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                        <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:16px; padding:26px 28px; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
+                            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid var(--line-soft);">
+                                <div style="display:flex; align-items:center; gap:14px;">
+                                    <div style="width:42px; height:42px; border-radius:12px; background:var(--g-blue-soft); color:var(--g-blue); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
                                     </div>
                                     <div>
-                                        <div style="font-size:1rem; font-weight:800; color:var(--ink);">Hero Floating Photo Showcase</div>
-                                        <div style="font-size:0.75rem; color:var(--ink-4);">Aktifkan atau nonaktifkan kartu foto showcase perjalanan yang melayang di bagian Hero portfolio</div>
+                                        <div style="font-size:1.05rem; font-weight:800; color:var(--ink);">Hero Floating Photo Showcase</div>
+                                        <div style="font-size:0.8rem; color:var(--ink-4); margin-top:2px;">Aktifkan atau nonaktifkan kartu foto showcase perjalanan yang melayang di bagian Hero portfolio</div>
                                     </div>
                                 </div>
-                                <div style="display:flex; align-items:center; gap:10px;">
-                                    <span id="hero-glimpse-status-badge" style="font-size:0.72rem; font-weight:800; padding:4px 10px; border-radius:12px; background:var(--g-green-soft); color:var(--g-green);">
+                                <div style="display:flex; align-items:center; gap:12px;">
+                                    <span id="hero-glimpse-status-badge" style="font-size:0.75rem; font-weight:800; padding:5px 12px; border-radius:var(--r-pill); background:var(--g-green-soft); color:var(--g-green);">
                                         ● Active
                                     </span>
-                                    <label style="display:inline-flex; align-items:center; cursor:pointer; gap:8px; font-size:0.85rem; font-weight:700;">
+                                    <label style="display:inline-flex; align-items:center; cursor:pointer; gap:8px; font-size:0.88rem; font-weight:700;">
                                         <input type="checkbox" id="cfg-hero-glimpse-toggle" checked onchange="onHeroGlimpseMasterToggle(this.checked)" style="width:20px; height:20px; accent-color:var(--g-blue); cursor:pointer;">
                                         <span>Showcase Active</span>
                                     </label>
@@ -4063,16 +4065,16 @@
                             </div>
 
                             <div id="hero-glimpse-settings-body">
-                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
-                                    <div style="font-size:0.78rem; font-weight:700; color:var(--ink-3);">
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:10px;">
+                                    <div style="font-size:0.82rem; font-weight:700; color:var(--ink-3);">
                                         Pilih Foto Spesifik yang Muncul di Hero Showcase:
                                     </div>
                                     <div style="display:flex; gap:8px;">
-                                        <button type="button" class="btn-sm-ghost" onclick="toggleAllHeroPhotos(true)" style="font-size:0.72rem; font-weight:700; padding:3px 10px; border:1px solid var(--line); border-radius:6px; background:var(--surface); cursor:pointer;">Activate All</button>
-                                        <button type="button" class="btn-sm-ghost" onclick="toggleAllHeroPhotos(false)" style="font-size:0.72rem; font-weight:700; padding:3px 10px; border:1px solid var(--line); border-radius:6px; background:var(--surface); cursor:pointer;">Inactivate All</button>
+                                        <button type="button" class="btn-sm-ghost" onclick="toggleAllHeroPhotos(true)" style="font-size:0.75rem; font-weight:700; padding:5px 12px; border:1px solid var(--line); border-radius:var(--r-pill); background:var(--surface); cursor:pointer;">Activate All</button>
+                                        <button type="button" class="btn-sm-ghost" onclick="toggleAllHeroPhotos(false)" style="font-size:0.75rem; font-weight:700; padding:5px 12px; border:1px solid var(--line); border-radius:var(--r-pill); background:var(--surface); cursor:pointer;">Inactivate All</button>
                                     </div>
                                 </div>
-                                <div id="hero-glimpse-photos-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:12px;">
+                                <div id="hero-glimpse-photos-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:14px;">
                                     <!-- Dynamic photo cards with active/inactive switches -->
                                 </div>
                             </div>
@@ -4083,98 +4085,98 @@
 
             <!-- ══ VIEW 4: SECTION HEADINGS ══ -->
             <div id="view-page-sections" class="view">
-                <div class="panel" style="margin-bottom: 24px; padding: 24px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:24px; padding-bottom:18px; border-bottom:1.5px solid var(--line-soft);">
-                        <div style="display:flex; align-items:center; gap:14px;">
-                            <div style="width:42px; height:42px; border-radius:12px; background:var(--g-red-soft); color:var(--g-red); display:flex; align-items:center; justify-content:center;">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>
+                <div class="panel" style="margin-bottom: 32px; padding: 32px 36px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1.5px solid var(--sidebar-border);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px; margin-bottom:28px; padding-bottom:22px; border-bottom:1.5px solid var(--line-soft);">
+                        <div style="display:flex; align-items:center; gap:16px;">
+                            <div style="width:46px; height:46px; border-radius:14px; background:var(--g-red-soft); color:var(--g-red); display:flex; align-items:center; justify-content:center; box-shadow:0 3px 10px rgba(234,67,53,0.15); flex-shrink:0;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>
                             </div>
                             <div>
-                                <div style="font-size:1.35rem; font-weight:800; color:var(--ink); letter-spacing:-0.02em;">Section Headings &amp; Subtitles</div>
-                                <div style="font-size:0.85rem; color:var(--ink-3); margin-top:2px;">Customize display titles and subtitles for every major section across the portfolio.</div>
+                                <div style="font-size:1.45rem; font-weight:800; color:var(--ink); letter-spacing:-0.02em;">Section Headings &amp; Subtitles</div>
+                                <div style="font-size:0.88rem; color:var(--ink-3); margin-top:4px; line-height:1.5;">Customize display titles and subtitles for every major section across the portfolio.</div>
                             </div>
                         </div>
-                        <div style="display:flex; gap:10px;">
-                            <a href="/" target="_blank" class="btn btn-ghost" style="padding:8px 16px; font-size:0.82rem; text-decoration:none;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        <div style="display:flex; gap:10px; align-items:center;">
+                            <a href="/" target="_blank" class="btn btn-ghost" style="padding:9px 18px; font-size:0.84rem; text-decoration:none; border-radius:var(--r-pill);">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                                 <span>Preview Portfolio</span>
                             </a>
-                            <button type="button" class="btn btn-primary" onclick="savePageSettings('sections', this)" style="padding:8px 20px; font-size:0.85rem;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <button type="button" class="btn btn-primary" onclick="savePageSettings('sections', this)" style="padding:9px 22px; font-size:0.85rem; font-weight:700; border-radius:var(--r-pill);">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                                 <span>Save Sections Changes</span>
                             </button>
                         </div>
                     </div>
 
-                    <div style="display:flex; flex-direction:column; gap:18px;">
-                        <div style="font-size:0.82rem; color:var(--ink-4); font-weight:600;">Override title and subtitle for all portfolio sections:</div>
-                        <div id="section-headings-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:18px;"></div>
+                    <div style="display:flex; flex-direction:column; gap:22px;">
+                        <div style="font-size:0.84rem; color:var(--ink-3); font-weight:700;">Override title and subtitle for all portfolio sections:</div>
+                        <div id="section-headings-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:22px;"></div>
                     </div>
                 </div>
             </div>
 
             <!-- ══ VIEW 5: FOOTER & SOCIALS ══ -->
             <div id="view-page-footer" class="view">
-                <div class="panel" style="margin-bottom: 24px; padding: 24px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:24px; padding-bottom:18px; border-bottom:1.5px solid var(--line-soft);">
-                        <div style="display:flex; align-items:center; gap:14px;">
-                            <div style="width:42px; height:42px; border-radius:12px; background:var(--g-blue-soft); color:var(--g-blue); display:flex; align-items:center; justify-content:center;">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="17" x2="21" y2="17"></line></svg>
+                <div class="panel" style="margin-bottom: 32px; padding: 32px 36px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1.5px solid var(--sidebar-border);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px; margin-bottom:28px; padding-bottom:22px; border-bottom:1.5px solid var(--line-soft);">
+                        <div style="display:flex; align-items:center; gap:16px;">
+                            <div style="width:46px; height:46px; border-radius:14px; background:var(--g-blue-soft); color:var(--g-blue); display:flex; align-items:center; justify-content:center; box-shadow:0 3px 10px rgba(66,133,244,0.15); flex-shrink:0;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="17" x2="21" y2="17"></line></svg>
                             </div>
                             <div>
-                                <div style="font-size:1.35rem; font-weight:800; color:var(--ink); letter-spacing:-0.02em;">Footer &amp; Social Links</div>
-                                <div style="font-size:0.85rem; color:var(--ink-3); margin-top:2px;">Configure bottom footer tagline, copyright statement, and public social profile URLs.</div>
+                                <div style="font-size:1.45rem; font-weight:800; color:var(--ink); letter-spacing:-0.02em;">Footer &amp; Social Links</div>
+                                <div style="font-size:0.88rem; color:var(--ink-3); margin-top:4px; line-height:1.5;">Configure bottom footer tagline, copyright statement, and public social profile URLs.</div>
                             </div>
                         </div>
-                        <div style="display:flex; gap:10px;">
-                            <a href="/" target="_blank" class="btn btn-ghost" style="padding:8px 16px; font-size:0.82rem; text-decoration:none;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        <div style="display:flex; gap:10px; align-items:center;">
+                            <a href="/" target="_blank" class="btn btn-ghost" style="padding:9px 18px; font-size:0.84rem; text-decoration:none; border-radius:var(--r-pill);">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                                 <span>Preview Portfolio</span>
                             </a>
-                            <button type="button" class="btn btn-primary" onclick="savePageSettings('footer', this)" style="padding:8px 20px; font-size:0.85rem;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <button type="button" class="btn btn-primary" onclick="savePageSettings('footer', this)" style="padding:9px 22px; font-size:0.85rem; font-weight:700; border-radius:var(--r-pill);">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                                 <span>Save Footer Changes</span>
                             </button>
                         </div>
                     </div>
 
-                    <div style="display:flex; flex-direction:column; gap:20px;">
-                        <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:var(--r-md); padding:20px;">
-                            <div style="font-size:0.85rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3); margin-bottom:14px; display:flex; align-items:center; gap:8px;">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    <div style="display:flex; flex-direction:column; gap:26px;">
+                        <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:16px; padding:26px 28px; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
+                            <div style="font-size:0.88rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3); margin-bottom:20px; display:flex; align-items:center; gap:9px;">
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                                 Footer Content
                             </div>
-                            <div style="margin-bottom:16px;">
-                                <label class="fm-label">Footer Tagline</label>
-                                <textarea id="cfg-footer-tagline" class="fm-textarea" rows="2" placeholder="Building high-impact AI solutions..."></textarea>
+                            <div style="margin-bottom:22px;">
+                                <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Footer Tagline</label>
+                                <textarea id="cfg-footer-tagline" class="fm-textarea" rows="2" placeholder="Building high-impact AI solutions..." style="background:var(--surface); border-radius:10px; padding:12px 16px; line-height:1.5;"></textarea>
                             </div>
                             <div>
-                                <label class="fm-label">Copyright Notice</label>
-                                <input type="text" id="cfg-footer-copyright" class="fm-input" placeholder="© 2026 Muhammad Haerul. All rights reserved.">
+                                <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Copyright Notice</label>
+                                <input type="text" id="cfg-footer-copyright" class="fm-input" placeholder="© 2026 Muhammad Haerul. All rights reserved." style="background:var(--surface); border-radius:10px; padding:11px 16px;">
                             </div>
                         </div>
 
-                        <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:var(--r-md); padding:20px;">
-                            <div style="font-size:0.85rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3); margin-bottom:14px; display:flex; align-items:center; gap:8px;">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                        <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:16px; padding:26px 28px; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
+                            <div style="font-size:0.88rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3); margin-bottom:20px; display:flex; align-items:center; gap:9px;">
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
                                 Social &amp; Contact Profiles
                             </div>
-                            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:16px;">
+                            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:20px;">
                                 <div>
-                                    <label class="fm-label">GitHub URL</label>
-                                    <input type="text" id="cfg-social-github" class="fm-input" placeholder="https://github.com/...">
+                                    <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">GitHub URL</label>
+                                    <input type="text" id="cfg-social-github" class="fm-input" placeholder="https://github.com/..." style="background:var(--surface); border-radius:10px; padding:11px 16px;">
                                 </div>
                                 <div>
-                                    <label class="fm-label">LinkedIn URL</label>
-                                    <input type="text" id="cfg-social-linkedin" class="fm-input" placeholder="https://linkedin.com/in/...">
+                                    <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">LinkedIn URL</label>
+                                    <input type="text" id="cfg-social-linkedin" class="fm-input" placeholder="https://linkedin.com/in/..." style="background:var(--surface); border-radius:10px; padding:11px 16px;">
                                 </div>
                                 <div>
-                                    <label class="fm-label">Instagram URL</label>
-                                    <input type="text" id="cfg-social-instagram" class="fm-input" placeholder="https://www.instagram.com/...">
+                                    <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Instagram URL</label>
+                                    <input type="text" id="cfg-social-instagram" class="fm-input" placeholder="https://www.instagram.com/..." style="background:var(--surface); border-radius:10px; padding:11px 16px;">
                                 </div>
                                 <div>
-                                    <label class="fm-label">Contact Email</label>
-                                    <input type="email" id="cfg-social-email" class="fm-input" placeholder="haerulmuhammad01@gmail.com">
+                                    <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Contact Email</label>
+                                    <input type="email" id="cfg-social-email" class="fm-input" placeholder="haerulmuhammad01@gmail.com" style="background:var(--surface); border-radius:10px; padding:11px 16px;">
                                 </div>
                             </div>
                         </div>
@@ -4359,7 +4361,7 @@
 
             <!-- ══ IMAGE SLIDESHOW SETTINGS VIEW ══ -->
             <div id="view-image-slideshow" class="view">
-                <div class="panel" style="margin-bottom: 28px; padding: 28px;">
+                <div class="panel" style="margin-bottom: 32px; padding: 32px 36px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1.5px solid var(--sidebar-border);">
                     <!-- Header -->
                     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:26px; padding-bottom:20px; border-bottom:1.5px solid var(--line-soft);">
                         <div style="display:flex; align-items:center; gap:16px;">
@@ -4538,7 +4540,7 @@
 
 <!-- ══ VIEW: CV ATS MAKER ══ -->
             <div id="view-cv-maker" class="view">
-                <div class="panel" style="margin-bottom: 24px; padding: 24px;">
+                <div class="panel" style="margin-bottom: 32px; padding: 32px 36px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1.5px solid var(--sidebar-border);">
                     <!-- Header -->
                     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:20px; padding-bottom:18px; border-bottom:1.5px solid var(--line-soft);">
                         <div style="display:flex; align-items:center; gap:14px;">
