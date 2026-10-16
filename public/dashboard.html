@@ -314,7 +314,7 @@
         backdrop-filter: blur(16px) saturate(1.5);
         -webkit-backdrop-filter: blur(16px) saturate(1.5);
         border-bottom: 1px solid var(--line);
-        padding: 14px 32px;
+        padding: 14px clamp(36px, 3.2vw, 52px);
         display: flex; justify-content: space-between; align-items: center; gap: 16px;
     }
     .topbar-crumb { font-size: 0.75rem; color: var(--ink-3); font-weight: 600; }
@@ -351,10 +351,13 @@
     .btn-ghost { background: var(--surface); color: var(--ink-2); border: 1.5px solid var(--line); }
     .btn-ghost:hover { border-color: var(--g-blue); color: var(--g-blue); background: var(--g-blue-soft); }
 
-    /* ════════════════════════════════════════
-       CONTENT
-    ════════════════════════════════════════ */
-    .content { padding: 32px; max-width: 1280px; width: 100%; margin: 0 auto; }
+    .content {
+        padding: 20px clamp(36px, 3.2vw, 52px) 48px;
+        max-width: 1440px;
+        width: 100%;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
 
     /* ════════════════════════════════════════
        VIEWS
