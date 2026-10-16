@@ -24,13 +24,13 @@ async function main() {
             sort_order: 1
         },
         {
-            title: 'Finalist Pitching Final Project — AI Talent Hub 2025',
+            title: 'Top 20 AI Talent Hub Indonesia 2025',
             issuer: 'Universitas Indonesia X PT Pertamina (Persero)',
-            metric_tag: 'Pitching Finalist',
-            badge_text: '🏅 UI & Pertamina Finalist',
+            metric_tag: 'Top 20 Finalist',
+            badge_text: '🏅 Top 20 AI Talent Hub',
             badge_color: 'blue',
-            description: 'Selected as a Finalist for the Final Project Pitching session in the AI Talent Hub 2025 program, organized by Direktorat Inovasi dan Riset Berdampak Tinggi Universitas Indonesia in collaboration with PT Pertamina (Persero).',
-            chips: ['Universitas Indonesia', 'PT Pertamina', 'AI Talent Hub 2025', 'Finalist Pitching', 'Applied AI'],
+            description: 'Selected as Top 20 in the AI Talent Hub Indonesia 2025 program, organized by Direktorat Inovasi dan Riset Berdampak Tinggi Universitas Indonesia in collaboration with PT Pertamina (Persero).',
+            chips: [],
             image_url: '/assets/images/awards/award_img_4.jpg',
             sort_order: 2
         },

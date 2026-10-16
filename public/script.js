@@ -2076,11 +2076,6 @@
               </div>
               <h3 class="award-title">${escapeHtml(aw.title)}</h3>
               ${aw.description ? `<p class="award-desc">${escapeHtml(aw.description)}</p>` : ''}
-              ${chips.length ? `
-                <div class="award-chips-row">
-                  ${chips.map(chip => `<span class="award-chip">${escapeHtml(chip)}</span>`).join('')}
-                </div>
-              ` : ''}
             </div>
 
             <div class="award-doc-slot ${hasImage ? 'has-action' : ''}" ${hasImage ? `onclick="window.openLightbox('${escapeHtml(aw.image_url)}', '${escapeHtml(aw.title)}')" style="cursor:pointer;" title="Click to view full certificate proof"` : ''}>
