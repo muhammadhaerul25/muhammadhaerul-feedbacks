@@ -310,15 +310,15 @@
     ════════════════════════════════════════ */
     .topbar {
         position: sticky; top: 0; z-index: 60;
-        background: rgba(248,249,250,0.9);
+        background: rgba(248,249,250,0.92);
         backdrop-filter: blur(16px) saturate(1.5);
         -webkit-backdrop-filter: blur(16px) saturate(1.5);
         border-bottom: 1px solid var(--line);
-        padding: 14px clamp(36px, 3.2vw, 52px);
+        padding: 12px clamp(32px, 3vw, 48px);
         display: flex; justify-content: space-between; align-items: center; gap: 16px;
     }
-    .topbar-crumb { font-size: 0.75rem; color: var(--ink-3); font-weight: 600; }
-    .topbar-title { font-size: 1.45rem; font-weight: 800; letter-spacing: -0.03em; color: var(--ink); }
+    .topbar-crumb { font-size: 0.74rem; color: var(--ink-3); font-weight: 600; }
+    .topbar-title { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.03em; color: var(--ink); }
 
     .mobile-nav-toggle {
         display: none;
@@ -352,7 +352,7 @@
     .btn-ghost:hover { border-color: var(--g-blue); color: var(--g-blue); background: var(--g-blue-soft); }
 
     .content {
-        padding: 24px clamp(36px, 3.2vw, 52px) 48px;
+        padding: 18px clamp(32px, 3vw, 48px) 40px;
         max-width: 1440px;
         width: 100%;
         margin: 0 auto;
@@ -797,9 +797,9 @@
     .panel {
         background: var(--surface);
         border: 1.5px solid var(--sidebar-border);
-        border-radius: 20px;
-        padding: 32px 36px;
-        margin-bottom: 32px;
+        border-radius: 18px;
+        padding: 24px 28px;
+        margin-bottom: 24px;
         box-shadow: 0 4px 20px rgba(0,0,0,0.03);
     }
     .panel-title { font-size: 1.05rem; font-weight: 800; color: var(--ink); margin-bottom: 18px; }
@@ -3416,40 +3416,40 @@
 
             <!-- ══ PROFILE & ABOUT CMS VIEW ══ -->
             <div id="view-profile" class="view">
-                <div class="panel" style="margin-bottom: 32px; padding: 32px 36px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1.5px solid var(--sidebar-border);">
-                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px; margin-bottom:28px; padding-bottom:22px; border-bottom:1.5px solid var(--line-soft);">
-                        <div style="display:flex; align-items:center; gap:16px;">
-                            <div style="width:46px; height:46px; border-radius:14px; background:var(--g-blue-soft); color:var(--g-blue); display:flex; align-items:center; justify-content:center; box-shadow:0 3px 10px rgba(66,133,244,0.15); flex-shrink:0;">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <div class="panel">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:22px; padding-bottom:18px; border-bottom:1.5px solid var(--line-soft);">
+                        <div style="display:flex; align-items:center; gap:14px;">
+                            <div style="width:44px; height:44px; border-radius:12px; background:var(--g-blue-soft); color:var(--g-blue); display:flex; align-items:center; justify-content:center; box-shadow:0 3px 10px rgba(66,133,244,0.15); flex-shrink:0;">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                             </div>
                             <div>
-                                <div style="font-size:1.45rem; font-weight:800; color:var(--ink); letter-spacing:-0.02em;">Profile &amp; About Management</div>
-                                <div style="font-size:0.88rem; color:var(--ink-3); margin-top:4px; line-height:1.5;">Manage your portrait photo, biography story paragraphs, personal facts, and area of expertise tags.</div>
+                                <div style="font-size:1.35rem; font-weight:800; color:var(--ink); letter-spacing:-0.02em;">Profile &amp; About Management</div>
+                                <div style="font-size:0.85rem; color:var(--ink-3); margin-top:2px;">Manage your portrait photo, biography story paragraphs, personal facts, and area of expertise tags.</div>
                             </div>
                         </div>
                         <div style="display:flex; gap:10px; align-items:center;">
-                            <a href="/#about" target="_blank" class="btn btn-ghost" style="padding:9px 18px; font-size:0.84rem; text-decoration:none; border-radius:var(--r-pill);">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            <a href="/#about" target="_blank" class="btn btn-ghost" style="padding:8px 18px; font-size:0.82rem; text-decoration:none; border-radius:var(--r-pill);">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                                 <span>Preview Profile</span>
                             </a>
                             <button type="button" class="btn btn-primary" onclick="saveProfileSettings(this)" id="btn-save-profile-settings" style="padding:9px 22px; font-size:0.85rem; font-weight:700; border-radius:var(--r-pill);">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                                 <span>Save Profile Changes</span>
                             </button>
                         </div>
                     </div>
 
-                    <div style="display:grid; grid-template-columns:1.05fr 1.35fr; gap:24px; align-items:start;">
+                    <div style="display:grid; grid-template-columns:1fr 1.25fr; gap:22px; align-items:start;">
                         <!-- Column 1: Portrait Photo, Name, Facts & Tags -->
                         <div style="display:flex; flex-direction:column; gap:20px;">
                             <!-- Portrait Card with Upload & In-Dashboard Cropper -->
-                            <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:var(--r-md); padding:20px;">
-                                <div style="font-size:0.85rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3); margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+                            <div style="background:#FAFBFD; border:1.5px solid var(--line); border-radius:14px; padding:22px 24px; box-shadow:0 1px 4px rgba(0,0,0,0.02);">
+                                <div style="font-size:0.82rem; font-weight:800; text-transform:uppercase; letter-spacing:0.07em; color:var(--ink-3); margin-bottom:16px; display:flex; align-items:center; gap:8px;">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                                     Portrait Photo &amp; Avatar
                                 </div>
                                 <div style="display:flex; gap:18px; align-items:center; margin-bottom:14px; flex-wrap:wrap;">
-                                    <div style="width:104px; height:116px; border-radius:14px; overflow:hidden; border:2px solid var(--line); box-shadow:0 4px 12px rgba(0,0,0,0.06); flex-shrink:0; background:var(--surface); position:relative; cursor:pointer;" onclick="openCropperForCurrentAvatar()" title="Click to Crop / Adjust">
+                                    <div style="width:110px; height:132px; border-radius:14px; overflow:hidden; border:2px solid var(--line); box-shadow:0 4px 12px rgba(0,0,0,0.06); flex-shrink:0; background:var(--surface); position:relative; cursor:pointer;" onclick="openCropperForCurrentAvatar()" title="Click to Crop / Adjust">
                                         <img id="prof-avatar-preview-img" src="/assets/profile.webp" alt="Profile Preview" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='/favicon.webp'">
                                         <div style="position:absolute; inset:0; background:rgba(0,0,0,0.4); opacity:0; hover:opacity:1; display:flex; align-items:center; justify-content:center; color:#fff; font-size:0.7rem; font-weight:700; transition:opacity 0.2s; gap:4px;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
                                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
@@ -3457,68 +3457,68 @@
                                         </div>
                                     </div>
                                     <div style="flex:1; min-width:200px;">
-                                        <label class="fm-label" style="font-size:0.75rem;">Photo Path / Image URL</label>
-                                        <input type="text" id="cfg-prof-avatar" class="fm-input" placeholder="/assets/profile.webp" oninput="updateProfileAvatarPreview(this.value)" style="font-size:0.84rem;">
+                                        <label class="fm-label" style="font-size:0.74rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-3); margin-top:0; margin-bottom:6px; display:block;">Photo Path / Image URL</label>
+                                        <input type="text" id="cfg-prof-avatar" class="fm-input" placeholder="/assets/profile.webp" oninput="updateProfileAvatarPreview(this.value)" style="font-size:0.84rem; background:var(--surface); border:1.5px solid var(--line); border-radius:10px; padding:10px 14px;">
                                         
                                         <div style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;">
-                                            <button type="button" class="btn btn-primary" onclick="document.getElementById('prof-avatar-file-input').click()" style="padding:6px 14px; font-size:0.78rem; font-weight:700; display:inline-flex; align-items:center; gap:6px;">
+                                            <button type="button" class="btn btn-primary" onclick="document.getElementById('prof-avatar-file-input').click()" style="padding:7px 16px; font-size:0.78rem; font-weight:700; display:inline-flex; align-items:center; gap:6px; border-radius:var(--r-pill);">
                                                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                                                 <span>Upload &amp; Crop</span>
                                             </button>
-                                            <button type="button" class="btn btn-ghost" onclick="openCropperForCurrentAvatar()" style="padding:6px 14px; font-size:0.78rem; font-weight:700; display:inline-flex; align-items:center; gap:6px;">
+                                            <button type="button" class="btn btn-ghost" onclick="openCropperForCurrentAvatar()" style="padding:7px 16px; font-size:0.78rem; font-weight:700; display:inline-flex; align-items:center; gap:6px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface); color:var(--ink-2);">
                                                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
                                                 <span>Edit / Crop Current</span>
                                             </button>
                                             <input type="file" id="prof-avatar-file-input" accept="image/*" style="display:none;" onchange="handleProfAvatarFileSelected(this)">
                                         </div>
-                                        <span style="font-size:0.72rem; color:var(--ink-4); margin-top:6px; display:block;">Upload any image, crop to 3:4 portrait or custom ratio, and save directly.</span>
+                                        <span style="font-size:0.72rem; color:var(--ink-4); margin-top:8px; display:block;">Upload any image, crop to 3:4 portrait or custom ratio, and save directly.</span>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Personal Details Card -->
-                            <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:var(--r-md); padding:20px;">
-                                <div style="font-size:0.85rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3); margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+                            <div style="background:#FAFBFD; border:1.5px solid var(--line); border-radius:14px; padding:22px 24px; box-shadow:0 1px 4px rgba(0,0,0,0.02);">
+                                <div style="font-size:0.82rem; font-weight:800; text-transform:uppercase; letter-spacing:0.07em; color:var(--ink-3); margin-bottom:16px; display:flex; align-items:center; gap:8px;">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                     Personal Facts &amp; Titles
                                 </div>
-                                <div style="display:flex; flex-direction:column; gap:12px;">
+                                <div style="display:flex; flex-direction:column; gap:14px;">
                                     <div>
-                                        <label class="fm-label" style="font-size:0.74rem;">Full Name (with degrees)</label>
-                                        <input type="text" id="cfg-prof-name" class="fm-input" placeholder="Muhammad Haerul, S.Kom">
+                                        <label class="fm-label" style="font-size:0.74rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-3); margin-top:0; margin-bottom:6px; display:block;">Full Name (with degrees)</label>
+                                        <input type="text" id="cfg-prof-name" class="fm-input" placeholder="Muhammad Haerul, S.Kom" style="background:var(--surface); border:1.5px solid var(--line); border-radius:10px; padding:10px 14px; font-size:0.86rem;">
                                     </div>
                                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
                                         <div>
-                                            <label class="fm-label" style="font-size:0.74rem;">Primary Role</label>
-                                            <input type="text" id="cfg-prof-role" class="fm-input" placeholder="AI Full-Stack Engineer">
+                                            <label class="fm-label" style="font-size:0.74rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-3); margin-top:0; margin-bottom:6px; display:block;">Primary Role</label>
+                                            <input type="text" id="cfg-prof-role" class="fm-input" placeholder="AI Full-Stack Engineer" style="background:var(--surface); border:1.5px solid var(--line); border-radius:10px; padding:10px 14px; font-size:0.86rem;">
                                         </div>
                                         <div>
-                                            <label class="fm-label" style="font-size:0.74rem;">Role Subtitle / Note</label>
-                                            <input type="text" id="cfg-prof-rolesub" class="fm-input" placeholder="(AI Engineer &amp; AI Trainer)">
+                                            <label class="fm-label" style="font-size:0.74rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-3); margin-top:0; margin-bottom:6px; display:block;">Role Subtitle / Note</label>
+                                            <input type="text" id="cfg-prof-rolesub" class="fm-input" placeholder="(AI Engineer &amp; AI Trainer)" style="background:var(--surface); border:1.5px solid var(--line); border-radius:10px; padding:10px 14px; font-size:0.86rem;">
                                         </div>
                                     </div>
                                     <div>
-                                        <label class="fm-label" style="font-size:0.74rem;">Education Fact</label>
-                                        <input type="text" id="cfg-prof-edu" class="fm-input" placeholder="Bachelor of Computer Science">
+                                        <label class="fm-label" style="font-size:0.74rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-3); margin-top:0; margin-bottom:6px; display:block;">Education Fact</label>
+                                        <input type="text" id="cfg-prof-edu" class="fm-input" placeholder="Bachelor of Computer Science" style="background:var(--surface); border:1.5px solid var(--line); border-radius:10px; padding:10px 14px; font-size:0.86rem;">
                                     </div>
                                     <div>
-                                        <label class="fm-label" style="font-size:0.74rem;">Experience Fact</label>
-                                        <input type="text" id="cfg-prof-exp" class="fm-input" placeholder="4+ years in AI &amp; Data Science">
+                                        <label class="fm-label" style="font-size:0.74rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-3); margin-top:0; margin-bottom:6px; display:block;">Experience Fact</label>
+                                        <input type="text" id="cfg-prof-exp" class="fm-input" placeholder="4+ years in AI &amp; Data Science" style="background:var(--surface); border:1.5px solid var(--line); border-radius:10px; padding:10px 14px; font-size:0.86rem;">
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Area of Expertise Tags -->
-                            <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:var(--r-md); padding:20px;">
-                                <div style="font-size:0.85rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3); margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+                            <div style="background:#FAFBFD; border:1.5px solid var(--line); border-radius:14px; padding:22px 24px; box-shadow:0 1px 4px rgba(0,0,0,0.02);">
+                                <div style="font-size:0.82rem; font-weight:800; text-transform:uppercase; letter-spacing:0.07em; color:var(--ink-3); margin-bottom:16px; display:flex; align-items:center; gap:8px;">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                                     Area of Expertise Tags
                                 </div>
-                                <label class="fm-label" style="font-size:0.74rem;">Comma-Separated Focus Tags</label>
-                                <textarea id="cfg-prof-tags" class="fm-textarea" rows="2" placeholder="Artificial Intelligence Application, Data Analytics, Computer Vision, Natural Language Processing, Generative AI, AI Agents" oninput="onProfileTagsInput(this.value)"></textarea>
+                                <label class="fm-label" style="font-size:0.74rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-3); margin-top:0; margin-bottom:6px; display:block;">Comma-Separated Focus Tags</label>
+                                <textarea id="cfg-prof-tags" class="fm-textarea" rows="2" placeholder="Artificial Intelligence Application, Data Analytics, Computer Vision, Natural Language Processing, Generative AI, AI Agents" oninput="onProfileTagsInput(this.value)" style="background:var(--surface); border:1.5px solid var(--line); border-radius:10px; padding:10px 14px; line-height:1.5; font-size:0.85rem; min-height:68px;"></textarea>
                                 <div style="margin-top:10px;">
                                     <span style="font-size:0.72rem; color:var(--ink-4); display:block; margin-bottom:6px;">Preview of Live Tags:</span>
-                                    <div id="prof-tags-preview" style="display:flex; flex-wrap:wrap; gap:6px;"></div>
+                                    <div id="prof-tags-preview" style="background:var(--surface); border:1.5px dashed var(--line); border-radius:10px; padding:10px 14px; display:flex; flex-wrap:wrap; gap:6px; min-height:40px;"></div>
                                 </div>
                             </div>
                         </div>
@@ -3526,72 +3526,72 @@
                         <!-- Column 2: Section 01 Headings & Story Paragraphs -->
                         <div style="display:flex; flex-direction:column; gap:20px;">
                             <!-- Heading Card -->
-                            <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:var(--r-md); padding:20px;">
-                                <div style="font-size:0.85rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3); margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+                            <div style="background:#FAFBFD; border:1.5px solid var(--line); border-radius:14px; padding:22px 24px; box-shadow:0 1px 4px rgba(0,0,0,0.02);">
+                                <div style="font-size:0.82rem; font-weight:800; text-transform:uppercase; letter-spacing:0.07em; color:var(--ink-3); margin-bottom:16px; display:flex; align-items:center; gap:8px;">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>
                                     Section 01 Headline &amp; Eyebrow
                                 </div>
                                 <div style="display:flex; flex-direction:column; gap:14px; margin-bottom:12px;">
                                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
                                         <div>
-                                            <label class="fm-label" style="font-size:0.74rem;">Section Eyebrow Tag</label>
-                                            <input type="text" id="cfg-prof-eyebrow" class="fm-input" placeholder="01 — Profile" oninput="updateProfileHeadingPreview()">
+                                            <label class="fm-label" style="font-size:0.74rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-3); margin-top:0; margin-bottom:6px; display:block;">Section Eyebrow Tag</label>
+                                            <input type="text" id="cfg-prof-eyebrow" class="fm-input" placeholder="01 — Profile" oninput="updateProfileHeadingPreview()" style="background:var(--surface); border:1.5px solid var(--line); border-radius:10px; padding:10px 14px; font-size:0.86rem;">
                                         </div>
                                         <div>
-                                            <label class="fm-label" style="font-size:0.74rem;">Lead Role Title <span class="opt">Default Tag</span></label>
-                                            <input type="text" id="cfg-prof-lead-role" class="fm-input" placeholder="AI Full-Stack Engineer" oninput="onProfileFormulaChange()">
+                                            <label class="fm-label" style="font-size:0.74rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-3); margin-top:0; margin-bottom:6px; display:block;">Lead Role Title <span class="opt">Default Tag</span></label>
+                                            <input type="text" id="cfg-prof-lead-role" class="fm-input" placeholder="AI Full-Stack Engineer" oninput="onProfileFormulaChange()" style="background:var(--surface); border:1.5px solid var(--line); border-radius:10px; padding:10px 14px; font-size:0.86rem;">
                                         </div>
                                     </div>
 
                                     <div>
-                                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                                            <label class="fm-label" style="font-size:0.74rem; margin-bottom:0;">Custom Section Headline <span class="req">* (Fully Customizable)</span></label>
+                                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                            <label class="fm-label" style="font-size:0.74rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-3); margin-top:0; margin-bottom:0; display:block;">Custom Section Headline <span class="req">* (Fully Customizable)</span></label>
                                             <span style="font-size:0.7rem; color:var(--ink-4);">You can write any freeform text</span>
                                         </div>
-                                        <input type="text" id="cfg-prof-lead-headline" class="fm-input" style="font-weight:700;" placeholder="AI Full-Stack Engineer with 4 Years of Experiences" oninput="updateProfileHeadingPreview()">
+                                        <input type="text" id="cfg-prof-lead-headline" class="fm-input" style="font-weight:700; background:var(--surface); border:1.5px solid var(--line); border-radius:10px; padding:10px 14px; font-size:0.86rem;" placeholder="AI Full-Stack Engineer with 4 Years of Experiences" oninput="updateProfileHeadingPreview()">
                                     </div>
 
-                                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; align-items:end;">
                                         <div>
-                                            <label class="fm-label" style="font-size:0.74rem;">Years of Experience Tag</label>
-                                            <input type="text" id="cfg-prof-lead-exp" class="fm-input" placeholder="4 Years" oninput="onProfileFormulaChange()">
+                                            <label class="fm-label" style="font-size:0.74rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-3); margin-top:0; margin-bottom:6px; display:block;">Years of Experience Tag</label>
+                                            <input type="text" id="cfg-prof-lead-exp" class="fm-input" placeholder="4 Years" oninput="onProfileFormulaChange()" style="background:var(--surface); border:1.5px solid var(--line); border-radius:10px; padding:10px 14px; font-size:0.86rem;">
                                         </div>
                                         <div>
-                                            <label class="fm-label" style="font-size:0.74rem;">Headline Formula Preset</label>
-                                            <button type="button" class="btn-sm-ghost" onclick="applyStandardProfileFormula()" style="width:100%; height:38px; border:1px solid var(--line); border-radius:var(--r-sm); font-size:0.75rem; font-weight:700; background:var(--surface);">
+                                            <label class="fm-label" style="font-size:0.74rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-3); margin-top:0; margin-bottom:6px; display:block;">Headline Formula Preset</label>
+                                            <button type="button" class="btn btn-ghost" onclick="applyStandardProfileFormula()" style="width:100%; height:41px; border:1.5px solid var(--line); border-radius:10px; font-size:0.76rem; font-weight:700; background:var(--surface); cursor:pointer; color:var(--ink-2); display:flex; align-items:center; justify-content:center; gap:6px;">
                                                 ↺ Auto-Fill from Role + Years
                                             </button>
                                         </div>
                                     </div>
                                 </div>
-                                <div style="background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:12px 14px; font-size:0.8rem; color:var(--ink-2);">
-                                    <span style="font-size:0.72rem; font-weight:700; color:var(--ink-4); display:block; margin-bottom:4px; text-transform:uppercase; letter-spacing:0.04em;">Live Section 01 Headline Preview:</span>
-                                    <div style="font-size:0.75rem; color:var(--g-blue); font-weight:800; margin-bottom:2px;" id="prof-eyebrow-preview">01 — PROFILE</div>
-                                    <div id="prof-lead-preview" style="color:var(--ink); font-weight:800; font-size:1.05rem; letter-spacing:-0.01em;">AI Full-Stack Engineer with 4 Years of Experiences</div>
+                                <div style="background:linear-gradient(135deg, rgba(66,133,244,0.05) 0%, rgba(52,168,83,0.05) 100%); border:1.5px solid rgba(66,133,244,0.25); border-radius:12px; padding:14px 18px; margin-top:14px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
+                                    <span style="font-size:0.72rem; font-weight:800; color:var(--ink-4); display:block; margin-bottom:4px; text-transform:uppercase; letter-spacing:0.06em;">Live Section 01 Headline Preview:</span>
+                                    <div style="font-size:0.75rem; color:var(--g-blue); font-weight:800; margin-bottom:3px; letter-spacing:0.04em; text-transform:uppercase;" id="prof-eyebrow-preview">01 — PROFILE</div>
+                                    <div id="prof-lead-preview" style="color:var(--ink); font-weight:800; font-size:1.05rem; letter-spacing:-0.02em;">AI Full-Stack Engineer with 4 Years of Experiences</div>
                                 </div>
                             </div>
 
                             <!-- Dynamic Bio Story Paragraphs Card -->
-                            <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:var(--r-md); padding:20px;">
+                            <div style="background:#FAFBFD; border:1.5px solid var(--line); border-radius:14px; padding:22px 24px; box-shadow:0 1px 4px rgba(0,0,0,0.02);">
                                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:10px;">
-                                    <div style="font-size:0.85rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3); display:flex; align-items:center; gap:8px;">
+                                    <div style="font-size:0.82rem; font-weight:800; text-transform:uppercase; letter-spacing:0.07em; color:var(--ink-3); display:flex; align-items:center; gap:8px;">
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
                                         Biography &amp; Story Paragraphs
                                         <span id="prof-story-count-badge" style="background:var(--g-blue-soft); color:var(--g-blue); font-size:0.72rem; padding:2px 8px; border-radius:10px; font-weight:700;">3</span>
                                     </div>
-                                    <button type="button" class="btn btn-ghost" onclick="addStoryParagraph()" style="padding:5px 12px; font-size:0.78rem; font-weight:700; display:inline-flex; align-items:center; gap:6px; color:var(--g-blue);">
+                                    <button type="button" class="btn btn-ghost" onclick="addStoryParagraph()" style="padding:6px 14px; font-size:0.78rem; font-weight:700; display:inline-flex; align-items:center; gap:6px; color:var(--g-blue); border-radius:var(--r-pill); border:1.5px solid rgba(66,133,244,0.3); background:var(--surface);">
                                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                                        <span>+ Add Paragraph</span>
+                                        <span>Add Paragraph</span>
                                     </button>
                                 </div>
-                                <div style="font-size:0.75rem; color:var(--ink-3); margin-bottom:14px; line-height:1.4;">
+                                <div style="font-size:0.78rem; color:var(--ink-3); margin-bottom:14px; line-height:1.45;">
                                     Adjust, add new paragraphs, or reorder them dynamically to craft your personal story on the portfolio about section.
                                 </div>
                                 <div id="prof-story-paragraphs-container" style="display:flex; flex-direction:column; gap:12px;">
                                     <!-- Dynamic paragraphs rendered via JS -->
                                 </div>
                                 <div style="margin-top:14px;">
-                                    <button type="button" class="btn btn-ghost" onclick="addStoryParagraph()" style="width:100%; border:1.5px dashed var(--line); padding:10px; font-size:0.8rem; font-weight:700; color:var(--g-blue); display:flex; align-items:center; justify-content:center; gap:8px; border-radius:10px;">
+                                    <button type="button" class="btn btn-ghost" onclick="addStoryParagraph()" style="width:100%; border:1.5px dashed var(--line); padding:11px; font-size:0.82rem; font-weight:700; color:var(--g-blue); display:flex; align-items:center; justify-content:center; gap:8px; border-radius:10px; background:var(--surface); cursor:pointer; transition:var(--t);">
                                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                                         <span>Add Another Story Paragraph</span>
                                     </button>
@@ -3837,8 +3837,8 @@
 
             <!-- ══ VIEW 1: IDENTITY & BRAND ══ -->
             <div id="view-page-identity" class="view">
-                <div class="panel" style="margin-bottom: 32px; padding: 32px 36px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1.5px solid var(--sidebar-border);">
-                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px; margin-bottom:28px; padding-bottom:22px; border-bottom:1.5px solid var(--line-soft);">
+                <div class="panel">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px; margin-bottom:20px; padding-bottom:16px; border-bottom:1.5px solid var(--line-soft);">
                         <div style="display:flex; align-items:center; gap:16px;">
                             <div style="width:46px; height:46px; border-radius:14px; background:var(--g-blue-soft); color:var(--g-blue); display:flex; align-items:center; justify-content:center; box-shadow:0 3px 10px rgba(66,133,244,0.15); flex-shrink:0;">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
@@ -3930,8 +3930,8 @@
 
             <!-- ══ VIEW 2: NAVBAR MANAGEMENT ══ -->
             <div id="view-page-navbar" class="view">
-                <div class="panel" style="margin-bottom: 32px; padding: 32px 36px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1.5px solid var(--sidebar-border);">
-                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px; margin-bottom:28px; padding-bottom:22px; border-bottom:1.5px solid var(--line-soft);">
+                <div class="panel">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px; margin-bottom:20px; padding-bottom:16px; border-bottom:1.5px solid var(--line-soft);">
                         <div style="display:flex; align-items:center; gap:16px;">
                             <div style="width:46px; height:46px; border-radius:14px; background:var(--g-green-soft); color:var(--g-green); display:flex; align-items:center; justify-content:center; box-shadow:0 3px 10px rgba(52,168,83,0.15); flex-shrink:0;">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
@@ -3967,8 +3967,8 @@
 
             <!-- ══ VIEW 3: HERO CUSTOMIZER ══ -->
             <div id="view-page-hero" class="view">
-                <div class="panel" style="margin-bottom: 32px; padding: 32px 36px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1.5px solid var(--sidebar-border);">
-                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px; margin-bottom:28px; padding-bottom:22px; border-bottom:1.5px solid var(--line-soft);">
+                <div class="panel">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px; margin-bottom:20px; padding-bottom:16px; border-bottom:1.5px solid var(--line-soft);">
                         <div style="display:flex; align-items:center; gap:16px;">
                             <div style="width:46px; height:46px; border-radius:14px; background:var(--g-yellow-soft); color:var(--g-yellow); display:flex; align-items:center; justify-content:center; box-shadow:0 3px 10px rgba(251,188,4,0.18); flex-shrink:0;">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>
@@ -4085,8 +4085,8 @@
 
             <!-- ══ VIEW 4: SECTION HEADINGS ══ -->
             <div id="view-page-sections" class="view">
-                <div class="panel" style="margin-bottom: 32px; padding: 32px 36px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1.5px solid var(--sidebar-border);">
-                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px; margin-bottom:28px; padding-bottom:22px; border-bottom:1.5px solid var(--line-soft);">
+                <div class="panel">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px; margin-bottom:20px; padding-bottom:16px; border-bottom:1.5px solid var(--line-soft);">
                         <div style="display:flex; align-items:center; gap:16px;">
                             <div style="width:46px; height:46px; border-radius:14px; background:var(--g-red-soft); color:var(--g-red); display:flex; align-items:center; justify-content:center; box-shadow:0 3px 10px rgba(234,67,53,0.15); flex-shrink:0;">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>
@@ -4117,8 +4117,8 @@
 
             <!-- ══ VIEW 5: FOOTER & SOCIALS ══ -->
             <div id="view-page-footer" class="view">
-                <div class="panel" style="margin-bottom: 32px; padding: 32px 36px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1.5px solid var(--sidebar-border);">
-                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px; margin-bottom:28px; padding-bottom:22px; border-bottom:1.5px solid var(--line-soft);">
+                <div class="panel">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px; margin-bottom:20px; padding-bottom:16px; border-bottom:1.5px solid var(--line-soft);">
                         <div style="display:flex; align-items:center; gap:16px;">
                             <div style="width:46px; height:46px; border-radius:14px; background:var(--g-blue-soft); color:var(--g-blue); display:flex; align-items:center; justify-content:center; box-shadow:0 3px 10px rgba(66,133,244,0.15); flex-shrink:0;">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="17" x2="21" y2="17"></line></svg>
@@ -4186,8 +4186,8 @@
 
             <!-- ══ ACCESS & SECURITY FULL PAGE VIEW ══ -->
             <div id="view-security" class="view">
-                <div class="panel" style="margin-bottom: 32px; padding: 32px 36px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1.5px solid var(--sidebar-border);">
-                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px; margin-bottom:28px; padding-bottom:22px; border-bottom:1.5px solid var(--line-soft);">
+                <div class="panel">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px; margin-bottom:20px; padding-bottom:16px; border-bottom:1.5px solid var(--line-soft);">
                         <div style="display:flex; align-items:center; gap:16px;">
                             <div style="width:46px; height:46px; border-radius:14px; background:var(--g-blue-soft); color:var(--g-blue); display:flex; align-items:center; justify-content:center; box-shadow:0 3px 10px rgba(66,133,244,0.15); flex-shrink:0;">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><circle cx="12" cy="11" r="3"/></svg>
@@ -4303,8 +4303,8 @@
 
             <!-- ══ LANGUAGE & REGION FULL PAGE VIEW ══ -->
             <div id="view-language" class="view">
-                <div class="panel" style="margin-bottom: 32px; padding: 32px 36px; max-width: 920px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1.5px solid var(--sidebar-border);">
-                    <div style="display:flex; align-items:center; gap:16px; margin-bottom:28px; padding-bottom:22px; border-bottom:1.5px solid var(--line-soft);">
+                <div class="panel" style="max-width: 920px;">
+                    <div style="display:flex; align-items:center; gap:16px; margin-bottom:20px; padding-bottom:16px; border-bottom:1.5px solid var(--line-soft);">
                         <div style="width:46px; height:46px; border-radius:14px; background:var(--g-blue-soft); color:var(--g-blue); display:flex; align-items:center; justify-content:center; box-shadow:0 3px 10px rgba(66,133,244,0.15); flex-shrink:0;">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
                         </div>
@@ -4361,7 +4361,7 @@
 
             <!-- ══ IMAGE SLIDESHOW SETTINGS VIEW ══ -->
             <div id="view-image-slideshow" class="view">
-                <div class="panel" style="margin-bottom: 32px; padding: 32px 36px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1.5px solid var(--sidebar-border);">
+                <div class="panel">
                     <!-- Header -->
                     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:26px; padding-bottom:20px; border-bottom:1.5px solid var(--line-soft);">
                         <div style="display:flex; align-items:center; gap:16px;">
@@ -4540,7 +4540,7 @@
 
 <!-- ══ VIEW: CV ATS MAKER ══ -->
             <div id="view-cv-maker" class="view">
-                <div class="panel" style="margin-bottom: 32px; padding: 32px 36px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1.5px solid var(--sidebar-border);">
+                <div class="panel">
                     <!-- Header -->
                     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:20px; padding-bottom:18px; border-bottom:1.5px solid var(--line-soft);">
                         <div style="display:flex; align-items:center; gap:14px;">
@@ -11104,7 +11104,7 @@ function renderStoryParagraphsEditor(paragraphs) {
         var isFirst = (idx === 0);
         var isLast = (idx === activeStoryParagraphs.length - 1);
         
-        return '<div class="story-paragraph-card" style="background:var(--surface); border:1.5px solid var(--line); border-radius:12px; padding:14px 16px; display:flex; flex-direction:column; gap:8px;">' +
+        return '<div class="story-paragraph-card" style="background:var(--surface); border:1.5px solid var(--line); border-radius:12px; padding:14px 16px; display:flex; flex-direction:column; gap:10px; box-shadow:0 1px 4px rgba(0,0,0,0.02);">' +
             '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">' +
                 '<div style="display:flex; align-items:center; gap:8px;">' +
                     '<span style="width:24px; height:24px; border-radius:6px; background:var(--g-blue-soft); color:var(--g-blue); font-size:0.75rem; font-weight:800; display:flex; align-items:center; justify-content:center;">' + (idx + 1) + '</span>' +
@@ -11112,14 +11112,14 @@ function renderStoryParagraphsEditor(paragraphs) {
                     '<span id="story-counts-' + idx + '" style="font-size:0.7rem; color:var(--ink-4); margin-left:4px;">(' + wordCount + ' words, ' + charCount + ' chars)</span>' +
                 '</div>' +
                 '<div style="display:flex; align-items:center; gap:6px;">' +
-                    '<button type="button" class="btn btn-ghost" onclick="moveStoryParagraph(' + idx + ', -1)" ' + (isFirst ? 'disabled style="opacity:0.3; padding:3px 8px; font-size:0.75rem;"' : 'style="padding:3px 8px; font-size:0.75rem;"') + ' title="Move Up">▲</button>' +
-                    '<button type="button" class="btn btn-ghost" onclick="moveStoryParagraph(' + idx + ', 1)" ' + (isLast ? 'disabled style="opacity:0.3; padding:3px 8px; font-size:0.75rem;"' : 'style="padding:3px 8px; font-size:0.75rem;"') + ' title="Move Down">▼</button>' +
-                    '<button type="button" class="btn btn-ghost" onclick="removeStoryParagraph(' + idx + ')" style="padding:3px 8px; font-size:0.75rem; color:var(--g-red);" title="Remove Paragraph">' +
+                    '<button type="button" class="btn btn-ghost" onclick="moveStoryParagraph(' + idx + ', -1)" ' + (isFirst ? 'disabled style="opacity:0.3; padding:4px 10px; font-size:0.75rem; border-radius:var(--r-pill);"' : 'style="padding:4px 10px; font-size:0.75rem; border-radius:var(--r-pill);"') + ' title="Move Up">▲</button>' +
+                    '<button type="button" class="btn btn-ghost" onclick="moveStoryParagraph(' + idx + ', 1)" ' + (isLast ? 'disabled style="opacity:0.3; padding:4px 10px; font-size:0.75rem; border-radius:var(--r-pill);"' : 'style="padding:4px 10px; font-size:0.75rem; border-radius:var(--r-pill);"') + ' title="Move Down">▼</button>' +
+                    '<button type="button" class="btn btn-ghost" onclick="removeStoryParagraph(' + idx + ')" style="padding:4px 10px; font-size:0.75rem; color:var(--g-red); border-radius:var(--r-pill);" title="Remove Paragraph">' +
                         '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>' +
                     '</button>' +
                 '</div>' +
             '</div>' +
-            '<textarea id="prof-story-para-' + idx + '" class="fm-textarea" rows="3" placeholder="Enter paragraph content..." oninput="updateStoryParagraphText(' + idx + ', this.value)" style="font-size:0.83rem; line-height:1.5;">' + esc(text) + '</textarea>' +
+            '<textarea id="prof-story-para-' + idx + '" class="fm-textarea" rows="3" placeholder="Enter paragraph content..." oninput="updateStoryParagraphText(' + idx + ', this.value)" style="font-size:0.84rem; line-height:1.55; background:#FAFBFD; border:1.5px solid var(--line-soft); border-radius:8px; padding:10px 14px;">' + esc(text) + '</textarea>' +
         '</div>';
     }).join('');
 

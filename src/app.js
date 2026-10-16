@@ -64,8 +64,16 @@ app.use(express.static(publicDir, {
 }));
 
 // 5. Clean Page Routes
-app.get('/', (req, res) => res.sendFile(path.join(publicDir, 'index.html')));
-app.get('/dashboard', (req, res) => res.sendFile(path.join(publicDir, 'dashboard.html')));
+app.get('/', (req, res) => {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.sendFile(path.join(publicDir, 'index.html'));
+});
+app.get('/dashboard', (req, res) => {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    res.sendFile(path.join(publicDir, 'dashboard.html'));
+});
 app.get('/feedback', (req, res) => res.sendFile(path.join(publicDir, 'form-feedbacks.html')));
 app.get('/form-feedbacks', (req, res) => res.sendFile(path.join(publicDir, 'form-feedbacks.html')));
 app.get('/projects', (req, res) => res.sendFile(path.join(publicDir, 'browse.html')));
