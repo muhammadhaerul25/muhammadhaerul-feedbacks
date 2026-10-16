@@ -200,7 +200,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=3.7">
+  <link rel="stylesheet" href="styles.css?v=3.8">
 </head>
 
 <body>
@@ -1761,8 +1761,111 @@
             the same systems.</p>
         </div>
 
-        <div class="talks-grid">
-          <!-- Dynamically populated via /api/publications without dummy data -->
+        <div class="publications-grid talks-grid" id="publications-grid">
+          <!-- Publication 1 -->
+          <article class="publication-card reveal in-view" onclick="window.open('https://medium.com/@muhammadhaerul.25','_blank','noopener')" style="cursor:pointer;">
+            <div class="pub-card-top">
+              <div class="pub-badge-wrap">
+                <span class="pub-icon" style="--accent:var(--black)">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                  </svg>
+                </span>
+                <div class="pub-meta-col">
+                  <span class="pub-publisher">Medium</span>
+                  <span class="pub-date">Aug 12, 2025</span>
+                </div>
+              </div>
+              <span class="pub-type-pill">Publication</span>
+            </div>
+
+            <div class="pub-card-mid">
+              <h3 class="pub-title">Muhammad Haerul's on Medium</h3>
+              <p class="pub-description">Technical articles, guides, and engineering deep-dives covering Artificial Intelligence, Computer Vision, Full-Stack System Architecture, and applied machine learning by Muhammad Haerul.</p>
+            </div>
+
+            <div class="pub-card-bottom">
+              <span style="display:inline-flex; align-items:center; gap:5px; font-weight:600; font-size:11.5px; color:var(--text-tertiary);">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Published &amp; Verified
+              </span>
+              <a href="https://medium.com/@muhammadhaerul.25" target="_blank" rel="noopener" class="pub-link-btn" onclick="event.stopPropagation();">
+                <span>Read Publication</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Publication 2 -->
+          <article class="publication-card reveal in-view" onclick="window.open('https://pypi.org/project/galaxy-object-detection-core/','_blank','noopener')" style="cursor:pointer;">
+            <div class="pub-card-top">
+              <div class="pub-badge-wrap">
+                <span class="pub-icon" style="--accent:var(--blue)">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                  </svg>
+                </span>
+                <div class="pub-meta-col">
+                  <span class="pub-publisher">Python Package Index (PyPI)</span>
+                  <span class="pub-date">Jun 2, 2025</span>
+                </div>
+              </div>
+              <span class="pub-type-pill">Publication</span>
+            </div>
+
+            <div class="pub-card-mid">
+              <h3 class="pub-title">Galaxy Object Detection</h3>
+              <p class="pub-description">Galaxy Object Detection Core is a modular, production-ready object detection library built on YOLO and YOLOWorld architectures. Designed for real-time performance and high-precision detection, the package supports 20+ industry categories including safety gear, documents, vehicles, road damage, KTP, and minerals.</p>
+            </div>
+
+            <div class="pub-card-bottom">
+              <span style="display:inline-flex; align-items:center; gap:5px; font-weight:600; font-size:11.5px; color:var(--text-tertiary);">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Published &amp; Verified
+              </span>
+              <a href="https://pypi.org/project/galaxy-object-detection-core/" target="_blank" rel="noopener" class="pub-link-btn" onclick="event.stopPropagation();">
+                <span>Read Publication</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Publication 3 -->
+          <article class="publication-card reveal in-view" onclick="window.open('https://repository.unhas.ac.id/id/eprint/44411/','_blank','noopener')" style="cursor:pointer;">
+            <div class="pub-card-top">
+              <div class="pub-badge-wrap">
+                <span class="pub-icon" style="--accent:var(--yellow)">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                  </svg>
+                </span>
+                <div class="pub-meta-col">
+                  <span class="pub-publisher">Hasanuddin University</span>
+                  <span class="pub-date">Apr 24, 2025</span>
+                </div>
+              </div>
+              <span class="pub-type-pill">Publication</span>
+            </div>
+
+            <div class="pub-card-mid">
+              <h3 class="pub-title">Development and Comparison of PPE Detection Models in Industrial Workers Based on Computer Vision</h3>
+              <p class="pub-description">Undergraduate scientific research and university repository publication analyzing, developing, and benchmarking computer vision models for Personal Protective Equipment (PPE) compliance detection in industrial environments.</p>
+            </div>
+
+            <div class="pub-card-bottom">
+              <span style="display:inline-flex; align-items:center; gap:5px; font-weight:600; font-size:11.5px; color:var(--text-tertiary);">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Published &amp; Verified
+              </span>
+              <a href="https://repository.unhas.ac.id/id/eprint/44411/" target="_blank" rel="noopener" class="pub-link-btn" onclick="event.stopPropagation();">
+                <span>Read Publication</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </a>
+            </div>
+          </article>
         </div>
 
         <div class="talks-links reveal">
@@ -2679,7 +2782,7 @@
   <!-- Global Toast Notification -->
   <div id="portfolioToast" class="portfolio-toast" role="status" aria-live="polite"></div>
 
-  <script src="script.js?v=4.9"></script>
+  <script src="script.js?v=5.0"></script>
 </body>
 
 </html>

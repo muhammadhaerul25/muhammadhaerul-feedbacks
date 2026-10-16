@@ -2554,32 +2554,60 @@
   let livePublications = [];
   let liveBlogs = [];
 
-  function renderPublications(pubs) {
-    const grid = document.querySelector('#publications .talks-grid');
+  function renderPublications(pubs = livePublications) {
+    const grid = document.getElementById('publications-grid') || document.querySelector('#publications .publications-grid, #publications .talks-grid');
     if (!grid) return;
     if (!Array.isArray(pubs) || !pubs.length) {
       grid.innerHTML = `
-        <div style="grid-column:1/-1; padding:36px 20px; text-align:center; color:var(--ink-muted); font-size:14px; border:1px dashed var(--border-soft); border-radius:12px;">
-          Publications and open-source write-ups will appear here once added in the dashboard.
+        <div style="grid-column:1/-1; padding:36px 20px; text-align:center; color:var(--text-tertiary); font-size:14px; border:1px dashed var(--border); border-radius:14px; background:var(--surface);">
+          ${isIndonesian() ? 'Publikasi dan tulisan open-source akan muncul di sini setelah ditambahkan di dashboard.' : 'Publications and open-source write-ups will appear here once added in the dashboard.'}
         </div>`;
       return;
     }
-    grid.innerHTML = pubs.map(p => `
-      <article class="talk-card reveal active" ${p.link ? `onclick="window.open('${escapeHtml(p.link)}','_blank','noopener')"` : ''} style="${p.link ? 'cursor:pointer;' : ''}">
-        <span class="talk-icon" style="--accent:${escapeHtml(p.accent_color || 'var(--blue)')}">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-            <path d="M9 18V6l10 6-10 6Z" />
-          </svg>
-        </span>
-        ${p.date ? `<p class="talk-date">${escapeHtml(p.date)}</p>` : ''}
-        <h3>${escapeHtml(p.title)}</h3>
-        ${p.description ? `<p class="talk-org">${escapeHtml(p.description)}</p>` : ''}
-        ${p.link ? `
-          <div style="margin-top:12px; display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:600; color:var(--blue);">
-            View Publication <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M7 7h10v10"/></svg>
-          </div>` : ''}
-      </article>
-    `).join('');
+
+    grid.innerHTML = pubs.map(p => {
+      const accent = p.accent_color || 'var(--blue)';
+      const publisher = p.publisher || 'Open Publication';
+      const link = p.link ? escapeHtml(p.link) : '';
+
+      return `
+        <article class="publication-card reveal in-view" ${link ? `onclick="window.open('${link}','_blank','noopener')"` : ''} style="${link ? 'cursor:pointer;' : ''}">
+          <div class="pub-card-top">
+            <div class="pub-badge-wrap">
+              <span class="pub-icon" style="--accent:${escapeHtml(accent)}">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+              </span>
+              <div class="pub-meta-col">
+                <span class="pub-publisher">${escapeHtml(publisher)}</span>
+                ${p.date ? `<span class="pub-date">${escapeHtml(p.date)}</span>` : ''}
+              </div>
+            </div>
+            <span class="pub-type-pill">Publication</span>
+          </div>
+
+          <div class="pub-card-mid">
+            <h3 class="pub-title">${escapeHtml(p.title)}</h3>
+            ${p.description ? `<p class="pub-description">${escapeHtml(p.description)}</p>` : ''}
+          </div>
+
+          <div class="pub-card-bottom">
+            <span style="display:inline-flex; align-items:center; gap:5px; font-weight:600; font-size:11.5px; color:var(--text-tertiary);">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              ${isIndonesian() ? 'Terverifikasi' : 'Published &amp; Verified'}
+            </span>
+            ${link ? `
+              <a href="${link}" target="_blank" rel="noopener" class="pub-link-btn" onclick="event.stopPropagation();">
+                <span>${isIndonesian() ? 'Buka Publikasi' : 'Read Publication'}</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </a>
+            ` : ''}
+          </div>
+        </article>
+      `;
+    }).join('');
   }
 
   function getBlogArtSvg(type) {
@@ -2606,7 +2634,7 @@
       const artClass = escapeHtml(b.art_type || 'ai-pattern');
       const tags = Array.isArray(b.tags) ? b.tags : [];
       return `
-        <article class="blog-card reveal active">
+        <article class="blog-card reveal in-view">
           <div class="blog-card-media" style="position:relative; overflow:hidden;">
             ${b.badge ? `<span class="blog-tag-badge">${escapeHtml(b.badge)}</span>` : ''}
             ${b.cover_image ? `
